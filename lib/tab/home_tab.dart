@@ -75,8 +75,7 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
               color: AppColor.buttonColor,
             ),
             labelColor: const Color(0xffffffff),
-            labelStyle:
-                const TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
+            labelStyle: const TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
             unselectedLabelColor: Colors.black,
             controller: tabController,
             unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.w600),
@@ -130,16 +129,234 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
               ),
             ],
           ),
-          const SizedBox(
-            height: 20,
+          Expanded(
+            child: TabBarView(
+                controller: tabController,
+                physics: BouncingScrollPhysics(),
+                children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Container(
+                      // height: 240,
+                      width: double.maxFinite,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Color(0xffE6E6E6))
+                      ),
+                      child:  Padding(
+                        padding: EdgeInsets.all(15),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    Text('OD : ',
+                                    style: TextStyle(
+                                      fontSize: 16,fontWeight: FontWeight.w400,color: Color(0xff272727)
+                                    ),
+                                    ),
+                                    Text('1-06-2024',
+                                    style: TextStyle(
+                                      fontSize: 16,fontWeight: FontWeight.w300,color: Color(0xff555555)
+                                    ),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Text('DD : ',
+                                    style: TextStyle(
+                                      fontSize: 16,fontWeight: FontWeight.w400,color: Color(0xff272727)
+                                    ),
+                                    ),
+                                    Text('18-06-2024',
+                                    style: TextStyle(
+                                      fontSize: 16,fontWeight: FontWeight.w300,color: Color(0xff555555)
+                                    ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 3),
+                            Row(
+                              children: [
+                                Text('Client : ',
+                                  style: TextStyle(
+                                      fontSize: 16,fontWeight: FontWeight.w400,color: Color(0xff272727)
+                                  ),
+                                ),
+                                Text('Dipesh',
+                                  style: TextStyle(
+                                      fontSize: 16,fontWeight: FontWeight.w300,color: Color(0xff555555)
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 3),
+                            Row(
+                              children: [
+                                Text('Machine Type : ',
+                                  style: TextStyle(
+                                      fontSize: 16,fontWeight: FontWeight.w400,color: Color(0xff272727)
+                                  ),
+                                ),
+                                Text('Containership',
+                                  style: TextStyle(
+                                      fontSize: 16,fontWeight: FontWeight.w300,color: Color(0xff555555)
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 3),
+                            Row(
+                              children: [
+                                Text('Total Payment : ',
+                                  style: TextStyle(
+                                      fontSize: 16,fontWeight: FontWeight.w400,color: Color(0xff272727)
+                                  ),
+                                ),
+                                Text('20000',
+                                  style: TextStyle(
+                                      fontSize: 16,fontWeight: FontWeight.w300,color: Color(0xff555555)
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 3),
+                            Row(
+                              children: [
+                                Text('Advance Payment : ',
+                                  style: TextStyle(
+                                      fontSize: 16,fontWeight: FontWeight.w400,color: Color(0xff272727)
+                                  ),
+                                ),
+                                Text('${1200}',
+                                  style: TextStyle(
+                                      fontSize: 16,fontWeight: FontWeight.w300,color: Color(0xff555555)
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 3),
+                            Row(
+                              children: [
+                                Text('Assigne Order : ',
+                                  style: TextStyle(
+                                      fontSize: 16,fontWeight: FontWeight.w400,color: Color(0xff272727)
+                                  ),
+                                ),
+                                Text('Manager 1',
+                                  style: TextStyle(
+                                      fontSize: 16,fontWeight: FontWeight.w300,color: Color(0xff555555)
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 5),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                InkWell(
+                                  onTap: () {},
+                                  borderRadius: BorderRadius.circular(5),
+                                  child: Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(5),
+                                          border: Border.all(color: const Color(0xffC9C9C9))
+                                      ),
+                                      padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 10),
+                                      child: const Text('Invoice',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w300,fontSize: 14,color: Color(0xff01959F)
+                                        ),
+                                      )),
+                                ),
+                                const SizedBox(width: 10,),
+                                InkWell(
+                                  onTap: () {},
+                                  borderRadius: BorderRadius.circular(5),
+                                  child: Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(5),
+                                          border: Border.all(color: const Color(0xffC9C9C9))
+                                      ),
+                                      padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+                                      child: const Text('Edit',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w300,fontSize: 14,color: Color(0xff555555)
+                                        ),
+                                      )),
+                                ),
+                                const SizedBox(width: 10,),
+                                InkWell(
+                                  onTap: () {},
+                                  borderRadius: BorderRadius.circular(5),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      border: Border.all(color: const Color(0xffC9C9C9))
+                                    ),
+                                    padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 10),
+                                      child: Text('Cancel',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w300,fontSize: 14,color: Color(0xffB50A0A)
+                                        ),
+                                      )),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Center(
+                    child: Image.asset(
+                      alignment: Alignment.center,
+                      "assets/images/no_order.png",
+                      height: 100,
+                    ),
+                  ),
+                ],
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Center(
+                    child: Image.asset(
+                      alignment: Alignment.center,
+                      "assets/images/no_order.png",
+                      height: 100,
+                    ),
+                  ),
+                ],
+              ),
+            
+            ]),
           ),
-          Center(
-            child: Image.asset(
-              alignment: Alignment.center,
-              "assets/images/no_order.png",
-              height: 100,
-            ),
-          ),
+          // const SizedBox(
+          //   height: 20,
+          // ),
+          // Center(
+          //   child: Image.asset(
+          //     alignment: Alignment.center,
+          //     "assets/images/no_order.png",
+          //     height: 100,
+          //   ),
+          // ),
         ],
       ),
       // drawer: drawer(),

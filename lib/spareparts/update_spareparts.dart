@@ -42,7 +42,7 @@ class _UpdateSparepartsState extends State<UpdateSpareparts> {
         ),
       ),
         bottomNavigationBar: Container(
-          margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: CustomButton(
             color: AppColor.buttonColor,
             buttonText: 'Update',
