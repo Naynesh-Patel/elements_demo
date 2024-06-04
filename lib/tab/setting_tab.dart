@@ -28,17 +28,6 @@ class _SettingTabState extends State<SettingTab> {
             color: Colors.black,
           ),
         ),
-        // actions: [
-        //   Padding(
-        //     padding: const EdgeInsets.all(8.0),
-        //     child: SvgPicture.asset(
-        //       "assets/svg/ic_notification.svg",
-        //       height: 22,
-        //       width: 22,
-        //       color: Colors.black,
-        //     ),
-        //   ),
-        // ],
       ),
       body: Column(
         mainAxisSize: MainAxisSize.min,
@@ -46,7 +35,7 @@ class _SettingTabState extends State<SettingTab> {
           ListTile(
             leading: SvgPicture.asset(
               "assets/svg/mange_user.svg",
-              color: Colors.black,
+              color: const Color(0xff555555),
               height: 20,
             ),
             title: const Text(
@@ -64,12 +53,14 @@ class _SettingTabState extends State<SettingTab> {
           ListTile(
             leading: Image.asset(
               "assets/images/mange.png",
+              color: const Color(0xff555555),
               height: 20,
             ),
             title: const Text(
               'Manage Spare Parts',
               style: TextStyle(
                 fontSize: 18,
+                color: Color(0xff555555),
                 fontWeight: FontWeight.w400,
               ),
             ),
@@ -81,13 +72,14 @@ class _SettingTabState extends State<SettingTab> {
           ListTile(
             leading: SvgPicture.asset(
               "assets/svg/all_users.svg",
-              color: Colors.black,
+              color: const Color(0xff555555),
               height: 20,
             ),
             title: const Text(
               'Manage User',
               style: TextStyle(
                 fontSize: 18,
+                color: Color(0xff555555),
                 fontWeight: FontWeight.w400,
               ),
             ),
@@ -99,7 +91,7 @@ class _SettingTabState extends State<SettingTab> {
           ListTile(
             leading: SvgPicture.asset(
               "assets/svg/mange_compny.svg",
-              color: Colors.black,
+              color: const Color(0xff555555),
               height: 20,
             ),
             title: const Text(
@@ -117,7 +109,7 @@ class _SettingTabState extends State<SettingTab> {
           ListTile(
             leading: SvgPicture.asset(
               "assets/svg/bil_history.svg",
-              color: Colors.black,
+              color: const Color(0xff555555),
               height: 20,
             ),
             title: const Text(
@@ -138,6 +130,7 @@ class _SettingTabState extends State<SettingTab> {
               'LogOut',
               style: TextStyle(
                 fontSize: 18,
+                color: Color(0xff555555),
                 fontWeight: FontWeight.w400,
               ),
             ),

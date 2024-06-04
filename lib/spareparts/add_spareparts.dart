@@ -43,16 +43,16 @@ class _AddSparepartsState extends State<AddSpareparts> {
         ),
         body: Container(
           margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-          child: Column(
+          child: const Column(
             children: [
-              const CustomTextField(
+              CustomTextField(
                 hintText: "Steel Bolt",
                 labelText: "Name",
               ),
-              const SizedBox(
+              SizedBox(
                 height: 20,
               ),
-              const CustomTextField(
+              CustomTextField(
                 hintText: "10",
                 labelText: "Qty",
               ),
@@ -63,7 +63,7 @@ class _AddSparepartsState extends State<AddSpareparts> {
           ),
         ),
         bottomNavigationBar: Container(
-          margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: CustomButton(
             color: AppColor.buttonColor,
             buttonText: 'Add',

@@ -47,6 +47,7 @@ class _DashBoardState extends State<DashBoard> {
       bottomNavigationBar: BottomNavigationBar(
         elevation: 0,
         fixedColor: Colors.black,
+        backgroundColor: const Color(0xffF9F9F9),
         type: BottomNavigationBarType.fixed,
         items: [
           BottomNavigationBarItem(

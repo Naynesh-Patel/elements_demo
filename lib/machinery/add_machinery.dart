@@ -34,7 +34,7 @@ class _AddMachineryState extends State<AddMachinery> {
           actions: [
             IconButton(
                 onPressed: () {},
-                icon: Icon(
+                icon: const Icon(
                   Icons.add,
                   size: 25,
                 ))
@@ -43,6 +43,7 @@ class _AddMachineryState extends State<AddMachinery> {
         body: Container(
           margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const CustomTextField(
                 hintText: "Containership",
@@ -55,10 +56,28 @@ class _AddMachineryState extends State<AddMachinery> {
                 hintText: "Select Quatity ",
                 labelText: "Manufacture Duration",
               ),
+              const SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  const Expanded(
+                    child: Text(
+                      "Add Spareparts",
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
+                  ),
+                  IconButton(onPressed: () {}, icon: const Icon(Icons.add)),
+                ],
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Checkbox(
+                    activeColor: AppColor.buttonColor,
                     value: value,
                     onChanged: (value) {
                       setState(() {
@@ -87,6 +106,8 @@ class _AddMachineryState extends State<AddMachinery> {
                           borderRadius: BorderRadius.circular(4)),
                       child: const Center(
                         child: TextField(
+                          cursorColor: Color(0xffD1D1D1),
+                          keyboardType: TextInputType.number,
                           textAlign: TextAlign.center,
                           decoration: InputDecoration(
                               border: InputBorder.none,

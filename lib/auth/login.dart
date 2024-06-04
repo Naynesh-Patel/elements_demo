@@ -77,6 +77,7 @@ class _LoginState extends State<Login> {
                     height: 15,
                   ),
                   CustomTextField(
+                    textInputType: TextInputType.number,
                     textEditingController:
                         controller.mobileNumberTextEditingController,
                     maxLength: 10,
