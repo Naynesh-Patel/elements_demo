@@ -3,6 +3,8 @@ import 'package:elements/user/add_user.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../widget/custom_dialogbox.dart';
+
 class MangeUser extends StatefulWidget {
   const MangeUser({super.key});
 
@@ -82,7 +84,10 @@ class _MangeUserState extends State<MangeUser> {
                     children: [
                       IconButton(
                           onPressed: () {
-                            deleteDialog();
+                            CustomDialogBox.showDialogBox(context: context,titleText: 'Are You Sure Delete?',
+                            contentText: 'Do you really want to delete these \nrecords? This process cannot be undone',
+                              data: 'Delete '
+                            );
                           },
                           icon: const Icon(
                             Icons.edit,
@@ -119,6 +124,7 @@ class _MangeUserState extends State<MangeUser> {
   }
 
   Future<void> deleteDialog() async {
+
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
@@ -128,69 +134,83 @@ class _MangeUserState extends State<MangeUser> {
             borderRadius: BorderRadius.circular(2),
           ),
           backgroundColor: Colors.white,
-          content: SingleChildScrollView(
-              child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Image.asset(
-                "assets/images/colse.png",
-                height: 50,
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              const Text(
-                "Are You Sure Delete?",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const Text(
-                "Do you really want to delete these \nrecords? This process cannot be undone",
-                style: TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 12,
-                    color: Color(0xff949494)),
-              )
-            ],
-          )),
-          actions: <Widget>[
-            InkWell(
-              onTap: () {
-                Get.back();
-              },
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: const Color(0xffC1C1C1)),
-                child: const Text(
-                  'Cancel',
-                  style: TextStyle(
-                    color: Colors.white,
+          title: const Text(
+            "Are You Sure Delete?",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 22,
+                color: Color(0xff555555)),
+          ),
+          content: const Text(
+            "Do you really want to delete these \nrecords? This process cannot be undone",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                // fontWeight: FontWeight.w300,
+                fontSize: 14,
+                color: Color(0xff949494)),
+          ),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Get.back();
+                    },
+
+                    child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 25),
+                        decoration:  BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: Color(0xffC1C1C1),
+                        ),
+                        child: const Text("Cancel",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w400))),
                   ),
-                ),
-              ),
-            ),
-            InkWell(
-              onTap: () {
-                Get.back();
-              },
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: AppColor.buttonColor),
-                child: const Text(
-                  'Delete',
-                  style: TextStyle(
-                    color: Colors.white,
+                  InkWell(
+                    onTap: () {
+                      Get.back();
+                    },
+                    child: Container(
+                        padding:
+                        const EdgeInsets.symmetric(vertical: 10, horizontal: 25),
+                        decoration: BoxDecoration(
+                            color: const Color(0xff01959F), borderRadius: BorderRadius.circular(8)),
+                        child: const Text("Delete",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w400))),
                   ),
-                ),
+                ],
               ),
-            ),
+            )
+
+
+            // InkWell(
+            //   onTap: () {
+            //     Get.back();
+            //   },
+            //   child: Container(
+            //     padding:
+            //         const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+            //     decoration: BoxDecoration(
+            //         borderRadius: BorderRadius.circular(8),
+            //         color: AppColor.buttonColor),
+            //     child: const Text(
+            //       'Delete',
+            //       style: TextStyle(
+            //         color: Colors.white,
+            //       ),
+            //     ),
+            //   ),
+            // ),
           ],
         );
       },
