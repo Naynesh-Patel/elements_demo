@@ -67,7 +67,7 @@ class _AddCustomerState extends State<AddCustomer> {
         bottomNavigationBar: Container(
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: CustomButton(
-            color: AppColor.buttonColor,
+              color: AppColor.buttonColor,
             buttonText: 'Add',
             onTap: () {},
           ),

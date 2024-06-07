@@ -1,4 +1,5 @@
 import 'package:elements/constant/app_colors.dart';
+import 'package:elements/invoice.dart';
 import 'package:elements/machinery/add_machinery.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -281,7 +282,9 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
                                     InkWell(
-                                      onTap: () {},
+                                      onTap: () {
+                                        Get.to(const Invoice());
+                                      },
                                       borderRadius: BorderRadius.circular(5),
                                       child: Container(
                                           decoration: BoxDecoration(
