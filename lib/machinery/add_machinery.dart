@@ -55,6 +55,21 @@ class _AddMachineryState extends State<AddMachinery> {
                 hintText: "Select Quatity ",
                 labelText: "Manufacture Duration",
               ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('Add Spareparts',
+                  style: TextStyle(
+                    color: Color(0xff555555),
+                    fontSize: 20,fontWeight: FontWeight.w400
+                  ),
+                  ),
+                  IconButton(onPressed: () {}, icon: Icon(Icons.add_rounded,))
+                ],
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [

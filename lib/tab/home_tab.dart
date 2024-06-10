@@ -132,7 +132,7 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
           Expanded(
             child: TabBarView(
                 controller: tabController,
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
