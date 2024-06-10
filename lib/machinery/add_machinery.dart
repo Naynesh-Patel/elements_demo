@@ -34,7 +34,7 @@ class _AddMachineryState extends State<AddMachinery> {
           actions: [
             IconButton(
                 onPressed: () {},
-                icon: const Icon(
+                icon: Icon(
                   Icons.add,
                   size: 25,
                 ))
@@ -43,7 +43,6 @@ class _AddMachineryState extends State<AddMachinery> {
         body: Container(
           margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const CustomTextField(
                 hintText: "Containership",
@@ -57,27 +56,24 @@ class _AddMachineryState extends State<AddMachinery> {
                 labelText: "Manufacture Duration",
               ),
               const SizedBox(
-                height: 10,
+                height: 20,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Expanded(
-                    child: Text(
-                      "Add Spareparts",
-                      style: TextStyle(
-                        fontSize: 18,
-                      ),
-                    ),
+                  Text('Add Spareparts',
+                  style: TextStyle(
+                    color: Color(0xff555555),
+                    fontSize: 20,fontWeight: FontWeight.w400
                   ),
-                  IconButton(onPressed: () {}, icon: const Icon(Icons.add)),
+                  ),
+                  IconButton(onPressed: () {}, icon: Icon(Icons.add_rounded,))
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Checkbox(
-                    activeColor: AppColor.buttonColor,
                     value: value,
                     onChanged: (value) {
                       setState(() {
@@ -106,8 +102,6 @@ class _AddMachineryState extends State<AddMachinery> {
                           borderRadius: BorderRadius.circular(4)),
                       child: const Center(
                         child: TextField(
-                          cursorColor: Color(0xffD1D1D1),
-                          keyboardType: TextInputType.number,
                           textAlign: TextAlign.center,
                           decoration: InputDecoration(
                               border: InputBorder.none,
