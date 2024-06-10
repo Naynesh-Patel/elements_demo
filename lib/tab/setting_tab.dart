@@ -15,6 +15,10 @@ class SettingTab extends StatefulWidget {
 }
 
 class _SettingTabState extends State<SettingTab> {
+
+  int index = -1;
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,105 +48,153 @@ class _SettingTabState extends State<SettingTab> {
         mainAxisSize: MainAxisSize.min,
         children: [
           ListTile(
+            // tileColor:isSelect ? Color(0xff01959F): null ,
+            // selectedColor:,
+
             leading: SvgPicture.asset(
               "assets/svg/mange_user.svg",
-              color: Colors.black,
+              color: index== 0 ? const Color(0xff01959F): Colors.black,
               height: 20,
             ),
-            title: const Text(
+            title:  Text(
               'Manage Machinery',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w400,
+                color: index== 0 ? const Color(0xff01959F): Colors.black,
               ),
             ),
-            trailing: const Icon(Icons.arrow_forward_ios_rounded),
+            trailing:  Icon(Icons.arrow_forward_ios_rounded,
+              color: index== 0 ? const Color(0xff01959F): Colors.black,
+            ),
             onTap: () {
-              Get.to(const MangeMachinery());
+              setState(() {
+                index=0;
+                Get.to(const MangeMachinery());
+              });
+
             },
           ),
           ListTile(
             leading: Image.asset(
               "assets/images/mange.png",
+              color: index== 1 ? const Color(0xff01959F): Colors.black,
               height: 20,
             ),
-            title: const Text(
+            title:  Text(
               'Manage Spare Parts',
               style: TextStyle(
                 fontSize: 18,
+                color: index== 1 ? const Color(0xff01959F): Colors.black,
                 fontWeight: FontWeight.w400,
               ),
             ),
-            trailing: const Icon(Icons.arrow_forward_ios_rounded),
+            trailing:  Icon(Icons.arrow_forward_ios_rounded,
+              color: index== 1 ? const Color(0xff01959F): Colors.black,
+            ),
             onTap: () {
-              Get.to(const MangeSpareparts());
+              setState(() {
+                index=1;
+                Get.to(const MangeSpareparts());
+              });
+
             },
           ),
           ListTile(
             leading: SvgPicture.asset(
               "assets/svg/all_users.svg",
-              color: Colors.black,
+              color:  index== 2 ? const Color(0xff01959F): Colors.black,
               height: 20,
             ),
-            title: const Text(
+            title:  Text(
               'Manage User',
               style: TextStyle(
                 fontSize: 18,
+                color: index== 2 ? const Color(0xff01959F): Colors.black,
                 fontWeight: FontWeight.w400,
               ),
             ),
-            trailing: const Icon(Icons.arrow_forward_ios_rounded),
+            trailing:  Icon(Icons.arrow_forward_ios_rounded,
+              color: index== 2 ? const Color(0xff01959F): Colors.black,
+            ),
             onTap: () {
-              Get.to(const MangeUser());
+              setState(() {
+                index=2;
+                Get.to(const MangeUser());
+              });
+
             },
           ),
           ListTile(
             leading: SvgPicture.asset(
               "assets/svg/mange_compny.svg",
-              color: Colors.black,
+              color: index== 3 ? const Color(0xff01959F): Colors.black,
               height: 20,
             ),
-            title: const Text(
+            title:  Text(
               'Manage Customer Company',
               style: TextStyle(
                 fontSize: 18,
+                color: index== 3 ? const Color(0xff01959F): Colors.black,
                 fontWeight: FontWeight.w400,
               ),
             ),
-            trailing: const Icon(Icons.arrow_forward_ios_rounded),
+            trailing:  Icon(Icons.arrow_forward_ios_rounded,
+              color: index== 3 ? const Color(0xff01959F): Colors.black,
+            ),
             onTap: () {
-              Get.to(const MangeCustomer());
+              setState(() {
+                index=3;
+                Get.to(const MangeCustomer());
+              });
+
             },
           ),
           ListTile(
             leading: SvgPicture.asset(
               "assets/svg/bil_history.svg",
-              color: Colors.black,
+              color: index== 4 ? const Color(0xff01959F): Colors.black,
               height: 20,
             ),
-            title: const Text(
+            title:  Text(
               'Bill History',
               style: TextStyle(
                 fontSize: 18,
+                color: index== 4 ? const Color(0xff01959F): Colors.black,
                 fontWeight: FontWeight.w400,
               ),
             ),
-            trailing: const Icon(Icons.arrow_forward_ios_rounded),
+            trailing:  Icon(Icons.arrow_forward_ios_rounded,
+              color: index== 4 ? const Color(0xff01959F): Colors.black,
+            ),
             onTap: () {
-              Get.to(const BillHistory());
+              setState(() {
+                index=4;
+                Get.to(const BillHistory());
+              });
+
             },
           ),
           ListTile(
-            leading: const Icon(Icons.logout),
-            title: const Text(
+            leading:  Icon(Icons.logout,
+              color: index== 5 ? const Color(0xff01959F): Colors.black,
+            ),
+            title:  Text(
               'LogOut',
               style: TextStyle(
                 fontSize: 18,
+                color: index== 5 ? const Color(0xff01959F): Colors.black,
                 fontWeight: FontWeight.w400,
               ),
             ),
-            trailing: const Icon(Icons.arrow_forward_ios_rounded),
-            onTap: () {},
+            trailing:  Icon(Icons.arrow_forward_ios_rounded,
+              color: index== 5 ? const Color(0xff01959F): Colors.black,
+            ),
+            onTap: () {
+              setState(() {
+                index=5;
+              });
+            },
           ),
         ],
       ),
