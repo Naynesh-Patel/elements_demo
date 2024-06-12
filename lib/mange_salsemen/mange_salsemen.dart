@@ -1,17 +1,17 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/user/add_user.dart';
+import 'package:elements/widget/custom_dialogbox.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-class MangeUser extends StatefulWidget {
-  const MangeUser({super.key});
+class Salesmen extends StatefulWidget {
+  const Salesmen({super.key});
 
   @override
-  State<MangeUser> createState() => _MangeUserState();
+  State<Salesmen> createState() => _SalesmenState();
 }
 
-class _MangeUserState extends State<MangeUser> {
+class _SalesmenState extends State<Salesmen> {
   bool value = false;
   int index = 0;
 
@@ -22,7 +22,7 @@ class _MangeUserState extends State<MangeUser> {
       appBar: AppBar(
         backgroundColor: const Color(0xffF9F9F9),
         title: const Text(
-          "Mange User",
+          "Salesmen",
           style: TextStyle(
             color: Colors.black,
           ),
@@ -51,12 +51,12 @@ class _MangeUserState extends State<MangeUser> {
                         Row(
                           children: [
                             Text(
-                              "Name :",
+                              "Role :",
                               style: TextStyle(
                                   fontWeight: FontWeight.w400, fontSize: 16),
                             ),
                             Text(
-                              "nens",
+                              "Worker",
                               style: TextStyle(
                                 color: Color(0xff555555),
                               ),
@@ -66,12 +66,38 @@ class _MangeUserState extends State<MangeUser> {
                         Row(
                           children: [
                             Text(
-                              "Role :",
+                              "Name :",
                               style: TextStyle(
                                   fontWeight: FontWeight.w400, fontSize: 16),
                             ),
                             Text(
-                              "Worker",
+                              " Dipesh",
+                              style: TextStyle(color: Color(0xff555555)),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              "Contact No. :",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w400, fontSize: 16),
+                            ),
+                            Text(
+                              "99123 45673",
+                              style: TextStyle(color: Color(0xff555555)),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              "Address :",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w400, fontSize: 16),
+                            ),
+                            Text(
+                              "Surat, Gujarat",
                               style: TextStyle(color: Color(0xff555555)),
                             ),
                           ],
@@ -80,48 +106,28 @@ class _MangeUserState extends State<MangeUser> {
                     ),
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      InkWell(
-                        borderRadius: BorderRadius.circular(10),
-                        onTap: () {},
-                        child: Container(
-                            decoration: BoxDecoration(
-                                color: const Color(0xffFFFFFF),
-                                borderRadius: BorderRadius.circular(6),
-                                border:
-                                    Border.all(color: const Color(0xffD1D1D1))),
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 10),
-                            child: SvgPicture.asset(
-                              'assets/svg/ic_edit.svg',
-                              height: 16,
-                              width: 16,
-                            )),
-                      ),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      InkWell(
-                        borderRadius: BorderRadius.circular(10),
-                        onTap: () {},
-                        child: Container(
-                          decoration: BoxDecoration(
-                              color: const Color(0xffFFFFFF),
-                              borderRadius: BorderRadius.circular(6),
-                              border:
-                                  Border.all(color: const Color(0xffD1D1D1))),
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 10),
-                          child: const Icon(
+                      IconButton(
+                          onPressed: () {
+                            CustomDialogBox.showDialogBox(
+                                context: context,
+                                titleText: 'Are You Sure Delete?',
+                                contentText:
+                                    'Do you really want to delete these \nrecords? This process cannot be undone',
+                                data: 'Delete ');
+                          },
+                          icon: const Icon(
+                            Icons.edit,
+                            color: Color(0xff555555),
+                          )),
+                      IconButton(
+                          onPressed: () {},
+                          icon: const Icon(
                             Icons.delete,
-                            size: 16,
-                            weight: 16,
-                          ),
-                        ),
-                      ),
+                            color: Color(0xff555555),
+                          )),
                     ],
-                  ),
+                  )
                 ],
               ),
             )

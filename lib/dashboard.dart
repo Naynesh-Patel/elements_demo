@@ -1,3 +1,4 @@
+import 'package:elements/constant/app_colors.dart';
 import 'package:elements/tab/attendance_tab.dart';
 import 'package:elements/tab/expensetab.dart';
 import 'package:elements/tab/setting_tab.dart';
@@ -18,6 +19,7 @@ class DashBoard extends StatefulWidget {
 
 class _DashBoardState extends State<DashBoard> {
   int _selectedIndex = 0;
+  int selectedColor = 0;
 
   static final List<Widget> _widgetOptions = <Widget>[
     const HomeTab(),
@@ -30,6 +32,8 @@ class _DashBoardState extends State<DashBoard> {
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
+      selectedColor = index;
+      index = index;
     });
   }
 
@@ -46,7 +50,7 @@ class _DashBoardState extends State<DashBoard> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         elevation: 0,
-        fixedColor: Colors.black,
+        fixedColor: AppColor.buttonColor,
         backgroundColor: const Color(0xffF9F9F9),
         type: BottomNavigationBarType.fixed,
         items: [
@@ -55,6 +59,7 @@ class _DashBoardState extends State<DashBoard> {
               "assets/images/home.png",
               height: 50,
               width: 50,
+              color: selectedColor == 0 ? AppColor.buttonColor : Colors.grey,
             ),
             label: "Home",
           ),
@@ -63,6 +68,7 @@ class _DashBoardState extends State<DashBoard> {
                 "assets/images/spareparts.png",
                 height: 50,
                 width: 50,
+                color: selectedColor == 1 ? AppColor.buttonColor : Colors.grey,
               ),
               label: "Spareparts"),
           BottomNavigationBarItem(
@@ -70,6 +76,7 @@ class _DashBoardState extends State<DashBoard> {
                 "assets/images/attebdance.png",
                 height: 50,
                 width: 50,
+                color: selectedColor == 2 ? AppColor.buttonColor : Colors.grey,
               ),
               label: "Attendance "),
           BottomNavigationBarItem(
@@ -77,12 +84,13 @@ class _DashBoardState extends State<DashBoard> {
                 "assets/images/expense.png",
                 height: 50,
                 width: 50,
+                color: selectedColor == 3 ? AppColor.buttonColor : Colors.grey,
               ),
               label: "Expense"),
           BottomNavigationBarItem(
               icon: Image.asset(
                 "assets/images/setting.png",
-                color: Colors.black,
+                color: selectedColor == 4 ? AppColor.buttonColor : Colors.grey,
                 height: 50,
                 width: 50,
               ),
@@ -106,13 +114,14 @@ class _DashBoardState extends State<DashBoard> {
               child: Column(
                 children: [
                   CircleAvatar(
-                      radius: (40),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(50),
-                        child: SvgPicture.asset(
-                          "assets/svg/ic_profile.svg",
-                        ),
-                      )),
+                    radius: (40),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(50),
+                      child: SvgPicture.asset(
+                        "assets/svg/ic_profile.svg",
+                      ),
+                    ),
+                  ),
                   const Text(
                     "Mahesh Patel",
                     style: TextStyle(

@@ -61,13 +61,18 @@ class _AddMachineryState extends State<AddMachinery> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Add Spareparts',
-                  style: TextStyle(
-                    color: Color(0xff555555),
-                    fontSize: 20,fontWeight: FontWeight.w400
+                  Text(
+                    'Add Spareparts',
+                    style: TextStyle(
+                        color: Color(0xff555555),
+                        fontSize: 20,
+                        fontWeight: FontWeight.w400),
                   ),
-                  ),
-                  IconButton(onPressed: () {}, icon: Icon(Icons.add_rounded,))
+                  IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.add_rounded,
+                      ))
                 ],
               ),
               Row(

@@ -1,5 +1,6 @@
 import 'package:elements/constant/app_colors.dart';
-import 'package:elements/machinery/add_machinery.dart';
+import 'package:elements/create_new_order.dart';
+import 'package:elements/invoice.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -71,11 +72,12 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
             },
             dividerColor: Colors.transparent,
             indicator: BoxDecoration(
-              borderRadius: BorderRadius.circular(4),
-              color: AppColor.buttonColor,
-            ),
+                borderRadius: BorderRadius.circular(4),
+                color: AppColor.buttonColor,
+                border: Border.all(color: const Color(0xffE6E6E6))),
             labelColor: const Color(0xffffffff),
-            labelStyle: const TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
+            labelStyle:
+                const TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
             unselectedLabelColor: Colors.black,
             controller: tabController,
             unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.w600),
@@ -84,9 +86,8 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
                 child: Container(
                   width: double.maxFinite,
                   height: double.maxFinite,
-                  decoration: BoxDecoration(
-                      // color: Colors.blue,
-                      borderRadius: BorderRadius.circular(4)),
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(4)),
                   child: const Center(
                       child: Text(
                     'Ongoing',
@@ -134,218 +135,268 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
                 controller: tabController,
                 physics: const BouncingScrollPhysics(),
                 children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  children: [
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Container(
-                      // height: 240,
-                      width: double.maxFinite,
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Color(0xffE6E6E6))
-                      ),
-                      child:  Padding(
-                        padding: EdgeInsets.all(15),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Column(
+                      children: [
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        Container(
+                          // height: 240,
+                          width: double.maxFinite,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(4),
+                              border:
+                                  Border.all(color: const Color(0xffE6E6E6))),
+                          child: Padding(
+                            padding: const EdgeInsets.all(15),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Row(
+                                const Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text('OD : ',
-                                    style: TextStyle(
-                                      fontSize: 16,fontWeight: FontWeight.w400,color: Color(0xff272727)
+                                    Row(
+                                      children: [
+                                        Text(
+                                          'OD : ',
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w400,
+                                              color: Color(0xff272727)),
+                                        ),
+                                        Text(
+                                          '1-06-2024',
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w300,
+                                              color: Color(0xff555555)),
+                                        ),
+                                      ],
                                     ),
-                                    ),
-                                    Text('1-06-2024',
-                                    style: TextStyle(
-                                      fontSize: 16,fontWeight: FontWeight.w300,color: Color(0xff555555)
-                                    ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          'DD : ',
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w400,
+                                              color: Color(0xff272727)),
+                                        ),
+                                        Text(
+                                          '18-06-2024',
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w300,
+                                              color: Color(0xff555555)),
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),
-                                Row(
+                                const SizedBox(height: 3),
+                                const Row(
                                   children: [
-                                    Text('DD : ',
-                                    style: TextStyle(
-                                      fontSize: 16,fontWeight: FontWeight.w400,color: Color(0xff272727)
+                                    Text(
+                                      'Client : ',
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w400,
+                                          color: Color(0xff272727)),
                                     ),
-                                    ),
-                                    Text('18-06-2024',
-                                    style: TextStyle(
-                                      fontSize: 16,fontWeight: FontWeight.w300,color: Color(0xff555555)
-                                    ),
+                                    Text(
+                                      'Dipesh',
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w300,
+                                          color: Color(0xff555555)),
                                     ),
                                   ],
                                 ),
-                              ],
-                            ),
-                            SizedBox(height: 3),
-                            Row(
-                              children: [
-                                Text('Client : ',
-                                  style: TextStyle(
-                                      fontSize: 16,fontWeight: FontWeight.w400,color: Color(0xff272727)
-                                  ),
+                                const SizedBox(height: 3),
+                                const Row(
+                                  children: [
+                                    Text(
+                                      'Machine Type : ',
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w400,
+                                          color: Color(0xff272727)),
+                                    ),
+                                    Text(
+                                      'Containership',
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w300,
+                                          color: Color(0xff555555)),
+                                    ),
+                                  ],
                                 ),
-                                Text('Dipesh',
-                                  style: TextStyle(
-                                      fontSize: 16,fontWeight: FontWeight.w300,color: Color(0xff555555)
-                                  ),
+                                const SizedBox(height: 3),
+                                const Row(
+                                  children: [
+                                    Text(
+                                      'Total Payment : ',
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w400,
+                                          color: Color(0xff272727)),
+                                    ),
+                                    Text(
+                                      '20000',
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w300,
+                                          color: Color(0xff555555)),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
-                            SizedBox(height: 3),
-                            Row(
-                              children: [
-                                Text('Machine Type : ',
-                                  style: TextStyle(
-                                      fontSize: 16,fontWeight: FontWeight.w400,color: Color(0xff272727)
-                                  ),
+                                const SizedBox(height: 3),
+                                const Row(
+                                  children: [
+                                    Text(
+                                      'Advance Payment : ',
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w400,
+                                          color: Color(0xff272727)),
+                                    ),
+                                    Text(
+                                      '${1200}',
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w300,
+                                          color: Color(0xff555555)),
+                                    ),
+                                  ],
                                 ),
-                                Text('Containership',
-                                  style: TextStyle(
-                                      fontSize: 16,fontWeight: FontWeight.w300,color: Color(0xff555555)
-                                  ),
+                                SizedBox(height: 3),
+                                const Row(
+                                  children: [
+                                    Text(
+                                      'Assigne Order : ',
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w400,
+                                          color: Color(0xff272727)),
+                                    ),
+                                    Text(
+                                      'Manager 1',
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w300,
+                                          color: Color(0xff555555)),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
-                            SizedBox(height: 3),
-                            Row(
-                              children: [
-                                Text('Total Payment : ',
-                                  style: TextStyle(
-                                      fontSize: 16,fontWeight: FontWeight.w400,color: Color(0xff272727)
-                                  ),
-                                ),
-                                Text('20000',
-                                  style: TextStyle(
-                                      fontSize: 16,fontWeight: FontWeight.w300,color: Color(0xff555555)
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 3),
-                            Row(
-                              children: [
-                                Text('Advance Payment : ',
-                                  style: TextStyle(
-                                      fontSize: 16,fontWeight: FontWeight.w400,color: Color(0xff272727)
-                                  ),
-                                ),
-                                Text('${1200}',
-                                  style: TextStyle(
-                                      fontSize: 16,fontWeight: FontWeight.w300,color: Color(0xff555555)
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 3),
-                            Row(
-                              children: [
-                                Text('Assigne Order : ',
-                                  style: TextStyle(
-                                      fontSize: 16,fontWeight: FontWeight.w400,color: Color(0xff272727)
-                                  ),
-                                ),
-                                Text('Manager 1',
-                                  style: TextStyle(
-                                      fontSize: 16,fontWeight: FontWeight.w300,color: Color(0xff555555)
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 5),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                InkWell(
-                                  onTap: () {},
-                                  borderRadius: BorderRadius.circular(5),
-                                  child: Container(
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(5),
-                                          border: Border.all(color: const Color(0xffC9C9C9))
-                                      ),
-                                      padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 10),
-                                      child: const Text('Invoice',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w300,fontSize: 14,color: Color(0xff01959F)
-                                        ),
-                                      )),
-                                ),
-                                const SizedBox(width: 10,),
-                                InkWell(
-                                  onTap: () {},
-                                  borderRadius: BorderRadius.circular(5),
-                                  child: Container(
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(5),
-                                          border: Border.all(color: const Color(0xffC9C9C9))
-                                      ),
-                                      padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
-                                      child: const Text('Edit',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w300,fontSize: 14,color: Color(0xff555555)
-                                        ),
-                                      )),
-                                ),
-                                const SizedBox(width: 10,),
-                                InkWell(
-                                  onTap: () {},
-                                  borderRadius: BorderRadius.circular(5),
-                                  child: Container(
-                                    decoration: BoxDecoration(
+                                const SizedBox(height: 5),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    InkWell(
+                                      onTap: () {
+                                        Get.to(const Invoice());
+                                      },
                                       borderRadius: BorderRadius.circular(5),
-                                      border: Border.all(color: const Color(0xffC9C9C9))
+                                      child: Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              border: Border.all(
+                                                  color:
+                                                      const Color(0xffC9C9C9))),
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 15, vertical: 10),
+                                          child: const Text(
+                                            'Invoice',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w300,
+                                                fontSize: 14,
+                                                color: Color(0xff01959F)),
+                                          )),
                                     ),
-                                    padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 10),
-                                      child: Text('Cancel',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w300,fontSize: 14,color: Color(0xffB50A0A)
-                                        ),
-                                      )),
-                                ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    InkWell(
+                                      onTap: () {},
+                                      borderRadius: BorderRadius.circular(5),
+                                      child: Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              border: Border.all(
+                                                  color:
+                                                      const Color(0xffC9C9C9))),
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 20, vertical: 10),
+                                          child: const Text(
+                                            'Edit',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w300,
+                                                fontSize: 14,
+                                                color: Color(0xff555555)),
+                                          )),
+                                    ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    InkWell(
+                                      onTap: () {},
+                                      borderRadius: BorderRadius.circular(5),
+                                      child: Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              border: Border.all(
+                                                  color:
+                                                      const Color(0xffC9C9C9))),
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 15, vertical: 10),
+                                          child: const Text(
+                                            'Cancel',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w300,
+                                                fontSize: 14,
+                                                color: Color(0xffB50A0A)),
+                                          )),
+                                    ),
+                                  ],
+                                )
                               ],
-                            )
-                          ],
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Center(
+                        child: Image.asset(
+                          alignment: Alignment.center,
+                          "assets/images/no_order.png",
+                          height: 100,
                         ),
                       ),
-                    )
-                  ],
-                ),
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Center(
-                    child: Image.asset(
-                      alignment: Alignment.center,
-                      "assets/images/no_order.png",
-                      height: 100,
-                    ),
+                    ],
                   ),
-                ],
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Center(
-                    child: Image.asset(
-                      alignment: Alignment.center,
-                      "assets/images/no_order.png",
-                      height: 100,
-                    ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Center(
+                        child: Image.asset(
+                          alignment: Alignment.center,
+                          "assets/images/no_order.png",
+                          height: 100,
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-
-            ]),
+                ]),
           ),
           // const SizedBox(
           //   height: 20,
@@ -367,7 +418,7 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
           ),
           backgroundColor: AppColor.buttonColor,
           onPressed: () {
-            Get.to(const AddMachinery());
+            Get.to(const CreateNewOrder());
           },
           child: const Icon(
             Icons.add,

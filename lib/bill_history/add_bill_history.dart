@@ -3,14 +3,15 @@ import 'package:elements/widget/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class AddHistory extends StatefulWidget {
-  const AddHistory({super.key});
+class AddBillHistory extends StatefulWidget {
+  const AddBillHistory({super.key});
 
   @override
-  State<AddHistory> createState() => _AddHistoryState();
+  State<AddBillHistory> createState() => _AddBillHistoryState();
 }
 
-class _AddHistoryState extends State<AddHistory> with TickerProviderStateMixin {
+class _AddBillHistoryState extends State<AddBillHistory>
+    with TickerProviderStateMixin {
   bool value = false;
   int index = 0;
   late TabController tabController;
@@ -28,7 +29,7 @@ class _AddHistoryState extends State<AddHistory> with TickerProviderStateMixin {
         appBar: AppBar(
           backgroundColor: const Color(0xffF9F9F9),
           title: const Text(
-            "Add History",
+            "Create Bill Invoice",
             style: TextStyle(
               color: Colors.black,
               fontSize: 20,

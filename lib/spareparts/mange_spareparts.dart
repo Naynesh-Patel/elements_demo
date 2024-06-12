@@ -44,8 +44,8 @@ class _MangeSparepartsState extends State<MangeSpareparts> {
                   border: Border.all(color: const Color(0xffE6E6E6), width: 1)),
               child: Row(
                 children: [
-                  Expanded(
-                    child: const Column(
+                  const Expanded(
+                    child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
@@ -81,18 +81,37 @@ class _MangeSparepartsState extends State<MangeSpareparts> {
                   ),
                   Row(
                     children: [
-                      IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
+                      InkWell(
+                        onTap: () {},
+                        borderRadius: BorderRadius.circular(5),
+                        child: Container(
+                          padding: const EdgeInsets.all(6),
+                          decoration: BoxDecoration(
+                              border:
+                                  Border.all(color: const Color(0xffC9C9C9)),
+                              borderRadius: BorderRadius.circular(5)),
+                          child: const Icon(
                             Icons.edit,
                             color: Color(0xff555555),
-                          )),
-                      IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      InkWell(
+                        onTap: () {},
+                        borderRadius: BorderRadius.circular(5),
+                        child: Container(
+                          padding: const EdgeInsets.all(6),
+                          decoration: BoxDecoration(
+                              border:
+                                  Border.all(color: const Color(0xffC9C9C9)),
+                              borderRadius: BorderRadius.circular(5)),
+                          child: const Icon(
                             Icons.delete,
                             color: Color(0xff555555),
-                          )),
+                          ),
+                        ),
+                      ),
                     ],
                   )
                 ],
@@ -108,7 +127,7 @@ class _MangeSparepartsState extends State<MangeSpareparts> {
           ),
           backgroundColor: AppColor.buttonColor,
           onPressed: () {
-            Get.to(AddSpareparts());
+            Get.to(const AddSpareparts());
           },
           child: const Icon(
             Icons.add,

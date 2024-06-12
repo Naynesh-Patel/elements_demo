@@ -114,10 +114,11 @@ class _MangeMachineryState extends State<MangeMachinery> {
                         child: Container(
                           padding: const EdgeInsets.all(6),
                           decoration: BoxDecoration(
-                            border: Border.all(color: const Color(0xffC9C9C9)),
-                            borderRadius: BorderRadius.circular(5)
-                          ),
-                          child: const Icon(Icons.edit,
+                              border:
+                                  Border.all(color: const Color(0xffC9C9C9)),
+                              borderRadius: BorderRadius.circular(5)),
+                          child: const Icon(
+                            Icons.edit,
                             color: Color(0xff555555),
                           ),
                         ),
@@ -129,9 +130,9 @@ class _MangeMachineryState extends State<MangeMachinery> {
                         child: Container(
                           padding: const EdgeInsets.all(6),
                           decoration: BoxDecoration(
-                            border: Border.all(color: const Color(0xffC9C9C9)),
-                            borderRadius: BorderRadius.circular(5)
-                          ),
+                              border:
+                                  Border.all(color: const Color(0xffC9C9C9)),
+                              borderRadius: BorderRadius.circular(5)),
                           child: const Icon(
                             Icons.delete,
                             color: Color(0xff555555),
@@ -210,10 +211,11 @@ class _MangeMachineryState extends State<MangeMachinery> {
                         child: Container(
                           padding: const EdgeInsets.all(6),
                           decoration: BoxDecoration(
-                              border: Border.all(color: const Color(0xffC9C9C9)),
-                              borderRadius: BorderRadius.circular(5)
-                          ),
-                          child: const Icon(Icons.edit,
+                              border:
+                                  Border.all(color: const Color(0xffC9C9C9)),
+                              borderRadius: BorderRadius.circular(5)),
+                          child: const Icon(
+                            Icons.edit,
                             color: Color(0xff555555),
                           ),
                         ),
@@ -225,9 +227,9 @@ class _MangeMachineryState extends State<MangeMachinery> {
                         child: Container(
                           padding: const EdgeInsets.all(6),
                           decoration: BoxDecoration(
-                              border: Border.all(color: const Color(0xffC9C9C9)),
-                              borderRadius: BorderRadius.circular(5)
-                          ),
+                              border:
+                                  Border.all(color: const Color(0xffC9C9C9)),
+                              borderRadius: BorderRadius.circular(5)),
                           child: const Icon(
                             Icons.delete,
                             color: Color(0xff555555),

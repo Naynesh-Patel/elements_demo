@@ -19,7 +19,10 @@ class MyApp extends StatelessWidget {
       initialBinding: BindingController(),
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        fontFamily: 'Kanit-Regular.ttf',
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.deepPurple,
+        ),
         useMaterial3: true,
       ),
       home: const Splash(),
