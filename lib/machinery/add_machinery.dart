@@ -34,7 +34,7 @@ class _AddMachineryState extends State<AddMachinery> {
           actions: [
             IconButton(
                 onPressed: () {},
-                icon: Icon(
+                icon: const Icon(
                   Icons.add,
                   size: 25,
                 ))
@@ -61,18 +61,19 @@ class _AddMachineryState extends State<AddMachinery> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  const Text(
                     'Add Spareparts',
                     style: TextStyle(
                         color: Color(0xff555555),
                         fontSize: 20,
                         fontWeight: FontWeight.w400),
                   ),
-                  IconButton(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.add_rounded,
-                      ))
+                  InkWell(
+                    onTap: () {},
+                    child: const Icon(
+                      Icons.add_rounded,
+                    ),
+                  )
                 ],
               ),
               Row(

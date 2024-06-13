@@ -2,7 +2,7 @@ import 'package:elements/bill_history/bill_history.dart';
 import 'package:elements/import_spareparts/import_spareparts.dart';
 import 'package:elements/machinery/mange_machinery.dart';
 import 'package:elements/manage_customer/mange_customer.dart';
-import 'package:elements/mange_product/mange_product.dart';
+
 import 'package:elements/spareparts/mange_spareparts.dart';
 import 'package:elements/user/mange_user.dart';
 import 'package:flutter/material.dart';
@@ -261,7 +261,7 @@ class _SettingTabState extends State<SettingTab> {
             onTap: () {
               setState(() {
                 index = 6;
-                Get.to(const MangeProduct());
+                // Get.to(const MangeProduct());
               });
             },
           ),
