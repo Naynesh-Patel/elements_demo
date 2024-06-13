@@ -312,7 +312,7 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
                                           child: const Text(
                                             'Invoice',
                                             style: TextStyle(
-                                                fontWeight: FontWeight.w300,
+                                                fontWeight: FontWeight.w400,
                                                 fontSize: 14,
                                                 color: Color(0xff01959F)),
                                           )),
@@ -335,7 +335,7 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
                                           child: const Text(
                                             'Edit',
                                             style: TextStyle(
-                                                fontWeight: FontWeight.w300,
+                                                fontWeight: FontWeight.w400,
                                                 fontSize: 14,
                                                 color: Color(0xff555555)),
                                           )),
@@ -358,7 +358,7 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
                                           child: const Text(
                                             'Cancel',
                                             style: TextStyle(
-                                                fontWeight: FontWeight.w300,
+                                                fontWeight: FontWeight.w400,
                                                 fontSize: 14,
                                                 color: Color(0xffB50A0A)),
                                           )),
