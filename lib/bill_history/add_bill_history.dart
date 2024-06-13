@@ -3,6 +3,8 @@ import 'package:elements/widget/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../widget/custom_text_field.dart';
+
 class AddBillHistory extends StatefulWidget {
   const AddBillHistory({super.key});
 
@@ -40,70 +42,70 @@ class _AddBillHistoryState extends State<AddBillHistory>
                 Get.back();
               },
               child: const Icon(Icons.arrow_back_ios_new)),
-          actions: [
-            IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.add,
-                  size: 25,
-                ))
-          ],
         ),
-        body: Column(
-          children: [
-            TabBar(
-              onTap: (value) {
-                currentIndex = value;
-                setState(() {});
-              },
-              dividerColor: Colors.transparent,
-              indicator: BoxDecoration(
-                borderRadius: BorderRadius.circular(4),
-                color: AppColor.buttonColor,
+        body: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+          child: Column(
+            children: [
+              CustomTextField(
+                hintText: "Invoice Bill",
+                labelText: "Bill Type",
+                suffixFixWidget: Image.asset(
+                  "assets/images/down.png",
+                  height: 20,
+                ),
               ),
-              labelColor: const Color(0xffffffff),
-              labelStyle:
-                  const TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
-              unselectedLabelColor: Colors.black,
-              controller: tabController,
-              unselectedLabelStyle:
-                  const TextStyle(fontWeight: FontWeight.w600),
-              tabs: [
-                Tab(
-                  child: Container(
-                    width: double.maxFinite,
-                    height: double.maxFinite,
-                    decoration: BoxDecoration(
-                        // color: Colors.blue,
-                        borderRadius: BorderRadius.circular(4)),
-                    child: const Center(
-                        child: Text(
-                      'Ongoing',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    )),
-                  ),
+              const SizedBox(
+                height: 15,
+              ),
+              CustomTextField(
+                hintText: "Select Company Name",
+                labelText: "Customer/Company Name*",
+                suffixFixWidget: Image.asset(
+                  "assets/images/down.png",
+                  height: 20,
                 ),
-                Tab(
-                  child: Container(
-                    width: double.maxFinite,
-                    height: double.maxFinite,
-                    decoration: BoxDecoration(
-                        // color: Colors.blue,
-                        borderRadius: BorderRadius.circular(8)),
-                    child: const Center(
-                        child: Text('Complete ',
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
-                            ))),
-                  ),
-                ),
-              ],
-            ),
-          ],
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              const CustomTextField(
+                hintText: "Select Machine Type",
+                labelText: "Machine Type*",
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              const CustomTextField(
+                hintText: "2",
+                labelText: "Qty*",
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              const CustomTextField(
+                hintText: "99656 25693",
+                labelText: "Mobile No.*",
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              const CustomTextField(
+                hintText: "₹ 2000 ",
+                labelText: "Price*",
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              const CustomTextField(
+                hintText: "Shipping Address....",
+                labelText: "Shipping Address*",
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+            ],
+          ),
         ),
         bottomNavigationBar: Container(
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),

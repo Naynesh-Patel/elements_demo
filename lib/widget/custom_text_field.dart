@@ -112,8 +112,8 @@ class CustomTextField extends StatelessWidget {
               fontWeight: FontWeight.w400,
               color: Color(0xff555555)),
           hintStyle: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w300,
+              fontSize: 14,
+              fontWeight: FontWeight.w400,
               color: Color(0xffD1D1D1)),
           counterText: "",
           labelText: labelText),

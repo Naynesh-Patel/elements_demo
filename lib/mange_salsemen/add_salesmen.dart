@@ -4,14 +4,14 @@ import 'package:elements/widget/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class AddUser extends StatefulWidget {
-  const AddUser({super.key});
+class AddSalesmen extends StatefulWidget {
+  const AddSalesmen({super.key});
 
   @override
-  State<AddUser> createState() => _AddUserState();
+  State<AddSalesmen> createState() => _AddSalesmenState();
 }
 
-class _AddUserState extends State<AddUser> {
+class _AddSalesmenState extends State<AddSalesmen> {
   bool value = false;
   int index = 0;
 
@@ -22,7 +22,7 @@ class _AddUserState extends State<AddUser> {
         appBar: AppBar(
           backgroundColor: const Color(0xffF9F9F9),
           title: const Text(
-            "Add User",
+            "Add Salesmen",
             style: TextStyle(
               color: Colors.black,
             ),
