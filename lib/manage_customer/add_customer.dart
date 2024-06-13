@@ -41,7 +41,7 @@ class _AddCustomerState extends State<AddCustomer> {
         ),
         body: Container(
           margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-          child: const Column(
+          child: Column(
             children: [
               CustomTextField(
                 hintText: "Tata Steel Pvt",
@@ -67,7 +67,7 @@ class _AddCustomerState extends State<AddCustomer> {
         bottomNavigationBar: Container(
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: CustomButton(
-              color: AppColor.buttonColor,
+            color: AppColor.buttonColor,
             buttonText: 'Add',
             onTap: () {},
           ),

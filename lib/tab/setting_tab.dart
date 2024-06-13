@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
+import '../mange_salsemen/mange_salesmen.dart';
+
 class SettingTab extends StatefulWidget {
   const SettingTab({super.key});
 
@@ -199,7 +201,7 @@ class _SettingTabState extends State<SettingTab> {
             onTap: () {
               setState(() {
                 index = 4;
-                Get.to(const MangeUser());
+                Get.to(const MangeSalesmen());
               });
             },
           ),
@@ -321,12 +323,108 @@ class _SettingTabState extends State<SettingTab> {
             ),
             onTap: () {
               setState(() {
+                logoutDialog();
                 index = 8;
               });
             },
           ),
         ],
       ),
+    );
+  }
+
+  Future<void> logoutDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(2),
+          ),
+          backgroundColor: Colors.white,
+          title: const Text(
+            "Are You Sure Logout?",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 22,
+                color: Color(0xff555555)),
+          ),
+          content: const Text(
+            "Do you really want to Logout these App? This process cannot be undone.",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                // fontWeight: FontWeight.w300,
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+                color: Color(0xff949494)),
+          ),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Get.back();
+                    },
+                    child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 5, horizontal: 20),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(4),
+                          color: const Color(0xffC1C1C1),
+                        ),
+                        child: const Text("Cancel",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400))),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Get.back();
+                    },
+                    child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 5, horizontal: 20),
+                        decoration: BoxDecoration(
+                            color: const Color(0xff01959F),
+                            borderRadius: BorderRadius.circular(4)),
+                        child: const Text("Delete",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400))),
+                  ),
+                ],
+              ),
+            )
+            // InkWell(
+            //   onTap: () {
+            //     Get.back();
+            //   },
+            //   child: Container(
+            //     padding:
+            //         const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+            //     decoration: BoxDecoration(
+            //         borderRadius: BorderRadius.circular(8),
+            //         color: AppColor.buttonColor),
+            //     child: const Text(
+            //       'Delete',
+            //       style: TextStyle(
+            //         color: Colors.white,
+            //       ),
+            //     ),
+            //   ),
+            // ),
+          ],
+        );
+      },
     );
   }
 }

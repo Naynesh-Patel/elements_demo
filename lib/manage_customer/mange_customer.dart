@@ -1,6 +1,5 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import 'add_customer.dart';
@@ -43,7 +42,7 @@ class _MangeCustomerState extends State<MangeCustomer> {
                   border: Border.all(color: const Color(0xffE6E6E6), width: 1)),
               child: Row(
                 children: [
-                  const Expanded(
+                  Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -91,51 +90,76 @@ class _MangeCustomerState extends State<MangeCustomer> {
                             ),
                           ],
                         ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            InkWell(
+                              onTap: () {},
+                              borderRadius: BorderRadius.circular(5),
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      border: Border.all(
+                                          color: const Color(0xffC9C9C9))),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 10),
+                                  child: const Text(
+                                    'View',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 14,
+                                        color: Color(0xff01959F)),
+                                  )),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            InkWell(
+                              onTap: () {},
+                              borderRadius: BorderRadius.circular(5),
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      border: Border.all(
+                                          color: const Color(0xffC9C9C9))),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 10),
+                                  child: const Text(
+                                    'Edit',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 14,
+                                        color: Color(0xff555555)),
+                                  )),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            InkWell(
+                              onTap: () {},
+                              borderRadius: BorderRadius.circular(5),
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      border: Border.all(
+                                          color: const Color(0xffC9C9C9))),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 10),
+                                  child: const Text(
+                                    'Cancel',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 14,
+                                        color: Color(0xffB50A0A)),
+                                  )),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      InkWell(
-                        borderRadius: BorderRadius.circular(10),
-                        onTap: () {},
-                        child: Container(
-                            decoration: BoxDecoration(
-                                color: const Color(0xffFFFFFF),
-                                borderRadius: BorderRadius.circular(6),
-                                border:
-                                    Border.all(color: const Color(0xffD1D1D1))),
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 10),
-                            child: SvgPicture.asset(
-                              'assets/svg/ic_edit.svg',
-                              height: 16,
-                              width: 16,
-                            )),
-                      ),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      InkWell(
-                        borderRadius: BorderRadius.circular(10),
-                        onTap: () {},
-                        child: Container(
-                          decoration: BoxDecoration(
-                              color: const Color(0xffFFFFFF),
-                              borderRadius: BorderRadius.circular(6),
-                              border:
-                                  Border.all(color: const Color(0xffD1D1D1))),
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 10),
-                          child: const Icon(
-                            Icons.delete,
-                            size: 16,
-                            weight: 16,
-                          ),
-                        ),
-                      ),
-                    ],
                   ),
                 ],
               ),

@@ -272,7 +272,7 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
                                     ),
                                   ],
                                 ),
-                                SizedBox(height: 3),
+                                const SizedBox(height: 3),
                                 const Row(
                                   children: [
                                     Text(

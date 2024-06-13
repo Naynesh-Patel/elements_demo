@@ -1,17 +1,16 @@
 import 'package:elements/constant/app_colors.dart';
-import 'package:elements/user/add_user.dart';
-import 'package:elements/widget/custom_dialogbox.dart';
+import 'package:elements/mange_salsemen/add_salesmen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class Salesmen extends StatefulWidget {
-  const Salesmen({super.key});
+class MangeSalesmen extends StatefulWidget {
+  const MangeSalesmen({super.key});
 
   @override
-  State<Salesmen> createState() => _SalesmenState();
+  State<MangeSalesmen> createState() => _MangeSalesmenState();
 }
 
-class _SalesmenState extends State<Salesmen> {
+class _MangeSalesmenState extends State<MangeSalesmen> {
   bool value = false;
   int index = 0;
 
@@ -22,7 +21,7 @@ class _SalesmenState extends State<Salesmen> {
       appBar: AppBar(
         backgroundColor: const Color(0xffF9F9F9),
         title: const Text(
-          "Salesmen",
+          "Mange Salesmen",
           style: TextStyle(
             color: Colors.black,
           ),
@@ -107,25 +106,37 @@ class _SalesmenState extends State<Salesmen> {
                   ),
                   Row(
                     children: [
-                      IconButton(
-                          onPressed: () {
-                            CustomDialogBox.showDialogBox(
-                                context: context,
-                                titleText: 'Are You Sure Delete?',
-                                contentText:
-                                    'Do you really want to delete these \nrecords? This process cannot be undone',
-                                data: 'Delete ');
-                          },
-                          icon: const Icon(
+                      InkWell(
+                        onTap: () {},
+                        borderRadius: BorderRadius.circular(5),
+                        child: Container(
+                          padding: const EdgeInsets.all(6),
+                          decoration: BoxDecoration(
+                              border:
+                                  Border.all(color: const Color(0xffC9C9C9)),
+                              borderRadius: BorderRadius.circular(5)),
+                          child: const Icon(
                             Icons.edit,
                             color: Color(0xff555555),
-                          )),
-                      IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      InkWell(
+                        onTap: () {},
+                        borderRadius: BorderRadius.circular(5),
+                        child: Container(
+                          padding: const EdgeInsets.all(6),
+                          decoration: BoxDecoration(
+                              border:
+                                  Border.all(color: const Color(0xffC9C9C9)),
+                              borderRadius: BorderRadius.circular(5)),
+                          child: const Icon(
                             Icons.delete,
                             color: Color(0xff555555),
-                          )),
+                          ),
+                        ),
+                      ),
                     ],
                   )
                 ],
@@ -141,7 +152,7 @@ class _SalesmenState extends State<Salesmen> {
           ),
           backgroundColor: AppColor.buttonColor,
           onPressed: () {
-            Get.to(const AddUser());
+            Get.to(const AddSalesmen());
           },
           child: const Icon(
             Icons.add,
