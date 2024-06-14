@@ -2,14 +2,13 @@ import 'package:elements/bill_history/bill_history.dart';
 import 'package:elements/import_spareparts/import_spareparts.dart';
 import 'package:elements/machinery/mange_machinery.dart';
 import 'package:elements/manage_customer/mange_customer.dart';
-
+import 'package:elements/mange_product/mange_product.dart';
+import 'package:elements/mange_salsemen/mange_salesmen.dart';
 import 'package:elements/spareparts/mange_spareparts.dart';
 import 'package:elements/user/mange_user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-
-import '../mange_salsemen/mange_salesmen.dart';
 
 class SettingTab extends StatefulWidget {
   const SettingTab({super.key});
@@ -61,7 +60,7 @@ class _SettingTabState extends State<SettingTab> {
             title: Text(
               'Manage Machinery',
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 16,
                 fontWeight: FontWeight.w400,
                 color: index == 0
                     ? const Color(0xff01959F)
@@ -70,6 +69,7 @@ class _SettingTabState extends State<SettingTab> {
             ),
             trailing: Icon(
               Icons.arrow_forward_ios_rounded,
+              size: 16,
               color: index == 0
                   ? const Color(0xff01959F)
                   : const Color(0xff555555),
@@ -92,7 +92,7 @@ class _SettingTabState extends State<SettingTab> {
             title: Text(
               'Manage Spareparts',
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 16,
                 color: index == 1
                     ? const Color(0xff01959F)
                     : const Color(0xff555555),
@@ -101,6 +101,7 @@ class _SettingTabState extends State<SettingTab> {
             ),
             trailing: Icon(
               Icons.arrow_forward_ios_rounded,
+              size: 16,
               color: index == 1
                   ? const Color(0xff01959F)
                   : const Color(0xff555555),
@@ -123,7 +124,7 @@ class _SettingTabState extends State<SettingTab> {
             title: Text(
               'Import Spareparts',
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 16,
                 color: index == 2
                     ? const Color(0xff01959F)
                     : const Color(0xff555555),
@@ -132,6 +133,7 @@ class _SettingTabState extends State<SettingTab> {
             ),
             trailing: Icon(
               Icons.arrow_forward_ios_rounded,
+              size: 16,
               color: index == 2
                   ? const Color(0xff01959F)
                   : const Color(0xff555555),
@@ -154,7 +156,7 @@ class _SettingTabState extends State<SettingTab> {
             title: Text(
               'Manage User',
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 16,
                 color: index == 3
                     ? const Color(0xff01959F)
                     : const Color(0xff555555),
@@ -163,6 +165,7 @@ class _SettingTabState extends State<SettingTab> {
             ),
             trailing: Icon(
               Icons.arrow_forward_ios_rounded,
+              size: 16,
               color: index == 3
                   ? const Color(0xff01959F)
                   : const Color(0xff555555),
@@ -185,7 +188,7 @@ class _SettingTabState extends State<SettingTab> {
             title: Text(
               'Manage Salesmen',
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 16,
                 color: index == 4
                     ? const Color(0xff01959F)
                     : const Color(0xff555555),
@@ -194,6 +197,7 @@ class _SettingTabState extends State<SettingTab> {
             ),
             trailing: Icon(
               Icons.arrow_forward_ios_rounded,
+              size: 16,
               color: index == 4
                   ? const Color(0xff01959F)
                   : const Color(0xff555555),
@@ -216,7 +220,7 @@ class _SettingTabState extends State<SettingTab> {
             title: Text(
               'Manage Customer Company',
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 16,
                 color: index == 5
                     ? const Color(0xff01959F)
                     : const Color(0xff555555),
@@ -225,6 +229,7 @@ class _SettingTabState extends State<SettingTab> {
             ),
             trailing: Icon(
               Icons.arrow_forward_ios_rounded,
+              size: 16,
               color: index == 5
                   ? const Color(0xff01959F)
                   : const Color(0xff555555),
@@ -247,7 +252,7 @@ class _SettingTabState extends State<SettingTab> {
             title: Text(
               'Manage Product',
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 16,
                 color: index == 6
                     ? const Color(0xff01959F)
                     : const Color(0xff555555),
@@ -256,6 +261,7 @@ class _SettingTabState extends State<SettingTab> {
             ),
             trailing: Icon(
               Icons.arrow_forward_ios_rounded,
+              size: 16,
               color: index == 6
                   ? const Color(0xff01959F)
                   : const Color(0xff555555),
@@ -263,7 +269,7 @@ class _SettingTabState extends State<SettingTab> {
             onTap: () {
               setState(() {
                 index = 6;
-                // Get.to(const MangeProduct());
+                Get.to(const MangeProduct());
               });
             },
           ),
@@ -278,7 +284,7 @@ class _SettingTabState extends State<SettingTab> {
             title: Text(
               'Bill History',
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 16,
                 color: index == 7
                     ? const Color(0xff01959F)
                     : const Color(0xff555555),
@@ -287,6 +293,7 @@ class _SettingTabState extends State<SettingTab> {
             ),
             trailing: Icon(
               Icons.arrow_forward_ios_rounded,
+              size: 16,
               color: index == 7
                   ? const Color(0xff01959F)
                   : const Color(0xff555555),
@@ -308,7 +315,7 @@ class _SettingTabState extends State<SettingTab> {
             title: Text(
               'Logout',
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 16,
                 color: index == 8
                     ? const Color(0xff01959F)
                     : const Color(0xff555555),
@@ -317,6 +324,7 @@ class _SettingTabState extends State<SettingTab> {
             ),
             trailing: Icon(
               Icons.arrow_forward_ios_rounded,
+              size: 16,
               color: index == 8
                   ? const Color(0xff01959F)
                   : const Color(0xff555555),

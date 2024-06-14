@@ -15,6 +15,7 @@ class CustomTextField extends StatelessWidget {
   final Widget? suffixFixWidget;
   final int? maxLength;
   final bool? readOnly;
+  final bool? obscureText;
   final bool? enable;
   final bool? autofocus;
   final Function()? onTap;
@@ -55,6 +56,7 @@ class CustomTextField extends StatelessWidget {
     this.onFieldSubmitted,
     this.onSaved,
     this.labelText,
+    this.obscureText,
   });
 
   @override
@@ -76,6 +78,7 @@ class CustomTextField extends StatelessWidget {
       maxLines: maxLines ?? 1,
       textAlign: TextAlign.start,
       initialValue: initialValue,
+      obscureText: obscureText ?? false,
       decoration: InputDecoration(
           errorText: errorText,
           fillColor: Colors.white,

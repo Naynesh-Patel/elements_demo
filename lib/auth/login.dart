@@ -26,6 +26,7 @@ class _LoginState extends State<Login> {
 
   @override
   void initState() {
+    controller.loginPasswordVisible = true;
     super.initState();
   }
 
@@ -36,7 +37,7 @@ class _LoginState extends State<Login> {
         body: ListView(
           children: [
             Container(
-              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+              margin: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -100,10 +101,12 @@ class _LoginState extends State<Login> {
                   ),
                   CustomTextField(
                       focusNode: controller.focusNode,
+                      obscureText: controller.loginPasswordVisible,
                       textEditingController:
                           controller.passwordTextEditingController,
                       hintText: "Password",
                       labelText: "Password",
+                      enable: true,
                       suffixFixWidget: IconButton(
                         onPressed: () {
                           setState(() {

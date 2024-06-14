@@ -34,14 +34,14 @@ class _CommonDropdownState extends State<CommonDropdown> {
         minWidth: 150,
         child: DropdownButton<String>(
           isExpanded: true,
-          elevation: 0,
+          elevation: 10,
           underline: const SizedBox.shrink(),
           focusColor: Colors.white,
           value: widget.value,
-          dropdownColor: Colors.grey.shade200,
+          dropdownColor: Colors.grey.shade50,
           icon: Image.asset(
             "assets/images/down.png",
-            height: 30,
+            height: 24,
           ),
           hint: Text(widget.hintText),
           items: widget.dropdownList.map((String value) {
@@ -54,7 +54,6 @@ class _CommonDropdownState extends State<CommonDropdown> {
                     fontWeight: FontWeight.w400,
                     color: Color(0xff555555)),
               ),
-              // alignment: Alignment.center,
             );
           }).toList(),
           onChanged: (val) {
