@@ -19,7 +19,7 @@ class _InvoiceState extends State<Invoice> {
           title: const Padding(
             padding: EdgeInsets.symmetric(horizontal: 5),
             child: Text(
-              'Invoice',
+              'Invoice Details',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
             ),
           ),
@@ -44,12 +44,12 @@ class _InvoiceState extends State<Invoice> {
             )
           ],
         ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+        body: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
           child: Column(
             children: [
               Container(
-                margin: const EdgeInsets.symmetric(vertical: 12),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(4),
                     border: Border.all(color: const Color(0xffC9C9C9)),
@@ -57,23 +57,24 @@ class _InvoiceState extends State<Invoice> {
                 child: TextField(
                   cursorColor: Colors.black,
                   decoration: InputDecoration(
-                      hintText: " Search...",
+                      hintText: "Search...",
                       hintStyle: const TextStyle(color: Color(0xffBEBEBE)),
                       border: InputBorder.none,
                       suffixIcon: IconButton(
                         icon: const Icon(
-                          Icons.search,
+                          Icons.search_rounded,
                           color: Color(0xffBEBEBE),
                         ),
                         color: const Color.fromRGBO(93, 25, 72, 1),
                         onPressed: () {},
                       )),
-                  style: const TextStyle(color: Colors.white, fontSize: 15.0),
+                  style: const TextStyle(color: Colors.grey, fontSize: 15.0),
                 ),
               ),
+              const SizedBox(
+                height: 16,
+              ),
               Container(
-                  // height: 130,
-                  margin: const EdgeInsets.symmetric(vertical: 15),
                   padding:
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                   decoration: BoxDecoration(
@@ -131,7 +132,7 @@ class _InvoiceState extends State<Invoice> {
                           ],
                         ),
                         const SizedBox(
-                          height: 10,
+                          height: 16,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
@@ -197,7 +198,7 @@ class _InvoiceState extends State<Invoice> {
                             ),
                           ],
                         ),
-                      ]))
+                      ])),
             ],
           ),
         ));

@@ -4,6 +4,8 @@ import 'package:elements/widget/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../widget/common_dropdown.dart';
+
 class AddSalesmen extends StatefulWidget {
   const AddSalesmen({super.key});
 
@@ -14,6 +16,14 @@ class AddSalesmen extends StatefulWidget {
 class _AddSalesmenState extends State<AddSalesmen> {
   bool value = false;
   int index = 0;
+
+  String dropdownvalue = 'User';
+  String? selectLevel;
+  var items = [
+    'Admin',
+    'User',
+    'Seller',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -82,10 +92,16 @@ class _AddSalesmenState extends State<AddSalesmen> {
               const SizedBox(
                 height: 15,
               ),
-              const CustomTextField(
-                hintText: "Select User Role",
-                labelText: "User Role",
+              CommonDropdown(
+                dropdownList: items,
+                value: selectLevel,
+                callback: setLevelValue,
+                hintText: "User Role",
               ),
+              // const CustomTextField(
+              //   hintText: "Select User Role",
+              //   labelText: "User Role",
+              // ),
               const SizedBox(
                 height: 20,
               ),
@@ -121,5 +137,9 @@ class _AddSalesmenState extends State<AddSalesmen> {
             onTap: () {},
           ),
         ));
+  }
+
+  void setLevelValue(String value) {
+    selectLevel = value;
   }
 }

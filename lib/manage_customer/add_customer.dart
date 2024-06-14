@@ -19,7 +19,7 @@ class _AddCustomerState extends State<AddCustomer> {
         appBar: AppBar(
           backgroundColor: const Color(0xffF9F9F9),
           title: const Text(
-            "Add Customer/Company",
+            "r/Company",
             style: TextStyle(
               color: Colors.black,
               fontSize: 20,

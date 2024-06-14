@@ -55,8 +55,8 @@ class _AttendanceTabState extends State<AttendanceTab> {
           child: DataTable2(
             dividerThickness: 0.1,
             columnSpacing: 10,
-            horizontalMargin: 10,
-            minWidth: 300,
+            horizontalMargin: 5,
+            minWidth: 250,
             headingRowColor: MaterialStateProperty.all<Color>(
                 const Color(0xffF1F1F1).withOpacity(0.60)),
             // dataRowColor: MaterialStateProperty.all<Color>(Colors.white),
@@ -87,8 +87,8 @@ class _AttendanceTabState extends State<AttendanceTab> {
                       onTap: () {},
                       child: Image.asset(
                         "assets/images/date.png",
-                        height: 16,
-                        width: 16,
+                        height: 14,
+                        width: 14,
                       ),
                     ),
                   ],

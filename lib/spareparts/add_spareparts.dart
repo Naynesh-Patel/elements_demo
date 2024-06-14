@@ -35,7 +35,7 @@ class _AddSparepartsState extends State<AddSpareparts> {
           actions: [
             IconButton(
                 onPressed: () {},
-                icon: Icon(
+                icon: const Icon(
                   Icons.add,
                   size: 24,
                 ))
@@ -47,7 +47,7 @@ class _AddSparepartsState extends State<AddSpareparts> {
             children: [
               CustomTextField(
                 hintText: "Steel Bolt",
-                labelText: "Name",
+                labelText: "Name*",
               ),
               SizedBox(
                 height: 20,
