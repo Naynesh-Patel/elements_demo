@@ -55,12 +55,13 @@ class _AttendanceTabState extends State<AttendanceTab> {
         body: Container(
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: DataTable2(
+            dividerThickness: 0.1,
             columnSpacing: 10,
             horizontalMargin: 10,
             minWidth: 300,
             headingRowColor: MaterialStateProperty.all<Color>(
                 const Color(0xffF1F1F1).withOpacity(0.60)),
-            dataRowColor: MaterialStateProperty.all<Color>(Colors.white),
+            // dataRowColor: MaterialStateProperty.all<Color>(Colors.white),
             dataTextStyle: const TextStyle(color: Color(0xff555555)),
             columns: [
               const DataColumn2(
@@ -134,7 +135,8 @@ class _AttendanceTabState extends State<AttendanceTab> {
                   child: Center(
                     child: Text(
                       "Filters",
-                      style: TextStyle(fontSize: 19),
+                      style:
+                          TextStyle(fontSize: 19, fontWeight: FontWeight.w500),
                     ),
                   ),
                 ),
@@ -198,7 +200,7 @@ class _AttendanceTabState extends State<AttendanceTab> {
                   },
                   child: Container(
                       padding: const EdgeInsets.symmetric(
-                          vertical: 8, horizontal: 15),
+                          vertical: 8, horizontal: 23),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(4),
                           // color: const Color(0xffC9C9C9),
@@ -218,7 +220,7 @@ class _AttendanceTabState extends State<AttendanceTab> {
                   },
                   child: Container(
                       padding: const EdgeInsets.symmetric(
-                          vertical: 8, horizontal: 15),
+                          vertical: 8, horizontal: 23),
                       decoration: BoxDecoration(
                           color: const Color(0xff01959F),
                           borderRadius: BorderRadius.circular(4)),

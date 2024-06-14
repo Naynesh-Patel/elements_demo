@@ -39,30 +39,100 @@ class _AddCustomerState extends State<AddCustomer> {
                 ))
           ],
         ),
-        body: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-          child: Column(
-            children: [
-              CustomTextField(
-                hintText: "Tata Steel Pvt",
-                labelText: "Name",
+        body: ListView(
+          shrinkWrap: true,
+          children: [
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Add Profile :',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 16,
+                        color: Color(0xff555555)),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Center(
+                    child: Stack(
+                      alignment: Alignment.bottomRight,
+                      children: [
+                        Image.asset(
+                          'assets/images/camera.png',
+                          height: 80,
+                          width: 80,
+                        ),
+                        Container(
+                            padding: const EdgeInsets.all(5),
+                            decoration: BoxDecoration(
+                                color: const Color(0xff01959F),
+                                // shape: BoxShape.circle,
+                                borderRadius: BorderRadius.circular(15)),
+                            child: const Icon(
+                              Icons.add,
+                              color: Colors.white,
+                              size: 18,
+                            ))
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  const CustomTextField(
+                    hintText: "Enter Company",
+                    labelText: "Company*",
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const CustomTextField(
+                    hintText: "Enter Owner Name",
+                    labelText: "Owner Name*",
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const CustomTextField(
+                    hintText: "99656 25693",
+                    labelText: "Contact No.*",
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const CustomTextField(
+                    hintText: "Enter Address",
+                    labelText: "Address",
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const CustomTextField(
+                    hintText: "www.machinepro.com",
+                    labelText: "Website",
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const CustomTextField(
+                    hintText: "L & T Pvt",
+                    labelText: "Reference By",
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const CustomTextField(
+                    hintText: "GD5456892098",
+                    labelText: "GST No.",
+                  ),
+                ],
               ),
-              SizedBox(
-                height: 20,
-              ),
-              CustomTextField(
-                hintText: "99656 25693",
-                labelText: "Contact No.",
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              CustomTextField(
-                hintText: "L & T Pvt",
-                labelText: "Reference By",
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
         bottomNavigationBar: Container(
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),

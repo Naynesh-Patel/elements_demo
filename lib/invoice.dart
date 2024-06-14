@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -74,8 +73,9 @@ class _InvoiceState extends State<Invoice> {
               ),
               Container(
                   // height: 130,
-                  margin: const EdgeInsets.symmetric( vertical: 15),
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  margin: const EdgeInsets.symmetric(vertical: 15),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                   decoration: BoxDecoration(
                     color: const Color(0xffDFF8FA),
                     border: Border.all(color: const Color(0xff01959F)),
@@ -107,7 +107,6 @@ class _InvoiceState extends State<Invoice> {
                                       color: Color(0xff555555),
                                     ),
                                   ),
-
                                   Text(
                                     "Thu Jan 06 at 17.20  3.24KB",
                                     style: TextStyle(
