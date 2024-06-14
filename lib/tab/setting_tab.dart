@@ -19,7 +19,6 @@ class SettingTab extends StatefulWidget {
 }
 
 class _SettingTabState extends State<SettingTab> {
-
   SettingController controller = Get.find();
 
   @override
@@ -37,7 +36,7 @@ class _SettingTabState extends State<SettingTab> {
         automaticallyImplyLeading: false,
         title: Text(
           "Setting",
-            style: AppTextStyle.textStyleRegular20,
+          style: AppTextStyle.textStyleRegular20,
         ),
         actions: [
           InkWell(
@@ -132,7 +131,8 @@ class _SettingTabState extends State<SettingTab> {
           ),
           _customTile(
             title: "Logout",
-            imgPath: "assets/svg/bil_history.svg",
+            isSvg: false,
+            imgPath: "assets/images/logout.png",
             index: 9,
             onTap: () {
               logoutDialog();
@@ -153,11 +153,8 @@ class _SettingTabState extends State<SettingTab> {
             borderRadius: BorderRadius.circular(2),
           ),
           backgroundColor: Colors.white,
-          title: Text(
-            "Are You Sure Logout?",
-            textAlign: TextAlign.center,
-            style: AppTextStyle.textStyleBold20
-          ),
+          title: Text("Are You Sure Logout?",
+              textAlign: TextAlign.center, style: AppTextStyle.textStyleBold20),
           content: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
@@ -165,7 +162,8 @@ class _SettingTabState extends State<SettingTab> {
               Text(
                 "Do you really want to Logout these App? This process cannot be undone.",
                 textAlign: TextAlign.center,
-                style: AppTextStyle.textStyleRegular14.copyWith(color: const Color(0xff949494)),
+                style: AppTextStyle.textStyleRegular14
+                    .copyWith(color: const Color(0xff949494)),
               ),
               const SizedBox(
                 height: 15.0,
@@ -218,37 +216,44 @@ class _SettingTabState extends State<SettingTab> {
     );
   }
 
-  Widget _customTile({void Function()? onTap,required int index,required String title,required String imgPath,bool isSvg = true}){
+  Widget _customTile(
+      {void Function()? onTap,
+      required int index,
+      required String title,
+      required String imgPath,
+      bool isSvg = true}) {
     return Obx(() => ListTile(
-      leading: isSvg ? SvgPicture.asset(
-        imgPath,
-        color:controller.selectMenu.value == index ?
-        AppColor.selectColor
-            : AppColor.blackColor,
-        height: 20,
-      ):Image.asset(
-        imgPath,
-        color:controller.selectMenu.value == index ?
-        AppColor.selectColor
-            : AppColor.blackColor,
-        height: 20,
-      ),
-      title: Text(
-          title,
-          style: AppTextStyle.textStyleRegular16.copyWith(color:controller.selectMenu.value == index ?
-          AppColor.selectColor
-            : AppColor.blackColor,),
-      ),
-      trailing: Icon(
-        Icons.arrow_forward_ios_rounded,
-        size: 18,
-        color :controller.selectMenu.value == index ?
-        AppColor.selectColor
-            : AppColor.blackColor,
-      ),
-      onTap: onTap,
-    ));
+          leading: isSvg
+              ? SvgPicture.asset(
+                  imgPath,
+                  color: controller.selectMenu.value == index
+                      ? AppColor.selectColor
+                      : AppColor.blackColor,
+                  height: 20,
+                )
+              : Image.asset(
+                  imgPath,
+                  color: controller.selectMenu.value == index
+                      ? AppColor.selectColor
+                      : AppColor.blackColor,
+                  height: 20,
+                ),
+          title: Text(
+            title,
+            style: AppTextStyle.textStyleRegular16.copyWith(
+              color: controller.selectMenu.value == index
+                  ? AppColor.selectColor
+                  : AppColor.blackColor,
+            ),
+          ),
+          trailing: Icon(
+            Icons.arrow_forward_ios_rounded,
+            size: 18,
+            color: controller.selectMenu.value == index
+                ? AppColor.selectColor
+                : AppColor.blackColor,
+          ),
+          onTap: onTap,
+        ));
   }
-
-
 }
