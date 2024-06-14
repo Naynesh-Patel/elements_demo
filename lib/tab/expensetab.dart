@@ -1,5 +1,6 @@
 import 'package:elements/add_expense.dart';
 import 'package:elements/constant/app_colors.dart';
+import 'package:elements/constant/app_text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -15,24 +16,22 @@ class _ExpensetTabState extends State<ExpensetTab> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor:AppColor.whiteColor,
       appBar: AppBar(
-        backgroundColor: const Color(0xffF9F9F9),
+        backgroundColor: AppColor.bgAppBarColor,
         automaticallyImplyLeading: false,
-        title: const Text(
+        title:  Text(
           "Expense",
-          style: TextStyle(
-            color: Colors.black,
-          ),
+            style: AppTextStyle.textStyleRegular20
         ),
         actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SvgPicture.asset(
-              "assets/svg/ic_notification.svg",
-              height: 22,
-              width: 22,
-            ),
+          SvgPicture.asset(
+            "assets/svg/ic_notification.svg",
+            height: 20,
+            width: 20,
+          ),
+          const SizedBox(
+            width: 16,
           ),
         ],
       ),
@@ -44,123 +43,85 @@ class _ExpensetTabState extends State<ExpensetTab> {
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(4),
-                  border: Border.all(color: const Color(0xffE6E6E6), width: 1)),
-              child: Row(
-                children: [
-                  const Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Text(
-                              "Name : ",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400, fontSize: 16),
-                            ),
-                            Text(
-                              "Dipesh",
-                              style: TextStyle(
-                                color: Color(0xff555555),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              "Expense Type:",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400, fontSize: 16),
-                            ),
-                            Text(
-                              "Tea",
-                              style: TextStyle(color: Color(0xff555555)),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              "Price : ",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400, fontSize: 16),
-                            ),
-                            Text(
-                              "₹ 20 ",
-                              style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                color: Color(0xff555555),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                  Column(
-                    children: [
-                      const Row(
+                  border: Border.all(color: AppColor.borderColor, width: 1)),
+              child: IntrinsicHeight(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                     Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            "DD :",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w400, fontSize: 16),
+                          _keyValue(
+                              "Name" ,
+                              "Ramesh"
                           ),
-                          Text(
-                            "16-2-2024",
-                            style: TextStyle(
-                              color: Color(0xff555555),
-                            ),
+                          const SizedBox(
+                            height: 8.0,
+                          ),
+                          _keyValue(
+                              "Expense Type" ,
+                              "Tea"
+                          ),
+                          const SizedBox(
+                            height: 8.0,
+                          ),
+                          _keyValue(
+                              "Price" ,
+                              "₹ 20 "
                           ),
                         ],
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        children: [
-                          InkWell(
-                            borderRadius: BorderRadius.circular(10),
-                            onTap: () {},
-                            child: Container(
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        _keyValue("DD", "16-2-2024"),
+                        Row(
+                          children: [
+                            InkWell(
+                              borderRadius: BorderRadius.circular(10),
+                              onTap: () {},
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      border: Border.all(
+                                          color: const Color(0xffD1D1D1))),
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 10, horizontal: 10),
+                                  child: SvgPicture.asset(
+                                    'assets/svg/ic_edit.svg',
+                                    height: 16,
+                                    width: 16,
+                                  )),
+                            ),
+                            const SizedBox(
+                              width: 12,
+                            ),
+                            InkWell(
+                              borderRadius: BorderRadius.circular(10),
+                              onTap: () {},
+                              child: Container(
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
                                     border: Border.all(
                                         color: const Color(0xffD1D1D1))),
                                 padding: const EdgeInsets.symmetric(
                                     vertical: 10, horizontal: 10),
-                                child: SvgPicture.asset(
-                                  'assets/svg/ic_edit.svg',
-                                  height: 16,
-                                  width: 16,
-                                )),
-                          ),
-                          const SizedBox(
-                            width: 5,
-                          ),
-                          InkWell(
-                            borderRadius: BorderRadius.circular(10),
-                            onTap: () {},
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  border: Border.all(
-                                      color: const Color(0xffD1D1D1))),
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 10, horizontal: 10),
-                              child: const Icon(
-                                Icons.delete,
-                                size: 16,
-                                weight: 16,
+                                child: const Icon(
+                                  Icons.delete,
+                                  size: 16,
+                                  weight: 16,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ],
+                          ],
+                        )
+                      ],
+                    ),
+                  ],
+                ),
               ),
             )
           ],
@@ -181,4 +142,15 @@ class _ExpensetTabState extends State<ExpensetTab> {
           )),
     );
   }
+
+  Widget _keyValue(key,value){
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text("$key : ",style: AppTextStyle.textStyleBold14,),
+        Flexible(child: Text("$value",style: AppTextStyle.textStyleRegular14.copyWith(color: Color(0xff555555)),)),
+      ],
+    );
+  }
+
 }

@@ -94,7 +94,7 @@ class AppTextStyle {
       fontSize: Get.width < 900 ? 16 : 20,
       color: AppColor.blackColor,
       letterSpacing: 1.0,
-      fontWeight: FontWeight.w600);
+      fontWeight: FontWeight.w500);
 
   static TextStyle textStyleBold18 = TextStyle(
       fontSize: Get.width < 900 ? 18 : 22,

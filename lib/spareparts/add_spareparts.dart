@@ -1,4 +1,5 @@
 import 'package:elements/constant/app_colors.dart';
+import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/widget/custom_button.dart';
 import 'package:elements/widget/custom_text_field.dart';
 import 'package:flutter/material.dart';
@@ -18,26 +19,25 @@ class _AddSparepartsState extends State<AddSpareparts> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: AppColor.whiteColor,
         appBar: AppBar(
           backgroundColor: const Color(0xffF9F9F9),
-          title: const Text(
+          title: Text(
             "Add Spareparts",
-            style: TextStyle(
-              color: Colors.black,
-            ),
+             style: AppTextStyle.textStyleRegular20
           ),
-          leading: InkWell(
-              onTap: () {
-                Get.back();
-              },
-              child: const Icon(Icons.arrow_back_ios_new)),
+          leading:IconButton(
+            icon: Icon(Icons.arrow_back_ios_new,size: 24,),
+            onPressed: () {
+              Get.back();
+            },
+          ),
           actions: [
             IconButton(
                 onPressed: () {},
                 icon: Icon(
                   Icons.add,
-                  size: 25,
+                  size: 24,
                 ))
           ],
         ),
