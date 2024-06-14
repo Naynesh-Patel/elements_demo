@@ -1,7 +1,11 @@
 import 'package:elements/constant/app_colors.dart';
+import 'package:elements/constant/app_text_style.dart';
+import 'package:elements/controller/home_controller.dart';
 import 'package:elements/create_new_order.dart';
 import 'package:elements/invoice.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
@@ -13,9 +17,11 @@ class HomeTab extends StatefulWidget {
 }
 
 class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
-  GlobalKey<ScaffoldState> key = GlobalKey();
   late TabController tabController;
   int currentIndex = 0;
+
+  HomeController controller = Get.find();
+
   @override
   void initState() {
     tabController = TabController(length: 3, vsync: this);
@@ -25,390 +31,37 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: key,
+      backgroundColor: AppColor.whiteColor,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: const Color(0xffF9F9F9),
-        // leading: IconButton(
-        //   onPressed: () {
-        //     key.currentState?.openDrawer();
-        //   },
-        //   icon: SvgPicture.asset(
-        //     "assets/svg/ic_menu.svg",
-        //     height: 20,
-        //     width: 24,
-        //     color: Colors.black,
-        //   ),
-        // ),
-        title: const Text(
+        backgroundColor: AppColor.bgAppBarColor,
+        title: Text(
           "MachinePro",
-          style: TextStyle(
-            fontWeight: FontWeight.w400,
-            fontSize: 20,
-            color: Colors.black,
-          ),
+          style: AppTextStyle.textStyleRegular20
         ),
         actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SvgPicture.asset(
-              "assets/svg/ic_notification.svg",
-              height: 22,
-              width: 22,
-            ),
+          SvgPicture.asset(
+            "assets/svg/ic_notification.svg",
+            height: 20,
+            width: 20,
+          ),
+         const SizedBox(
+            width: 16,
           ),
         ],
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const SizedBox(
-            height: 20,
-          ),
-          TabBar(
-            onTap: (value) {
-              currentIndex = value;
-              setState(() {});
-            },
-            dividerColor: Colors.transparent,
-            indicator: BoxDecoration(
-                borderRadius: BorderRadius.circular(4),
-                color: AppColor.buttonColor,
-                border: Border.all(color: const Color(0xffE6E6E6))),
-            labelColor: const Color(0xffffffff),
-            labelStyle:
-                const TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
-            unselectedLabelColor: Colors.black,
-            controller: tabController,
-            unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.w600),
-            tabs: [
-              Tab(
-                child: Container(
-                  width: double.maxFinite,
-                  height: double.maxFinite,
-                  decoration:
-                      BoxDecoration(borderRadius: BorderRadius.circular(4)),
-                  child: const Center(
-                      child: Text(
-                    'Ongoing',
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  )),
-                ),
-              ),
-              Tab(
-                child: Container(
-                  width: double.maxFinite,
-                  height: double.maxFinite,
-                  decoration: BoxDecoration(
-                      // color: Colors.blue,
-                      borderRadius: BorderRadius.circular(4)),
-                  child: const Center(
-                      child: Text('Upcomming',
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                          ))),
-                ),
-              ),
-              Tab(
-                child: Container(
-                  width: double.maxFinite,
-                  height: double.maxFinite,
-                  decoration: BoxDecoration(
-                      // color: Colors.blue,
-                      borderRadius: BorderRadius.circular(8)),
-                  child: const Center(
-                      child: Text('Complete ',
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                          ))),
-                ),
-              ),
-            ],
-          ),
-          Expanded(
-            child: TabBarView(
-                controller: tabController,
-                physics: const BouncingScrollPhysics(),
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Column(
-                      children: [
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        Container(
-                          // height: 240,
-                          width: double.maxFinite,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(4),
-                              border:
-                                  Border.all(color: const Color(0xffE6E6E6))),
-                          child: Padding(
-                            padding: const EdgeInsets.all(15),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Text(
-                                          'OD : ',
-                                          style: TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w400,
-                                              color: Color(0xff272727)),
-                                        ),
-                                        Text(
-                                          '1-06-2024',
-                                          style: TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w300,
-                                              color: Color(0xff555555)),
-                                        ),
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          'DD : ',
-                                          style: TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w400,
-                                              color: Color(0xff272727)),
-                                        ),
-                                        Text(
-                                          '18-06-2024',
-                                          style: TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w300,
-                                              color: Color(0xff555555)),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 3),
-                                const Row(
-                                  children: [
-                                    Text(
-                                      'Client : ',
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400,
-                                          color: Color(0xff272727)),
-                                    ),
-                                    Text(
-                                      'Dipesh',
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w300,
-                                          color: Color(0xff555555)),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 3),
-                                const Row(
-                                  children: [
-                                    Text(
-                                      'Machine Type : ',
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400,
-                                          color: Color(0xff272727)),
-                                    ),
-                                    Text(
-                                      'Containership',
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w300,
-                                          color: Color(0xff555555)),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 3),
-                                const Row(
-                                  children: [
-                                    Text(
-                                      'Total Payment : ',
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400,
-                                          color: Color(0xff272727)),
-                                    ),
-                                    Text(
-                                      '20000',
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w300,
-                                          color: Color(0xff555555)),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 3),
-                                const Row(
-                                  children: [
-                                    Text(
-                                      'Advance Payment : ',
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400,
-                                          color: Color(0xff272727)),
-                                    ),
-                                    Text(
-                                      '${1200}',
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w300,
-                                          color: Color(0xff555555)),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 3),
-                                const Row(
-                                  children: [
-                                    Text(
-                                      'Assigne Order : ',
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400,
-                                          color: Color(0xff272727)),
-                                    ),
-                                    Text(
-                                      'Manager 1',
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w300,
-                                          color: Color(0xff555555)),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 5),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    InkWell(
-                                      onTap: () {
-                                        Get.to(const Invoice());
-                                      },
-                                      borderRadius: BorderRadius.circular(5),
-                                      child: Container(
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                              border: Border.all(
-                                                  color:
-                                                      const Color(0xffC9C9C9))),
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 15, vertical: 10),
-                                          child: const Text(
-                                            'Invoice',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w400,
-                                                fontSize: 14,
-                                                color: Color(0xff01959F)),
-                                          )),
-                                    ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    InkWell(
-                                      onTap: () {},
-                                      borderRadius: BorderRadius.circular(5),
-                                      child: Container(
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                              border: Border.all(
-                                                  color:
-                                                      const Color(0xffC9C9C9))),
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 20, vertical: 10),
-                                          child: const Text(
-                                            'Edit',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w400,
-                                                fontSize: 14,
-                                                color: Color(0xff555555)),
-                                          )),
-                                    ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    InkWell(
-                                      onTap: () {},
-                                      borderRadius: BorderRadius.circular(5),
-                                      child: Container(
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                              border: Border.all(
-                                                  color:
-                                                      const Color(0xffC9C9C9))),
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 15, vertical: 10),
-                                          child: const Text(
-                                            'Cancel',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w400,
-                                                fontSize: 14,
-                                                color: Color(0xffB50A0A)),
-                                          )),
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Center(
-                        child: Image.asset(
-                          alignment: Alignment.center,
-                          "assets/images/no_order.png",
-                          height: 100,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Center(
-                        child: Image.asset(
-                          alignment: Alignment.center,
-                          "assets/images/no_order.png",
-                          height: 100,
-                        ),
-                      ),
-                    ],
-                  ),
-                ]),
-          ),
-          // const SizedBox(
-          //   height: 20,
-          // ),
-          // Center(
-          //   child: Image.asset(
-          //     alignment: Alignment.center,
-          //     "assets/images/no_order.png",
-          //     height: 100,
-          //   ),
-          // ),
-        ],
+      body: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _widgetTabBarView(),
+            const SizedBox(
+              height: 16,
+            ),
+            Obx(() => controller.selectTab.value == 1 ? _onGoingView() : controller.selectTab.value == 2 ? _upComingView() : _completeView()),
+          ],
+        ),
       ),
       // drawer: drawer(),
       floatingActionButton: FloatingActionButton(
@@ -426,126 +79,209 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
           )),
     );
   }
-  // drawer() {
-  //   return Drawer(
-  //     child: ListView(
-  //       padding: EdgeInsets.zero,
-  //       children: <Widget>[
-  //         DrawerHeader(
-  //             decoration: BoxDecoration(
-  //               color: const Color(0xff3054CF).withOpacity(0.8),
-  //             ),
-  //             child: Column(
-  //               children: [
-  //                 CircleAvatar(
-  //                     radius: (40),
-  //                     child: ClipRRect(
-  //                       borderRadius: BorderRadius.circular(50),
-  //                       child: SvgPicture.asset(
-  //                         "assets/svg/ic_profile.svg",
-  //                       ),
-  //                     )),
-  //                 const Text(
-  //                   "Mahesh Patel",
-  //                   style: TextStyle(
-  //                     color: Colors.white,
-  //                     fontSize: 14,
-  //                   ),
-  //                 ),
-  //               ],
-  //             )),
-  //         ListTile(
-  //           leading: SvgPicture.asset(
-  //             "assets/svg/mange_user.svg",
-  //             color: Colors.black,
-  //             height: 20,
-  //           ),
-  //           title: const Text(
-  //             'Manage Machinery',
-  //             style: TextStyle(
-  //               fontSize: 18,
-  //               fontWeight: FontWeight.w400,
-  //             ),
-  //           ),
-  //           onTap: () {},
-  //         ),
-  //         ListTile(
-  //           leading: SvgPicture.asset(
-  //             "assets/svg/all_users.svg",
-  //             color: Colors.black,
-  //             height: 20,
-  //           ),
-  //           title: const Text(
-  //             'Manage User',
-  //             style: TextStyle(
-  //               fontSize: 18,
-  //               fontWeight: FontWeight.w400,
-  //             ),
-  //           ),
-  //           onTap: () {},
-  //         ),
-  //         ListTile(
-  //           leading: SvgPicture.asset(
-  //             "assets/svg/mange_user.svg",
-  //             color: Colors.black,
-  //             height: 20,
-  //           ),
-  //           title: const Text(
-  //             'Manage Companies/Customers',
-  //             style: TextStyle(
-  //               fontSize: 18,
-  //               fontWeight: FontWeight.w400,
-  //             ),
-  //           ),
-  //           onTap: () {},
-  //         ),
-  //         ListTile(
-  //           leading: SvgPicture.asset(
-  //             "assets/svg/mange_user.svg",
-  //             color: Colors.black,
-  //             height: 20,
-  //           ),
-  //           title: const Text(
-  //             'Manage Spare Parts',
-  //             style: TextStyle(
-  //               fontSize: 18,
-  //               fontWeight: FontWeight.w400,
-  //             ),
-  //           ),
-  //           onTap: () {},
-  //         ),
-  //         ListTile(
-  //           leading: SvgPicture.asset(
-  //             "assets/svg/mange_compny.svg",
-  //             color: Colors.black,
-  //             height: 20,
-  //           ),
-  //           title: const Text(
-  //             'Manage Expenses',
-  //             style: TextStyle(
-  //               fontSize: 18,
-  //               fontWeight: FontWeight.w400,
-  //             ),
-  //           ),
-  //           onTap: () {},
-  //         ),
-  //         ListTile(
-  //           leading: SvgPicture.asset(
-  //             "assets/svg/mange_attend.svg",
-  //             color: Colors.black,
-  //             height: 20,
-  //           ),
-  //           title: const Text(
-  //             'Manage Attendence',
-  //             style: TextStyle(
-  //               fontSize: 18,
-  //               fontWeight: FontWeight.w400,
-  //             ),
-  //           ),
-  //           onTap: () {},
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
+
+
+  Widget _widgetTabBarView(){
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(color: AppColor.borderColor),
+        borderRadius: BorderRadius.circular(5.0)
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: _tabBox(
+              title: "Ongoing",
+              index: 1,
+            ),
+          ),
+          Expanded(
+            child: _tabBox(
+              title: "Upcoming",
+              index: 2,
+            ),
+          ),
+          Expanded(
+            child: _tabBox(
+              title: "Complete ",
+              index: 3,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _tabBox({required String title,required int index}){
+    return Obx(() => InkWell(
+      onTap:() {
+        controller.selectTab.value = index;
+      },
+      borderRadius: BorderRadius.circular(5),
+      child: Container(
+        width: Get.width,
+        decoration: BoxDecoration(
+          borderRadius: index == 1 ? const BorderRadius.only(topLeft: Radius.circular(5.0),bottomLeft: Radius.circular(5.0)): index == 3 ? const BorderRadius.only(topRight: Radius.circular(5.0),bottomRight: Radius.circular(5.0)) : null,
+          color: controller.selectTab.value == index ? AppColor.selectColor : AppColor.whiteColor,
+            border: Border(
+              right: index == 2 ? const BorderSide(color: AppColor.borderColor) : BorderSide.none,
+              left: index == 2 ? const BorderSide(color: AppColor.borderColor) : BorderSide.none,
+            )
+        ),
+        alignment: Alignment.center,
+        padding: const EdgeInsets.symmetric(vertical: 16),
+        child: Text(title,style: AppTextStyle.textStyleRegular14.copyWith(color: controller.selectTab.value == index ? AppColor.whiteColor: AppColor.blackColor),),
+      ),
+    ));
+  }
+
+  Widget _onGoingView(){
+    return SingleChildScrollView(
+      child: Container(
+        width: double.maxFinite,
+        padding: const EdgeInsets.symmetric(horizontal: 16.0,vertical: 16.0),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(4),
+            border: Border.all(color: AppColor.borderColor)),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                _keyValue(
+                  "OD",
+                  "1-06-2024",
+                ),
+                _keyValue(
+                  "OD",
+                  "18-06-2024",
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            _keyValue(
+              "Client",
+              "Ramesh",
+            ),
+            const SizedBox(height: 8),
+            _keyValue(
+              "Machine Type",
+              "Containership",
+            ),
+            const SizedBox(height: 8),
+            _keyValue(
+              "Total Payment",
+              "20000",
+            ),
+            const SizedBox(height: 8),
+            _keyValue(
+              "Advance Payment",
+              "12000",
+            ),
+            const SizedBox(height: 8),
+            _keyValue(
+              "Assigne Order",
+              "Manager 1",
+            ),
+            const SizedBox(height: 16),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                _smallButton(
+                  title: "Invoice",
+                  textColor: AppColor.selectColor,
+                  onTap: () {
+                    Get.to(const Invoice());
+                  },
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                _smallButton(
+                  title: "  Edit  ",
+                  onTap: () {
+
+                  },
+                  textColor: const Color(0xff555555)
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                _smallButton(
+                    title: "Cancel",
+                    onTap: () {
+
+                    },
+                    textColor: const Color(0xffB50A0A)
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _upComingView(){
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          _emptyView(),
+        ],
+      ),
+    );
+  }
+
+  Widget _completeView(){
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          _emptyView(),
+        ],
+      ),
+    );
+  }
+
+  Widget _keyValue(key,value){
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text("$key : ",style: AppTextStyle.textStyleBold14,),
+        Flexible(child: Text("$value",style: AppTextStyle.textStyleRegular14.copyWith(color: Color(0xff555555)),)),
+      ],
+    );
+  }
+
+  Widget _smallButton({void Function()? onTap,required String title,Color? textColor}){
+    return InkWell(
+      onTap: () {},
+      borderRadius: BorderRadius.circular(5),
+      child: Container(
+          decoration: BoxDecoration(
+              borderRadius:
+              BorderRadius.circular(5),
+              border: Border.all(
+                  color:
+                  const Color(0xffC9C9C9))),
+          padding: const EdgeInsets.symmetric(
+              horizontal: 16, vertical: 10),
+          child: Text(
+            title,
+            style: AppTextStyle.textStyleBold12.copyWith(color: textColor ?? AppColor.blackColor)
+          )),
+    );
+  }
+
+  Widget _emptyView(){
+    return Container(
+      height: Get.height * 0.55,
+      padding: const EdgeInsets.symmetric(horizontal: 110.0),
+      child:   Image.asset(
+        alignment: Alignment.center,
+        "assets/images/no_order.png",
+      ),
+    );
+  }
+
 }

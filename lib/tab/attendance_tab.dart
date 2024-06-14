@@ -1,5 +1,6 @@
 import 'package:data_table_2/data_table_2.dart';
 import 'package:elements/constant/app_colors.dart';
+import 'package:elements/constant/app_text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -20,35 +21,32 @@ class _AttendanceTabState extends State<AttendanceTab> {
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          backgroundColor: const Color(0xffF9F9F9),
-          title: const Text(
+          backgroundColor: AppColor.bgAppBarColor,
+          title: Text(
             "Attendance",
-            style: TextStyle(
-              fontWeight: FontWeight.w400,
-              fontSize: 20,
-              color: Colors.black,
-            ),
+              style: AppTextStyle.textStyleRegular20
           ),
           actions: [
-            Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: InkWell(
-                  onTap: () {
-                    filterDialog();
-                  },
-                  child: Image.asset(
-                    "assets/images/filtter.png",
-                    height: 20,
-                    width: 20,
-                  ),
-                )),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SvgPicture.asset(
-                "assets/svg/ic_notification.svg",
-                height: 22,
-                width: 22,
+            InkWell(
+              onTap: () {
+                filterDialog();
+              },
+              child: Image.asset(
+                "assets/images/filtter.png",
+                height: 20,
+                width: 20,
               ),
+            ),
+            const SizedBox(
+              width: 20,
+            ),
+            SvgPicture.asset(
+              "assets/svg/ic_notification.svg",
+              height: 20,
+              width: 20,
+            ),
+            const SizedBox(
+              width: 16,
             ),
           ],
         ),

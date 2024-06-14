@@ -1,4 +1,5 @@
 import 'package:elements/constant/app_colors.dart';
+import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/spareparts/add_spareparts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -15,25 +16,23 @@ class _SparepartsTabState extends State<SparepartsTab> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColor.whiteColor,
       appBar: AppBar(
-        backgroundColor: const Color(0xffF9F9F9),
-        title: const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 5),
-          child: Text(
-            'Spareparts Stocks',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
-          ),
+        backgroundColor: AppColor.bgAppBarColor,
+        title:  Text(
+          'Spareparts Stocks',
+            style: AppTextStyle.textStyleRegular20
         ),
         automaticallyImplyLeading: false,
         actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 15),
-            child: SvgPicture.asset(
-              'assets/svg/ic_notification.svg',
-              height: 22,
-              width: 22,
-            ),
-          )
+          SvgPicture.asset(
+            'assets/svg/ic_notification.svg',
+            height: 20,
+            width: 20,
+          ),
+          const SizedBox(
+            width: 16,
+          ),
         ],
       ),
       body: Padding(
@@ -46,12 +45,9 @@ class _SparepartsTabState extends State<SparepartsTab> {
               itemBuilder: (context, index) {
                 return ListTile(
                   contentPadding: const EdgeInsets.all(0),
-                  title: const Text(
-                    'Spareparts 1',
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xff555555)),
+                  title:  Text(
+                    'Spareparts ${index+1}',
+                    style: AppTextStyle.textStyleBold14.copyWith(color: const Color(0xff555555)),
                   ),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
