@@ -1,6 +1,7 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/controller/auth_controller.dart';
 import 'package:elements/dashboard.dart';
+import 'package:elements/widget/common_dropdown.dart';
 import 'package:elements/widget/custom_button.dart';
 import 'package:elements/widget/custom_text_field.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   String dropdownvalue = 'User';
+  String? selectLevel;
   var items = [
     'Admin',
     'User',
@@ -63,19 +65,28 @@ class _LoginState extends State<Login> {
                   const SizedBox(
                     height: 30,
                   ),
-                  CustomTextField(
-                    textEditingController:
-                        controller.userTypeTextEditingController,
-                    hintText: "Select User Type",
-                    labelText: " User Type",
-                    suffixFixWidget: Image.asset(
-                      "assets/images/down.png",
-                      height: 20,
-                    ),
+                  CommonDropdown(
+                    dropdownList: items,
+                    value: selectLevel,
+                    callback: setLevelValue,
+                    hintText: "User Type",
                   ),
                   const SizedBox(
                     height: 15,
                   ),
+                  // CustomTextField(
+                  //   textEditingController:
+                  //       controller.userTypeTextEditingController,
+                  //   hintText: "Select User Type",
+                  //   labelText: " User Type",
+                  //   suffixFixWidget: Image.asset(
+                  //     "assets/images/down.png",
+                  //     height: 20,
+                  //   ),
+                  // ),
+                  // const SizedBox(
+                  //   height: 15,
+                  // ),
                   CustomTextField(
                     textInputType: TextInputType.number,
                     textEditingController:
@@ -122,5 +133,9 @@ class _LoginState extends State<Login> {
             ),
           ],
         ));
+  }
+
+  void setLevelValue(String value) {
+    selectLevel = value;
   }
 }
