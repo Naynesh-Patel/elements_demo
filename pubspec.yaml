@@ -39,6 +39,7 @@ dependencies:
   flutter_svg: ^2.0.10+1
   data_table_2: ^2.5.12
   syncfusion_flutter_datepicker: ^26.1.35
+  dropdown_button2: ^2.3.9
 #  share_plus: ^9.0.0
 
 dev_dependencies:

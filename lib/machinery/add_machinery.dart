@@ -1,4 +1,5 @@
 import 'package:elements/constant/app_colors.dart';
+import 'package:elements/widget/custom_appbar.dart';
 import 'package:elements/widget/custom_button.dart';
 import 'package:elements/widget/custom_text_field.dart';
 import 'package:flutter/material.dart';
@@ -18,26 +19,15 @@ class _AddMachineryState extends State<AddMachinery> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          backgroundColor: const Color(0xffF9F9F9),
-          title: const Text(
-            "Add Machinery",
-            style: TextStyle(
-              color: Colors.black,
-            ),
-          ),
-          leading: InkWell(
-              onTap: () {
-                Get.back();
-              },
-              child: const Icon(Icons.arrow_back_ios_new)),
-          actions: [
-            IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.add,
-                  size: 25,
-                ))
+        appBar: CustomAppBar(
+          title: "Add Machinery",
+          onPressed: () {
+
+          },
+          action: [
+            IconButton(onPressed: () {
+
+            }, icon: const Icon(Icons.add))
           ],
         ),
         body: Container(

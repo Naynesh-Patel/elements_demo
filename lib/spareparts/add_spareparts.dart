@@ -1,64 +1,109 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
+import 'package:elements/controller/home_controller.dart';
+import 'package:elements/widget/custom_appbar.dart';
 import 'package:elements/widget/custom_button.dart';
 import 'package:elements/widget/custom_text_field.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AddSpareparts extends StatefulWidget {
-  const AddSpareparts({super.key});
+  final bool isUpdate;
+  const AddSpareparts({super.key,this.isUpdate = false});
 
   @override
   State<AddSpareparts> createState() => _AddSparepartsState();
 }
 
 class _AddSparepartsState extends State<AddSpareparts> {
-  bool value = false;
-  int index = 0;
+
+  HomeController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: AppColor.whiteColor,
-        appBar: AppBar(
-          backgroundColor: const Color(0xffF9F9F9),
-          title: Text(
-            "Add Spareparts",
-             style: AppTextStyle.textStyleRegular20
-          ),
-          leading:IconButton(
-            icon: Icon(Icons.arrow_back_ios_new,size: 24,),
-            onPressed: () {
-              Get.back();
-            },
-          ),
-          actions: [
-            IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.add,
-                  size: 24,
-                ))
-          ],
+        appBar: CustomAppBar(
+          title: widget.isUpdate ? "Update Spareparts Details" :"Add Spereparts",
+          onPressed: () {
+            Get.back();
+          },
         ),
         body: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-          child: const Column(
+          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          child:  Column(
             children: [
               CustomTextField(
                 hintText: "Steel Bolt",
                 labelText: "Name*",
+                focusNode: controller.sparepartsNameFocusNode,
               ),
-              SizedBox(
-                height: 20,
-              ),
-              CustomTextField(
-                hintText: "10",
-                labelText: "Qty",
-              ),
-              SizedBox(
-                height: 20,
-              ),
+              if(widget.isUpdate)...[
+                const SizedBox(
+                  height: 16.0,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Add Qty",style: AppTextStyle.textStyleRegular18,),
+                    IconButton(
+                      padding: EdgeInsets.zero,
+                        constraints: BoxConstraints(),
+                        style: const ButtonStyle(
+                          tapTargetSize: MaterialTapTargetSize.shrinkWrap, // the '2023' part
+                        ),
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.add,
+                          size: 24,
+                        )),
+                  ],
+                ),
+                const SizedBox(
+                  height: 16.0,
+                ),
+                CustomTextField(
+                  hintText: "10",
+                  labelText: "Qty",
+                  textEditingController: TextEditingController(text: "10"),
+                  focusNode: controller.sparepartsQtyFocusNode,
+                ),
+                const SizedBox(
+                  height: 16.0,
+                ),
+                CustomTextField(
+                  hintText: "New Qty",
+                  labelText: "Add New Qty",
+                  focusNode: controller.sparepartsNewQtyFocusNode,
+                ),
+                const SizedBox(
+                  height: 16.0,
+                ),
+                Row(
+                  children: [
+                    Expanded(child: Text("Total Qty : 30",style: AppTextStyle.textStyleLight14.copyWith(color: AppColor.dropDownHintColor),)),
+                    OutlinedButton(
+                      onPressed: () {
+
+                      },
+                      style: ButtonStyle(
+                        shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0),side: const BorderSide(color: AppColor.borderColor,),)),
+                      ),
+                      child: Text("Update",style: AppTextStyle.textStyleLight14.copyWith(color: AppColor.selectColor),),
+                    )
+                  ],
+                ),
+              ]else...[
+                const SizedBox(
+                  height: 16.0,
+                ),
+                CustomTextField(
+                  hintText: "Qty",
+                  labelText: "Qty",
+                  focusNode: controller.sparepartsQtyFocusNode,
+                ),
+              ],
             ],
           ),
         ),

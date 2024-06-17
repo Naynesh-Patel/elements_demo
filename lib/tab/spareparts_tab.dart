@@ -35,7 +35,7 @@ class _SparepartsTabState extends State<SparepartsTab> {
           ),
         ],
       ),
-      body: Padding(
+      body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
         child: Column(
           children: [
@@ -53,22 +53,26 @@ class _SparepartsTabState extends State<SparepartsTab> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Container(
-                        height: 44,
                         width: 115,
+                        height: 42,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(4),
                             border: Border.all(color: const Color(0xffD1D1D1))),
-                        child: const TextField(
+                        child:  TextField(
+                          textAlignVertical: TextAlignVertical.center,
+                          textAlign: TextAlign.center,
                           decoration: InputDecoration(
                               border: InputBorder.none,
-                              contentPadding: EdgeInsets.symmetric(
-                                horizontal: 25,
+                              contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 8.0,
+                                vertical: 11
                               ),
                               hintText: '20 piece',
-                              hintStyle: TextStyle(
+                              helperStyle: AppTextStyle.textStyleRegular16.copyWith(color: AppColor.dropDownHintColor),
+                              hintStyle: const TextStyle(
                                   color: Color(0xff949494),
                                   fontSize: 16,
-                                  fontWeight: FontWeight.w400)),
+                                  fontWeight: FontWeight.w400,)),
                         ),
                       ),
                       const SizedBox(
@@ -76,7 +80,9 @@ class _SparepartsTabState extends State<SparepartsTab> {
                       ),
                       InkWell(
                         borderRadius: BorderRadius.circular(10),
-                        onTap: () {},
+                        onTap: () {
+                          Get.to(const AddSpareparts(isUpdate: true));
+                        },
                         child: Container(
                             decoration: BoxDecoration(
                                 // color: const Color(0xffFFFFFF),

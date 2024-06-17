@@ -1,4 +1,6 @@
 import 'package:elements/constant/app_colors.dart';
+import 'package:elements/controller/home_controller.dart';
+import 'package:elements/widget/custom_appbar.dart';
 import 'package:elements/widget/custom_button.dart';
 import 'package:elements/widget/custom_text_field.dart';
 import 'package:flutter/material.dart';
@@ -12,56 +14,47 @@ class AddExpense extends StatefulWidget {
 }
 
 class _AddExpenseState extends State<AddExpense> {
-  bool value = false;
-  int index = 0;
+
+  HomeController controller = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          backgroundColor: const Color(0xffF9F9F9),
-          title: const Text(
-            "Add Expense",
-            style: TextStyle(
-              color: Colors.black,
-            ),
-          ),
-          leading: InkWell(
-              onTap: () {
-                Get.back();
-              },
-              child: const Icon(Icons.arrow_back_ios_new)),
-          // actions: [
-          //   IconButton(
-          //       onPressed: () {},
-          //       icon: const Icon(
-          //         Icons.add,
-          //         size: 25,
-          //       ))
-          // ],
+        appBar: CustomAppBar(
+          title:"Add Expense",
+          onPressed: () {
+            Get.back();
+          },
         ),
         body: Container(
           margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-          child: const Column(
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomTextField(
-                hintText: "Dipesh",
+                hintText: "",
                 labelText: "Name",
+                textEditingController: TextEditingController(text: "Ramesh"),
+                focusNode: controller.expenseNameFocusNode,
               ),
-              SizedBox(
-                height: 10,
+              const SizedBox(
+                height: 16,
               ),
               CustomTextField(
+                textEditingController: TextEditingController(text: "Tea"),
                 hintText: "Tea",
                 labelText: "Expense Type",
+                focusNode: controller.expenseTypeFocusNode,
               ),
-              SizedBox(
-                height: 10,
+              const SizedBox(
+                height: 16,
               ),
               CustomTextField(
+                textEditingController: TextEditingController(text: "20"),
                 hintText: "₹ 20 ",
                 labelText: "Price",
+                focusNode: controller.expensePriceFocusNode,
               ),
             ],
           ),

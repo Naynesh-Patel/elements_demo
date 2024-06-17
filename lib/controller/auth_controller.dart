@@ -7,7 +7,13 @@ class AuthController extends GetxController {
   TextEditingController passwordTextEditingController = TextEditingController();
   TextEditingController userTypeTextEditingController = TextEditingController();
 
-  bool loginPasswordVisible = false;
+  bool loginPasswordVisible = true;
 
   FocusNode focusNode = FocusNode();
+
+
+  /* ========== Focus Nodes =========== */
+  FocusNode mobileFocusNode = FocusNode();
+  FocusNode passwordFocusNode = FocusNode();
+
 }
