@@ -34,14 +34,11 @@ class _MangeMachineryState extends State<MangeMachinery> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Flexible(child: Text("Total Machinery Stock  : 20",style: AppTextStyle.textStyleRegular14,)),
-                OutlinedButton(
-                  onPressed: () {
+                _smallButton(title: "Update",
+                onTap: () {
 
-                  },
-                  style: ButtonStyle(
-                    shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0),side: const BorderSide(color: AppColor.borderColor,),)),
-                  ),
-                  child: Text("Update",style: AppTextStyle.textStyleLight14.copyWith(color: AppColor.selectColor),),
+                },
+                  textColor: AppColor.selectColor
                 )
               ],
             ),

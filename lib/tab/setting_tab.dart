@@ -219,35 +219,27 @@ class _SettingTabState extends State<SettingTab> {
   }
 
   Widget _customTile({void Function()? onTap,required int index,required String title,required String imgPath,bool isSvg = true}){
-    return Obx(() => ListTile(
+    return ListTile(
       leading: isSvg ? SvgPicture.asset(
         imgPath,
-        color:controller.selectMenu.value == index ?
-        AppColor.selectColor
-            : AppColor.blackColor,
+        color: AppColor.blackColor,
         height: 20,
       ):Image.asset(
         imgPath,
-        color:controller.selectMenu.value == index ?
-        AppColor.selectColor
-            : AppColor.blackColor,
+        color: AppColor.blackColor,
         height: 20,
       ),
       title: Text(
           title,
-          style: AppTextStyle.textStyleRegular16.copyWith(color:controller.selectMenu.value == index ?
-          AppColor.selectColor
-            : AppColor.blackColor,),
+          style: AppTextStyle.textStyleRegular16.copyWith(color: AppColor.blackColor,),
       ),
-      trailing: Icon(
+      trailing: const Icon(
         Icons.arrow_forward_ios_rounded,
         size: 18,
-        color :controller.selectMenu.value == index ?
-        AppColor.selectColor
-            : AppColor.blackColor,
+        color : AppColor.blackColor,
       ),
       onTap: onTap,
-    ));
+    );
   }
 
 

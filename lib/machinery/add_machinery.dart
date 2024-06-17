@@ -37,7 +37,7 @@ class _AddMachineryState extends State<AddMachinery> {
               const CustomTextField(
                 hintText: "Containership",
                 labelText: "Name",
-              ),
+              ),       
               const SizedBox(
                 height: 20,
               ),
