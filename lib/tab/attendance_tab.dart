@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
+import '../date_piker.dart';
+
 class AttendanceTab extends StatefulWidget {
   const AttendanceTab({super.key});
 
@@ -22,10 +24,7 @@ class _AttendanceTabState extends State<AttendanceTab> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           backgroundColor: AppColor.bgAppBarColor,
-          title: Text(
-            "Attendance",
-              style: AppTextStyle.textStyleRegular20
-          ),
+          title: Text("Attendance", style: AppTextStyle.textStyleRegular20),
           actions: [
             InkWell(
               onTap: () {
@@ -84,7 +83,9 @@ class _AttendanceTabState extends State<AttendanceTab> {
                       width: 5,
                     ),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Get.to(const DatePiker());
+                      },
                       child: Image.asset(
                         "assets/images/date.png",
                         height: 14,
@@ -117,7 +118,8 @@ class _AttendanceTabState extends State<AttendanceTab> {
   Future<void> filterDialog() async {
     return showDialog<void>(
       context: context,
-      barrierDismissible: false, // user must tap button!
+      barrierDismissible: false,
+      // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
           shape: RoundedRectangleBorder(
@@ -161,7 +163,7 @@ class _AttendanceTabState extends State<AttendanceTab> {
             ),
             ListView.builder(
               shrinkWrap: true,
-              itemCount: 3,
+              itemCount: 2,
               itemBuilder: (context, index) {
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.start,

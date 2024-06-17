@@ -1,4 +1,5 @@
 import 'package:elements/constant/app_colors.dart';
+import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/import_spareparts/add_import_spareparts.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -38,19 +39,9 @@ class _ImportSparepartsState extends State<ImportSpareparts> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Row(
+                Row(
                   children: [
-                    Text(
-                      "Total Product Import : ",
-                      style:
-                          TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
-                    ),
-                    Text(
-                      "30",
-                      style: TextStyle(
-                        color: Color(0xff555555),
-                      ),
-                    ),
+                    _keyValue("Total Product Import", "30"),
                   ],
                 ),
                 InkWell(
@@ -84,91 +75,22 @@ class _ImportSparepartsState extends State<ImportSpareparts> {
               child: Column(
                 children: [
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Expanded(
+                      Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Row(
-                              children: [
-                                Text(
-                                  "Company Name : ",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 16),
-                                ),
-                                Text(
-                                  "Containership",
-                                  style: TextStyle(
-                                    color: Color(0xff555555),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  "Name : ",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 16),
-                                ),
-                                Text(
-                                  " Steel Bolts",
-                                  style: TextStyle(
-                                    color: Color(0xff555555),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  "Qty : ",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 16),
-                                ),
-                                Text(
-                                  "10",
-                                  style: TextStyle(color: Color(0xff555555)),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  "Type : ",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 16),
-                                ),
-                                Text(
-                                  "Medium ",
-                                  style: TextStyle(color: Color(0xff555555)),
-                                ),
-                              ],
-                            ),
+                            _keyValue("Company Name", "Containership "),
+                            _keyValue("Name", "Steel Bolts "),
+                            _keyValue("Qty", "10"),
+                            _keyValue("Type", "Medium"),
                           ],
                         ),
                       ),
                       Column(
                         children: [
-                          const Row(
-                            children: [
-                              Text(
-                                "DD: ",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w400, fontSize: 16),
-                              ),
-                              Text(
-                                "16-7-2024",
-                                style: TextStyle(
-                                  color: Color(0xff555555),
-                                ),
-                              ),
-                            ],
-                          ),
+                          _keyValue("DD", "16-7-2024"),
                           const SizedBox(
                             height: 25,
                           ),
@@ -230,6 +152,24 @@ class _ImportSparepartsState extends State<ImportSpareparts> {
             Icons.add,
             color: Colors.white,
           )),
+    );
+  }
+
+  Widget _keyValue(key, value) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          "$key : ",
+          style: AppTextStyle.textStyleBold14,
+        ),
+        Flexible(
+            child: Text(
+          "$value",
+          style: AppTextStyle.textStyleRegular14
+              .copyWith(color: Color(0xff555555)),
+        )),
+      ],
     );
   }
 }

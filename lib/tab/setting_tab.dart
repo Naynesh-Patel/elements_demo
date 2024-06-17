@@ -100,7 +100,7 @@ class _SettingTabState extends State<SettingTab> {
             index: 5,
             onTap: () {
               controller.selectMenu.value = 5;
-              Get.to(const MangeUser());
+              Get.to(const MangeSalesmen());
             },
           ),
           _customTile(
@@ -118,7 +118,7 @@ class _SettingTabState extends State<SettingTab> {
             index: 7,
             onTap: () {
               controller.selectMenu.value = 7;
-              Get.to(const MangeCustomer());
+              Get.to(const MangeProduct());
             },
           ),
           _customTile(
@@ -132,7 +132,8 @@ class _SettingTabState extends State<SettingTab> {
           ),
           _customTile(
             title: "Logout",
-            imgPath: "assets/svg/bil_history.svg",
+            isSvg: false,
+            imgPath: "assets/images/logout.png",
             index: 9,
             onTap: () {
               logoutDialog();
@@ -153,11 +154,8 @@ class _SettingTabState extends State<SettingTab> {
             borderRadius: BorderRadius.circular(2),
           ),
           backgroundColor: Colors.white,
-          title: Text(
-            "Are You Sure Logout?",
-            textAlign: TextAlign.center,
-            style: AppTextStyle.textStyleBold20
-          ),
+          title: Text("Are You Sure Logout?",
+              textAlign: TextAlign.center, style: AppTextStyle.textStyleBold20),
           content: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
@@ -165,7 +163,8 @@ class _SettingTabState extends State<SettingTab> {
               Text(
                 "Do you really want to Logout these App? This process cannot be undone.",
                 textAlign: TextAlign.center,
-                style: AppTextStyle.textStyleRegular14.copyWith(color: const Color(0xff949494)),
+                style: AppTextStyle.textStyleRegular14
+                    .copyWith(color: const Color(0xff949494)),
               ),
               const SizedBox(
                 height: 15.0,

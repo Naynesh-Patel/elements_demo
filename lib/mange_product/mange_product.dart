@@ -1,4 +1,5 @@
 import 'package:elements/constant/app_colors.dart';
+import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/mange_product/add_product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -39,21 +40,7 @@ class _MangeProductState extends State<MangeProduct> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Row(
-                  children: [
-                    Text(
-                      "Total Product Import : ",
-                      style:
-                          TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
-                    ),
-                    Text(
-                      "30",
-                      style: TextStyle(
-                        color: Color(0xff555555),
-                      ),
-                    ),
-                  ],
-                ),
+                _keyValue("Total Product Import", "30"),
                 InkWell(
                   child: Container(
                       height: 38,
@@ -150,6 +137,24 @@ class _MangeProductState extends State<MangeProduct> {
             Icons.add,
             color: Colors.white,
           )),
+    );
+  }
+
+  Widget _keyValue(key, value) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          "$key : ",
+          style: AppTextStyle.textStyleBold14,
+        ),
+        Flexible(
+            child: Text(
+          "$value",
+          style: AppTextStyle.textStyleRegular14
+              .copyWith(color: const Color(0xff555555)),
+        )),
+      ],
     );
   }
 }

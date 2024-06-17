@@ -1,4 +1,5 @@
 import 'package:elements/constant/app_colors.dart';
+import 'package:elements/constant/app_text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -46,50 +47,10 @@ class _MangeCustomerState extends State<MangeCustomer> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
-                          children: [
-                            Text(
-                              "Name :",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400, fontSize: 16),
-                            ),
-                            Text(
-                              "Tata Steel Pvt",
-                              style: TextStyle(
-                                color: Color(0xff555555),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              "Contact No. :",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400, fontSize: 16),
-                            ),
-                            Text(
-                              "99656 25693",
-                              style: TextStyle(color: Color(0xff555555)),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              "Reference By :",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400, fontSize: 16),
-                            ),
-                            Text(
-                              "L & T Pvt",
-                              style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                color: Color(0xff555555),
-                              ),
-                            ),
-                          ],
-                        ),
+
+                        _keyValue("Name", "Tata Steel Pvt"),
+                        _keyValue("Contact No", "99656 25693"),
+                        _keyValue("Reference By", "L & T Pvt"),
                         SizedBox(
                           height: 10,
                         ),
@@ -180,6 +141,24 @@ class _MangeCustomerState extends State<MangeCustomer> {
             Icons.add,
             color: Colors.white,
           )),
+    );
+  }
+
+  Widget _keyValue(key, value) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          "$key : ",
+          style: AppTextStyle.textStyleBold14,
+        ),
+        Flexible(
+            child: Text(
+              "$value",
+              style: AppTextStyle.textStyleRegular14
+                  .copyWith(color: const Color(0xff555555)),
+            )),
+      ],
     );
   }
 }
