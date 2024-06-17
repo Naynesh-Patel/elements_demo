@@ -1,4 +1,5 @@
 import 'package:elements/constant/app_colors.dart';
+import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/user/add_user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -44,38 +45,12 @@ class _MangeUserState extends State<MangeUser> {
                   border: Border.all(color: const Color(0xffE6E6E6), width: 1)),
               child: Row(
                 children: [
-                  const Expanded(
+                  Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
-                          children: [
-                            Text(
-                              "Name :",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400, fontSize: 16),
-                            ),
-                            Text(
-                              "nens",
-                              style: TextStyle(
-                                color: Color(0xff555555),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              "Role :",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400, fontSize: 16),
-                            ),
-                            Text(
-                              "Worker",
-                              style: TextStyle(color: Color(0xff555555)),
-                            ),
-                          ],
-                        ),
+                        _keyValue("Name", "nens"),
+                        _keyValue("Role", "Worker"),
                       ],
                     ),
                   ),
@@ -235,6 +210,24 @@ class _MangeUserState extends State<MangeUser> {
           ],
         );
       },
+    );
+  }
+
+  Widget _keyValue(key, value) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          "$key : ",
+          style: AppTextStyle.textStyleBold14,
+        ),
+        Flexible(
+            child: Text(
+          "$value",
+          style: AppTextStyle.textStyleRegular14
+              .copyWith(color: const Color(0xff555555)),
+        )),
+      ],
     );
   }
 }

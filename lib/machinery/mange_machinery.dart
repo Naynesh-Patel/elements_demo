@@ -1,4 +1,5 @@
 import 'package:elements/constant/app_colors.dart';
+import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/machinery/add_machinery.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -42,67 +43,14 @@ class _MangeMachineryState extends State<MangeMachinery> {
                   border: Border.all(color: const Color(0xffE6E6E6), width: 1)),
               child: Row(
                 children: [
-                  const Expanded(
+                  Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
-                          children: [
-                            Text(
-                              "Machine name : ",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400, fontSize: 16),
-                            ),
-                            Text(
-                              "Containership",
-                              style: TextStyle(
-                                color: Color(0xff555555),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              "Spare parts 1 : ",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400, fontSize: 16),
-                            ),
-                            Text(
-                              "20",
-                              style: TextStyle(color: Color(0xff555555)),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              "Spare parts 2 : ",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400, fontSize: 16),
-                            ),
-                            Text(
-                              "26",
-                              style: TextStyle(color: Color(0xff555555)),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              "Duration : ",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400, fontSize: 16),
-                            ),
-                            Text(
-                              "29 Days",
-                              style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                color: Color(0xff555555),
-                              ),
-                            ),
-                          ],
-                        ),
+                        _keyValue("Machine name", "Containership"),
+                        _keyValue("Spare parts 1 ", "20"),
+                        _keyValue("Spare parts 2 ", "20"),
+                        _keyValue("Duration", "29 Days"),
                       ],
                     ),
                   ),
@@ -152,54 +100,13 @@ class _MangeMachineryState extends State<MangeMachinery> {
                   border: Border.all(color: const Color(0xffE6E6E6), width: 1)),
               child: Row(
                 children: [
-                  const Expanded(
+                  Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
-                          children: [
-                            Text(
-                              "Machine name : ",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400, fontSize: 16),
-                            ),
-                            Text(
-                              "Containership",
-                              style: TextStyle(
-                                color: Color(0xff555555),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              "Spare parts : ",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400, fontSize: 16),
-                            ),
-                            Text(
-                              "20",
-                              style: TextStyle(color: Color(0xff555555)),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              "Duration : ",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400, fontSize: 16),
-                            ),
-                            Text(
-                              "29 Days",
-                              style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                color: Color(0xff555555),
-                              ),
-                            ),
-                          ],
-                        ),
+                        _keyValue("Machine name", "Containership"),
+                        _keyValue("Spare parts", "20"),
+                        _keyValue("Duration", "29 Days"),
                       ],
                     ),
                   ),
@@ -257,6 +164,24 @@ class _MangeMachineryState extends State<MangeMachinery> {
             Icons.add,
             color: Colors.white,
           )),
+    );
+  }
+
+  Widget _keyValue(key, value) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          "$key : ",
+          style: AppTextStyle.textStyleBold14,
+        ),
+        Flexible(
+            child: Text(
+          "$value",
+          style: AppTextStyle.textStyleRegular14
+              .copyWith(color: const Color(0xff555555)),
+        )),
+      ],
     );
   }
 }

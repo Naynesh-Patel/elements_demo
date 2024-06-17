@@ -5,6 +5,8 @@ import 'package:elements/controller/setting_controller.dart';
 import 'package:elements/import_spareparts/import_spareparts.dart';
 import 'package:elements/machinery/mange_machinery.dart';
 import 'package:elements/manage_customer/mange_customer.dart';
+import 'package:elements/mange_product/mange_product.dart';
+import 'package:elements/mange_salsemen/mange_salesmen.dart';
 import 'package:elements/spareparts/mange_spareparts.dart';
 import 'package:elements/user/mange_user.dart';
 import 'package:flutter/material.dart';
@@ -99,7 +101,7 @@ class _SettingTabState extends State<SettingTab> {
             index: 5,
             onTap: () {
               controller.selectMenu.value = 5;
-              Get.to(const MangeUser());
+              Get.to(const MangeSalesmen());
             },
           ),
           _customTile(
@@ -117,7 +119,7 @@ class _SettingTabState extends State<SettingTab> {
             index: 7,
             onTap: () {
               controller.selectMenu.value = 7;
-              Get.to(const MangeCustomer());
+              Get.to(const MangeProduct());
             },
           ),
           _customTile(

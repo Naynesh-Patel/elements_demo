@@ -1,4 +1,5 @@
 import 'package:elements/constant/app_colors.dart';
+import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/mange_salsemen/add_salesmen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -43,64 +44,14 @@ class _MangeSalesmenState extends State<MangeSalesmen> {
                   border: Border.all(color: const Color(0xffE6E6E6), width: 1)),
               child: Row(
                 children: [
-                  const Expanded(
+                  Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
-                          children: [
-                            Text(
-                              "Role :",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400, fontSize: 16),
-                            ),
-                            Text(
-                              "Worker",
-                              style: TextStyle(
-                                color: Color(0xff555555),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              "Name :",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400, fontSize: 16),
-                            ),
-                            Text(
-                              " Dipesh",
-                              style: TextStyle(color: Color(0xff555555)),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              "Contact No. :",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400, fontSize: 16),
-                            ),
-                            Text(
-                              "99123 45673",
-                              style: TextStyle(color: Color(0xff555555)),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              "Address :",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400, fontSize: 16),
-                            ),
-                            Text(
-                              "Surat, Gujarat",
-                              style: TextStyle(color: Color(0xff555555)),
-                            ),
-                          ],
-                        ),
+                        _keyValue("Role", "Worker"),
+                        _keyValue("Name", "Dipesh"),
+                        _keyValue("Contact No", "99123 45673"),
+                        _keyValue("Address", "Surat, Gujarat"),
                       ],
                     ),
                   ),
@@ -252,6 +203,24 @@ class _MangeSalesmenState extends State<MangeSalesmen> {
           ],
         );
       },
+    );
+  }
+
+  Widget _keyValue(key, value) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          "$key : ",
+          style: AppTextStyle.textStyleBold14,
+        ),
+        Flexible(
+            child: Text(
+          "$value",
+          style: AppTextStyle.textStyleRegular14
+              .copyWith(color: const Color(0xff555555)),
+        )),
+      ],
     );
   }
 }
