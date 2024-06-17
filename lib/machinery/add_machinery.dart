@@ -1,4 +1,5 @@
 import 'package:elements/constant/app_colors.dart';
+import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/widget/custom_appbar.dart';
 import 'package:elements/widget/custom_button.dart';
 import 'package:elements/widget/custom_text_field.dart';
@@ -13,8 +14,24 @@ class AddMachinery extends StatefulWidget {
 }
 
 class _AddMachineryState extends State<AddMachinery> {
-  bool value = false;
-  int index = 0;
+
+  RxList<dynamic> sparepartsList = [
+    {
+    "name":"1",
+    "select":false,
+  },
+    {
+      "name":"2",
+      "select":false,
+    },
+    {
+      "name":"3",
+      "select":false,
+    },
+  ].obs;
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +39,7 @@ class _AddMachineryState extends State<AddMachinery> {
         appBar: CustomAppBar(
           title: "Add Machinery",
           onPressed: () {
-
+            Get.back();
           },
           action: [
             IconButton(onPressed: () {
@@ -35,80 +52,121 @@ class _AddMachineryState extends State<AddMachinery> {
           child: Column(
             children: [
               const CustomTextField(
-                hintText: "Containership",
-                labelText: "Name",
-              ),       
+                hintText: "Machine Name",
+                labelText: "Machine Name*",
+              ),
               const SizedBox(
-                height: 20,
+                height: 16,
               ),
               const CustomTextField(
-                hintText: "Select Quatity ",
-                labelText: "Manufacture Duration",
+                hintText: "Machine Type",
+                labelText: "Machine Type*",
               ),
               const SizedBox(
-                height: 20,
+                height: 16,
+              ),
+              const CustomTextField(
+                hintText: "Qty",
+                labelText: "Qty*",
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              const CustomTextField(
+                hintText: "Eg. 30 days",
+                labelText: "Manufacture Duration*",
+              ),
+              const SizedBox(
+                height: 16,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
-                    'Add Spareparts',
-                    style: TextStyle(
-                        color: Color(0xff555555),
-                        fontSize: 20,
-                        fontWeight: FontWeight.w400),
-                  ),
-                  InkWell(
-                    onTap: () {},
-                    child: const Icon(
-                      Icons.add_rounded,
-                    ),
-                  )
+                  Text("Add Spareparts ",style: AppTextStyle.textStyleRegular18,),
+                  IconButton(
+                      padding: EdgeInsets.zero,
+                      constraints: BoxConstraints(),
+                      style: const ButtonStyle(
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap, // the '2023' part
+                      ),
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.add,
+                        size: 24,
+                      )),
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Checkbox(
-                    value: value,
-                    onChanged: (value) {
-                      setState(() {
-                        this.value = value!;
-                      });
-                    },
-                  ), //Ch
-                  const Expanded(
-                      child: Text(
-                    "SpareParts 1",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 16,
-                    ),
-                  )),
-                  Expanded(
-                    child: Container(
-                      height: 44,
-                      width: 44,
-                      margin: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 20),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(
-                              color: const Color(0xffD1D1D1), width: 1),
-                          borderRadius: BorderRadius.circular(4)),
-                      child: const Center(
-                        child: TextField(
-                          textAlign: TextAlign.center,
-                          decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: 'Qty',
-                              hintStyle: TextStyle(color: Color(0xffD1D1D1))),
+              const SizedBox(
+                height: 16,
+              ),
+              Obx(() => ListView.separated(
+                shrinkWrap: true,
+                itemCount: sparepartsList.length,
+                itemBuilder: (context, index) {
+                  return  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                       InkWell(
+                        borderRadius: BorderRadius.circular(6.0),
+                        onTap: () {
+                          if(sparepartsList[index]['select']==null){
+                            sparepartsList[index]['select'] = true;
+                          }else if(sparepartsList[index]['select'] == true){
+                            sparepartsList[index]['select'] = false;
+                          }else{
+                            sparepartsList[index]['select'] = true;
+                          }
+                          setState(() {
+
+                          });
+
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(horizontal: 4.0,vertical: 4.0),
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: AppColor.dropDownHintColor
+                              ),
+                              borderRadius: BorderRadius.circular(6.0)
+                          ),
+                          child: Icon(Icons.check_rounded,size: 14,color: sparepartsList[index]['select']??false ? AppColor.blackColor : Colors.transparent,),
                         ),
                       ),
-                    ),
-                  ),
-                ],
-              ),
+                      SizedBox(width: 10.0,),
+                      Expanded(
+                        child: Text(
+                          'Spareparts ${index+1}',
+                          style: AppTextStyle.textStyleBold14.copyWith(color: const Color(0xff555555)),
+                        ),),
+                      Container(
+                        width: 115,
+                        height: 42,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(4),
+                            border: Border.all(color: const Color(0xffD1D1D1))),
+                        child:  TextField(
+                          textAlignVertical: TextAlignVertical.center,
+                          textAlign: TextAlign.center,
+                  keyboardType:TextInputType.number,
+                          decoration: InputDecoration(
+                              border: InputBorder.none,
+                              contentPadding: const EdgeInsets.symmetric(
+                                  horizontal: 8.0,
+                                  vertical: 13.0
+                              ),
+                              hintText: 'Qty',
+                              hintStyle: AppTextStyle.textStyleRegular14.copyWith(color: AppColor.dropDownHintColor),
+                              labelStyle:AppTextStyle.textStyleRegular16.copyWith(color: AppColor.blackColor),
+                              helperStyle: AppTextStyle.textStyleRegular16.copyWith(color: AppColor.dropDownHintColor),),
+                        ),
+                      ),
+                    ],
+                  );
+                }, separatorBuilder: (BuildContext context, int index) {
+                  return const SizedBox(
+                    height: 12.0,
+                  );
+              },)),
             ],
           ),
         ),

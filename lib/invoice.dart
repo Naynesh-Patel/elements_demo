@@ -1,3 +1,5 @@
+import 'package:elements/constant/app_colors.dart';
+import 'package:elements/constant/app_text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -15,33 +17,28 @@ class _InvoiceState extends State<Invoice> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: const Color(0xffF9F9F9),
-          title: const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 5),
-            child: Text(
-              'Invoice Details',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
-            ),
-          ),
-          leading: InkWell(
-            onTap: () {
+          automaticallyImplyLeading: false,
+          backgroundColor: AppColor.bgAppBarColor,
+          titleSpacing: 0.0,
+          leading: IconButton(
+            onPressed:() {
               Get.back();
             },
-            child: const Icon(
-              Icons.arrow_back_ios_new_outlined,
-              color: Color(0xff000000),
-            ),
+            icon: const Icon(Icons.arrow_back_ios_new_rounded,size: 20,color: AppColor.blackColor,),
           ),
-          automaticallyImplyLeading: false,
+          title: Text(
+              "Invoice Details",
+              style: AppTextStyle.textStyleRegular20
+          ),
           actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 15),
-              child: SvgPicture.asset(
-                'assets/svg/ic_notification.svg',
-                height: 22,
-                width: 22,
-              ),
-            )
+            SvgPicture.asset(
+              "assets/svg/ic_notification.svg",
+              height: 20,
+              width: 20,
+            ),
+            const SizedBox(
+              width: 16,
+            ),
           ],
         ),
         body: Container(

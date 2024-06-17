@@ -255,7 +255,7 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
 
   Widget _smallButton({void Function()? onTap,required String title,Color? textColor}){
     return InkWell(
-      onTap: () {},
+      onTap: onTap,
       borderRadius: BorderRadius.circular(5),
       child: Container(
           decoration: BoxDecoration(
