@@ -1,10 +1,12 @@
 import 'package:elements/constant/app_colors.dart';
-import 'package:elements/widget/common_dropdown.dart';
+import 'package:elements/constant/app_text_style.dart';
+import 'package:elements/controller/home_controller.dart';
+import 'package:elements/widget/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'widget/custom_button.dart';
 import 'widget/custom_text_field.dart';
+import 'widget/dropdown_fromfield.dart';
 
 class CreateNewOrder extends StatefulWidget {
   const CreateNewOrder({super.key});
@@ -14,108 +16,74 @@ class CreateNewOrder extends StatefulWidget {
 }
 
 class _CreateNewOrderState extends State<CreateNewOrder> {
-  String dropdownvalue = 'User';
-  String? selectLevel;
-  var items = [
-    'Admin',
-    'User',
-    'Seller',
-  ];
+
+  HomeController controller = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          backgroundColor: const Color(0xffF9F9F9),
-          title: const Text(
-            "Create New Order",
-            style: TextStyle(
-              color: Colors.black,
-            ),
-          ),
-          leading: InkWell(
-              onTap: () {
-                Get.back();
-              },
-              child: const Icon(Icons.arrow_back_ios_new)),
-          // actions: [
-          //   IconButton(
-          //       onPressed: () {},
-          //       icon: const Icon(
-          //         Icons.add,
-          //         size: 25,
-          //       ))
-          // ],
+        backgroundColor: AppColor.whiteColor,
+        appBar: CustomAppBar(
+          title: 'Create  New Order',
+          onPressed: () {
+            Get.back();
+          },
         ),
-        body: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+        body: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           child: Column(
             children: [
-              CommonDropdown(
-                dropdownList: items,
-                value: selectLevel,
-                callback: setLevelValue,
-                hintText: "Customer/Company*",
+              WidgetDropDownFromField(
+                hintText: "Select Customer/Company",
+                itemList: const ["Admin","Usre","Seller"],
+                onTap: (value) {
+                  debugPrint("Select => $value");
+                },
               ),
-              // CustomTextField(
-              //   hintText: "Select Customer/Company ",
-              //   labelText: "Customer/Company* ",
-              //   suffixFixWidget: Image.asset(
-              //     "assets/images/down.png",
-              //     height: 20,
-              //   ),
-              // ),
               const SizedBox(
                 height: 20,
               ),
-              CommonDropdown(
-                dropdownList: items,
-                value: selectLevel,
-                callback: setLevelValue,
-                hintText: "Machine Type*",
-              ),
-              // CustomTextField(
-              //   hintText: "Select Machine  Type",
-              //   labelText: "Machine Type*",
-              //   suffixFixWidget: Image.asset(
-              //     "assets/images/down.png",
-              //     height: 20,
-              //   ),
-              // ),
+              CustomTextField(
+                  hintText: "Select Machine Type*",
+                  labelText: "Machine Type*",
+                  enable: false,
+                  focusNode: FocusNode(),
+                  suffixFixWidget: const Icon(Icons.arrow_forward_ios_rounded,size: 18,color: AppColor.blackColor,)),
               const SizedBox(
                 height: 20,
               ),
-              const CustomTextField(
+               CustomTextField(
                   hintText: "Select Delivery Date",
                   labelText: "Delivery Date*",
-                  suffixFixWidget: Icon(Icons.date_range)),
+                  enable: false,
+                  focusNode: controller.deliveryDateFocusNode,
+                  suffixFixWidget: const Icon(Icons.date_range,size: 22,)),
               const SizedBox(
                 height: 20,
               ),
-              const CustomTextField(
+               CustomTextField(
                 hintText: "Total Payment",
                 labelText: "Total Payment",
+                focusNode: controller.paymentFocusNode,
               ),
               const SizedBox(
                 height: 20,
               ),
-              const CustomTextField(
+               CustomTextField(
                 hintText: "Advance Payment",
                 labelText: "Advance Payment",
-              ),
+                textEditingController: controller.advancePaymentTextEditingController,
+                focusNode: controller.advancedPaymentFocusNode,
+                             ),
               const SizedBox(
                 height: 20,
               ),
-              // const CustomTextField(
-              //   hintText: "Select Manager role",
-              //   labelText: "Assigns Order*",
-              // ),
-              CommonDropdown(
-                dropdownList: items,
-                value: selectLevel,
-                callback: setLevelValue,
-                hintText: "Assigns Order*",
-              ),
+              CustomTextField(
+                  hintText: "Select Manager Role",
+                  labelText: "Assigns Order*",
+                  enable: false,
+                  focusNode: FocusNode(),
+                  suffixFixWidget: const Icon(Icons.arrow_forward_ios_rounded,size: 18,color: AppColor.blackColor,)),
               const SizedBox(
                 height: 20,
               ),
@@ -132,7 +100,5 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
         ));
   }
 
-  void setLevelValue(String value) {
-    selectLevel = value;
-  }
+
 }

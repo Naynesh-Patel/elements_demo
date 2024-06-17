@@ -1,3 +1,5 @@
+import 'package:elements/constant/app_colors.dart';
+import 'package:elements/constant/app_text_style.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
@@ -24,10 +26,7 @@ class CustomButton extends StatelessWidget {
           child: Center(
               child: Text(
             buttonText,
-            style: const TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
+            style: AppTextStyle.textStyleBold18.copyWith(color: AppColor.whiteColor),
           )),
         ),
       ),

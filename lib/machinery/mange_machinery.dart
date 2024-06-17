@@ -1,6 +1,8 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/machinery/add_machinery.dart';
+import 'package:elements/widget/custom_appbar.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,130 +20,84 @@ class _MangeMachineryState extends State<MangeMachinery> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: const Color(0xffF9F9F9),
-        title: const Text(
-          "Mange Machinery",
-          style: TextStyle(
-            color: Colors.black,
-          ),
-        ),
-        leading: InkWell(
-            onTap: () {
-              Get.back();
-            },
-            child: const Icon(Icons.arrow_back_ios_new)),
+      appBar:CustomAppBar(
+        title: "Manage Machinery Stock",
+        onPressed: () {
+          Get.back();
+        },
       ),
       body: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         child: Column(
           children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(4),
-                  border: Border.all(color: const Color(0xffE6E6E6), width: 1)),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _keyValue("Machine name", "Containership"),
-                        _keyValue("Spare parts 1 ", "20"),
-                        _keyValue("Spare parts 2 ", "20"),
-                        _keyValue("Duration", "29 Days"),
-                      ],
-                    ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Flexible(child: Text("Total Machinery Stock  : 20",style: AppTextStyle.textStyleRegular14,)),
+                OutlinedButton(
+                  onPressed: () {
+
+                  },
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0),side: const BorderSide(color: AppColor.borderColor,),)),
                   ),
-                  Row(
-                    children: [
-                      InkWell(
-                        onTap: () {},
-                        borderRadius: BorderRadius.circular(5),
-                        child: Container(
-                          padding: const EdgeInsets.all(6),
-                          decoration: BoxDecoration(
-                              border:
-                                  Border.all(color: const Color(0xffC9C9C9)),
-                              borderRadius: BorderRadius.circular(5)),
-                          child: const Icon(
-                            Icons.edit,
-                            color: Color(0xff555555),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      InkWell(
-                        onTap: () {},
-                        borderRadius: BorderRadius.circular(5),
-                        child: Container(
-                          padding: const EdgeInsets.all(6),
-                          decoration: BoxDecoration(
-                              border:
-                                  Border.all(color: const Color(0xffC9C9C9)),
-                              borderRadius: BorderRadius.circular(5)),
-                          child: const Icon(
-                            Icons.delete,
-                            color: Color(0xff555555),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+                  child: Text("Update",style: AppTextStyle.textStyleLight14.copyWith(color: AppColor.selectColor),),
+                )
+              ],
             ),
-            const SizedBox(height: 15),
+            const SizedBox(height: 16),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(4),
                   border: Border.all(color: const Color(0xffE6E6E6), width: 1)),
-              child: Row(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _keyValue("Machine name", "Containership"),
-                        _keyValue("Spare parts", "20"),
-                        _keyValue("Duration", "29 Days"),
-                      ],
-                    ),
+                  _keyValue(
+                    "Machine Name",
+                    "Containership",
                   ),
+                  const SizedBox(height: 8),
+                  _keyValue(
+                    "Machine Type",
+                    "Steel Cutting",
+                  ),
+                  const SizedBox(height: 8),
+                  _keyValue(
+                    "Qty",
+                    "1",
+                  ),
+                  const SizedBox(height: 16),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      InkWell(
-                        onTap: () {},
-                        borderRadius: BorderRadius.circular(5),
-                        child: Container(
-                          padding: const EdgeInsets.all(6),
-                          decoration: BoxDecoration(
-                              border:
-                                  Border.all(color: const Color(0xffC9C9C9)),
-                              borderRadius: BorderRadius.circular(5)),
-                          child: const Icon(
-                            Icons.edit,
-                            color: Color(0xff555555),
-                          ),
-                        ),
+                      _smallButton(
+                        title: " View ",
+                        textColor: AppColor.selectColor,
+                        onTap: () {
+
+                        },
                       ),
-                      const SizedBox(width: 10),
-                      InkWell(
-                        onTap: () {},
-                        borderRadius: BorderRadius.circular(5),
-                        child: Container(
-                          padding: const EdgeInsets.all(6),
-                          decoration: BoxDecoration(
-                              border:
-                                  Border.all(color: const Color(0xffC9C9C9)),
-                              borderRadius: BorderRadius.circular(5)),
-                          child: const Icon(
-                            Icons.delete,
-                            color: Color(0xff555555),
-                          ),
-                        ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      _smallButton(
+                          title: "  Edit  ",
+                          onTap: () {
+
+                          },
+                          textColor: const Color(0xff555555)
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      _smallButton(
+                          title: "Delete",
+                          onTap: () {
+
+                          },
+                          textColor: const Color(0xffB50A0A)
                       ),
                     ],
                   )
@@ -167,21 +123,34 @@ class _MangeMachineryState extends State<MangeMachinery> {
     );
   }
 
-  Widget _keyValue(key, value) {
+  Widget _keyValue(key,value){
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(
-          "$key : ",
-          style: AppTextStyle.textStyleBold14,
-        ),
-        Flexible(
-            child: Text(
-          "$value",
-          style: AppTextStyle.textStyleRegular14
-              .copyWith(color: const Color(0xff555555)),
-        )),
+        Text("$key : ",style: AppTextStyle.textStyleBold14,),
+        Flexible(child: Text("$value",style: AppTextStyle.textStyleRegular14.copyWith(color: Color(0xff555555)),)),
       ],
     );
   }
+
+  Widget _smallButton({void Function()? onTap,required String title,Color? textColor}){
+    return InkWell(
+      onTap: () {},
+      borderRadius: BorderRadius.circular(5),
+      child: Container(
+          decoration: BoxDecoration(
+              borderRadius:
+              BorderRadius.circular(5),
+              border: Border.all(
+                  color:
+                  const Color(0xffC9C9C9))),
+          padding: const EdgeInsets.symmetric(
+              horizontal: 16, vertical: 10),
+          child: Text(
+              title,
+              style: AppTextStyle.textStyleBold12.copyWith(color: textColor ?? AppColor.blackColor)
+          )),
+    );
+  }
+
 }

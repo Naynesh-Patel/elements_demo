@@ -2,12 +2,177 @@ import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 
-class CustomTextField extends StatelessWidget {
+class CustomTextField extends StatefulWidget {
   final TextEditingController? textEditingController;
   final FocusNode? focusNode;
   final String? hintText;
   final String? labelText;
+  final Widget? label;
+  final String? initialValue;
+  final TextInputType? textInputType;
+  final Widget? preFixWidget;
+  final BoxConstraints? prefixIconConstraints;
+  final Widget? suffixFixWidget;
+  final int? maxLength;
+  final bool? readOnly;
+  final bool? obscureText;
+  final bool? enable;
+  final bool? autofocus;
+  final Function()? onTap;
+  final Function(String)? onChange;
+  final double? paddingHorizontal;
+  final TextStyle? style;
+  final int? maxLines;
+  final String? Function(String?)? validator;
+  final List<TextInputFormatter>? inputFormatters;
+  final AutovalidateMode? autoValidateMode;
+  final String? errorText;
+  final Function(String)? onFieldSubmitted;
+  final Function(String?)? onSaved;
+  const CustomTextField({Key? key,
+    this.textEditingController,
+    this.focusNode,
+    this.hintText,
+    this.label,
+    this.initialValue,
+    this.textInputType,
+    this.suffixFixWidget,
+    this.preFixWidget,
+    this.prefixIconConstraints,
+    this.maxLength,
+    this.readOnly,
+    this.enable,
+    this.autofocus,
+    this.onTap,
+    this.onChange,
+    this.paddingHorizontal,
+    this.style,
+    this.maxLines,
+    this.validator,
+    this.autoValidateMode,
+    this.inputFormatters,
+    this.errorText,
+    this.onFieldSubmitted,
+    this.onSaved,
+    this.labelText,
+    this.obscureText,
+  }) : super(key: key);
+
+  @override
+  State<CustomTextField> createState() => _CustomTextFieldState();
+}
+
+class _CustomTextFieldState extends State<CustomTextField> {
+
+  @override
+  void initState() {
+    // widget.focusNode?.addListener(_handleFocusChange);
+    _handleFocusChange();
+    super.initState();
+  }
+
+  String _lText ="";
+
+  void _handleFocusChange() {
+    if (mounted) {
+      widget.textEditingController?.addListener(() {
+        if (widget.textEditingController != null) {
+          if (widget.textEditingController!.text.isNotEmpty) {
+            _lText = widget.labelText!;
+            setState(() {
+              // Your state change code goes here
+            });
+          } else {
+            _lText = "";
+            setState(() {
+              // Your state change code goes here
+            });
+          }
+        }
+      });
+    }
+
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      controller: widget.textEditingController,
+      focusNode: widget.focusNode,
+      keyboardType: widget.textInputType ?? TextInputType.text,
+      showCursor: true,
+      enabled: widget.enable ?? true,
+      readOnly: widget.readOnly ?? false,
+      cursorColor: Colors.black,
+      maxLength: widget.maxLength,
+      onChanged: widget.onChange,
+      autofocus: widget.autofocus ?? false,
+      style: widget.style ??
+          AppTextStyle.textStyleRegular16
+              .copyWith(letterSpacing: widget.maxLength == 10 ? 2.0 : 1.0),
+      maxLines: widget.maxLines ?? 1,
+      textAlign: TextAlign.start,
+      initialValue: widget.initialValue,
+      obscureText: widget.obscureText ?? false,
+      decoration: InputDecoration(
+          errorText: widget.errorText,
+          fillColor: Colors.white,
+          errorStyle: const TextStyle(color: Colors.red),
+          prefixIcon: widget.preFixWidget,
+          suffixIcon: widget.suffixFixWidget ?? const SizedBox.shrink(),
+          // prefixIconConstraints: prefixIconConstraints ??
+          //     const BoxConstraints(maxWidth: 16, minWidth: 10),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(6),
+            borderSide: const BorderSide(color: AppColor.hintColor, width: 0.0),
+          ),
+          disabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(6),
+            borderSide: const BorderSide(color: AppColor.hintColor, width: 0.0),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(6),
+            borderSide: const BorderSide(color: Colors.red, width: 0.0),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(6),
+            borderSide: const BorderSide(color: Colors.red, width: 1.0),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(6),
+            borderSide: const BorderSide(color: AppColor.hintColor, width: 0.0),
+          ),
+          contentPadding:
+          const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+          hintText: widget.hintText,
+          hintStyle: AppTextStyle.textStyleRegular14.copyWith(color: AppColor.dropDownHintColor),
+          labelStyle:AppTextStyle.textStyleRegular16.copyWith(color: AppColor.blackColor),
+          counterText: "",
+          label: widget.label,
+          labelText:_lText,
+          // labelText: widget.focusNode!.hasFocus ? widget.labelText :"",
+          floatingLabelBehavior: FloatingLabelBehavior.always
+      ),
+      onFieldSubmitted: widget.onFieldSubmitted,
+      inputFormatters: widget.inputFormatters,
+      onSaved: widget.onSaved,
+      onTap: widget.onTap,
+      validator: widget.validator,
+      autovalidateMode: widget.autoValidateMode,
+    );
+  }
+}
+
+
+/*class CustomTextField extends StatelessWidget {
+  final TextEditingController? textEditingController;
+  final FocusNode? focusNode;
+  final String? hintText;
+  final String? labelText;
+  final Widget? label;
   final String? initialValue;
   final TextInputType? textInputType;
   final Widget? preFixWidget;
@@ -35,6 +200,7 @@ class CustomTextField extends StatelessWidget {
     this.textEditingController,
     this.focusNode,
     this.hintText,
+    this.label,
     this.initialValue,
     this.textInputType,
     this.suffixFixWidget,
@@ -88,38 +254,35 @@ class CustomTextField extends StatelessWidget {
           // prefixIconConstraints: prefixIconConstraints ??
           //     const BoxConstraints(maxWidth: 16, minWidth: 10),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(4),
+            borderRadius: BorderRadius.circular(6),
             borderSide: const BorderSide(color: AppColor.hintColor, width: 0.0),
           ),
           disabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(4),
+            borderRadius: BorderRadius.circular(6),
             borderSide: const BorderSide(color: AppColor.hintColor, width: 0.0),
           ),
           focusedErrorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(4),
+            borderRadius: BorderRadius.circular(6),
             borderSide: const BorderSide(color: Colors.red, width: 0.0),
           ),
           errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(4),
+            borderRadius: BorderRadius.circular(6),
             borderSide: const BorderSide(color: Colors.red, width: 1.0),
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(4),
+            borderRadius: BorderRadius.circular(6),
             borderSide: const BorderSide(color: AppColor.hintColor, width: 0.0),
           ),
           contentPadding:
               const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
           hintText: hintText,
-          labelStyle: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w400,
-              color: Color(0xff555555)),
-          hintStyle: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
-              color: Color(0xffD1D1D1)),
+          hintStyle: AppTextStyle.textStyleRegular14.copyWith(color: AppColor.dropDownHintColor),
+          labelStyle:AppTextStyle.textStyleRegular16.copyWith(color: AppColor.blackColor),
           counterText: "",
-          labelText: labelText),
+          label: label,
+          labelText: focusNode!.hasFocus ? labelText :"",
+          floatingLabelBehavior: FloatingLabelBehavior.always
+      ),
       onFieldSubmitted: onFieldSubmitted,
       inputFormatters: inputFormatters,
       onSaved: onSaved,
@@ -128,4 +291,4 @@ class CustomTextField extends StatelessWidget {
       autovalidateMode: autoValidateMode,
     );
   }
-}
+}*/

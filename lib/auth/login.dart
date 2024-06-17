@@ -1,9 +1,11 @@
 import 'package:elements/constant/app_colors.dart';
+import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/controller/auth_controller.dart';
 import 'package:elements/dashboard.dart';
 import 'package:elements/widget/common_dropdown.dart';
 import 'package:elements/widget/custom_button.dart';
 import 'package:elements/widget/custom_text_field.dart';
+import 'package:elements/widget/dropdown_fromfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -15,29 +17,19 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  String dropdownvalue = 'User';
-  String? selectLevel;
-  var items = [
-    'Admin',
-    'User',
-    'Seller',
-  ];
+
+
   AuthController controller = Get.find();
 
-  @override
-  void initState() {
-    controller.loginPasswordVisible = true;
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: AppColor.whiteColor,
         body: ListView(
           children: [
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,57 +47,42 @@ class _LoginState extends State<Login> {
                   const SizedBox(
                     height: 40,
                   ),
-                  const Text(
+                   Text(
                     "Login",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 26,
-                    ),
+                    style: AppTextStyle.textStyleBold20.copyWith(fontSize: 26)
                   ),
                   const SizedBox(
                     height: 30,
                   ),
-                  CommonDropdown(
-                    dropdownList: items,
-                    value: selectLevel,
-                    callback: setLevelValue,
-                    hintText: "User Type",
+                  WidgetDropDownFromField(
+                    hintText: "Select User Type",
+                    itemList: const ["Admin","Usre","Seller"],
+                    onTap: (value) {
+                      debugPrint("Select => $value");
+                    },
                   ),
                   const SizedBox(
                     height: 15,
                   ),
-                  // CustomTextField(
-                  //   textEditingController:
-                  //       controller.userTypeTextEditingController,
-                  //   hintText: "Select User Type",
-                  //   labelText: " User Type",
-                  //   suffixFixWidget: Image.asset(
-                  //     "assets/images/down.png",
-                  //     height: 20,
-                  //   ),
-                  // ),
-                  // const SizedBox(
-                  //   height: 15,
-                  // ),
                   CustomTextField(
+                    focusNode: controller.mobileFocusNode,
                     textInputType: TextInputType.number,
                     textEditingController:
                         controller.mobileNumberTextEditingController,
                     maxLength: 10,
-                    hintText: "Mobile No",
-                    labelText: "Mobile No",
+                    hintText: "Mobile No*",
+                    labelText: "Mobile No*",
                   ),
                   const SizedBox(
                     height: 15,
                   ),
                   CustomTextField(
-                      focusNode: controller.focusNode,
+                      focusNode: controller.passwordFocusNode,
                       obscureText: controller.loginPasswordVisible,
                       textEditingController:
                           controller.passwordTextEditingController,
-                      hintText: "Password",
-                      labelText: "Password",
+                      hintText: "Password*",
+                      labelText: "Password*",
                       enable: true,
                       suffixFixWidget: IconButton(
                         onPressed: () {
@@ -122,7 +99,7 @@ class _LoginState extends State<Login> {
                         ),
                       )),
                   const SizedBox(
-                    height: 15,
+                    height: 20,
                   ),
                   CustomButton(
                     color: AppColor.buttonColor,
@@ -136,9 +113,5 @@ class _LoginState extends State<Login> {
             ),
           ],
         ));
-  }
-
-  void setLevelValue(String value) {
-    selectLevel = value;
   }
 }
