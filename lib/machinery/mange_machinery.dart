@@ -88,7 +88,7 @@ class _MangeMachineryState extends State<MangeMachinery> {
                         ),
                       ),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),
