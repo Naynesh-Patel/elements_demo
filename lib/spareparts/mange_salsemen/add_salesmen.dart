@@ -4,7 +4,7 @@ import 'package:elements/widget/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../widget/common_dropdown.dart';
+import '../../widget/common_dropdown.dart';
 
 class AddSalesmen extends StatefulWidget {
   const AddSalesmen({super.key});

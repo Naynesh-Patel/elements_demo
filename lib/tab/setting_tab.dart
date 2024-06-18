@@ -6,7 +6,7 @@ import 'package:elements/import_spareparts/import_spareparts.dart';
 import 'package:elements/machinery/mange_machinery.dart';
 import 'package:elements/manage_customer/mange_customer.dart';
 import 'package:elements/mange_product/mange_product.dart';
-import 'package:elements/mange_salsemen/mange_salesmen.dart';
+import 'package:elements/spareparts/mange_salsemen/mange_salesmen.dart';
 import 'package:elements/spareparts/mange_spareparts.dart';
 import 'package:elements/user/mange_user.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +21,6 @@ class SettingTab extends StatefulWidget {
 }
 
 class _SettingTabState extends State<SettingTab> {
-
   SettingController controller = Get.find();
 
   @override
@@ -39,7 +38,7 @@ class _SettingTabState extends State<SettingTab> {
         automaticallyImplyLeading: false,
         title: Text(
           "Setting",
-            style: AppTextStyle.textStyleRegular20,
+          style: AppTextStyle.textStyleRegular20,
         ),
         actions: [
           InkWell(
@@ -219,29 +218,36 @@ class _SettingTabState extends State<SettingTab> {
     );
   }
 
-  Widget _customTile({void Function()? onTap,required int index,required String title,required String imgPath,bool isSvg = true}){
+  Widget _customTile(
+      {void Function()? onTap,
+      required int index,
+      required String title,
+      required String imgPath,
+      bool isSvg = true}) {
     return ListTile(
-      leading: isSvg ? SvgPicture.asset(
-        imgPath,
-        color: AppColor.blackColor,
-        height: 20,
-      ):Image.asset(
-        imgPath,
-        color: AppColor.blackColor,
-        height: 20,
-      ),
+      leading: isSvg
+          ? SvgPicture.asset(
+              imgPath,
+              color: AppColor.blackColor,
+              height: 20,
+            )
+          : Image.asset(
+              imgPath,
+              color: AppColor.blackColor,
+              height: 20,
+            ),
       title: Text(
-          title,
-          style: AppTextStyle.textStyleRegular16.copyWith(color: AppColor.blackColor,),
+        title,
+        style: AppTextStyle.textStyleRegular16.copyWith(
+          color: AppColor.blackColor,
+        ),
       ),
       trailing: const Icon(
         Icons.arrow_forward_ios_rounded,
         size: 18,
-        color : AppColor.blackColor,
+        color: AppColor.blackColor,
       ),
       onTap: onTap,
     );
   }
-
-
 }

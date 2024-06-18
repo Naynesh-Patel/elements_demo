@@ -1,11 +1,15 @@
 import 'package:elements/constant/app_colors.dart';
+import 'package:elements/user/user_view_detail.dart';
+import 'package:elements/widget/custom_appbar.dart';
 import 'package:elements/widget/custom_button.dart';
 import 'package:elements/widget/custom_text_field.dart';
+import 'package:elements/widget/dropdown_fromfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AddUser extends StatefulWidget {
-  const AddUser({super.key});
+  final bool isUpdate;
+  const AddUser({super.key, this.isUpdate = false});
 
   @override
   State<AddUser> createState() => _AddUserState();
@@ -19,27 +23,11 @@ class _AddUserState extends State<AddUser> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          backgroundColor: const Color(0xffF9F9F9),
-          title: const Text(
-            "Add User",
-            style: TextStyle(
-              color: Colors.black,
-            ),
-          ),
-          leading: InkWell(
-              onTap: () {
-                Get.back();
-              },
-              child: const Icon(Icons.arrow_back_ios_new)),
-          actions: [
-            IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.add,
-                  size: 25,
-                ))
-          ],
+        appBar: CustomAppBar(
+          onPressed: () {
+            Get.back();
+          },
+          title: widget.isUpdate ? "Update User Details" : "Add User",
         ),
         body: ListView(
           shrinkWrap: true,
@@ -85,9 +73,12 @@ class _AddUserState extends State<AddUser> {
                   const SizedBox(
                     height: 15,
                   ),
-                  const CustomTextField(
+                  WidgetDropDownFromField(
                     hintText: "Select User Role",
-                    labelText: "User Role",
+                    itemList: const ["Admin", "User", "Seller"],
+                    onTap: (value) {
+                      debugPrint("Select => $value");
+                    },
                   ),
                   const SizedBox(
                     height: 20,
@@ -128,7 +119,9 @@ class _AddUserState extends State<AddUser> {
           child: CustomButton(
             color: AppColor.buttonColor,
             buttonText: 'Add',
-            onTap: () {},
+            onTap: () {
+              Get.to(const UserViewDetils());
+            },
           ),
         ));
   }

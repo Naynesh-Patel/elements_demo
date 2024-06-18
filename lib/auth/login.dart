@@ -2,7 +2,6 @@ import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/controller/auth_controller.dart';
 import 'package:elements/dashboard.dart';
-import 'package:elements/widget/common_dropdown.dart';
 import 'package:elements/widget/custom_button.dart';
 import 'package:elements/widget/custom_text_field.dart';
 import 'package:elements/widget/dropdown_fromfield.dart';
@@ -17,10 +16,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-
-
   AuthController controller = Get.find();
-
 
   @override
   Widget build(BuildContext context) {
@@ -47,16 +43,15 @@ class _LoginState extends State<Login> {
                   const SizedBox(
                     height: 40,
                   ),
-                   Text(
-                    "Login",
-                    style: AppTextStyle.textStyleBold20.copyWith(fontSize: 26)
-                  ),
+                  Text("Login",
+                      style:
+                          AppTextStyle.textStyleBold20.copyWith(fontSize: 26)),
                   const SizedBox(
                     height: 30,
                   ),
                   WidgetDropDownFromField(
                     hintText: "Select User Type",
-                    itemList: const ["Admin","Usre","Seller"],
+                    itemList: const ["Admin", "Usre", "Seller"],
                     onTap: (value) {
                       debugPrint("Select => $value");
                     },
