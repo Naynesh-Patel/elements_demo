@@ -39,6 +39,7 @@ class _AddBillHistoryState extends State<AddBillHistory>
         body: Container(
           margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               WidgetDropDownFromField(
                 hintText: "Invoice Bill",

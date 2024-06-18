@@ -50,6 +50,7 @@ class _MangeSparepartsState extends State<MangeSpareparts> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         _keyValue("Name", "Steel Bolt"),
+                        const SizedBox(height: 8),
                         _keyValue("Qty", "10"),
                       ],
                     ),
@@ -123,7 +124,7 @@ class _MangeSparepartsState extends State<MangeSpareparts> {
             child: Text(
           "$value",
           style: AppTextStyle.textStyleRegular14
-              .copyWith(color: Color(0xff555555)),
+              .copyWith(color: const Color(0xff555555)),
         )),
       ],
     );

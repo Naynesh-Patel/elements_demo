@@ -49,8 +49,11 @@ class _MangeSalesmenState extends State<MangeSalesmen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         _keyValue("Role", "Worker"),
+                        const SizedBox(height: 8),
                         _keyValue("Name", "Dipesh"),
+                        const SizedBox(height: 8),
                         _keyValue("Contact No", "99123 45673"),
+                        const SizedBox(height: 8),
                         _keyValue("Address", "Surat, Gujarat"),
                       ],
                     ),

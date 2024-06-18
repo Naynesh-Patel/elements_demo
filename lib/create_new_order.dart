@@ -1,9 +1,10 @@
 import 'package:elements/constant/app_colors.dart';
-import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/controller/home_controller.dart';
+import 'package:elements/view_order_detail.dart';
 import 'package:elements/widget/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'widget/custom_button.dart';
 import 'widget/custom_text_field.dart';
 import 'widget/dropdown_fromfield.dart';
@@ -16,7 +17,6 @@ class CreateNewOrder extends StatefulWidget {
 }
 
 class _CreateNewOrderState extends State<CreateNewOrder> {
-
   HomeController controller = Get.find();
 
   @override
@@ -24,6 +24,17 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
     return Scaffold(
         backgroundColor: AppColor.whiteColor,
         appBar: CustomAppBar(
+          action: [
+            Padding(
+                padding: const EdgeInsets.only(right: 10),
+                child: IconButton(
+                    onPressed: () {
+                      Get.to(const ViewOrderDetails());
+                    },
+                    icon: const Icon(
+                      Icons.add,
+                    )))
+          ],
           title: 'Create  New Order',
           onPressed: () {
             Get.back();
@@ -35,7 +46,7 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
             children: [
               WidgetDropDownFromField(
                 hintText: "Select Customer/Company",
-                itemList: const ["Admin","Usre","Seller"],
+                itemList: const ["Admin", "Usre", "Seller"],
                 onTap: (value) {
                   debugPrint("Select => $value");
                 },
@@ -48,20 +59,27 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                   labelText: "Machine Type*",
                   enable: false,
                   focusNode: FocusNode(),
-                  suffixFixWidget: const Icon(Icons.arrow_forward_ios_rounded,size: 18,color: AppColor.blackColor,)),
+                  suffixFixWidget: const Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    size: 18,
+                    color: AppColor.blackColor,
+                  )),
               const SizedBox(
                 height: 20,
               ),
-               CustomTextField(
+              CustomTextField(
                   hintText: "Select Delivery Date",
                   labelText: "Delivery Date*",
                   enable: false,
                   focusNode: controller.deliveryDateFocusNode,
-                  suffixFixWidget: const Icon(Icons.date_range,size: 22,)),
+                  suffixFixWidget: const Icon(
+                    Icons.date_range,
+                    size: 22,
+                  )),
               const SizedBox(
                 height: 20,
               ),
-               CustomTextField(
+              CustomTextField(
                 hintText: "Total Payment",
                 labelText: "Total Payment",
                 focusNode: controller.paymentFocusNode,
@@ -69,12 +87,13 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
               const SizedBox(
                 height: 20,
               ),
-               CustomTextField(
+              CustomTextField(
                 hintText: "Advance Payment",
                 labelText: "Advance Payment",
-                textEditingController: controller.advancePaymentTextEditingController,
+                textEditingController:
+                    controller.advancePaymentTextEditingController,
                 focusNode: controller.advancedPaymentFocusNode,
-                             ),
+              ),
               const SizedBox(
                 height: 20,
               ),
@@ -83,7 +102,11 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                   labelText: "Assigns Order*",
                   enable: false,
                   focusNode: FocusNode(),
-                  suffixFixWidget: const Icon(Icons.arrow_forward_ios_rounded,size: 18,color: AppColor.blackColor,)),
+                  suffixFixWidget: const Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    size: 18,
+                    color: AppColor.blackColor,
+                  )),
               const SizedBox(
                 height: 20,
               ),
@@ -99,6 +122,4 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
           ),
         ));
   }
-
-
 }
