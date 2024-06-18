@@ -47,11 +47,10 @@ class _MangeCustomerState extends State<MangeCustomer> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-
                         _keyValue("Name", "Tata Steel Pvt"),
                         _keyValue("Contact No", "99656 25693"),
                         _keyValue("Reference By", "L & T Pvt"),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Row(
@@ -154,10 +153,10 @@ class _MangeCustomerState extends State<MangeCustomer> {
         ),
         Flexible(
             child: Text(
-              "$value",
-              style: AppTextStyle.textStyleRegular14
-                  .copyWith(color: const Color(0xff555555)),
-            )),
+          "$value",
+          style: AppTextStyle.textStyleRegular14
+              .copyWith(color: const Color(0xff555555)),
+        )),
       ],
     );
   }
