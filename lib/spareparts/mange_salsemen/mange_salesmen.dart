@@ -1,6 +1,6 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
-import 'package:elements/mange_salsemen/add_salesmen.dart';
+import 'package:elements/spareparts/mange_salsemen/add_salesmen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -49,8 +49,11 @@ class _MangeSalesmenState extends State<MangeSalesmen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         _keyValue("Role", "Worker"),
+                        const SizedBox(height: 8),
                         _keyValue("Name", "Dipesh"),
+                        const SizedBox(height: 8),
                         _keyValue("Contact No", "99123 45673"),
+                        const SizedBox(height: 8),
                         _keyValue("Address", "Surat, Gujarat"),
                       ],
                     ),

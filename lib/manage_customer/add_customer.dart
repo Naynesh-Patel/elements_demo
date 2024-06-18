@@ -1,5 +1,6 @@
 import 'package:elements/constant/app_colors.dart';
-import 'package:elements/widget/button/custom_button.dart';
+import 'package:elements/manage_customer/customer_view_detail.dart';
+import 'package:elements/widget/custom_button.dart';
 import 'package:elements/widget/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,7 +20,7 @@ class _AddCustomerState extends State<AddCustomer> {
         appBar: AppBar(
           backgroundColor: const Color(0xffF9F9F9),
           title: const Text(
-            "r/Company",
+            "Add Customer/Company",
             style: TextStyle(
               color: Colors.black,
               fontSize: 20,
@@ -32,7 +33,9 @@ class _AddCustomerState extends State<AddCustomer> {
               child: const Icon(Icons.arrow_back_ios_new)),
           actions: [
             IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Get.to(const CustomerViewDetail());
+                },
                 icon: const Icon(
                   Icons.add,
                   size: 25,

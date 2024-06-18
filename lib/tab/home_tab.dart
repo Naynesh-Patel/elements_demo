@@ -267,5 +267,4 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
       ),
     );
   }
-
 }
