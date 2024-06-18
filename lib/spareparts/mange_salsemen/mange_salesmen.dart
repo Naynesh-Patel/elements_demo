@@ -1,6 +1,7 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/spareparts/mange_salsemen/add_salesmen.dart';
+import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -19,20 +20,26 @@ class _MangeSalesmenState extends State<MangeSalesmen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: const Color(0xffF9F9F9),
-        title: const Text(
-          "Mange Salesmen",
-          style: TextStyle(
-            color: Colors.black,
-          ),
-        ),
-        leading: InkWell(
-            onTap: () {
-              Get.back();
-            },
-            child: const Icon(Icons.arrow_back_ios_new)),
+      appBar: CustomAppBar(
+        onPressed: () {
+          Get.back();
+        },
+        title: 'Manage Salesmen',
       ),
+      // AppBar(
+      //   backgroundColor: const Color(0xffF9F9F9),
+      //   title: const Text(
+      //     "Manage Salesmen",
+      //     style: TextStyle(
+      //       color: Colors.black,
+      //     ),
+      //   ),
+      //   leading: InkWell(
+      //       onTap: () {
+      //         Get.back();
+      //       },
+      //       child: const Icon(Icons.arrow_back_ios_new)),
+      // ),
       body: Container(
         margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
         child: Column(

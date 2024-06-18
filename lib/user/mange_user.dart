@@ -1,5 +1,6 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/user/add_user.dart';
+import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,19 +22,11 @@ class _MangeUserState extends State<MangeUser> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: const Color(0xffF9F9F9),
-        title: const Text(
-          "Mange User",
-          style: TextStyle(
-            color: Colors.black,
-          ),
-        ),
-        leading: InkWell(
-            onTap: () {
-              Get.back();
-            },
-            child: const Icon(Icons.arrow_back_ios_new)),
+      appBar: CustomAppBar(
+        title: 'Mange User',
+        onPressed: () {
+          Get.back();
+        },
       ),
       body: Container(
         margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
