@@ -21,6 +21,7 @@ class SettingTab extends StatefulWidget {
 }
 
 class _SettingTabState extends State<SettingTab> {
+
   SettingController controller = Get.find();
 
   @override
@@ -38,7 +39,7 @@ class _SettingTabState extends State<SettingTab> {
         automaticallyImplyLeading: false,
         title: Text(
           "Setting",
-          style: AppTextStyle.textStyleRegular20,
+            style: AppTextStyle.textStyleRegular20,
         ),
         actions: [
           InkWell(
@@ -218,44 +219,29 @@ class _SettingTabState extends State<SettingTab> {
     );
   }
 
-  Widget _customTile(
-      {void Function()? onTap,
-      required int index,
-      required String title,
-      required String imgPath,
-      bool isSvg = true}) {
-    return Obx(() => ListTile(
-          leading: isSvg
-              ? SvgPicture.asset(
-                  imgPath,
-                  color: controller.selectMenu.value == index
-                      ? AppColor.selectColor
-                      : AppColor.blackColor,
-                  height: 20,
-                )
-              : Image.asset(
-                  imgPath,
-                  color: controller.selectMenu.value == index
-                      ? AppColor.selectColor
-                      : AppColor.blackColor,
-                  height: 20,
-                ),
-          title: Text(
-            title,
-            style: AppTextStyle.textStyleRegular16.copyWith(
-              color: controller.selectMenu.value == index
-                  ? AppColor.selectColor
-                  : AppColor.blackColor,
-            ),
-          ),
-          trailing: Icon(
-            Icons.arrow_forward_ios_rounded,
-            size: 18,
-            color: controller.selectMenu.value == index
-                ? AppColor.selectColor
-                : AppColor.blackColor,
-          ),
-          onTap: onTap,
-        ));
+  Widget _customTile({void Function()? onTap,required int index,required String title,required String imgPath,bool isSvg = true}){
+    return ListTile(
+      leading: isSvg ? SvgPicture.asset(
+        imgPath,
+        color: AppColor.blackColor,
+        height: 20,
+      ):Image.asset(
+        imgPath,
+        color: AppColor.blackColor,
+        height: 20,
+      ),
+      title: Text(
+          title,
+          style: AppTextStyle.textStyleRegular16.copyWith(color: AppColor.blackColor,),
+      ),
+      trailing: const Icon(
+        Icons.arrow_forward_ios_rounded,
+        size: 18,
+        color : AppColor.blackColor,
+      ),
+      onTap: onTap,
+    );
   }
+
+
 }
