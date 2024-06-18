@@ -67,6 +67,7 @@ class _ViewOrderDetailsState extends State<ViewOrderDetails> {
               hintText: "Total Payment",
               labelText: "Rs 50,000",
             ),
+
             const SizedBox(
               height: 20,
             ),
