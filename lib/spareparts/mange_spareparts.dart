@@ -1,6 +1,8 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/spareparts/add_spareparts.dart';
+import 'package:elements/widget/app%20bar/custom_appbar.dart';
+import 'package:elements/widget/button/small_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,26 +20,29 @@ class _MangeSparepartsState extends State<MangeSpareparts> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: const Color(0xffF9F9F9),
-        title: const Text(
-          "Mange Spareparts",
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w400,
-            color: Colors.black,
-          ),
-        ),
-        leading: InkWell(
-            onTap: () {
-              Get.back();
-            },
-            child: const Icon(Icons.arrow_back_ios_new)),
+      appBar: CustomAppBar(
+        title: "Mange Spareparts",
+        onPressed: () {
+          Get.back();
+        },
       ),
       body: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         child: Column(
           children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Flexible(child: Text("Total Machinery Stock  : 20",style: AppTextStyle.textStyleRegular14,)),
+                SmallButton(title: "Update",
+                    onTap: () {
+
+                    },
+                    textColor: AppColor.selectColor
+                )
+              ],
+            ),
+            const SizedBox(height: 16),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               decoration: BoxDecoration(
@@ -50,6 +55,7 @@ class _MangeSparepartsState extends State<MangeSpareparts> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         _keyValue("Name", "Steel Bolt"),
+                        const SizedBox(height: 8),
                         _keyValue("Qty", "10"),
                       ],
                     ),
@@ -123,7 +129,7 @@ class _MangeSparepartsState extends State<MangeSpareparts> {
             child: Text(
           "$value",
           style: AppTextStyle.textStyleRegular14
-              .copyWith(color: Color(0xff555555)),
+              .copyWith(color: const Color(0xff555555)),
         )),
       ],
     );

@@ -1,6 +1,7 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/spareparts/add_spareparts.dart';
+import 'package:elements/widget/app%20bar/home_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -17,14 +18,9 @@ class _SparepartsTabState extends State<SparepartsTab> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColor.whiteColor,
-      appBar: AppBar(
-        backgroundColor: AppColor.bgAppBarColor,
-        title:  Text(
-          'Spareparts Stocks',
-            style: AppTextStyle.textStyleRegular20
-        ),
-        automaticallyImplyLeading: false,
-        actions: [
+      appBar: HomeAppBar(
+        title: "Spareparts Stocks",
+        action: [
           SvgPicture.asset(
             'assets/svg/ic_notification.svg',
             height: 20,

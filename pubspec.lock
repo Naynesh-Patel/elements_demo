@@ -25,6 +25,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
+  calendar_date_picker2:
+    dependency: "direct main"
+    description:
+      name: calendar_date_picker2
+      sha256: "31e8359e1da9d1c4e1b3afd10d51701e7f42f1290e269f04c77f409174a5af78"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.6"
   characters:
     dependency: transitive
     description:
@@ -264,22 +272,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
-  syncfusion_flutter_core:
-    dependency: transitive
-    description:
-      name: syncfusion_flutter_core
-      sha256: a0825cdba4f580067ded49ca2321dc3fcf2b224d454d00c8f6edead933949a1d
-      url: "https://pub.dev"
-    source: hosted
-    version: "26.1.35"
-  syncfusion_flutter_datepicker:
-    dependency: "direct main"
-    description:
-      name: syncfusion_flutter_datepicker
-      sha256: "14ba4eb3cb850d804f501855b281df7bdf4722c734796b3a73994df1032f0223"
-      url: "https://pub.dev"
-    source: hosted
-    version: "26.1.35"
   term_glyph:
     dependency: transitive
     description:

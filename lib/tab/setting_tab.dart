@@ -9,6 +9,8 @@ import 'package:elements/mange_product/mange_product.dart';
 import 'package:elements/mange_salsemen/mange_salesmen.dart';
 import 'package:elements/spareparts/mange_spareparts.dart';
 import 'package:elements/user/mange_user.dart';
+import 'package:elements/widget/app%20bar/home_app_bar.dart';
+import 'package:elements/widget/dialogs/custom_dialogbox.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -34,14 +36,9 @@ class _SettingTabState extends State<SettingTab> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColor.whiteColor,
-      appBar: AppBar(
-        backgroundColor: AppColor.bgAppBarColor,
-        automaticallyImplyLeading: false,
-        title: Text(
-          "Setting",
-            style: AppTextStyle.textStyleRegular20,
-        ),
-        actions: [
+      appBar: HomeAppBar(
+        title: "Setting",
+        action: [
           InkWell(
             onTap: () {},
             child: SvgPicture.asset(
@@ -138,84 +135,17 @@ class _SettingTabState extends State<SettingTab> {
             imgPath: "assets/images/logout.png",
             index: 9,
             onTap: () {
-              logoutDialog();
+              CustomDialogBox.showLogoutDialog(
+                context: context,
+                onCancelTap: () {
+                Get.back();
+              }, onLogoutTap: () {
+
+              },);
             },
           ),
         ],
       ),
-    );
-  }
-
-  Future<void> logoutDialog() async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(2),
-          ),
-          backgroundColor: Colors.white,
-          title: Text("Are You Sure Logout?",
-              textAlign: TextAlign.center, style: AppTextStyle.textStyleBold20),
-          content: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                "Do you really want to Logout these App? This process cannot be undone.",
-                textAlign: TextAlign.center,
-                style: AppTextStyle.textStyleRegular14
-                    .copyWith(color: const Color(0xff949494)),
-              ),
-              const SizedBox(
-                height: 15.0,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  InkWell(
-                    onTap: () {
-                      Get.back();
-                    },
-                    child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 5, horizontal: 20),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(4),
-                          color: const Color(0xffC1C1C1),
-                        ),
-                        child: const Text("Cancel",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400))),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Get.back();
-                    },
-                    child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 5, horizontal: 20),
-                        decoration: BoxDecoration(
-                            color: const Color(0xff01959F),
-                            borderRadius: BorderRadius.circular(4)),
-                        child: const Text("Delete",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400))),
-                  ),
-                ],
-              )
-            ],
-          ),
-        );
-      },
     );
   }
 

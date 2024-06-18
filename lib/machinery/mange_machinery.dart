@@ -1,7 +1,8 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/machinery/add_machinery.dart';
-import 'package:elements/widget/custom_appbar.dart';
+import 'package:elements/widget/app%20bar/custom_appbar.dart';
+import 'package:elements/widget/button/small_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,8 +15,7 @@ class MangeMachinery extends StatefulWidget {
 }
 
 class _MangeMachineryState extends State<MangeMachinery> {
-  bool value = false;
-  int index = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +34,7 @@ class _MangeMachineryState extends State<MangeMachinery> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Flexible(child: Text("Total Machinery Stock  : 20",style: AppTextStyle.textStyleRegular14,)),
-                _smallButton(title: "Update",
+                SmallButton(title: "Update",
                 onTap: () {
 
                 },
@@ -69,7 +69,7 @@ class _MangeMachineryState extends State<MangeMachinery> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      _smallButton(
+                      SmallButton(
                         title: " View ",
                         textColor: AppColor.selectColor,
                         onTap: () {
@@ -79,7 +79,7 @@ class _MangeMachineryState extends State<MangeMachinery> {
                       const SizedBox(
                         width: 10,
                       ),
-                      _smallButton(
+                      SmallButton(
                           title: "  Edit  ",
                           onTap: () {
 
@@ -89,7 +89,7 @@ class _MangeMachineryState extends State<MangeMachinery> {
                       const SizedBox(
                         width: 10,
                       ),
-                      _smallButton(
+                      SmallButton(
                           title: "Delete",
                           onTap: () {
 
@@ -130,24 +130,5 @@ class _MangeMachineryState extends State<MangeMachinery> {
     );
   }
 
-  Widget _smallButton({void Function()? onTap,required String title,Color? textColor}){
-    return InkWell(
-      onTap: () {},
-      borderRadius: BorderRadius.circular(5),
-      child: Container(
-          decoration: BoxDecoration(
-              borderRadius:
-              BorderRadius.circular(5),
-              border: Border.all(
-                  color:
-                  const Color(0xffC9C9C9))),
-          padding: const EdgeInsets.symmetric(
-              horizontal: 16, vertical: 10),
-          child: Text(
-              title,
-              style: AppTextStyle.textStyleBold12.copyWith(color: textColor ?? AppColor.blackColor)
-          )),
-    );
-  }
 
 }

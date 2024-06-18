@@ -1,6 +1,7 @@
 import 'package:elements/add_expense.dart';
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
+import 'package:elements/widget/app%20bar/home_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -17,14 +18,9 @@ class _ExpensetTabState extends State<ExpensetTab> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor:AppColor.whiteColor,
-      appBar: AppBar(
-        backgroundColor: AppColor.bgAppBarColor,
-        automaticallyImplyLeading: false,
-        title:  Text(
-          "Expense",
-            style: AppTextStyle.textStyleRegular20
-        ),
-        actions: [
+      appBar: HomeAppBar(
+        title: "Expense",
+        action: [
           SvgPicture.asset(
             "assets/svg/ic_notification.svg",
             height: 20,

@@ -3,9 +3,10 @@ import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/controller/home_controller.dart';
 import 'package:elements/create_new_order.dart';
 import 'package:elements/invoice.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:elements/widget/app%20bar/home_app_bar.dart';
+import 'package:elements/widget/button/small_button.dart';
+import 'package:elements/widget/dialogs/custom_dialogbox.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
@@ -32,14 +33,9 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColor.whiteColor,
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: AppColor.bgAppBarColor,
-        title: Text(
-          "MachinePro",
-          style: AppTextStyle.textStyleRegular20
-        ),
-        actions: [
+      appBar: HomeAppBar(
+        title: "MachinePro",
+        action: [
           SvgPicture.asset(
             "assets/svg/ic_notification.svg",
             height: 20,
@@ -188,7 +184,7 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                _smallButton(
+                SmallButton(
                   title: "Invoice",
                   textColor: AppColor.selectColor,
                   onTap: () {
@@ -198,7 +194,7 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
                 const SizedBox(
                   width: 10,
                 ),
-                _smallButton(
+                SmallButton(
                   title: "  Edit  ",
                   onTap: () {
 
@@ -208,10 +204,18 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
                 const SizedBox(
                   width: 10,
                 ),
-                _smallButton(
+                SmallButton(
                     title: "Cancel",
                     onTap: () {
+                       CustomDialogBox.showDeleteDialog(
+                           context: context,
+                           bodyText: "Do you really want to cancel these records? This process cannot be undone.",
+                           onCancelTap: () {
+                             Get.back();
+                           },
+                           onDeleteTap: () {
 
+                           },);
                     },
                     textColor: const Color(0xffB50A0A)
                 ),
@@ -250,26 +254,6 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
         Text("$key : ",style: AppTextStyle.textStyleBold14,),
         Flexible(child: Text("$value",style: AppTextStyle.textStyleRegular14.copyWith(color: Color(0xff555555)),)),
       ],
-    );
-  }
-
-  Widget _smallButton({void Function()? onTap,required String title,Color? textColor}){
-    return InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(5),
-      child: Container(
-          decoration: BoxDecoration(
-              borderRadius:
-              BorderRadius.circular(5),
-              border: Border.all(
-                  color:
-                  const Color(0xffC9C9C9))),
-          padding: const EdgeInsets.symmetric(
-              horizontal: 16, vertical: 10),
-          child: Text(
-            title,
-            style: AppTextStyle.textStyleBold12.copyWith(color: textColor ?? AppColor.blackColor)
-          )),
     );
   }
 

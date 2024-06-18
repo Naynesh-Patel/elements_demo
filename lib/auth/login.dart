@@ -2,10 +2,10 @@ import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/controller/auth_controller.dart';
 import 'package:elements/dashboard.dart';
-import 'package:elements/widget/common_dropdown.dart';
-import 'package:elements/widget/custom_button.dart';
+import 'package:elements/widget/dropdown/common_dropdown.dart';
+import 'package:elements/widget/button/custom_button.dart';
 import 'package:elements/widget/custom_text_field.dart';
-import 'package:elements/widget/dropdown_fromfield.dart';
+import 'package:elements/widget/dropdown/dropdown_fromfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

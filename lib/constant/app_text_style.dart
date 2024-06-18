@@ -42,6 +42,12 @@ class AppTextStyle {
       letterSpacing: 1.0,
       fontWeight: FontWeight.w600);
 
+  static TextStyle textStyleRegular13 = TextStyle(
+      fontSize: Get.width < 900 ? 13 : 17,
+      color: AppColor.blackColor,
+      letterSpacing: 1.0,
+      fontWeight: FontWeight.w500);
+
   static TextStyle textStyleLight14 = TextStyle(
       fontSize: Get.width < 900 ? 14 : 18,
       color: AppColor.hintColor,
