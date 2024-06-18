@@ -1,6 +1,6 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/manage_customer/customer_view_detail.dart';
-import 'package:elements/widget/custom_button.dart';
+import 'package:elements/widget/button/custom_button.dart';
 import 'package:elements/widget/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

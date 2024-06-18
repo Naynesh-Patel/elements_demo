@@ -1,9 +1,9 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/user/user_view_detail.dart';
-import 'package:elements/widget/custom_appbar.dart';
-import 'package:elements/widget/custom_button.dart';
+import 'package:elements/widget/app%20bar/custom_appbar.dart';
+import 'package:elements/widget/button/custom_button.dart';
 import 'package:elements/widget/custom_text_field.dart';
-import 'package:elements/widget/dropdown_fromfield.dart';
+import 'package:elements/widget/dropdown/dropdown_fromfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

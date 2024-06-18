@@ -1,13 +1,13 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/controller/home_controller.dart';
 import 'package:elements/view_order_detail.dart';
-import 'package:elements/widget/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'widget/custom_button.dart';
+import 'widget/app bar/custom_appbar.dart';
+import 'widget/button/custom_button.dart';
 import 'widget/custom_text_field.dart';
-import 'widget/dropdown_fromfield.dart';
+import 'widget/dropdown/dropdown_fromfield.dart';
 
 class CreateNewOrder extends StatefulWidget {
   const CreateNewOrder({super.key});
