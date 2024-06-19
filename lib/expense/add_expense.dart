@@ -38,18 +38,14 @@ class _AddExpenseState extends State<AddExpense> {
                 textEditingController: TextEditingController(text: "Ramesh"),
                 focusNode: controller.expenseNameFocusNode,
               ),
-              const SizedBox(
-                height: 16,
-              ),
+              verticalSpacing(),
               CustomTextField(
                 textEditingController: TextEditingController(text: "Tea"),
                 hintText: "Tea",
                 labelText: "Expense Type",
                 focusNode: controller.expenseTypeFocusNode,
               ),
-              const SizedBox(
-                height: 16,
-              ),
+              verticalSpacing(),
               CustomTextField(
                 textEditingController: TextEditingController(text: "20"),
                 hintText: "₹ 20 ",
@@ -68,4 +64,9 @@ class _AddExpenseState extends State<AddExpense> {
           ),
         ));
   }
+
+  Widget verticalSpacing(){
+    return const SizedBox(height: 26.0,);
+  }
+
 }

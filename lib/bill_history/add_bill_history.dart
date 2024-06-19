@@ -43,6 +43,7 @@ class _AddBillHistoryState extends State<AddBillHistory>
             children: [
               WidgetDropDownFromField(
                 hintText: "Invoice Bill",
+                labelText: "Bill Type",
                 itemList: const ["Admin", "Usre", "Seller"],
                 onTap: (value) {
                   debugPrint("Select => $value");
@@ -53,6 +54,7 @@ class _AddBillHistoryState extends State<AddBillHistory>
               ),
               WidgetDropDownFromField(
                 hintText: "Select Company Name",
+                labelText: "Customer/Company Name*",
                 itemList: const ["Admin", "Usre", "Seller"],
                 onTap: (value) {
                   debugPrint("Select => $value");
@@ -63,42 +65,33 @@ class _AddBillHistoryState extends State<AddBillHistory>
               ),
               WidgetDropDownFromField(
                 hintText: "Select Machine Type",
+                labelText: "Machine Type*",
                 itemList: const ["Admin", "Usre", "Seller"],
                 onTap: (value) {
                   debugPrint("Select => $value");
                 },
               ),
-              const SizedBox(
-                height: 15,
-              ),
+              verticalSpacing(),
               const CustomTextField(
-                hintText: "Qty*",
-                labelText: "2*",
+                labelText: "Qty*",
+                hintText: "2*",
               ),
-              const SizedBox(
-                height: 15,
-              ),
+              verticalSpacing(),
               const CustomTextField(
-                hintText: "Mobile No.*",
-                labelText: "9989898958",
+                labelText: "Mobile No.*",
+                hintText: "9989898958",
               ),
-              const SizedBox(
-                height: 15,
-              ),
+              verticalSpacing(),
               const CustomTextField(
-                hintText: "Price*",
-                labelText: "2000*",
+                labelText: "Price*",
+                hintText: "2000*",
               ),
-              const SizedBox(
-                height: 15,
-              ),
+              verticalSpacing(),
               const CustomTextField(
                 hintText: "Shipping Address....",
                 labelText: "Shipping Address*",
               ),
-              const SizedBox(
-                height: 15,
-              ),
+              verticalSpacing(),
             ],
           ),
         ),
@@ -110,5 +103,9 @@ class _AddBillHistoryState extends State<AddBillHistory>
             onTap: () {},
           ),
         ));
+  }
+
+  Widget verticalSpacing(){
+    return const SizedBox(height: 26.0,);
   }
 }

@@ -21,7 +21,7 @@ class _BillHistoryState extends State<BillHistory> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: CustomAppBar(
-        title: 'Bill History',
+        title: "Bill History",
         onPressed: () {
           Get.back();
         },
@@ -29,6 +29,7 @@ class _BillHistoryState extends State<BillHistory> {
       body: Container(
         margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10),

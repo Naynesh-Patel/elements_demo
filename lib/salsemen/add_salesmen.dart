@@ -99,6 +99,7 @@ class _AddSalesmenState extends State<AddSalesmen> {
                     ),
                     WidgetDropDownFromField(
                       hintText: "User Role",
+                      labelText: "User Role",
                       itemList: const ["Admin", "Usre", "Seller"],
                       onTap: (value) {
                         debugPrint("Select => $value");
