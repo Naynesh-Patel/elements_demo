@@ -69,7 +69,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   void initState() {
     // widget.focusNode?.addListener(_handleFocusChange);
-    _handleFocusChange();
+    // _handleFocusChange();
     super.initState();
   }
 
@@ -111,7 +111,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       onChanged: widget.onChange,
       autofocus: widget.autofocus ?? false,
       style: widget.style ??
-          AppTextStyle.textStyleRegular16
+          AppTextStyle.textStyleRegular14
               .copyWith(letterSpacing: widget.maxLength == 10 ? 2.0 : 1.0),
       maxLines: widget.maxLines ?? 1,
       textAlign: TextAlign.start,
@@ -148,11 +148,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
           contentPadding:
           const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
           hintText: widget.hintText,
-          hintStyle: AppTextStyle.textStyleRegular14.copyWith(color: AppColor.dropDownHintColor),
-          labelStyle:AppTextStyle.textStyleRegular16.copyWith(color: AppColor.blackColor),
+          hintStyle: AppTextStyle.textStyleRegular13.copyWith(color: AppColor.dropDownHintColor),
+          labelStyle:AppTextStyle.textStyleRegular16,
           counterText: "",
           label: widget.label,
-          labelText:_lText,
+          labelText:widget.labelText,
           // labelText: widget.focusNode!.hasFocus ? widget.labelText :"",
           floatingLabelBehavior: FloatingLabelBehavior.always
       ),
