@@ -1,5 +1,6 @@
 import 'package:elements/bill_history/add_bill_history.dart';
 import 'package:elements/constant/app_colors.dart';
+import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -19,20 +20,11 @@ class _BillHistoryState extends State<BillHistory> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: const Color(0xffF9F9F9),
-        title: const Text(
-          "Bill History",
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 20,
-          ),
-        ),
-        leading: InkWell(
-            onTap: () {
-              Get.back();
-            },
-            child: const Icon(Icons.arrow_back_ios_new)),
+      appBar: CustomAppBar(
+        title: "Bill History",
+        onPressed: () {
+          Get.back();
+        },
       ),
       body: Container(
         margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),

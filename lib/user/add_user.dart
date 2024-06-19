@@ -71,6 +71,7 @@ class _AddUserState extends State<AddUser> {
                   verticalSpacing(),
                   WidgetDropDownFromField(
                     hintText: "Select User Role",
+                    labelText: "User Role",
                     itemList: const ["Admin", "User", "Seller"],
                     onTap: (value) {
                       debugPrint("Select => $value");

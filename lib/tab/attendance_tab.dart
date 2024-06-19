@@ -2,6 +2,7 @@ import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/widget/app%20bar/home_app_bar.dart';
 import 'package:elements/widget/button/small_button.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -167,6 +168,7 @@ class _AttendanceTabState extends State<AttendanceTab> {
     return showDialog<void>(
       context: context,
       barrierDismissible: false,
+      useSafeArea: true,
       // user must tap button!
       builder: (BuildContext context) {
         return StatefulBuilder(
@@ -235,7 +237,7 @@ class _AttendanceTabState extends State<AttendanceTab> {
 
                               },
                               child: Container(
-                                padding: EdgeInsets.symmetric(horizontal: 4.0,vertical: 4.0),
+                                padding: const EdgeInsets.symmetric(horizontal: 4.0,vertical: 4.0),
                                 decoration: BoxDecoration(
                                     border: Border.all(
                                         color: AppColor.dropDownHintColor

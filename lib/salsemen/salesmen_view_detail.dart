@@ -71,6 +71,7 @@ class _SalsemenViewDetilsState extends State<SalsemenViewDetils> {
                 ),
                 WidgetDropDownFromField(
                   hintText: "User Role",
+                  labelText: "User Role",
                   itemList: const ["Admin", "Usre", "Seller"],
                   onTap: (value) {
                     debugPrint("Select => $value");

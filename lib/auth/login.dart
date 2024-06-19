@@ -56,6 +56,7 @@ class _LoginState extends State<Login> {
                   ),
                   WidgetDropDownFromField(
                     hintText: "Select User Type",
+                    labelText: "User Type*",
                     itemList: const ["Admin","Usre","Seller"],
                     onTap: (value) {
                       debugPrint("Select => $value");

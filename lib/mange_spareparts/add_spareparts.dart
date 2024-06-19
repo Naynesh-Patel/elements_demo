@@ -123,9 +123,7 @@ class _AddSparepartsState extends State<AddSpareparts> {
                   ],
                 ),
               ] else ...[
-                const SizedBox(
-                  height: 16.0,
-                ),
+                verticalSpacing(),
                 CustomTextField(
                   hintText: "Qty",
                   labelText: "Qty",
@@ -144,4 +142,9 @@ class _AddSparepartsState extends State<AddSpareparts> {
           ),
         ));
   }
+
+  Widget verticalSpacing(){
+    return const SizedBox(height: 26.0,);
+  }
+
 }

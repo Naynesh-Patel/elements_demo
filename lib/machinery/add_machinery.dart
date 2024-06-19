@@ -48,30 +48,22 @@ class _AddMachineryState extends State<AddMachinery> {
                 hintText: "Machine Name",
                 labelText: "Machine Name*",
               ),
-              const SizedBox(
-                height: 16,
-              ),
+              verticalSpacing(),
               const CustomTextField(
                 hintText: "Machine Type",
                 labelText: "Machine Type*",
               ),
-              const SizedBox(
-                height: 16,
-              ),
+              verticalSpacing(),
               const CustomTextField(
                 hintText: "Qty",
                 labelText: "Qty*",
               ),
-              const SizedBox(
-                height: 16,
-              ),
+              verticalSpacing(),
               const CustomTextField(
                 hintText: "Eg. 30 days",
                 labelText: "Manufacture Duration*",
               ),
-              const SizedBox(
-                height: 16,
-              ),
+              verticalSpacing(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -189,5 +181,9 @@ class _AddMachineryState extends State<AddMachinery> {
             onTap: () {},
           ),
         ));
+  }
+
+  Widget verticalSpacing(){
+    return const SizedBox(height: 26.0,);
   }
 }
