@@ -1,9 +1,9 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/controller/home_controller.dart';
-import 'package:elements/create_new_order.dart';
-import 'package:elements/invoice.dart';
-import 'package:elements/view_order_detail.dart';
+import 'package:elements/home/create_new_order.dart';
+import 'package:elements/home/invoice.dart';
+import 'package:elements/home/view_order_detail.dart';
 import 'package:elements/widget/app%20bar/home_app_bar.dart';
 import 'package:elements/widget/button/small_button.dart';
 import 'package:elements/widget/dialogs/custom_dialogbox.dart';

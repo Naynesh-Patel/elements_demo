@@ -6,14 +6,14 @@ import 'package:get/get.dart';
 
 import '../date_piker.dart';
 
-class SparepartsDetails extends StatefulWidget {
-  const SparepartsDetails({super.key});
+class ViewSparepartsDetails extends StatefulWidget {
+  const ViewSparepartsDetails({super.key});
 
   @override
-  State<SparepartsDetails> createState() => _SparepartsDetailsState();
+  State<ViewSparepartsDetails> createState() => _ViewSparepartsDetailsState();
 }
 
-class _SparepartsDetailsState extends State<SparepartsDetails> {
+class _ViewSparepartsDetailsState extends State<ViewSparepartsDetails> {
   bool value = false;
   int index = 0;
 
@@ -174,7 +174,7 @@ class _SparepartsDetailsState extends State<SparepartsDetails> {
               ),
             ),
           ),
-          Text("Authoriy", style: AppTextStyle.textStyleRegular14),
+          Text("Qty", style: AppTextStyle.textStyleRegular14),
         ],
       ),
     );

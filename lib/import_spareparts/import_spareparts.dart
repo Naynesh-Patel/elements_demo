@@ -1,9 +1,10 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/import_spareparts/add_import_spareparts.dart';
-import 'package:elements/import_spareparts/view_import_details.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../expense/view_expense_details.dart';
 
 class ImportSpareparts extends StatefulWidget {
   const ImportSpareparts({super.key});
@@ -70,7 +71,7 @@ class _ImportSparepartsState extends State<ImportSpareparts> {
             ),
             InkWell(
               onTap: () {
-                Get.to(ViewImportDetails());
+                Get.to(ViewExpenseDetails());
               },
               child: Container(
                 padding:

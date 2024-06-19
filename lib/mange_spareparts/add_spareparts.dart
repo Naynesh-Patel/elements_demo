@@ -1,7 +1,6 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/controller/home_controller.dart';
-import 'package:elements/spareparts/spareparts_details.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:elements/widget/button/custom_button.dart';
 import 'package:elements/widget/custom_text_field.dart';
@@ -25,17 +24,17 @@ class _AddSparepartsState extends State<AddSpareparts> {
     return Scaffold(
         backgroundColor: AppColor.whiteColor,
         appBar: CustomAppBar(
-          action: [
-            Padding(
-                padding: const EdgeInsets.only(right: 10),
-                child: IconButton(
-                    onPressed: () {
-                      Get.to(const SparepartsDetails());
-                    },
-                    icon: const Icon(
-                      Icons.add,
-                    )))
-          ],
+          // action: [
+          //   Padding(
+          //       padding: const EdgeInsets.only(right: 10),
+          //       child: IconButton(
+          //           onPressed: () {
+          //             Get.to(const ViewSparepartsDetails());
+          //           },
+          //           icon: const Icon(
+          //             Icons.add,
+          //           )))
+          // ],
           title: widget.isUpdate
               ? "Update Spareparts Details"
               : "Add Import Spareparts",

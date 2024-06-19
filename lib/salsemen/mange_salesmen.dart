@@ -1,9 +1,11 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
-import 'package:elements/spareparts/mange_salsemen/add_salesmen.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../mange_salsemen/add_salesmen.dart';
+import 'salesmen_view_detail.dart';
 
 class MangeSalesmen extends StatefulWidget {
   const MangeSalesmen({super.key});
@@ -44,63 +46,70 @@ class _MangeSalesmenState extends State<MangeSalesmen> {
         margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
         child: Column(
           children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(4),
-                  border: Border.all(color: const Color(0xffE6E6E6), width: 1)),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _keyValue("Role", "Worker"),
-                        const SizedBox(height: 8),
-                        _keyValue("Name", "Dipesh"),
-                        const SizedBox(height: 8),
-                        _keyValue("Contact No", "99123 45673"),
-                        const SizedBox(height: 8),
-                        _keyValue("Address", "Surat, Gujarat"),
-                      ],
+            InkWell(
+              onTap: () {
+                Get.to(const SalsemenViewDetils());
+              },
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(4),
+                    border:
+                        Border.all(color: const Color(0xffE6E6E6), width: 1)),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _keyValue("Role", "Worker"),
+                          const SizedBox(height: 8),
+                          _keyValue("Name", "Dipesh"),
+                          const SizedBox(height: 8),
+                          _keyValue("Contact No", "99123 45673"),
+                          const SizedBox(height: 8),
+                          _keyValue("Address", "Surat, Gujarat"),
+                        ],
+                      ),
                     ),
-                  ),
-                  Row(
-                    children: [
-                      InkWell(
-                        onTap: () {},
-                        borderRadius: BorderRadius.circular(5),
-                        child: Container(
-                          padding: const EdgeInsets.all(6),
-                          decoration: BoxDecoration(
-                              border:
-                                  Border.all(color: const Color(0xffC9C9C9)),
-                              borderRadius: BorderRadius.circular(5)),
-                          child: const Icon(
-                            Icons.edit,
-                            color: Color(0xff555555),
+                    Row(
+                      children: [
+                        InkWell(
+                          onTap: () {},
+                          borderRadius: BorderRadius.circular(5),
+                          child: Container(
+                            padding: const EdgeInsets.all(6),
+                            decoration: BoxDecoration(
+                                border:
+                                    Border.all(color: const Color(0xffC9C9C9)),
+                                borderRadius: BorderRadius.circular(5)),
+                            child: const Icon(
+                              Icons.edit,
+                              color: Color(0xff555555),
+                            ),
                           ),
                         ),
-                      ),
-                      const SizedBox(width: 10),
-                      InkWell(
-                        onTap: () {},
-                        borderRadius: BorderRadius.circular(5),
-                        child: Container(
-                          padding: const EdgeInsets.all(6),
-                          decoration: BoxDecoration(
-                              border:
-                                  Border.all(color: const Color(0xffC9C9C9)),
-                              borderRadius: BorderRadius.circular(5)),
-                          child: const Icon(
-                            Icons.delete,
-                            color: Color(0xff555555),
+                        const SizedBox(width: 10),
+                        InkWell(
+                          onTap: () {},
+                          borderRadius: BorderRadius.circular(5),
+                          child: Container(
+                            padding: const EdgeInsets.all(6),
+                            decoration: BoxDecoration(
+                                border:
+                                    Border.all(color: const Color(0xffC9C9C9)),
+                                borderRadius: BorderRadius.circular(5)),
+                            child: const Icon(
+                              Icons.delete,
+                              color: Color(0xff555555),
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  )
-                ],
+                      ],
+                    )
+                  ],
+                ),
               ),
             )
           ],

@@ -1,26 +1,28 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
-import 'package:elements/machinery/add_machinery.dart';
-import 'package:elements/machinery/view_machinery.dart';
+import 'package:elements/mange_spareparts/add_spareparts.dart';
+import 'package:elements/mange_spareparts/view_spareparts_details.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:elements/widget/button/small_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class MangeMachinery extends StatefulWidget {
-  const MangeMachinery({super.key});
+class MangeSpareparts extends StatefulWidget {
+  const MangeSpareparts({super.key});
 
   @override
-  State<MangeMachinery> createState() => _MangeMachineryState();
+  State<MangeSpareparts> createState() => _MangeSparepartsState();
 }
 
-class _MangeMachineryState extends State<MangeMachinery> {
+class _MangeSparepartsState extends State<MangeSpareparts> {
+  bool value = false;
+  int index = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: CustomAppBar(
-        title: "Manage Machinery Stock",
+        title: "Mange Spareparts",
         onPressed: () {
           Get.back();
         },
@@ -46,7 +48,7 @@ class _MangeMachineryState extends State<MangeMachinery> {
             const SizedBox(height: 16),
             InkWell(
               onTap: () {
-                Get.to(const ViewMachinery());
+                Get.to(const ViewSparepartsDetails());
               },
               child: Container(
                 padding:
@@ -55,46 +57,51 @@ class _MangeMachineryState extends State<MangeMachinery> {
                     borderRadius: BorderRadius.circular(4),
                     border:
                         Border.all(color: const Color(0xffE6E6E6), width: 1)),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: Row(
                   children: [
-                    _keyValue(
-                      "Machine Name",
-                      "Containership",
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _keyValue("Name", "Steel Bolt"),
+                          const SizedBox(height: 8),
+                          _keyValue("Qty", "10"),
+                        ],
+                      ),
                     ),
-                    const SizedBox(height: 8),
-                    _keyValue(
-                      "Machine Type",
-                      "Steel Cutting",
-                    ),
-                    const SizedBox(height: 8),
-                    _keyValue(
-                      "Qty",
-                      "1",
-                    ),
-                    const SizedBox(height: 16),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        SmallButton(
-                          title: " View ",
-                          textColor: AppColor.selectColor,
+                        InkWell(
                           onTap: () {},
+                          borderRadius: BorderRadius.circular(5),
+                          child: Container(
+                            padding: const EdgeInsets.all(6),
+                            decoration: BoxDecoration(
+                                border:
+                                    Border.all(color: const Color(0xffC9C9C9)),
+                                borderRadius: BorderRadius.circular(5)),
+                            child: const Icon(
+                              Icons.edit,
+                              color: Color(0xff555555),
+                            ),
+                          ),
                         ),
-                        const SizedBox(
-                          width: 10,
+                        const SizedBox(width: 10),
+                        InkWell(
+                          onTap: () {},
+                          borderRadius: BorderRadius.circular(5),
+                          child: Container(
+                            padding: const EdgeInsets.all(6),
+                            decoration: BoxDecoration(
+                                border:
+                                    Border.all(color: const Color(0xffC9C9C9)),
+                                borderRadius: BorderRadius.circular(5)),
+                            child: const Icon(
+                              Icons.delete,
+                              color: Color(0xff555555),
+                            ),
+                          ),
                         ),
-                        SmallButton(
-                            title: "  Edit  ",
-                            onTap: () {},
-                            textColor: const Color(0xff555555)),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        SmallButton(
-                            title: "Delete",
-                            onTap: () {},
-                            textColor: const Color(0xffB50A0A)),
                       ],
                     )
                   ],
@@ -111,7 +118,7 @@ class _MangeMachineryState extends State<MangeMachinery> {
           ),
           backgroundColor: AppColor.buttonColor,
           onPressed: () {
-            Get.to(const AddMachinery());
+            Get.to(const AddSpareparts());
           },
           child: const Icon(
             Icons.add,
@@ -132,7 +139,7 @@ class _MangeMachineryState extends State<MangeMachinery> {
             child: Text(
           "$value",
           style: AppTextStyle.textStyleRegular14
-              .copyWith(color: Color(0xff555555)),
+              .copyWith(color: const Color(0xff555555)),
         )),
       ],
     );
