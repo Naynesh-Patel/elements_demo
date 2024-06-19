@@ -30,15 +30,15 @@ class _AddImportSparepartsState extends State<AddImportSpareparts> {
               onTap: () {
                 Get.back();
               },
-              child: Icon(Icons.arrow_back_ios_new)),
-          actions: [
-            IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.add,
-                  size: 25,
-                ))
-          ],
+              child: const Icon(Icons.arrow_back_ios_new)),
+          // actions: [
+          //   IconButton(
+          //       onPressed: () {},
+          //       icon: const Icon(
+          //         Icons.add,
+          //         size: 25,
+          //       ))
+          // ],
         ),
         body: Container(
           margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),

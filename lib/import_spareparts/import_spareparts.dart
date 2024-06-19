@@ -4,6 +4,8 @@ import 'package:elements/import_spareparts/add_import_spareparts.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../expense/view_expense_details.dart';
+
 class ImportSpareparts extends StatefulWidget {
   const ImportSpareparts({super.key});
 
@@ -67,75 +69,82 @@ class _ImportSparepartsState extends State<ImportSpareparts> {
             const SizedBox(
               height: 10,
             ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(4),
-                  border: Border.all(color: const Color(0xffE6E6E6), width: 1)),
-              child: Column(
-                children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+            InkWell(
+              onTap: () {
+                Get.to(ViewExpenseDetails());
+              },
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(4),
+                    border:
+                        Border.all(color: const Color(0xffE6E6E6), width: 1)),
+                child: Column(
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              _keyValue("Company Name", "Containership "),
+                              _keyValue("Name", "Steel Bolts "),
+                              _keyValue("Qty", "10"),
+                              _keyValue("Type", "Medium"),
+                            ],
+                          ),
+                        ),
+                        Column(
                           children: [
-                            _keyValue("Company Name", "Containership "),
-                            _keyValue("Name", "Steel Bolts "),
-                            _keyValue("Qty", "10"),
-                            _keyValue("Type", "Medium"),
+                            _keyValue("DD", "16-7-2024"),
+                            const SizedBox(
+                              height: 25,
+                            ),
+                            Row(
+                              children: [
+                                InkWell(
+                                  onTap: () {},
+                                  borderRadius: BorderRadius.circular(5),
+                                  child: Container(
+                                    padding: const EdgeInsets.all(6),
+                                    decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: const Color(0xffC9C9C9)),
+                                        borderRadius: BorderRadius.circular(5)),
+                                    child: const Icon(
+                                      Icons.edit,
+                                      color: Color(0xff555555),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(width: 10),
+                                InkWell(
+                                  onTap: () {},
+                                  borderRadius: BorderRadius.circular(5),
+                                  child: Container(
+                                    padding: const EdgeInsets.all(6),
+                                    decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: const Color(0xffC9C9C9)),
+                                        borderRadius: BorderRadius.circular(5)),
+                                    child: const Icon(
+                                      Icons.delete,
+                                      color: Color(0xff555555),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )
                           ],
                         ),
-                      ),
-                      Column(
-                        children: [
-                          _keyValue("DD", "16-7-2024"),
-                          const SizedBox(
-                            height: 25,
-                          ),
-                          Row(
-                            children: [
-                              InkWell(
-                                onTap: () {},
-                                borderRadius: BorderRadius.circular(5),
-                                child: Container(
-                                  padding: const EdgeInsets.all(6),
-                                  decoration: BoxDecoration(
-                                      border: Border.all(
-                                          color: const Color(0xffC9C9C9)),
-                                      borderRadius: BorderRadius.circular(5)),
-                                  child: const Icon(
-                                    Icons.edit,
-                                    color: Color(0xff555555),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(width: 10),
-                              InkWell(
-                                onTap: () {},
-                                borderRadius: BorderRadius.circular(5),
-                                child: Container(
-                                  padding: const EdgeInsets.all(6),
-                                  decoration: BoxDecoration(
-                                      border: Border.all(
-                                          color: const Color(0xffC9C9C9)),
-                                      borderRadius: BorderRadius.circular(5)),
-                                  child: const Icon(
-                                    Icons.delete,
-                                    color: Color(0xff555555),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
+            )
           ],
         ),
       ),

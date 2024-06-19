@@ -6,8 +6,8 @@ import 'package:elements/import_spareparts/import_spareparts.dart';
 import 'package:elements/machinery/mange_machinery.dart';
 import 'package:elements/manage_customer/mange_customer.dart';
 import 'package:elements/mange_product/mange_product.dart';
-import 'package:elements/spareparts/mange_salsemen/mange_salesmen.dart';
-import 'package:elements/spareparts/mange_spareparts.dart';
+import 'package:elements/mange_spareparts/mange_spareparts.dart';
+import 'package:elements/salsemen/mange_salesmen.dart';
 import 'package:elements/user/mange_user.dart';
 import 'package:elements/widget/app%20bar/home_app_bar.dart';
 import 'package:elements/widget/dialogs/custom_dialogbox.dart';
@@ -23,7 +23,6 @@ class SettingTab extends StatefulWidget {
 }
 
 class _SettingTabState extends State<SettingTab> {
-
   SettingController controller = Get.find();
 
   @override
@@ -112,7 +111,7 @@ class _SettingTabState extends State<SettingTab> {
             },
           ),
           _customTile(
-            title: "Manage Product",
+            title: "Manage Machine Stock",
             imgPath: "assets/svg/mange_product.svg",
             index: 7,
             onTap: () {
@@ -138,10 +137,10 @@ class _SettingTabState extends State<SettingTab> {
               CustomDialogBox.showLogoutDialog(
                 context: context,
                 onCancelTap: () {
-                Get.back();
-              }, onLogoutTap: () {
-
-              },);
+                  Get.back();
+                },
+                onLogoutTap: () {},
+              );
             },
           ),
         ],
@@ -149,29 +148,36 @@ class _SettingTabState extends State<SettingTab> {
     );
   }
 
-  Widget _customTile({void Function()? onTap,required int index,required String title,required String imgPath,bool isSvg = true}){
+  Widget _customTile(
+      {void Function()? onTap,
+      required int index,
+      required String title,
+      required String imgPath,
+      bool isSvg = true}) {
     return ListTile(
-      leading: isSvg ? SvgPicture.asset(
-        imgPath,
-        color: AppColor.blackColor,
-        height: 20,
-      ):Image.asset(
-        imgPath,
-        color: AppColor.blackColor,
-        height: 20,
-      ),
+      leading: isSvg
+          ? SvgPicture.asset(
+              imgPath,
+              color: AppColor.blackColor,
+              height: 20,
+            )
+          : Image.asset(
+              imgPath,
+              color: AppColor.blackColor,
+              height: 20,
+            ),
       title: Text(
-          title,
-          style: AppTextStyle.textStyleRegular16.copyWith(color: AppColor.blackColor,),
+        title,
+        style: AppTextStyle.textStyleRegular16.copyWith(
+          color: AppColor.blackColor,
+        ),
       ),
       trailing: const Icon(
         Icons.arrow_forward_ios_rounded,
         size: 18,
-        color : AppColor.blackColor,
+        color: AppColor.blackColor,
       ),
       onTap: onTap,
     );
   }
-
-
 }

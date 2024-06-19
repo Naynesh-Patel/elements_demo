@@ -1,5 +1,6 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
+import 'package:elements/manage_customer/customer_view_detail.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:elements/widget/button/small_button.dart';
 import 'package:elements/widget/dialogs/custom_dialogbox.dart';
@@ -30,61 +31,71 @@ class _MangeCustomerState extends State<MangeCustomer> {
         margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
         child: Column(
           children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(4),
-                  border: Border.all(color: const Color(0xffE6E6E6), width: 1)),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _keyValue("Name", "Tata Steel Pvt"),
-                  const SizedBox(
-                    height: 6,
-                  ),
-                  _keyValue("Contact No", "99656 25693"),
-                  const SizedBox(
-                    height: 6,
-                  ),
-                  _keyValue("Reference By", "L & T Pvt"),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      SmallButton(
-                        title: "  View  ",
-                        textColor: AppColor.selectColor,
-                        onTap: () {
-
-                      },),
-                      const SizedBox(width: 12.0,),
-                      SmallButton(
-                        title: "  Edit  ",
-                        onTap: () {
-
-                        },),
-                      const SizedBox(width: 12.0,),
-                      SmallButton(
-                        title: "Cancel",
-                        textColor: AppColor.cancelColor,
-                        onTap: () {
-                          CustomDialogBox.showDeleteDialog(
-                            context: context,
-                            bodyText: "Do you really want to cancel these records? This process cannot be undone.",
-                            onCancelTap: () {
-                              Get.back();
-                            },
-                            onDeleteTap: () {
-
-                            },);
-                        },),
-                    ],
-                  ),
-                ],
+            InkWell(
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(4),
+                    border:
+                        Border.all(color: const Color(0xffE6E6E6), width: 1)),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _keyValue("Name", "Tata Steel Pvt"),
+                    const SizedBox(
+                      height: 6,
+                    ),
+                    _keyValue("Contact No", "99656 25693"),
+                    const SizedBox(
+                      height: 6,
+                    ),
+                    _keyValue("Reference By", "L & T Pvt"),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        SmallButton(
+                          title: "  View  ",
+                          textColor: AppColor.selectColor,
+                          onTap: () {},
+                        ),
+                        const SizedBox(
+                          width: 12.0,
+                        ),
+                        SmallButton(
+                          title: "  Edit  ",
+                          onTap: () {},
+                        ),
+                        const SizedBox(
+                          width: 12.0,
+                        ),
+                        SmallButton(
+                          title: "Cancel",
+                          textColor: AppColor.cancelColor,
+                          onTap: () {
+                            CustomDialogBox.showDeleteDialog(
+                              context: context,
+                              bodyText:
+                                  "Do you really want to cancel these records? This process cannot be undone.",
+                              onCancelTap: () {
+                                Get.back();
+                              },
+                              onDeleteTap: () {},
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            )
+              onTap: () {
+                Get.to(const CustomerViewDetail());
+              },
+            ),
           ],
         ),
       ),
@@ -114,10 +125,10 @@ class _MangeCustomerState extends State<MangeCustomer> {
         ),
         Flexible(
             child: Text(
-              "$value",
-              style: AppTextStyle.textStyleRegular14
-                  .copyWith(color: const Color(0xff555555)),
-            )),
+          "$value",
+          style: AppTextStyle.textStyleRegular14
+              .copyWith(color: const Color(0xff555555)),
+        )),
       ],
     );
   }

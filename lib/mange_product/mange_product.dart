@@ -19,6 +19,9 @@ class _MangeProductState extends State<MangeProduct> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: CustomAppBar(
+        onPressed: () {
+          Get.back();
+        },
         title: 'Product Stock',
       ),
       body: Padding(

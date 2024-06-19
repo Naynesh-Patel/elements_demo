@@ -4,16 +4,16 @@ import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../date_piker.dart';
+import '../../date_piker.dart';
 
-class SparepartsDetails extends StatefulWidget {
-  const SparepartsDetails({super.key});
+class ViewExpenseDetails extends StatefulWidget {
+  const ViewExpenseDetails({super.key});
 
   @override
-  State<SparepartsDetails> createState() => _SparepartsDetailsState();
+  State<ViewExpenseDetails> createState() => _ViewExpenseDetailsState();
 }
 
-class _SparepartsDetailsState extends State<SparepartsDetails> {
+class _ViewExpenseDetailsState extends State<ViewExpenseDetails> {
   bool value = false;
   int index = 0;
 
@@ -24,19 +24,19 @@ class _SparepartsDetailsState extends State<SparepartsDetails> {
           onPressed: () {
             Get.back();
           },
-          action: [
-            InkWell(
-                onTap: () {},
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 20),
-                  child: Image.asset(
-                    "assets/images/filtter.png",
-                    height: 20,
-                    width: 20,
-                  ),
-                )),
-          ],
-          title: 'View Spareparts Details',
+          // action: [
+          //   InkWell(
+          //       onTap: () {},
+          //       child: Padding(
+          //         padding: const EdgeInsets.only(right: 20),
+          //         child: Image.asset(
+          //           "assets/images/filtter.png",
+          //           height: 20,
+          //           width: 20,
+          //         ),
+          //       )),
+          // ],
+          title: 'View Expense',
         ),
         body: Container(
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -44,15 +44,12 @@ class _SparepartsDetailsState extends State<SparepartsDetails> {
             children: [
               _tableTopContent(),
               _tableView(
-                name: 'Steel Bolt',
-                date: "5/10/2023",
-                qty: '20',
-              ),
+                  name: 'Dipesh', date: "5/10/2023", type: 'Tea', price: '10'),
               _tableView(
-                name: 'Steel Paip',
-                date: "5/10/2023",
-                qty: '50',
-              ),
+                  name: 'Nehal',
+                  date: "5/10/2023",
+                  type: 'Cantin',
+                  price: '10'),
             ],
           ),
           // child: DataTable2(
@@ -115,7 +112,7 @@ class _SparepartsDetailsState extends State<SparepartsDetails> {
         ));
   }
 
-  Widget _tableView({required String qty, name, date}) {
+  Widget _tableView({required String type, price, name, date}) {
     return Column(
       children: [
         const SizedBox(
@@ -126,7 +123,10 @@ class _SparepartsDetailsState extends State<SparepartsDetails> {
             Expanded(child: Text(name, style: AppTextStyle.textStyleRegular13)),
             Expanded(
                 child: Text("$date", style: AppTextStyle.textStyleRegular13)),
-            Text(qty, style: AppTextStyle.textStyleRegular13)
+            Expanded(
+              child: Text(type, style: AppTextStyle.textStyleRegular13),
+            ),
+            Text(price, style: AppTextStyle.textStyleRegular13),
           ],
         ),
         const SizedBox(
@@ -174,7 +174,10 @@ class _SparepartsDetailsState extends State<SparepartsDetails> {
               ),
             ),
           ),
-          Text("Authoriy", style: AppTextStyle.textStyleRegular14),
+          Expanded(
+            child: Text("Type", style: AppTextStyle.textStyleRegular14),
+          ),
+          Text("Price", style: AppTextStyle.textStyleRegular14),
         ],
       ),
     );

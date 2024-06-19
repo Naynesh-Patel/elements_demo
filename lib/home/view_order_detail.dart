@@ -4,7 +4,7 @@ import 'package:elements/widget/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'widget/app bar/custom_appbar.dart';
+import '../widget/app bar/custom_appbar.dart';
 
 class ViewOrderDetails extends StatefulWidget {
   const ViewOrderDetails({super.key});
@@ -29,6 +29,7 @@ class _ViewOrderDetailsState extends State<ViewOrderDetails> {
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomTextField(
               hintText: "Customer/Company",
@@ -43,6 +44,45 @@ class _ViewOrderDetailsState extends State<ViewOrderDetails> {
               hintText: "Machine Type",
               labelText: "ContainerShip",
               enable: false,
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            ListView.builder(
+              shrinkWrap: true,
+              itemCount: 3,
+              itemBuilder: (context, index) {
+                return Container(
+                  margin: const EdgeInsets.symmetric(vertical: 10),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      const Expanded(
+                        child: Text("Machine 1"),
+                      ),
+                      InkWell(
+                        borderRadius: BorderRadius.circular(10),
+                        onTap: () {},
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: const Color(0xffFFFFFF),
+                              borderRadius: BorderRadius.circular(6),
+                              border:
+                                  Border.all(color: const Color(0xffD1D1D1))),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 10),
+                          child: const Icon(
+                            Icons.delete,
+                            size: 16,
+                            weight: 16,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
             ),
             const SizedBox(
               height: 20,
@@ -68,7 +108,6 @@ class _ViewOrderDetailsState extends State<ViewOrderDetails> {
               hintText: "Total Payment",
               labelText: "Rs 50,000",
             ),
-
             const SizedBox(
               height: 20,
             ),
@@ -77,6 +116,9 @@ class _ViewOrderDetailsState extends State<ViewOrderDetails> {
               labelText: "Rs 10,000",
               enable: false,
               focusNode: FocusNode(),
+            ),
+            const SizedBox(
+              height: 20,
             ),
             CustomTextField(
               hintText: "Assign Order",

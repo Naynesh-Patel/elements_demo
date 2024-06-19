@@ -1,6 +1,6 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
-import 'package:elements/spareparts/add_spareparts.dart';
+import 'package:elements/mange_spareparts/add_spareparts.dart';
 import 'package:elements/widget/app%20bar/home_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -41,9 +41,10 @@ class _SparepartsTabState extends State<SparepartsTab> {
               itemBuilder: (context, index) {
                 return ListTile(
                   contentPadding: const EdgeInsets.all(0),
-                  title:  Text(
-                    'Spareparts ${index+1}',
-                    style: AppTextStyle.textStyleBold14.copyWith(color: const Color(0xff555555)),
+                  title: Text(
+                    'Spareparts ${index + 1}',
+                    style: AppTextStyle.textStyleBold14
+                        .copyWith(color: const Color(0xff555555)),
                   ),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -54,21 +55,21 @@ class _SparepartsTabState extends State<SparepartsTab> {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(4),
                             border: Border.all(color: const Color(0xffD1D1D1))),
-                        child:  TextField(
+                        child: TextField(
                           textAlignVertical: TextAlignVertical.center,
                           textAlign: TextAlign.center,
                           decoration: InputDecoration(
                               border: InputBorder.none,
                               contentPadding: const EdgeInsets.symmetric(
-                                horizontal: 8.0,
-                                vertical: 11
-                              ),
+                                  horizontal: 8.0, vertical: 11),
                               hintText: '20 piece',
-                              helperStyle: AppTextStyle.textStyleRegular16.copyWith(color: AppColor.dropDownHintColor),
+                              helperStyle: AppTextStyle.textStyleRegular16
+                                  .copyWith(color: AppColor.dropDownHintColor),
                               hintStyle: const TextStyle(
-                                  color: Color(0xff949494),
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w400,)),
+                                color: Color(0xff949494),
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                              )),
                         ),
                       ),
                       const SizedBox(
