@@ -17,6 +17,7 @@ class _NotificationState extends State<Notification> {
         automaticallyImplyLeading: false,
         title: const Text(
           "Notification",
+
           style: TextStyle(
             color: Colors.black,
           ),
