@@ -1,6 +1,5 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/controller/home_controller.dart';
-import 'package:elements/view_order_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -24,17 +23,17 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
     return Scaffold(
         backgroundColor: AppColor.whiteColor,
         appBar: CustomAppBar(
-          action: [
-            Padding(
-                padding: const EdgeInsets.only(right: 10),
-                child: IconButton(
-                    onPressed: () {
-                      Get.to(const ViewOrderDetails());
-                    },
-                    icon: const Icon(
-                      Icons.add,
-                    )))
-          ],
+          // action: [
+          //   Padding(
+          //       padding: const EdgeInsets.only(right: 10),
+          //       child: IconButton(
+          //           onPressed: () {
+          //             Get.to(const ViewOrderDetails());
+          //           },
+          //           icon: const Icon(
+          //             Icons.add,
+          //           )))
+          // ],
           title: 'Create  New Order',
           onPressed: () {
             Get.back();

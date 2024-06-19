@@ -3,6 +3,7 @@ import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/controller/home_controller.dart';
 import 'package:elements/create_new_order.dart';
 import 'package:elements/invoice.dart';
+import 'package:elements/view_order_detail.dart';
 import 'package:elements/widget/app%20bar/home_app_bar.dart';
 import 'package:elements/widget/button/small_button.dart';
 import 'package:elements/widget/dialogs/custom_dialogbox.dart';
@@ -41,13 +42,13 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
             height: 20,
             width: 20,
           ),
-         const SizedBox(
+          const SizedBox(
             width: 16,
           ),
         ],
       ),
       body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -55,7 +56,16 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
             const SizedBox(
               height: 16,
             ),
-            Obx(() => controller.selectTab.value == 1 ? _onGoingView() : controller.selectTab.value == 2 ? _upComingView() : _completeView()),
+            Obx(() => controller.selectTab.value == 1
+                ? InkWell(
+                    onTap: () {
+                      Get.to(const ViewOrderDetails());
+                    },
+                    child: _onGoingView(),
+                  )
+                : controller.selectTab.value == 2
+                    ? _upComingView()
+                    : _completeView()),
           ],
         ),
       ),
@@ -76,13 +86,11 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
     );
   }
 
-
-  Widget _widgetTabBarView(){
+  Widget _widgetTabBarView() {
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(color: AppColor.borderColor),
-        borderRadius: BorderRadius.circular(5.0)
-      ),
+          border: Border.all(color: AppColor.borderColor),
+          borderRadius: BorderRadius.circular(5.0)),
       child: Row(
         children: [
           Expanded(
@@ -108,34 +116,53 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
     );
   }
 
-  Widget _tabBox({required String title,required int index}){
+  Widget _tabBox({required String title, required int index}) {
     return Obx(() => InkWell(
-      onTap:() {
-        controller.selectTab.value = index;
-      },
-      borderRadius: BorderRadius.circular(5),
-      child: Container(
-        width: Get.width,
-        decoration: BoxDecoration(
-          borderRadius: index == 1 ? const BorderRadius.only(topLeft: Radius.circular(5.0),bottomLeft: Radius.circular(5.0)): index == 3 ? const BorderRadius.only(topRight: Radius.circular(5.0),bottomRight: Radius.circular(5.0)) : null,
-          color: controller.selectTab.value == index ? AppColor.selectColor : AppColor.whiteColor,
-            border: Border(
-              right: index == 2 ? const BorderSide(color: AppColor.borderColor) : BorderSide.none,
-              left: index == 2 ? const BorderSide(color: AppColor.borderColor) : BorderSide.none,
-            )
-        ),
-        alignment: Alignment.center,
-        padding: const EdgeInsets.symmetric(vertical: 16),
-        child: Text(title,style: AppTextStyle.textStyleRegular14.copyWith(color: controller.selectTab.value == index ? AppColor.whiteColor: AppColor.blackColor),),
-      ),
-    ));
+          onTap: () {
+            controller.selectTab.value = index;
+          },
+          borderRadius: BorderRadius.circular(5),
+          child: Container(
+            width: Get.width,
+            decoration: BoxDecoration(
+                borderRadius: index == 1
+                    ? const BorderRadius.only(
+                        topLeft: Radius.circular(5.0),
+                        bottomLeft: Radius.circular(5.0))
+                    : index == 3
+                        ? const BorderRadius.only(
+                            topRight: Radius.circular(5.0),
+                            bottomRight: Radius.circular(5.0))
+                        : null,
+                color: controller.selectTab.value == index
+                    ? AppColor.selectColor
+                    : AppColor.whiteColor,
+                border: Border(
+                  right: index == 2
+                      ? const BorderSide(color: AppColor.borderColor)
+                      : BorderSide.none,
+                  left: index == 2
+                      ? const BorderSide(color: AppColor.borderColor)
+                      : BorderSide.none,
+                )),
+            alignment: Alignment.center,
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            child: Text(
+              title,
+              style: AppTextStyle.textStyleRegular14.copyWith(
+                  color: controller.selectTab.value == index
+                      ? AppColor.whiteColor
+                      : AppColor.blackColor),
+            ),
+          ),
+        ));
   }
 
-  Widget _onGoingView(){
+  Widget _onGoingView() {
     return SingleChildScrollView(
       child: Container(
         width: double.maxFinite,
-        padding: const EdgeInsets.symmetric(horizontal: 16.0,vertical: 16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(4),
             border: Border.all(color: AppColor.borderColor)),
@@ -195,30 +222,26 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
                   width: 10,
                 ),
                 SmallButton(
-                  title: "  Edit  ",
-                  onTap: () {
-
-                  },
-                  textColor: const Color(0xff555555)
-                ),
+                    title: "  Edit  ",
+                    onTap: () {},
+                    textColor: const Color(0xff555555)),
                 const SizedBox(
                   width: 10,
                 ),
                 SmallButton(
                     title: "Cancel",
                     onTap: () {
-                       CustomDialogBox.showDeleteDialog(
-                           context: context,
-                           bodyText: "Do you really want to cancel these records? This process cannot be undone.",
-                           onCancelTap: () {
-                             Get.back();
-                           },
-                           onDeleteTap: () {
-
-                           },);
+                      CustomDialogBox.showDeleteDialog(
+                        context: context,
+                        bodyText:
+                            "Do you really want to cancel these records? This process cannot be undone.",
+                        onCancelTap: () {
+                          Get.back();
+                        },
+                        onDeleteTap: () {},
+                      );
                     },
-                    textColor: const Color(0xffB50A0A)
-                ),
+                    textColor: const Color(0xffB50A0A)),
               ],
             )
           ],
@@ -227,7 +250,7 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
     );
   }
 
-  Widget _upComingView(){
+  Widget _upComingView() {
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -237,7 +260,7 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
     );
   }
 
-  Widget _completeView(){
+  Widget _completeView() {
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -247,21 +270,29 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
     );
   }
 
-  Widget _keyValue(key,value){
+  Widget _keyValue(key, value) {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text("$key : ",style: AppTextStyle.textStyleBold14,),
-        Flexible(child: Text("$value",style: AppTextStyle.textStyleRegular14.copyWith(color: Color(0xff555555)),)),
+        Text(
+          "$key : ",
+          style: AppTextStyle.textStyleBold14,
+        ),
+        Flexible(
+            child: Text(
+          "$value",
+          style: AppTextStyle.textStyleRegular14
+              .copyWith(color: Color(0xff555555)),
+        )),
       ],
     );
   }
 
-  Widget _emptyView(){
+  Widget _emptyView() {
     return Container(
       height: Get.height * 0.55,
       padding: const EdgeInsets.symmetric(horizontal: 110.0),
-      child:   Image.asset(
+      child: Image.asset(
         alignment: Alignment.center,
         "assets/images/no_order.png",
       ),
