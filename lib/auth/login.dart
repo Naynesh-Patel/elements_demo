@@ -61,9 +61,7 @@ class _LoginState extends State<Login> {
                       debugPrint("Select => $value");
                     },
                   ),
-                  const SizedBox(
-                    height: 15,
-                  ),
+                  verticalSpacing(),
                   CustomTextField(
                     focusNode: controller.mobileFocusNode,
                     textInputType: TextInputType.number,
@@ -73,9 +71,7 @@ class _LoginState extends State<Login> {
                     hintText: "Mobile No*",
                     labelText: "Mobile No*",
                   ),
-                  const SizedBox(
-                    height: 15,
-                  ),
+                  verticalSpacing(),
                   CustomTextField(
                       focusNode: controller.passwordFocusNode,
                       obscureText: controller.loginPasswordVisible,
@@ -114,4 +110,10 @@ class _LoginState extends State<Login> {
           ],
         ));
   }
+
+
+  Widget verticalSpacing(){
+    return const SizedBox(height: 26.0,);
+  }
+
 }

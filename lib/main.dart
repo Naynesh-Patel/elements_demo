@@ -17,13 +17,8 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       initialBinding: BindingController(),
-      title: 'Flutter Demo',
       theme: ThemeData(
-        fontFamily: 'Kanit-Regular.ttf',
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.deepPurple,
-        ),
-        useMaterial3: true,
+        fontFamily: 'Kanit',
       ),
       home: const Splash(),
     );
