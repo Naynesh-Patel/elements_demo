@@ -22,12 +22,13 @@ class _BillHistoryState extends State<BillHistory> {
       backgroundColor: Colors.white,
       appBar: CustomAppBar(
         title: 'Bill History',
-        onPressed: () {},
+        onPressed: () {
+          Get.back();
+        },
       ),
       body: Container(
         margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
         child: Column(
-          mainAxisSize: MainAxisSize.min,
           children: [
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10),

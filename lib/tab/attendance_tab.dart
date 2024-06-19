@@ -21,20 +21,20 @@ class _AttendanceTabState extends State<AttendanceTab> {
 
   List<dynamic> filterList = [
     {
-      "name":"Aarsh",
-      "select":false,
+      "name": "Arash",
+      "select": false,
     },
     {
-    "name":"Dipesh",
-    "select":false,
-  },
-    {
-      "name":"Suresh",
-      "select":false,
+      "name": "Dipesh",
+      "select": false,
     },
     {
-      "name":"Nihal",
-      "select":false,
+      "name": "Suresh",
+      "select": false,
+    },
+    {
+      "name": "Nihal",
+      "select": false,
     },
   ];
 
@@ -170,7 +170,7 @@ class _AttendanceTabState extends State<AttendanceTab> {
       // user must tap button!
       builder: (BuildContext context) {
         return StatefulBuilder(
-          builder:(context, setState) {
+          builder: (context, setState) {
             return AlertDialog(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(2),
@@ -192,9 +192,11 @@ class _AttendanceTabState extends State<AttendanceTab> {
                                   style: AppTextStyle.textStyleBold16),
                             ),
                           ),
-                          IconButton(onPressed: () {
-                            Get.back();
-                          }, icon: const Icon(Icons.clear)),
+                          IconButton(
+                              onPressed: () {
+                                Get.back();
+                              },
+                              icon: const Icon(Icons.clear)),
                         ],
                       ),
                     ),
@@ -202,7 +204,8 @@ class _AttendanceTabState extends State<AttendanceTab> {
                       color: Colors.grey,
                     ),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 0.0),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8.0, vertical: 0.0),
                       child: Text(
                         "User Name List",
                         style: AppTextStyle.textStyleBold13,
@@ -214,7 +217,8 @@ class _AttendanceTabState extends State<AttendanceTab> {
                     ListView.separated(
                       shrinkWrap: true,
                       itemCount: filterList.length,
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 0.0),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8.0, vertical: 0.0),
                       itemBuilder: (context, index) {
                         return Row(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -222,57 +226,61 @@ class _AttendanceTabState extends State<AttendanceTab> {
                             InkWell(
                               borderRadius: BorderRadius.circular(6.0),
                               onTap: () {
-                                if(filterList[index]['select']==null){
+                                if (filterList[index]['select'] == null) {
                                   filterList[index]['select'] = true;
-                                }else if(filterList[index]['select'] == true){
+                                } else if (filterList[index]['select'] ==
+                                    true) {
                                   filterList[index]['select'] = false;
-                                }else{
+                                } else {
                                   filterList[index]['select'] = true;
                                 }
-                                setState(() {
-
-                                });
-
+                                setState(() {});
                               },
                               child: Container(
-                                padding: EdgeInsets.symmetric(horizontal: 4.0,vertical: 4.0),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 4.0, vertical: 4.0),
                                 decoration: BoxDecoration(
                                     border: Border.all(
-                                        color: AppColor.dropDownHintColor
-                                    ),
-                                    borderRadius: BorderRadius.circular(6.0)
+                                        color: AppColor.dropDownHintColor),
+                                    borderRadius: BorderRadius.circular(6.0)),
+                                child: Icon(
+                                  Icons.check_rounded,
+                                  size: 14,
+                                  color: filterList[index]['select'] ?? false
+                                      ? AppColor.blackColor
+                                      : Colors.transparent,
                                 ),
-                                child: Icon(Icons.check_rounded,size: 14,color: filterList[index]['select']??false ? AppColor.blackColor : Colors.transparent,),
                               ),
                             ),
-                            SizedBox(width: 4.0,),
+                            const SizedBox(
+                              width: 4.0,
+                            ),
                             Text(
                               "${filterList[index]['name']}",
                               style: AppTextStyle.textStyleRegular14,
                             ),
                           ],
                         );
-                      }, separatorBuilder: (BuildContext context, int index) {
-                      return SizedBox(
-                        height: 8.0,
-                      );
-                    },
+                      },
+                      separatorBuilder: (BuildContext context, int index) {
+                        return const SizedBox(
+                          height: 8.0,
+                        );
+                      },
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         SmallButton(
                           title: "Clear",
-                          onTap: () {
-
-                          },
+                          onTap: () {},
                         ),
                         const SizedBox(
                           width: 16.0,
                         ),
                         SmallButton(
                           title: "Apply",
-                          onTap: () {  },
+                          onTap: () {},
                           textColor: AppColor.whiteColor,
                           bodyColor: AppColor.selectColor,
                         ),
@@ -380,48 +388,47 @@ class _AttendanceTabState extends State<AttendanceTab> {
     );
   }
 
-  Widget _tableView({required String name, date, checkIn, checkOut, bool isWeeklyOff = false}) {
-    return Container(
-      child: Column(
-        children: [
-          const SizedBox(
-            height: 12.0,
-          ),
-          Row(
-            children: [
+  Widget _tableView(
+      {required String name,
+      date,
+      checkIn,
+      checkOut,
+      bool isWeeklyOff = false}) {
+    return Column(
+      children: [
+        const SizedBox(
+          height: 12.0,
+        ),
+        Row(
+          children: [
+            Expanded(child: Text(name, style: AppTextStyle.textStyleRegular13)),
+            Expanded(
+                child: Text("$date", style: AppTextStyle.textStyleRegular13)),
+            if (isWeeklyOff) ...[
               Expanded(
-                  child: Text(name, style: AppTextStyle.textStyleRegular13)),
-              Expanded(
-                  child: Text("$date", style: AppTextStyle.textStyleRegular13)),
-              if (isWeeklyOff) ...[
-                Expanded(
-                  flex: 2,
-                  child: Text(
-                    "Weekly Off",
-                    textAlign: TextAlign.center,
-                    style: AppTextStyle.textStyleRegular13
-                        .copyWith(color: AppColor.selectColor),
-                  ),
+                flex: 2,
+                child: Text(
+                  "Weekly Off",
+                  textAlign: TextAlign.center,
+                  style: AppTextStyle.textStyleRegular13
+                      .copyWith(color: AppColor.selectColor),
                 ),
-              ] else ...[
-                Expanded(
-                    child:
-                        Text(checkIn, style: AppTextStyle.textStyleRegular13)),
-                Expanded(
-                    child: Text(checkOut,
-                        textAlign: TextAlign.center,
-                        style: AppTextStyle.textStyleRegular13)),
-              ]
-            ],
-          ),
-          const SizedBox(
-            height: 8.0,
-          ),
-          Divider(),
-        ],
-      ),
+              ),
+            ] else ...[
+              Expanded(
+                  child: Text(checkIn, style: AppTextStyle.textStyleRegular13)),
+              Expanded(
+                  child: Text(checkOut,
+                      textAlign: TextAlign.center,
+                      style: AppTextStyle.textStyleRegular13)),
+            ]
+          ],
+        ),
+        const SizedBox(
+          height: 8.0,
+        ),
+        const Divider(),
+      ],
     );
   }
-
-
 }
