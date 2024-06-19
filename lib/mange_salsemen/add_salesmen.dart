@@ -1,4 +1,5 @@
 import 'package:elements/constant/app_colors.dart';
+import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:elements/widget/button/custom_button.dart';
 import 'package:elements/widget/custom_text_field.dart';
@@ -41,12 +42,9 @@ class _AddSalesmenState extends State<AddSalesmen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+               Text(
                 'Add Profile :',
-                style: TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 16,
-                    color: Color(0xff555555)),
+                style: AppTextStyle.textStyleRegular16,
               ),
               const SizedBox(
                 height: 15,
@@ -74,9 +72,7 @@ class _AddSalesmenState extends State<AddSalesmen> {
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 15,
-              ),
+              verticalSpacing(),
               CommonDropdown(
                 dropdownList: items,
                 value: selectLevel,
@@ -87,31 +83,22 @@ class _AddSalesmenState extends State<AddSalesmen> {
               //   hintText: "Select User Role",
               //   labelText: "User Role",
               // ),
-              const SizedBox(
-                height: 20,
-              ),
-
+              verticalSpacing(),
               const CustomTextField(
                 hintText: "worker",
                 labelText: "Work Type*",
               ),
-              const SizedBox(
-                height: 20,
-              ),
+              verticalSpacing(),
               const CustomTextField(
                 hintText: "Dipesh Patel",
                 labelText: "Name*",
               ),
-              const SizedBox(
-                height: 20,
-              ),
+              verticalSpacing(),
               const CustomTextField(
                 hintText: "Name",
                 labelText: "Contact No.",
               ),
-              const SizedBox(
-                height: 20,
-              ),
+              verticalSpacing(),
             ],
           ),
         ),
@@ -123,6 +110,10 @@ class _AddSalesmenState extends State<AddSalesmen> {
             onTap: () {},
           ),
         ));
+  }
+
+  Widget verticalSpacing(){
+    return const SizedBox(height: 26.0,);
   }
 
   void setLevelValue(String value) {
