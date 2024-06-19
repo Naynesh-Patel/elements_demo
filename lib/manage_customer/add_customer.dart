@@ -8,7 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AddCustomer extends StatefulWidget {
-  const AddCustomer({super.key});
+  final bool isUpdate;
+  final bool isView;
+  const AddCustomer({super.key,this.isUpdate=false,this.isView=false});
 
   @override
   State<AddCustomer> createState() => _AddCustomerState();
@@ -20,7 +22,7 @@ class _AddCustomerState extends State<AddCustomer> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar:CustomAppBar(
-          title: "Add Customer/Company",
+          title: widget.isUpdate ? "Update Customer/Company Details" : widget.isView ? "View Customer/Company Details" : "Add Customer/Company",
           onPressed:() {
            Get.back();
           },
@@ -36,7 +38,8 @@ class _AddCustomerState extends State<AddCustomer> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                      Text(
-                      'Add Profile :',
+                       widget.isUpdate || widget.isView ? 'Profile :' :
+                       'Add Profile :',
                       style: AppTextStyle.textStyleRegular16,
                     ),
                     const SizedBox(
@@ -76,19 +79,24 @@ class _AddCustomerState extends State<AddCustomer> {
                       labelText: "Owner Name*",
                     ),
                     verticalSpacing(),
-                    const CustomTextField(
+                     CustomTextField(
                       hintText: "99656 25693",
                       labelText: "Contact No.*",
+                      suffixFixIcon: widget.isView ? const Icon(Icons.phone,size: 20,) : const SizedBox.shrink(),
                     ),
                     verticalSpacing(),
-                    const CustomTextField(
+                     CustomTextField(
                       hintText: "Enter Address",
                       labelText: "Address",
+                      suffixFixIcon: widget.isView ? const Icon(Icons.location_on_outlined,size: 20,) : const SizedBox.shrink(),
                     ),
                     verticalSpacing(),
-                    const CustomTextField(
+                     CustomTextField(
                       hintText: "www.machinepro.com",
                       labelText: "Website",
+                         suffixFixIcon: widget.isView ? Container(
+                             padding: const EdgeInsets.all(14.0),
+                             child: Image.asset("assets/images/world_wide_web.png",height: 16,width:5,fit: BoxFit.cover,color: AppColor.blackColor,)) : const SizedBox.shrink(),
                     ),
                     verticalSpacing(),
                     const CustomTextField(
@@ -106,11 +114,11 @@ class _AddCustomerState extends State<AddCustomer> {
             ],
           ),
         ),
-        bottomNavigationBar: Container(
+        bottomNavigationBar: widget.isView ? const SizedBox.shrink() : Container(
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: CustomButton(
             color: AppColor.buttonColor,
-            buttonText: 'Add',
+            buttonText: widget.isUpdate ? 'Update' : 'Add',
             onTap: () {},
           ),
         ));
