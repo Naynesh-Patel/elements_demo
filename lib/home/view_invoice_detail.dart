@@ -91,7 +91,7 @@ class _ViewInvoiceDetailsState extends State<ViewInvoiceDetails> {
               const CustomTextField(
                   hintText: "Delivery Date",
                   labelText: "18-10-2024",
-                  suffixFixWidget: Icon(
+                  suffixFixIcon: Icon(
                     Icons.date_range,
                     size: 22,
                   )),

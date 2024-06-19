@@ -60,14 +60,18 @@ class _MangeCustomerState extends State<MangeCustomer> {
                         SmallButton(
                           title: "  View  ",
                           textColor: AppColor.selectColor,
-                          onTap: () {},
+                          onTap: () {
+                            Get.to(const AddCustomer(isView: true));
+                          },
                         ),
                         const SizedBox(
                           width: 12.0,
                         ),
                         SmallButton(
                           title: "  Edit  ",
-                          onTap: () {},
+                          onTap: () {
+                            Get.to(const AddCustomer(isUpdate: true,));
+                          },
                         ),
                         const SizedBox(
                           width: 12.0,

@@ -95,7 +95,7 @@ class _CustomerViewDetailState extends State<CustomerViewDetail> {
                   textInputType: TextInputType.numberWithOptions(),
                   hintText: "Contact No.",
                   labelText: "99656 25693",
-                  suffixFixWidget: Icon(
+                  suffixFixIcon: Icon(
                     Icons.call,
                     size: 24,
                   ),
@@ -107,7 +107,7 @@ class _CustomerViewDetailState extends State<CustomerViewDetail> {
                   textInputType: TextInputType.numberWithOptions(),
                   hintText: "Address",
                   labelText: "Surat,Gujrat",
-                  suffixFixWidget: Icon(
+                  suffixFixIcon: Icon(
                     Icons.location_on_outlined,
                     size: 24,
                   ),
@@ -119,7 +119,7 @@ class _CustomerViewDetailState extends State<CustomerViewDetail> {
                   textInputType: TextInputType.numberWithOptions(),
                   hintText: "Website",
                   labelText: "www.tatasteel.com",
-                  suffixFixWidget: Icon(
+                  suffixFixIcon: Icon(
                     Icons.location_on_outlined,
                     size: 24,
                   ),
