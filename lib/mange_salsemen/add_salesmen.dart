@@ -44,7 +44,7 @@ class _AddSalesmenState extends State<AddSalesmen> {
             children: [
               Text(
                 'Add Profile :',
-                style: AppTextStyle.textStyleRegular16,
+                style: AppTextStyle.textStyleRegular16.copyWith(color: AppColor.blackLightColor),
               ),
               const SizedBox(
                 height: 15,

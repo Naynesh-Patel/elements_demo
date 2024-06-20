@@ -70,7 +70,7 @@ class AppTextStyle {
       fontSize: Get.width < 900 ? 16 : 20,
       color: AppColor.hintColor,
       letterSpacing: 1.0,
-      fontWeight: FontWeight.w300);
+      fontWeight: FontWeight.w400);
 
   static TextStyle textStyleRegular16 = TextStyle(
       fontSize: Get.width < 900 ? 16 : 20,
@@ -97,7 +97,7 @@ class AppTextStyle {
       fontWeight: FontWeight.w600);
 
   static TextStyle textStyleRegular18 = TextStyle(
-      fontSize: Get.width < 900 ? 16 : 20,
+      fontSize: Get.width < 900 ? 18 : 20,
       color: AppColor.blackColor,
       letterSpacing: 1.0,
       fontWeight: FontWeight.w500);

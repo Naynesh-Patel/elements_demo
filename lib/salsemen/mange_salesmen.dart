@@ -64,11 +64,11 @@ class _MangeSalesmenState extends State<MangeSalesmen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           _keyValue("Role", "Worker"),
-                          const SizedBox(height: 8),
+                          verticalSpacing(),
                           _keyValue("Name", "Dipesh"),
-                          const SizedBox(height: 8),
+                          verticalSpacing(),
                           _keyValue("Contact No", "99123 45673"),
-                          const SizedBox(height: 8),
+                          verticalSpacing(),
                           _keyValue("Address", "Surat, Gujarat"),
                         ],
                       ),
@@ -231,15 +231,21 @@ class _MangeSalesmenState extends State<MangeSalesmen> {
       children: [
         Text(
           "$key : ",
-          style: AppTextStyle.textStyleBold14,
+          style: AppTextStyle.textStyleRegular16,
         ),
         Flexible(
             child: Text(
           "$value",
           style: AppTextStyle.textStyleRegular14
-              .copyWith(color: const Color(0xff555555)),
+              .copyWith(color: AppColor.blackLightColor),
         )),
       ],
+    );
+  }
+
+  Widget verticalSpacing(){
+    return const SizedBox(
+      height: 6.0,
     );
   }
 }

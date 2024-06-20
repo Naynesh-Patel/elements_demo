@@ -42,8 +42,8 @@ dependencies:
   date_picker_plus: ^4.0.0
   calendar_date_picker2: ^1.0.6
   flutter_launcher_icons: ^0.13.1
-  http: ^1.2.1
-  share: ^2.0.4
+  image_picker: ^1.1.2
+#  share_plus: ^9.0.0
 
 dev_dependencies:
   flutter_test:
@@ -71,6 +71,7 @@ flutter:
   assets:
     - assets/images/
     - assets/svg/
+    - assets/fonts/kanit/
     #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -84,35 +85,24 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
 
-
   fonts:
-      - family: kanit
-        fonts:
-          - asset: assets/fonts/kanit/Kanit-Light.ttf
-            weight: 400
-          - asset: assets/fonts/kanit/Kanit-Regular.ttf
-            weight: 500
-          - asset: assets/fonts/kanit/Kanit-SemiBold.ttf
-            weight: 600
-          - asset: assets/fonts/kanit/Kanit-ExtraBold.ttf
-            weight: 700
+    - family: Kanit
+      fonts:
+        - asset: assets/fonts/kanit/Kanit-Light.ttf
+          weight: 400
+        - asset: assets/fonts/kanit/Kanit-Regular.ttf
+          weight: 500
+        - asset: assets/fonts/kanit/Kanit-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/kanit/Kanit-ExtraBold.ttf
+          weight: 700
+
 flutter_launcher_icons:
     android: "launcher_icon"
     ios: true
     image_path: "assets/images/app_icon.png"
+
   # example:
 
-
-#    fonts:
-#      - family: kanit
-#        fonts:
-#          - asset: assets/fonts/kanit/Kanit-Light.ttf
-#            weight: 400
-#          - asset: assets/fonts/kanit/Kanit-Regular.ttf
-#            weight: 500
-#          - asset: assets/fonts/kanit/Kanit-SemiBold.ttf
-#            weight: 600
-#          - asset: assets/fonts/kanit/Kanit-ExtraBold.ttf
-#            weight: 700
   # For details regarding fonts from package dependencies
   # see https://flutter.dev/custom-fonts/#from-packages

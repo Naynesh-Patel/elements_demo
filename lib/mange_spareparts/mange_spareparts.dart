@@ -64,7 +64,7 @@ class _MangeSparepartsState extends State<MangeSpareparts> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           _keyValue("Name", "Steel Bolt"),
-                          const SizedBox(height: 8),
+                          verticalSpacing(),
                           _keyValue("Qty", "10"),
                         ],
                       ),
@@ -133,7 +133,7 @@ class _MangeSparepartsState extends State<MangeSpareparts> {
       children: [
         Text(
           "$key : ",
-          style: AppTextStyle.textStyleBold14,
+          style: AppTextStyle.textStyleRegular16,
         ),
         Flexible(
             child: Text(
@@ -142,6 +142,12 @@ class _MangeSparepartsState extends State<MangeSpareparts> {
               .copyWith(color: const Color(0xff555555)),
         )),
       ],
+    );
+  }
+
+  Widget verticalSpacing(){
+    return const SizedBox(
+      height: 6.0,
     );
   }
 }

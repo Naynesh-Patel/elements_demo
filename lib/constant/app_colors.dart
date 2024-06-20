@@ -16,5 +16,6 @@ class AppColor {
   static const Color selectDateColor =  Color(0xffB50A0A);
   static const Color dropDownHintColor =  Color(0xff949494);
   static const Color cancelColor =  Color(0xffB50A0A);
+  static const Color blackLightColor = Color(0xff555555);
 
 }

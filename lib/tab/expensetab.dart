@@ -56,13 +56,9 @@ class _ExpensetTabState extends State<ExpensetTab> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             _keyValue("Name", "Ramesh"),
-                            const SizedBox(
-                              height: 8.0,
-                            ),
+                            verticalSpacing(),
                             _keyValue("Expense Type", "Tea"),
-                            const SizedBox(
-                              height: 8.0,
-                            ),
+                             verticalSpacing(),
                             _keyValue("Price", "₹ 20 "),
                           ],
                         ),
@@ -144,7 +140,7 @@ class _ExpensetTabState extends State<ExpensetTab> {
       children: [
         Text(
           "$key : ",
-          style: AppTextStyle.textStyleBold14,
+          style: AppTextStyle.textStyleRegular16,
         ),
         Flexible(
             child: Text(
@@ -155,4 +151,11 @@ class _ExpensetTabState extends State<ExpensetTab> {
       ],
     );
   }
+
+  Widget verticalSpacing(){
+    return const SizedBox(
+      height: 6.0,
+    );
+  }
+
 }

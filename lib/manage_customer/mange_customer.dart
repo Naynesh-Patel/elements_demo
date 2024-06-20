@@ -43,17 +43,11 @@ class _MangeCustomerState extends State<MangeCustomer> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     _keyValue("Name", "Tata Steel Pvt"),
-                    const SizedBox(
-                      height: 6,
-                    ),
+                    verticalSpacing(),
                     _keyValue("Contact No", "99656 25693"),
-                    const SizedBox(
-                      height: 6,
-                    ),
+                    verticalSpacing(),
                     _keyValue("Reference By", "L & T Pvt"),
-                    const SizedBox(
-                      height: 10,
-                    ),
+                    verticalSpacing(),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
@@ -125,15 +119,21 @@ class _MangeCustomerState extends State<MangeCustomer> {
       children: [
         Text(
           "$key : ",
-          style: AppTextStyle.textStyleBold14,
+          style: AppTextStyle.textStyleRegular14,
         ),
         Flexible(
             child: Text(
           "$value",
           style: AppTextStyle.textStyleRegular14
-              .copyWith(color: const Color(0xff555555)),
+              .copyWith(color: AppColor.blackLightColor),
         )),
       ],
+    );
+  }
+
+  Widget verticalSpacing(){
+    return const SizedBox(
+      height: 6.0,
     );
   }
 }

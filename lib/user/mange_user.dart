@@ -126,7 +126,7 @@ class _MangeUserState extends State<MangeUser> {
   Widget _tableView(
       {required String Authoriy, name, date,}) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Column(
         children: [
           const SizedBox(
@@ -134,10 +134,10 @@ class _MangeUserState extends State<MangeUser> {
           ),
           Row(
             children: [
-              Expanded(child: Text(name,textAlign: TextAlign.start,style: AppTextStyle.textStyleRegular13)),
+              Expanded(child: Text(name,textAlign: TextAlign.start,style: AppTextStyle.textStyleLight12.copyWith(color:AppColor.blackLightColor))),
               Expanded(
-                  child: Text("$date",textAlign: TextAlign.center, style: AppTextStyle.textStyleRegular13)),
-              Expanded(child: Text(Authoriy,textAlign: TextAlign.end,style: AppTextStyle.textStyleRegular13))
+                  child: Text("$date",textAlign: TextAlign.center, style: AppTextStyle.textStyleLight12.copyWith(color: AppColor.blackLightColor))),
+              Expanded(child: Text(Authoriy,textAlign: TextAlign.end,style: AppTextStyle.textStyleLight12.copyWith(color: AppColor.blackLightColor)))
             ],
           ),
           const SizedBox(
