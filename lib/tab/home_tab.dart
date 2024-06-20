@@ -182,32 +182,32 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
                 ),
               ],
             ),
-            const SizedBox(height: 8),
+            verticalSpacing(),
             _keyValue(
               "Client",
               "Ramesh",
             ),
-            const SizedBox(height: 8),
+            verticalSpacing(),
             _keyValue(
               "Machine Type",
               "Containership",
             ),
-            const SizedBox(height: 8),
+            verticalSpacing(),
             _keyValue(
               "Total Payment",
               "20000",
             ),
-            const SizedBox(height: 8),
+            verticalSpacing(),
             _keyValue(
               "Advance Payment",
               "12000",
             ),
-            const SizedBox(height: 8),
+            verticalSpacing(),
             _keyValue(
               "Assigne Order",
               "Manager 1",
             ),
-            const SizedBox(height: 16),
+            verticalSpacing(),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -238,7 +238,9 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
                         onCancelTap: () {
                           Get.back();
                         },
-                        onDeleteTap: () {},
+                        onDeleteTap: () {
+
+                        },
                       );
                     },
                     textColor: const Color(0xffB50A0A)),
@@ -298,4 +300,9 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
       ),
     );
   }
+
+  Widget verticalSpacing(){
+    return const SizedBox(height: 8,);
+  }
+
 }

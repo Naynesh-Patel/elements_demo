@@ -36,8 +36,9 @@ class _AddBillHistoryState extends State<AddBillHistory>
           },
           title: 'Create Bill Invoice',
         ),
-        body: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+        body: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
