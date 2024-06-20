@@ -92,13 +92,17 @@ flutter_launcher_icons:
     fonts:
       - family: Kanit
         fonts:
-          - asset: assets/fonts/kanit/Kanit-Light.ttf
+          - asset: assets/fonts/Kanit/Kanit-Black.ttf
+            weight: 200
+          - asset: assets/fonts/Kanit/Kanit-Bold.ttf
+            weight: 300
+          - asset: assets/fonts/Kanit/Kanit-Light.ttf
             weight: 400
-          - asset: assets/fonts/kanit/Kanit-Regular.ttf
+          - asset: assets/fonts/Kanit/Kanit-Regular.ttf
             weight: 500
-          - asset: assets/fonts/kanit/Kanit-SemiBold.ttf
+          - asset: assets/fonts/Kanit/Kanit-SemiBold.ttf
             weight: 600
-          - asset: assets/fonts/kanit/Kanit-ExtraBold.ttf
+          - asset: assets/fonts/Kanit/Kanit-ExtraBold.ttf
             weight: 700
   # For details regarding fonts from package dependencies
   # see https://flutter.dev/custom-fonts/#from-packages
