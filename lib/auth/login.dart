@@ -69,7 +69,7 @@ class _LoginState extends State<Login> {
                     textEditingController:
                         controller.mobileNumberTextEditingController,
                     maxLength: 10,
-                    hintText: "Mobile No*",
+                    hintText: "Mobile No",
                     labelText: "Mobile No*",
                   ),
                   verticalSpacing(),
@@ -78,7 +78,7 @@ class _LoginState extends State<Login> {
                       obscureText: controller.loginPasswordVisible,
                       textEditingController:
                           controller.passwordTextEditingController,
-                      hintText: "Password*",
+                      hintText: "Password",
                       labelText: "Password*",
                       enable: true,
                       suffixFixIcon: IconButton(
