@@ -1,6 +1,7 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/user/add_user.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -123,25 +124,28 @@ class _MangeUserState extends State<MangeUser> {
   }
 
   Widget _tableView(
-      {required String Authoriy, name, date, bool isWeeklyOff = false}) {
-    return Column(
-      children: [
-        const SizedBox(
-          height: 12.0,
-        ),
-        Row(
-          children: [
-            Expanded(child: Text(name, style: AppTextStyle.textStyleRegular13)),
-            Expanded(
-                child: Text("$date", style: AppTextStyle.textStyleRegular13)),
-            Text(Authoriy, style: AppTextStyle.textStyleRegular13)
-          ],
-        ),
-        const SizedBox(
-          height: 8.0,
-        ),
-        const Divider(),
-      ],
+      {required String Authoriy, name, date,}) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: Column(
+        children: [
+          const SizedBox(
+            height: 12.0,
+          ),
+          Row(
+            children: [
+              Expanded(child: Text(name,textAlign: TextAlign.start,style: AppTextStyle.textStyleLight12.copyWith(color:AppColor.blackLightColor))),
+              Expanded(
+                  child: Text("$date",textAlign: TextAlign.center, style: AppTextStyle.textStyleLight12.copyWith(color: AppColor.blackLightColor))),
+              Expanded(child: Text(Authoriy,textAlign: TextAlign.end,style: AppTextStyle.textStyleLight12.copyWith(color: AppColor.blackLightColor)))
+            ],
+          ),
+          const SizedBox(
+            height: 8.0,
+          ),
+          const Divider(),
+        ],
+      ),
     );
   }
 

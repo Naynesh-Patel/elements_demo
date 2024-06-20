@@ -1,10 +1,9 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/controller/home_controller.dart';
+import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:elements/widget/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../widget/app bar/custom_appbar.dart';
 
 class ViewOrderDetails extends StatefulWidget {
   const ViewOrderDetails({super.key});
@@ -58,8 +57,8 @@ class _ViewOrderDetailsState extends State<ViewOrderDetails> {
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      const Expanded(
-                        child: Text("Machine 1"),
+                      Expanded(
+                        child: Text("Machine ${index + 1}"),
                       ),
                       InkWell(
                         borderRadius: BorderRadius.circular(10),

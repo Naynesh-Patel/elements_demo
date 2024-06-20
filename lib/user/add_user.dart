@@ -1,4 +1,5 @@
 import 'package:elements/constant/app_colors.dart';
+import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/user/user_view_detail.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:elements/widget/button/custom_button.dart';
@@ -37,12 +38,9 @@ class _AddUserState extends State<AddUser> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                   Text(
                     'Add Profile :',
-                    style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontSize: 16,
-                        color: Color(0xff555555)),
+                     style: AppTextStyle.textStyleRegular16.copyWith(color: AppColor.blackLightColor),
                   ),
                   const SizedBox(
                     height: 15,
@@ -70,41 +68,32 @@ class _AddUserState extends State<AddUser> {
                       ],
                     ),
                   ),
-                  const SizedBox(
-                    height: 15,
-                  ),
+                  verticalSpacing(),
                   WidgetDropDownFromField(
                     hintText: "Select User Role",
+                    labelText: "User Role",
                     itemList: const ["Admin", "User", "Seller"],
                     onTap: (value) {
                       debugPrint("Select => $value");
                     },
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
+                  verticalSpacing(),
                   const CustomTextField(
                     hintText: "Name",
                     labelText: "User Name",
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
+                  verticalSpacing(),
                   const CustomTextField(
                     textInputType: TextInputType.numberWithOptions(),
                     hintText: "99656 25693",
                     labelText: "Contact No.",
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
+                  verticalSpacing(),
                   const CustomTextField(
                     hintText: "Surat,Gujrat",
                     labelText: "Address",
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
+                  verticalSpacing(),
                   const CustomTextField(
                     hintText: "Upload Fingerprint",
                     labelText: "Upload Fingerprint",
@@ -125,4 +114,9 @@ class _AddUserState extends State<AddUser> {
           ),
         ));
   }
+
+  Widget verticalSpacing(){
+    return const SizedBox(height: 26.0,);
+  }
+
 }

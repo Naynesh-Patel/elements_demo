@@ -48,30 +48,22 @@ class _AddMachineryState extends State<AddMachinery> {
                 hintText: "Machine Name",
                 labelText: "Machine Name*",
               ),
-              const SizedBox(
-                height: 16,
-              ),
+              verticalSpacing(),
               const CustomTextField(
                 hintText: "Machine Type",
                 labelText: "Machine Type*",
               ),
-              const SizedBox(
-                height: 16,
-              ),
+              verticalSpacing(),
               const CustomTextField(
                 hintText: "Qty",
                 labelText: "Qty*",
               ),
-              const SizedBox(
-                height: 16,
-              ),
+              verticalSpacing(),
               const CustomTextField(
                 hintText: "Eg. 30 days",
                 labelText: "Manufacture Duration*",
               ),
-              const SizedBox(
-                height: 16,
-              ),
+              verticalSpacing(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -138,7 +130,7 @@ class _AddMachineryState extends State<AddMachinery> {
                           Expanded(
                             child: Text(
                               'Spareparts ${index + 1}',
-                              style: AppTextStyle.textStyleBold14
+                              style: AppTextStyle.textStyleRegular16
                                   .copyWith(color: const Color(0xff555555)),
                             ),
                           ),
@@ -189,5 +181,9 @@ class _AddMachineryState extends State<AddMachinery> {
             onTap: () {},
           ),
         ));
+  }
+
+  Widget verticalSpacing(){
+    return const SizedBox(height: 26.0,);
   }
 }

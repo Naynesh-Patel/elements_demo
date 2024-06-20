@@ -49,13 +49,14 @@ class _LoginState extends State<Login> {
                   ),
                    Text(
                     "Login",
-                    style:AppTextStyle.textStyleBold20.copyWith(fontSize: 26),
+                    style: AppTextStyle.textStyleBold20.copyWith(fontSize: 26,fontFamily: "Kanit")
                   ),
                   const SizedBox(
                     height: 30,
                   ),
                   WidgetDropDownFromField(
                     hintText: "Select User Type",
+                    labelText: "User Type*",
                     itemList: const ["Admin","Usre","Seller"],
                     onTap: (value) {
                       debugPrint("Select => $value");

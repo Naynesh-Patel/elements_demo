@@ -33,14 +33,14 @@ class _DatePikerState extends State<DatePiker> {
                 calendarType: CalendarDatePicker2Type.multi,
                 calendarViewMode: CalendarDatePicker2Mode.day,
                 controlsHeight: 50.0,
-                controlsTextStyle: AppTextStyle.textStyleBold14,
+                controlsTextStyle: AppTextStyle.textStyleRegular16,
                 customModePickerIcon: const SizedBox(),
                 dayTextStyle: AppTextStyle.textStyleRegular14.copyWith(color: AppColor.dropDownHintColor),
                 disabledDayTextStyle: AppTextStyle.textStyleRegular14,
-                weekdayLabelTextStyle: AppTextStyle.textStyleBold12,
+                weekdayLabelTextStyle: AppTextStyle.textStyleRegular14,
                   selectedDayHighlightColor:AppColor.selectDateColor,
-                 nextMonthIcon: const Icon(Icons.arrow_forward_ios_rounded,size: 18,color: AppColor.blackColor,),
-                lastMonthIcon: const Icon(Icons.arrow_back_ios_rounded,size: 18,color: AppColor.blackColor,),
+                 nextMonthIcon: const Icon(Icons.arrow_forward_ios_rounded,size: 16,color: AppColor.blackColor,),
+                lastMonthIcon: const Icon(Icons.arrow_back_ios_rounded,size: 16,color: AppColor.blackColor,),
                 // hideYearPickerDividers: true,
                 // selectedDayTextStyle: AppTextStyle.textStyleRegular14.copyWith(color: AppColor.whiteColor)
 
@@ -113,7 +113,7 @@ class _DatePikerState extends State<DatePiker> {
       children: [
         Text(
           "$key : ",
-          style: AppTextStyle.textStyleBold14,
+          style: AppTextStyle.textStyleRegular16,
         ),
         Flexible(
             child: Text(

@@ -45,14 +45,13 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
             children: [
               WidgetDropDownFromField(
                 hintText: "Select Customer/Company",
+                labelText: "Customer/Company*",
                 itemList: const ["Admin", "Usre", "Seller"],
                 onTap: (value) {
                   debugPrint("Select => $value");
                 },
               ),
-              const SizedBox(
-                height: 20,
-              ),
+              verticalSpacing(),
               CustomTextField(
                   hintText: "Select Machine Type*",
                   labelText: "Machine Type*",
@@ -63,9 +62,7 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                     size: 18,
                     color: AppColor.blackColor,
                   )),
-              const SizedBox(
-                height: 20,
-              ),
+              verticalSpacing(),
               CustomTextField(
                   hintText: "Select Delivery Date",
                   labelText: "Delivery Date*",
@@ -75,17 +72,13 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                     Icons.date_range,
                     size: 22,
                   )),
-              const SizedBox(
-                height: 20,
-              ),
+              verticalSpacing(),
               CustomTextField(
                 hintText: "Total Payment",
                 labelText: "Total Payment",
                 focusNode: controller.paymentFocusNode,
               ),
-              const SizedBox(
-                height: 20,
-              ),
+              verticalSpacing(),
               CustomTextField(
                 hintText: "Advance Payment",
                 labelText: "Advance Payment",
@@ -93,9 +86,7 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                     controller.advancePaymentTextEditingController,
                 focusNode: controller.advancedPaymentFocusNode,
               ),
-              const SizedBox(
-                height: 20,
-              ),
+              verticalSpacing(),
               CustomTextField(
                   hintText: "Select Manager Role",
                   labelText: "Assigns Order*",
@@ -106,9 +97,7 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                     size: 18,
                     color: AppColor.blackColor,
                   )),
-              const SizedBox(
-                height: 20,
-              ),
+              verticalSpacing(),
             ],
           ),
         ),
@@ -120,5 +109,9 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
             onTap: () {},
           ),
         ));
+  }
+
+  Widget verticalSpacing(){
+    return const SizedBox(height: 26.0,);
   }
 }

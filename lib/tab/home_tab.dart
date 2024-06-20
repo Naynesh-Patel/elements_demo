@@ -149,7 +149,7 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
             padding: const EdgeInsets.symmetric(vertical: 16),
             child: Text(
               title,
-              style: AppTextStyle.textStyleRegular14.copyWith(
+              style: AppTextStyle.textStyleRegular16.copyWith(
                   color: controller.selectTab.value == index
                       ? AppColor.whiteColor
                       : AppColor.blackColor),
@@ -276,13 +276,13 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
       children: [
         Text(
           "$key : ",
-          style: AppTextStyle.textStyleBold14,
+          style: AppTextStyle.textStyleRegular16.copyWith(color: const Color(0xff272727)),
         ),
         Flexible(
             child: Text(
           "$value",
           style: AppTextStyle.textStyleRegular14
-              .copyWith(color: Color(0xff555555)),
+              .copyWith(color: const Color(0xff555555)),
         )),
       ],
     );

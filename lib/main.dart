@@ -18,10 +18,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialBinding: BindingController(),
       theme: ThemeData(
-        fontFamily: 'Kanit',
-        textTheme: Theme.of(context).textTheme.apply(
-          fontFamily: 'Kanit',
-        ),
+        fontFamily: "Kanit",
+        // useMaterial3: true,
       ),
       home: const Splash(),
     );

@@ -34,118 +34,123 @@ class _SettingTabState extends State<SettingTab> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.whiteColor,
-      appBar: HomeAppBar(
-        title: "Setting",
-        action: [
-          InkWell(
-            onTap: () {},
-            child: SvgPicture.asset(
-              'assets/svg/ic_notification.svg',
-              height: 20,
-              width: 20,
+        backgroundColor: AppColor.whiteColor,
+        appBar: HomeAppBar(
+          title: "Setting",
+          action: [
+            InkWell(
+              onTap: () {},
+              child: SvgPicture.asset(
+                'assets/svg/ic_notification.svg',
+                height: 20,
+                width: 20,
+              ),
             ),
-          ),
-          const SizedBox(
-            width: 16.0,
-          ),
-        ],
-      ),
-      body: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          _customTile(
-            title: "Manage Machinery",
-            imgPath: "assets/svg/mange_user.svg",
-            index: 1,
-            onTap: () {
-              controller.selectMenu.value = 1;
-              Get.to(const MangeMachinery());
-            },
-          ),
-          _customTile(
-            title: "Manage Spareparts",
-            imgPath: "assets/images/mange.png",
-            isSvg: false,
-            index: 2,
-            onTap: () {
-              controller.selectMenu.value = 2;
-              Get.to(const MangeSpareparts());
-            },
-          ),
-          _customTile(
-            title: "Import Spareparts",
-            imgPath: "assets/images/import_spareparts.png",
-            isSvg: false,
-            index: 3,
-            onTap: () {
-              controller.selectMenu.value = 3;
-              Get.to(const ImportSpareparts());
-            },
-          ),
-          _customTile(
-            title: "Manage User",
-            imgPath: "assets/svg/all_users.svg",
-            index: 4,
-            onTap: () {
-              controller.selectMenu.value = 4;
-              Get.to(const MangeUser());
-            },
-          ),
-          _customTile(
-            title: "Manage Salesmen",
-            imgPath: "assets/svg/all_users.svg",
-            index: 5,
-            onTap: () {
-              controller.selectMenu.value = 5;
-              Get.to(const MangeSalesmen());
-            },
-          ),
-          _customTile(
-            title: "Manage Customer Company",
-            imgPath: "assets/svg/mange_compny.svg",
-            index: 6,
-            onTap: () {
-              controller.selectMenu.value = 6;
-              Get.to(const MangeCustomer());
-            },
-          ),
-          _customTile(
-            title: "Manage Machine Stock",
-            imgPath: "assets/svg/mange_product.svg",
-            index: 7,
-            onTap: () {
-              controller.selectMenu.value = 7;
-              Get.to(const MangeProduct());
-            },
-          ),
-          _customTile(
-            title: "Bill History",
-            imgPath: "assets/svg/bil_history.svg",
-            index: 8,
-            onTap: () {
-              controller.selectMenu.value = 8;
-              Get.to(const BillHistory());
-            },
-          ),
-          _customTile(
-            title: "Logout",
-            isSvg: false,
-            imgPath: "assets/images/logout.png",
-            index: 9,
-            onTap: () {
-              CustomDialogBox.showLogoutDialog(
-                context: context,
-                onCancelTap: () {
-                  Get.back();
-                },
-                onLogoutTap: () {},
-              );
-            },
-          ),
-        ],
-      ),
-    );
+            const SizedBox(
+              width: 16.0,
+            ),
+          ],
+        ),
+        body: ListView(
+          shrinkWrap: true,
+          children: [
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                _customTile(
+                  title: "Manage Machinery",
+                  imgPath: "assets/svg/mange_user.svg",
+                  index: 1,
+                  onTap: () {
+                    controller.selectMenu.value = 1;
+                    Get.to(const MangeMachinery());
+                  },
+                ),
+                _customTile(
+                  title: "Manage Spareparts",
+                  imgPath: "assets/images/mange.png",
+                  isSvg: false,
+                  index: 2,
+                  onTap: () {
+                    controller.selectMenu.value = 2;
+                    Get.to(const MangeSpareparts());
+                  },
+                ),
+                _customTile(
+                  title: "Import Spareparts",
+                  imgPath: "assets/images/import_spareparts.png",
+                  isSvg: false,
+                  index: 3,
+                  onTap: () {
+                    controller.selectMenu.value = 3;
+                    Get.to(const ImportSpareparts());
+                  },
+                ),
+                _customTile(
+                  title: "Manage User",
+                  imgPath: "assets/svg/all_users.svg",
+                  index: 4,
+                  onTap: () {
+                    controller.selectMenu.value = 4;
+                    Get.to(const MangeUser());
+                  },
+                ),
+                _customTile(
+                  title: "Manage Salesmen",
+                  imgPath: "assets/images/mange_salesmen.png",
+                  isSvg: false,
+                  index: 5,
+                  onTap: () {
+                    controller.selectMenu.value = 5;
+                    Get.to(const MangeSalesmen());
+                  },
+                ),
+                _customTile(
+                  title: "Manage Customer Company",
+                  imgPath: "assets/svg/mange_compny.svg",
+                  index: 6,
+                  onTap: () {
+                    controller.selectMenu.value = 6;
+                    Get.to(const MangeCustomer());
+                  },
+                ),
+                _customTile(
+                  title: "Manage Machine Stock",
+                  imgPath: "assets/svg/mange_product.svg",
+                  index: 7,
+                  onTap: () {
+                    controller.selectMenu.value = 7;
+                    Get.to(const MangeProduct());
+                  },
+                ),
+                _customTile(
+                  title: "Bill History",
+                  imgPath: "assets/svg/bil_history.svg",
+                  index: 8,
+                  onTap: () {
+                    controller.selectMenu.value = 8;
+                    Get.to(const BillHistory());
+                  },
+                ),
+                _customTile(
+                  title: "Logout",
+                  isSvg: false,
+                  imgPath: "assets/images/logout.png",
+                  index: 9,
+                  onTap: () {
+                    CustomDialogBox.showLogoutDialog(
+                      context: context,
+                      onCancelTap: () {
+                        Get.back();
+                      },
+                      onLogoutTap: () {},
+                    );
+                  },
+                ),
+              ],
+            ),
+          ],
+        ));
   }
 
   Widget _customTile(

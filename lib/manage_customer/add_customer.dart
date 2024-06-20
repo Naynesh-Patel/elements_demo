@@ -1,6 +1,6 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
-import 'package:elements/manage_customer/customer_view_detail.dart';
+import 'package:elements/controller/customer_controller.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:elements/widget/button/custom_button.dart';
 import 'package:elements/widget/custom_text_field.dart';
@@ -17,6 +17,9 @@ class AddCustomer extends StatefulWidget {
 }
 
 class _AddCustomerState extends State<AddCustomer> {
+
+  CustomerController controller = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +43,7 @@ class _AddCustomerState extends State<AddCustomer> {
                      Text(
                        widget.isUpdate || widget.isView ? 'Profile :' :
                        'Add Profile :',
-                      style: AppTextStyle.textStyleRegular16,
+                      style: AppTextStyle.textStyleRegular16.copyWith(color: AppColor.blackLightColor),
                     ),
                     const SizedBox(
                       height: 20,
@@ -49,22 +52,38 @@ class _AddCustomerState extends State<AddCustomer> {
                       child: Stack(
                         alignment: Alignment.bottomRight,
                         children: [
+                          controller.imgFile == null ?
                           Image.asset(
                             'assets/images/camera.png',
                             height: 80,
                             width: 80,
-                          ),
-                          Container(
-                              padding: const EdgeInsets.all(5),
-                              decoration: BoxDecoration(
-                                  color: const Color(0xff01959F),
-                                  // shape: BoxShape.circle,
-                                  borderRadius: BorderRadius.circular(15)),
-                              child: const Icon(
-                                Icons.add,
-                                color: Colors.white,
-                                size: 18,
-                              ))
+                          ):SizedBox(
+                              height: 80,
+                              width: 80,
+                              child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(50.0),
+                                  child: Image.file(controller.imgFile!,fit: BoxFit.cover,))),
+                          InkWell(
+                            onTap: () async {
+                              bool refresh = await controller.pickImageFromGallery();
+                              if(refresh){
+                                setState(() {
+
+                                });
+                              }
+                            },
+                            child: Container(
+                                padding: const EdgeInsets.all(5),
+                                decoration: BoxDecoration(
+                                    color: const Color(0xff01959F),
+                                    // shape: BoxShape.circle,
+                                    borderRadius: BorderRadius.circular(15)),
+                                child: const Icon(
+                                  Icons.add,
+                                  color: Colors.white,
+                                  size: 18,
+                                )),
+                          )
                         ],
                       ),
                     ),

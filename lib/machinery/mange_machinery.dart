@@ -62,17 +62,17 @@ class _MangeMachineryState extends State<MangeMachinery> {
                       "Machine Name",
                       "Containership",
                     ),
-                    const SizedBox(height: 8),
+                    verticalSpacing(),
                     _keyValue(
                       "Machine Type",
                       "Steel Cutting",
                     ),
-                    const SizedBox(height: 8),
+                    verticalSpacing(),
                     _keyValue(
                       "Qty",
                       "1",
                     ),
-                    const SizedBox(height: 16),
+                    verticalSpacing(),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
@@ -126,15 +126,21 @@ class _MangeMachineryState extends State<MangeMachinery> {
       children: [
         Text(
           "$key : ",
-          style: AppTextStyle.textStyleBold14,
+          style: AppTextStyle.textStyleRegular16,
         ),
         Flexible(
             child: Text(
           "$value",
           style: AppTextStyle.textStyleRegular14
-              .copyWith(color: Color(0xff555555)),
+              .copyWith(color: const Color(0xff555555)),
         )),
       ],
+    );
+  }
+
+  Widget verticalSpacing(){
+    return const SizedBox(
+      height: 6.0,
     );
   }
 }
