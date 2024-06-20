@@ -43,6 +43,7 @@ class _AddMachineryState extends State<AddMachinery> {
         body: Container(
           margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               const CustomTextField(
                 hintText: "Machine Name",
@@ -183,7 +184,9 @@ class _AddMachineryState extends State<AddMachinery> {
         ));
   }
 
-  Widget verticalSpacing(){
-    return const SizedBox(height: 26.0,);
+  Widget verticalSpacing() {
+    return const SizedBox(
+      height: 26.0,
+    );
   }
 }

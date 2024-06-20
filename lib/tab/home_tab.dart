@@ -282,7 +282,7 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
             child: Text(
           "$value",
           style: AppTextStyle.textStyleRegular14
-              .copyWith(color: Color(0xff555555)),
+              .copyWith(color: const Color(0xff555555)),
         )),
       ],
     );

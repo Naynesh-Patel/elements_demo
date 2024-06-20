@@ -21,7 +21,7 @@ class _AttendanceTabState extends State<AttendanceTab> {
 
   List<dynamic> filterList = [
     {
-      "name": "Aarsh",
+      "name": "Arash",
       "select": false,
     },
     {
@@ -264,7 +264,7 @@ class _AttendanceTabState extends State<AttendanceTab> {
                         );
                       },
                       separatorBuilder: (BuildContext context, int index) {
-                        return SizedBox(
+                        return const SizedBox(
                           height: 8.0,
                         );
                       },

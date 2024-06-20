@@ -119,7 +119,7 @@ class _ViewMachineryState extends State<ViewMachinery> {
                                 setState(() {});
                               },
                               child: Container(
-                                padding: EdgeInsets.symmetric(
+                                padding: const EdgeInsets.symmetric(
                                     horizontal: 4.0, vertical: 4.0),
                                 decoration: BoxDecoration(
                                     border: Border.all(
@@ -135,7 +135,7 @@ class _ViewMachineryState extends State<ViewMachinery> {
                                 ),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 10.0,
                             ),
                             Expanded(

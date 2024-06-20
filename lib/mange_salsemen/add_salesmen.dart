@@ -3,10 +3,9 @@ import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:elements/widget/button/custom_button.dart';
 import 'package:elements/widget/custom_text_field.dart';
+import 'package:elements/widget/dropdown/common_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../widget/dropdown/common_dropdown.dart';
 
 class AddSalesmen extends StatefulWidget {
   const AddSalesmen({super.key});
@@ -40,9 +39,10 @@ class _AddSalesmenState extends State<AddSalesmen> {
         body: Container(
           margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-               Text(
+              Text(
                 'Add Profile :',
                 style: AppTextStyle.textStyleRegular16,
               ),
@@ -112,8 +112,10 @@ class _AddSalesmenState extends State<AddSalesmen> {
         ));
   }
 
-  Widget verticalSpacing(){
-    return const SizedBox(height: 26.0,);
+  Widget verticalSpacing() {
+    return const SizedBox(
+      height: 26.0,
+    );
   }
 
   void setLevelValue(String value) {

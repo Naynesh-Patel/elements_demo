@@ -4,6 +4,7 @@ import 'package:elements/home/view_invoice_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:share/share.dart';
 
 class Invoice extends StatefulWidget {
   const Invoice({super.key});
@@ -13,6 +14,8 @@ class Invoice extends StatefulWidget {
 }
 
 class _InvoiceState extends State<Invoice> {
+  String link = '';
+  String text = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -184,7 +187,9 @@ class _InvoiceState extends State<Invoice> {
                               ),
                               InkWell(
                                 borderRadius: BorderRadius.circular(10),
-                                onTap: () {},
+                                onTap: () {
+                                  onShare();
+                                },
                                 child: Container(
                                   decoration: BoxDecoration(
                                       color: const Color(0xffFFFFFF),
@@ -207,5 +212,11 @@ class _InvoiceState extends State<Invoice> {
             ],
           ),
         ));
+  }
+
+  Future<void> onShare() async {
+    const String text = 'Hello, check out my awesome app!';
+    const String subject = 'Look what I found!';
+    Share.share(text, subject: subject);
   }
 }

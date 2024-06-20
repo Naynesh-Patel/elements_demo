@@ -5,7 +5,6 @@ import 'package:elements/controller/setting_controller.dart';
 import 'package:elements/import_spareparts/import_spareparts.dart';
 import 'package:elements/machinery/mange_machinery.dart';
 import 'package:elements/manage_customer/mange_customer.dart';
-import 'package:elements/mange_product/mange_product.dart';
 import 'package:elements/mange_spareparts/mange_spareparts.dart';
 import 'package:elements/salsemen/mange_salesmen.dart';
 import 'package:elements/user/mange_user.dart';
@@ -114,21 +113,21 @@ class _SettingTabState extends State<SettingTab> {
                     Get.to(const MangeCustomer());
                   },
                 ),
-                _customTile(
-                  title: "Manage Machine Stock",
-                  imgPath: "assets/svg/mange_product.svg",
-                  index: 7,
-                  onTap: () {
-                    controller.selectMenu.value = 7;
-                    Get.to(const MangeProduct());
-                  },
-                ),
+                // _customTile(
+                //   title: "Manage Machine Stock",
+                //   imgPath: "assets/svg/mange_product.svg",
+                //   index: 7,
+                //   onTap: () {
+                //     controller.selectMenu.value = 7;
+                //     Get.to(const MangeProduct());
+                //   },
+                // ),
                 _customTile(
                   title: "Bill History",
                   imgPath: "assets/svg/bil_history.svg",
-                  index: 8,
+                  index: 7,
                   onTap: () {
-                    controller.selectMenu.value = 8;
+                    controller.selectMenu.value = 7;
                     Get.to(const BillHistory());
                   },
                 ),
@@ -136,7 +135,7 @@ class _SettingTabState extends State<SettingTab> {
                   title: "Logout",
                   isSvg: false,
                   imgPath: "assets/images/logout.png",
-                  index: 9,
+                  index: 8,
                   onTap: () {
                     CustomDialogBox.showLogoutDialog(
                       context: context,
