@@ -97,7 +97,7 @@ class _SalsemenViewDetilsState extends State<SalsemenViewDetils> {
                   textInputType: TextInputType.numberWithOptions(),
                   hintText: "Contact No.",
                   labelText: "99656 25693",
-                  suffixFixWidget: Icon(
+                  suffixFixIcon: Icon(
                     Icons.call,
                     size: 24,
                   ),

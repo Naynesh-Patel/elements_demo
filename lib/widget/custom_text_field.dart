@@ -14,7 +14,8 @@ class CustomTextField extends StatefulWidget {
   final TextInputType? textInputType;
   final Widget? preFixWidget;
   final BoxConstraints? prefixIconConstraints;
-  final Widget? suffixFixWidget;
+  final Widget? suffixFixIcon;
+  final Widget? suffix;
   final int? maxLength;
   final bool? readOnly;
   final bool? obscureText;
@@ -38,7 +39,8 @@ class CustomTextField extends StatefulWidget {
     this.label,
     this.initialValue,
     this.textInputType,
-    this.suffixFixWidget,
+    this.suffixFixIcon,
+    this.suffix,
     this.preFixWidget,
     this.prefixIconConstraints,
     this.maxLength,
@@ -122,7 +124,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
           fillColor: Colors.white,
           errorStyle: const TextStyle(color: Colors.red),
           prefixIcon: widget.preFixWidget,
-          suffixIcon: widget.suffixFixWidget ?? const SizedBox.shrink(),
+          suffixIcon: widget.suffixFixIcon ?? const SizedBox.shrink(),
+          suffix: widget.suffix ?? const SizedBox.shrink(),
           // prefixIconConstraints: prefixIconConstraints ??
           //     const BoxConstraints(maxWidth: 16, minWidth: 10),
           enabledBorder: OutlineInputBorder(

@@ -80,7 +80,7 @@ class _LoginState extends State<Login> {
                       hintText: "Password*",
                       labelText: "Password*",
                       enable: true,
-                      suffixFixWidget: IconButton(
+                      suffixFixIcon: IconButton(
                         onPressed: () {
                           setState(() {
                             controller.loginPasswordVisible =

@@ -58,7 +58,7 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                   labelText: "Machine Type*",
                   enable: false,
                   focusNode: FocusNode(),
-                  suffixFixWidget: const Icon(
+                  suffixFixIcon: const Icon(
                     Icons.arrow_forward_ios_rounded,
                     size: 18,
                     color: AppColor.blackColor,
@@ -71,7 +71,7 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                   labelText: "Delivery Date*",
                   enable: false,
                   focusNode: controller.deliveryDateFocusNode,
-                  suffixFixWidget: const Icon(
+                  suffixFixIcon: const Icon(
                     Icons.date_range,
                     size: 22,
                   )),
@@ -101,7 +101,7 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                   labelText: "Assigns Order*",
                   enable: false,
                   focusNode: FocusNode(),
-                  suffixFixWidget: const Icon(
+                  suffixFixIcon: const Icon(
                     Icons.arrow_forward_ios_rounded,
                     size: 18,
                     color: AppColor.blackColor,

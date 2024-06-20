@@ -84,7 +84,7 @@ class _UserViewDetilsState extends State<UserViewDetils> {
                   textInputType: TextInputType.numberWithOptions(),
                   hintText: "Contact No.",
                   labelText: "99656 25693",
-                  suffixFixWidget: Icon(
+                  suffixFixIcon: Icon(
                     Icons.call,
                     size: 24,
                   ),
@@ -95,7 +95,7 @@ class _UserViewDetilsState extends State<UserViewDetils> {
                 const CustomTextField(
                   hintText: "Surat,Gujarat",
                   labelText: "Address",
-                  suffixFixWidget: Icon(
+                  suffixFixIcon: Icon(
                     Icons.location_on_outlined,
                     size: 24,
                   ),
