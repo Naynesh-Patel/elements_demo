@@ -83,7 +83,7 @@ class WidgetDropDownFromField extends StatelessWidget {
         Positioned(
           left: 16,
           child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 4.0),
+              padding: const EdgeInsets.symmetric(horizontal: 4.0),
               color: Colors.white, child: Text(labelText,style: AppTextStyle.textStyleRegular13,)),
         )
       ],

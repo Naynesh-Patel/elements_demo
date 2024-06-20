@@ -35,7 +35,7 @@ class _SmallButtonState extends State<SmallButton> {
               horizontal: 16, vertical: 10),
           child: Text(
               widget.title,
-              style: AppTextStyle.textStyleBold12.copyWith(color: widget.textColor ?? AppColor.blackColor)
+              style: AppTextStyle.textStyleRegular14.copyWith(color: widget.textColor ?? AppColor.blackColor)
           )),
     );
   }

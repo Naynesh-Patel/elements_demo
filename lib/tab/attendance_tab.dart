@@ -253,7 +253,7 @@ class _AttendanceTabState extends State<AttendanceTab> {
                                 ),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 4.0,
                             ),
                             Text(
@@ -264,7 +264,7 @@ class _AttendanceTabState extends State<AttendanceTab> {
                         );
                       },
                       separatorBuilder: (BuildContext context, int index) {
-                        return SizedBox(
+                        return const SizedBox(
                           height: 8.0,
                         );
                       },
@@ -396,6 +396,7 @@ class _AttendanceTabState extends State<AttendanceTab> {
       checkOut,
       bool isWeeklyOff = false}) {
     return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Column(
         children: [
           const SizedBox(
@@ -404,34 +405,34 @@ class _AttendanceTabState extends State<AttendanceTab> {
           Row(
             children: [
               Expanded(
-                  child: Text(name, style: AppTextStyle.textStyleRegular13)),
+                  child: Text(name, style: AppTextStyle.textStyleLight12.copyWith(color: const Color(0xff555555)))),
               Expanded(
-                  child: Text("$date", style: AppTextStyle.textStyleRegular13)),
+                  child: Text("$date", style: AppTextStyle.textStyleLight12.copyWith(color: const Color(0xff555555)))),
               if (isWeeklyOff) ...[
                 Expanded(
                   flex: 2,
                   child: Text(
                     "Weekly Off",
                     textAlign: TextAlign.center,
-                    style: AppTextStyle.textStyleRegular13
+                    style: AppTextStyle.textStyleLight12
                         .copyWith(color: AppColor.selectColor),
                   ),
                 ),
               ] else ...[
                 Expanded(
                     child:
-                        Text(checkIn, style: AppTextStyle.textStyleRegular13)),
+                        Text(checkIn, style: AppTextStyle.textStyleLight12.copyWith(color: const Color(0xff555555)))),
                 Expanded(
                     child: Text(checkOut,
                         textAlign: TextAlign.center,
-                        style: AppTextStyle.textStyleRegular13)),
+                        style: AppTextStyle.textStyleLight12.copyWith(color: const Color(0xff555555)))),
               ]
             ],
           ),
           const SizedBox(
             height: 8.0,
           ),
-          Divider(),
+          const Divider(),
         ],
       ),
     );

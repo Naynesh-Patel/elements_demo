@@ -130,7 +130,7 @@ class _AddMachineryState extends State<AddMachinery> {
                           Expanded(
                             child: Text(
                               'Spareparts ${index + 1}',
-                              style: AppTextStyle.textStyleBold14
+                              style: AppTextStyle.textStyleRegular16
                                   .copyWith(color: const Color(0xff555555)),
                             ),
                           ),

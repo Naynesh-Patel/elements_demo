@@ -2,6 +2,8 @@ import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/import_spareparts/add_import_spareparts.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
+import 'package:elements/widget/button/small_button.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -34,29 +36,15 @@ class _ImportSparepartsState extends State<ImportSpareparts> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  children: [
-                    _keyValue("Total Product Import", "30"),
-                  ],
-                ),
-                InkWell(
-                  child: Container(
-                      height: 38,
-                      width: 96,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(4),
-                          border: Border.all(color: const Color(0xffC9C9C9))),
-                      child: const Center(
-                        child: Text(
-                          "Update",
-                          style: TextStyle(
-                            color: AppColor.buttonColor,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w300,
-                          ),
-                        ),
-                      )),
-                ),
+                Flexible(
+                    child: Text(
+                      "Total Product Import  : 30",
+                      style: AppTextStyle.textStyleRegular14,
+                    )),
+                SmallButton(
+                    title: "Update",
+                    onTap: () {},
+                    textColor: AppColor.selectColor)
               ],
             ),
             const SizedBox(
@@ -64,7 +52,7 @@ class _ImportSparepartsState extends State<ImportSpareparts> {
             ),
             InkWell(
               onTap: () {
-                Get.to(ViewExpenseDetails());
+                Get.to(const ViewExpenseDetails());
               },
               child: Container(
                 padding:
@@ -74,66 +62,50 @@ class _ImportSparepartsState extends State<ImportSpareparts> {
                     border:
                         Border.all(color: const Color(0xffE6E6E6), width: 1)),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    _keyValue("Company Name", "Containership "),
+                    verticalSpacing(),
+                    _keyValue("Name", "Steel Bolts "),
+                    verticalSpacing(),
+                    _keyValue("Qty", "10"),
                     Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              _keyValue("Company Name", "Containership "),
-                              _keyValue("Name", "Steel Bolts "),
-                              _keyValue("Qty", "10"),
-                              _keyValue("Type", "Medium"),
-                            ],
+                        Expanded(child: _keyValue("Type", "Medium")),
+                        InkWell(
+                          onTap: () {},
+                          borderRadius: BorderRadius.circular(5),
+                          child: Container(
+                            padding: const EdgeInsets.all(6),
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    color: const Color(0xffC9C9C9)),
+                                borderRadius: BorderRadius.circular(5)),
+                            child: const Icon(
+                              Icons.edit,
+                              color: Color(0xff555555),
+                            ),
                           ),
                         ),
-                        Column(
-                          children: [
-                            _keyValue("DD", "16-7-2024"),
-                            const SizedBox(
-                              height: 25,
+                        const SizedBox(width: 10),
+                        InkWell(
+                          onTap: () {},
+                          borderRadius: BorderRadius.circular(5),
+                          child: Container(
+                            padding: const EdgeInsets.all(6),
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    color: const Color(0xffC9C9C9)),
+                                borderRadius: BorderRadius.circular(5)),
+                            child: const Icon(
+                              Icons.delete,
+                              color: Color(0xff555555),
                             ),
-                            Row(
-                              children: [
-                                InkWell(
-                                  onTap: () {},
-                                  borderRadius: BorderRadius.circular(5),
-                                  child: Container(
-                                    padding: const EdgeInsets.all(6),
-                                    decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: const Color(0xffC9C9C9)),
-                                        borderRadius: BorderRadius.circular(5)),
-                                    child: const Icon(
-                                      Icons.edit,
-                                      color: Color(0xff555555),
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(width: 10),
-                                InkWell(
-                                  onTap: () {},
-                                  borderRadius: BorderRadius.circular(5),
-                                  child: Container(
-                                    padding: const EdgeInsets.all(6),
-                                    decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: const Color(0xffC9C9C9)),
-                                        borderRadius: BorderRadius.circular(5)),
-                                    child: const Icon(
-                                      Icons.delete,
-                                      color: Color(0xff555555),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            )
-                          ],
+                          ),
                         ),
                       ],
                     ),
+
                   ],
                 ),
               ),
@@ -163,7 +135,7 @@ class _ImportSparepartsState extends State<ImportSpareparts> {
       children: [
         Text(
           "$key : ",
-          style: AppTextStyle.textStyleBold14,
+          style: AppTextStyle.textStyleRegular16,
         ),
         Flexible(
             child: Text(
@@ -174,4 +146,11 @@ class _ImportSparepartsState extends State<ImportSpareparts> {
       ],
     );
   }
+
+  Widget verticalSpacing(){
+    return const SizedBox(
+      height: 6.0,
+    );
+  }
+
 }

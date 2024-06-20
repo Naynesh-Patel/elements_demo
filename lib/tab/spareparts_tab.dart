@@ -43,7 +43,7 @@ class _SparepartsTabState extends State<SparepartsTab> {
                   contentPadding: const EdgeInsets.all(0),
                   title: Text(
                     'Spareparts ${index + 1}',
-                    style: AppTextStyle.textStyleBold14
+                    style: AppTextStyle.textStyleRegular16
                         .copyWith(color: const Color(0xff555555)),
                   ),
                   trailing: Row(
@@ -61,15 +61,12 @@ class _SparepartsTabState extends State<SparepartsTab> {
                           decoration: InputDecoration(
                               border: InputBorder.none,
                               contentPadding: const EdgeInsets.symmetric(
-                                  horizontal: 8.0, vertical: 11),
+                                  horizontal: 8.0, vertical: 13),
                               hintText: '20 piece',
-                              helperStyle: AppTextStyle.textStyleRegular16
+                              helperStyle: AppTextStyle.textStyleLight16
                                   .copyWith(color: AppColor.dropDownHintColor),
-                              hintStyle: const TextStyle(
-                                color: Color(0xff949494),
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400,
-                              )),
+                              hintStyle: AppTextStyle.textStyleLight14
+                                  .copyWith(color: AppColor.dropDownHintColor)),
                         ),
                       ),
                       const SizedBox(

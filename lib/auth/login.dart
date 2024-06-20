@@ -49,7 +49,7 @@ class _LoginState extends State<Login> {
                   ),
                    Text(
                     "Login",
-                    style: AppTextStyle.textStyleBold20.copyWith(fontSize: 26)
+                    style: AppTextStyle.textStyleBold20.copyWith(fontSize: 26,fontFamily: "Kanit")
                   ),
                   const SizedBox(
                     height: 30,

@@ -40,7 +40,7 @@ class _AddUserState extends State<AddUser> {
                 children: [
                    Text(
                     'Add Profile :',
-                     style: AppTextStyle.textStyleRegular16,
+                     style: AppTextStyle.textStyleRegular16.copyWith(color: AppColor.blackLightColor),
                   ),
                   const SizedBox(
                     height: 15,

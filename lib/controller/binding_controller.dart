@@ -1,3 +1,4 @@
+import 'package:elements/controller/customer_controller.dart';
 import 'package:elements/controller/setting_controller.dart';
 import 'package:get/get.dart';
 
@@ -10,5 +11,6 @@ class BindingController extends Bindings {
     Get.lazyPut<AuthController>(() => AuthController(), fenix: true);
     Get.lazyPut<HomeController>(() => HomeController(), fenix: true);
     Get.lazyPut<SettingController>(() => SettingController(), fenix: true);
+    Get.lazyPut<CustomerController>(() => CustomerController(), fenix: true);
   }
 }
