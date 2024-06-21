@@ -4,6 +4,7 @@ import 'package:elements/machinery/add_machinery.dart';
 import 'package:elements/machinery/view_machinery.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:elements/widget/button/small_button.dart';
+import 'package:elements/widget/dialogs/custom_dialogbox.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -93,7 +94,17 @@ class _MangeMachineryState extends State<MangeMachinery> {
                         ),
                         SmallButton(
                             title: "Delete",
-                            onTap: () {},
+                            onTap: () {
+                              CustomDialogBox.showDeleteDialog(
+                                context: context,
+                                bodyText:
+                                    "Do you really want to cancel these records? This process cannot be undone.",
+                                onCancelTap: () {
+                                  Get.back();
+                                },
+                                onDeleteTap: () {},
+                              );
+                            },
                             textColor: const Color(0xffB50A0A)),
                       ],
                     )
@@ -138,7 +149,7 @@ class _MangeMachineryState extends State<MangeMachinery> {
     );
   }
 
-  Widget verticalSpacing(){
+  Widget verticalSpacing() {
     return const SizedBox(
       height: 6.0,
     );

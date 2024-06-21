@@ -1,6 +1,7 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
+import 'package:elements/widget/dialogs/custom_dialogbox.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -184,7 +185,15 @@ class _MangeSalesmenState extends State<MangeSalesmen> {
                   ),
                   InkWell(
                     onTap: () {
-                      Get.back();
+                      CustomDialogBox.showDeleteDialog(
+                        context: context,
+                        bodyText:
+                            "Do you really want to cancel these records? This process cannot be undone.",
+                        onCancelTap: () {
+                          Get.back();
+                        },
+                        onDeleteTap: () {},
+                      );
                     },
                     child: Container(
                         padding: const EdgeInsets.symmetric(
@@ -243,7 +252,7 @@ class _MangeSalesmenState extends State<MangeSalesmen> {
     );
   }
 
-  Widget verticalSpacing(){
+  Widget verticalSpacing() {
     return const SizedBox(
       height: 6.0,
     );

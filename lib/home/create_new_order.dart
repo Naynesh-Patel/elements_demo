@@ -106,12 +106,16 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
           child: CustomButton(
             color: AppColor.buttonColor,
             buttonText: 'Done',
-            onTap: () {},
+            onTap: () {
+              Get.back();
+            },
           ),
         ));
   }
 
-  Widget verticalSpacing(){
-    return const SizedBox(height: 26.0,);
+  Widget verticalSpacing() {
+    return const SizedBox(
+      height: 26.0,
+    );
   }
 }

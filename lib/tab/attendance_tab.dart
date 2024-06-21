@@ -3,7 +3,6 @@ import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/widget/app%20bar/home_app_bar.dart';
 import 'package:elements/widget/button/small_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../date_piker.dart';
@@ -57,14 +56,14 @@ class _AttendanceTabState extends State<AttendanceTab> {
             const SizedBox(
               width: 20,
             ),
-            SvgPicture.asset(
-              "assets/svg/ic_notification.svg",
-              height: 20,
-              width: 20,
-            ),
-            const SizedBox(
-              width: 16,
-            ),
+            // SvgPicture.asset(
+            //   "assets/svg/ic_notification.svg",
+            //   height: 20,
+            //   width: 20,
+            // ),
+            // const SizedBox(
+            //   width: 16,
+            // ),
           ],
         ),
         body: Container(
@@ -405,9 +404,13 @@ class _AttendanceTabState extends State<AttendanceTab> {
           Row(
             children: [
               Expanded(
-                  child: Text(name, style: AppTextStyle.textStyleLight12.copyWith(color: const Color(0xff555555)))),
+                  child: Text(name,
+                      style: AppTextStyle.textStyleLight12
+                          .copyWith(color: const Color(0xff555555)))),
               Expanded(
-                  child: Text("$date", style: AppTextStyle.textStyleLight12.copyWith(color: const Color(0xff555555)))),
+                  child: Text("$date",
+                      style: AppTextStyle.textStyleLight12
+                          .copyWith(color: const Color(0xff555555)))),
               if (isWeeklyOff) ...[
                 Expanded(
                   flex: 2,
@@ -420,12 +423,14 @@ class _AttendanceTabState extends State<AttendanceTab> {
                 ),
               ] else ...[
                 Expanded(
-                    child:
-                        Text(checkIn, style: AppTextStyle.textStyleLight12.copyWith(color: const Color(0xff555555)))),
+                    child: Text(checkIn,
+                        style: AppTextStyle.textStyleLight12
+                            .copyWith(color: const Color(0xff555555)))),
                 Expanded(
                     child: Text(checkOut,
                         textAlign: TextAlign.center,
-                        style: AppTextStyle.textStyleLight12.copyWith(color: const Color(0xff555555)))),
+                        style: AppTextStyle.textStyleLight12
+                            .copyWith(color: const Color(0xff555555)))),
               ]
             ],
           ),

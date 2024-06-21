@@ -20,16 +20,16 @@ class _SparepartsTabState extends State<SparepartsTab> {
       backgroundColor: AppColor.whiteColor,
       appBar: HomeAppBar(
         title: "Spareparts Stocks",
-        action: [
-          SvgPicture.asset(
-            'assets/svg/ic_notification.svg',
-            height: 20,
-            width: 20,
-          ),
-          const SizedBox(
-            width: 16,
-          ),
-        ],
+        // action: [
+        //   SvgPicture.asset(
+        //     'assets/svg/ic_notification.svg',
+        //     height: 20,
+        //     width: 20,
+        //   ),
+        //   const SizedBox(
+        //     width: 16,
+        //   ),
+        // ],
       ),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),

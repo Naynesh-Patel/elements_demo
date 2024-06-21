@@ -23,7 +23,8 @@ class CustomDialogBox {
           contentPadding: EdgeInsets.zero,
           backgroundColor: Colors.white,
           content: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 16.0),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -32,24 +33,30 @@ class CustomDialogBox {
                   textAlign: TextAlign.center,
                   style: AppTextStyle.textStyleBold16,
                 ),
-                const SizedBox(height: 8.0,),
+                const SizedBox(
+                  height: 8.0,
+                ),
                 Text(
                   bodyText,
                   textAlign: TextAlign.center,
-                  style: AppTextStyle.textStyleLight12.copyWith(color: const Color(0xff949494)),
+                  style: AppTextStyle.textStyleLight12
+                      .copyWith(color: const Color(0xff949494)),
                 ),
-                const SizedBox(height: 16.0,),
+                const SizedBox(
+                  height: 16.0,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    SmallButton(title: "Cancel", onTap: onCancelTap),
+                    const SizedBox(
+                      width: 16.0,
+                    ),
                     SmallButton(
-                      title: "Cancel", onTap:onCancelTap),
-                    const SizedBox(width: 16.0,),
-                    SmallButton(
-                      title: "Delete",
+                        title: "Delete",
                         textColor: AppColor.whiteColor,
                         bodyColor: AppColor.selectColor,
-                        onTap:onDeleteTap),
+                        onTap: onDeleteTap),
                   ],
                 ),
               ],
@@ -76,7 +83,8 @@ class CustomDialogBox {
           contentPadding: EdgeInsets.zero,
           backgroundColor: Colors.white,
           content: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 16.0),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -85,24 +93,30 @@ class CustomDialogBox {
                   textAlign: TextAlign.center,
                   style: AppTextStyle.textStyleBold16,
                 ),
-                const SizedBox(height: 8.0,),
+                const SizedBox(
+                  height: 8.0,
+                ),
                 Text(
                   "Do you really want to Logout these App? This process cannot be undone.",
                   textAlign: TextAlign.center,
-                  style: AppTextStyle.textStyleLight12.copyWith(color: const Color(0xff949494)),
+                  style: AppTextStyle.textStyleLight12
+                      .copyWith(color: const Color(0xff949494)),
                 ),
-                const SizedBox(height: 16.0,),
+                const SizedBox(
+                  height: 16.0,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SmallButton(
-                        title: "Cancel", onTap:onCancelTap),
-                    const SizedBox(width: 16.0,),
+                    SmallButton(title: "Cancel", onTap: onCancelTap),
+                    const SizedBox(
+                      width: 16.0,
+                    ),
                     SmallButton(
                         title: "logout",
                         textColor: AppColor.whiteColor,
                         bodyColor: AppColor.selectColor,
-                        onTap:onLogoutTap),
+                        onTap: onLogoutTap),
                   ],
                 ),
               ],
@@ -112,5 +126,4 @@ class CustomDialogBox {
       },
     );
   }
-
 }

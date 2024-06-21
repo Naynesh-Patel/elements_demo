@@ -3,7 +3,7 @@ import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/import_spareparts/add_import_spareparts.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:elements/widget/button/small_button.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:elements/widget/dialogs/custom_dialogbox.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -38,9 +38,9 @@ class _ImportSparepartsState extends State<ImportSpareparts> {
               children: [
                 Flexible(
                     child: Text(
-                      "Total Product Import  : 30",
-                      style: AppTextStyle.textStyleRegular14,
-                    )),
+                  "Total Product Import  : 30",
+                  style: AppTextStyle.textStyleRegular14,
+                )),
                 SmallButton(
                     title: "Update",
                     onTap: () {},
@@ -78,8 +78,8 @@ class _ImportSparepartsState extends State<ImportSpareparts> {
                           child: Container(
                             padding: const EdgeInsets.all(6),
                             decoration: BoxDecoration(
-                                border: Border.all(
-                                    color: const Color(0xffC9C9C9)),
+                                border:
+                                    Border.all(color: const Color(0xffC9C9C9)),
                                 borderRadius: BorderRadius.circular(5)),
                             child: const Icon(
                               Icons.edit,
@@ -89,13 +89,23 @@ class _ImportSparepartsState extends State<ImportSpareparts> {
                         ),
                         const SizedBox(width: 10),
                         InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            CustomDialogBox.showDeleteDialog(
+                              context: context,
+                              bodyText:
+                                  "Do you really want to cancel these records? This process cannot be undone.",
+                              onCancelTap: () {
+                                Get.back();
+                              },
+                              onDeleteTap: () {},
+                            );
+                          },
                           borderRadius: BorderRadius.circular(5),
                           child: Container(
                             padding: const EdgeInsets.all(6),
                             decoration: BoxDecoration(
-                                border: Border.all(
-                                    color: const Color(0xffC9C9C9)),
+                                border:
+                                    Border.all(color: const Color(0xffC9C9C9)),
                                 borderRadius: BorderRadius.circular(5)),
                             child: const Icon(
                               Icons.delete,
@@ -105,7 +115,6 @@ class _ImportSparepartsState extends State<ImportSpareparts> {
                         ),
                       ],
                     ),
-
                   ],
                 ),
               ),
@@ -147,10 +156,9 @@ class _ImportSparepartsState extends State<ImportSpareparts> {
     );
   }
 
-  Widget verticalSpacing(){
+  Widget verticalSpacing() {
     return const SizedBox(
       height: 6.0,
     );
   }
-
 }

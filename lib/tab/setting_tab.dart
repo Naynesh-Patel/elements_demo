@@ -36,19 +36,19 @@ class _SettingTabState extends State<SettingTab> {
         backgroundColor: AppColor.whiteColor,
         appBar: HomeAppBar(
           title: "Setting",
-          action: [
-            InkWell(
-              onTap: () {},
-              child: SvgPicture.asset(
-                'assets/svg/ic_notification.svg',
-                height: 20,
-                width: 20,
-              ),
-            ),
-            const SizedBox(
-              width: 16.0,
-            ),
-          ],
+          // action: [
+          //   InkWell(
+          //     onTap: () {},
+          //     child: SvgPicture.asset(
+          //       'assets/svg/ic_notification.svg',
+          //       height: 20,
+          //       width: 20,
+          //     ),
+          //   ),
+          //   const SizedBox(
+          //     width: 16.0,
+          //   ),
+          // ],
         ),
         body: ListView(
           shrinkWrap: true,

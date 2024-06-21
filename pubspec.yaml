@@ -42,6 +42,8 @@ dependencies:
   date_picker_plus: ^4.0.0
   calendar_date_picker2: ^1.0.6
   flutter_launcher_icons: ^0.13.1
+  http: ^1.2.1
+  share: ^2.0.4
   image_picker: ^1.1.2
 #  share_plus: ^9.0.0
 

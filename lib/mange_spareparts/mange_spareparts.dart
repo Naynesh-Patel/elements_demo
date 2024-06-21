@@ -4,6 +4,7 @@ import 'package:elements/mange_spareparts/add_spareparts.dart';
 import 'package:elements/mange_spareparts/view_spareparts_details.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:elements/widget/button/small_button.dart';
+import 'package:elements/widget/dialogs/custom_dialogbox.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -88,7 +89,17 @@ class _MangeSparepartsState extends State<MangeSpareparts> {
                         ),
                         const SizedBox(width: 10),
                         InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            CustomDialogBox.showDeleteDialog(
+                              context: context,
+                              bodyText:
+                                  "Do you really want to cancel these records? This process cannot be undone.",
+                              onCancelTap: () {
+                                Get.back();
+                              },
+                              onDeleteTap: () {},
+                            );
+                          },
                           borderRadius: BorderRadius.circular(5),
                           child: Container(
                             padding: const EdgeInsets.all(6),
@@ -145,7 +156,7 @@ class _MangeSparepartsState extends State<MangeSpareparts> {
     );
   }
 
-  Widget verticalSpacing(){
+  Widget verticalSpacing() {
     return const SizedBox(
       height: 6.0,
     );

@@ -2,6 +2,7 @@ import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/expense/add_expense.dart';
 import 'package:elements/widget/app%20bar/home_app_bar.dart';
+import 'package:elements/widget/dialogs/custom_dialogbox.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -22,16 +23,16 @@ class _ExpensetTabState extends State<ExpensetTab> {
       backgroundColor: AppColor.whiteColor,
       appBar: HomeAppBar(
         title: "Expense",
-        action: [
-          SvgPicture.asset(
-            "assets/svg/ic_notification.svg",
-            height: 20,
-            width: 20,
-          ),
-          const SizedBox(
-            width: 16,
-          ),
-        ],
+        // action: [
+        //   SvgPicture.asset(
+        //     "assets/svg/ic_notification.svg",
+        //     height: 20,
+        //     width: 20,
+        //   ),
+        //   const SizedBox(
+        //     width: 16,
+        //   ),
+        // ],
       ),
       body: Container(
         margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
@@ -39,7 +40,7 @@ class _ExpensetTabState extends State<ExpensetTab> {
           children: [
             InkWell(
               onTap: () {
-                Get.to(ViewExpenseDetails());
+                Get.to(const ViewExpenseDetails());
               },
               child: Container(
                 padding:
@@ -58,7 +59,7 @@ class _ExpensetTabState extends State<ExpensetTab> {
                             _keyValue("Name", "Ramesh"),
                             verticalSpacing(),
                             _keyValue("Expense Type", "Tea"),
-                             verticalSpacing(),
+                            verticalSpacing(),
                             _keyValue("Price", "₹ 20 "),
                           ],
                         ),
@@ -91,7 +92,17 @@ class _ExpensetTabState extends State<ExpensetTab> {
                               ),
                               InkWell(
                                 borderRadius: BorderRadius.circular(10),
-                                onTap: () {},
+                                onTap: () {
+                                  CustomDialogBox.showDeleteDialog(
+                                    context: context,
+                                    bodyText:
+                                        "Do you really want to cancel these records? This process cannot be undone.",
+                                    onCancelTap: () {
+                                      Get.back();
+                                    },
+                                    onDeleteTap: () {},
+                                  );
+                                },
                                 child: Container(
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
@@ -146,16 +157,15 @@ class _ExpensetTabState extends State<ExpensetTab> {
             child: Text(
           "$value",
           style: AppTextStyle.textStyleRegular14
-              .copyWith(color: Color(0xff555555)),
+              .copyWith(color: const Color(0xff555555)),
         )),
       ],
     );
   }
 
-  Widget verticalSpacing(){
+  Widget verticalSpacing() {
     return const SizedBox(
       height: 6.0,
     );
   }
-
 }

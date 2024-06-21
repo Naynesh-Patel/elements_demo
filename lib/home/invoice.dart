@@ -1,6 +1,7 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/home/view_invoice_detail.dart';
+import 'package:elements/widget/dialogs/custom_dialogbox.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -166,7 +167,17 @@ class _InvoiceState extends State<Invoice> {
                               ),
                               InkWell(
                                 borderRadius: BorderRadius.circular(10),
-                                onTap: () {},
+                                onTap: () {
+                                  CustomDialogBox.showDeleteDialog(
+                                    context: context,
+                                    bodyText:
+                                        "Do you really want to cancel these records? This process cannot be undone.",
+                                    onCancelTap: () {
+                                      Get.back();
+                                    },
+                                    onDeleteTap: () {},
+                                  );
+                                },
                                 child: Container(
                                   decoration: BoxDecoration(
                                       color: const Color(0xffFFFFFF),

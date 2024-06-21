@@ -1,6 +1,7 @@
 import 'package:elements/bill_history/add_bill_history.dart';
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
+import 'package:elements/widget/dialogs/custom_dialogbox.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -141,7 +142,17 @@ class _BillHistoryState extends State<BillHistory> {
                           ),
                           InkWell(
                             borderRadius: BorderRadius.circular(10),
-                            onTap: () {},
+                            onTap: () {
+                              CustomDialogBox.showDeleteDialog(
+                                context: context,
+                                bodyText:
+                                    "Do you really want to cancel these records? This process cannot be undone.",
+                                onCancelTap: () {
+                                  Get.back();
+                                },
+                                onDeleteTap: () {},
+                              );
+                            },
                             child: Container(
                               decoration: BoxDecoration(
                                   color: const Color(0xffFFFFFF),

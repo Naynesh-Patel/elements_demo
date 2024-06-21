@@ -14,7 +14,6 @@ class AddExpense extends StatefulWidget {
 }
 
 class _AddExpenseState extends State<AddExpense> {
-
   HomeController controller = Get.find();
 
   @override
@@ -22,7 +21,7 @@ class _AddExpenseState extends State<AddExpense> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: CustomAppBar(
-          title:"Add Expense",
+          title: "Add Expense",
           onPressed: () {
             Get.back();
           },
@@ -60,13 +59,16 @@ class _AddExpenseState extends State<AddExpense> {
           child: CustomButton(
             color: AppColor.buttonColor,
             buttonText: 'Done',
-            onTap: () {},
+            onTap: () {
+              Get.back();
+            },
           ),
         ));
   }
 
-  Widget verticalSpacing(){
-    return const SizedBox(height: 26.0,);
+  Widget verticalSpacing() {
+    return const SizedBox(
+      height: 26.0,
+    );
   }
-
 }

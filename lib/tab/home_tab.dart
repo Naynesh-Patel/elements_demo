@@ -8,7 +8,6 @@ import 'package:elements/widget/app%20bar/home_app_bar.dart';
 import 'package:elements/widget/button/small_button.dart';
 import 'package:elements/widget/dialogs/custom_dialogbox.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 class HomeTab extends StatefulWidget {
@@ -36,16 +35,16 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
       backgroundColor: AppColor.whiteColor,
       appBar: HomeAppBar(
         title: "MachinePro",
-        action: [
-          SvgPicture.asset(
-            "assets/svg/ic_notification.svg",
-            height: 20,
-            width: 20,
-          ),
-          const SizedBox(
-            width: 16,
-          ),
-        ],
+        // action: [
+        //   SvgPicture.asset(
+        //     "assets/svg/ic_notification.svg",
+        //     height: 20,
+        //     width: 20,
+        //   ),
+        //   const SizedBox(
+        //     width: 16,
+        //   ),
+        // ],
       ),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
@@ -204,7 +203,7 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
             ),
             const SizedBox(height: 8),
             _keyValue(
-              "Assigne Order",
+              "Assigned Order",
               "Manager 1",
             ),
             const SizedBox(height: 16),
@@ -276,7 +275,8 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
       children: [
         Text(
           "$key : ",
-          style: AppTextStyle.textStyleRegular16.copyWith(color: const Color(0xff272727)),
+          style: AppTextStyle.textStyleRegular16
+              .copyWith(color: const Color(0xff272727)),
         ),
         Flexible(
             child: Text(
