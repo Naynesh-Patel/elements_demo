@@ -27,24 +27,24 @@ class _AddImportSparepartsState extends State<AddImportSpareparts> {
         ),
         body: Container(
           margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-          child:  Column(
+          child: Column(
             children: [
-              CustomTextField(
+              const CustomTextField(
                 hintText: "Tata steel Pvt",
                 labelText: "Company Name*",
               ),
               verticalSpacing(),
-              CustomTextField(
+              const CustomTextField(
                 hintText: "Steel Bolt",
                 labelText: "Spareparts Name*",
               ),
               verticalSpacing(),
-              CustomTextField(
+              const CustomTextField(
                 hintText: "20",
                 labelText: "Qty*",
               ),
               verticalSpacing(),
-              CustomTextField(
+              const CustomTextField(
                 hintText: "Medium",
                 labelText: "Type*",
               ),
@@ -61,7 +61,9 @@ class _AddImportSparepartsState extends State<AddImportSpareparts> {
         ));
   }
 
-  Widget verticalSpacing(){
-    return const SizedBox(height: 26.0,);
+  Widget verticalSpacing() {
+    return const SizedBox(
+      height: 26.0,
+    );
   }
 }

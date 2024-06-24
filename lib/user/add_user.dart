@@ -1,5 +1,6 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
+import 'package:elements/controller/user_controller.dart';
 import 'package:elements/user/user_view_detail.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:elements/widget/button/custom_button.dart';
@@ -20,6 +21,8 @@ class _AddUserState extends State<AddUser> {
   bool value = false;
   int index = 0;
 
+  UserController controller = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,9 +41,10 @@ class _AddUserState extends State<AddUser> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                   Text(
+                  Text(
                     'Add Profile :',
-                     style: AppTextStyle.textStyleRegular16.copyWith(color: AppColor.blackLightColor),
+                    style: AppTextStyle.textStyleRegular16
+                        .copyWith(color: AppColor.blackLightColor),
                   ),
                   const SizedBox(
                     height: 15,
@@ -49,22 +53,41 @@ class _AddUserState extends State<AddUser> {
                     child: Stack(
                       alignment: Alignment.bottomRight,
                       children: [
-                        Image.asset(
-                          'assets/images/camera.png',
-                          height: 80,
-                          width: 80,
-                        ),
-                        Container(
-                            padding: const EdgeInsets.all(5),
-                            decoration: BoxDecoration(
-                                color: const Color(0xff01959F),
-                                // shape: BoxShape.circle,
-                                borderRadius: BorderRadius.circular(15)),
-                            child: const Icon(
-                              Icons.add,
-                              color: Colors.white,
-                              size: 18,
-                            ))
+                        controller.imgFile == null
+                            ? Image.asset(
+                                'assets/images/camera.png',
+                                height: 80,
+                                width: 80,
+                              )
+                            : SizedBox(
+                                height: 80,
+                                width: 80,
+                                child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(50.0),
+                                    child: Image.file(
+                                      controller.imgFile!,
+                                      fit: BoxFit.cover,
+                                    ))),
+                        InkWell(
+                          onTap: () async {
+                            bool refresh =
+                                await controller.pickImageFromGallery();
+                            if (refresh) {
+                              setState(() {});
+                            }
+                          },
+                          child: Container(
+                              padding: const EdgeInsets.all(5),
+                              decoration: BoxDecoration(
+                                  color: const Color(0xff01959F),
+                                  // shape: BoxShape.circle,
+                                  borderRadius: BorderRadius.circular(15)),
+                              child: const Icon(
+                                Icons.add,
+                                color: Colors.white,
+                                size: 18,
+                              )),
+                        )
                       ],
                     ),
                   ),
@@ -115,8 +138,9 @@ class _AddUserState extends State<AddUser> {
         ));
   }
 
-  Widget verticalSpacing(){
-    return const SizedBox(height: 26.0,);
+  Widget verticalSpacing() {
+    return const SizedBox(
+      height: 26.0,
+    );
   }
-
 }

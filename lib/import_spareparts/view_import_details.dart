@@ -1,10 +1,9 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
+import 'package:elements/date_piker.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../date_piker.dart';
 
 class ViewImportDetails extends StatefulWidget {
   const ViewImportDetails({super.key});
@@ -48,7 +47,7 @@ class _ViewImportDetailsState extends State<ViewImportDetails> {
               _tableView(
                   name: 'Nehal',
                   date: "5/10/2023",
-                  type: 'Cantin',
+                  type: 'Canting',
                   price: '10'),
             ],
           ),

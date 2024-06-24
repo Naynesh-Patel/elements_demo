@@ -10,24 +10,27 @@ import 'package:get/get.dart';
 class AddCustomer extends StatefulWidget {
   final bool isUpdate;
   final bool isView;
-  const AddCustomer({super.key,this.isUpdate=false,this.isView=false});
+  const AddCustomer({super.key, this.isUpdate = false, this.isView = false});
 
   @override
   State<AddCustomer> createState() => _AddCustomerState();
 }
 
 class _AddCustomerState extends State<AddCustomer> {
-
   CustomerController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
-        appBar:CustomAppBar(
-          title: widget.isUpdate ? "Update Customer/Company Details" : widget.isView ? "View Customer/Company Details" : "Add Customer/Company",
-          onPressed:() {
-           Get.back();
+        appBar: CustomAppBar(
+          title: widget.isUpdate
+              ? "Update Customer/Company Details"
+              : widget.isView
+                  ? "View Customer/Company Details"
+                  : "Add Customer/Company",
+          onPressed: () {
+            Get.back();
           },
         ),
         body: SingleChildScrollView(
@@ -36,14 +39,17 @@ class _AddCustomerState extends State<AddCustomer> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                     Text(
-                       widget.isUpdate || widget.isView ? 'Profile :' :
-                       'Add Profile :',
-                      style: AppTextStyle.textStyleRegular16.copyWith(color: AppColor.blackLightColor),
+                    Text(
+                      widget.isUpdate || widget.isView
+                          ? 'Profile :'
+                          : 'Add Profile :',
+                      style: AppTextStyle.textStyleRegular16
+                          .copyWith(color: AppColor.blackLightColor),
                     ),
                     const SizedBox(
                       height: 20,
@@ -52,24 +58,27 @@ class _AddCustomerState extends State<AddCustomer> {
                       child: Stack(
                         alignment: Alignment.bottomRight,
                         children: [
-                          controller.imgFile == null ?
-                          Image.asset(
-                            'assets/images/camera.png',
-                            height: 80,
-                            width: 80,
-                          ):SizedBox(
-                              height: 80,
-                              width: 80,
-                              child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(50.0),
-                                  child: Image.file(controller.imgFile!,fit: BoxFit.cover,))),
+                          controller.imgFile == null
+                              ? Image.asset(
+                                  'assets/images/camera.png',
+                                  height: 80,
+                                  width: 80,
+                                )
+                              : SizedBox(
+                                  height: 80,
+                                  width: 80,
+                                  child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(50.0),
+                                      child: Image.file(
+                                        controller.imgFile!,
+                                        fit: BoxFit.cover,
+                                      ))),
                           InkWell(
                             onTap: () async {
-                              bool refresh = await controller.pickImageFromGallery();
-                              if(refresh){
-                                setState(() {
-
-                                });
+                              bool refresh =
+                                  await controller.pickImageFromGallery();
+                              if (refresh) {
+                                setState(() {});
                               }
                             },
                             child: Container(
@@ -98,24 +107,42 @@ class _AddCustomerState extends State<AddCustomer> {
                       labelText: "Owner Name*",
                     ),
                     verticalSpacing(),
-                     CustomTextField(
+                    CustomTextField(
                       hintText: "99656 25693",
                       labelText: "Contact No.*",
-                      suffixFixIcon: widget.isView ? const Icon(Icons.phone,size: 20,) : const SizedBox.shrink(),
+                      suffixFixIcon: widget.isView
+                          ? const Icon(
+                              Icons.phone,
+                              size: 20,
+                            )
+                          : const SizedBox.shrink(),
                     ),
                     verticalSpacing(),
-                     CustomTextField(
+                    CustomTextField(
                       hintText: "Enter Address",
                       labelText: "Address",
-                      suffixFixIcon: widget.isView ? const Icon(Icons.location_on_outlined,size: 20,) : const SizedBox.shrink(),
+                      suffixFixIcon: widget.isView
+                          ? const Icon(
+                              Icons.location_on_outlined,
+                              size: 20,
+                            )
+                          : SizedBox.shrink(),
                     ),
                     verticalSpacing(),
-                     CustomTextField(
+                    CustomTextField(
                       hintText: "www.machinepro.com",
                       labelText: "Website",
-                         suffixFixIcon: widget.isView ? Container(
-                             padding: const EdgeInsets.all(14.0),
-                             child: Image.asset("assets/images/world_wide_web.png",height: 16,width:5,fit: BoxFit.cover,color: AppColor.blackColor,)) : const SizedBox.shrink(),
+                      suffixFixIcon: widget.isView
+                          ? Container(
+                              padding: const EdgeInsets.all(14.0),
+                              child: Image.asset(
+                                "assets/images/world_wide_web.png",
+                                height: 16,
+                                width: 5,
+                                fit: BoxFit.cover,
+                                color: AppColor.blackColor,
+                              ))
+                          : const SizedBox.shrink(),
                     ),
                     verticalSpacing(),
                     const CustomTextField(
@@ -133,18 +160,22 @@ class _AddCustomerState extends State<AddCustomer> {
             ],
           ),
         ),
-        bottomNavigationBar: widget.isView ? const SizedBox.shrink() : Container(
-          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-          child: CustomButton(
-            color: AppColor.buttonColor,
-            buttonText: widget.isUpdate ? 'Update' : 'Add',
-            onTap: () {},
-          ),
-        ));
+        bottomNavigationBar: widget.isView
+            ? const SizedBox.shrink()
+            : Container(
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                child: CustomButton(
+                  color: AppColor.buttonColor,
+                  buttonText: widget.isUpdate ? 'Update' : 'Add',
+                  onTap: () {},
+                ),
+              ));
   }
 
-  Widget verticalSpacing(){
-    return const SizedBox(height: 26.0,);
+  Widget verticalSpacing() {
+    return const SizedBox(
+      height: 26.0,
+    );
   }
-
 }

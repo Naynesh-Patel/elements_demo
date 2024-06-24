@@ -1,9 +1,10 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
+import 'package:elements/controller/salesmen_controller.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:elements/widget/button/custom_button.dart';
 import 'package:elements/widget/custom_text_field.dart';
-import 'package:elements/widget/dropdown/common_dropdown.dart';
+import 'package:elements/widget/dropdown/dropdown_fromfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -26,6 +27,8 @@ class _AddSalesmenState extends State<AddSalesmen> {
     'Seller',
   ];
 
+  SalesmenController controller = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +47,8 @@ class _AddSalesmenState extends State<AddSalesmen> {
             children: [
               Text(
                 'Add Profile :',
-                style: AppTextStyle.textStyleRegular16.copyWith(color: AppColor.blackLightColor),
+                style: AppTextStyle.textStyleRegular16
+                    .copyWith(color: AppColor.blackLightColor),
               ),
               const SizedBox(
                 height: 15,
@@ -53,36 +57,52 @@ class _AddSalesmenState extends State<AddSalesmen> {
                 child: Stack(
                   alignment: Alignment.bottomRight,
                   children: [
-                    Image.asset(
-                      'assets/images/camera.png',
-                      height: 80,
-                      width: 80,
-                    ),
-                    Container(
-                        padding: const EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                            color: const Color(0xff01959F),
-                            // shape: BoxShape.circle,
-                            borderRadius: BorderRadius.circular(15)),
-                        child: const Icon(
-                          Icons.add,
-                          color: Colors.white,
-                          size: 18,
-                        ))
+                    controller.imgFile == null
+                        ? Image.asset(
+                            'assets/images/camera.png',
+                            height: 80,
+                            width: 80,
+                          )
+                        : SizedBox(
+                            height: 80,
+                            width: 80,
+                            child: ClipRRect(
+                                borderRadius: BorderRadius.circular(50.0),
+                                child: Image.file(
+                                  controller.imgFile!,
+                                  fit: BoxFit.cover,
+                                ))),
+                    InkWell(
+                      onTap: () async {
+                        bool refresh = await controller.pickImageFromGallery();
+                        if (refresh) {
+                          setState(() {});
+                        }
+                      },
+                      child: Container(
+                          padding: const EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                              color: const Color(0xff01959F),
+                              // shape: BoxShape.circle,
+                              borderRadius: BorderRadius.circular(15)),
+                          child: const Icon(
+                            Icons.add,
+                            color: Colors.white,
+                            size: 18,
+                          )),
+                    )
                   ],
                 ),
               ),
               verticalSpacing(),
-              CommonDropdown(
-                dropdownList: items,
-                value: selectLevel,
-                callback: setLevelValue,
-                hintText: "User Role",
+              WidgetDropDownFromField(
+                hintText: "Select User Role",
+                labelText: "User Role",
+                itemList: const ["Admin", "Usre", "Seller"],
+                onTap: (value) {
+                  debugPrint("Select => $value");
+                },
               ),
-              // const CustomTextField(
-              //   hintText: "Select User Role",
-              //   labelText: "User Role",
-              // ),
               verticalSpacing(),
               const CustomTextField(
                 hintText: "worker",

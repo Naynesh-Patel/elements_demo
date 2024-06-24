@@ -37,16 +37,16 @@ class _InvoiceState extends State<Invoice> {
           ),
           title:
               Text("Invoice Details", style: AppTextStyle.textStyleRegular20),
-          actions: [
-            SvgPicture.asset(
-              "assets/svg/ic_notification.svg",
-              height: 20,
-              width: 20,
-            ),
-            const SizedBox(
-              width: 16,
-            ),
-          ],
+          // actions: [
+          //   SvgPicture.asset(
+          //     "assets/svg/ic_notification.svg",
+          //     height: 20,
+          //     width: 20,
+          //   ),
+          //   const SizedBox(
+          //     width: 16,
+          //   ),
+          // ],
         ),
         body: Container(
           margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
