@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 
 class AddSalesmen extends StatefulWidget {
   final bool isUpdate;
+
   const AddSalesmen({super.key, this.isUpdate = false});
 
   @override
@@ -20,13 +21,7 @@ class _AddSalesmenState extends State<AddSalesmen> {
   bool value = false;
   int index = 0;
 
-  String dropdownvalue = 'User';
   String? selectLevel;
-  var items = [
-    'Admin',
-    'User',
-    'Seller',
-  ];
 
   SalesmenController controller = Get.find();
 
@@ -35,7 +30,7 @@ class _AddSalesmenState extends State<AddSalesmen> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: CustomAppBar(
-          title: 'Add Salesmen',
+          title: widget.isUpdate ? 'Update Salesmen' : 'Add Salesmen',
           onPressed: () {
             Get.back();
           },

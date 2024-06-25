@@ -6,6 +6,8 @@ import 'package:elements/widget/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../widget/dialogs/custom_dialogbox.dart';
+
 class ViewOrderDetails extends StatefulWidget {
   final bool isUpdate;
   const ViewOrderDetails({super.key, this.isUpdate = false});
@@ -52,7 +54,7 @@ class _ViewOrderDetailsState extends State<ViewOrderDetails> {
               ),
               ListView.builder(
                 shrinkWrap: true,
-                itemCount: 3,
+                itemCount: 2,
                 itemBuilder: (context, index) {
                   return Container(
                     margin: const EdgeInsets.symmetric(vertical: 10),
@@ -65,7 +67,19 @@ class _ViewOrderDetailsState extends State<ViewOrderDetails> {
                         ),
                         InkWell(
                           borderRadius: BorderRadius.circular(10),
-                          onTap: () {},
+                          onTap: () {
+                            CustomDialogBox.showDeleteDialog(
+                              context: context,
+                              bodyText:
+                                  "Do you really want to cancel these records? This process cannot be undone.",
+                              onCancelTap: () {
+                                Get.back();
+                              },
+                              onDeleteTap: () {
+                                Get.back();
+                              },
+                            );
+                          },
                           child: Container(
                             decoration: BoxDecoration(
                                 color: const Color(0xffFFFFFF),

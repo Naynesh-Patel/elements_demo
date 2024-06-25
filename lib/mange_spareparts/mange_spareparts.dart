@@ -8,8 +8,6 @@ import 'package:elements/widget/dialogs/custom_dialogbox.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../import_spareparts/add_import_spareparts.dart';
-
 class MangeSpareparts extends StatefulWidget {
   const MangeSpareparts({super.key});
 
@@ -25,7 +23,7 @@ class _MangeSparepartsState extends State<MangeSpareparts> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: CustomAppBar(
-        title: "Mange Spareparts",
+        title: "are youSpareparts",
         onPressed: () {
           Get.back();
         },
@@ -44,7 +42,11 @@ class _MangeSparepartsState extends State<MangeSpareparts> {
                 )),
                 SmallButton(
                     title: "Update",
-                    onTap: () {},
+                    onTap: () {
+                      Get.to(const AddSpareparts(
+                        isUpdate: true,
+                      ));
+                    },
                     textColor: AppColor.selectColor)
               ],
             ),
@@ -76,7 +78,7 @@ class _MangeSparepartsState extends State<MangeSpareparts> {
                       children: [
                         InkWell(
                           onTap: () {
-                            Get.to(AddImportSpareparts(
+                            Get.to(const AddSpareparts(
                               isUpdate: true,
                             ));
                           },

@@ -5,6 +5,7 @@ import 'package:elements/widget/dialogs/custom_dialogbox.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:share/share.dart';
 
 class BillHistory extends StatefulWidget {
   const BillHistory({super.key});
@@ -123,7 +124,7 @@ class _BillHistoryState extends State<BillHistory> {
                           InkWell(
                             borderRadius: BorderRadius.circular(10),
                             onTap: () {
-                              Get.to(AddBillHistory(
+                              Get.to(const AddBillHistory(
                                 isUpdate: true,
                               ));
                             },
@@ -154,7 +155,9 @@ class _BillHistoryState extends State<BillHistory> {
                                 onCancelTap: () {
                                   Get.back();
                                 },
-                                onDeleteTap: () {},
+                                onDeleteTap: () {
+                                  Get.back();
+                                },
                               );
                             },
                             child: Container(
@@ -177,7 +180,9 @@ class _BillHistoryState extends State<BillHistory> {
                           ),
                           InkWell(
                             borderRadius: BorderRadius.circular(10),
-                            onTap: () {},
+                            onTap: () {
+                              onShare();
+                            },
                             child: Container(
                               decoration: BoxDecoration(
                                   color: const Color(0xffFFFFFF),
@@ -213,5 +218,11 @@ class _BillHistoryState extends State<BillHistory> {
             color: Colors.white,
           )),
     );
+  }
+
+  Future<void> onShare() async {
+    const String text = 'Hello, check out my awesome app!';
+    const String subject = 'Look what I found!';
+    Share.share(text, subject: subject);
   }
 }

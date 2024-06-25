@@ -1,5 +1,6 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
+import 'package:elements/controller/machinery_controller.dart';
 import 'package:elements/machinery/add_machinery.dart';
 import 'package:elements/machinery/view_machinery.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
@@ -16,6 +17,7 @@ class MangeMachinery extends StatefulWidget {
 }
 
 class _MangeMachineryState extends State<MangeMachinery> {
+  MachineryController controller = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +42,11 @@ class _MangeMachineryState extends State<MangeMachinery> {
                 )),
                 SmallButton(
                     title: "Update",
-                    onTap: () {},
+                    onTap: () {
+                      Get.to(const AddMachinery(
+                        isUpdate: true,
+                      ));
+                    },
                     textColor: AppColor.selectColor)
               ],
             ),
@@ -90,7 +96,7 @@ class _MangeMachineryState extends State<MangeMachinery> {
                         SmallButton(
                             title: "  Edit  ",
                             onTap: () {
-                              Get.to(AddMachinery(
+                              Get.to(const AddMachinery(
                                 isUpdate: true,
                               ));
                             },

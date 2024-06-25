@@ -76,7 +76,7 @@ class _ExpensetTabState extends State<ExpensetTab> {
                               InkWell(
                                 borderRadius: BorderRadius.circular(10),
                                 onTap: () {
-                                  Get.to(AddExpense(
+                                  Get.to(const AddExpense(
                                     isUpdate: true,
                                   ));
                                 },
@@ -106,7 +106,9 @@ class _ExpensetTabState extends State<ExpensetTab> {
                                     onCancelTap: () {
                                       Get.back();
                                     },
-                                    onDeleteTap: () {},
+                                    onDeleteTap: () {
+                                      Get.back();
+                                    },
                                   );
                                 },
                                 child: Container(

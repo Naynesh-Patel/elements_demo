@@ -64,7 +64,9 @@ class _MangeCustomerState extends State<MangeCustomer> {
                         SmallButton(
                           title: "  Edit  ",
                           onTap: () {
-                            Get.to(const AddCustomer(isUpdate: true,));
+                            Get.to(const AddCustomer(
+                              isUpdate: true,
+                            ));
                           },
                         ),
                         const SizedBox(
@@ -81,7 +83,9 @@ class _MangeCustomerState extends State<MangeCustomer> {
                               onCancelTap: () {
                                 Get.back();
                               },
-                              onDeleteTap: () {},
+                              onDeleteTap: () {
+                                Get.back();
+                              },
                             );
                           },
                         ),
@@ -131,7 +135,7 @@ class _MangeCustomerState extends State<MangeCustomer> {
     );
   }
 
-  Widget verticalSpacing(){
+  Widget verticalSpacing() {
     return const SizedBox(
       height: 6.0,
     );

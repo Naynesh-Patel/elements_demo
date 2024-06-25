@@ -2,7 +2,6 @@ import 'package:elements/bill_history/bill_history.dart';
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/controller/setting_controller.dart';
-import 'package:elements/import_spareparts/import_spareparts.dart';
 import 'package:elements/machinery/mange_machinery.dart';
 import 'package:elements/manage_customer/mange_customer.dart';
 import 'package:elements/mange_spareparts/mange_spareparts.dart';
@@ -75,22 +74,22 @@ class _SettingTabState extends State<SettingTab> {
                     Get.to(const MangeSpareparts());
                   },
                 ),
-                _customTile(
-                  title: "Import Spareparts",
-                  imgPath: "assets/images/import_spareparts.png",
-                  isSvg: false,
-                  index: 3,
-                  onTap: () {
-                    controller.selectMenu.value = 3;
-                    Get.to(const ImportSpareparts());
-                  },
-                ),
+                // _customTile(
+                //   title: "Import Spareparts",
+                //   imgPath: "assets/images/import_spareparts.png",
+                //   isSvg: false,
+                //   index: 3,
+                //   onTap: () {
+                //     controller.selectMenu.value = 3;
+                //     Get.to(const ImportSpareparts());
+                //   },
+                // ),
                 _customTile(
                   title: "Manage User",
                   imgPath: "assets/svg/all_users.svg",
-                  index: 4,
+                  index: 3,
                   onTap: () {
-                    controller.selectMenu.value = 4;
+                    controller.selectMenu.value = 3;
                     Get.to(const MangeUser());
                   },
                 ),
@@ -98,18 +97,18 @@ class _SettingTabState extends State<SettingTab> {
                   title: "Manage Salesmen",
                   imgPath: "assets/images/mange_salesmen.png",
                   isSvg: false,
-                  index: 5,
+                  index: 4,
                   onTap: () {
-                    controller.selectMenu.value = 5;
+                    controller.selectMenu.value = 4;
                     Get.to(const MangeSalesmen());
                   },
                 ),
                 _customTile(
                   title: "Manage Customer Company",
                   imgPath: "assets/svg/mange_compny.svg",
-                  index: 6,
+                  index: 5,
                   onTap: () {
-                    controller.selectMenu.value = 6;
+                    controller.selectMenu.value = 5;
                     Get.to(const MangeCustomer());
                   },
                 ),
@@ -125,9 +124,9 @@ class _SettingTabState extends State<SettingTab> {
                 _customTile(
                   title: "Bill History",
                   imgPath: "assets/svg/bil_history.svg",
-                  index: 7,
+                  index: 6,
                   onTap: () {
-                    controller.selectMenu.value = 7;
+                    controller.selectMenu.value = 6;
                     Get.to(const BillHistory());
                   },
                 ),
@@ -135,7 +134,7 @@ class _SettingTabState extends State<SettingTab> {
                   title: "Logout",
                   isSvg: false,
                   imgPath: "assets/images/logout.png",
-                  index: 8,
+                  index: 7,
                   onTap: () {
                     CustomDialogBox.showLogoutDialog(
                       context: context,

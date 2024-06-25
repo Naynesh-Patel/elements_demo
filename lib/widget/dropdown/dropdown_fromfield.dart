@@ -9,11 +9,16 @@ class WidgetDropDownFromField extends StatelessWidget {
   final String hintText;
   final String labelText;
   final ValueSetter<dynamic> onTap;
-  const WidgetDropDownFromField({Key? key,required this.itemList,required this.hintText,required this.labelText,required this.onTap}) : super(key: key);
+  const WidgetDropDownFromField(
+      {super.key,
+      required this.itemList,
+      required this.hintText,
+      required this.labelText,
+      required this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    return  Stack(
+    return Stack(
       children: <Widget>[
         Container(
           height: 60,
@@ -27,47 +32,49 @@ class WidgetDropDownFromField extends StatelessWidget {
             height: 50,
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.all(Radius.circular(5)),
-              border: Border.all(color:AppColor.borderColor),
+              border: Border.all(color: AppColor.borderColor),
             ),
-            child:DropdownButtonFormField2<dynamic>(
+            child: DropdownButtonFormField2<dynamic>(
               isExpanded: true,
-              hint: Text(hintText,style: AppTextStyle.textStyleRegular14.copyWith(color: AppColor.dropDownHintColor),),
+              hint: Text(
+                hintText,
+                style: AppTextStyle.textStyleRegular14
+                    .copyWith(color: AppColor.dropDownHintColor),
+              ),
               decoration: const InputDecoration(
                 enabledBorder: OutlineInputBorder(
                     // borderSide: BorderSide(color: AppColor.borderColor),
                     borderSide: BorderSide.none,
-                    borderRadius: BorderRadius.all(Radius.circular(6.0))
-                ),
+                    borderRadius: BorderRadius.all(Radius.circular(6.0))),
                 focusedBorder: OutlineInputBorder(
                     // borderSide: BorderSide(color: AppColor.borderColor),
                     borderSide: BorderSide.none,
-                    borderRadius: BorderRadius.all(Radius.circular(6.0))
-                ),
+                    borderRadius: BorderRadius.all(Radius.circular(6.0))),
                 border: OutlineInputBorder(
                     // borderSide: BorderSide(color: AppColor.borderColor),
                     borderSide: BorderSide.none,
-                    borderRadius: BorderRadius.all(Radius.circular(6.0))
-                ),
-                contentPadding: EdgeInsets.symmetric(vertical: 0.0,horizontal: 1.0),
-                suffixIcon:  Icon(
+                    borderRadius: BorderRadius.all(Radius.circular(6.0))),
+                contentPadding:
+                    EdgeInsets.symmetric(vertical: 0.0, horizontal: 1.0),
+                suffixIcon: Icon(
                   Icons.keyboard_arrow_down_outlined,
                   color: AppColor.blackColor,
                 ),
               ),
               items: itemList
                   .map((item) => DropdownMenuItem(
-                value: item,
-                child: Text(
-                  item,
-                  style: const TextStyle(
-                    fontSize: 14,
-                  ),
-                ),
-              )).toList(),
+                        value: item,
+                        child: Text(
+                          item,
+                          style: const TextStyle(
+                            fontSize: 14,
+                          ),
+                        ),
+                      ))
+                  .toList(),
               onChanged: (value) {
                 onTap(value);
               },
-
               iconStyleData: const IconStyleData(
                 icon: SizedBox.shrink(),
               ),
@@ -76,7 +83,6 @@ class WidgetDropDownFromField extends StatelessWidget {
                   borderRadius: BorderRadius.circular(5.0),
                 ),
               ),
-
             ),
           ),
         ),
@@ -84,7 +90,11 @@ class WidgetDropDownFromField extends StatelessWidget {
           left: 16,
           child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 4.0),
-              color: Colors.white, child: Text(labelText,style: AppTextStyle.textStyleRegular13,)),
+              color: Colors.white,
+              child: Text(
+                labelText,
+                style: AppTextStyle.textStyleRegular13,
+              )),
         )
       ],
     );
