@@ -39,67 +39,6 @@ class _AddBillHistoryState extends State<AddBillHistory>
           title:
               widget.isUpdate ? "Update Bill Invoice" : 'Create Bill Invoice',
         ),
-        body: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-          child: ListView(
-            shrinkWrap: true,
-            children: [
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  WidgetDropDownFromField(
-                    hintText: "Invoice Bill",
-                    labelText: "Bill Type",
-                    itemList: const ["Admin", "Usre", "Seller"],
-                    onTap: (value) {
-                      debugPrint("Select => $value");
-                    },
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  WidgetDropDownFromField(
-                    hintText: "Select Company Name",
-                    labelText: "Customer/Company Name*",
-                    itemList: const ["Admin", "Usre", "Seller"],
-                    onTap: (value) {
-                      debugPrint("Select => $value");
-                    },
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  WidgetDropDownFromField(
-                    hintText: "Select Machine Type",
-                    labelText: "Machine Type*",
-                    itemList: const ["Admin", "Usre", "Seller"],
-                    onTap: (value) {
-                      debugPrint("Select => $value");
-                    },
-                  ),
-                  verticalSpacing(),
-                  const CustomTextField(
-                    labelText: "Qty*",
-                    hintText: "2*",
-                  ),
-                  verticalSpacing(),
-                  const CustomTextField(
-                    labelText: "Mobile No.*",
-                    hintText: "9989898958",
-                  ),
-                  verticalSpacing(),
-                  const CustomTextField(
-                    labelText: "Price*",
-                    hintText: "2000*",
-                  ),
-                  verticalSpacing(),
-                  const CustomTextField(
-                    hintText: "Shipping Address....",
-                    labelText: "Shipping Address*",
-                  ),
-                  verticalSpacing(),
-                ],
-              ),
         body: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
