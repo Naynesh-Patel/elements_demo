@@ -103,7 +103,9 @@ class _MangeSparepartsState extends State<MangeSpareparts> {
                               onCancelTap: () {
                                 Get.back();
                               },
-                              onDeleteTap: () {},
+                              onDeleteTap: () {
+                                Get.back();
+                              },
                             );
                           },
                           borderRadius: BorderRadius.circular(5),
