@@ -122,7 +122,11 @@ class _BillHistoryState extends State<BillHistory> {
                         children: [
                           InkWell(
                             borderRadius: BorderRadius.circular(10),
-                            onTap: () {},
+                            onTap: () {
+                              Get.to(AddBillHistory(
+                                isUpdate: true,
+                              ));
+                            },
                             child: Container(
                                 decoration: BoxDecoration(
                                     color: const Color(0xffFFFFFF),

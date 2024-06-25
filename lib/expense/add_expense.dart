@@ -7,7 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AddExpense extends StatefulWidget {
-  const AddExpense({super.key});
+  final bool isUpdate;
+  const AddExpense({super.key, this.isUpdate = false});
 
   @override
   State<AddExpense> createState() => _AddExpenseState();
@@ -21,7 +22,7 @@ class _AddExpenseState extends State<AddExpense> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: CustomAppBar(
-          title: "Add Expense",
+          title: widget.isUpdate ? "Update Expense Details" : "Add Expense",
           onPressed: () {
             Get.back();
           },
@@ -58,7 +59,7 @@ class _AddExpenseState extends State<AddExpense> {
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: CustomButton(
             color: AppColor.buttonColor,
-            buttonText: 'Done',
+            buttonText: widget.isUpdate ? 'Update' : 'Done',
             onTap: () {
               Get.back();
             },

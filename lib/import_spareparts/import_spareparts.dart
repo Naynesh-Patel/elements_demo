@@ -72,7 +72,12 @@ class _ImportSparepartsState extends State<ImportSpareparts> {
                       children: [
                         Expanded(child: _keyValue("Type", "Medium")),
                         InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            // Get.to(const AddCustomer(
+                            //   isUpdate: true,
+                            // ),
+                            // );
+                          },
                           borderRadius: BorderRadius.circular(5),
                           child: Container(
                             padding: const EdgeInsets.all(6),

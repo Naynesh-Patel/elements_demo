@@ -222,7 +222,11 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
                 ),
                 SmallButton(
                     title: "  Edit  ",
-                    onTap: () {},
+                    onTap: () {
+                      Get.to(ViewOrderDetails(
+                        isUpdate: true,
+                      ));
+                    },
                     textColor: const Color(0xff555555)),
                 const SizedBox(
                   width: 10,

@@ -10,7 +10,9 @@ import 'package:get/get.dart';
 import '../expense/view_expense_details.dart';
 
 class ExpensetTab extends StatefulWidget {
-  const ExpensetTab({super.key});
+  final bool isUpdate;
+
+  const ExpensetTab({super.key, this.isUpdate = false});
 
   @override
   State<ExpensetTab> createState() => _ExpensetTabState();
@@ -73,7 +75,11 @@ class _ExpensetTabState extends State<ExpensetTab> {
                             children: [
                               InkWell(
                                 borderRadius: BorderRadius.circular(10),
-                                onTap: () {},
+                                onTap: () {
+                                  Get.to(AddExpense(
+                                    isUpdate: true,
+                                  ));
+                                },
                                 child: Container(
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),

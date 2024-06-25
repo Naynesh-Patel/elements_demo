@@ -7,7 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AddBillHistory extends StatefulWidget {
-  const AddBillHistory({super.key});
+  final bool isUpdate;
+  const AddBillHistory({super.key, this.isUpdate = false});
 
   @override
   State<AddBillHistory> createState() => _AddBillHistoryState();
@@ -16,6 +17,7 @@ class AddBillHistory extends StatefulWidget {
 class _AddBillHistoryState extends State<AddBillHistory>
     with TickerProviderStateMixin {
   bool value = false;
+
   int index = 0;
   late TabController tabController;
   int currentIndex = 0;
@@ -34,7 +36,8 @@ class _AddBillHistoryState extends State<AddBillHistory>
           onPressed: () {
             Get.back();
           },
-          title: 'Create Bill Invoice',
+          title:
+              widget.isUpdate ? "Update Bill Invoice" : 'Create Bill Invoice',
         ),
         body: Container(
           margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),

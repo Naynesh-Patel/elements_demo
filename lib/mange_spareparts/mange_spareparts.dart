@@ -8,6 +8,8 @@ import 'package:elements/widget/dialogs/custom_dialogbox.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../import_spareparts/add_import_spareparts.dart';
+
 class MangeSpareparts extends StatefulWidget {
   const MangeSpareparts({super.key});
 
@@ -73,7 +75,11 @@ class _MangeSparepartsState extends State<MangeSpareparts> {
                     Row(
                       children: [
                         InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            Get.to(AddImportSpareparts(
+                              isUpdate: true,
+                            ));
+                          },
                           borderRadius: BorderRadius.circular(5),
                           child: Container(
                             padding: const EdgeInsets.all(6),

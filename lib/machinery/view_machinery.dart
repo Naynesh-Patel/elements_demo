@@ -33,7 +33,7 @@ class _ViewMachineryState extends State<ViewMachinery> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: CustomAppBar(
-        title: "Add Machinery",
+        title: "View Machinery",
         onPressed: () {
           Get.back();
         },

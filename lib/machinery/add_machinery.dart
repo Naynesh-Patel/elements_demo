@@ -9,7 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AddMachinery extends StatefulWidget {
-  const AddMachinery({super.key});
+  final bool isUpdate;
+  const AddMachinery({super.key, this.isUpdate = false});
 
   @override
   State<AddMachinery> createState() => _AddMachineryState();
@@ -40,7 +41,7 @@ class _AddMachineryState extends State<AddMachinery> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: CustomAppBar(
-          title: "Add Machinery",
+          title: widget.isUpdate ? "Update Machinery Details" : "Add Machinery",
           onPressed: () {
             Get.back();
           },
@@ -211,7 +212,7 @@ class _AddMachineryState extends State<AddMachinery> {
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: CustomButton(
             color: AppColor.buttonColor,
-            buttonText: 'Add',
+            buttonText: widget.isUpdate ? "Update" : "Add",
             onTap: () {},
           ),
         ));

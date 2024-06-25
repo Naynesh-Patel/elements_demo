@@ -6,7 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AddImportSpareparts extends StatefulWidget {
-  const AddImportSpareparts({super.key});
+  final bool isUpdate;
+  const AddImportSpareparts({
+    super.key,
+    this.isUpdate = false,
+  });
 
   @override
   State<AddImportSpareparts> createState() => _AddImportSparepartsState();
@@ -20,7 +24,9 @@ class _AddImportSparepartsState extends State<AddImportSpareparts> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: CustomAppBar(
-          title: "Add Import Spareparts",
+          title: widget.isUpdate
+              ? "Update Import Spareparts "
+              : "Add Import Spareparts",
           onPressed: () {
             Get.back();
           },
@@ -55,7 +61,7 @@ class _AddImportSparepartsState extends State<AddImportSpareparts> {
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: CustomButton(
             color: AppColor.buttonColor,
-            buttonText: 'Add',
+            buttonText: widget.isUpdate ? 'Update' : 'Add',
             onTap: () {},
           ),
         ));

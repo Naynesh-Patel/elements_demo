@@ -7,7 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AddSalesmen extends StatefulWidget {
-  const AddSalesmen({super.key});
+  final bool isUpdate;
+
+  const AddSalesmen({super.key, this.isUpdate = false});
 
   @override
   State<AddSalesmen> createState() => _AddSalesmenState();
@@ -31,9 +33,9 @@ class _AddSalesmenState extends State<AddSalesmen> {
         backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: const Color(0xffF9F9F9),
-          title: const Text(
-            "Add Salesmen",
-            style: TextStyle(
+          title: Text(
+            widget.isUpdate ? "Update Salesmen" : "Add Salesmen",
+            style: const TextStyle(
               color: Colors.black,
             ),
           ),
@@ -137,7 +139,7 @@ class _AddSalesmenState extends State<AddSalesmen> {
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: CustomButton(
             color: AppColor.buttonColor,
-            buttonText: 'Add',
+            buttonText: widget.isUpdate ? "Update" : "Add",
             onTap: () {},
           ),
         ));

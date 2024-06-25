@@ -80,14 +80,20 @@ class _MangeMachineryState extends State<MangeMachinery> {
                         SmallButton(
                           title: " View ",
                           textColor: AppColor.selectColor,
-                          onTap: () {},
+                          onTap: () {
+                            Get.to(const ViewMachinery());
+                          },
                         ),
                         const SizedBox(
                           width: 10,
                         ),
                         SmallButton(
                             title: "  Edit  ",
-                            onTap: () {},
+                            onTap: () {
+                              Get.to(AddMachinery(
+                                isUpdate: true,
+                              ));
+                            },
                             textColor: const Color(0xff555555)),
                         const SizedBox(
                           width: 10,

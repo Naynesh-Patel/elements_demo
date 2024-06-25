@@ -137,14 +137,15 @@ class _AddSparepartsState extends State<AddSpareparts> {
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: CustomButton(
             color: AppColor.buttonColor,
-            buttonText: 'Add',
+            buttonText: widget.isUpdate ? 'Update' : 'Add',
             onTap: () {},
           ),
         ));
   }
 
-  Widget verticalSpacing(){
-    return const SizedBox(height: 26.0,);
+  Widget verticalSpacing() {
+    return const SizedBox(
+      height: 26.0,
+    );
   }
-
 }

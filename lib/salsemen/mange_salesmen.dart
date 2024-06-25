@@ -77,7 +77,11 @@ class _MangeSalesmenState extends State<MangeSalesmen> {
                     Row(
                       children: [
                         InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            Get.to(const AddSalesmen(
+                              isUpdate: true,
+                            ));
+                          },
                           borderRadius: BorderRadius.circular(5),
                           child: Container(
                             padding: const EdgeInsets.all(6),
