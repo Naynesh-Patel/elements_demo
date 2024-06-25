@@ -34,8 +34,6 @@ class _AddMachineryState extends State<AddMachinery> {
     },
   ].obs;
 
-  RxString machineryType = "select".obs;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -43,11 +43,9 @@ class _AttendanceTabState extends State<AttendanceTab> {
         appBar: HomeAppBar(
           title: "Attendance",
           action: [
-            InkWell(
-              onTap: () {
-                filterDialog();
-              },
-              child: Image.asset(
+            IconButton(
+              onPressed: () { filterDialog(); },
+              icon: Image.asset(
                 "assets/images/filtter.png",
                 height: 20,
                 width: 20,
