@@ -30,27 +30,74 @@ class HomeController extends GetxController {
 
   RxList<dynamic> machineList = <dynamic>[].obs;
 
-  RxBool isJobLoading = false.obs;
+  RxBool isMachineLoading = false.obs;
 
   Future getMachine() async {
     try {
       String url = "${baseURL}job/get?user_id=";
       log("API => $url");
 
-      isJobLoading.value = true;
+      isMachineLoading.value = true;
       var response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
-        isJobLoading.value = false;
+        isMachineLoading.value = false;
         var responseData = jsonDecode(response.body);
         List jobData = responseData["data"];
         machineList.value = jobData;
       } else {
         debugPrint("statusCode${response.statusCode}");
-        isJobLoading.value = false;
+        isMachineLoading.value = false;
       }
     } catch (e) {
       debugPrint("Errors:$e");
-      isJobLoading.value = false;
+      isMachineLoading.value = false;
+    }
+  }
+
+  Future deleteMachine(id) async {
+    try {
+      String url = "${baseURL}job/delete";
+      log("API => $url");
+
+      isMachineLoading.value = true;
+      var response = await http.post(Uri.parse(url), body: {
+        "id": id,
+      });
+      isMachineLoading.value = false;
+      if (response.statusCode == 200) {
+        isMachineLoading.value = false;
+        var responseData = jsonDecode(response.body);
+        if (responseData["status"] == 1) {
+        } else {}
+      } else {
+        debugPrint("statusCode::${response.statusCode}");
+        isMachineLoading.value = false;
+      }
+    } catch (e) {
+      debugPrint("Error:$e");
+      isMachineLoading.value = false;
+    }
+  }
+
+  Future<void> updateMachine() async {
+    Map<String, dynamic> body = {
+      "user_id": "",
+    };
+    try {
+      String url = "${baseURL}job/reject_candidate";
+      log("API => $url");
+      isMachineLoading.value = true;
+      var response = await http.post(Uri.parse(url), body: body);
+      if (response.statusCode == 200) {
+        jsonDecode(response.body);
+        isMachineLoading.value = false;
+      } else {
+        debugPrint("statusCode${response.statusCode}");
+        isMachineLoading.value = false;
+      }
+    } catch (e) {
+      debugPrint("Error${e.toString()}");
+      isMachineLoading.value = false;
     }
   }
 }

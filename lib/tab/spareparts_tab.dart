@@ -22,9 +22,6 @@ class _SparepartsTabState extends State<SparepartsTab> {
       backgroundColor: AppColor.whiteColor,
       appBar: HomeAppBar(
         title: "Spareparts Stocks",
-        action: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.add)),
-        ],
         // action: [
         //   SvgPicture.asset(
         //     'assets/svg/ic_notification.svg',

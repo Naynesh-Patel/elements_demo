@@ -2,7 +2,6 @@ import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
 
 class CustomTextField extends StatefulWidget {
   final TextEditingController? textEditingController;
@@ -32,7 +31,8 @@ class CustomTextField extends StatefulWidget {
   final String? errorText;
   final Function(String)? onFieldSubmitted;
   final Function(String?)? onSaved;
-  const CustomTextField({Key? key,
+  const CustomTextField({
+    Key? key,
     this.textEditingController,
     this.focusNode,
     this.hintText,
@@ -67,15 +67,7 @@ class CustomTextField extends StatefulWidget {
 }
 
 class _CustomTextFieldState extends State<CustomTextField> {
-
-  @override
-  void initState() {
-    // widget.focusNode?.addListener(_handleFocusChange);
-    // _handleFocusChange();
-    super.initState();
-  }
-
-  String _lText ="";
+  String _lText = "";
 
   void _handleFocusChange() {
     if (mounted) {
@@ -95,9 +87,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         }
       });
     }
-
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -149,16 +139,16 @@ class _CustomTextFieldState extends State<CustomTextField> {
             borderSide: const BorderSide(color: AppColor.hintColor, width: 0.0),
           ),
           contentPadding:
-          const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
           hintText: widget.hintText,
-          hintStyle: AppTextStyle.textStyleRegular13.copyWith(color: AppColor.dropDownHintColor),
-          labelStyle:AppTextStyle.textStyleRegular16,
+          hintStyle: AppTextStyle.textStyleRegular13
+              .copyWith(color: AppColor.dropDownHintColor),
+          labelStyle: AppTextStyle.textStyleRegular16,
           counterText: "",
           label: widget.label,
-          labelText:widget.labelText,
+          labelText: widget.labelText,
           // labelText: widget.focusNode!.hasFocus ? widget.labelText :"",
-          floatingLabelBehavior: FloatingLabelBehavior.always
-      ),
+          floatingLabelBehavior: FloatingLabelBehavior.always),
       onFieldSubmitted: widget.onFieldSubmitted,
       inputFormatters: widget.inputFormatters,
       onSaved: widget.onSaved,
@@ -168,7 +158,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
     );
   }
 }
-
 
 /*class CustomTextField extends StatelessWidget {
   final TextEditingController? textEditingController;

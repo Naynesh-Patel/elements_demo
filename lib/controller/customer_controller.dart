@@ -7,10 +7,10 @@ class CustomerController extends GetxController {
   File? imgFile;
 
   Future<bool> pickImageFromGallery() async {
-    XFile? _pickImage =
+    XFile? pickImage =
         await ImagePicker().pickImage(source: ImageSource.gallery);
-    if (_pickImage != null) {
-      imgFile = File(_pickImage.path);
+    if (pickImage != null) {
+      imgFile = File(pickImage.path);
       return true;
     } else {
       return false;

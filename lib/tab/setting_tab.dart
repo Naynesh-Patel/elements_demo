@@ -141,7 +141,9 @@ class _SettingTabState extends State<SettingTab> {
                       onCancelTap: () {
                         Get.back();
                       },
-                      onLogoutTap: () {},
+                      onLogoutTap: () {
+                        Get.back();
+                      },
                     );
                   },
                 ),

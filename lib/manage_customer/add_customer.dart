@@ -126,7 +126,7 @@ class _AddCustomerState extends State<AddCustomer> {
                               Icons.location_on_outlined,
                               size: 20,
                             )
-                          : SizedBox.shrink(),
+                          : const SizedBox.shrink(),
                     ),
                     verticalSpacing(),
                     CustomTextField(

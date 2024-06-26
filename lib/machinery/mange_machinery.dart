@@ -94,7 +94,7 @@ class _MangeMachineryState extends State<MangeMachinery> {
                           width: 10,
                         ),
                         SmallButton(
-                            title: "  Edit  ",
+                            title: "Edit",
                             onTap: () {
                               Get.to(const AddMachinery(
                                 isUpdate: true,
@@ -114,7 +114,9 @@ class _MangeMachineryState extends State<MangeMachinery> {
                                 onCancelTap: () {
                                   Get.back();
                                 },
-                                onDeleteTap: () {},
+                                onDeleteTap: () {
+                                  Get.back();
+                                },
                               );
                             },
                             textColor: const Color(0xffB50A0A)),

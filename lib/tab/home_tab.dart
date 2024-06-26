@@ -176,7 +176,7 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
                   "1-06-2024",
                 ),
                 _keyValue(
-                  "OD",
+                  "DD",
                   "18-06-2024",
                 ),
               ],
@@ -223,7 +223,7 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
                 SmallButton(
                     title: "  Edit  ",
                     onTap: () {
-                      Get.to(ViewOrderDetails(
+                      Get.to(const ViewOrderDetails(
                         isUpdate: true,
                       ));
                     },
@@ -242,7 +242,7 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
                           Get.back();
                         },
                         onDeleteTap: () {
-
+                          Get.back();
                         },
                       );
                     },
@@ -305,8 +305,9 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
     );
   }
 
-  Widget verticalSpacing(){
-    return const SizedBox(height: 8,);
+  Widget verticalSpacing() {
+    return const SizedBox(
+      height: 8,
+    );
   }
-
 }

@@ -54,7 +54,7 @@ class _DashBoardState extends State<DashBoard> {
         fixedColor: AppColor.buttonColor,
         backgroundColor: const Color(0xffF9F9F9),
         unselectedLabelStyle: AppTextStyle.textStyleRegular12,
-        selectedLabelStyle:AppTextStyle.textStyleRegular12,
+        selectedLabelStyle: AppTextStyle.textStyleRegular12,
         type: BottomNavigationBarType.fixed,
         items: [
           BottomNavigationBarItem(
@@ -141,7 +141,7 @@ class _DashBoardState extends State<DashBoard> {
               height: 20,
             ),
             title: const Text(
-              'Manage Machinery',
+              'are youchinery',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w400,

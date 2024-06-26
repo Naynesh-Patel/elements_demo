@@ -2,9 +2,7 @@ import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/widget/app%20bar/home_app_bar.dart';
 import 'package:elements/widget/button/small_button.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 import '../date_piker.dart';
@@ -54,7 +52,9 @@ class _AttendanceTabState extends State<AttendanceTab> {
           title: "Attendance",
           action: [
             IconButton(
-              onPressed: () { filterDialog(); },
+              onPressed: () {
+                filterDialog();
+              },
               icon: Image.asset(
                 "assets/images/filtter.png",
                 height: 20,
@@ -186,7 +186,6 @@ class _AttendanceTabState extends State<AttendanceTab> {
               contentPadding: EdgeInsets.zero,
               backgroundColor: Colors.white,
               scrollable: true,
-
               content: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
@@ -226,10 +225,11 @@ class _AttendanceTabState extends State<AttendanceTab> {
                     ),
                     SingleChildScrollView(
                       child: Column(
-                        children: List.generate(filterList.length, (index){
+                        children: List.generate(filterList.length, (index) {
                           return Container(
-                            padding: EdgeInsets.symmetric(horizontal: 8.0),
-                            margin: EdgeInsets.only(bottom: 8.0),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            margin: const EdgeInsets.only(bottom: 8.0),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
@@ -252,13 +252,15 @@ class _AttendanceTabState extends State<AttendanceTab> {
                                     decoration: BoxDecoration(
                                         border: Border.all(
                                             color: AppColor.dropDownHintColor),
-                                        borderRadius: BorderRadius.circular(6.0)),
+                                        borderRadius:
+                                            BorderRadius.circular(6.0)),
                                     child: Icon(
                                       Icons.check_rounded,
                                       size: 14,
-                                      color: filterList[index]['select'] ?? false
-                                          ? AppColor.blackColor
-                                          : Colors.transparent,
+                                      color:
+                                          filterList[index]['select'] ?? false
+                                              ? AppColor.blackColor
+                                              : Colors.transparent,
                                     ),
                                   ),
                                 ),
@@ -338,14 +340,18 @@ class _AttendanceTabState extends State<AttendanceTab> {
                       children: [
                         SmallButton(
                           title: "Clear",
-                          onTap: () {},
+                          onTap: () {
+                            Get.back();
+                          },
                         ),
                         const SizedBox(
                           width: 16.0,
                         ),
                         SmallButton(
                           title: "Apply",
-                          onTap: () {},
+                          onTap: () {
+                            Get.back();
+                          },
                           textColor: AppColor.whiteColor,
                           bodyColor: AppColor.selectColor,
                         ),
@@ -488,7 +494,8 @@ class _AttendanceTabState extends State<AttendanceTab> {
                 ),
               ] else ...[
                 Expanded(
-                    child: Text(checkIn,textAlign: TextAlign.center,
+                    child: Text(checkIn,
+                        textAlign: TextAlign.center,
                         style: AppTextStyle.textStyleLight12
                             .copyWith(color: const Color(0xff555555)))),
                 Expanded(

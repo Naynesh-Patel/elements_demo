@@ -123,14 +123,11 @@ class _CustomerViewDetailState extends State<CustomerViewDetail> {
                 const SizedBox(
                   height: 20,
                 ),
-                const CustomTextField(
-                  textInputType: TextInputType.numberWithOptions(),
+                CustomTextField(
+                  textInputType: const TextInputType.numberWithOptions(),
                   hintText: " www.tatasteel.com",
                   labelText: "Website",
-                  suffixFixIcon: Icon(
-                    Icons.location_on_outlined,
-                    size: 24,
-                  ),
+                  suffixFixIcon: Image.asset("assets/images/website.png"),
                 ),
                 const SizedBox(
                   height: 20,
