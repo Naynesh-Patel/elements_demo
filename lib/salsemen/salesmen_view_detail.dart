@@ -1,10 +1,8 @@
-
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:elements/widget/custom_text_field.dart';
 import 'package:elements/widget/dropdown/dropdown_fromfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 
 class SalsemenViewDetils extends StatefulWidget {
   final bool isUpdate;
@@ -66,7 +64,7 @@ class _SalsemenViewDetilsState extends State<SalsemenViewDetils> {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 WidgetDropDownFromField(
@@ -81,23 +79,23 @@ class _SalsemenViewDetilsState extends State<SalsemenViewDetils> {
                   height: 15,
                 ),
                 const CustomTextField(
-                  hintText: "Work Type",
-                  labelText: "Manager",
+                  hintText: "Manager",
+                  labelText: "Work Type",
                 ),
                 const SizedBox(
                   height: 20,
                 ),
                 const CustomTextField(
-                  hintText: "Name",
-                  labelText: "Amit Patel",
+                  hintText: "Amit Patel",
+                  labelText: " Name",
                 ),
                 const SizedBox(
                   height: 20,
                 ),
                 const CustomTextField(
                   textInputType: TextInputType.numberWithOptions(),
-                  hintText: "Contact No.",
-                  labelText: "99656 25693",
+                  hintText: "99656 25693",
+                  labelText: " Contact No.",
                   suffixFixIcon: Icon(
                     Icons.call,
                     size: 24,

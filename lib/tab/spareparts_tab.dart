@@ -1,10 +1,12 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
-import 'package:elements/mange_spareparts/add_spareparts.dart';
 import 'package:elements/widget/app%20bar/home_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+
+import '../import_spareparts_tab/add_spareparts_tab.dart';
+import '../widget/button/small_button.dart';
 
 class SparepartsTab extends StatefulWidget {
   const SparepartsTab({super.key});
@@ -20,6 +22,9 @@ class _SparepartsTabState extends State<SparepartsTab> {
       backgroundColor: AppColor.whiteColor,
       appBar: HomeAppBar(
         title: "Spareparts Stocks",
+        action: [
+          IconButton(onPressed: () {}, icon: const Icon(Icons.add)),
+        ],
         // action: [
         //   SvgPicture.asset(
         //     'assets/svg/ic_notification.svg',
@@ -35,6 +40,25 @@ class _SparepartsTabState extends State<SparepartsTab> {
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
         child: Column(
           children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Flexible(
+                    child: Text(
+                  "Total Product Import  : 30",
+                  style: AppTextStyle.textStyleRegular14,
+                )),
+                SmallButton(
+                    title: "Update",
+                    onTap: () {
+                      Get.back();
+                    },
+                    textColor: AppColor.selectColor)
+              ],
+            ),
+            const SizedBox(
+              height: 10,
+            ),
             ListView.builder(
               shrinkWrap: true,
               itemCount: 4,
@@ -75,7 +99,7 @@ class _SparepartsTabState extends State<SparepartsTab> {
                       InkWell(
                         borderRadius: BorderRadius.circular(10),
                         onTap: () {
-                          Get.to(const AddSpareparts(isUpdate: true));
+                          Get.to(const AddSparepartsTab(isUpdate: true));
                         },
                         child: Container(
                             decoration: BoxDecoration(
@@ -106,7 +130,7 @@ class _SparepartsTabState extends State<SparepartsTab> {
           ),
           backgroundColor: AppColor.buttonColor,
           onPressed: () {
-            Get.to(const AddSpareparts());
+            Get.to(const AddSparepartsTab());
           },
           child: const Icon(
             Icons.add,

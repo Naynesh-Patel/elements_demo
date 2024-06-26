@@ -1,8 +1,8 @@
-
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:elements/widget/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CustomerViewDetail extends StatefulWidget {
   final bool isUpdate;
@@ -71,31 +71,39 @@ class _CustomerViewDetailState extends State<CustomerViewDetail> {
                   height: 15,
                 ),
                 const CustomTextField(
-                  hintText: "Company",
-                  labelText: "tata",
+                  hintText: "tata",
+                  labelText: "Company",
                 ),
                 const SizedBox(
                   height: 20,
                 ),
                 const CustomTextField(
-                  hintText: "Owner Name",
-                  labelText: "Ratan tata",
+                  hintText: "Ratan tata",
+                  labelText: "Owner Name",
                 ),
                 const SizedBox(
                   height: 20,
                 ),
                 const CustomTextField(
-                  hintText: "Owner Name",
-                  labelText: "Ratan tata",
+                  hintText: "Ratan tata",
+                  labelText: "Owner Name",
                 ),
                 const SizedBox(
                   height: 20,
                 ),
-                const CustomTextField(
-                  textInputType: TextInputType.numberWithOptions(),
-                  hintText: "Contact No.",
-                  labelText: "99656 25693",
-                  suffixFixIcon: Icon(
+                CustomTextField(
+                  onTap: () async {
+                    final call = Uri.parse('tel:+91 7359085239');
+                    if (await canLaunchUrl(call)) {
+                      launchUrl(call);
+                    } else {
+                      throw 'Could not launch $call';
+                    }
+                  },
+                  textInputType: const TextInputType.numberWithOptions(),
+                  hintText: "99656 25693",
+                  labelText: "Contact No.",
+                  suffixFixIcon: const Icon(
                     Icons.call,
                     size: 24,
                   ),
@@ -105,8 +113,8 @@ class _CustomerViewDetailState extends State<CustomerViewDetail> {
                 ),
                 const CustomTextField(
                   textInputType: TextInputType.numberWithOptions(),
-                  hintText: "Address",
-                  labelText: "Surat,Gujrat",
+                  hintText: "Surat,Gujrat",
+                  labelText: "Address",
                   suffixFixIcon: Icon(
                     Icons.location_on_outlined,
                     size: 24,
@@ -117,8 +125,8 @@ class _CustomerViewDetailState extends State<CustomerViewDetail> {
                 ),
                 const CustomTextField(
                   textInputType: TextInputType.numberWithOptions(),
-                  hintText: "Website",
-                  labelText: "www.tatasteel.com",
+                  hintText: " www.tatasteel.com",
+                  labelText: "Website",
                   suffixFixIcon: Icon(
                     Icons.location_on_outlined,
                     size: 24,
@@ -128,8 +136,8 @@ class _CustomerViewDetailState extends State<CustomerViewDetail> {
                   height: 20,
                 ),
                 const CustomTextField(
-                  hintText: "Reference By",
-                  labelText: "L & T Pvt",
+                  hintText: "L & T Pvt",
+                  labelText: "Reference By",
                 ),
               ],
             ),

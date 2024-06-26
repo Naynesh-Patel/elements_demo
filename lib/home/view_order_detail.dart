@@ -1,12 +1,13 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/controller/home_controller.dart';
+import 'package:elements/home/select_machine.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:elements/widget/button/custom_button.dart';
 import 'package:elements/widget/custom_text_field.dart';
+import 'package:elements/widget/dialogs/custom_dialogbox.dart';
+import 'package:elements/widget/dropdown/dropdown_fromfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../widget/dialogs/custom_dialogbox.dart';
 
 class ViewOrderDetails extends StatefulWidget {
   final bool isUpdate;
@@ -35,20 +36,27 @@ class _ViewOrderDetailsState extends State<ViewOrderDetails> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CustomTextField(
-                hintText: "Customer/Company",
-                labelText: "Tata Steel Pvt.",
-                enable: false,
-                focusNode: FocusNode(),
+              WidgetDropDownFromField(
+                hintText: "Tata Steel Pvt.",
+                labelText: "Customer/Company ",
+                itemList: const ["Admin", "Usre", "Seller"],
+                onTap: (value) {
+                  debugPrint("Select => $value");
+                },
               ),
               const SizedBox(
                 height: 20,
               ),
-              const CustomTextField(
-                hintText: "Machine Type",
-                labelText: "ContainerShip",
-                enable: false,
-              ),
+              CustomTextField(
+                  onTap: () {
+                    Get.to(const SelectMachine());
+                  },
+                  hintText: "ContainerShip",
+                  labelText: "Machine Type",
+                  suffixFixIcon: Image.asset(
+                    "assets/images/arrow_down.png",
+                    height: 24,
+                  )),
               const SizedBox(
                 height: 20,
               ),
@@ -104,8 +112,8 @@ class _ViewOrderDetailsState extends State<ViewOrderDetails> {
                 height: 20,
               ),
               const CustomTextField(
-                  hintText: "Delivery Date",
-                  labelText: "18-10-2024",
+                  hintText: "18-10-2024",
+                  labelText: "Delivery Date",
                   suffixFixIcon: Icon(
                     Icons.date_range,
                     size: 22,
@@ -114,33 +122,28 @@ class _ViewOrderDetailsState extends State<ViewOrderDetails> {
                 height: 20,
               ),
               const CustomTextField(
-                hintText: "Total Payment",
-                labelText: "Rs 50,000",
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const CustomTextField(
-                hintText: "Total Payment",
-                labelText: "Rs 50,000",
+                hintText: "Rs 50,000",
+                labelText: "Total Payment",
               ),
               const SizedBox(
                 height: 20,
               ),
               CustomTextField(
-                hintText: "Advance Payment",
-                labelText: "Rs 10,000",
+                hintText: "Rs 10,000",
+                labelText: "Advance Payment",
                 enable: false,
                 focusNode: FocusNode(),
               ),
               const SizedBox(
                 height: 20,
               ),
-              CustomTextField(
-                hintText: "Assign Order",
-                labelText: "Manager 1",
-                enable: false,
-                focusNode: FocusNode(),
+              WidgetDropDownFromField(
+                hintText: "Manager",
+                labelText: "Assigns Order",
+                itemList: const ["Admin", "Usre", "Seller"],
+                onTap: (value) {
+                  debugPrint("Select => $value");
+                },
               ),
               const SizedBox(
                 height: 20,
@@ -153,7 +156,9 @@ class _ViewOrderDetailsState extends State<ViewOrderDetails> {
           child: CustomButton(
             color: AppColor.buttonColor,
             buttonText: widget.isUpdate ? "Update" : "Add",
-            onTap: () {},
+            onTap: () {
+              Get.back();
+            },
           ),
         ));
   }

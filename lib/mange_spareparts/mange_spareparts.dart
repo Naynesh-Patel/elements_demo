@@ -23,7 +23,7 @@ class _MangeSparepartsState extends State<MangeSpareparts> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: CustomAppBar(
-        title: "are youSpareparts",
+        title: "Manage Spareparts",
         onPressed: () {
           Get.back();
         },

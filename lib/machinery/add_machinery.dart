@@ -211,7 +211,9 @@ class _AddMachineryState extends State<AddMachinery> {
           child: CustomButton(
             color: AppColor.buttonColor,
             buttonText: widget.isUpdate ? "Update" : "Add",
-            onTap: () {},
+            onTap: () {
+              Get.back();
+            },
           ),
         ));
   }

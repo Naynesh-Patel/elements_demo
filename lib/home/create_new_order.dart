@@ -1,5 +1,6 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/controller/home_controller.dart';
+import 'package:elements/home/select_machine.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:elements/widget/button/custom_button.dart';
 import 'package:elements/widget/custom_text_field.dart';
@@ -52,10 +53,11 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
               ),
               verticalSpacing(),
               CustomTextField(
+                  onTap: () {
+                    Get.to(const SelectMachine());
+                  },
                   hintText: "Select Machine Type*",
                   labelText: "Machine Type*",
-                  enable: false,
-                  focusNode: FocusNode(),
                   suffixFixIcon: const Icon(
                     Icons.arrow_forward_ios_rounded,
                     size: 18,

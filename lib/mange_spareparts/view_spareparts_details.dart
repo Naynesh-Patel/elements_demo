@@ -1,9 +1,7 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 import '../date_piker.dart';
@@ -37,7 +35,6 @@ class _ViewSparepartsDetailsState extends State<ViewSparepartsDetails> {
       "name": "Nihal",
       "select": false,
     },
-
   ];
 
   @override
@@ -49,7 +46,9 @@ class _ViewSparepartsDetailsState extends State<ViewSparepartsDetails> {
           },
           action: [
             IconButton(
-                onPressed: () { filterDialog(); },
+                onPressed: () {
+                  filterDialog();
+                },
                 icon: Image.asset(
                   "assets/images/filtter.png",
                   height: 20,
@@ -137,7 +136,7 @@ class _ViewSparepartsDetailsState extends State<ViewSparepartsDetails> {
 
   Widget _tableView({required String qty, name, date}) {
     return Container(
-      padding: const EdgeInsets.symmetric( horizontal: 8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Column(
         children: [
           const SizedBox(
@@ -146,9 +145,16 @@ class _ViewSparepartsDetailsState extends State<ViewSparepartsDetails> {
           Row(
             // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Expanded(child: Text(name, style: AppTextStyle.textStyleRegular13)),
-              Expanded(child: Text("$date",textAlign: TextAlign.center,style: AppTextStyle.textStyleRegular13)),
-              Expanded(child: Text(qty,textAlign: TextAlign.end,style: AppTextStyle.textStyleRegular13)),
+              Expanded(
+                  child: Text(name, style: AppTextStyle.textStyleRegular13)),
+              Expanded(
+                  child: Text("$date",
+                      textAlign: TextAlign.center,
+                      style: AppTextStyle.textStyleRegular13)),
+              Expanded(
+                  child: Text(qty,
+                      textAlign: TextAlign.end,
+                      style: AppTextStyle.textStyleRegular13)),
             ],
           ),
           const SizedBox(
@@ -197,11 +203,14 @@ class _ViewSparepartsDetailsState extends State<ViewSparepartsDetails> {
               ),
             ),
           ),
-          Text("Qty", style: AppTextStyle.textStyleRegular14.copyWith(color: AppColor.selectColor)),
+          Text("Qty",
+              style: AppTextStyle.textStyleRegular14
+                  .copyWith(color: AppColor.selectColor)),
         ],
       ),
     );
   }
+
   Future<void> filterDialog() async {
     return showDialog<void>(
       context: context,
@@ -218,7 +227,6 @@ class _ViewSparepartsDetailsState extends State<ViewSparepartsDetails> {
               contentPadding: EdgeInsets.zero,
               backgroundColor: Colors.white,
               scrollable: true,
-
               content: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
@@ -256,57 +264,6 @@ class _ViewSparepartsDetailsState extends State<ViewSparepartsDetails> {
                     const SizedBox(
                       height: 16,
                     ),
-                    // SingleChildScrollView(
-                    //   child: Column(
-                    //     children: List.generate(filterList.length, (index){
-                    //       return Container(
-                    //         padding: EdgeInsets.symmetric(horizontal: 8.0),
-                    //         margin: EdgeInsets.only(bottom: 8.0),
-                    //         child: Row(
-                    //           mainAxisAlignment: MainAxisAlignment.start,
-                    //           children: [
-                    //             InkWell(
-                    //               borderRadius: BorderRadius.circular(6.0),
-                    //               onTap: () {
-                    //                 if (filterList[index]['select'] == null) {
-                    //                   filterList[index]['select'] = true;
-                    //                 } else if (filterList[index]['select'] ==
-                    //                     true) {
-                    //                   filterList[index]['select'] = false;
-                    //                 } else {
-                    //                   filterList[index]['select'] = true;
-                    //                 }
-                    //                 setState(() {});
-                    //               },
-                    //               child: Container(
-                    //                 padding: const EdgeInsets.symmetric(
-                    //                     horizontal: 4.0, vertical: 4.0),
-                    //                 decoration: BoxDecoration(
-                    //                     border: Border.all(
-                    //                         color: AppColor.dropDownHintColor),
-                    //                     borderRadius: BorderRadius.circular(6.0)),
-                    //                 child: Icon(
-                    //                   Icons.check_rounded,
-                    //                   size: 14,
-                    //                   color: filterList[index]['select'] ?? false
-                    //                       ? AppColor.blackColor
-                    //                       : Colors.transparent,
-                    //                 ),
-                    //               ),
-                    //             ),
-                    //             const SizedBox(
-                    //               width: 4.0,
-                    //             ),
-                    //             Text(
-                    //               "${filterList[index]['name']}",
-                    //               style: AppTextStyle.textStyleRegular14,
-                    //             ),
-                    //           ],
-                    //         ),
-                    //       );
-                    //     }),
-                    //   ),
-                    // ),
                     SizedBox(
                       height: 100,
                       width: Get.width,
@@ -371,6 +328,7 @@ class _ViewSparepartsDetailsState extends State<ViewSparepartsDetails> {
                         SmallButton(
                           title: "Clear",
                           onTap: () {
+                            Get.back();
                           },
                         ),
                         const SizedBox(
@@ -378,7 +336,9 @@ class _ViewSparepartsDetailsState extends State<ViewSparepartsDetails> {
                         ),
                         SmallButton(
                           title: "Apply",
-                          onTap: () {},
+                          onTap: () {
+                            Get.back();
+                          },
                           textColor: AppColor.whiteColor,
                           bodyColor: AppColor.selectColor,
                         ),

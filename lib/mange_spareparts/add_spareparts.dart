@@ -36,7 +36,7 @@ class _AddSparepartsState extends State<AddSpareparts> {
           //           )))
           // ],
           title: widget.isUpdate
-              ? "Update Spareparts Details"
+              ? "Update Import Spareparts "
               : "Add Import Spareparts",
           onPressed: () {
             Get.back();
@@ -138,7 +138,9 @@ class _AddSparepartsState extends State<AddSpareparts> {
           child: CustomButton(
             color: AppColor.buttonColor,
             buttonText: widget.isUpdate ? 'Update' : 'Add',
-            onTap: () {},
+            onTap: () {
+              Get.back();
+            },
           ),
         ));
   }

@@ -5,18 +5,18 @@ import 'package:elements/widget/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class AddImportSpareparts extends StatefulWidget {
+class AddSparepartsTab extends StatefulWidget {
   final bool isUpdate;
-  const AddImportSpareparts({
+  const AddSparepartsTab({
     super.key,
     this.isUpdate = false,
   });
 
   @override
-  State<AddImportSpareparts> createState() => _AddImportSparepartsState();
+  State<AddSparepartsTab> createState() => _AddSparepartsTabState();
 }
 
-class _AddImportSparepartsState extends State<AddImportSpareparts> {
+class _AddSparepartsTabState extends State<AddSparepartsTab> {
   bool value = false;
   int index = 0;
   @override
@@ -24,9 +24,8 @@ class _AddImportSparepartsState extends State<AddImportSpareparts> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: CustomAppBar(
-          title: widget.isUpdate
-              ? "Update Import Spareparts "
-              : "Add Import Spareparts",
+          title:
+              widget.isUpdate ? "Update Spareparts Details " : "Add Spareparts",
           onPressed: () {
             Get.back();
           },
@@ -36,23 +35,13 @@ class _AddImportSparepartsState extends State<AddImportSpareparts> {
           child: Column(
             children: [
               const CustomTextField(
-                hintText: "Tata steel Pvt",
-                labelText: "Company Name*",
-              ),
-              verticalSpacing(),
-              const CustomTextField(
-                hintText: "Steel Bolt",
-                labelText: "Spareparts Name*",
+                hintText: "Steel",
+                labelText: "Name*",
               ),
               verticalSpacing(),
               const CustomTextField(
                 hintText: "20",
                 labelText: "Qty*",
-              ),
-              verticalSpacing(),
-              const CustomTextField(
-                hintText: "Medium",
-                labelText: "Type*",
               ),
             ],
           ),
@@ -62,7 +51,9 @@ class _AddImportSparepartsState extends State<AddImportSpareparts> {
           child: CustomButton(
             color: AppColor.buttonColor,
             buttonText: widget.isUpdate ? 'Update' : 'Add',
-            onTap: () {},
+            onTap: () {
+              Get.back();
+            },
           ),
         ));
   }
