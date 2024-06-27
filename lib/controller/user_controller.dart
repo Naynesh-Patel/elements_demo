@@ -8,6 +8,7 @@ class UserController extends GetxController {
   TextEditingController userNameTextEditingController = TextEditingController();
   TextEditingController contactNoTextEditingController =
       TextEditingController();
+
   TextEditingController addressTextEditingController = TextEditingController();
 
   File? imgFile;
