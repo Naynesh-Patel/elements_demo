@@ -109,9 +109,10 @@ class _LoginState extends State<Login> {
                                     .text.isEmpty) {
                                   showToast("Please enter mobile number");
                                 }
-                              } else if (controller
-                                  .userTypeTextEditingController.text.isEmpty) {
-                                showToast("Please enter user type");
+                                if (controller.userTypeTextEditingController
+                                    .text.isEmpty) {
+                                  showToast("Please enter user type");
+                                }
                               } else {
                                 controller.login();
                               }
