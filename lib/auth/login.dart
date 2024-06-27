@@ -56,6 +56,7 @@ class _LoginState extends State<Login> {
                     labelText: "User Type*",
                     itemList: const ["Admin", "Manager", "Salesman"],
                     onTap: (value) {
+                      controller.userTypeTextEditingController.text =value;
                       debugPrint("Select => $value");
                     },
                   ),
@@ -63,6 +64,7 @@ class _LoginState extends State<Login> {
                   CustomTextField(
                     focusNode: controller.mobileFocusNode,
                     textInputType: TextInputType.number,
+                    validator: validateMobile,
                     textEditingController:
                         controller.mobileNumberTextEditingController,
                     maxLength: 10,
@@ -102,6 +104,7 @@ class _LoginState extends State<Login> {
                             color: AppColor.buttonColor,
                             buttonText: 'Login',
                             onTap: () {
+
                               if (controller.mobileNumberTextEditingController
                                   .text.isEmpty) {
                                 showToast("Please enter mobile number");
@@ -114,7 +117,7 @@ class _LoginState extends State<Login> {
                                   showToast("Please enter user type");
                                 }
                               } else {
-                                controller.login();
+                                              controller.login();
                               }
                             },
                           ),
@@ -131,4 +134,14 @@ class _LoginState extends State<Login> {
       height: 26.0,
     );
   }
+
+
+  String? validateMobile(String value) {
+// Indian Mobile number are of 10 digit only
+    if (value.length != 10)
+      return 'Mobile Number must be of 10 digit';
+    else
+      return null;
+  }
+
 }

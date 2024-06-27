@@ -18,6 +18,7 @@ class AuthController extends GetxController {
 
   bool loginPasswordVisible = true;
 
+
   final box = GetStorage();
 
   FocusNode focusNode = FocusNode();
