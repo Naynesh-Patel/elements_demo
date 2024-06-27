@@ -1,12 +1,14 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/controller/auth_controller.dart';
-import 'package:elements/dashboard.dart';
 import 'package:elements/widget/button/custom_button.dart';
+import 'package:elements/widget/custom_button_loader.dart';
 import 'package:elements/widget/custom_text_field.dart';
 import 'package:elements/widget/dropdown/dropdown_fromfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../constant/methods.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -52,7 +54,7 @@ class _LoginState extends State<Login> {
                   WidgetDropDownFromField(
                     hintText: "Select User Type",
                     labelText: "User Type*",
-                    itemList: const ["Admin", "Usre", "Seller"],
+                    itemList: const ["Admin", "Manager", "Salesman"],
                     onTap: (value) {
                       debugPrint("Select => $value");
                     },
@@ -93,12 +95,28 @@ class _LoginState extends State<Login> {
                   const SizedBox(
                     height: 20,
                   ),
-                  CustomButton(
-                    color: AppColor.buttonColor,
-                    buttonText: 'Login',
-                    onTap: () {
-                      Get.to(const DashBoard());
-                    },
+                  Obx(
+                    () => controller.isLoginLoading.value
+                        ? const CustomButtonLoader()
+                        : CustomButton(
+                            color: AppColor.buttonColor,
+                            buttonText: 'Login',
+                            onTap: () {
+                              if (controller.mobileNumberTextEditingController
+                                  .text.isEmpty) {
+                                showToast("Please enter mobile number");
+                                if (controller.mobileNumberTextEditingController
+                                    .text.isEmpty) {
+                                  showToast("Please enter mobile number");
+                                }
+                              } else if (controller
+                                  .userTypeTextEditingController.text.isEmpty) {
+                                showToast("Please enter user type");
+                              } else {
+                                controller.login();
+                              }
+                            },
+                          ),
                   ),
                 ],
               ),

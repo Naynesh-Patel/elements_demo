@@ -2,6 +2,10 @@ import 'package:elements/auth/login.dart';
 import 'package:elements/constant/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+
+import 'constant/vars.dart';
+import 'dashboard.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});
@@ -24,7 +28,7 @@ class _SplashState extends State<Splash> {
 
   _buildBody() {
     return Scaffold(
-      backgroundColor:AppColor.whiteColor,
+      backgroundColor: AppColor.whiteColor,
       body: Center(
         child: Image.asset(
           "assets/images/logo.png",
@@ -36,11 +40,13 @@ class _SplashState extends State<Splash> {
   }
 
   _timer() {
-    Future.delayed(
-      const Duration(seconds: 2),
-      () {
+    isLogin = GetStorage().read("isLogin") ?? false;
+    Future.delayed(const Duration(seconds: 2), () {
+      if (isLogin) {
+        Get.to(const DashBoard());
+      } else {
         Get.off(const Login());
-      },
-    );
+      }
+    });
   }
 }

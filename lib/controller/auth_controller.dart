@@ -3,9 +3,12 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
 import '../constant/urls.dart';
+import '../constant/vars.dart';
+import '../dashboard.dart';
 
 class AuthController extends GetxController {
   TextEditingController mobileNumberTextEditingController =
@@ -14,6 +17,8 @@ class AuthController extends GetxController {
   TextEditingController userTypeTextEditingController = TextEditingController();
 
   bool loginPasswordVisible = true;
+
+  final box = GetStorage();
 
   FocusNode focusNode = FocusNode();
 
@@ -25,15 +30,21 @@ class AuthController extends GetxController {
 
   Future<void> login() async {
     Map<String, dynamic> body = {
-      "user_id": "",
+      "password": passwordTextEditingController.text,
+      "mobile_no": mobileNumberTextEditingController.text,
+      "user_type": userTypeTextEditingController.text,
     };
     try {
-      String url = "${baseURL}job/reject_candidate";
+      String url = "${baseURL}user/login";
       log("API => $url");
       isLoginLoading.value = true;
       var response = await http.post(Uri.parse(url), body: body);
       if (response.statusCode == 200) {
         jsonDecode(response.body);
+        box.write("isLogin", true);
+        isLogin = true;
+        Get.to(const DashBoard());
+        box.write("user", response);
         isLoginLoading.value = false;
       } else {
         debugPrint("statusCode${response.statusCode}");
