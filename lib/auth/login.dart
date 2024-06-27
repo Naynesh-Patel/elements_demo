@@ -64,7 +64,6 @@ class _LoginState extends State<Login> {
                   CustomTextField(
                     focusNode: controller.mobileFocusNode,
                     textInputType: TextInputType.number,
-                    validator: validateMobile,
                     textEditingController:
                         controller.mobileNumberTextEditingController,
                     maxLength: 10,
@@ -108,6 +107,9 @@ class _LoginState extends State<Login> {
                               if (controller.mobileNumberTextEditingController
                                   .text.isEmpty) {
                                 showToast("Please enter mobile number");
+                                if(controller.mobileNumberTextEditingController.value != 10){
+                                  showToast("Please enter Maximum 10 number");
+                                }
                                 if (controller.passwordTextEditingController
                                     .text.isEmpty) {
                                   showToast("Please enter password number");
@@ -134,14 +136,4 @@ class _LoginState extends State<Login> {
       height: 26.0,
     );
   }
-
-
-  String? validateMobile(String value) {
-// Indian Mobile number are of 10 digit only
-    if (value.length != 10)
-      return 'Mobile Number must be of 10 digit';
-    else
-      return null;
-  }
-
 }
