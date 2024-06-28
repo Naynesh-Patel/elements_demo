@@ -127,6 +127,7 @@ class _AddSparepartsState extends State<AddSpareparts> {
                 CustomTextField(
                   hintText: "Qty",
                   labelText: "Qty",
+                  textInputType: TextInputType.number,
                   focusNode: controller.sparepartsQtyFocusNode,
                 ),
               ],

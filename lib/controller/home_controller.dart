@@ -23,6 +23,10 @@ class HomeController extends GetxController {
   FocusNode expenseTypeFocusNode = FocusNode();
   FocusNode expensePriceFocusNode = FocusNode();
 
+  TextEditingController sDate = TextEditingController();
+  TextEditingController eDate = TextEditingController();
+  TextEditingController formatSDate = TextEditingController();
+  TextEditingController formatEDate = TextEditingController();
 /* ========== TextEditing Controller =========== */
 
   TextEditingController advancePaymentTextEditingController =

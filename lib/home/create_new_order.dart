@@ -46,7 +46,7 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
               WidgetDropDownFromField(
                 hintText: "Select Customer/Company",
                 labelText: "Customer/Company*",
-                itemList: const ["Admin", "Usre", "Seller"],
+                itemList: const ["Admin", "User", "Seller"],
                 onTap: (value) {
                   debugPrint("Select => $value");
                 },
@@ -68,6 +68,7 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                   hintText: "Select Delivery Date",
                   labelText: "Delivery Date*",
                   enable: false,
+                  onTap: () async {},
                   focusNode: controller.deliveryDateFocusNode,
                   suffixFixIcon: const Icon(
                     Icons.date_range,
@@ -77,12 +78,14 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
               CustomTextField(
                 hintText: "Total Payment",
                 labelText: "Total Payment",
+                textInputType: TextInputType.number,
                 focusNode: controller.paymentFocusNode,
               ),
               verticalSpacing(),
               CustomTextField(
                 hintText: "Advance Payment",
                 labelText: "Advance Payment",
+                textInputType: TextInputType.number,
                 textEditingController:
                     controller.advancePaymentTextEditingController,
                 focusNode: controller.advancedPaymentFocusNode,
