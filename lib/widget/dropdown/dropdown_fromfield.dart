@@ -8,11 +8,15 @@ class WidgetDropDownFromField extends StatelessWidget {
   final List<dynamic> itemList;
   final String hintText;
   final String labelText;
+  final String? Function(dynamic)? validator;
   final ValueSetter<dynamic> onTap;
   const WidgetDropDownFromField(
       {super.key,
       required this.itemList,
       required this.hintText,
+        this.validator
+        ,
+         // this.validator,
       required this.labelText,
       required this.onTap});
 
@@ -35,6 +39,8 @@ class WidgetDropDownFromField extends StatelessWidget {
               border: Border.all(color: AppColor.borderColor),
             ),
             child: DropdownButtonFormField2<dynamic>(
+              // validator: validator,
+              validator: validator,
               isExpanded: true,
               hint: Text(
                 hintText,
