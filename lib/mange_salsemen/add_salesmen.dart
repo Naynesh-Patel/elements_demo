@@ -22,7 +22,7 @@ class _AddSalesmenState extends State<AddSalesmen> {
   int index = 0;
 
   String? selectLevel;
-
+  final _formKey = GlobalKey<FormState>();
   SalesmenController controller = Get.find();
 
   @override
@@ -35,92 +35,132 @@ class _AddSalesmenState extends State<AddSalesmen> {
             Get.back();
           },
         ),
-        body: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Add Profile :',
-                style: AppTextStyle.textStyleRegular16
-                    .copyWith(color: AppColor.blackLightColor),
+        body: Form(
+          key: _formKey,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Add Profile :',
+                    style: AppTextStyle.textStyleRegular16
+                        .copyWith(color: AppColor.blackLightColor),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Center(
+                    child: Stack(
+                      alignment: Alignment.bottomRight,
+                      children: [
+                        controller.imgFile == null
+                            ? Image.asset(
+                                'assets/images/camera.png',
+                                height: 80,
+                                width: 80,
+                              )
+                            : SizedBox(
+                                height: 80,
+                                width: 80,
+                                child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(50.0),
+                                    child: Image.file(
+                                      controller.imgFile!,
+                                      fit: BoxFit.cover,
+                                    ))),
+                        InkWell(
+                          onTap: () async {
+                            bool refresh = await controller.pickImageFromGallery();
+                            if (refresh) {
+                              setState(() {});
+                            }
+                          },
+                          child: Container(
+                              padding: const EdgeInsets.all(5),
+                              decoration: BoxDecoration(
+                                  color: const Color(0xff01959F),
+                                  // shape: BoxShape.circle,
+                                  borderRadius: BorderRadius.circular(15)),
+                              child: const Icon(
+                                Icons.add,
+                                color: Colors.white,
+                                size: 18,
+                              )),
+                        )
+                      ],
+                    ),
+                  ),
+                  verticalSpacing(),
+                  WidgetDropDownFromField(
+                    // validator: (value) {
+                    //   if(value!.isEmpty){
+                    //     return "Enter Qty*";
+                    //   }
+                    //   else{
+                    //     return null;
+                    //   }
+                    // },
+                    hintText: "Select User Role",
+                    labelText: "User Role",
+                    itemList: const ["Admin", "Usre", "Seller"],
+                    onTap: (value) {
+                      debugPrint("Select => $value");
+                    },
+                  ),
+                  verticalSpacing(),
+                  CustomTextField(
+                    textEditingController: controller.workerTextEditingController,
+                    hintText: "worker",
+                    labelText: "Work Type*",
+                    validator: (value) {
+                      if(value!.isEmpty){
+                        return "Enter Work Type*";
+                      }
+                      else{
+                        return null;
+                      }
+                    },
+                  ),
+                  verticalSpacing(),
+                  CustomTextField(
+                    textEditingController:
+                        controller.salesmenNameTextEditingController,
+                    hintText: "Dipesh Patel",
+                    labelText: "Name*",
+                    validator: (value) {
+                      if(value!.isEmpty){
+                        return "Enter Name*";
+                      }
+                      else{
+                        return null;
+                      }
+                    },
+                  ),
+                  verticalSpacing(),
+                  CustomTextField(
+                    textInputType: const TextInputType.numberWithOptions(),
+                    textEditingController:
+                        controller.contactNoTextEditingController,
+                    hintText: "Name",
+                    labelText: "Contact No.",
+                    validator: (value) {
+                      if(value!.isEmpty){
+                        return "Enter Contact No.*";
+                      }
+                      else{
+                        return null;
+                      }
+                    },
+
+                  ),
+                  verticalSpacing(),
+                ],
               ),
-              const SizedBox(
-                height: 15,
-              ),
-              Center(
-                child: Stack(
-                  alignment: Alignment.bottomRight,
-                  children: [
-                    controller.imgFile == null
-                        ? Image.asset(
-                            'assets/images/camera.png',
-                            height: 80,
-                            width: 80,
-                          )
-                        : SizedBox(
-                            height: 80,
-                            width: 80,
-                            child: ClipRRect(
-                                borderRadius: BorderRadius.circular(50.0),
-                                child: Image.file(
-                                  controller.imgFile!,
-                                  fit: BoxFit.cover,
-                                ))),
-                    InkWell(
-                      onTap: () async {
-                        bool refresh = await controller.pickImageFromGallery();
-                        if (refresh) {
-                          setState(() {});
-                        }
-                      },
-                      child: Container(
-                          padding: const EdgeInsets.all(5),
-                          decoration: BoxDecoration(
-                              color: const Color(0xff01959F),
-                              // shape: BoxShape.circle,
-                              borderRadius: BorderRadius.circular(15)),
-                          child: const Icon(
-                            Icons.add,
-                            color: Colors.white,
-                            size: 18,
-                          )),
-                    )
-                  ],
-                ),
-              ),
-              verticalSpacing(),
-              WidgetDropDownFromField(
-                hintText: "Select User Role",
-                labelText: "User Role",
-                itemList: const ["Admin", "Usre", "Seller"],
-                onTap: (value) {
-                  debugPrint("Select => $value");
-                },
-              ),
-              verticalSpacing(),
-              CustomTextField(
-                textEditingController: controller.workerTextEditingController,
-                hintText: "worker",
-                labelText: "Work Type*",
-              ),
-              verticalSpacing(),
-              CustomTextField(
-                textEditingController:
-                    controller.salesmenNameTextEditingController,
-                hintText: "Dipesh Patel",
-                labelText: "Name*",
-              ),
-              verticalSpacing(),
-              CustomTextField(
-                textEditingController:
-                    controller.contactNoTextEditingController,
-                hintText: "Name",
-                labelText: "Contact No.",
-              ),
-              verticalSpacing(),
-            ],
+            ),
           ),
         ),
         bottomNavigationBar: Container(
@@ -129,7 +169,11 @@ class _AddSalesmenState extends State<AddSalesmen> {
             color: AppColor.buttonColor,
             buttonText: widget.isUpdate ? 'Update' : 'Add',
             onTap: () {
-              Get.back();
+              if (_formKey.currentState!.validate()){
+
+                Get.back();
+
+              }
             },
           ),
         ));

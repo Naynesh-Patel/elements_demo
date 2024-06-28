@@ -92,6 +92,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+
       controller: widget.textEditingController,
       focusNode: widget.focusNode,
       keyboardType: widget.textInputType ?? TextInputType.text,
