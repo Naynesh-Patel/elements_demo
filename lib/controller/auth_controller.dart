@@ -23,6 +23,7 @@ class AuthController extends GetxController {
 
   /* ========== Focus Nodes =========== */
   FocusNode mobileFocusNode = FocusNode();
+
   FocusNode passwordFocusNode = FocusNode();
 
   RxBool isLoginLoading = false.obs;
