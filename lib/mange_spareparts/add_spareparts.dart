@@ -55,10 +55,9 @@ class _AddSparepartsState extends State<AddSpareparts> {
                   labelText: "Name*",
                   focusNode: controller.sparepartsNameFocusNode,
                   validator: (value) {
-                    if(value!.isEmpty){
+                    if (value!.isEmpty) {
                       return "Enter Name*";
-                    }
-                    else{
+                    } else {
                       return null;
                     }
                   },
@@ -92,19 +91,17 @@ class _AddSparepartsState extends State<AddSpareparts> {
                     height: 16.0,
                   ),
                   CustomTextField(
-                    hintText: "10",
-                    labelText: "Qty",
-                    textEditingController: TextEditingController(text: "10"),
-                    focusNode: controller.sparepartsQtyFocusNode,
+                      hintText: "10",
+                      labelText: "Qty",
+                      textEditingController: TextEditingController(text: "10"),
+                      focusNode: controller.sparepartsQtyFocusNode,
                       validator: (value) {
-                        if(value!.isEmpty){
+                        if (value!.isEmpty) {
                           return "Enter Qty*";
-                        }
-                        else{
+                        } else {
                           return null;
                         }
-                      }
-                  ),
+                      }),
                   const SizedBox(
                     height: 16.0,
                   ),
@@ -113,10 +110,9 @@ class _AddSparepartsState extends State<AddSpareparts> {
                     labelText: "Add New Qty",
                     focusNode: controller.sparepartsNewQtyFocusNode,
                     validator: (value) {
-                      if(value!.isEmpty){
+                      if (value!.isEmpty) {
                         return "Enter New Qty*";
-                      }
-                      else{
+                      } else {
                         return null;
                       }
                     },
@@ -135,7 +131,8 @@ class _AddSparepartsState extends State<AddSpareparts> {
                       OutlinedButton(
                         onPressed: () {},
                         style: ButtonStyle(
-                          shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                          shape:
+                              MaterialStateProperty.all(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(4.0),
                             side: const BorderSide(
                               color: AppColor.borderColor,
@@ -153,18 +150,16 @@ class _AddSparepartsState extends State<AddSpareparts> {
                 ] else ...[
                   verticalSpacing(),
                   CustomTextField(
-                    hintText: "Qty",
-                    labelText: "Qty",
-                    focusNode: controller.sparepartsQtyFocusNode,
+                      hintText: "Qty",
+                      labelText: "Qty",
+                      focusNode: controller.sparepartsQtyFocusNode,
                       validator: (value) {
-                        if(value!.isEmpty){
+                        if (value!.isEmpty) {
                           return "Enter Qty*";
-                        }
-                        else{
+                        } else {
                           return null;
                         }
-                      }
-                  ),
+                      }),
                 ],
               ],
             ),
@@ -176,10 +171,8 @@ class _AddSparepartsState extends State<AddSpareparts> {
             color: AppColor.buttonColor,
             buttonText: widget.isUpdate ? 'Update' : 'Add',
             onTap: () {
-              if (_formKey.currentState!.validate()){
-
+              if (_formKey.currentState!.validate()) {
                 Get.back();
-
               }
             },
           ),

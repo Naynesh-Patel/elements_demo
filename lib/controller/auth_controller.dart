@@ -30,7 +30,7 @@ class AuthController extends GetxController {
   Future<void> login() async {
     Map<String, dynamic> body = {
       "password": passwordTextEditingController.text,
-      "mobile_no": mobileNumberTextEditingController.text,
+      "contact_no": mobileNumberTextEditingController.text,
       "user_type": userTypeTextEditingController.text,
     };
     try {

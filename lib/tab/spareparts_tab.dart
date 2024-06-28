@@ -120,19 +120,19 @@ class _SparepartsTabState extends State<SparepartsTab> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-          elevation: 10.0,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(36),
-          ),
-          backgroundColor: AppColor.buttonColor,
-          onPressed: () {
-            Get.to(const AddSparepartsTab());
-          },
-          child: const Icon(
-            Icons.add,
-            color: Colors.white,
-          )),
+      // floatingActionButton: FloatingActionButton(
+      //     elevation: 10.0,
+      //     shape: RoundedRectangleBorder(
+      //       borderRadius: BorderRadius.circular(36),
+      //     ),
+      //     backgroundColor: AppColor.buttonColor,
+      //     onPressed: () {
+      //       Get.to(const AddSparepartsTab());
+      //     },
+      //     child: const Icon(
+      //       Icons.add,
+      //       color: Colors.white,
+      //     )),
     );
   }
 }
