@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-import 'constant/vars.dart';
 import 'dashboard.dart';
 
 class Splash extends StatefulWidget {
@@ -40,9 +39,8 @@ class _SplashState extends State<Splash> {
   }
 
   _timer() {
-    isLogin = GetStorage().read("isLogin") ?? false;
     Future.delayed(const Duration(seconds: 2), () {
-      if (isLogin) {
+      if (GetStorage().read("isLogin") ?? false) {
         Get.to(const DashBoard());
       } else {
         Get.off(const Login());

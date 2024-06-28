@@ -7,7 +7,6 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
 import '../constant/urls.dart';
-import '../constant/vars.dart';
 import '../dashboard.dart';
 
 class AuthController extends GetxController {
@@ -17,7 +16,6 @@ class AuthController extends GetxController {
   TextEditingController userTypeTextEditingController = TextEditingController();
 
   bool loginPasswordVisible = true;
-
 
   final box = GetStorage();
 
@@ -41,11 +39,14 @@ class AuthController extends GetxController {
       isLoginLoading.value = true;
       var response = await http.post(Uri.parse(url), body: body);
       if (response.statusCode == 200) {
+        var responseData = jsonDecode(response.body);
         jsonDecode(response.body);
-        box.write("isLogin", true);
-        isLogin = true;
-        Get.to(const DashBoard());
-        box.write("user", response);
+        if (responseData['status'] == 0) {
+        } else {
+          box.write("user", responseData);
+          box.write("isLogin", true);
+          Get.off(() => const DashBoard());
+        }
         isLoginLoading.value = false;
       } else {
         debugPrint("statusCode${response.statusCode}");

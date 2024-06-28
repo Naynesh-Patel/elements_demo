@@ -1,9 +1,10 @@
+import 'package:elements/constant/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
- // final int SHORT_DELAY = 1000; // 1seconds
+// final int SHORT_DELAY = 1000; // 1seconds
 
 void showToast(msg) {
   Fluttertoast.showToast(
@@ -11,12 +12,10 @@ void showToast(msg) {
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.CENTER,
       timeInSecForIosWeb: 1,
-      backgroundColor: Colors.black,
+      backgroundColor: AppColor.buttonColor,
       textColor: Colors.white,
       fontSize: 16.0);
 }
-
-
 
 Future<DateTime?> openDatePicker(context,
     {required DateTime firstDate, lastDate}) async {
@@ -57,25 +56,24 @@ bool isValidEmail(email) {
       .hasMatch(email);
 }
 
+bool isValidPhoneNumber(String? value) =>
+    RegExp(r'(^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$)')
+        .hasMatch(value ?? '');
+
 Future<void> openPhoneCall({number}) async {
   Uri phoneno = Uri.parse('tel:${number}');
   if (await launchUrl(phoneno)) {
-
-  } else {
-
-  }
+  } else {}
 }
 
 Future<void> openGmail() async {
-  const uri =
-      'mailto:test@example.org?subject=Greetings&body=Hello%20World';
+  const uri = 'mailto:test@example.org?subject=Greetings&body=Hello%20World';
   if (await canLaunch(uri)) {
     await launch(uri);
   } else {
     throw 'Could not launch $uri';
   }
 }
-
 
 /*Future<bool> isInternetAvailable()async{
   ConnectivityResult result = await (Connectivity().checkConnectivity());
@@ -86,5 +84,3 @@ Future<void> openGmail() async {
   }
   return false;
 }*/
-
-

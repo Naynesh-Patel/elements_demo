@@ -2,6 +2,11 @@ import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/widget/button/small_button.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+
+import '../../constant/vars.dart';
+import '../../splash.dart';
 
 class CustomDialogBox {
   CustomDialogBox._();
@@ -116,7 +121,13 @@ class CustomDialogBox {
                         title: "logout",
                         textColor: AppColor.whiteColor,
                         bodyColor: AppColor.selectColor,
-                        onTap: onLogoutTap),
+                        onTap: () {
+                          Navigator.pop(context);
+                          GetStorage().write("isLogin", false);
+                          isLogin = false;
+                          Get.offUntil(GetPageRoute(page: () => const Splash()),
+                              ModalRoute.withName('toNewLogin'));
+                        }),
                   ],
                 ),
               ],

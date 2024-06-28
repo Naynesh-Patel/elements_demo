@@ -1,5 +1,6 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
+import 'package:elements/constant/methods.dart';
 import 'package:elements/controller/auth_controller.dart';
 import 'package:elements/widget/button/custom_button.dart';
 import 'package:elements/widget/custom_button_loader.dart';
@@ -7,8 +8,6 @@ import 'package:elements/widget/custom_text_field.dart';
 import 'package:elements/widget/dropdown/dropdown_fromfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../constant/methods.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -56,7 +55,7 @@ class _LoginState extends State<Login> {
                     labelText: "User Type*",
                     itemList: const ["Admin", "Manager", "Salesman"],
                     onTap: (value) {
-                      controller.userTypeTextEditingController.text =value;
+                      controller.userTypeTextEditingController.text = value;
                       debugPrint("Select => $value");
                     },
                   ),
@@ -76,9 +75,9 @@ class _LoginState extends State<Login> {
                       obscureText: controller.loginPasswordVisible,
                       textEditingController:
                           controller.passwordTextEditingController,
+                      maxLength: 6,
                       hintText: "Password",
                       labelText: "Password*",
-                      enable: true,
                       suffixFixIcon: IconButton(
                         onPressed: () {
                           setState(() {
@@ -103,23 +102,22 @@ class _LoginState extends State<Login> {
                             color: AppColor.buttonColor,
                             buttonText: 'Login',
                             onTap: () {
-
                               if (controller.mobileNumberTextEditingController
                                   .text.isEmpty) {
                                 showToast("Please enter mobile number");
-                                if(controller.mobileNumberTextEditingController.value != 10){
-                                  showToast("Please enter Maximum 10 number");
-                                }
-                                if (controller.passwordTextEditingController
-                                    .text.isEmpty) {
-                                  showToast("Please enter password number");
-                                }
+                              }
+                              if (controller
+                                  .passwordTextEditingController.text.isEmpty) {
+                                showToast("Please enter password number");
+                              } else if (!isValidPhoneNumber(controller
+                                  .mobileNumberTextEditingController.text)) {
+                                showToast("Please enter valid mobile number");
                                 if (controller.userTypeTextEditingController
                                     .text.isEmpty) {
                                   showToast("Please enter user type");
                                 }
                               } else {
-                                              controller.login();
+                                controller.login();
                               }
                             },
                           ),

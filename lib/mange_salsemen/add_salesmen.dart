@@ -100,17 +100,22 @@ class _AddSalesmenState extends State<AddSalesmen> {
                 },
               ),
               verticalSpacing(),
-              const CustomTextField(
+              CustomTextField(
+                textEditingController: controller.workerTextEditingController,
                 hintText: "worker",
                 labelText: "Work Type*",
               ),
               verticalSpacing(),
-              const CustomTextField(
+              CustomTextField(
+                textEditingController:
+                    controller.salesmenNameTextEditingController,
                 hintText: "Dipesh Patel",
                 labelText: "Name*",
               ),
               verticalSpacing(),
-              const CustomTextField(
+              CustomTextField(
+                textEditingController:
+                    controller.contactNoTextEditingController,
                 hintText: "Name",
                 labelText: "Contact No.",
               ),
