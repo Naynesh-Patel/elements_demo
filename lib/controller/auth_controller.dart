@@ -1,13 +1,13 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:elements/constant/urls.dart';
+import 'package:elements/dashboard.dart';
+import 'package:elements/model/model_user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
-
-import '../constant/urls.dart';
-import '../dashboard.dart';
 
 class AuthController extends GetxController {
   TextEditingController mobileNumberTextEditingController =
@@ -18,6 +18,8 @@ class AuthController extends GetxController {
   bool loginPasswordVisible = true;
 
   final box = GetStorage();
+
+  Rx<ModelUser> modelUser = ModelUser().obs;
 
   FocusNode focusNode = FocusNode();
 
@@ -43,6 +45,7 @@ class AuthController extends GetxController {
         var responseData = jsonDecode(response.body);
         jsonDecode(response.body);
         if (responseData['status'] == 0) {
+          modelUser.value = ModelUser.fromJson(responseData['user']);
         } else {
           box.write("user", responseData);
           box.write("isLogin", true);

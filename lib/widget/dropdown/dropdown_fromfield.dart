@@ -14,9 +14,9 @@ class WidgetDropDownFromField extends StatelessWidget {
       {super.key,
       required this.itemList,
       required this.hintText,
-        this.validator
-        ,
-         // this.validator,
+      this.validator,
+
+      // this.validator,
       required this.labelText,
       required this.onTap});
 

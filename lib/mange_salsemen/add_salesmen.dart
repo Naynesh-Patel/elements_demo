@@ -74,7 +74,8 @@ class _AddSalesmenState extends State<AddSalesmen> {
                                     ))),
                         InkWell(
                           onTap: () async {
-                            bool refresh = await controller.pickImageFromGallery();
+                            bool refresh =
+                                await controller.pickImageFromGallery();
                             if (refresh) {
                               setState(() {});
                             }
@@ -113,14 +114,14 @@ class _AddSalesmenState extends State<AddSalesmen> {
                   ),
                   verticalSpacing(),
                   CustomTextField(
-                    textEditingController: controller.workerTextEditingController,
+                    textEditingController:
+                        controller.workerTextEditingController,
                     hintText: "worker",
                     labelText: "Work Type*",
                     validator: (value) {
-                      if(value!.isEmpty){
+                      if (value!.isEmpty) {
                         return "Enter Work Type*";
-                      }
-                      else{
+                      } else {
                         return null;
                       }
                     },
@@ -132,10 +133,9 @@ class _AddSalesmenState extends State<AddSalesmen> {
                     hintText: "Dipesh Patel",
                     labelText: "Name*",
                     validator: (value) {
-                      if(value!.isEmpty){
+                      if (value!.isEmpty) {
                         return "Enter Name*";
-                      }
-                      else{
+                      } else {
                         return null;
                       }
                     },
@@ -148,14 +148,12 @@ class _AddSalesmenState extends State<AddSalesmen> {
                     hintText: "Name",
                     labelText: "Contact No.",
                     validator: (value) {
-                      if(value!.isEmpty){
+                      if (value!.isEmpty) {
                         return "Enter Contact No.*";
-                      }
-                      else{
+                      } else {
                         return null;
                       }
                     },
-
                   ),
                   verticalSpacing(),
                 ],
@@ -169,10 +167,8 @@ class _AddSalesmenState extends State<AddSalesmen> {
             color: AppColor.buttonColor,
             buttonText: widget.isUpdate ? 'Update' : 'Add',
             onTap: () {
-              if (_formKey.currentState!.validate()){
-
+              if (_formKey.currentState!.validate()) {
                 Get.back();
-
               }
             },
           ),

@@ -80,58 +80,54 @@ class _AddBillHistoryState extends State<AddBillHistory>
                   },
                 ),
                 verticalSpacing(),
-                 CustomTextField(
+                CustomTextField(
                   labelText: "Qty*",
                   hintText: "2*",
-                   validator: (value) {
-                     if(value!.isEmpty){
-                       return "Enter Qty*";
-                     }
-                     else{
-                       return null;
-                     }
-                   },
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Enter Qty*";
+                    } else {
+                      return null;
+                    }
+                  },
                 ),
                 verticalSpacing(),
-                 CustomTextField(
+                CustomTextField(
                   labelText: "Mobile No.*",
                   hintText: "9989898958",
-                   validator: (value) {
-                     if(value!.isEmpty){
-                       return "Enter Mobile No.*";
-                     }
-                     else{
-                       return null;
-                     }
-                   },
-                   textInputType: const TextInputType.numberWithOptions(),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Enter Mobile No.*";
+                    } else {
+                      return null;
+                    }
+                  },
+                  textInputType: const TextInputType.numberWithOptions(),
                 ),
                 verticalSpacing(),
-                 CustomTextField(
+                CustomTextField(
                   labelText: "Price*",
                   hintText: "2000*",
-                   validator: (value) {
-                     if(value!.isEmpty){
-                       return "Enter Price*";
-                     }
-                     else{
-                       return null;
-                     }
-                   },
-                   textInputType: const TextInputType.numberWithOptions(),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Enter Price*";
+                    } else {
+                      return null;
+                    }
+                  },
+                  textInputType: const TextInputType.numberWithOptions(),
                 ),
                 verticalSpacing(),
-                 CustomTextField(
+                CustomTextField(
                   hintText: "Shipping Address....",
                   labelText: "Shipping Address*",
-                   validator: (value) {
-                     if(value!.isEmpty){
-                       return "Enter Shipping Address*";
-                     }
-                     else{
-                       return null;
-                     }
-                   },
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Enter Shipping Address*";
+                    } else {
+                      return null;
+                    }
+                  },
                 ),
                 verticalSpacing(),
               ],
@@ -144,10 +140,8 @@ class _AddBillHistoryState extends State<AddBillHistory>
             color: AppColor.buttonColor,
             buttonText: 'Done',
             onTap: () {
-              if (_formKey.currentState!.validate()){
-
+              if (_formKey.currentState!.validate()) {
                 Get.back();
-
               }
             },
           ),
