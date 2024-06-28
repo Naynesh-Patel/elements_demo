@@ -7,6 +7,7 @@ import 'package:elements/widget/custom_text_field.dart';
 import 'package:elements/widget/dropdown/dropdown_fromfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class CreateNewOrder extends StatefulWidget {
   const CreateNewOrder({super.key});
@@ -17,6 +18,7 @@ class CreateNewOrder extends StatefulWidget {
 
 class _CreateNewOrderState extends State<CreateNewOrder> {
   HomeController controller = Get.find();
+  TextEditingController date = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -64,16 +66,21 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                     color: AppColor.blackColor,
                   )),
               verticalSpacing(),
-              CustomTextField(
-                  hintText: "Select Delivery Date",
-                  labelText: "Delivery Date*",
-                  enable: false,
-                  onTap: () async {},
-                  focusNode: controller.deliveryDateFocusNode,
-                  suffixFixIcon: const Icon(
-                    Icons.date_range,
-                    size: 22,
-                  )),
+              InkWell(
+                onTap: () async {
+                  datePicker();
+                },
+                child: CustomTextField(
+                    textEditingController: date,
+                    hintText: "Select Delivery Date",
+                    labelText: "Delivery Date*",
+                    enable: false,
+                    focusNode: controller.deliveryDateFocusNode,
+                    suffixFixIcon: Icon(
+                      Icons.date_range,
+                      size: 22,
+                    )),
+              ),
               verticalSpacing(),
               CustomTextField(
                 hintText: "Total Payment",
@@ -121,5 +128,19 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
     return const SizedBox(
       height: 26.0,
     );
+  }
+  datePicker() async {
+    DateTime? datePicked = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(2024),
+        lastDate: DateTime(2050));
+    if (datePicked != null) {
+      var pickDate =
+      DateFormat('dd/MM/yyyy').format(datePicked);
+      date.text = pickDate;
+      print(
+          'Date Selected:${datePicked.day}-${datePicked.month}-${datePicked.year}');
+    }
   }
 }

@@ -7,6 +7,8 @@ import 'package:elements/widget/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../controller/spareparts_controller.dart';
+
 class AddSpareparts extends StatefulWidget {
   final bool isUpdate;
 
@@ -18,6 +20,7 @@ class AddSpareparts extends StatefulWidget {
 
 class _AddSparepartsState extends State<AddSpareparts> {
   HomeController controller = Get.find();
+  SparepartsController  spareparts = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +50,7 @@ class _AddSparepartsState extends State<AddSpareparts> {
           child: Column(
             children: [
               CustomTextField(
+                textEditingController: spareparts.nameTextEditingController,
                 hintText: "Steel Bolt",
                 labelText: "Name*",
                 focusNode: controller.sparepartsNameFocusNode,
@@ -125,6 +129,7 @@ class _AddSparepartsState extends State<AddSpareparts> {
               ] else ...[
                 verticalSpacing(),
                 CustomTextField(
+                  textEditingController: spareparts.qtyTypeTextEditingController,
                   hintText: "Qty",
                   labelText: "Qty",
                   textInputType: TextInputType.number,
@@ -140,7 +145,8 @@ class _AddSparepartsState extends State<AddSpareparts> {
             color: AppColor.buttonColor,
             buttonText: widget.isUpdate ? 'Update' : 'Add',
             onTap: () {
-              Get.back();
+              spareparts.updateSpareparts();
+              // Get.back();
             },
           ),
         ));

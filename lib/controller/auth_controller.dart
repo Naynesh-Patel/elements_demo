@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:elements/splash.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -18,6 +19,7 @@ class AuthController extends GetxController {
   bool loginPasswordVisible = true;
 
   final box = GetStorage();
+
 
   FocusNode focusNode = FocusNode();
 
@@ -45,7 +47,7 @@ class AuthController extends GetxController {
         } else {
           box.write("user", responseData);
           box.write("isLogin", true);
-          Get.off(() => const DashBoard());
+          Get.off(() => const Splash());
         }
         isLoginLoading.value = false;
       } else {
