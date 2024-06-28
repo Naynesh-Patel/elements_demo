@@ -1,4 +1,5 @@
 import 'package:elements/constant/app_colors.dart';
+import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/tab/attendance_tab.dart';
 import 'package:elements/tab/expensetab.dart';
 import 'package:elements/tab/setting_tab.dart';
@@ -52,13 +53,15 @@ class _DashBoardState extends State<DashBoard> {
         elevation: 0,
         fixedColor: AppColor.buttonColor,
         backgroundColor: const Color(0xffF9F9F9),
+        unselectedLabelStyle: AppTextStyle.textStyleRegular12,
+        selectedLabelStyle: AppTextStyle.textStyleRegular12,
         type: BottomNavigationBarType.fixed,
         items: [
           BottomNavigationBarItem(
             icon: Image.asset(
               "assets/images/home.png",
-              height: 50,
-              width: 50,
+              height: 40,
+              width: 40,
               color: selectedColor == 0 ? AppColor.buttonColor : Colors.grey,
             ),
             label: "Home",
@@ -66,24 +69,24 @@ class _DashBoardState extends State<DashBoard> {
           BottomNavigationBarItem(
               icon: Image.asset(
                 "assets/images/spareparts.png",
-                height: 50,
-                width: 50,
+                height: 40,
+                width: 40,
                 color: selectedColor == 1 ? AppColor.buttonColor : Colors.grey,
               ),
               label: "Spareparts"),
           BottomNavigationBarItem(
               icon: Image.asset(
                 "assets/images/attebdance.png",
-                height: 50,
-                width: 50,
+                height: 40,
+                width: 40,
                 color: selectedColor == 2 ? AppColor.buttonColor : Colors.grey,
               ),
               label: "Attendance "),
           BottomNavigationBarItem(
               icon: Image.asset(
                 "assets/images/expense.png",
-                height: 50,
-                width: 50,
+                height: 40,
+                width: 40,
                 color: selectedColor == 3 ? AppColor.buttonColor : Colors.grey,
               ),
               label: "Expense"),
@@ -91,8 +94,8 @@ class _DashBoardState extends State<DashBoard> {
               icon: Image.asset(
                 "assets/images/setting.png",
                 color: selectedColor == 4 ? AppColor.buttonColor : Colors.grey,
-                height: 50,
-                width: 50,
+                height: 40,
+                width: 40,
               ),
               label: "Setting"),
         ],
@@ -138,7 +141,7 @@ class _DashBoardState extends State<DashBoard> {
               height: 20,
             ),
             title: const Text(
-              'Manage Machinery',
+              'are youchinery',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w400,

@@ -1,8 +1,11 @@
 import 'package:elements/constant/app_colors.dart';
+import 'package:elements/constant/app_text_style.dart';
+import 'package:elements/constant/methods.dart';
 import 'package:elements/controller/auth_controller.dart';
-import 'package:elements/dashboard.dart';
-import 'package:elements/widget/custom_button.dart';
+import 'package:elements/widget/button/custom_button.dart';
+import 'package:elements/widget/custom_button_loader.dart';
 import 'package:elements/widget/custom_text_field.dart';
+import 'package:elements/widget/dropdown/dropdown_fromfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,23 +17,12 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  String dropdownvalue = 'User';
-  var items = [
-    'Admin',
-    'User',
-    'Seller',
-  ];
   AuthController controller = Get.find();
-
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: AppColor.whiteColor,
         body: ListView(
           children: [
             Container(
@@ -52,48 +44,41 @@ class _LoginState extends State<Login> {
                   const SizedBox(
                     height: 40,
                   ),
-                  const Text(
-                    "Login",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 26,
-                    ),
-                  ),
+                  Text("Login",
+                      style: AppTextStyle.textStyleBold20
+                          .copyWith(fontSize: 26, fontFamily: "Kanit")),
                   const SizedBox(
                     height: 30,
                   ),
-                  CustomTextField(
-                    textEditingController:
-                        controller.userTypeTextEditingController,
+                  WidgetDropDownFromField(
                     hintText: "Select User Type",
-                    labelText: " User Type",
-                    suffixFixWidget: Image.asset(
-                      "assets/images/down.png",
-                      height: 20,
-                    ),
+                    labelText: "User Type*",
+                    itemList: const ["Admin", "Manager", "Salesman"],
+                    onTap: (value) {
+                      controller.userTypeTextEditingController.text = value;
+                      debugPrint("Select => $value");
+                    },
                   ),
-                  const SizedBox(
-                    height: 15,
-                  ),
+                  verticalSpacing(),
                   CustomTextField(
+                    focusNode: controller.mobileFocusNode,
                     textInputType: TextInputType.number,
                     textEditingController:
                         controller.mobileNumberTextEditingController,
                     maxLength: 10,
                     hintText: "Mobile No",
-                    labelText: "Mobile No",
+                    labelText: "Mobile No*",
                   ),
-                  const SizedBox(
-                    height: 15,
-                  ),
+                  verticalSpacing(),
                   CustomTextField(
-                      focusNode: controller.focusNode,
+                      focusNode: controller.passwordFocusNode,
+                      obscureText: controller.loginPasswordVisible,
                       textEditingController:
                           controller.passwordTextEditingController,
+                      maxLength: 6,
                       hintText: "Password",
-                      labelText: "Password",
-                      suffixFixWidget: IconButton(
+                      labelText: "Password*",
+                      suffixFixIcon: IconButton(
                         onPressed: () {
                           setState(() {
                             controller.loginPasswordVisible =
@@ -108,19 +93,45 @@ class _LoginState extends State<Login> {
                         ),
                       )),
                   const SizedBox(
-                    height: 15,
+                    height: 20,
                   ),
-                  CustomButton(
-                    color: AppColor.buttonColor,
-                    buttonText: 'Login',
-                    onTap: () {
-                      Get.to(const DashBoard());
-                    },
+                  Obx(
+                    () => controller.isLoginLoading.value
+                        ? const CustomButtonLoader()
+                        : CustomButton(
+                            color: AppColor.buttonColor,
+                            buttonText: 'Login',
+                            onTap: () {
+                              if (controller.mobileNumberTextEditingController
+                                  .text.isEmpty) {
+                                showToast("Please enter mobile number");
+                              }
+                              if (controller
+                                  .passwordTextEditingController.text.isEmpty) {
+                                showToast("Please enter password number");
+                              } else if (!isValidPhoneNumber(controller
+                                  .mobileNumberTextEditingController.text)) {
+                                showToast("Please enter valid mobile number");
+                                if (controller.userTypeTextEditingController
+                                    .text.isEmpty) {
+                                  showToast("Please enter user type");
+                                }
+                              } else {
+                                controller.login();
+                              }
+                            },
+                          ),
                   ),
                 ],
               ),
             ),
           ],
         ));
+  }
+
+  Widget verticalSpacing() {
+    return const SizedBox(
+      height: 26.0,
+    );
   }
 }

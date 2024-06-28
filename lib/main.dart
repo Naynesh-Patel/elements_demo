@@ -1,10 +1,12 @@
 import 'package:elements/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 import 'controller/binding_controller.dart';
 
-void main() {
+Future<void> main() async {
+  await GetStorage.init();
   runApp(const MyApp());
 }
 
@@ -17,13 +19,9 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       initialBinding: BindingController(),
-      title: 'Flutter Demo',
       theme: ThemeData(
-        fontFamily: 'Kanit-Regular.ttf',
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.deepPurple,
-        ),
-        useMaterial3: true,
+        fontFamily: "Kanit",
+        // useMaterial3: true,
       ),
       home: const Splash(),
     );

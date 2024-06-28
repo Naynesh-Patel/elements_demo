@@ -1,12 +1,14 @@
 import 'package:elements/constant/app_colors.dart';
-import 'package:elements/widget/custom_button.dart';
+import 'package:elements/widget/app%20bar/custom_appbar.dart';
+import 'package:elements/widget/button/custom_button.dart';
+import 'package:elements/widget/custom_text_field.dart';
+import 'package:elements/widget/dropdown/dropdown_fromfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../widget/custom_text_field.dart';
-
 class AddBillHistory extends StatefulWidget {
-  const AddBillHistory({super.key});
+  final bool isUpdate;
+  const AddBillHistory({super.key, this.isUpdate = false});
 
   @override
   State<AddBillHistory> createState() => _AddBillHistoryState();
@@ -15,9 +17,11 @@ class AddBillHistory extends StatefulWidget {
 class _AddBillHistoryState extends State<AddBillHistory>
     with TickerProviderStateMixin {
   bool value = false;
+
   int index = 0;
   late TabController tabController;
   int currentIndex = 0;
+
   @override
   void initState() {
     tabController = TabController(length: 2, vsync: this);
@@ -28,82 +32,70 @@ class _AddBillHistoryState extends State<AddBillHistory>
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          backgroundColor: const Color(0xffF9F9F9),
-          title: const Text(
-            "Create Bill Invoice",
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 20,
-            ),
-          ),
-          leading: InkWell(
-              onTap: () {
-                Get.back();
-              },
-              child: const Icon(Icons.arrow_back_ios_new)),
+        appBar: CustomAppBar(
+          onPressed: () {
+            Get.back();
+          },
+          title:
+              widget.isUpdate ? "Update Bill Invoice" : 'Create Bill Invoice',
         ),
-        body: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+        body: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              CustomTextField(
+              WidgetDropDownFromField(
                 hintText: "Invoice Bill",
                 labelText: "Bill Type",
-                suffixFixWidget: Image.asset(
-                  "assets/images/down.png",
-                  height: 20,
-                ),
+                itemList: const ["Admin", "Usre", "Seller"],
+                onTap: (value) {
+                  debugPrint("Select => $value");
+                },
               ),
               const SizedBox(
                 height: 15,
               ),
-              CustomTextField(
+              WidgetDropDownFromField(
                 hintText: "Select Company Name",
                 labelText: "Customer/Company Name*",
-                suffixFixWidget: Image.asset(
-                  "assets/images/down.png",
-                  height: 20,
-                ),
+                itemList: const ["Admin", "Usre", "Seller"],
+                onTap: (value) {
+                  debugPrint("Select => $value");
+                },
               ),
               const SizedBox(
                 height: 15,
               ),
-              const CustomTextField(
+              WidgetDropDownFromField(
                 hintText: "Select Machine Type",
                 labelText: "Machine Type*",
+                itemList: const ["Admin", "Usre", "Seller"],
+                onTap: (value) {
+                  debugPrint("Select => $value");
+                },
               ),
-              const SizedBox(
-                height: 15,
-              ),
+              verticalSpacing(),
               const CustomTextField(
-                hintText: "2",
                 labelText: "Qty*",
+                hintText: "2*",
               ),
-              const SizedBox(
-                height: 15,
-              ),
+              verticalSpacing(),
               const CustomTextField(
-                hintText: "99656 25693",
                 labelText: "Mobile No.*",
+                hintText: "9989898958",
               ),
-              const SizedBox(
-                height: 15,
-              ),
+              verticalSpacing(),
               const CustomTextField(
-                hintText: "₹ 2000 ",
                 labelText: "Price*",
+                hintText: "2000*",
               ),
-              const SizedBox(
-                height: 15,
-              ),
+              verticalSpacing(),
               const CustomTextField(
                 hintText: "Shipping Address....",
                 labelText: "Shipping Address*",
               ),
-              const SizedBox(
-                height: 15,
-              ),
+              verticalSpacing(),
             ],
           ),
         ),
@@ -111,9 +103,17 @@ class _AddBillHistoryState extends State<AddBillHistory>
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: CustomButton(
             color: AppColor.buttonColor,
-            buttonText: 'Add',
-            onTap: () {},
+            buttonText: 'Done',
+            onTap: () {
+              Get.back();
+            },
           ),
         ));
+  }
+
+  Widget verticalSpacing() {
+    return const SizedBox(
+      height: 26.0,
+    );
   }
 }

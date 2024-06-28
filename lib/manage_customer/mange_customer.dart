@@ -1,4 +1,9 @@
 import 'package:elements/constant/app_colors.dart';
+import 'package:elements/constant/app_text_style.dart';
+import 'package:elements/manage_customer/customer_view_detail.dart';
+import 'package:elements/widget/app%20bar/custom_appbar.dart';
+import 'package:elements/widget/button/small_button.dart';
+import 'package:elements/widget/dialogs/custom_dialogbox.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -15,155 +20,84 @@ class _MangeCustomerState extends State<MangeCustomer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: const Color(0xffF9F9F9),
-        title: const Text(
-          "Manage Customer/Company",
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 20,
-          ),
-        ),
-        leading: InkWell(
-            onTap: () {
-              Get.back();
-            },
-            child: const Icon(Icons.arrow_back_ios_new)),
+      backgroundColor: AppColor.whiteColor,
+      appBar: CustomAppBar(
+        title: "Manage Customer/Company",
+        onPressed: () {
+          Get.back();
+        },
       ),
       body: Container(
         margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
         child: Column(
           children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(4),
-                  border: Border.all(color: const Color(0xffE6E6E6), width: 1)),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+            InkWell(
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(4),
+                    border:
+                        Border.all(color: const Color(0xffE6E6E6), width: 1)),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _keyValue("Name", "Tata Steel Pvt"),
+                    verticalSpacing(),
+                    _keyValue("Contact No", "99656 25693"),
+                    verticalSpacing(),
+                    _keyValue("Reference By", "L & T Pvt"),
+                    verticalSpacing(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Row(
-                          children: [
-                            Text(
-                              "Name :",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400, fontSize: 16),
-                            ),
-                            Text(
-                              "Tata Steel Pvt",
-                              style: TextStyle(
-                                color: Color(0xff555555),
-                              ),
-                            ),
-                          ],
+                        SmallButton(
+                          title: "  View  ",
+                          textColor: AppColor.selectColor,
+                          onTap: () {
+                            Get.to(const AddCustomer(isView: true));
+                          },
                         ),
-                        Row(
-                          children: [
-                            Text(
-                              "Contact No. :",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400, fontSize: 16),
-                            ),
-                            Text(
-                              "99656 25693",
-                              style: TextStyle(color: Color(0xff555555)),
-                            ),
-                          ],
+                        const SizedBox(
+                          width: 12.0,
                         ),
-                        Row(
-                          children: [
-                            Text(
-                              "Reference By :",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400, fontSize: 16),
-                            ),
-                            Text(
-                              "L & T Pvt",
-                              style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                color: Color(0xff555555),
-                              ),
-                            ),
-                          ],
+                        SmallButton(
+                          title: "  Edit  ",
+                          onTap: () {
+                            Get.to(const AddCustomer(
+                              isUpdate: true,
+                            ));
+                          },
                         ),
-                        SizedBox(
-                          height: 10,
+                        const SizedBox(
+                          width: 12.0,
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            InkWell(
-                              onTap: () {},
-                              borderRadius: BorderRadius.circular(5),
-                              child: Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5),
-                                      border: Border.all(
-                                          color: const Color(0xffC9C9C9))),
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 20, vertical: 10),
-                                  child: const Text(
-                                    'View',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 14,
-                                        color: Color(0xff01959F)),
-                                  )),
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            InkWell(
-                              onTap: () {},
-                              borderRadius: BorderRadius.circular(5),
-                              child: Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5),
-                                      border: Border.all(
-                                          color: const Color(0xffC9C9C9))),
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 20, vertical: 10),
-                                  child: const Text(
-                                    'Edit',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 14,
-                                        color: Color(0xff555555)),
-                                  )),
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            InkWell(
-                              onTap: () {},
-                              borderRadius: BorderRadius.circular(5),
-                              child: Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5),
-                                      border: Border.all(
-                                          color: const Color(0xffC9C9C9))),
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 20, vertical: 10),
-                                  child: const Text(
-                                    'Cancel',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 14,
-                                        color: Color(0xffB50A0A)),
-                                  )),
-                            ),
-                          ],
+                        SmallButton(
+                          title: "Cancel",
+                          textColor: AppColor.cancelColor,
+                          onTap: () {
+                            CustomDialogBox.showDeleteDialog(
+                              context: context,
+                              bodyText:
+                                  "Do you really want to cancel these records? This process cannot be undone.",
+                              onCancelTap: () {
+                                Get.back();
+                              },
+                              onDeleteTap: () {
+                                Get.back();
+                              },
+                            );
+                          },
                         ),
                       ],
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            )
+              onTap: () {
+                Get.to(const CustomerViewDetail());
+              },
+            ),
           ],
         ),
       ),
@@ -180,6 +114,30 @@ class _MangeCustomerState extends State<MangeCustomer> {
             Icons.add,
             color: Colors.white,
           )),
+    );
+  }
+
+  Widget _keyValue(key, value) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          "$key : ",
+          style: AppTextStyle.textStyleRegular14,
+        ),
+        Flexible(
+            child: Text(
+          "$value",
+          style: AppTextStyle.textStyleRegular14
+              .copyWith(color: AppColor.blackLightColor),
+        )),
+      ],
+    );
+  }
+
+  Widget verticalSpacing() {
+    return const SizedBox(
+      height: 6.0,
     );
   }
 }

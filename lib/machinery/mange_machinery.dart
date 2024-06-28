@@ -1,5 +1,11 @@
 import 'package:elements/constant/app_colors.dart';
+import 'package:elements/constant/app_text_style.dart';
+import 'package:elements/controller/machinery_controller.dart';
 import 'package:elements/machinery/add_machinery.dart';
+import 'package:elements/machinery/view_machinery.dart';
+import 'package:elements/widget/app%20bar/custom_appbar.dart';
+import 'package:elements/widget/button/small_button.dart';
+import 'package:elements/widget/dialogs/custom_dialogbox.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,234 +17,113 @@ class MangeMachinery extends StatefulWidget {
 }
 
 class _MangeMachineryState extends State<MangeMachinery> {
-  bool value = false;
-  int index = 0;
+  MachineryController controller = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: const Color(0xffF9F9F9),
-        title: const Text(
-          "Mange Machinery",
-          style: TextStyle(
-            color: Colors.black,
-          ),
-        ),
-        leading: InkWell(
-            onTap: () {
-              Get.back();
-            },
-            child: const Icon(Icons.arrow_back_ios_new)),
+      appBar: CustomAppBar(
+        title: "Manage Machinery Stock",
+        onPressed: () {
+          Get.back();
+        },
       ),
       body: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         child: Column(
           children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(4),
-                  border: Border.all(color: const Color(0xffE6E6E6), width: 1)),
-              child: Row(
-                children: [
-                  const Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Text(
-                              "Machine name : ",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400, fontSize: 16),
-                            ),
-                            Text(
-                              "Containership",
-                              style: TextStyle(
-                                color: Color(0xff555555),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              "Spare parts 1 : ",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400, fontSize: 16),
-                            ),
-                            Text(
-                              "20",
-                              style: TextStyle(color: Color(0xff555555)),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              "Spare parts 2 : ",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400, fontSize: 16),
-                            ),
-                            Text(
-                              "26",
-                              style: TextStyle(color: Color(0xff555555)),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              "Duration : ",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400, fontSize: 16),
-                            ),
-                            Text(
-                              "29 Days",
-                              style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                color: Color(0xff555555),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      InkWell(
-                        onTap: () {},
-                        borderRadius: BorderRadius.circular(5),
-                        child: Container(
-                          padding: const EdgeInsets.all(6),
-                          decoration: BoxDecoration(
-                              border:
-                                  Border.all(color: const Color(0xffC9C9C9)),
-                              borderRadius: BorderRadius.circular(5)),
-                          child: const Icon(
-                            Icons.edit,
-                            color: Color(0xff555555),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      InkWell(
-                        onTap: () {},
-                        borderRadius: BorderRadius.circular(5),
-                        child: Container(
-                          padding: const EdgeInsets.all(6),
-                          decoration: BoxDecoration(
-                              border:
-                                  Border.all(color: const Color(0xffC9C9C9)),
-                              borderRadius: BorderRadius.circular(5)),
-                          child: const Icon(
-                            Icons.delete,
-                            color: Color(0xff555555),
-                          ),
-                        ),
-                      ),
-                    ],
-                  )
-                ],
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Flexible(
+                    child: Text(
+                  "Total Machinery Stock  : 20",
+                  style: AppTextStyle.textStyleRegular14,
+                )),
+                SmallButton(
+                    title: "Update",
+                    onTap: () {
+                      Get.to(const AddMachinery(
+                        isUpdate: true,
+                      ));
+                    },
+                    textColor: AppColor.selectColor)
+              ],
             ),
-            const SizedBox(height: 15),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(4),
-                  border: Border.all(color: const Color(0xffE6E6E6), width: 1)),
-              child: Row(
-                children: [
-                  const Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Text(
-                              "Machine name : ",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400, fontSize: 16),
-                            ),
-                            Text(
-                              "Containership",
-                              style: TextStyle(
-                                color: Color(0xff555555),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              "Spare parts : ",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400, fontSize: 16),
-                            ),
-                            Text(
-                              "20",
-                              style: TextStyle(color: Color(0xff555555)),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              "Duration : ",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400, fontSize: 16),
-                            ),
-                            Text(
-                              "29 Days",
-                              style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                color: Color(0xff555555),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
+            const SizedBox(height: 16),
+            InkWell(
+              onTap: () {
+                Get.to(const ViewMachinery());
+              },
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(4),
+                    border:
+                        Border.all(color: const Color(0xffE6E6E6), width: 1)),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _keyValue(
+                      "Machine Name",
+                      "Containership",
                     ),
-                  ),
-                  Row(
-                    children: [
-                      InkWell(
-                        onTap: () {},
-                        borderRadius: BorderRadius.circular(5),
-                        child: Container(
-                          padding: const EdgeInsets.all(6),
-                          decoration: BoxDecoration(
-                              border:
-                                  Border.all(color: const Color(0xffC9C9C9)),
-                              borderRadius: BorderRadius.circular(5)),
-                          child: const Icon(
-                            Icons.edit,
-                            color: Color(0xff555555),
-                          ),
+                    verticalSpacing(),
+                    _keyValue(
+                      "Machine Type",
+                      "Steel Cutting",
+                    ),
+                    verticalSpacing(),
+                    _keyValue(
+                      "Qty",
+                      "1",
+                    ),
+                    verticalSpacing(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        SmallButton(
+                          title: " View ",
+                          textColor: AppColor.selectColor,
+                          onTap: () {
+                            Get.to(const ViewMachinery());
+                          },
                         ),
-                      ),
-                      const SizedBox(width: 10),
-                      InkWell(
-                        onTap: () {},
-                        borderRadius: BorderRadius.circular(5),
-                        child: Container(
-                          padding: const EdgeInsets.all(6),
-                          decoration: BoxDecoration(
-                              border:
-                                  Border.all(color: const Color(0xffC9C9C9)),
-                              borderRadius: BorderRadius.circular(5)),
-                          child: const Icon(
-                            Icons.delete,
-                            color: Color(0xff555555),
-                          ),
+                        const SizedBox(
+                          width: 10,
                         ),
-                      ),
-                    ],
-                  )
-                ],
+                        SmallButton(
+                            title: "Edit",
+                            onTap: () {
+                              Get.to(const AddMachinery(
+                                isUpdate: true,
+                              ));
+                            },
+                            textColor: const Color(0xff555555)),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        SmallButton(
+                            title: "Delete",
+                            onTap: () {
+                              CustomDialogBox.showDeleteDialog(
+                                context: context,
+                                bodyText:
+                                    "Do you really want to cancel these records? This process cannot be undone.",
+                                onCancelTap: () {
+                                  Get.back();
+                                },
+                                onDeleteTap: () {
+                                  Get.back();
+                                },
+                              );
+                            },
+                            textColor: const Color(0xffB50A0A)),
+                      ],
+                    )
+                  ],
+                ),
               ),
             ),
           ],
@@ -257,6 +142,30 @@ class _MangeMachineryState extends State<MangeMachinery> {
             Icons.add,
             color: Colors.white,
           )),
+    );
+  }
+
+  Widget _keyValue(key, value) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          "$key : ",
+          style: AppTextStyle.textStyleRegular16,
+        ),
+        Flexible(
+            child: Text(
+          "$value",
+          style: AppTextStyle.textStyleRegular14
+              .copyWith(color: const Color(0xff555555)),
+        )),
+      ],
+    );
+  }
+
+  Widget verticalSpacing() {
+    return const SizedBox(
+      height: 6.0,
     );
   }
 }
