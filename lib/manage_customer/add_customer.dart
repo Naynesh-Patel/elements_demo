@@ -102,6 +102,7 @@ class _AddCustomerState extends State<AddCustomer> {
                       ),
                       verticalSpacing(),
                        CustomTextField(
+                         textEditingController: controller.companyTextEditingController,
                         hintText: "Enter Company",
                         labelText: "Company*",
                         validator: (value) {
@@ -115,6 +116,7 @@ class _AddCustomerState extends State<AddCustomer> {
                       ),
                       verticalSpacing(),
                        CustomTextField(
+                         textEditingController: controller.ownerTextEditingController,
                         hintText: "Enter Owner Name",
                         labelText: "Owner Name*",
                          validator: (value) {
@@ -128,6 +130,7 @@ class _AddCustomerState extends State<AddCustomer> {
                       ),
                       verticalSpacing(),
                       CustomTextField(
+                        textEditingController: controller.contactTextEditingController,
                         hintText: "99656 25693",
                         labelText: "Contact No.*",
                         validator: (value) {
@@ -167,6 +170,7 @@ class _AddCustomerState extends State<AddCustomer> {
                       ),
                       verticalSpacing(),
                       CustomTextField(
+                        textEditingController: controller.websiteTextEditingController,
                         hintText: "www.machinepro.com",
                         labelText: "Website",
                         validator: (value) {
@@ -191,6 +195,7 @@ class _AddCustomerState extends State<AddCustomer> {
                       ),
                       verticalSpacing(),
                        CustomTextField(
+                         textEditingController: controller.referenceTextEditingController,
                         hintText: "L & T Pvt",
                         labelText: "Reference By",
                         validator: (value) {
@@ -204,6 +209,7 @@ class _AddCustomerState extends State<AddCustomer> {
                       ),
                       verticalSpacing(),
                        CustomTextField(
+                         textEditingController: controller.gstinTextEditingController,
                         hintText: "GD5456892098",
                         labelText: "GST No.",
                          validator: (value) {
@@ -236,6 +242,7 @@ class _AddCustomerState extends State<AddCustomer> {
                       Get.back();
 
                     }
+                    controller.addCustomer();
                   },
                 ),
               ));
