@@ -20,6 +20,7 @@ class AddSpareparts extends StatefulWidget {
 
 class _AddSparepartsState extends State<AddSpareparts> {
   HomeController controller = Get.find();
+  final _formKey = GlobalKey<FormState>();
   SparepartsController  spareparts = Get.find();
 
   @override
@@ -145,6 +146,9 @@ class _AddSparepartsState extends State<AddSpareparts> {
             color: AppColor.buttonColor,
             buttonText: widget.isUpdate ? 'Update' : 'Add',
             onTap: () {
+              if (_formKey.currentState!.validate()) {
+                Get.back();
+              }
               spareparts.updateSpareparts();
               // Get.back();
             },

@@ -54,6 +54,13 @@ class _LoginState extends State<Login> {
                     hintText: "Select User Type",
                     labelText: "User Type*",
                     itemList: const ["Admin", "Manager", "Salesman"],
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Enter user type";
+                      } else {
+                        return null;
+                      }
+                    },
                     onTap: (value) {
                       controller.userTypeTextEditingController.text = value;
                       debugPrint("Select => $value");
