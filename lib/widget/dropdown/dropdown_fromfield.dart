@@ -4,7 +4,7 @@ import 'package:elements/constant/app_text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class WidgetDropDownFromField extends StatelessWidget {
+class WidgetDropDownFromField extends StatefulWidget {
   final List<dynamic> itemList;
   final String hintText;
   final String labelText;
@@ -12,14 +12,18 @@ class WidgetDropDownFromField extends StatelessWidget {
   final ValueSetter<dynamic> onTap;
   const WidgetDropDownFromField(
       {super.key,
-      required this.itemList,
-      required this.hintText,
       this.validator,
+      required this.hintText,
+      required this.onTap,
+      required this.itemList,
+      required this.labelText});
 
-      // this.validator,
-      required this.labelText,
-      required this.onTap});
+  @override
+  State<WidgetDropDownFromField> createState() =>
+      _WidgetDropDownFromFieldState();
+}
 
+class _WidgetDropDownFromFieldState extends State<WidgetDropDownFromField> {
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -40,10 +44,10 @@ class WidgetDropDownFromField extends StatelessWidget {
             ),
             child: DropdownButtonFormField2<dynamic>(
               // validator: validator,
-              validator: validator,
+              validator: widget.validator,
               isExpanded: true,
               hint: Text(
-                hintText,
+                widget.hintText,
                 style: AppTextStyle.textStyleRegular14
                     .copyWith(color: AppColor.dropDownHintColor),
               ),
@@ -67,7 +71,7 @@ class WidgetDropDownFromField extends StatelessWidget {
                   color: AppColor.blackColor,
                 ),
               ),
-              items: itemList
+              items: widget.itemList
                   .map((item) => DropdownMenuItem(
                         value: item,
                         child: Text(
@@ -79,7 +83,7 @@ class WidgetDropDownFromField extends StatelessWidget {
                       ))
                   .toList(),
               onChanged: (value) {
-                onTap(value);
+                widget.onTap(value);
               },
               iconStyleData: const IconStyleData(
                 icon: SizedBox.shrink(),
@@ -98,7 +102,7 @@ class WidgetDropDownFromField extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 4.0),
               color: Colors.white,
               child: Text(
-                labelText,
+                widget.labelText,
                 style: AppTextStyle.textStyleRegular13,
               )),
         )

@@ -1,14 +1,14 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:elements/constant/urls.dart';
-import 'package:elements/dashboard.dart';
-import 'package:elements/model/model_user.dart';
 import 'package:elements/splash.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
+
+import '../constant/urls.dart';
+import '../model/model_user.dart';
 
 class AuthController extends GetxController {
   TextEditingController mobileNumberTextEditingController =

@@ -32,7 +32,7 @@ class CustomTextField extends StatefulWidget {
   final Function(String)? onFieldSubmitted;
   final Function(String?)? onSaved;
   const CustomTextField({
-    Key? key,
+    super.key,
     this.textEditingController,
     this.focusNode,
     this.hintText,
@@ -60,7 +60,7 @@ class CustomTextField extends StatefulWidget {
     this.onSaved,
     this.labelText,
     this.obscureText,
-  }) : super(key: key);
+  });
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -92,7 +92,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-
       controller: widget.textEditingController,
       focusNode: widget.focusNode,
       keyboardType: widget.textInputType ?? TextInputType.text,

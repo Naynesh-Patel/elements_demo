@@ -71,8 +71,7 @@ class HomeController extends GetxController {
       if (response.statusCode == 200) {
         isMachineLoading.value = false;
         var responseData = jsonDecode(response.body);
-        if (responseData["status"] == 1) {
-        } else {}
+        if (responseData["status"] == 1) {}
       } else {
         debugPrint("statusCode::${response.statusCode}");
         isMachineLoading.value = false;

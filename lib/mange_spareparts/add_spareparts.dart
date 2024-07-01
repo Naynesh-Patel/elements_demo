@@ -21,7 +21,7 @@ class AddSpareparts extends StatefulWidget {
 class _AddSparepartsState extends State<AddSpareparts> {
   HomeController controller = Get.find();
   final _formKey = GlobalKey<FormState>();
-  SparepartsController  spareparts = Get.find();
+  SparepartsController sparepartsController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -54,15 +54,15 @@ class _AddSparepartsState extends State<AddSpareparts> {
             child: Column(
               children: [
                 CustomTextField(
-                  textEditingController: spareparts.nameTextEditingController,
+                  textEditingController:
+                      sparepartsController.nameTextEditingController,
                   hintText: "Steel Bolt",
                   labelText: "Name*",
-                  focusNode: controller.sparepartsNameFocusNode,
+                  focusNode: sparepartsController.sparepartsNameFocusNode,
                   validator: (value) {
-                    if(value!.isEmpty){
-                      return "Enter Name*";
-                    }
-                    else{
+                    if (value!.isEmpty) {
+                      return "Enter Name";
+                    } else {
                       return null;
                     }
                   },
@@ -98,8 +98,9 @@ class _AddSparepartsState extends State<AddSpareparts> {
                   CustomTextField(
                     hintText: "10",
                     labelText: "Qty",
-                    textEditingController: TextEditingController(text: "10"),
-                    focusNode: controller.sparepartsQtyFocusNode,
+                    textEditingController:
+                        sparepartsController.qtyTypeTextEditingController,
+                    focusNode: sparepartsController.sparepartsQtyFocusNode,
                   ),
                   const SizedBox(
                     height: 16.0,
@@ -123,7 +124,8 @@ class _AddSparepartsState extends State<AddSpareparts> {
                       OutlinedButton(
                         onPressed: () {},
                         style: ButtonStyle(
-                          shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                          shape:
+                              MaterialStateProperty.all(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(4.0),
                             side: const BorderSide(
                               color: AppColor.borderColor,
@@ -141,16 +143,16 @@ class _AddSparepartsState extends State<AddSpareparts> {
                 ] else ...[
                   verticalSpacing(),
                   CustomTextField(
-                    textEditingController: spareparts.qtyTypeTextEditingController,
+                    textEditingController:
+                        sparepartsController.qtyTypeTextEditingController,
                     hintText: "Qty",
                     labelText: "Qty",
                     textInputType: TextInputType.number,
-                    focusNode: controller.sparepartsQtyFocusNode,
+                    focusNode: sparepartsController.sparepartsQtyFocusNode,
                     validator: (value) {
-                      if(value!.isEmpty){
+                      if (value!.isEmpty) {
                         return "Enter Qty";
-                      }
-                      else{
+                      } else {
                         return null;
                       }
                     },
@@ -169,7 +171,7 @@ class _AddSparepartsState extends State<AddSpareparts> {
               if (_formKey.currentState!.validate()) {
                 Get.back();
               }
-              spareparts.updateSpareparts();
+              sparepartsController.addSpareparts();
               // Get.back();
             },
           ),

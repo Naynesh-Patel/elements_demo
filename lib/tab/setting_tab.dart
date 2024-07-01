@@ -26,6 +26,7 @@ class _SettingTabState extends State<SettingTab> {
   @override
   void initState() {
     controller.selectMenu.value = 0;
+
     super.initState();
   }
 

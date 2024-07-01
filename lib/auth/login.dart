@@ -1,13 +1,13 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
-import 'package:elements/constant/methods.dart';
 import 'package:elements/controller/auth_controller.dart';
 import 'package:elements/widget/button/custom_button.dart';
-import 'package:elements/widget/custom_button_loader.dart';
 import 'package:elements/widget/custom_text_field.dart';
 import 'package:elements/widget/dropdown/dropdown_fromfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../widget/custom_button_loader.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -29,7 +29,8 @@ class _LoginState extends State<Login> {
           child: ListView(
             children: [
               Container(
-                margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -57,16 +58,16 @@ class _LoginState extends State<Login> {
                       hintText: "Select User Type",
                       labelText: "User Type*",
                       itemList: const ["Admin", "Manager", "Salesman"],
+                      onTap: (value) {
+                        controller.userTypeTextEditingController.text = value;
+                        debugPrint("Select => $value");
+                      },
                       validator: (value) {
-                        if (value!.isEmpty) {
+                        if (value) {
                           return "Enter user type";
                         } else {
                           return null;
                         }
-                      },
-                      onTap: (value) {
-                        controller.userTypeTextEditingController.text = value;
-                        debugPrint("Select => $value");
                       },
                     ),
                     verticalSpacing(),
@@ -79,10 +80,9 @@ class _LoginState extends State<Login> {
                       hintText: "Mobile No",
                       labelText: "Mobile No*",
                       validator: (value) {
-                        if(value!.isEmpty){
-                          return "Enter Mobile No*";
-                        }
-                        else{
+                        if (value!.isEmpty) {
+                          return "Enter Mobile No";
+                        } else {
                           return null;
                         }
                       },
@@ -97,10 +97,9 @@ class _LoginState extends State<Login> {
                         hintText: "Password",
                         labelText: "Password*",
                         validator: (value) {
-                          if(value!.isEmpty){
-                            return "Enter Password*";
-                          }
-                          else{
+                          if (value!.isEmpty) {
+                            return "Enter Password";
+                          } else {
                             return null;
                           }
                         },
@@ -128,10 +127,8 @@ class _LoginState extends State<Login> {
                               color: AppColor.buttonColor,
                               buttonText: 'Login',
                               onTap: () {
-                                if (_formKey.currentState!.validate()){
-
+                                if (_formKey.currentState!.validate()) {
                                   controller.login();
-
                                 }
                               },
                             ),

@@ -43,7 +43,6 @@ class _ViewOrderDetailsState extends State<ViewOrderDetails> {
                 onTap: (value) {
                   debugPrint("Select => $value");
                 },
-                validator: (String) {},
               ),
               const SizedBox(
                 height: 20,
