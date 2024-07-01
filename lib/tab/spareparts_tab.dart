@@ -77,9 +77,12 @@ class _SparepartsTabState extends State<SparepartsTab> {
                             borderRadius: BorderRadius.circular(4),
                             border: Border.all(color: const Color(0xffD1D1D1))),
                         child: TextField(
+                          keyboardType: TextInputType.numberWithOptions(),
+                          maxLength: 3,
                           textAlignVertical: TextAlignVertical.center,
                           textAlign: TextAlign.center,
                           decoration: InputDecoration(
+                            counterText: '',
                               border: InputBorder.none,
                               contentPadding: const EdgeInsets.symmetric(
                                   horizontal: 8.0, vertical: 13),
