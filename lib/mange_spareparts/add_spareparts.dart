@@ -20,7 +20,7 @@ class AddSpareparts extends StatefulWidget {
 
 class _AddSparepartsState extends State<AddSpareparts> {
   HomeController controller = Get.find();
-  SparepartsController  spareparts = Get.find();
+  SparepartsController spareparts = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -129,7 +129,8 @@ class _AddSparepartsState extends State<AddSpareparts> {
               ] else ...[
                 verticalSpacing(),
                 CustomTextField(
-                  textEditingController: spareparts.qtyTypeTextEditingController,
+                  textEditingController:
+                      spareparts.qtyTypeTextEditingController,
                   hintText: "Qty",
                   labelText: "Qty",
                   textInputType: TextInputType.number,

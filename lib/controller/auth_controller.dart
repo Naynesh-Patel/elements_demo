@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:elements/splash.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -9,6 +8,7 @@ import 'package:http/http.dart' as http;
 
 import '../constant/urls.dart';
 import '../dashboard.dart';
+import '../model/model_user.dart';
 
 class AuthController extends GetxController {
   TextEditingController mobileNumberTextEditingController =
@@ -20,6 +20,7 @@ class AuthController extends GetxController {
 
   final box = GetStorage();
 
+  Rx<ModelUser> modelUser = ModelUser().obs;
 
   FocusNode focusNode = FocusNode();
 
@@ -32,7 +33,7 @@ class AuthController extends GetxController {
   Future<void> login() async {
     Map<String, dynamic> body = {
       "password": passwordTextEditingController.text,
-      "mobile_no": mobileNumberTextEditingController.text,
+      "contact_no": mobileNumberTextEditingController.text,
       "user_type": userTypeTextEditingController.text,
     };
     try {
@@ -44,10 +45,11 @@ class AuthController extends GetxController {
         var responseData = jsonDecode(response.body);
         jsonDecode(response.body);
         if (responseData['status'] == 0) {
+          modelUser.value = ModelUser.fromJson(responseData['user']);
         } else {
           box.write("user", responseData);
           box.write("isLogin", true);
-          Get.off(() => const Splash());
+          Get.off(() => const DashBoard());
         }
         isLoginLoading.value = false;
       } else {

@@ -76,7 +76,7 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                     labelText: "Delivery Date*",
                     enable: false,
                     focusNode: controller.deliveryDateFocusNode,
-                    suffixFixIcon: Icon(
+                    suffixFixIcon: const Icon(
                       Icons.date_range,
                       size: 22,
                     )),
@@ -129,6 +129,7 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
       height: 26.0,
     );
   }
+
   datePicker() async {
     DateTime? datePicked = await showDatePicker(
         context: context,
@@ -136,8 +137,7 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
         firstDate: DateTime(2024),
         lastDate: DateTime(2050));
     if (datePicked != null) {
-      var pickDate =
-      DateFormat('dd/MM/yyyy').format(datePicked);
+      var pickDate = DateFormat('dd/MM/yyyy').format(datePicked);
       date.text = pickDate;
       print(
           'Date Selected:${datePicked.day}-${datePicked.month}-${datePicked.year}');
