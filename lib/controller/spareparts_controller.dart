@@ -21,7 +21,7 @@ class SparepartsController extends GetxController {
     Map<String, dynamic> body = {
       "name": nameTextEditingController.text,
       "qty": qtyTypeTextEditingController.text,
-      // "user_type": userTypeTextEditingController.text,
+      // "id": userTypeTextEditingController.text,
     };
 
     var response = await http.post(Uri.parse(url),body: body);
