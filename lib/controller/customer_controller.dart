@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 
+import '../constant/methods.dart';
 import '../constant/urls.dart';
 
 class CustomerController extends GetxController {
@@ -77,6 +78,7 @@ class CustomerController extends GetxController {
     try {
       String url = "${baseURL}customer/getAll";
       log("API => $url");
+      customerList.clear();
       isGetCustomerLoading.value = true;
       var response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
@@ -91,6 +93,27 @@ class CustomerController extends GetxController {
     } catch (e) {
       debugPrint("Errors:$e");
       isGetCustomerLoading.value = false;
+    }
+  }
+
+  Future<void> deletecustomer(index) async {
+    try {
+      String url = "${baseURL}customer/delete";
+      log("API => $url");
+      var response = await http.post(Uri.parse(url), body: {
+        "id": customerList[index]['id'],
+      });
+      if (response.statusCode == 200) {
+        var responseData = jsonDecode(response.body);
+        if (responseData["status"]["success"] == 1) {
+          customerList.removeAt(index);
+          showToast(responseData["message"]);
+        }
+      } else {
+        debugPrint("Fail");
+      }
+    } catch (e) {
+      debugPrint("Error:$e");
     }
   }
 

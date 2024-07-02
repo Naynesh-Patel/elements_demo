@@ -131,6 +131,7 @@ class _AddCustomerState extends State<AddCustomer> {
                       verticalSpacing(),
                       CustomTextField(
                         textEditingController: controller.contactTextEditingController,
+                        maxLength: 10,
                         hintText: "99656 25693",
                         labelText: "Contact No.*",
                         validator: (value) {
