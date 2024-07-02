@@ -122,7 +122,6 @@ class SparepartsController extends GetxController {
       if (response.statusCode == 200) {
         var responseData = jsonDecode(response.body);
         if (responseData["status"]["success"] == 1) {
-          Get.back();
           showToast(responseData["message"]);
         }
       } else {

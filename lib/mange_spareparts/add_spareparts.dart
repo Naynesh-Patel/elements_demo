@@ -46,119 +46,121 @@ class _AddSparepartsState extends State<AddSpareparts> {
             Get.back();
           },
         ),
-        body: Form(
-          key: _formKey,
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-          child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-            child: Column(
-              children: [
-                CustomTextField(
-                  textEditingController:
-                      sparepartsController.nameTextEditingController,
-                  hintText: "Steel Bolt",
-                  labelText: "Name*",
-                  focusNode: sparepartsController.sparepartsNameFocusNode,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return "Enter Name";
-                    } else {
-                      return null;
-                    }
-                  },
-                ),
-                if (widget.isUpdate) ...[
-                  const SizedBox(
-                    height: 16.0,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Add Qty",
-                        style: AppTextStyle.textStyleRegular18,
-                      ),
-                      IconButton(
-                          padding: EdgeInsets.zero,
-                          constraints: const BoxConstraints(),
-                          style: const ButtonStyle(
-                            tapTargetSize: MaterialTapTargetSize
-                                .shrinkWrap, // the '2023' part
-                          ),
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.add,
-                            size: 24,
-                          )),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 16.0,
-                  ),
-                  CustomTextField(
-                    hintText: "10",
-                    labelText: "Qty",
-                    textEditingController:
-                        sparepartsController.qtyTypeTextEditingController,
-                    focusNode: sparepartsController.sparepartsQtyFocusNode,
-                  ),
-                  const SizedBox(
-                    height: 16.0,
-                  ),
-                  CustomTextField(
-                    hintText: "New Qty",
-                    labelText: "Add New Qty",
-                    focusNode: controller.sparepartsNewQtyFocusNode,
-                  ),
-                  const SizedBox(
-                    height: 16.0,
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                          child: Text(
-                        "Total Qty : 30",
-                        style: AppTextStyle.textStyleLight14
-                            .copyWith(color: AppColor.dropDownHintColor),
-                      )),
-                      OutlinedButton(
-                        onPressed: () {},
-                        style: ButtonStyle(
-                          shape:
-                              MaterialStateProperty.all(RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(4.0),
-                            side: const BorderSide(
-                              color: AppColor.borderColor,
-                            ),
-                          )),
-                        ),
-                        child: Text(
-                          "Update",
-                          style: AppTextStyle.textStyleLight14
-                              .copyWith(color: AppColor.selectColor),
-                        ),
-                      )
-                    ],
-                  ),
-                ] else ...[
-                  verticalSpacing(),
+        body: Obx(
+          () => Form(
+            key: _formKey,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+              child: Column(
+                children: [
                   CustomTextField(
                     textEditingController:
-                        sparepartsController.qtyTypeTextEditingController,
-                    hintText: "Qty",
-                    labelText: "Qty",
-                    textInputType: TextInputType.number,
-                    focusNode: sparepartsController.sparepartsQtyFocusNode,
+                        sparepartsController.nameTextEditingController,
+                    hintText: "Steel Bolt",
+                    labelText: "Name*",
+                    focusNode: sparepartsController.sparepartsNameFocusNode,
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return "Enter Qty";
+                        return "Enter Name";
                       } else {
                         return null;
                       }
                     },
                   ),
+                  if (widget.isUpdate) ...[
+                    const SizedBox(
+                      height: 16.0,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Add Qty",
+                          style: AppTextStyle.textStyleRegular18,
+                        ),
+                        IconButton(
+                            padding: EdgeInsets.zero,
+                            constraints: const BoxConstraints(),
+                            style: const ButtonStyle(
+                              tapTargetSize: MaterialTapTargetSize
+                                  .shrinkWrap, // the '2023' part
+                            ),
+                            onPressed: () {},
+                            icon: const Icon(
+                              Icons.add,
+                              size: 24,
+                            )),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 16.0,
+                    ),
+                    CustomTextField(
+                      hintText: "10",
+                      labelText: "Qty",
+                      textEditingController:
+                          sparepartsController.qtyTypeTextEditingController,
+                      focusNode: sparepartsController.sparepartsQtyFocusNode,
+                    ),
+                    const SizedBox(
+                      height: 16.0,
+                    ),
+                    CustomTextField(
+                      hintText: "New Qty",
+                      labelText: "Add New Qty",
+                      focusNode: controller.sparepartsNewQtyFocusNode,
+                    ),
+                    const SizedBox(
+                      height: 16.0,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                            child: Text(
+                          "Total Qty : 30",
+                          style: AppTextStyle.textStyleLight14
+                              .copyWith(color: AppColor.dropDownHintColor),
+                        )),
+                        OutlinedButton(
+                          onPressed: () {},
+                          style: ButtonStyle(
+                            shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(4.0),
+                              side: const BorderSide(
+                                color: AppColor.borderColor,
+                              ),
+                            )),
+                          ),
+                          child: Text(
+                            "Update",
+                            style: AppTextStyle.textStyleLight14
+                                .copyWith(color: AppColor.selectColor),
+                          ),
+                        )
+                      ],
+                    ),
+                  ] else ...[
+                    verticalSpacing(),
+                    CustomTextField(
+                      textEditingController:
+                          sparepartsController.qtyTypeTextEditingController,
+                      hintText: "Qty",
+                      labelText: "Qty",
+                      textInputType: TextInputType.number,
+                      focusNode: sparepartsController.sparepartsQtyFocusNode,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Enter Qty";
+                        } else {
+                          return null;
+                        }
+                      },
+                    ),
+                  ],
                 ],
-              ],
+              ),
             ),
           ),
         ),
