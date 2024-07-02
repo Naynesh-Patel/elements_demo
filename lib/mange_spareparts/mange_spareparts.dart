@@ -131,10 +131,12 @@ class _MangeSparepartsState extends State<MangeSpareparts> {
                                           Get.back();
                                         },
                                         onDeleteTap: () {
-                                          controller.deleteSpareparts(controller
-                                              .sparepartsList[index]["id"]);
-                                          Get.back();
-                                          setState(() {});
+                                          setState(() {
+                                            controller.deleteSpareparts(
+                                                controller.sparepartsList[index]
+                                                    ["id"]);
+                                            Get.back();
+                                          });
                                         },
                                       );
                                     },
