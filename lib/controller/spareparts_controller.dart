@@ -1,12 +1,11 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:elements/constant/methods.dart';
 import 'package:elements/constant/urls.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-
-import '../constant/methods.dart';
 
 class SparepartsController extends GetxController {
   TextEditingController nameTextEditingController = TextEditingController();
@@ -116,19 +115,23 @@ class SparepartsController extends GetxController {
     try {
       String url = "${baseURL}sparepart/delete";
       log("API => $url");
+      isDeleteSparepartsLoading.value = false;
       var response = await http.post(Uri.parse(url), body: {
         "id": id,
       });
       if (response.statusCode == 200) {
         var responseData = jsonDecode(response.body);
+        isDeleteSparepartsLoading.value = false;
         if (responseData["status"]["success"] == 1) {
           showToast(responseData["message"]);
+          isDeleteSparepartsLoading.value = false;
         }
       } else {
         debugPrint("Fail");
       }
     } catch (e) {
       debugPrint("Error:$e");
+      isDeleteSparepartsLoading.value = false;
     }
   }
 }
