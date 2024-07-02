@@ -120,7 +120,11 @@ class _MangeCustomerState extends State<MangeCustomer> {
                                               Get.back();
                                             },
                                             onDeleteTap: () {
-                                              controller.deletecustomer(index);
+                                              controller.deletecustomer(
+                                                  controller.customerList[index]
+                                                      ['id']);
+                                              controller.customerList
+                                                  .removeAt(index);
                                               Get.back();
                                             },
                                           );

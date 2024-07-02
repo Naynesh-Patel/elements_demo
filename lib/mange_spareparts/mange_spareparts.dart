@@ -25,6 +25,7 @@ class _MangeSparepartsState extends State<MangeSpareparts> {
   void initState() {
     setState(() {
       controller.getSpareparts();
+      controller.updateSpareparts();
     });
     super.initState();
   }
@@ -102,8 +103,8 @@ class _MangeSparepartsState extends State<MangeSpareparts> {
                                 children: [
                                   InkWell(
                                     onTap: () {
-                                      Get.to(const AddSpareparts(
-                                        isUpdate: true,
+                                      Get.to(AddSpareparts(
+                                        model: controller.sparepartsList[index],
                                       ));
                                     },
                                     borderRadius: BorderRadius.circular(5),
@@ -134,7 +135,9 @@ class _MangeSparepartsState extends State<MangeSpareparts> {
                                           setState(() {
                                             controller.deleteSpareparts(
                                                 controller.sparepartsList[index]
-                                                    ["id"]);
+                                                    ['id']);
+                                            controller.sparepartsList
+                                                .removeAt(index);
                                             Get.back();
                                           });
                                         },

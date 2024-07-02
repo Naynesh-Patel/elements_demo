@@ -9,9 +9,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AddSpareparts extends StatefulWidget {
-  final bool isUpdate;
+  final dynamic model;
 
-  const AddSpareparts({super.key, this.isUpdate = false});
+  const AddSpareparts({
+    super.key,
+    this.model,
+  });
 
   @override
   State<AddSpareparts> createState() => _AddSparepartsState();
@@ -24,7 +27,15 @@ class _AddSparepartsState extends State<AddSpareparts> {
 
   @override
   void initState() {
-    // TODO: implement initState
+    if (widget.model != null) {
+      sparepartsController.nameTextEditingController.text =
+          widget.model['name'] ?? '';
+      sparepartsController.qtyTypeTextEditingController.text =
+          widget.model['qty'] ?? '';
+    } else {
+      sparepartsController.nameTextEditingController.clear();
+      sparepartsController.qtyTypeTextEditingController.clear();
+    }
     super.initState();
   }
 
@@ -44,7 +55,7 @@ class _AddSparepartsState extends State<AddSpareparts> {
           //             Icons.add,
           //           )))
           // ],
-          title: widget.isUpdate
+          title: widget.model != null
               ? "Update Import Spareparts "
               : "Add Import Spareparts",
           onPressed: () {
@@ -72,7 +83,7 @@ class _AddSparepartsState extends State<AddSpareparts> {
                     }
                   },
                 ),
-                if (widget.isUpdate) ...[
+                if (widget.model != null) ...[
                   const SizedBox(
                     height: 16.0,
                   ),
@@ -171,14 +182,19 @@ class _AddSparepartsState extends State<AddSpareparts> {
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: CustomButton(
             color: AppColor.buttonColor,
-            buttonText: widget.isUpdate ? 'Update' : 'Add',
+            buttonText: widget.model != null ? 'Update' : 'Add',
             onTap: () {
               if (_formKey.currentState!.validate()) {
-                if (widget.isUpdate) {
+                if (widget.model != null) {
                   sparepartsController.updateSpareparts();
                 } else {
                   sparepartsController.addSpareparts();
                 }
+                // if (widget.model != null) {
+                //   sparepartsController.updateSpareparts();
+                // } else {
+                //   sparepartsController.addSpareparts();
+                // }
               }
             },
           ),
