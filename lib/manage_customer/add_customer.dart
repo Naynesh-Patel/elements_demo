@@ -151,6 +151,7 @@ class _AddCustomerState extends State<AddCustomer> {
                       ),
                       verticalSpacing(),
                       CustomTextField(
+                        textEditingController: controller.addressTextEditingController,
                         hintText: "Enter Address",
                         labelText: "Address",
                         validator: (value) {

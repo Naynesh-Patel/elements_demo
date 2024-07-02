@@ -7,6 +7,8 @@ import 'package:elements/widget/dialogs/custom_dialogbox.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../controller/customer_controller.dart';
+import '../widget/custom_loader.dart';
 import 'add_customer.dart';
 
 class MangeCustomer extends StatefulWidget {
@@ -17,6 +19,16 @@ class MangeCustomer extends StatefulWidget {
 }
 
 class _MangeCustomerState extends State<MangeCustomer> {
+  CustomerController controller = Get.find();
+
+  @override
+  void initState() {
+    setState(() {
+      controller.getcustomer();
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,78 +39,111 @@ class _MangeCustomerState extends State<MangeCustomer> {
           Get.back();
         },
       ),
-      body: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-        child: Column(
-          children: [
-            InkWell(
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(4),
-                    border:
-                        Border.all(color: const Color(0xffE6E6E6), width: 1)),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _keyValue("Name", "Tata Steel Pvt"),
-                    verticalSpacing(),
-                    _keyValue("Contact No", "99656 25693"),
-                    verticalSpacing(),
-                    _keyValue("Reference By", "L & T Pvt"),
-                    verticalSpacing(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        SmallButton(
-                          title: "  View  ",
-                          textColor: AppColor.selectColor,
-                          onTap: () {
-                            Get.to(const AddCustomer(isView: true));
-                          },
-                        ),
-                        const SizedBox(
-                          width: 12.0,
-                        ),
-                        SmallButton(
-                          title: "  Edit  ",
-                          onTap: () {
-                            Get.to(const AddCustomer(
-                              isUpdate: true,
-                            ));
-                          },
-                        ),
-                        const SizedBox(
-                          width: 12.0,
-                        ),
-                        SmallButton(
-                          title: "Cancel",
-                          textColor: AppColor.cancelColor,
-                          onTap: () {
-                            CustomDialogBox.showDeleteDialog(
-                              context: context,
-                              bodyText:
-                                  "Do you really want to cancel these records? This process cannot be undone.",
-                              onCancelTap: () {
-                                Get.back();
-                              },
-                              onDeleteTap: () {
-                                Get.back();
-                              },
-                            );
-                          },
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              onTap: () {
-                Get.to(const CustomerViewDetail());
-              },
-            ),
-          ],
+      body: SingleChildScrollView(
+        child: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+          child: Obx(
+            () => controller.isGetCustomerLoading.value
+                ? const CustomLoader()
+                : Column(
+                    children: [
+                      ListView.separated(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: controller.customerList.length,
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 10),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(4),
+                                  border: Border.all(
+                                      color: const Color(0xffE6E6E6),
+                                      width: 1)),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  _keyValue(
+                                      "Name",
+                                      controller.customerList[index]
+                                              ['company'] ??
+                                          ''),
+                                  verticalSpacing(),
+                                  _keyValue(
+                                      "Contact No",
+                                      controller.customerList[index]
+                                              ['contact'] ??
+                                          ''),
+                                  verticalSpacing(),
+                                  _keyValue(
+                                      "Reference By",
+                                      controller.customerList[index]
+                                              ['reference'] ??
+                                          ''),
+                                  verticalSpacing(),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      SmallButton(
+                                        title: "  View  ",
+                                        textColor: AppColor.selectColor,
+                                        onTap: () {
+                                          Get.to(
+                                              const AddCustomer(isView: true));
+                                        },
+                                      ),
+                                      const SizedBox(
+                                        width: 12.0,
+                                      ),
+                                      SmallButton(
+                                        title: "  Edit  ",
+                                        onTap: () {
+                                          Get.to(const AddCustomer(
+                                            isUpdate: true,
+                                          ));
+                                        },
+                                      ),
+                                      const SizedBox(
+                                        width: 12.0,
+                                      ),
+                                      SmallButton(
+                                        title: "Cancel",
+                                        textColor: AppColor.cancelColor,
+                                        onTap: () {
+                                          CustomDialogBox.showDeleteDialog(
+                                            context: context,
+                                            bodyText:
+                                                "Do you really want to cancel these records? This process cannot be undone.",
+                                            onCancelTap: () {
+                                              Get.back();
+                                            },
+                                            onDeleteTap: () {
+                                              Get.back();
+                                            },
+                                          );
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            onTap: () {
+                              Get.to(const CustomerViewDetail());
+                            },
+                          );
+                        },
+                        separatorBuilder: (BuildContext context, int index) {
+                          return const SizedBox(
+                            height: 16,
+                          );
+                        },
+                      )
+                    ],
+                  ),
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(

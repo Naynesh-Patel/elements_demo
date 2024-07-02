@@ -62,13 +62,14 @@ class _LoginState extends State<Login> {
                         controller.userTypeTextEditingController.text = value;
                         debugPrint("Select => $value");
                       },
-                      validator: (value) {
-                        if (value) {
-                          return "Enter user type";
-                        } else {
-                          return null;
-                        }
-                      },
+                      validator: (value) => value == null ? 'Please Enter user type' : null,
+                      // validator: (value) {
+                      //   if (value) {
+                      //     return "Enter user type";
+                      //   } else {
+                      //     return null;
+                      //   }
+                      // },
                     ),
                     verticalSpacing(),
                     CustomTextField(
