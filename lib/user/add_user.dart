@@ -128,6 +128,7 @@ class _AddUserState extends State<AddUser> {
                       textInputType: const TextInputType.numberWithOptions(),
                       hintText: "99656 25693",
                       labelText: "Contact No.",
+                      maxLength: 10,
                       validator: (value) {
                         if (value!.isEmpty) {
                           return "Enter Contact No";

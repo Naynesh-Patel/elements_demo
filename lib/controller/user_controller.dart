@@ -44,7 +44,7 @@ class UserController extends GetxController {
       "contact_no": contactNoTextEditingController.text,
       "address": addressTextEditingController.text,
       "user_type": userRoleTextEditingController.text,
-      "fingerprint": fingerprintEditingController,
+      "fingerprint": fingerprintEditingController.text,
     };
     try {
       String url = "${baseURL}user/insert";

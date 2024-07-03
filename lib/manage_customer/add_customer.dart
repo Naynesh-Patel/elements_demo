@@ -263,7 +263,7 @@ class _AddCustomerState extends State<AddCustomer> {
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 child: CustomButton(
                   color: AppColor.buttonColor,
-                  buttonText: widget.model != null ? 'Update' : 'Add',
+                  buttonText:widget.model != null ? 'Update' : 'Add',
                   onTap: () {
                     if (_formKey.currentState!.validate()) {
                       if (widget.model != null) {
