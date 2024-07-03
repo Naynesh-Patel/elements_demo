@@ -100,8 +100,9 @@ class _MangeCustomerState extends State<MangeCustomer> {
                                       SmallButton(
                                         title: "  Edit  ",
                                         onTap: () {
-                                          Get.to(const AddCustomer(
-                                            isUpdate: true,
+                                          Get.to(AddCustomer(
+                                            model:
+                                                controller.customerList[index],
                                           ));
                                         },
                                       ),

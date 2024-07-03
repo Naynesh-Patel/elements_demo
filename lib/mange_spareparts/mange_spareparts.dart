@@ -25,7 +25,6 @@ class _MangeSparepartsState extends State<MangeSpareparts> {
   void initState() {
     setState(() {
       controller.getSpareparts();
-      controller.updateSpareparts();
     });
     super.initState();
   }

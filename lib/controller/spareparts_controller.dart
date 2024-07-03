@@ -103,7 +103,8 @@ class SparepartsController extends GetxController {
       var response = await http.post(Uri.parse(url), body: body);
       if (response.statusCode == 200) {
         jsonDecode(response.body);
-        jsonDecode(response.body);
+        getSpareparts();
+        Get.back();
         isUpdateSparepartsLoading.value = false;
       } else {
         debugPrint("statusCode${response.statusCode}");

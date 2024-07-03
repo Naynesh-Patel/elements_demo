@@ -64,8 +64,8 @@ class CustomerController extends GetxController {
       var response = await http.post(Uri.parse(url), body: body);
       if (response.statusCode == 200) {
         jsonDecode(response.body);
-        // getcustomer();
-        // Get.back();
+        getcustomer();
+        Get.back();
         isCustomerLoading.value = false;
       } else {
         debugPrint("statusCode${response.statusCode}");
@@ -143,8 +143,8 @@ class CustomerController extends GetxController {
       var response = await http.post(Uri.parse(url), body: body);
       if (response.statusCode == 200) {
         jsonDecode(response.body);
-        Get.back();
-        getcustomer();
+        // Get.back();
+        // getcustomer();
         isGetCustomerUpdateLoading.value = false;
       } else {
         debugPrint("statusCode${response.statusCode}");

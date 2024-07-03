@@ -10,7 +10,9 @@ import 'package:get/get.dart';
 class AddCustomer extends StatefulWidget {
   final bool isUpdate;
   final bool isView;
-  const AddCustomer({super.key, this.isUpdate = false, this.isView = false});
+  final dynamic model;
+  const AddCustomer(
+      {super.key, this.isUpdate = false, this.isView = false, this.model});
 
   @override
   State<AddCustomer> createState() => _AddCustomerState();
@@ -21,11 +23,29 @@ class _AddCustomerState extends State<AddCustomer> {
   final _formKey = GlobalKey<FormState>();
 
   @override
+  void initState() {
+    controller.updateCustomer();
+    if (widget.model != null) {
+      controller.companyTextEditingController.text =
+          widget.model['company'] ?? '';
+      controller.contactTextEditingController.text =
+          widget.model['contact'] ?? '';
+      controller.referenceTextEditingController.text =
+          widget.model['reference'] ?? '';
+    } else {
+      controller.companyTextEditingController.clear();
+      controller.contactTextEditingController.clear();
+      controller.referenceTextEditingController.clear();
+    }
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: CustomAppBar(
-          title: widget.isUpdate
+          title: widget.model != null
               ? "Update Customer/Company Details"
               : widget.isView
                   ? "View Customer/Company Details"
@@ -37,7 +57,7 @@ class _AddCustomerState extends State<AddCustomer> {
         body: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Form(
-            key:_formKey ,
+            key: _formKey,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,7 +69,7 @@ class _AddCustomerState extends State<AddCustomer> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        widget.isUpdate || widget.isView
+                        widget.model != null || widget.isView
                             ? 'Profile :'
                             : 'Add Profile :',
                         style: AppTextStyle.textStyleRegular16
@@ -72,7 +92,8 @@ class _AddCustomerState extends State<AddCustomer> {
                                     height: 80,
                                     width: 80,
                                     child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(50.0),
+                                        borderRadius:
+                                            BorderRadius.circular(50.0),
                                         child: Image.file(
                                           controller.imgFile!,
                                           fit: BoxFit.cover,
@@ -101,44 +122,44 @@ class _AddCustomerState extends State<AddCustomer> {
                         ),
                       ),
                       verticalSpacing(),
-                       CustomTextField(
-                         textEditingController: controller.companyTextEditingController,
+                      CustomTextField(
+                        textEditingController:
+                            controller.companyTextEditingController,
                         hintText: "Enter Company",
                         labelText: "Company*",
                         validator: (value) {
-                          if(value!.isEmpty){
+                          if (value!.isEmpty) {
                             return "Enter Company*";
-                          }
-                          else{
+                          } else {
                             return null;
                           }
                         },
                       ),
                       verticalSpacing(),
-                       CustomTextField(
-                         textEditingController: controller.ownerTextEditingController,
+                      CustomTextField(
+                        textEditingController:
+                            controller.ownerTextEditingController,
                         hintText: "Enter Owner Name",
                         labelText: "Owner Name*",
-                         validator: (value) {
-                           if(value!.isEmpty){
-                             return "Enter Owner Name*";
-                           }
-                           else{
-                             return null;
-                           }
-                         },
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Enter Owner Name*";
+                          } else {
+                            return null;
+                          }
+                        },
                       ),
                       verticalSpacing(),
                       CustomTextField(
-                        textEditingController: controller.contactTextEditingController,
+                        textEditingController:
+                            controller.contactTextEditingController,
                         maxLength: 10,
                         hintText: "99656 25693",
                         labelText: "Contact No.*",
                         validator: (value) {
-                          if(value!.isEmpty){
+                          if (value!.isEmpty) {
                             return "Enter Contact No.*";
-                          }
-                          else{
+                          } else {
                             return null;
                           }
                         },
@@ -152,14 +173,14 @@ class _AddCustomerState extends State<AddCustomer> {
                       ),
                       verticalSpacing(),
                       CustomTextField(
-                        textEditingController: controller.addressTextEditingController,
+                        textEditingController:
+                            controller.addressTextEditingController,
                         hintText: "Enter Address",
                         labelText: "Address",
                         validator: (value) {
-                          if(value!.isEmpty){
+                          if (value!.isEmpty) {
                             return "Enter Address*";
-                          }
-                          else{
+                          } else {
                             return null;
                           }
                         },
@@ -172,14 +193,14 @@ class _AddCustomerState extends State<AddCustomer> {
                       ),
                       verticalSpacing(),
                       CustomTextField(
-                        textEditingController: controller.websiteTextEditingController,
+                        textEditingController:
+                            controller.websiteTextEditingController,
                         hintText: "www.machinepro.com",
                         labelText: "Website",
                         validator: (value) {
-                          if(value!.isEmpty){
+                          if (value!.isEmpty) {
                             return "Enter Website*";
-                          }
-                          else{
+                          } else {
                             return null;
                           }
                         },
@@ -196,32 +217,32 @@ class _AddCustomerState extends State<AddCustomer> {
                             : const SizedBox.shrink(),
                       ),
                       verticalSpacing(),
-                       CustomTextField(
-                         textEditingController: controller.referenceTextEditingController,
+                      CustomTextField(
+                        textEditingController:
+                            controller.referenceTextEditingController,
                         hintText: "L & T Pvt",
                         labelText: "Reference By",
                         validator: (value) {
-                          if(value!.isEmpty){
+                          if (value!.isEmpty) {
                             return "Enter Reference*";
-                          }
-                          else{
+                          } else {
                             return null;
                           }
                         },
                       ),
                       verticalSpacing(),
-                       CustomTextField(
-                         textEditingController: controller.gstinTextEditingController,
+                      CustomTextField(
+                        textEditingController:
+                            controller.gstinTextEditingController,
                         hintText: "GD5456892098",
                         labelText: "GST No.",
-                         validator: (value) {
-                           if(value!.isEmpty){
-                             return "Enter GST No*";
-                           }
-                           else{
-                             return null;
-                           }
-                         },
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Enter GST No*";
+                          } else {
+                            return null;
+                          }
+                        },
                       ),
                     ],
                   ),
@@ -237,14 +258,16 @@ class _AddCustomerState extends State<AddCustomer> {
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 child: CustomButton(
                   color: AppColor.buttonColor,
-                  buttonText: widget.isUpdate ? 'Update' : 'Add',
+                  buttonText: widget.model != null ? 'Update' : 'Add',
                   onTap: () {
-                    if (_formKey.currentState!.validate()){
-
-                      Get.back();
-
+                    if (_formKey.currentState!.validate()) {
+                      if (widget.model != null) {
+                        controller.updateCustomer();
+                      } else {
+                        controller.addCustomer();
+                        ;
+                      }
                     }
-                    controller.addCustomer();
                   },
                 ),
               ));

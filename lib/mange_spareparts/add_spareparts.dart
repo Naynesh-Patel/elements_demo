@@ -27,6 +27,7 @@ class _AddSparepartsState extends State<AddSpareparts> {
 
   @override
   void initState() {
+    sparepartsController.updateSpareparts();
     if (widget.model != null) {
       sparepartsController.nameTextEditingController.text =
           widget.model['name'] ?? '';
@@ -192,11 +193,6 @@ class _AddSparepartsState extends State<AddSpareparts> {
                 } else {
                   sparepartsController.addSpareparts();
                 }
-                // if (widget.model != null) {
-                //   sparepartsController.updateSpareparts();
-                // } else {
-                //   sparepartsController.addSpareparts();
-                // }
               }
             },
           ),
