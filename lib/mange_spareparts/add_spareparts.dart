@@ -122,6 +122,8 @@ class _AddSparepartsState extends State<AddSpareparts> {
                     height: 16.0,
                   ),
                   CustomTextField(
+                    textEditingController:
+                        sparepartsController.qtyTypeTextEditingController,
                     hintText: "New Qty",
                     labelText: "Add New Qty",
                     focusNode: controller.sparepartsNewQtyFocusNode,
@@ -137,23 +139,23 @@ class _AddSparepartsState extends State<AddSpareparts> {
                         style: AppTextStyle.textStyleLight14
                             .copyWith(color: AppColor.dropDownHintColor),
                       )),
-                      OutlinedButton(
-                        onPressed: () {},
-                        style: ButtonStyle(
-                          shape:
-                              MaterialStateProperty.all(RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(4.0),
-                            side: const BorderSide(
-                              color: AppColor.borderColor,
-                            ),
-                          )),
-                        ),
-                        child: Text(
-                          "Update",
-                          style: AppTextStyle.textStyleLight14
-                              .copyWith(color: AppColor.selectColor),
-                        ),
-                      )
+                      // OutlinedButton(
+                      //   onPressed: () {},
+                      //   style: ButtonStyle(
+                      //     shape:
+                      //         MaterialStateProperty.all(RoundedRectangleBorder(
+                      //       borderRadius: BorderRadius.circular(4.0),
+                      //       side: const BorderSide(
+                      //         color: AppColor.borderColor,
+                      //       ),
+                      //     )),
+                      //   ),
+                      //   child: Text(
+                      //     "Update",
+                      //     style: AppTextStyle.textStyleLight14
+                      //         .copyWith(color: AppColor.selectColor),
+                      //   ),
+                      // ),
                     ],
                   ),
                 ] else ...[
