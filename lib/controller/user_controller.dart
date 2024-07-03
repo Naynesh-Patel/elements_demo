@@ -38,13 +38,42 @@ class UserController extends GetxController {
     }
   }
 
+  // Future<void> addUser() async {
+  //   Map<String, dynamic> body = {
+  //     "name": userNameTextEditingController.text,
+  //     "contact_no": contactNoTextEditingController.text,
+  //     "address": addressTextEditingController.text,
+  //     "user_type": userRoleTextEditingController.text,
+  //     "fingerprint": fingerprintEditingController,
+  //   };
+  //   try {
+  //     String url = "${baseURL}user/insert";
+  //     log("API => $url");
+  //     isUserLoading.value = true;
+  //     var response = await http.post(Uri.parse(url), body: body);
+  //     if (response.statusCode == 200) {
+  //       jsonDecode(response.body);
+  //       Get.back();
+  //       getUser();
+  //
+  //       isUserLoading.value = false;
+  //     } else {
+  //       debugPrint("statusCode${response.statusCode}");
+  //       isUserLoading.value = false;
+  //     }
+  //   } catch (e) {
+  //     debugPrint("Error${e.toString()}");
+  //     isUserLoading.value = false;
+  //   }
+  // }
+
   Future<void> addUser() async {
     Map<String, dynamic> body = {
       "name": userNameTextEditingController.text,
       "contact_no": contactNoTextEditingController.text,
       "address": addressTextEditingController.text,
       "user_type": userRoleTextEditingController.text,
-      "fingerprint": fingerprintEditingController.text,
+      "fingerprint": fingerprintEditingController,
     };
     try {
       String url = "${baseURL}user/insert";

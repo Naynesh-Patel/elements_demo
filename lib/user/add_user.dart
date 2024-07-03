@@ -33,7 +33,7 @@ class _AddUserState extends State<AddUser> {
           onPressed: () {
             Get.back();
           },
-          title: widget.isUpdate ? "Update User Details" : "Add User",
+          title: widget.model != null ? "Update User Details" : "Add User",
         ),
         body: Form(
           key: _formKey,
@@ -175,7 +175,7 @@ class _AddUserState extends State<AddUser> {
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: CustomButton(
             color: AppColor.buttonColor,
-            buttonText: 'Add',
+            buttonText: widget.model != null ? 'Update' : 'Add',
             onTap: () {
               if (_formKey.currentState!.validate()) {
                 if (widget.model != null) {
