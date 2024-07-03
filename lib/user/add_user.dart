@@ -10,7 +10,8 @@ import 'package:get/get.dart';
 
 class AddUser extends StatefulWidget {
   final bool isUpdate;
-  const AddUser({super.key, this.isUpdate = false});
+  final dynamic model;
+  const AddUser({super.key, this.isUpdate = false, this.model});
 
   @override
   State<AddUser> createState() => _AddUserState();
@@ -102,11 +103,14 @@ class _AddUserState extends State<AddUser> {
                       labelText: "User Role",
                       itemList: const ["Admin", "User", "Seller"],
                       onTap: (value) {
+                        controller.userRoleTextEditingController.text = value;
                         debugPrint("Select => $value");
                       },
                     ),
                     verticalSpacing(),
                     CustomTextField(
+                      textEditingController:
+                          controller.userNameTextEditingController,
                       hintText: "Name",
                       labelText: "User Name",
                       validator: (value) {
@@ -119,6 +123,8 @@ class _AddUserState extends State<AddUser> {
                     ),
                     verticalSpacing(),
                     CustomTextField(
+                      textEditingController:
+                          controller.contactNoTextEditingController,
                       textInputType: const TextInputType.numberWithOptions(),
                       hintText: "99656 25693",
                       labelText: "Contact No.",
@@ -132,6 +138,8 @@ class _AddUserState extends State<AddUser> {
                     ),
                     verticalSpacing(),
                     CustomTextField(
+                      textEditingController:
+                          controller.addressTextEditingController,
                       hintText: "Surat,Gujrat",
                       labelText: "Address",
                       validator: (value) {
@@ -144,6 +152,8 @@ class _AddUserState extends State<AddUser> {
                     ),
                     verticalSpacing(),
                     CustomTextField(
+                      textEditingController:
+                          controller.fingerprintEditingController,
                       hintText: "Upload Fingerprint",
                       labelText: "Upload Fingerprint",
                       validator: (value) {
@@ -167,7 +177,11 @@ class _AddUserState extends State<AddUser> {
             buttonText: 'Add',
             onTap: () {
               if (_formKey.currentState!.validate()) {
-                Get.back();
+                if (widget.model != null) {
+                  controller.updateUser(widget.model['id']);
+                } else {
+                  controller.addUser();
+                }
               }
             },
           ),

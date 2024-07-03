@@ -88,9 +88,8 @@ class CustomerController extends GetxController {
         isGetCustomerLoading.value = false;
         var responseData = jsonDecode(response.body);
         List jobData = responseData["data"];
-
-        // getcustomer();
         // Get.back();
+        // getcustomer();
         customerList.value = jobData;
       } else {
         debugPrint("statusCode${response.statusCode}");
@@ -101,27 +100,6 @@ class CustomerController extends GetxController {
       isGetCustomerLoading.value = false;
     }
   }
-
-  // Future<void> deletecustomer(id) async {
-  //   try {
-  //     String url = "${baseURL}customer/delete";
-  //     log("API => $url");
-  //     var response = await http.post(Uri.parse(url), body: {
-  //       "id": id,
-  //     });
-  //     if (response.statusCode == 200) {
-  //       var responseData = jsonDecode(response.body);
-  //       if (responseData["status"]["success"] == 1) {
-  //         customerList.removeAt(index);
-  //         showToast(responseData["message"]);
-  //       }
-  //     } else {
-  //       debugPrint("Fail");
-  //     }
-  //   } catch (e) {
-  //     debugPrint("Error:$e");
-  //   }
-  // }
 
   Future<void> updateCustomer(id) async {
     Map<String, dynamic> body = {
@@ -137,7 +115,7 @@ class CustomerController extends GetxController {
       "id": id,
     };
     try {
-      String url = "${baseURL}sparepart/update";
+      String url = "${baseURL}customer/update";
       log("API => $url");
       isGetCustomerUpdateLoading.value = true;
       var response = await http.post(Uri.parse(url), body: body);

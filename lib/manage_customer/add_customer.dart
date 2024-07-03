@@ -32,10 +32,15 @@ class _AddCustomerState extends State<AddCustomer> {
           widget.model['contact'] ?? '';
       controller.referenceTextEditingController.text =
           widget.model['reference'] ?? '';
+      controller.ownerTextEditingController.text = widget.model['owner'] ?? '';
+      controller.addressTextEditingController.text =
+          widget.model['address'] ?? '';
     } else {
       controller.companyTextEditingController.clear();
       controller.contactTextEditingController.clear();
       controller.referenceTextEditingController.clear();
+      controller.ownerTextEditingController.clear();
+      controller.addressTextEditingController.clear();
     }
     super.initState();
   }
@@ -263,10 +268,8 @@ class _AddCustomerState extends State<AddCustomer> {
                     if (_formKey.currentState!.validate()) {
                       if (widget.model != null) {
                         controller.updateCustomer(widget.model['id']);
-                        Get.back();
                       } else {
                         controller.addCustomer();
-                        ;
                       }
                     }
                   },
