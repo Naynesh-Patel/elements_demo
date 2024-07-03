@@ -65,23 +65,54 @@ class _MangeCustomerState extends State<MangeCustomer> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  _keyValue(
-                                      "Name",
-                                      controller.customerList[index]
+                                  Row(
+                                    children: [
+                                      Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          _keyValue(
+                                              "Name",
+                                              controller.customerList[index]
                                               ['company'] ??
-                                          ''),
-                                  verticalSpacing(),
-                                  _keyValue(
-                                      "Contact No",
-                                      controller.customerList[index]
-                                              ['contact'] ??
-                                          ''),
-                                  verticalSpacing(),
-                                  _keyValue(
-                                      "Reference By",
-                                      controller.customerList[index]
+                                                  ''),
+                                          verticalSpacing(),
+                                          _keyValue(
+                                              "Contact No",
+                                              controller.customerList[index]
+                                                      ['contact'] ??
+                                                  ''),
+                                          verticalSpacing(),
+                                          _keyValue(
+                                              "Reference By",
+                                              controller.customerList[index]
                                               ['reference'] ??
-                                          ''),
+                                                  ''),
+                                          verticalSpacing(),
+                                        ],
+                                      ),
+                                      Spacer(),
+                                      Stack(
+                                        children: [
+                                          controller.imgFile == null
+                                              ? Image.asset(
+                                            'assets/images/user_p.png',
+                                            height: 60,
+                                            width: 60,
+                                          )
+                                              : SizedBox(
+                                              height: 80,
+                                              width: 80,
+                                              child: ClipRRect(
+                                                  borderRadius:
+                                                  BorderRadius.circular(50.0),
+                                                  child: Image.file(
+                                                    controller.imgFile!,
+                                                    fit: BoxFit.cover,
+                                                  ))),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                   verticalSpacing(),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
@@ -110,7 +141,7 @@ class _MangeCustomerState extends State<MangeCustomer> {
                                         width: 12.0,
                                       ),
                                       SmallButton(
-                                        title: "Cancel",
+                                        title: "Delete",
                                         textColor: AppColor.cancelColor,
                                         onTap: () {
                                           CustomDialogBox.showDeleteDialog(

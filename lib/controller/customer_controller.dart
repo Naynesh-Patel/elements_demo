@@ -123,7 +123,7 @@ class CustomerController extends GetxController {
   //   }
   // }
 
-  Future<void> updateCustomer() async {
+  Future<void> updateCustomer(id) async {
     Map<String, dynamic> body = {
       'company': companyTextEditingController.text,
       'owner': ownerTextEditingController.text,
@@ -134,7 +134,7 @@ class CustomerController extends GetxController {
       'gstin': gstinTextEditingController.text,
       'photo': base64Image,
       'address': addressTextEditingController.text,
-      // "user_id": id,
+      "id": id,
     };
     try {
       String url = "${baseURL}sparepart/update";
@@ -143,8 +143,8 @@ class CustomerController extends GetxController {
       var response = await http.post(Uri.parse(url), body: body);
       if (response.statusCode == 200) {
         jsonDecode(response.body);
-        // Get.back();
-        // getcustomer();
+        Get.back();
+        getcustomer();
         isGetCustomerUpdateLoading.value = false;
       } else {
         debugPrint("statusCode${response.statusCode}");
