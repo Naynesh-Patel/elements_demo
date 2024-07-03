@@ -90,11 +90,11 @@ class SparepartsController extends GetxController {
     }
   }
 
-  Future<void> updateSpareparts() async {
+  Future<void> updateSpareparts(id) async {
     Map<String, dynamic> body = {
       "name": nameTextEditingController.text,
       "qty": qtyTypeTextEditingController.text,
-      // "user_id": id,
+      "id": id,
     };
     try {
       String url = "${baseURL}sparepart/update";
@@ -103,8 +103,8 @@ class SparepartsController extends GetxController {
       var response = await http.post(Uri.parse(url), body: body);
       if (response.statusCode == 200) {
         jsonDecode(response.body);
-        getSpareparts();
         Get.back();
+        getSpareparts();
         isUpdateSparepartsLoading.value = false;
       } else {
         debugPrint("statusCode${response.statusCode}");

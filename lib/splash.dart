@@ -41,7 +41,7 @@ class _SplashState extends State<Splash> {
   _timer() {
     Future.delayed(const Duration(seconds: 2), () {
       if (GetStorage().read("isLogin") ?? false) {
-        Get.to(const DashBoard());
+        Get.off(const DashBoard());
       } else {
         Get.off(const Login());
       }

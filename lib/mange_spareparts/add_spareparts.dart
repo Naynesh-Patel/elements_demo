@@ -27,7 +27,6 @@ class _AddSparepartsState extends State<AddSpareparts> {
 
   @override
   void initState() {
-    sparepartsController.updateSpareparts();
     if (widget.model != null) {
       sparepartsController.nameTextEditingController.text =
           widget.model['name'] ?? '';
@@ -189,7 +188,7 @@ class _AddSparepartsState extends State<AddSpareparts> {
             onTap: () {
               if (_formKey.currentState!.validate()) {
                 if (widget.model != null) {
-                  sparepartsController.updateSpareparts();
+                  sparepartsController.updateSpareparts(widget.model['id']);
                 } else {
                   sparepartsController.addSpareparts();
                 }
