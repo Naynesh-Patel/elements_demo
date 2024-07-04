@@ -51,7 +51,8 @@ class _MangeUserState extends State<MangeUser> {
                       ListView.builder(
                         shrinkWrap: true,
                         scrollDirection: Axis.vertical,
-                        physics: NeverScrollableScrollPhysics(),
+                        physics:
+                        NeverScrollableScrollPhysics(),
                         itemCount: controller.userList.length,
                         itemBuilder: (context, index) {
                           return Column(
