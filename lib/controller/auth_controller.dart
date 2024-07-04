@@ -93,6 +93,7 @@ class AuthController extends GetxController {
         isPasswordLoading.value = false;
         GetStorage().write("isLogin", false);
         modelUser.value = ModelUser();
+
         Get.to(const Login());
       } else {
         debugPrint("Error");
