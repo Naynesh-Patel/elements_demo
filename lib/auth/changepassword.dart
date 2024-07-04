@@ -1,7 +1,9 @@
 import 'package:elements/constant/app_colors.dart';
+import 'package:elements/constant/vars.dart';
 import 'package:elements/controller/auth_controller.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:elements/widget/button/custom_button.dart';
+import 'package:elements/widget/dialogs/custom_dialogbox.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -55,9 +57,10 @@ class _ChangePasswordState extends State<ChangePassword> {
                 validator: (value) {
                   if (value!.isEmpty) {
                     return "Enter Old Password";
-                  } else {
-                    return null;
+                  } else if(controller.oldPasswordTextEditingController.text != modelUser.value.password){
+                    return "Old Ppassword is not match";
                   }
+                  return null;
                 },
                 suffixFixIcon: IconButton(
                   onPressed: () {
@@ -74,9 +77,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 15,
-              ),
+              verticalSpacing(),
               CustomTextField(
                   focusNode: controller.newPasswordNode,
                   obscureText: controller.newPasswordVisible,
@@ -105,9 +106,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                       size: 20,
                     ),
                   )),
-              const SizedBox(
-                height: 15,
-              ),
+              verticalSpacing(),
               CustomTextField(
                   focusNode: controller.changePasswordNode,
                   obscureText: controller.changePasswordVisible,
@@ -120,7 +119,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                       return 'Conform password is required please enter';
                     }
                     if (value !=
-                        controller.oldPasswordTextEditingController.text) {
+                        controller.newPasswordTextEditingController.text) {
                       return 'Confirm password not matching';
                     }
                     return null;
@@ -150,7 +149,7 @@ class _ChangePasswordState extends State<ChangePassword> {
           buttonText: 'Change Password',
           onTap: () {
             if (_formKey.currentState!.validate()) {
-              controller.changePassword();
+              controller.changePassword(context: context);
             }
           },
         ),

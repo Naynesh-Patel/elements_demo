@@ -2,7 +2,10 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:elements/auth/login.dart';
+import 'package:elements/constant/vars.dart';
+import 'package:elements/dashboard.dart';
 import 'package:elements/splash.dart';
+import 'package:elements/widget/dialogs/custom_dialogbox.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -31,7 +34,7 @@ class AuthController extends GetxController {
 
   final box = GetStorage();
 
-  Rx<ModelUser> modelUser = ModelUser().obs;
+  // Rx<ModelUser> modelUser = ModelUser().obs;
 
   FocusNode focusNode = FocusNode();
 
@@ -44,7 +47,7 @@ class AuthController extends GetxController {
 
   RxBool isLoginLoading = false.obs;
 
-  Future<void> changePassword() async {
+  Future<void> changePassword({context}) async {
     Map<String, dynamic> body = {
       "user_id": modelUser.value.id,
       "old_password": oldPasswordTextEditingController.text,
@@ -57,11 +60,10 @@ class AuthController extends GetxController {
       isLoginLoading.value = true;
       var response = await http.post(Uri.parse(url), body: body);
       if (response.statusCode == 200) {
-        jsonDecode(response.body);
-        isPasswordLoading.value = false;
-        GetStorage().write("isLogin", false);
-        modelUser.value = ModelUser();
-        Get.to(const Login());
+        var responseData = jsonDecode(response.body);
+        box.write("user",responseData['user']);
+        modelUser.value = ModelUser.fromJson(responseData['user']);
+        CustomDialogBox.showPasswordReset(context: context);
       } else {
         debugPrint("Error");
         isPasswordLoading.value = false;
@@ -86,10 +88,10 @@ class AuthController extends GetxController {
         var responseData = jsonDecode(response.body);
         jsonDecode(response.body);
         if (responseData['status'] == 1) {
-          box.write("user", responseData);
+          box.write("user",responseData['user']);
           box.write("isLogin", true);
           modelUser.value = ModelUser.fromJson(responseData['user']);
-          Get.off(() => const Splash());
+          Get.off(() => const DashBoard());
         } else {
           debugPrint('user not found');
         }
