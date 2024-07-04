@@ -25,7 +25,7 @@ class _LoginState extends State<Login> {
         backgroundColor: AppColor.whiteColor,
         body: Form(
           key: _formKey,
-          autovalidateMode: AutovalidateMode.onUserInteraction,
+          // autovalidateMode: AutovalidateMode.onUserInteraction,
           child: ListView(
             children: [
               Container(
@@ -62,13 +62,13 @@ class _LoginState extends State<Login> {
                         controller.userTypeTextEditingController.text = value;
                         debugPrint("Select => $value");
                       },
-                      validator: (value) {
-                        if (value) {
-                          return "Enter user type";
-                        } else {
-                          return null;
-                        }
-                      },
+                      // validator: (value) {
+                      //   if (value) {
+                      //     return "Enter user type";
+                      //   } else {
+                      //     return null;
+                      //   }
+                      // },
                     ),
                     verticalSpacing(),
                     CustomTextField(

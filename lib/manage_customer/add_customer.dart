@@ -38,7 +38,7 @@ class _AddCustomerState extends State<AddCustomer> {
           physics: const BouncingScrollPhysics(),
           child: Form(
             key:_formKey ,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
+            // autovalidateMode: AutovalidateMode.onUserInteraction,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -105,9 +105,10 @@ class _AddCustomerState extends State<AddCustomer> {
                          textEditingController: controller.companyTextEditingController,
                         hintText: "Enter Company",
                         labelText: "Company*",
+                         autoValidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
                           if(value!.isEmpty){
-                            return "Enter Company*";
+                            return "Please Enter Company";
                           }
                           else{
                             return null;
@@ -119,9 +120,10 @@ class _AddCustomerState extends State<AddCustomer> {
                          textEditingController: controller.ownerTextEditingController,
                         hintText: "Enter Owner Name",
                         labelText: "Owner Name*",
+                         autoValidateMode: AutovalidateMode.onUserInteraction,
                          validator: (value) {
                            if(value!.isEmpty){
-                             return "Enter Owner Name*";
+                             return "Please Enter Owner Name";
                            }
                            else{
                              return null;
@@ -133,9 +135,10 @@ class _AddCustomerState extends State<AddCustomer> {
                         textEditingController: controller.contactTextEditingController,
                         hintText: "99656 25693",
                         labelText: "Contact No.*",
+                        autoValidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
                           if(value!.isEmpty){
-                            return "Enter Contact No.*";
+                            return "Please Enter Contact No";
                           }
                           else{
                             return null;
@@ -153,9 +156,10 @@ class _AddCustomerState extends State<AddCustomer> {
                       CustomTextField(
                         hintText: "Enter Address",
                         labelText: "Address",
+                        autoValidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
                           if(value!.isEmpty){
-                            return "Enter Address*";
+                            return "Please Enter Address";
                           }
                           else{
                             return null;
@@ -173,9 +177,10 @@ class _AddCustomerState extends State<AddCustomer> {
                         textEditingController: controller.websiteTextEditingController,
                         hintText: "www.machinepro.com",
                         labelText: "Website",
+                        autoValidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
                           if(value!.isEmpty){
-                            return "Enter Website*";
+                            return "Please Enter Website";
                           }
                           else{
                             return null;
@@ -198,9 +203,10 @@ class _AddCustomerState extends State<AddCustomer> {
                          textEditingController: controller.referenceTextEditingController,
                         hintText: "L & T Pvt",
                         labelText: "Reference By",
+                         autoValidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
                           if(value!.isEmpty){
-                            return "Enter Reference*";
+                            return "Please Enter Reference";
                           }
                           else{
                             return null;
@@ -212,9 +218,10 @@ class _AddCustomerState extends State<AddCustomer> {
                          textEditingController: controller.gstinTextEditingController,
                         hintText: "GD5456892098",
                         labelText: "GST No.",
+                         autoValidateMode: AutovalidateMode.onUserInteraction,
                          validator: (value) {
                            if(value!.isEmpty){
-                             return "Enter GST No*";
+                             return "Please Enter GST No";
                            }
                            else{
                              return null;

@@ -16,6 +16,7 @@ class AddExpense extends StatefulWidget {
 
 class _AddExpenseState extends State<AddExpense> {
   HomeController controller = Get.find();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -27,32 +28,62 @@ class _AddExpenseState extends State<AddExpense> {
             Get.back();
           },
         ),
-        body: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CustomTextField(
-                hintText: "",
-                labelText: "Name",
-                textEditingController: TextEditingController(text: "Ramesh"),
-                focusNode: controller.expenseNameFocusNode,
-              ),
-              verticalSpacing(),
-              CustomTextField(
-                textEditingController: TextEditingController(text: "Tea"),
-                hintText: "Tea",
-                labelText: "Expense Type",
-                focusNode: controller.expenseTypeFocusNode,
-              ),
-              verticalSpacing(),
-              CustomTextField(
-                textEditingController: TextEditingController(text: "20"),
-                hintText: "₹ 20 ",
-                labelText: "Price",
-                focusNode: controller.expensePriceFocusNode,
-              ),
-            ],
+        body: Form(
+          key: _formKey,
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CustomTextField(
+                  hintText: "",
+                  labelText: "Name",
+                  // textEditingController: TextEditingController(text: "Ramesh"),
+                  focusNode: controller.expenseNameFocusNode,
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (value) {
+                    if(value!.isEmpty){
+                      return "Please Enter Name";
+                    }
+                    else{
+                      return null;
+                    }
+                  },
+                ),
+                verticalSpacing(),
+                CustomTextField(
+                  // textEditingController: TextEditingController(text: "Tea"),
+                  hintText: "Tea",
+                  labelText: "Expense Type",
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (value) {
+                    if(value!.isEmpty){
+                      return "Please Enter Expense Type";
+                    }
+                    else{
+                      return null;
+                    }
+                  },
+                  focusNode: controller.expenseTypeFocusNode,
+                ),
+                verticalSpacing(),
+                CustomTextField(
+                  // textEditingController: TextEditingController(text: "20"),
+                  hintText: "₹ 20 ",
+                  labelText: "Price",
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (value) {
+                    if(value!.isEmpty){
+                      return "Please Enter Price";
+                    }
+                    else{
+                      return null;
+                    }
+                  },
+                  focusNode: controller.expensePriceFocusNode,
+                ),
+              ],
+            ),
           ),
         ),
         bottomNavigationBar: Container(
@@ -61,7 +92,11 @@ class _AddExpenseState extends State<AddExpense> {
             color: AppColor.buttonColor,
             buttonText: widget.isUpdate ? 'Update' : 'Done',
             onTap: () {
-              Get.back();
+              if (_formKey.currentState!.validate()){
+
+                Get.back();
+
+              }
             },
           ),
         ));
