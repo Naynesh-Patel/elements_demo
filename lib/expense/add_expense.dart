@@ -1,4 +1,5 @@
 import 'package:elements/constant/app_colors.dart';
+import 'package:elements/controller/customer_controller.dart';
 import 'package:elements/controller/home_controller.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:elements/widget/button/custom_button.dart';
@@ -6,9 +7,14 @@ import 'package:elements/widget/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../controller/customer_controller.dart';
+import '../controller/customer_controller.dart';
+import '../controller/expense_controller.dart';
+
 class AddExpense extends StatefulWidget {
   final bool isUpdate;
-  const AddExpense({super.key, this.isUpdate = false});
+  final dynamic model;
+  const AddExpense({super.key, this.isUpdate = false, this.model});
 
   @override
   State<AddExpense> createState() => _AddExpenseState();
@@ -16,6 +22,8 @@ class AddExpense extends StatefulWidget {
 
 class _AddExpenseState extends State<AddExpense> {
   HomeController controller = Get.find();
+  ExpenseController expenseController = Get.find();
+  CustomerController customerController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -35,19 +43,19 @@ class _AddExpenseState extends State<AddExpense> {
               CustomTextField(
                 hintText: "",
                 labelText: "Name",
-                textEditingController: TextEditingController(text: "Ramesh"),
+                textEditingController: expenseController.nameTextEditingController,
                 focusNode: controller.expenseNameFocusNode,
               ),
               verticalSpacing(),
               CustomTextField(
-                textEditingController: TextEditingController(text: "Tea"),
+                textEditingController: expenseController.expenseTypeTextEditingController,
                 hintText: "Tea",
                 labelText: "Expense Type",
                 focusNode: controller.expenseTypeFocusNode,
               ),
               verticalSpacing(),
               CustomTextField(
-                textEditingController: TextEditingController(text: "20"),
+                textEditingController: expenseController.priceTextEditingController,
                 hintText: "₹ 20 ",
                 labelText: "Price",
                 focusNode: controller.expensePriceFocusNode,
@@ -61,6 +69,7 @@ class _AddExpenseState extends State<AddExpense> {
             color: AppColor.buttonColor,
             buttonText: widget.isUpdate ? 'Update' : 'Done',
             onTap: () {
+              expenseController.addExpense(widget.model['id']);
               Get.back();
             },
           ),

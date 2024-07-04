@@ -1,4 +1,5 @@
 import 'package:elements/controller/customer_controller.dart';
+import 'package:elements/controller/expense_controller.dart';
 import 'package:elements/controller/home_controller.dart';
 import 'package:elements/controller/machinery_controller.dart';
 import 'package:elements/controller/salesmen_controller.dart';
@@ -16,6 +17,7 @@ class BindingController extends Bindings {
     Get.lazyPut<SparepartsController>(() => SparepartsController(),
         fenix: true);
     Get.lazyPut<HomeController>(() => HomeController(), fenix: true);
+    Get.lazyPut<ExpenseController>(() => ExpenseController(), fenix: true);
     Get.lazyPut<SettingController>(() => SettingController(), fenix: true);
     Get.lazyPut<CustomerController>(() => CustomerController(), fenix: true);
     Get.lazyPut<SalesmenController>(() => SalesmenController(), fenix: true);
