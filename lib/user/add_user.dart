@@ -24,6 +24,28 @@ class _AddUserState extends State<AddUser> {
   UserController controller = Get.find();
 
   final _formKey = GlobalKey<FormState>();
+  @override
+  void initState() {
+    if (widget.model != null) {
+      controller.userRoleTextEditingController.text =
+          widget.model['user_type'] ?? '';
+      controller.userNameTextEditingController.text =
+          widget.model['name'] ?? '';
+      controller.addressTextEditingController.text =
+          widget.model['address'] ?? '';
+      controller.contactNoTextEditingController.text =
+          widget.model['contact_no'] ?? '';
+      controller.fingerprintEditingController.text =
+          widget.model['fingerprint'] ?? '';
+    } else {
+      controller.userRoleTextEditingController.clear();
+      controller.userNameTextEditingController.clear();
+      controller.addressTextEditingController.clear();
+      controller.contactNoTextEditingController.clear();
+      controller.fingerprintEditingController.clear();
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
