@@ -102,8 +102,8 @@ class _MangeSparepartsState extends State<MangeSpareparts> {
                                 children: [
                                   InkWell(
                                     onTap: () {
-                                      Get.to(const AddSpareparts(
-                                        isUpdate: true,
+                                      Get.to(AddSpareparts(
+                                        model: controller.sparepartsList[index],
                                       ));
                                     },
                                     borderRadius: BorderRadius.circular(5),
@@ -131,10 +131,14 @@ class _MangeSparepartsState extends State<MangeSpareparts> {
                                           Get.back();
                                         },
                                         onDeleteTap: () {
-                                          controller.deleteSpareparts(controller
-                                              .sparepartsList[index]["id"]);
-                                          Get.back();
-                                          setState(() {});
+                                          setState(() {
+                                            controller.deleteSpareparts(
+                                                controller.sparepartsList[index]
+                                                    ['id']);
+                                            controller.sparepartsList
+                                                .removeAt(index);
+                                            Get.back();
+                                          });
                                         },
                                       );
                                     },

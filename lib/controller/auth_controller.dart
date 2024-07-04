@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:elements/auth/login.dart';
 import 'package:elements/splash.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -14,9 +15,19 @@ class AuthController extends GetxController {
   TextEditingController mobileNumberTextEditingController =
       TextEditingController();
   TextEditingController passwordTextEditingController = TextEditingController();
+  TextEditingController oldPasswordTextEditingController =
+      TextEditingController();
+  TextEditingController newPasswordTextEditingController =
+      TextEditingController();
+  TextEditingController confrimeTextEditingController = TextEditingController();
   TextEditingController userTypeTextEditingController = TextEditingController();
 
   bool loginPasswordVisible = true;
+  bool changePasswordVisible = true;
+  bool oldPasswordVisible = true;
+  bool newPasswordVisible = true;
+
+  RxBool isPasswordLoading = false.obs;
 
   final box = GetStorage();
 
@@ -26,8 +37,10 @@ class AuthController extends GetxController {
 
   /* ========== Focus Nodes =========== */
   FocusNode mobileFocusNode = FocusNode();
-
   FocusNode passwordFocusNode = FocusNode();
+  FocusNode changePasswordNode = FocusNode();
+  FocusNode oldPasswordNode = FocusNode();
+  FocusNode newPasswordNode = FocusNode();
 
   RxBool isLoginLoading = false.obs;
 
@@ -60,6 +73,34 @@ class AuthController extends GetxController {
     } catch (e) {
       debugPrint("Error${e.toString()}");
       isLoginLoading.value = false;
+    }
+  }
+
+  Future<void> changePassword(id) async {
+    Map<String, dynamic> body = {
+      "user_id": id,
+      "old_password": mobileNumberTextEditingController.text,
+      "new_password": newPasswordTextEditingController.text,
+    };
+    try {
+      isPasswordLoading.value = true;
+      String url = "${baseURL}user/changePassword";
+      log("API => $url");
+      isLoginLoading.value = true;
+      var response = await http.post(Uri.parse(url), body: body);
+      if (response.statusCode == 200) {
+        jsonDecode(response.body);
+        isPasswordLoading.value = false;
+        GetStorage().write("isLogin", false);
+        modelUser.value = ModelUser();
+
+        Get.to(const Login());
+      } else {
+        debugPrint("Error");
+        isPasswordLoading.value = false;
+      }
+    } catch (e) {
+      isPasswordLoading.value = false;
     }
   }
 }

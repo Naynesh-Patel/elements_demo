@@ -199,19 +199,18 @@ class _AddCustomerState extends State<AddCustomer> {
                             : const SizedBox.shrink(),
                       ),
                       verticalSpacing(),
-                       CustomTextField(
-                         textEditingController: controller.referenceTextEditingController,
+                      CustomTextField(
+                        textEditingController:
+                            controller.referenceTextEditingController,
                         hintText: "L & T Pvt",
                         labelText: "Reference By",
-                         autoValidateMode: AutovalidateMode.onUserInteraction,
-                        validator: (value) {
-                          if(value!.isEmpty){
-                            return "Please Enter Reference";
-                          }
-                          else{
-                            return null;
-                          }
-                        },
+                        // validator: (value) {
+                        //   if (value!.isEmpty) {
+                        //     return "Enter Reference*";
+                        //   } else {
+                        //     return null;
+                        //   }
+                        // },
                       ),
                       verticalSpacing(),
                        CustomTextField(

@@ -25,7 +25,7 @@ class _LoginState extends State<Login> {
         backgroundColor: AppColor.whiteColor,
         body: Form(
           key: _formKey,
-          // autovalidateMode: AutovalidateMode.onUserInteraction,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           child: ListView(
             children: [
               Container(

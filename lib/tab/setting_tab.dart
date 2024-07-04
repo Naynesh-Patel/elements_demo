@@ -13,6 +13,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
+import '../auth/changepassword.dart';
+
 class SettingTab extends StatefulWidget {
   const SettingTab({super.key});
 
@@ -132,10 +134,19 @@ class _SettingTabState extends State<SettingTab> {
                   },
                 ),
                 _customTile(
+                  title: "Change Password",
+                  imgPath: "assets/svg/bil_history.svg",
+                  index: 7,
+                  onTap: () {
+                    controller.selectMenu.value = 7;
+                    Get.to(const ChangePassword());
+                  },
+                ),
+                _customTile(
                   title: "Logout",
                   isSvg: false,
                   imgPath: "assets/images/logout.png",
-                  index: 7,
+                  index: 8,
                   onTap: () {
                     CustomDialogBox.showLogoutDialog(
                       context: context,

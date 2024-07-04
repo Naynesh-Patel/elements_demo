@@ -10,7 +10,8 @@ import 'package:get/get.dart';
 
 class AddUser extends StatefulWidget {
   final bool isUpdate;
-  const AddUser({super.key, this.isUpdate = false});
+  final dynamic model;
+  const AddUser({super.key, this.isUpdate = false, this.model});
 
   @override
   State<AddUser> createState() => _AddUserState();
@@ -32,11 +33,11 @@ class _AddUserState extends State<AddUser> {
           onPressed: () {
             Get.back();
           },
-          title: widget.isUpdate ? "Update User Details" : "Add User",
+          title: widget.model != null ? "Update User Details" : "Add User",
         ),
         body: Form(
           key: _formKey,
-          // autovalidateMode: AutovalidateMode.onUserInteraction,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           child: ListView(
             shrinkWrap: true,
             children: [
@@ -102,20 +103,19 @@ class _AddUserState extends State<AddUser> {
                       labelText: "User Role",
                       itemList: const ["Admin", "User", "Seller"],
                       onTap: (value) {
+                        controller.userRoleTextEditingController.text = value;
                         debugPrint("Select => $value");
                       },
-                      validator: (value) => value == null ? 'field required' : null,
-
-
                     ),
                     verticalSpacing(),
                     CustomTextField(
+                      textEditingController:
+                          controller.userNameTextEditingController,
                       hintText: "Name",
                       labelText: "User Name",
-                      autoValidateMode: AutovalidateMode.onUserInteraction,
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return "Please Enter User Name";
+                          return "Enter User Name";
                         } else {
                           return null;
                         }
@@ -123,13 +123,15 @@ class _AddUserState extends State<AddUser> {
                     ),
                     verticalSpacing(),
                     CustomTextField(
+                      textEditingController:
+                          controller.contactNoTextEditingController,
                       textInputType: const TextInputType.numberWithOptions(),
                       hintText: "99656 25693",
                       labelText: "Contact No.",
-                      autoValidateMode: AutovalidateMode.onUserInteraction,
+                      maxLength: 10,
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return "Please Enter Contact No";
+                          return "Enter Contact No";
                         } else {
                           return null;
                         }
@@ -137,12 +139,13 @@ class _AddUserState extends State<AddUser> {
                     ),
                     verticalSpacing(),
                     CustomTextField(
+                      textEditingController:
+                          controller.addressTextEditingController,
                       hintText: "Surat,Gujrat",
                       labelText: "Address",
-                      autoValidateMode: AutovalidateMode.onUserInteraction,
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return "Please Enter Address";
+                          return "Enter Address";
                         } else {
                           return null;
                         }
@@ -150,112 +153,18 @@ class _AddUserState extends State<AddUser> {
                     ),
                     verticalSpacing(),
                     CustomTextField(
+                      textEditingController:
+                          controller.fingerprintEditingController,
                       hintText: "Upload Fingerprint",
                       labelText: "Upload Fingerprint",
-                      autoValidateMode: AutovalidateMode.onUserInteraction,
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return "Please Enter Fingerprint";
+                          return "Enter Fingerprint";
                         } else {
                           return null;
                         }
                       },
                     ),
-                    verticalSpacing(),
-
-
-                    // Padding(
-                    //   padding: const EdgeInsets.symmetric(vertical: 20),
-                    //   child: Container(
-                    //     height: 60,
-                    //     width: double.maxFinite,
-                    //     decoration: BoxDecoration(
-                    //       borderRadius: const BorderRadius.all(Radius.circular(5)),
-                    //       border: Border.all(color: AppColor.borderColor),
-                    //     ),
-                    //     child: DropdownButtonFormField<String>(
-                    //       onChanged: (value) {
-                    //
-                    //       },
-                    //       items: [
-                    //         DropdownMenuItem(child:Text('Jay'),value: 'Jay',),
-                    //         DropdownMenuItem(child:Text('jack'),value: 'jack',),
-                    //         DropdownMenuItem(child:Text('j'),value: 'j',),
-                    //         DropdownMenuItem(child:Text('a'),value: 'a',),
-                    //       ],
-                    //       hint: Text('Name '),
-                    //
-                    //       decoration: InputDecoration(
-                    //         border: InputBorder.none,
-                    //         contentPadding: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
-                    //         errorBorder: OutlineInputBorder(gapPadding: CircularProgressIndicator.strokeAlignCenter,
-                    //             borderSide: const BorderSide(color: Colors.red),
-                    //             borderRadius: BorderRadius.circular(10)),
-                    //
-                    //       ),
-                    //
-                    //       validator: (value) {
-                    //         if (value == null || value.isEmpty) {
-                    //           return 'Select some role';
-                    //         } else {
-                    //           return null;
-                    //         }
-                    //       },
-                    //     ),
-                    //   ),
-                    // )
-
-                    // Positioned(
-                    //  top: 0,
-                    //   bottom: 0,
-                    //   left: 0,
-                    //   right: 0,
-                    //   child: DropdownButtonFormField<String>(
-                    //     onChanged: (value) {
-                    //
-                    //     },
-                    //     items: [
-                    //       DropdownMenuItem(child:Text('Jay'),value: 'Jay',),
-                    //       DropdownMenuItem(child:Text('jack'),value: 'jack',),
-                    //       DropdownMenuItem(child:Text('j'),value: 'j',),
-                    //       DropdownMenuItem(child:Text('a'),value: 'a',),
-                    //     ],
-                    //     hint: Text('Name '),
-                    //
-                    //     decoration: InputDecoration(
-                    //       labelText: 'Naam',labelStyle: TextStyle(
-                    //         color: AppColor.blackColor
-                    //     ),
-                    //       enabledBorder: OutlineInputBorder(
-                    //         borderSide: BorderSide(color: AppColor.borderColor),
-                    //           // borderSide: BorderSide.none,
-                    //           borderRadius: BorderRadius.all(Radius.circular(6.0))),
-                    //       border: OutlineInputBorder(
-                    //         borderSide: BorderSide(color: AppColor.borderColor)
-                    //
-                    //       ),
-                    //       focusedBorder: OutlineInputBorder(
-                    //         borderSide: BorderSide(color: AppColor.borderColor),
-                    //         //   borderSide: BorderSide.none,
-                    //           borderRadius: BorderRadius.all(Radius.circular(6.0))),
-                    //       contentPadding: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
-                    //       errorBorder: OutlineInputBorder(gapPadding: CircularProgressIndicator.strokeAlignCenter,
-                    //           borderSide: const BorderSide(color: Colors.red),
-                    //           borderRadius: BorderRadius.circular(10)),
-                    //
-                    //     ),
-                    //     autovalidateMode: AutovalidateMode.onUserInteraction,
-                    //     validator: (value) {
-                    //       if (value == null || value.isEmpty) {
-                    //         return 'Select some role';
-                    //       } else {
-                    //         return null;
-                    //       }
-                    //     },
-                    //   ),
-                    // ),
-
-
                   ],
                 ),
               ),
@@ -266,10 +175,14 @@ class _AddUserState extends State<AddUser> {
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: CustomButton(
             color: AppColor.buttonColor,
-            buttonText: 'Add',
+            buttonText: widget.model != null ? 'Update' : 'Add',
             onTap: () {
               if (_formKey.currentState!.validate()) {
-                Get.back();
+                if (widget.model != null) {
+                  controller.updateUser(widget.model['id']);
+                } else {
+                  controller.addUser();
+                }
               }
             },
           ),

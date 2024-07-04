@@ -19,7 +19,6 @@ class AddSparepartsTab extends StatefulWidget {
 class _AddSparepartsTabState extends State<AddSparepartsTab> {
   bool value = false;
   int index = 0;
-  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,41 +30,20 @@ class _AddSparepartsTabState extends State<AddSparepartsTab> {
             Get.back();
           },
         ),
-        body: Form(
-          key: _formKey,
-          child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-            child: Column(
-              children: [
-                 CustomTextField(
-                  hintText: "Steel",
-                  labelText: "Name*",
-                  autoValidateMode: AutovalidateMode.onUserInteraction,
-                  validator: (value) {
-                    if(value!.isEmpty){
-                      return "Please Enter Name";
-                    }
-                    else{
-                      return null;
-                    }
-                  },
-                ),
-                verticalSpacing(),
-                 CustomTextField(
-                  hintText: "20",
-                  labelText: "Qty*",
-                  autoValidateMode: AutovalidateMode.onUserInteraction,
-                  validator: (value) {
-                    if(value!.isEmpty){
-                      return "Please Enter Qty";
-                    }
-                    else{
-                      return null;
-                    }
-                  },
-                ),
-              ],
-            ),
+        body: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+          child: Column(
+            children: [
+              const CustomTextField(
+                hintText: "Steel",
+                labelText: "Name*",
+              ),
+              verticalSpacing(),
+              const CustomTextField(
+                hintText: "20",
+                labelText: "Qty*",
+              ),
+            ],
           ),
         ),
         bottomNavigationBar: Container(
@@ -74,11 +52,7 @@ class _AddSparepartsTabState extends State<AddSparepartsTab> {
             color: AppColor.buttonColor,
             buttonText: widget.isUpdate ? 'Update' : 'Add',
             onTap: () {
-              if (_formKey.currentState!.validate()){
-
-                Get.back();
-
-              }
+              Get.back();
             },
           ),
         ));

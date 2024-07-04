@@ -1,12 +1,11 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:elements/constant/methods.dart';
 import 'package:elements/constant/urls.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-
-import '../constant/methods.dart';
 
 class SparepartsController extends GetxController {
   TextEditingController nameTextEditingController = TextEditingController();
@@ -56,6 +55,9 @@ class SparepartsController extends GetxController {
       var response = await http.post(Uri.parse(url), body: body);
       if (response.statusCode == 200) {
         jsonDecode(response.body);
+
+        getSpareparts();
+        Get.back();
         isSparepartsLoading.value = false;
       } else {
         debugPrint("statusCode${response.statusCode}");
@@ -88,11 +90,11 @@ class SparepartsController extends GetxController {
     }
   }
 
-  Future<void> updateSpareparts() async {
+  Future<void> updateSpareparts(id) async {
     Map<String, dynamic> body = {
       "name": nameTextEditingController.text,
       "qty": qtyTypeTextEditingController.text,
-      // "user_id": id,
+      "id": id,
     };
     try {
       String url = "${baseURL}sparepart/update";
@@ -101,6 +103,8 @@ class SparepartsController extends GetxController {
       var response = await http.post(Uri.parse(url), body: body);
       if (response.statusCode == 200) {
         jsonDecode(response.body);
+        Get.back();
+        getSpareparts();
         isUpdateSparepartsLoading.value = false;
       } else {
         debugPrint("statusCode${response.statusCode}");
@@ -112,23 +116,54 @@ class SparepartsController extends GetxController {
     }
   }
 
+  // Future<void> deleteSpareparts(id) async {
+  //   try {
+  //     String url = "${baseURL}sparepart/delete";
+  //     log("API => $url");
+  //     isDeleteSparepartsLoading.value = false;
+  //     var response = await http.post(Uri.parse(url), body: {
+  //       "id": id,
+  //     });
+  //     if (response.statusCode == 200) {
+  //       var responseData = jsonDecode(response.body);
+  //       isDeleteSparepartsLoading.value = false;
+  //       if (responseData["status"]["success"] == 1) {
+  //         showToast(responseData["message"]);
+  //         isDeleteSparepartsLoading.value = false;
+  //       }
+  //     } else {
+  //       debugPrint("Fail");
+  //     }
+  //   } catch (e) {
+  //     debugPrint("Error:$e");
+  //     isDeleteSparepartsLoading.value = false;
+  //   }
+  // }
+
   Future<void> deleteSpareparts(id) async {
     try {
       String url = "${baseURL}sparepart/delete";
       log("API => $url");
-      var response = await http.post(Uri.parse(url), body: {
-        "id": id,
-      });
+
+      isDeleteSparepartsLoading.value = true;
+      var response = await http.post(Uri.parse(url), body: {"id": id});
       if (response.statusCode == 200) {
         var responseData = jsonDecode(response.body);
-        if (responseData["status"]["success"] == 1) {
+        isDeleteSparepartsLoading.value = false;
+        if (responseData["status"] == 1) {
           showToast(responseData["message"]);
+          isDeleteSparepartsLoading.value = false;
+        } else {
+          showToast(responseData["message"]);
+          isDeleteSparepartsLoading.value = false;
         }
       } else {
-        debugPrint("Fail");
+        debugPrint("statusCode===>${response.statusCode}");
+        isDeleteSparepartsLoading.value = false;
       }
     } catch (e) {
-      debugPrint("Error:$e");
+      debugPrint("Error:${e.toString()}");
+      isDeleteSparepartsLoading.value = false;
     }
   }
 }

@@ -1,18 +1,20 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/controller/home_controller.dart';
+import 'package:elements/controller/spareparts_controller.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:elements/widget/button/custom_button.dart';
 import 'package:elements/widget/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../controller/spareparts_controller.dart';
-
 class AddSpareparts extends StatefulWidget {
-  final bool isUpdate;
+  final dynamic model;
 
-  const AddSpareparts({super.key, this.isUpdate = false});
+  const AddSpareparts({
+    super.key,
+    this.model,
+  });
 
   @override
   State<AddSpareparts> createState() => _AddSparepartsState();
@@ -22,6 +24,20 @@ class _AddSparepartsState extends State<AddSpareparts> {
   HomeController controller = Get.find();
   final _formKey = GlobalKey<FormState>();
   SparepartsController sparepartsController = Get.find();
+
+  @override
+  void initState() {
+    if (widget.model != null) {
+      sparepartsController.nameTextEditingController.text =
+          widget.model['name'] ?? '';
+      sparepartsController.qtyTypeTextEditingController.text =
+          widget.model['qty'] ?? '';
+    } else {
+      sparepartsController.nameTextEditingController.clear();
+      sparepartsController.qtyTypeTextEditingController.clear();
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +55,7 @@ class _AddSparepartsState extends State<AddSpareparts> {
           //             Icons.add,
           //           )))
           // ],
-          title: widget.isUpdate
+          title: widget.model != null
               ? "Update Import Spareparts "
               : "Add Import Spareparts",
           onPressed: () {
@@ -48,27 +64,26 @@ class _AddSparepartsState extends State<AddSpareparts> {
         ),
         body: Form(
           key: _formKey,
-          // autovalidateMode: AutovalidateMode.onUserInteraction,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           child: Container(
             margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
             child: Column(
               children: [
                 CustomTextField(
                   textEditingController:
-                  sparepartsController.nameTextEditingController,
+                      sparepartsController.nameTextEditingController,
                   hintText: "Steel Bolt",
                   labelText: "Name*",
                   focusNode: sparepartsController.sparepartsNameFocusNode,
-                  autoValidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return "Please Enter Name";
+                      return "Enter Name";
                     } else {
                       return null;
                     }
                   },
                 ),
-                if (widget.isUpdate) ...[
+                if (widget.model != null) ...[
                   const SizedBox(
                     height: 16.0,
                   ),
@@ -100,13 +115,15 @@ class _AddSparepartsState extends State<AddSpareparts> {
                     hintText: "10",
                     labelText: "Qty",
                     textEditingController:
-                    sparepartsController.qtyTypeTextEditingController,
+                        sparepartsController.qtyTypeTextEditingController,
                     focusNode: sparepartsController.sparepartsQtyFocusNode,
                   ),
                   const SizedBox(
                     height: 16.0,
                   ),
                   CustomTextField(
+                    textEditingController:
+                        sparepartsController.qtyTypeTextEditingController,
                     hintText: "New Qty",
                     labelText: "Add New Qty",
                     focusNode: controller.sparepartsNewQtyFocusNode,
@@ -118,42 +135,41 @@ class _AddSparepartsState extends State<AddSpareparts> {
                     children: [
                       Expanded(
                           child: Text(
-                            "Total Qty : 30",
-                            style: AppTextStyle.textStyleLight14
-                                .copyWith(color: AppColor.dropDownHintColor),
-                          )),
-                      OutlinedButton(
-                        onPressed: () {},
-                        style: ButtonStyle(
-                          shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(4.0),
-                                side: const BorderSide(
-                                  color: AppColor.borderColor,
-                                ),
-                              )),
-                        ),
-                        child: Text(
-                          "Update",
-                          style: AppTextStyle.textStyleLight14
-                              .copyWith(color: AppColor.selectColor),
-                        ),
-                      )
+                        "Total Qty : 30",
+                        style: AppTextStyle.textStyleLight14
+                            .copyWith(color: AppColor.dropDownHintColor),
+                      )),
+                      // OutlinedButton(
+                      //   onPressed: () {},
+                      //   style: ButtonStyle(
+                      //     shape:
+                      //         MaterialStateProperty.all(RoundedRectangleBorder(
+                      //       borderRadius: BorderRadius.circular(4.0),
+                      //       side: const BorderSide(
+                      //         color: AppColor.borderColor,
+                      //       ),
+                      //     )),
+                      //   ),
+                      //   child: Text(
+                      //     "Update",
+                      //     style: AppTextStyle.textStyleLight14
+                      //         .copyWith(color: AppColor.selectColor),
+                      //   ),
+                      // ),
                     ],
                   ),
                 ] else ...[
                   verticalSpacing(),
                   CustomTextField(
                     textEditingController:
-                    sparepartsController.qtyTypeTextEditingController,
+                        sparepartsController.qtyTypeTextEditingController,
                     hintText: "Qty",
                     labelText: "Qty",
                     textInputType: TextInputType.number,
                     focusNode: sparepartsController.sparepartsQtyFocusNode,
-                    autoValidateMode: AutovalidateMode.onUserInteraction,
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return "Please Enter Qty";
+                        return "Enter Qty";
                       } else {
                         return null;
                       }
@@ -168,13 +184,15 @@ class _AddSparepartsState extends State<AddSpareparts> {
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: CustomButton(
             color: AppColor.buttonColor,
-            buttonText: widget.isUpdate ? 'Update' : 'Add',
+            buttonText: widget.model != null ? 'Update' : 'Add',
             onTap: () {
               if (_formKey.currentState!.validate()) {
-                Get.back();
+                if (widget.model != null) {
+                  sparepartsController.updateSpareparts(widget.model['id']);
+                } else {
+                  sparepartsController.addSpareparts();
+                }
               }
-              sparepartsController.addSpareparts();
-              // Get.back();
             },
           ),
         ));
