@@ -2,7 +2,10 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:elements/auth/login.dart';
+import 'package:elements/constant/vars.dart';
+import 'package:elements/dashboard.dart';
 import 'package:elements/splash.dart';
+import 'package:elements/widget/dialogs/custom_dialogbox.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -31,7 +34,7 @@ class AuthController extends GetxController {
 
   final box = GetStorage();
 
-  Rx<ModelUser> modelUser = ModelUser().obs;
+  // Rx<ModelUser> modelUser = ModelUser().obs;
 
   FocusNode focusNode = FocusNode();
 
@@ -43,6 +46,32 @@ class AuthController extends GetxController {
   FocusNode newPasswordNode = FocusNode();
 
   RxBool isLoginLoading = false.obs;
+
+  Future<void> changePassword({context}) async {
+    Map<String, dynamic> body = {
+      "user_id": modelUser.value.id,
+      "old_password": oldPasswordTextEditingController.text,
+      "new_password": newPasswordTextEditingController.text,
+    };
+    try {
+      isPasswordLoading.value = true;
+      String url = "${baseURL}user/changePassword";
+      log("API => $url");
+      isLoginLoading.value = true;
+      var response = await http.post(Uri.parse(url), body: body);
+      if (response.statusCode == 200) {
+        var responseData = jsonDecode(response.body);
+        box.write("user",responseData['user']);
+        modelUser.value = ModelUser.fromJson(responseData['user']);
+        CustomDialogBox.showPasswordReset(context: context);
+      } else {
+        debugPrint("Error");
+        isPasswordLoading.value = false;
+      }
+    } catch (e) {
+      isPasswordLoading.value = false;
+    }
+  }
 
   Future<void> login() async {
     Map<String, dynamic> body = {
@@ -58,12 +87,13 @@ class AuthController extends GetxController {
       if (response.statusCode == 200) {
         var responseData = jsonDecode(response.body);
         jsonDecode(response.body);
-        if (responseData['status'] == 0) {
-          modelUser.value = ModelUser.fromJson(responseData['user']);
-        } else {
-          box.write("user", responseData);
+        if (responseData['status'] == 1) {
+          box.write("user",responseData['user']);
           box.write("isLogin", true);
-          Get.off(() => const Splash());
+          modelUser.value = ModelUser.fromJson(responseData['user']);
+          Get.off(() => const DashBoard());
+        } else {
+          debugPrint('user not found');
         }
         isLoginLoading.value = false;
       } else {
@@ -73,34 +103,6 @@ class AuthController extends GetxController {
     } catch (e) {
       debugPrint("Error${e.toString()}");
       isLoginLoading.value = false;
-    }
-  }
-
-  Future<void> changePassword(id) async {
-    Map<String, dynamic> body = {
-      "user_id": id,
-      "old_password": mobileNumberTextEditingController.text,
-      "new_password": newPasswordTextEditingController.text,
-    };
-    try {
-      isPasswordLoading.value = true;
-      String url = "${baseURL}user/changePassword";
-      log("API => $url");
-      isLoginLoading.value = true;
-      var response = await http.post(Uri.parse(url), body: body);
-      if (response.statusCode == 200) {
-        jsonDecode(response.body);
-        isPasswordLoading.value = false;
-        GetStorage().write("isLogin", false);
-        modelUser.value = ModelUser();
-
-        Get.to(const Login());
-      } else {
-        debugPrint("Error");
-        isPasswordLoading.value = false;
-      }
-    } catch (e) {
-      isPasswordLoading.value = false;
     }
   }
 }
