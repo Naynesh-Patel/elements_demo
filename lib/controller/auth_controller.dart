@@ -44,6 +44,33 @@ class AuthController extends GetxController {
 
   RxBool isLoginLoading = false.obs;
 
+  Future<void> changePassword() async {
+    Map<String, dynamic> body = {
+      "user_id": modelUser.value.id,
+      "old_password": oldPasswordTextEditingController.text,
+      "new_password": newPasswordTextEditingController.text,
+    };
+    try {
+      isPasswordLoading.value = true;
+      String url = "${baseURL}user/changePassword";
+      log("API => $url");
+      isLoginLoading.value = true;
+      var response = await http.post(Uri.parse(url), body: body);
+      if (response.statusCode == 200) {
+        jsonDecode(response.body);
+        isPasswordLoading.value = false;
+        GetStorage().write("isLogin", false);
+        modelUser.value = ModelUser();
+        Get.to(const Login());
+      } else {
+        debugPrint("Error");
+        isPasswordLoading.value = false;
+      }
+    } catch (e) {
+      isPasswordLoading.value = false;
+    }
+  }
+
   Future<void> login() async {
     Map<String, dynamic> body = {
       "password": passwordTextEditingController.text,
@@ -58,12 +85,13 @@ class AuthController extends GetxController {
       if (response.statusCode == 200) {
         var responseData = jsonDecode(response.body);
         jsonDecode(response.body);
-        if (responseData['status'] == 0) {
-          modelUser.value = ModelUser.fromJson(responseData['user']);
-        } else {
+        if (responseData['status'] == 1) {
           box.write("user", responseData);
           box.write("isLogin", true);
+          modelUser.value = ModelUser.fromJson(responseData['user']);
           Get.off(() => const Splash());
+        } else {
+          debugPrint('user not found');
         }
         isLoginLoading.value = false;
       } else {
@@ -73,34 +101,6 @@ class AuthController extends GetxController {
     } catch (e) {
       debugPrint("Error${e.toString()}");
       isLoginLoading.value = false;
-    }
-  }
-
-  Future<void> changePassword(id) async {
-    Map<String, dynamic> body = {
-      "user_id": id,
-      "old_password": mobileNumberTextEditingController.text,
-      "new_password": newPasswordTextEditingController.text,
-    };
-    try {
-      isPasswordLoading.value = true;
-      String url = "${baseURL}user/changePassword";
-      log("API => $url");
-      isLoginLoading.value = true;
-      var response = await http.post(Uri.parse(url), body: body);
-      if (response.statusCode == 200) {
-        jsonDecode(response.body);
-        isPasswordLoading.value = false;
-        GetStorage().write("isLogin", false);
-        modelUser.value = ModelUser();
-
-        Get.to(const Login());
-      } else {
-        debugPrint("Error");
-        isPasswordLoading.value = false;
-      }
-    } catch (e) {
-      isPasswordLoading.value = false;
     }
   }
 }
