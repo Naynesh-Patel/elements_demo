@@ -10,7 +10,9 @@ import 'package:get/get.dart';
 class AddCustomer extends StatefulWidget {
   final bool isUpdate;
   final bool isView;
-  const AddCustomer({super.key, this.isUpdate = false, this.isView = false, required model});
+  final dynamic model;
+  const AddCustomer(
+      {super.key, this.isUpdate = false, this.isView = false, this.model});
 
   @override
   State<AddCustomer> createState() => _AddCustomerState();
@@ -21,11 +23,34 @@ class _AddCustomerState extends State<AddCustomer> {
   final _formKey = GlobalKey<FormState>();
 
   @override
+  void initState() {
+    // controller.updateCustomer(widget.model['id']);
+    if (widget.model != null) {
+      controller.companyTextEditingController.text =
+          widget.model['company'] ?? '';
+      controller.contactTextEditingController.text =
+          widget.model['contact'] ?? '';
+      controller.referenceTextEditingController.text =
+          widget.model['reference'] ?? '';
+      controller.ownerTextEditingController.text = widget.model['owner'] ?? '';
+      controller.addressTextEditingController.text =
+          widget.model['address'] ?? '';
+    } else {
+      controller.companyTextEditingController.clear();
+      controller.contactTextEditingController.clear();
+      controller.referenceTextEditingController.clear();
+      controller.ownerTextEditingController.clear();
+      controller.addressTextEditingController.clear();
+    }
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: CustomAppBar(
-          title: widget.isUpdate
+          title: widget.model != null
               ? "Update Customer/Company Details"
               : widget.isView
                   ? "View Customer/Company Details"
@@ -37,8 +62,8 @@ class _AddCustomerState extends State<AddCustomer> {
         body: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Form(
-            key:_formKey ,
-            // autovalidateMode: AutovalidateMode.onUserInteraction,
+            key: _formKey,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -49,7 +74,7 @@ class _AddCustomerState extends State<AddCustomer> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        widget.isUpdate || widget.isView
+                        widget.model != null || widget.isView
                             ? 'Profile :'
                             : 'Add Profile :',
                         style: AppTextStyle.textStyleRegular16
@@ -72,7 +97,8 @@ class _AddCustomerState extends State<AddCustomer> {
                                     height: 80,
                                     width: 80,
                                     child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(50.0),
+                                        borderRadius:
+                                            BorderRadius.circular(50.0),
                                         child: Image.file(
                                           controller.imgFile!,
                                           fit: BoxFit.cover,
@@ -101,46 +127,44 @@ class _AddCustomerState extends State<AddCustomer> {
                         ),
                       ),
                       verticalSpacing(),
-                       CustomTextField(
-                         textEditingController: controller.companyTextEditingController,
+                      CustomTextField(
+                        textEditingController:
+                            controller.companyTextEditingController,
                         hintText: "Enter Company",
                         labelText: "Company*",
-                         autoValidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
-                          if(value!.isEmpty){
-                            return "Please Enter Company";
-                          }
-                          else{
+                          if (value!.isEmpty) {
+                            return "Enter Company*";
+                          } else {
                             return null;
                           }
                         },
                       ),
                       verticalSpacing(),
-                       CustomTextField(
-                         textEditingController: controller.ownerTextEditingController,
+                      CustomTextField(
+                        textEditingController:
+                            controller.ownerTextEditingController,
                         hintText: "Enter Owner Name",
                         labelText: "Owner Name*",
-                         autoValidateMode: AutovalidateMode.onUserInteraction,
-                         validator: (value) {
-                           if(value!.isEmpty){
-                             return "Please Enter Owner Name";
-                           }
-                           else{
-                             return null;
-                           }
-                         },
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Enter Owner Name*";
+                          } else {
+                            return null;
+                          }
+                        },
                       ),
                       verticalSpacing(),
                       CustomTextField(
-                        textEditingController: controller.contactTextEditingController,
+                        textEditingController:
+                            controller.contactTextEditingController,
+                        maxLength: 10,
                         hintText: "99656 25693",
                         labelText: "Contact No.*",
-                        autoValidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
-                          if(value!.isEmpty){
-                            return "Please Enter Contact No";
-                          }
-                          else{
+                          if (value!.isEmpty) {
+                            return "Enter Contact No.*";
+                          } else {
                             return null;
                           }
                         },
@@ -154,14 +178,14 @@ class _AddCustomerState extends State<AddCustomer> {
                       ),
                       verticalSpacing(),
                       CustomTextField(
+                        textEditingController:
+                            controller.addressTextEditingController,
                         hintText: "Enter Address",
                         labelText: "Address",
-                        autoValidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
-                          if(value!.isEmpty){
-                            return "Please Enter Address";
-                          }
-                          else{
+                          if (value!.isEmpty) {
+                            return "Enter Address*";
+                          } else {
                             return null;
                           }
                         },
@@ -174,18 +198,17 @@ class _AddCustomerState extends State<AddCustomer> {
                       ),
                       verticalSpacing(),
                       CustomTextField(
-                        textEditingController: controller.websiteTextEditingController,
+                        textEditingController:
+                            controller.websiteTextEditingController,
                         hintText: "www.machinepro.com",
                         labelText: "Website",
-                        autoValidateMode: AutovalidateMode.onUserInteraction,
-                        validator: (value) {
-                          if(value!.isEmpty){
-                            return "Please Enter Website";
-                          }
-                          else{
-                            return null;
-                          }
-                        },
+                        // validator: (value) {
+                        //   if (value!.isEmpty) {
+                        //     return "Enter Website*";
+                        //   } else {
+                        //     return null;
+                        //   }
+                        // },
                         suffixFixIcon: widget.isView
                             ? Container(
                                 padding: const EdgeInsets.all(14.0),
@@ -213,19 +236,18 @@ class _AddCustomerState extends State<AddCustomer> {
                         // },
                       ),
                       verticalSpacing(),
-                       CustomTextField(
-                         textEditingController: controller.gstinTextEditingController,
+                      CustomTextField(
+                        textEditingController:
+                            controller.gstinTextEditingController,
                         hintText: "GD5456892098",
                         labelText: "GST No.",
-                         autoValidateMode: AutovalidateMode.onUserInteraction,
-                         validator: (value) {
-                           if(value!.isEmpty){
-                             return "Please Enter GST No";
-                           }
-                           else{
-                             return null;
-                           }
-                         },
+                        // validator: (value) {
+                        //   if (value!.isEmpty) {
+                        //     return "Enter GST No*";
+                        //   } else {
+                        //     return null;
+                        //   }
+                        // },
                       ),
                     ],
                   ),
@@ -241,14 +263,15 @@ class _AddCustomerState extends State<AddCustomer> {
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 child: CustomButton(
                   color: AppColor.buttonColor,
-                  buttonText: widget.isUpdate ? 'Update' : 'Add',
+                  buttonText: widget.model != null ? 'Update' : 'Add',
                   onTap: () {
-                    if (_formKey.currentState!.validate()){
-
-                      Get.back();
-
+                    if (_formKey.currentState!.validate()) {
+                      if (widget.model != null) {
+                        controller.updateCustomer(widget.model['id']);
+                      } else {
+                        controller.addCustomer();
+                      }
                     }
-                    controller.addCustomer();
                   },
                 ),
               ));
