@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 
 import '../../date_piker.dart';
 import '../controller/expense_controller.dart';
+import '../widget/custom_loader.dart';
 
 class ViewExpenseDetails extends StatefulWidget {
   const ViewExpenseDetails({super.key});
@@ -22,7 +23,6 @@ class _ViewExpenseDetailsState extends State<ViewExpenseDetails> {
   @override
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     expenseController.getExpense();
   }
@@ -49,7 +49,9 @@ class _ViewExpenseDetailsState extends State<ViewExpenseDetails> {
         body: SingleChildScrollView(
           child: Container(
             margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-            child: Column(
+            child: Obx(() => expenseController.isGetExpenseLoading.value
+              ? const CustomLoader()
+            :  Column(
               children: [
                 ListView.separated(
                   shrinkWrap: true,
@@ -60,18 +62,18 @@ class _ViewExpenseDetailsState extends State<ViewExpenseDetails> {
                     return SizedBox(height: 10,);
                   },
                   itemBuilder: (context, index) {
-                  return Column(
-                    children: [
-                      _tableView(
-                          name: expenseController.expenseList[index]['name'],
-                          date: expenseController.expenseList[index]['created_at'],
-                          type: expenseController.expenseList[index]['expense_type'],
-                          price: expenseController.expenseList[index]['price']),
-                    ],
-                  );
-                },)
+                    return Column(
+                      children: [
+                        _tableView(
+                            name: expenseController.expenseList[index]['name'] ?? '',
+                            date: expenseController.expenseList[index]['created_at'] ?? '',
+                            type: expenseController.expenseList[index]['expense_type'] ?? '',
+                            price: expenseController.expenseList[index]['price'] ?? ''),
+                      ],
+                    );
+                  },)
               ],
-            ),
+            ),),
             // child: DataTable2(
             //   dividerThickness: 0.2,
             //   columnSpacing: 20,
