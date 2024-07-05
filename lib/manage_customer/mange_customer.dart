@@ -68,12 +68,13 @@ class _MangeCustomerState extends State<MangeCustomer> {
                                   Row(
                                     children: [
                                       Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           _keyValue(
                                               "Name",
                                               controller.customerList[index]
-                                              ['company'] ??
+                                                      ['company'] ??
                                                   ''),
                                           verticalSpacing(),
                                           _keyValue(
@@ -85,7 +86,7 @@ class _MangeCustomerState extends State<MangeCustomer> {
                                           _keyValue(
                                               "Reference By",
                                               controller.customerList[index]
-                                              ['reference'] ??
+                                                      ['reference'] ??
                                                   ''),
                                           verticalSpacing(),
                                         ],
@@ -95,20 +96,21 @@ class _MangeCustomerState extends State<MangeCustomer> {
                                         children: [
                                           controller.imgFile == null
                                               ? Image.asset(
-                                            'assets/images/user_p.png',
-                                            height: 60,
-                                            width: 60,
-                                          )
+                                                  'assets/images/user_p.png',
+                                                  height: 60,
+                                                  width: 60,
+                                                )
                                               : SizedBox(
-                                              height: 80,
-                                              width: 80,
-                                              child: ClipRRect(
-                                                  borderRadius:
-                                                  BorderRadius.circular(50.0),
-                                                  child: Image.file(
-                                                    controller.imgFile!,
-                                                    fit: BoxFit.cover,
-                                                  ))),
+                                                  height: 80,
+                                                  width: 80,
+                                                  child: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              50.0),
+                                                      child: Image.file(
+                                                        controller.imgFile!,
+                                                        fit: BoxFit.cover,
+                                                      ))),
                                         ],
                                       ),
                                     ],
@@ -121,8 +123,8 @@ class _MangeCustomerState extends State<MangeCustomer> {
                                         title: "  View  ",
                                         textColor: AppColor.selectColor,
                                         onTap: () {
-                                          // Get.to(
-                                          //     const AddCustomer(isView: true, model: null,));
+                                          Get.to(
+                                              const AddCustomer(isView: true));
                                         },
                                       ),
                                       const SizedBox(
@@ -190,7 +192,7 @@ class _MangeCustomerState extends State<MangeCustomer> {
           ),
           backgroundColor: AppColor.buttonColor,
           onPressed: () {
-            // Get.to(const AddCustomer());
+            Get.to(const AddCustomer());
           },
           child: const Icon(
             Icons.add,
