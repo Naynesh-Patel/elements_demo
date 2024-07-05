@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:elements/constant/vars.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -37,12 +38,12 @@ class ExpenseController extends GetxController {
   // }
 
 
-  Future<void> addExpense(id) async {
+  Future<void> addExpense() async {
     Map<String, dynamic> body = {
       "name": nameTextEditingController.text,
       "expense_type": expenseTypeTextEditingController.text,
       "price": priceTextEditingController.text,
-      "user_id": id,
+      "user_id": modelUser.value.id,
       // "company_id": companyIdEditingController.text,
     };
     try {

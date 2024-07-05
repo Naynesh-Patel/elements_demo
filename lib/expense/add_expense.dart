@@ -13,8 +13,7 @@ import '../controller/expense_controller.dart';
 
 class AddExpense extends StatefulWidget {
   final bool isUpdate;
-  final dynamic model;
-  const AddExpense({super.key, this.isUpdate = false, this.model});
+  const AddExpense({super.key, this.isUpdate = false});
 
   @override
   State<AddExpense> createState() => _AddExpenseState();
@@ -69,7 +68,7 @@ class _AddExpenseState extends State<AddExpense> {
             color: AppColor.buttonColor,
             buttonText: widget.isUpdate ? 'Update' : 'Done',
             onTap: () {
-              expenseController.addExpense(widget.model['id']);
+              expenseController.addExpense();
               Get.back();
             },
           ),
