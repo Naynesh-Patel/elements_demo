@@ -7,8 +7,6 @@ import 'package:elements/widget/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../controller/customer_controller.dart';
-import '../controller/customer_controller.dart';
 import '../controller/expense_controller.dart';
 
 class AddExpense extends StatefulWidget {
@@ -42,19 +40,22 @@ class _AddExpenseState extends State<AddExpense> {
               CustomTextField(
                 hintText: "",
                 labelText: "Name",
-                textEditingController: expenseController.nameTextEditingController,
+                textEditingController:
+                    expenseController.nameTextEditingController,
                 focusNode: controller.expenseNameFocusNode,
               ),
               verticalSpacing(),
               CustomTextField(
-                textEditingController: expenseController.expenseTypeTextEditingController,
+                textEditingController:
+                    expenseController.expenseTypeTextEditingController,
                 hintText: "Tea",
                 labelText: "Expense Type",
                 focusNode: controller.expenseTypeFocusNode,
               ),
               verticalSpacing(),
               CustomTextField(
-                textEditingController: expenseController.priceTextEditingController,
+                textEditingController:
+                    expenseController.priceTextEditingController,
                 hintText: "₹ 20 ",
                 labelText: "Price",
                 focusNode: controller.expensePriceFocusNode,
