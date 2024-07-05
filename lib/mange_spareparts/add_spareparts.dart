@@ -94,18 +94,18 @@ class _AddSparepartsState extends State<AddSpareparts> {
                         "Add Qty",
                         style: AppTextStyle.textStyleRegular18,
                       ),
-                      IconButton(
-                          padding: EdgeInsets.zero,
-                          constraints: const BoxConstraints(),
-                          style: const ButtonStyle(
-                            tapTargetSize: MaterialTapTargetSize
-                                .shrinkWrap, // the '2023' part
-                          ),
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.add,
-                            size: 24,
-                          )),
+                      // IconButton(
+                      //     padding: EdgeInsets.zero,
+                      //     constraints: const BoxConstraints(),
+                      //     style: const ButtonStyle(
+                      //       tapTargetSize: MaterialTapTargetSize
+                      //           .shrinkWrap, // the '2023' part
+                      //     ),
+                      //     onPressed: () {},
+                      //     icon: const Icon(
+                      //       Icons.add,
+                      //       size: 24,
+                      //     )),
                     ],
                   ),
                   const SizedBox(
@@ -114,6 +114,7 @@ class _AddSparepartsState extends State<AddSpareparts> {
                   CustomTextField(
                     hintText: "10",
                     labelText: "Qty",
+                    enable: false,
                     textEditingController:
                         sparepartsController.qtyTypeTextEditingController,
                     focusNode: sparepartsController.sparepartsQtyFocusNode,
@@ -122,6 +123,7 @@ class _AddSparepartsState extends State<AddSpareparts> {
                     height: 16.0,
                   ),
                   CustomTextField(
+                    textInputType: TextInputType.number,
                     textEditingController:
                         sparepartsController.qtyTypeTextEditingController,
                     hintText: "New Qty",
@@ -165,6 +167,7 @@ class _AddSparepartsState extends State<AddSpareparts> {
                         sparepartsController.qtyTypeTextEditingController,
                     hintText: "Qty",
                     labelText: "Qty",
+                    // enable: false,
                     textInputType: TextInputType.number,
                     focusNode: sparepartsController.sparepartsQtyFocusNode,
                     validator: (value) {

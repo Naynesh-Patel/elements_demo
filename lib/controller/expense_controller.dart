@@ -64,6 +64,8 @@ class ExpenseController extends GetxController {
       if (response.statusCode == 200) {
         isGetExpenseLoading.value = false;
         var responseData = jsonDecode(response.body);
+        Get.back();
+        getExpense();
         List jobData = responseData["expenses"];
         expenseList.value = jobData;
       } else {

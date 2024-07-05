@@ -14,7 +14,8 @@ class UserController extends GetxController {
   TextEditingController userNameTextEditingController = TextEditingController();
   TextEditingController addressTextEditingController = TextEditingController();
   TextEditingController userRoleTextEditingController = TextEditingController();
-  TextEditingController contactNoTextEditingController = TextEditingController();
+  TextEditingController contactNoTextEditingController =
+      TextEditingController();
 
   TextEditingController fingerprintEditingController = TextEditingController();
 
@@ -115,8 +116,38 @@ class UserController extends GetxController {
     }
   }
 
+  // Future<void> updateUser(id) async {
+  //   Map<String, dynamic> body = {
+  //     "id": id,
+  //     "name": userNameTextEditingController.text,
+  //     "contact_no": contactNoTextEditingController.text,
+  //     "address": addressTextEditingController.text,
+  //     "user_type": userRoleTextEditingController.text,
+  //     "fingerprint": fingerprintEditingController.text,
+  //   };
+  //   try {
+  //     String url = "${baseURL}user/update";
+  //     log("API => $url");
+  //     isUpdateUserLoading.value = true;
+  //     var response = await http.post(Uri.parse(url), body: body);
+  //     if (response.statusCode == 200) {
+  //       jsonDecode(response.body);
+  //       Get.back();
+  //       getUser();
+  //       isUpdateUserLoading.value = false;
+  //     } else {
+  //       debugPrint("statusCode${response.statusCode}");
+  //       isUpdateUserLoading.value = false;
+  //     }
+  //   } catch (e) {
+  //     debugPrint("Error${e.toString()}");
+  //     isUpdateUserLoading.value = false;
+  //   }
+  // }
+
   Future<void> updateUser(id) async {
     Map<String, dynamic> body = {
+      "id": id,
       "name": userNameTextEditingController.text,
       "contact_no": contactNoTextEditingController.text,
       "address": addressTextEditingController.text,
