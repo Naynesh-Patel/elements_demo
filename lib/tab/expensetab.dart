@@ -9,6 +9,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class ExpensetTab extends StatefulWidget {
+  // ExpenseController expenseController = Get.find();
   final bool isUpdate;
 
   const ExpensetTab({super.key, this.isUpdate = false});
