@@ -137,7 +137,7 @@ class _WidgetDropDownFromFieldState extends State<WidgetDropDownFromField> {
         mainAxisSize: MainAxisSize.min,
         children: [
           const SizedBox(height: 8.0,),
-          Text(widget.errorMsg ??"Please select user role",style: AppTextStyle.textStyleLight12.copyWith(color: Colors.red),)
+          Text(widget.errorMsg ??"Please Select User Role",style: AppTextStyle.textStyleLight12.copyWith(color: Colors.red),)
         ],
       ),
     );
