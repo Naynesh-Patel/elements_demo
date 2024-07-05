@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 
 import '../../date_piker.dart';
 import '../controller/expense_controller.dart';
-import '../widget/custom_loader.dart';
 
 class ViewExpenseDetails extends StatefulWidget {
   const ViewExpenseDetails({super.key});
@@ -16,16 +15,10 @@ class ViewExpenseDetails extends StatefulWidget {
 }
 
 class _ViewExpenseDetailsState extends State<ViewExpenseDetails> {
-  ExpenseController expenseController = Get.find();
   bool value = false;
   int index = 0;
 
   @override
-  @override
-  void initState() {
-    super.initState();
-    expenseController.getExpense();
-  }
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: CustomAppBar(
@@ -46,92 +39,75 @@ class _ViewExpenseDetailsState extends State<ViewExpenseDetails> {
           // ],
           title: 'View Expense',
         ),
-        body: SingleChildScrollView(
-          child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-            child: Obx(() => expenseController.isGetExpenseLoading.value
-              ? const CustomLoader()
-            :  Column(
-              children: [
-                ListView.separated(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.vertical,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: expenseController.expenseList.length,
-                  separatorBuilder: (context, index) {
-                    return SizedBox(height: 10,);
-                  },
-                  itemBuilder: (context, index) {
-                    return Column(
-                      children: [
-                        _tableView(
-                            name: expenseController.expenseList[index]['name'] ?? '',
-                            date: expenseController.expenseList[index]['created_at'] ?? '',
-                            type: expenseController.expenseList[index]['expense_type'] ?? '',
-                            price: expenseController.expenseList[index]['price'] ?? ''),
-                      ],
-                    );
-                  },)
-              ],
-            ),),
-            // child: DataTable2(
-            //   dividerThickness: 0.2,
-            //   columnSpacing: 20,
-            //   horizontalMargin: 5,
-            //   minWidth: 400,
-            //   headingRowColor: MaterialStateProperty.all<Color>(
-            //       const Color(0xffF1F1F1).withOpacity(0.60)),
-            //   // dataRowColor: MaterialStateProperty.all<Color>(Colors.white),
-            //   dataTextStyle: const TextStyle(color: Color(0xff555555)),
-            //   columns: [
-            //     const DataColumn2(
-            //       label: Text(
-            //         'Name',
-            //         style: TextStyle(
-            //           color: AppColor.buttonColor,
-            //         ),
-            //       ),
-            //       size: ColumnSize.L,
-            //     ),
-            //     DataColumn(
-            //       label: Row(
-            //         children: [
-            //           const Text(
-            //             'Date',
-            //             style: TextStyle(
-            //               color: AppColor.buttonColor,
-            //             ),
-            //           ),
-            //           const SizedBox(
-            //             width: 5,
-            //           ),
-            //           InkWell(
-            //             onTap: () {
-            //               Get.to(const DatePiker());
-            //             },
-            //             child: Image.asset(
-            //               "assets/images/date.png",
-            //               height: 14,
-            //               width: 14,
-            //             ),
-            //           ),
-            //         ],
-            //       ),
-            //     ),
-            //     const DataColumn(
-            //       label: Text('Qty'),
-            //     ),
-            //   ],
-            //   rows: List<DataRow>.generate(
-            //     2,
-            //     (index) => const DataRow(cells: [
-            //       DataCell(Text('Steel Bolt')),
-            //       DataCell(Text('5/10/2023')),
-            //       DataCell(Text('20')),
-            //     ]),
-            //   ),
-            // ),
+        body: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          child: Column(
+            children: [
+              // _tableTopContent(),
+              _tableView(
+                  name: 'Name',
+                  date:'21/05/2024',
+                  type: 'type',
+                  price: '2000'),
+            ],
           ),
+          // child: DataTable2(
+          //   dividerThickness: 0.2,
+          //   columnSpacing: 20,
+          //   horizontalMargin: 5,
+          //   minWidth: 400,
+          //   headingRowColor: MaterialStateProperty.all<Color>(
+          //       const Color(0xffF1F1F1).withOpacity(0.60)),
+          //   // dataRowColor: MaterialStateProperty.all<Color>(Colors.white),
+          //   dataTextStyle: const TextStyle(color: Color(0xff555555)),
+          //   columns: [
+          //     const DataColumn2(
+          //       label: Text(
+          //         'Name',
+          //         style: TextStyle(
+          //           color: AppColor.buttonColor,
+          //         ),
+          //       ),
+          //       size: ColumnSize.L,
+          //     ),
+          //     DataColumn(
+          //       label: Row(
+          //         children: [
+          //           const Text(
+          //             'Date',
+          //             style: TextStyle(
+          //               color: AppColor.buttonColor,
+          //             ),
+          //           ),
+          //           const SizedBox(
+          //             width: 5,
+          //           ),
+          //           InkWell(
+          //             onTap: () {
+          //               Get.to(const DatePiker());
+          //             },
+          //             child: Image.asset(
+          //               "assets/images/date.png",
+          //               height: 14,
+          //               width: 14,
+          //             ),
+          //           ),
+          //         ],
+          //       ),
+          //     ),
+          //     const DataColumn(
+          //       label: Text('Qty'),
+          //     ),
+          //   ],
+          //   rows: List<DataRow>.generate(
+          //     2,
+          //     (index) => const DataRow(cells: [
+          //       DataCell(Text('Steel Bolt')),
+          //       DataCell(Text('5/10/2023')),
+          //       DataCell(Text('20')),
+          //     ]),
+          //   ),
+          // ),
         ));
   }
 
