@@ -1,5 +1,8 @@
 import 'package:elements/constant/app_colors.dart';
+import 'package:elements/controller/customer_controller.dart';
 import 'package:elements/controller/home_controller.dart';
+import 'package:elements/controller/order_controller.dart';
+import 'package:elements/home/select_customer_company.dart';
 import 'package:elements/home/select_machine.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:elements/widget/button/custom_button.dart';
@@ -20,6 +23,9 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
   HomeController controller = Get.find();
   TextEditingController date = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  OrderController orderController = Get.find();
+  CustomerController customerController = Get.find();
+
 
   @override
   Widget build(BuildContext context) {
@@ -48,14 +54,43 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
             key: _formKey,
             child: Column(
               children: [
-                WidgetDropDownFromField(
-                  hintText: "Select Customer/Company",
-                  labelText: "Customer/Company*",
-                  itemList: const ["Admin", "User", "Seller"],
-                  onTap: (value) {
-                    debugPrint("Select => $value");
-                  },
-                ),
+                // WidgetDropDownFromField(
+                //   hintText: "Select Customer/Company",
+                //   labelText: "Customer/Company*",
+                //   itemList: const ["Admin", "User", "Seller"],
+                //   onTap: (value) {
+                //     debugPrint("Select => $value");
+                //     // orderController.customerCompany=value;
+                //   },
+                // ),
+                CustomTextField(
+                  focusNode: FocusNode(),
+                  readOnly: true,
+                    onTap: () {
+                       Get.to(SelectCustomerCompany())?.then((value){
+                         customerController.companyTextEditingController.text=value;
+                         setState(() {
+
+                         });
+                       });
+                    },
+                    hintText: "Select Customer/Company",
+                    labelText: "Customer/Company*",
+                    textEditingController: customerController.companyTextEditingController,
+                    // autoValidateMode: AutovalidateMode.onUserInteraction,
+                    // validator: (value) {
+                    //   if(value!.isEmpty){
+                    //     return "Please Enter Machine Type";
+                    //   }
+                    //   else{
+                    //     return null;
+                    //   }
+                    // },
+                    suffixFixIcon: const Icon(
+                      Icons.arrow_forward_ios_rounded,
+                      size: 18,
+                      color: AppColor.blackColor,
+                    )),
                 verticalSpacing(),
                 CustomTextField(
                     onTap: () {

@@ -29,6 +29,7 @@ class CustomerController extends GetxController {
 
   RxList<dynamic> customerList = <dynamic>[].obs;
 
+
   File? imgFile;
   String base64Image = "";
 
