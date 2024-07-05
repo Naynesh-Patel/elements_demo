@@ -4,6 +4,7 @@ import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../controller/spareparts_controller.dart';
 import '../date_piker.dart';
 import '../widget/button/small_button.dart';
 
@@ -15,6 +16,7 @@ class ViewSparepartsDetails extends StatefulWidget {
 }
 
 class _ViewSparepartsDetailsState extends State<ViewSparepartsDetails> {
+  SparepartsController controller = Get.find();
   bool value = false;
   int index = 0;
 
@@ -36,6 +38,12 @@ class _ViewSparepartsDetailsState extends State<ViewSparepartsDetails> {
       "select": false,
     },
   ];
+
+  @override
+  void initState() {
+    controller.getSpareparts();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,75 +70,20 @@ class _ViewSparepartsDetailsState extends State<ViewSparepartsDetails> {
           child: Column(
             children: [
               _tableTopContent(),
-              _tableView(
-                name: 'Steel Bolt',
-                date: "5/10/2023",
-                qty: '20',
-              ),
-              _tableView(
-                name: 'Steel Paip',
-                date: "5/10/2023",
-                qty: '50',
-              ),
+              Obx(
+                () => ListView.builder(
+                  itemCount: controller.sparepartsList.length,
+                  itemBuilder: (context, index) {
+                    return _tableView(
+                      name: controller.sparepartsList[index]['name'] ?? '',
+                      date: controller.sparepartsList[index]['name'] ?? '',
+                      qty: controller.sparepartsList[index]['name'] ?? '',
+                    );
+                  },
+                ),
+              )
             ],
           ),
-          // child: DataTable2(
-          //   dividerThickness: 0.2,
-          //   columnSpacing: 20,
-          //   horizontalMargin: 5,
-          //   minWidth: 400,
-          //   headingRowColor: MaterialStateProperty.all<Color>(
-          //       const Color(0xffF1F1F1).withOpacity(0.60)),
-          //   // dataRowColor: MaterialStateProperty.all<Color>(Colors.white),
-          //   dataTextStyle: const TextStyle(color: Color(0xff555555)),
-          //   columns: [
-          //     const DataColumn2(
-          //       label: Text(
-          //         'Name',
-          //         style: TextStyle(
-          //           color: AppColor.buttonColor,
-          //         ),
-          //       ),
-          //       size: ColumnSize.L,
-          //     ),
-          //     DataColumn(
-          //       label: Row(
-          //         children: [
-          //           const Text(
-          //             'Date',
-          //             style: TextStyle(
-          //               color: AppColor.buttonColor,
-          //             ),
-          //           ),
-          //           const SizedBox(
-          //             width: 5,
-          //           ),
-          //           InkWell(
-          //             onTap: () {
-          //               Get.to(const DatePiker());
-          //             },
-          //             child: Image.asset(
-          //               "assets/images/date.png",
-          //               height: 14,
-          //               width: 14,
-          //             ),
-          //           ),
-          //         ],
-          //       ),
-          //     ),
-          //     const DataColumn(
-          //       label: Text('Qty'),
-          //     ),
-          //   ],
-          //   rows: List<DataRow>.generate(
-          //     2,
-          //     (index) => const DataRow(cells: [
-          //       DataCell(Text('Steel Bolt')),
-          //       DataCell(Text('5/10/2023')),
-          //       DataCell(Text('20')),
-          //     ]),
-          //   ),
-          // ),
         ));
   }
 

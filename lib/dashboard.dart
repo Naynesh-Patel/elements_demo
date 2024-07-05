@@ -45,7 +45,7 @@ class _DashBoardState extends State<DashBoard> {
     return Scaffold(
       backgroundColor: Colors.white,
       key: key,
-      drawer: drawer(),
+      // drawer: drawer(),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
