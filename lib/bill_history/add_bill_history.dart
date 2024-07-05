@@ -42,7 +42,7 @@ class _AddBillHistoryState extends State<AddBillHistory>
         ),
         body: Form(
           key: _formKey,
-          autovalidateMode: AutovalidateMode.onUserInteraction,
+          // autovalidateMode: AutovalidateMode.onUserInteraction,
           child: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
@@ -85,11 +85,12 @@ class _AddBillHistoryState extends State<AddBillHistory>
                   hintText: "2*",
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return "Enter Qty*";
+                      return "Please Enter Qty";
                     } else {
                       return null;
                     }
                   },
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
                 ),
                 verticalSpacing(),
                 CustomTextField(
@@ -97,11 +98,12 @@ class _AddBillHistoryState extends State<AddBillHistory>
                   hintText: "9989898958",
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return "Enter Mobile No.*";
+                      return "Please Enter Mobile No";
                     } else {
                       return null;
                     }
                   },
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
                   textInputType: const TextInputType.numberWithOptions(),
                 ),
                 verticalSpacing(),
@@ -110,11 +112,12 @@ class _AddBillHistoryState extends State<AddBillHistory>
                   hintText: "2000*",
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return "Enter Price*";
+                      return "Please Enter Price";
                     } else {
                       return null;
                     }
                   },
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
                   textInputType: const TextInputType.numberWithOptions(),
                 ),
                 verticalSpacing(),
@@ -123,11 +126,12 @@ class _AddBillHistoryState extends State<AddBillHistory>
                   labelText: "Shipping Address*",
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return "Enter Shipping Address*";
+                      return "Please Enter Shipping Address";
                     } else {
                       return null;
                     }
                   },
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
                 ),
                 verticalSpacing(),
               ],

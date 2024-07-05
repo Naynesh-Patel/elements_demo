@@ -43,6 +43,7 @@ class _WidgetDropDownFromFieldState extends State<WidgetDropDownFromField> {
               border: Border.all(color: AppColor.borderColor),
             ),
             child: DropdownButtonFormField2<dynamic>(
+
               // validator: validator,
               validator: widget.validator,
               isExpanded: true,

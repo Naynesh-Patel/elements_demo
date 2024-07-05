@@ -37,7 +37,7 @@ class _AddSalesmenState extends State<AddSalesmen> {
         ),
         body: Form(
           key: _formKey,
-          autovalidateMode: AutovalidateMode.onUserInteraction,
+          // autovalidateMode: AutovalidateMode.onUserInteraction,
           child: Container(
             margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
             child: SingleChildScrollView(
@@ -118,9 +118,10 @@ class _AddSalesmenState extends State<AddSalesmen> {
                         controller.workerTextEditingController,
                     hintText: "worker",
                     labelText: "Work Type*",
+                    autoValidateMode: AutovalidateMode.onUserInteraction,
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return "Enter Work Type*";
+                        return "Please Enter Work Type";
                       } else {
                         return null;
                       }
@@ -132,9 +133,10 @@ class _AddSalesmenState extends State<AddSalesmen> {
                         controller.salesmenNameTextEditingController,
                     hintText: "Dipesh Patel",
                     labelText: "Name*",
+                    autoValidateMode: AutovalidateMode.onUserInteraction,
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return "Enter Name*";
+                        return "Please Enter Name";
                       } else {
                         return null;
                       }
@@ -147,9 +149,10 @@ class _AddSalesmenState extends State<AddSalesmen> {
                         controller.contactNoTextEditingController,
                     hintText: "Name",
                     labelText: "Contact No.",
+                    autoValidateMode: AutovalidateMode.onUserInteraction,
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return "Enter Contact No.*";
+                        return "Please Enter Contact No";
                       } else {
                         return null;
                       }

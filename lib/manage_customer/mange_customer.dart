@@ -121,8 +121,8 @@ class _MangeCustomerState extends State<MangeCustomer> {
                                         title: "  View  ",
                                         textColor: AppColor.selectColor,
                                         onTap: () {
-                                          Get.to(
-                                              const AddCustomer(isView: true));
+                                          // Get.to(
+                                          //     const AddCustomer(isView: true, model: null,));
                                         },
                                       ),
                                       const SizedBox(
@@ -190,7 +190,7 @@ class _MangeCustomerState extends State<MangeCustomer> {
           ),
           backgroundColor: AppColor.buttonColor,
           onPressed: () {
-            Get.to(const AddCustomer());
+            // Get.to(const AddCustomer());
           },
           child: const Icon(
             Icons.add,
