@@ -14,8 +14,7 @@ class UserController extends GetxController {
   TextEditingController userNameTextEditingController = TextEditingController();
   TextEditingController addressTextEditingController = TextEditingController();
   TextEditingController userRoleTextEditingController = TextEditingController();
-  TextEditingController contactNoTextEditingController =
-      TextEditingController();
+  TextEditingController contactNoTextEditingController = TextEditingController();
 
   TextEditingController fingerprintEditingController = TextEditingController();
 
