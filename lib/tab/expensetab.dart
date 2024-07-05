@@ -1,13 +1,12 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/expense/add_expense.dart';
+import 'package:elements/expense/view_expense_details.dart';
 import 'package:elements/widget/app%20bar/home_app_bar.dart';
 import 'package:elements/widget/dialogs/custom_dialogbox.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-
-import '../expense/view_expense_details.dart';
 
 class ExpensetTab extends StatefulWidget {
   final bool isUpdate;

@@ -38,7 +38,7 @@ class _AddExpenseState extends State<AddExpense> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomTextField(
-                hintText: "",
+                hintText: "Name",
                 labelText: "Name",
                 textEditingController:
                     expenseController.nameTextEditingController,
