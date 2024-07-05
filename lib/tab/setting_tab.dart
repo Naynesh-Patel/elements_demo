@@ -1,3 +1,4 @@
+import 'package:elements/auth/changepassword.dart';
 import 'package:elements/bill_history/bill_history.dart';
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
@@ -12,8 +13,6 @@ import 'package:elements/widget/dialogs/custom_dialogbox.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-
-import '../auth/changepassword.dart';
 
 class SettingTab extends StatefulWidget {
   const SettingTab({super.key});
@@ -135,7 +134,8 @@ class _SettingTabState extends State<SettingTab> {
                 ),
                 _customTile(
                   title: "Change Password",
-                  imgPath: "assets/svg/bil_history.svg",
+                  isSvg: false,
+                  imgPath: "assets/images/padlock.png",
                   index: 7,
                   onTap: () {
                     controller.selectMenu.value = 7;

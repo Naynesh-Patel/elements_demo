@@ -49,7 +49,7 @@ class _AddMachineryState extends State<AddMachinery> {
         ),
         body: Form(
           key: _formKey,
-          autovalidateMode: AutovalidateMode.onUserInteraction,
+          // autovalidateMode: AutovalidateMode.onUserInteraction,
           child: Container(
               margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
               child: ListView(
@@ -61,10 +61,10 @@ class _AddMachineryState extends State<AddMachinery> {
                        CustomTextField(
                         hintText: "Machine Name",
                         labelText: "Machine Name*",
-                        // autoValidateMode: AutovalidateMode.onUserInteraction,
+                        autoValidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
                           if(value!.isEmpty){
-                            return "Enter Machine Name*";
+                            return "Please Enter Machine Name";
                           }
                           else{
                             return null;
@@ -75,10 +75,10 @@ class _AddMachineryState extends State<AddMachinery> {
                        CustomTextField(
                         hintText: "Machine Type",
                         labelText: "Machine Type*",
-                        // autoValidateMode: AutovalidateMode.onUserInteraction,
+                        autoValidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
                           if(value!.isEmpty){
-                            return "Enter Machine Type*";
+                            return "Please Enter Machine Type";
                           }
                           else{
                             return null;
@@ -89,10 +89,10 @@ class _AddMachineryState extends State<AddMachinery> {
                        CustomTextField(
                         hintText: "Qty",
                         labelText: "Qty*",
-                         // autoValidateMode: AutovalidateMode.onUserInteraction,
+                         autoValidateMode: AutovalidateMode.onUserInteraction,
                          validator: (value) {
                            if(value!.isEmpty){
-                             return "Enter Qty*";
+                             return "Please Enter Qty";
                            }
                            else{
                              return null;
@@ -103,10 +103,10 @@ class _AddMachineryState extends State<AddMachinery> {
                        CustomTextField(
                         hintText: "Eg. 30 days",
                         labelText: "Manufacture Duration*",
-                         // autoValidateMode: AutovalidateMode.onUserInteraction,
+                         autoValidateMode: AutovalidateMode.onUserInteraction,
                          validator: (value) {
                            if(value!.isEmpty){
-                             return "Enter Manufacture Duration*";
+                             return "Please Enter Manufacture Duration";
                            }
                            else{
                              return null;

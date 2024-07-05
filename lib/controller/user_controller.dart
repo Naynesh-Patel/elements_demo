@@ -14,8 +14,7 @@ class UserController extends GetxController {
   TextEditingController userNameTextEditingController = TextEditingController();
   TextEditingController addressTextEditingController = TextEditingController();
   TextEditingController userRoleTextEditingController = TextEditingController();
-  TextEditingController contactNoTextEditingController =
-      TextEditingController();
+  TextEditingController contactNoTextEditingController = TextEditingController();
 
   TextEditingController fingerprintEditingController = TextEditingController();
 
@@ -122,7 +121,7 @@ class UserController extends GetxController {
       "contact_no": contactNoTextEditingController.text,
       "address": addressTextEditingController.text,
       "user_type": userRoleTextEditingController.text,
-      "fingerprint": fingerprintEditingController,
+      "fingerprint": fingerprintEditingController.text,
     };
     try {
       String url = "${baseURL}user/update";

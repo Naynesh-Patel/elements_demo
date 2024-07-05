@@ -1,7 +1,6 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/user/add_user.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -23,13 +22,14 @@ class _MangeUserState extends State<MangeUser> {
   UserController controller = Get.find();
 
   @override
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     controller.getUser();
   }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
@@ -51,13 +51,11 @@ class _MangeUserState extends State<MangeUser> {
                       ListView.builder(
                         shrinkWrap: true,
                         scrollDirection: Axis.vertical,
-                        physics:
-                        NeverScrollableScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         itemCount: controller.userList.length,
                         itemBuilder: (context, index) {
                           return Column(
                             children: [
-
                               _tableView(
                                 name: controller.userList[index]['name'],
                                 date: "15/9/2024",
@@ -68,75 +66,9 @@ class _MangeUserState extends State<MangeUser> {
                           );
                         },
                       )
-
-                      // _tableView(
-                      //   name: 'Dipesh',
-                      //   date: "5/10/2023",
-                      //   Authoriy: 'Worker',
-                      // ),
-                      // _tableView(
-                      //   name: 'Dipesh',
-                      //   date: "5/10/2023",
-                      //   Authoriy: 'Helper',
-                      // ),
                     ],
                   ),
           ),
-          // child: DataTable2(
-          //   dividerThickness: 0.2,
-          //   columnSpacing: 20,
-          //   horizontalMargin: 5,
-          //   minWidth: 400,
-          //   headingRowColor: MaterialStateProperty.all<Color>(
-          //       const Color(0xffF1F1F1).withOpacity(0.60)),
-          //   // dataRowColor: MaterialStateProperty.all<Color>(Colors.white),
-          //   dataTextStyle: const TextStyle(color: Color(0xff555555)),
-          //   columns: [
-          //     const DataColumn2(
-          //       label: Text(
-          //         'Name',
-          //         style: TextStyle(
-          //           color: AppColor.buttonColor,
-          //         ),
-          //       ),
-          //       size: ColumnSize.L,
-          //     ),
-          //     DataColumn(
-          //       label: Row(
-          //         children: [
-          //           const Text(
-          //             'Date',
-          //             style: TextStyle(
-          //               color: AppColor.buttonColor,
-          //             ),
-          //           ),
-          //           const SizedBox(
-          //             width: 5,
-          //           ),
-          //           InkWell(
-          //             onTap: () {},
-          //             child: Image.asset(
-          //               "assets/images/date.png",
-          //               height: 14,
-          //               width: 14,
-          //             ),
-          //           ),
-          //         ],
-          //       ),
-          //     ),
-          //     const DataColumn(
-          //       label: Text('Authority'),
-          //     ),
-          //   ],
-          //   rows: List<DataRow>.generate(
-          //     3,
-          //     (index) => const DataRow(cells: [
-          //       DataCell(Text('Dipesh')),
-          //       DataCell(Text('5/10/2023')),
-          //       DataCell(Text('Worker')),
-          //     ]),
-          //   ),
-          // ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -156,6 +88,7 @@ class _MangeUserState extends State<MangeUser> {
   }
 
   Widget _tableView({
+    // ignore: non_constant_identifier_names
     required String Authoriy,
     name,
     date,
@@ -180,10 +113,45 @@ class _MangeUserState extends State<MangeUser> {
                       style: AppTextStyle.textStyleLight12
                           .copyWith(color: AppColor.blackLightColor))),
               Expanded(
-                  child: Text(Authoriy,
-                      textAlign: TextAlign.end,
-                      style: AppTextStyle.textStyleLight12
-                          .copyWith(color: AppColor.blackLightColor)))
+                child: Text(
+                  Authoriy,
+                  textAlign: TextAlign.end,
+                  style: AppTextStyle.textStyleLight12
+                      .copyWith(color: AppColor.blackLightColor),
+                ),
+              ),
+              Expanded(
+                  child: InkWell(
+                onTap: () {
+                  Get.to(AddUser(
+                    model: controller.userList[index],
+                  ));
+                },
+                child: Text(
+                  "Edit",
+                  textAlign: TextAlign.end,
+                  style: AppTextStyle.textStyleLight12
+                      .copyWith(color: AppColor.blackLightColor),
+                ),
+              )),
+              const SizedBox(
+                width: 20,
+              ),
+              Expanded(
+                  child: InkWell(
+                onTap: () {
+                  setState(() {
+                    controller.deleteUser(controller.userList[index]['id']);
+                    controller.userList.removeAt(index);
+                  });
+                },
+                child: Text(
+                  "Delete",
+                  textAlign: TextAlign.end,
+                  style: AppTextStyle.textStyleLight12
+                      .copyWith(color: AppColor.blackLightColor),
+                ),
+              )),
             ],
           ),
           const SizedBox(
@@ -232,7 +200,13 @@ class _MangeUserState extends State<MangeUser> {
               ),
             ),
           ),
-          Text("Authoriy", style: AppTextStyle.textStyleRegular14),
+          Expanded(
+            child: Text("Authoriy", style: AppTextStyle.textStyleRegular14),
+          ),
+          const Expanded(
+            child: Text("Edit", style: TextStyle(color: Colors.green)),
+          ),
+          const Text("Delete", style: TextStyle(color: Colors.red)),
         ],
       ),
     );

@@ -5,7 +5,7 @@ import 'package:elements/widget/dialogs/custom_dialogbox.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../mange_salsemen/add_salesmen.dart';
+import 'add_salesmen.dart';
 import 'salesmen_view_detail.dart';
 
 class MangeSalesmen extends StatefulWidget {

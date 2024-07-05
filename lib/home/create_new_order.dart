@@ -19,6 +19,7 @@ class CreateNewOrder extends StatefulWidget {
 class _CreateNewOrderState extends State<CreateNewOrder> {
   HomeController controller = Get.find();
   TextEditingController date = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -43,73 +44,112 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
         ),
         body: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-          child: Column(
-            children: [
-              WidgetDropDownFromField(
-                hintText: "Select Customer/Company",
-                labelText: "Customer/Company*",
-                itemList: const ["Admin", "User", "Seller"],
-                onTap: (value) {
-                  debugPrint("Select => $value");
-                },
-              ),
-              verticalSpacing(),
-              CustomTextField(
-                  onTap: () {
-                    Get.to(const SelectMachine());
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                WidgetDropDownFromField(
+                  hintText: "Select Customer/Company",
+                  labelText: "Customer/Company*",
+                  itemList: const ["Admin", "User", "Seller"],
+                  onTap: (value) {
+                    debugPrint("Select => $value");
                   },
-                  hintText: "Select Machine Type*",
-                  labelText: "Machine Type*",
-                  suffixFixIcon: const Icon(
-                    Icons.arrow_forward_ios_rounded,
-                    size: 18,
-                    color: AppColor.blackColor,
-                  )),
-              verticalSpacing(),
-              InkWell(
-                onTap: () async {
-                  datePicker();
-                },
-                child: CustomTextField(
-                    textEditingController: date,
-                    hintText: "Select Delivery Date",
-                    labelText: "Delivery Date*",
-                    enable: false,
-                    focusNode: controller.deliveryDateFocusNode,
+                ),
+                verticalSpacing(),
+                CustomTextField(
+                    onTap: () {
+                      Get.to(const SelectMachine());
+                    },
+                    hintText: "Select Machine Type*",
+                    labelText: "Machine Type*",
+                    // autoValidateMode: AutovalidateMode.onUserInteraction,
+                    // validator: (value) {
+                    //   if(value!.isEmpty){
+                    //     return "Please Enter Machine Type";
+                    //   }
+                    //   else{
+                    //     return null;
+                    //   }
+                    // },
                     suffixFixIcon: const Icon(
-                      Icons.date_range,
-                      size: 22,
+                      Icons.arrow_forward_ios_rounded,
+                      size: 18,
+                      color: AppColor.blackColor,
                     )),
-              ),
-              verticalSpacing(),
-              CustomTextField(
-                hintText: "Total Payment",
-                labelText: "Total Payment",
-                textInputType: TextInputType.number,
-                focusNode: controller.paymentFocusNode,
-              ),
-              verticalSpacing(),
-              CustomTextField(
-                hintText: "Advance Payment",
-                labelText: "Advance Payment",
-                textInputType: TextInputType.number,
-                textEditingController:
-                    controller.advancePaymentTextEditingController,
-                focusNode: controller.advancedPaymentFocusNode,
-              ),
-              verticalSpacing(),
-              CustomTextField(
-                  hintText: "Select Manager Role",
-                  labelText: "Assigns Order*",
-                  enable: false,
-                  focusNode: FocusNode(),
-                  suffixFixIcon: const Icon(
-                    Icons.arrow_forward_ios_rounded,
-                    size: 18,
-                    color: AppColor.blackColor,
-                  )),
-              verticalSpacing(),
-            ],
+                verticalSpacing(),
+                InkWell(
+                  onTap: () async {
+                    datePicker();
+                  },
+                  child: CustomTextField(
+                      textEditingController: date,
+                      hintText: "Select Delivery Date",
+                      labelText: "Delivery Date*",
+                      enable: false,
+                      focusNode: controller.deliveryDateFocusNode,
+                      autoValidateMode: AutovalidateMode.onUserInteraction,
+                      validator: (value) {
+                        if(value!.isEmpty){
+                          return "Please Enter Delivery Date";
+                        }
+                        else{
+                          return null;
+                        }
+                      },
+                      suffixFixIcon: const Icon(
+                        Icons.date_range,
+                        size: 22,
+                      )),
+                ),
+                verticalSpacing(),
+                CustomTextField(
+                  hintText: "Total Payment",
+                  labelText: "Total Payment",
+                  textInputType: TextInputType.number,
+                  focusNode: controller.paymentFocusNode,
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (value) {
+                    if(value!.isEmpty){
+                      return "Please Enter Total Payment";
+                    }
+                    else{
+                      return null;
+                    }
+                  },
+                ),
+                verticalSpacing(),
+                CustomTextField(
+                  hintText: "Advance Payment",
+                  labelText: "Advance Payment",
+                  textInputType: TextInputType.number,
+                  textEditingController:
+                      controller.advancePaymentTextEditingController,
+                  focusNode: controller.advancedPaymentFocusNode,
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (value) {
+                    if(value!.isEmpty){
+                      return "Please Enter Advance Payment";
+                    }
+                    else{
+                      return null;
+                    }
+                  },
+                ),
+                verticalSpacing(),
+                CustomTextField(
+                    hintText: "Select Manager Role",
+                    labelText: "Assigns Order*",
+                    enable: false,
+                    focusNode: FocusNode(),
+                    suffixFixIcon: const Icon(
+                      Icons.arrow_forward_ios_rounded,
+                      size: 18,
+                      color: AppColor.blackColor,
+                    )),
+                verticalSpacing(),
+              ],
+            ),
           ),
         ),
         bottomNavigationBar: Container(
@@ -118,7 +158,11 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
             color: AppColor.buttonColor,
             buttonText: 'Done',
             onTap: () {
-              Get.back();
+              if (_formKey.currentState!.validate()){
+
+                Get.back();
+
+              }
             },
           ),
         ));
