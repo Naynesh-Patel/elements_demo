@@ -33,7 +33,7 @@ class ExpenseController extends GetxController {
       "expense_type": expenseTypeTextEditingController.text,
       "price": priceTextEditingController.text,
       "user_id": modelUser.value.id,
-      // "company_id": companyIdEditingController.text,
+      "company_id": '7',
     };
     try {
       String url = "${baseURL}expense/create";
@@ -64,7 +64,9 @@ class ExpenseController extends GetxController {
       if (response.statusCode == 200) {
         isGetExpenseLoading.value = false;
         var responseData = jsonDecode(response.body);
-        List jobData = responseData["data"];
+        Get.back();
+        getExpense();
+        List jobData = responseData["expenses"];
         expenseList.value = jobData;
       } else {
         debugPrint("statusCode${response.statusCode}");
