@@ -23,6 +23,7 @@ class ExpensetTab extends StatefulWidget {
 class _ExpensetTabState extends State<ExpensetTab> {
   ExpenseController expenseController = Get.find();
 
+  @override
   void initState() {
     setState(() {
       expenseController.getExpense();
@@ -58,7 +59,7 @@ class _ExpensetTabState extends State<ExpensetTab> {
                     : ListView.separated(
                         shrinkWrap: true,
                         // scrollDirection: Axis.vertical,
-                        physics: NeverScrollableScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         itemCount: expenseController.expenseList.length,
                         itemBuilder: (context, index) {
                           return InkWell(
@@ -202,7 +203,7 @@ class _ExpensetTabState extends State<ExpensetTab> {
                           );
                         },
                         separatorBuilder: (context, index) {
-                          return SizedBox(
+                          return const SizedBox(
                             height: 10,
                           );
                         },
