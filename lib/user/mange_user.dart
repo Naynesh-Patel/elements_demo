@@ -58,7 +58,7 @@ class _MangeUserState extends State<MangeUser> {
                             children: [
                               _tableView(
                                 name: controller.userList[index]['name'],
-                                date: "15/9/2024",
+                                date: controller.userList[index]['create_at'],
                                 Authoriy: controller.userList[index]
                                     ['user_type'],
                               ),

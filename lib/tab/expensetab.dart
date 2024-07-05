@@ -123,8 +123,9 @@ class _ExpensetTabState extends State<ExpensetTab> {
                                               borderRadius:
                                                   BorderRadius.circular(10),
                                               onTap: () {
-                                                Get.to(const AddExpense(
-                                                  isUpdate: true,
+                                                Get.to(AddExpense(
+                                                  model: expenseController
+                                                      .expenseList[index],
                                                 ));
                                               },
                                               child: Container(

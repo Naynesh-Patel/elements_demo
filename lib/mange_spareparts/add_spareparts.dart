@@ -46,9 +46,12 @@ class _AddSparepartsState extends State<AddSpareparts> {
           widget.model['name'] ?? '';
       sparepartsController.qtyTypeTextEditingController.text =
           widget.model['qty'] ?? '';
+      sparepartsController.totalQtyTextEditingController.text =
+          widget.model['qty'] ?? '';
     } else {
       sparepartsController.nameTextEditingController.clear();
       sparepartsController.qtyTypeTextEditingController.clear();
+      sparepartsController.totalQtyTextEditingController.clear();
     }
     super.initState();
   }
@@ -142,6 +145,13 @@ class _AddSparepartsState extends State<AddSpareparts> {
                         sparepartsController.newqtyTypeTextEditingController,
                     hintText: "New Qty",
                     labelText: "Add New Qty",
+                    onChange: (p0) {
+                      if (p0.isEmpty) {
+                        total(int.parse("0"));
+                      } else {
+                        total(int.parse(p0));
+                      }
+                    },
                     focusNode: controller.sparepartsNewQtyFocusNode,
                   ),
                   const SizedBox(
@@ -156,7 +166,7 @@ class _AddSparepartsState extends State<AddSpareparts> {
                       ),
                       Expanded(
                           child: Text(
-                        '$totalCount',
+                        sparepartsController.totalQtyTextEditingController.text,
                         style: AppTextStyle.textStyleLight14
                             .copyWith(color: AppColor.dropDownHintColor),
                       )),
@@ -226,10 +236,11 @@ class _AddSparepartsState extends State<AddSpareparts> {
     );
   }
 
-  total() {
-    setState(() {
-      sparepartsController.qtyTypeTextEditingController.text +=
-          sparepartsController.newqtyTypeTextEditingController.text;
-    });
+  total(int value) {
+    sparepartsController.totalQtyTextEditingController.text =
+        (int.parse(sparepartsController.qtyTypeTextEditingController.text) +
+                value)
+            .toString();
+    setState(() {});
   }
 }

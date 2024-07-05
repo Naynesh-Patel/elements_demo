@@ -1,19 +1,18 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'dart:io';
 
 import 'package:elements/constant/vars.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:image_picker/image_picker.dart';
 
 import '../constant/methods.dart';
 import '../constant/urls.dart';
 
 class ExpenseController extends GetxController {
   TextEditingController nameTextEditingController = TextEditingController();
-  TextEditingController expenseTypeTextEditingController = TextEditingController();
+  TextEditingController expenseTypeTextEditingController =
+      TextEditingController();
   TextEditingController priceTextEditingController = TextEditingController();
   TextEditingController userIdTextEditingController = TextEditingController();
   TextEditingController companyIdEditingController = TextEditingController();
@@ -24,8 +23,6 @@ class ExpenseController extends GetxController {
   RxBool isUpdateExpenseLoading = false.obs;
 
   RxList<dynamic> expenseList = <dynamic>[].obs;
-
-
 
   Future<void> addExpense() async {
     Map<String, dynamic> body = {
@@ -80,11 +77,11 @@ class ExpenseController extends GetxController {
 
   Future<void> updateExpense(id) async {
     Map<String, dynamic> body = {
-      // "name": userNameTextEditingController.text,
-      // "contact_no": contactNoTextEditingController.text,
-      // "address": expenseTypeTextEditingController.text,
-      // "user_type": userRoleTextEditingController.text,
-      // "fingerprint": fingerprintEditingController,
+      "name": nameTextEditingController.text,
+      "expense_type": expenseTypeTextEditingController.text,
+      "price": priceTextEditingController.text,
+      "user_id": modelUser.value.id,
+      "company_id": '7',
     };
     try {
       String url = "${baseURL}user/update";

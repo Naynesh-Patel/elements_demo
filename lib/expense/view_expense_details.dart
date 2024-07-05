@@ -15,8 +15,15 @@ class ViewExpenseDetails extends StatefulWidget {
 }
 
 class _ViewExpenseDetailsState extends State<ViewExpenseDetails> {
+  ExpenseController controller = Get.find();
   bool value = false;
   int index = 0;
+
+  @override
+  void initState() {
+    controller.getExpense();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,75 +46,97 @@ class _ViewExpenseDetailsState extends State<ViewExpenseDetails> {
           // ],
           title: 'View Expense',
         ),
-        body: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-          child: Column(
-            children: [
-              // _tableTopContent(),
-              _tableView(
-                  name: 'Name',
-                  date:'21/05/2024',
-                  type: 'type',
-                  price: '2000'),
-            ],
-          ),
-          // child: DataTable2(
-          //   dividerThickness: 0.2,
-          //   columnSpacing: 20,
-          //   horizontalMargin: 5,
-          //   minWidth: 400,
-          //   headingRowColor: MaterialStateProperty.all<Color>(
-          //       const Color(0xffF1F1F1).withOpacity(0.60)),
-          //   // dataRowColor: MaterialStateProperty.all<Color>(Colors.white),
-          //   dataTextStyle: const TextStyle(color: Color(0xff555555)),
-          //   columns: [
-          //     const DataColumn2(
-          //       label: Text(
-          //         'Name',
-          //         style: TextStyle(
-          //           color: AppColor.buttonColor,
-          //         ),
-          //       ),
-          //       size: ColumnSize.L,
-          //     ),
-          //     DataColumn(
-          //       label: Row(
-          //         children: [
-          //           const Text(
-          //             'Date',
-          //             style: TextStyle(
-          //               color: AppColor.buttonColor,
-          //             ),
-          //           ),
-          //           const SizedBox(
-          //             width: 5,
-          //           ),
-          //           InkWell(
-          //             onTap: () {
-          //               Get.to(const DatePiker());
-          //             },
-          //             child: Image.asset(
-          //               "assets/images/date.png",
-          //               height: 14,
-          //               width: 14,
-          //             ),
-          //           ),
-          //         ],
-          //       ),
-          //     ),
-          //     const DataColumn(
-          //       label: Text('Qty'),
-          //     ),
-          //   ],
-          //   rows: List<DataRow>.generate(
-          //     2,
-          //     (index) => const DataRow(cells: [
-          //       DataCell(Text('Steel Bolt')),
-          //       DataCell(Text('5/10/2023')),
-          //       DataCell(Text('20')),
-          //     ]),
-          //   ),
-          // ),
+        body: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Container(
+              height: Get.height,
+              margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  tableTopContent(),
+                  Obx(() => ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: controller.expenseList.length,
+                        itemBuilder: (context, index) {
+                          return Column(
+                            children: [
+                              _tableView(
+                                name:
+                                    controller.expenseList[index]['name'] ?? '',
+                                date: controller.expenseList[index]
+                                        ['created_at'] ??
+                                    '',
+                                type: controller.expenseList[index]
+                                        ['expense_type'] ??
+                                    '',
+                                price: controller.expenseList[index]['price'] ??
+                                    '',
+                              ),
+                            ],
+                          );
+                        },
+                      ))
+                ],
+              )
+              // child: DataTable2(
+              //   dividerThickness: 0.2,
+              //   columnSpacing: 20,
+              //   horizontalMargin: 5,
+              //   minWidth: 400,
+              //   headingRowColor: MaterialStateProperty.all<Color>(
+              //       const Color(0xffF1F1F1).withOpacity(0.60)),
+              //   // dataRowColor: MaterialStateProperty.all<Color>(Colors.white),
+              //   dataTextStyle: const TextStyle(color: Color(0xff555555)),
+              //   columns: [
+              //     const DataColumn2(
+              //       label: Text(
+              //         'Name',
+              //         style: TextStyle(
+              //           color: AppColor.buttonColor,
+              //         ),
+              //       ),
+              //       size: ColumnSize.L,
+              //     ),
+              //     DataColumn(
+              //       label: Row(
+              //         children: [
+              //           const Text(
+              //             'Date',
+              //             style: TextStyle(
+              //               color: AppColor.buttonColor,
+              //             ),
+              //           ),
+              //           const SizedBox(
+              //             width: 5,
+              //           ),
+              //           InkWell(
+              //             onTap: () {
+              //               Get.to(const DatePiker());
+              //             },
+              //             child: Image.asset(
+              //               "assets/images/date.png",
+              //               height: 14,
+              //               width: 14,
+              //             ),
+              //           ),
+              //         ],
+              //       ),
+              //     ),
+              //     const DataColumn(
+              //       label: Text('Qty'),
+              //     ),
+              //   ],
+              //   rows: List<DataRow>.generate(
+              //     2,
+              //     (index) => const DataRow(cells: [
+              //       DataCell(Text('Steel Bolt')),
+              //       DataCell(Text('5/10/2023')),
+              //       DataCell(Text('20')),
+              //     ]),
+              //   ),
+              // ),
+              ),
         ));
   }
 
@@ -136,7 +165,7 @@ class _ViewExpenseDetailsState extends State<ViewExpenseDetails> {
     );
   }
 
-  Widget _tableTopContent() {
+  Widget tableTopContent() {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
       decoration: const BoxDecoration(color: Color(0xffF1F1F1)),
