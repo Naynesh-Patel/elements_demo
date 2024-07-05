@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 class AddCustomer extends StatefulWidget {
   final bool isUpdate;
   final bool isView;
-  const AddCustomer({super.key, this.isUpdate = false, this.isView = false});
+  const AddCustomer({super.key, this.isUpdate = false, this.isView = false, required model});
 
   @override
   State<AddCustomer> createState() => _AddCustomerState();

@@ -77,7 +77,7 @@ class _AddSparepartsState extends State<AddSpareparts> {
                   focusNode: sparepartsController.sparepartsNameFocusNode,
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return "Enter Name";
+                      return "Please Enter Name";
                     } else {
                       return null;
                     }

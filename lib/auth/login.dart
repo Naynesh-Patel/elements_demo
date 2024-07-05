@@ -25,7 +25,7 @@ class _LoginState extends State<Login> {
         backgroundColor: AppColor.whiteColor,
         body: Form(
           key: _formKey,
-          autovalidateMode: AutovalidateMode.onUserInteraction,
+          // autovalidateMode: AutovalidateMode.onUserInteraction,
           child: ListView(
             children: [
               Container(
@@ -79,6 +79,7 @@ class _LoginState extends State<Login> {
                       maxLength: 10,
                       hintText: "Mobile No",
                       labelText: "Mobile No*",
+                      autoValidateMode: AutovalidateMode.onUserInteraction,
                       validator: (value) {
                         if (value!.isEmpty) {
                           return "Enter Mobile No";
@@ -96,6 +97,7 @@ class _LoginState extends State<Login> {
                         maxLength: 6,
                         hintText: "Password",
                         labelText: "Password*",
+                        autoValidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
                           if (value!.isEmpty) {
                             return "Enter Password";

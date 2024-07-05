@@ -5,6 +5,7 @@ import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:elements/widget/button/custom_button.dart';
 import 'package:elements/widget/custom_text_field.dart';
 import 'package:elements/widget/dropdown/dropdown_fromfield.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -37,7 +38,7 @@ class _AddUserState extends State<AddUser> {
         ),
         body: Form(
           key: _formKey,
-          autovalidateMode: AutovalidateMode.onUserInteraction,
+          // autovalidateMode: AutovalidateMode.onUserInteraction,
           child: ListView(
             shrinkWrap: true,
             children: [
@@ -115,11 +116,12 @@ class _AddUserState extends State<AddUser> {
                       labelText: "User Name",
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return "Enter User Name";
+                          return "Please Enter User Name";
                         } else {
                           return null;
                         }
                       },
+                      autoValidateMode: AutovalidateMode.onUserInteraction,
                     ),
                     verticalSpacing(),
                     CustomTextField(
@@ -129,9 +131,10 @@ class _AddUserState extends State<AddUser> {
                       hintText: "99656 25693",
                       labelText: "Contact No.",
                       maxLength: 10,
+                      autoValidateMode: AutovalidateMode.onUserInteraction,
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return "Enter Contact No";
+                          return "Please Enter Contact No";
                         } else {
                           return null;
                         }
@@ -143,9 +146,10 @@ class _AddUserState extends State<AddUser> {
                           controller.addressTextEditingController,
                       hintText: "Surat,Gujrat",
                       labelText: "Address",
+                      autoValidateMode: AutovalidateMode.onUserInteraction,
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return "Enter Address";
+                          return "Please Enter Address";
                         } else {
                           return null;
                         }
@@ -157,14 +161,65 @@ class _AddUserState extends State<AddUser> {
                           controller.fingerprintEditingController,
                       hintText: "Upload Fingerprint",
                       labelText: "Upload Fingerprint",
+                      autoValidateMode: AutovalidateMode.onUserInteraction,
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return "Enter Fingerprint";
+                          return "Please Enter Fingerprint";
                         } else {
                           return null;
                         }
                       },
                     ),
+                    verticalSpacing(),
+
+                    // DropdownButtonFormField<String>(
+                    //   isExpanded: true,
+                    //
+                    //   items: [
+                    //     DropdownMenuItem(child: Text('Jack'),value: 'Jack',),
+                    //     DropdownMenuItem(child: Text('Jay'),value: 'Jay',),
+                    //     DropdownMenuItem(child: Text('Femil'),value: 'Femil',),
+                    //     DropdownMenuItem(child: Text('Nehal'),value: 'Nehal',),
+                    //   ],
+                    //   onChanged: (value) {},
+                    //
+                    //   decoration: InputDecoration(
+                    //     labelText: 'Naam',
+                    //       floatingLabelBehavior: FloatingLabelBehavior.always,
+                    //       labelStyle: TextStyle(
+                    //         color: Colors.black
+                    //       ),
+                    //       hintText: 'User',
+                    //       hintStyle: TextStyle(
+                    //         color: Colors.grey
+                    //       ),
+                    //       contentPadding:
+                    //       EdgeInsets.symmetric(vertical: 0.0, horizontal: 20),
+                    //     errorBorder: OutlineInputBorder(
+                    //         borderSide: const BorderSide(width: 1,color: Colors.red),
+                    //         borderRadius: BorderRadius.circular(10)),
+                    //     border: OutlineInputBorder(
+                    //       borderSide: BorderSide(color: AppColor.borderColor),
+                    //         // borderSide: BorderSide.none,
+                    //         borderRadius: BorderRadius.all(Radius.circular(6.0))
+                    //     ),
+                    //     enabledBorder: OutlineInputBorder(
+                    //       borderSide: BorderSide(color: AppColor.borderColor),
+                    //         // borderSide: BorderSide.none,
+                    //         borderRadius: BorderRadius.all(Radius.circular(6.0))),
+                    //     focusedBorder: OutlineInputBorder(
+                    //       borderSide: BorderSide(color: AppColor.borderColor),
+                    //         // borderSide: BorderSide.none,
+                    //         borderRadius: BorderRadius.all(Radius.circular(6.0))),
+                    //   ),
+                    //   validator: (value) {
+                    //     if (value == null || value.isEmpty) {
+                    //       return 'Select some role';
+                    //     } else {
+                    //       return null;
+                    //     }
+                    //   },
+                    // )
                   ],
                 ),
               ),
