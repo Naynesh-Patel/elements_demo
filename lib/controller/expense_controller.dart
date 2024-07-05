@@ -23,19 +23,8 @@ class ExpenseController extends GetxController {
   RxBool isDeleteExpenseLoading = false.obs;
   RxBool isUpdateExpenseLoading = false.obs;
 
-  RxList<dynamic> userList = <dynamic>[].obs;
-  // File? imgFile;
+  RxList<dynamic> expenseList = <dynamic>[].obs;
 
-  // Future<bool> pickImageFromGallery() async {
-  //   XFile? pickImage =
-  //       await ImagePicker().pickImage(source: ImageSource.gallery);
-  //   if (pickImage != null) {
-  //     imgFile = File(pickImage.path);
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // }
 
 
   Future<void> addExpense() async {
@@ -44,7 +33,7 @@ class ExpenseController extends GetxController {
       "expense_type": expenseTypeTextEditingController.text,
       "price": priceTextEditingController.text,
       "user_id": modelUser.value.id,
-      // "company_id": companyIdEditingController.text,
+      "company_id": '7',
     };
     try {
       String url = "${baseURL}expense/create";
@@ -68,15 +57,15 @@ class ExpenseController extends GetxController {
 
   Future getExpense() async {
     try {
-      String url = "${baseURL}user/getAll";
+      String url = "${baseURL}expense/getAll";
       log("API => $url");
       isGetExpenseLoading.value = true;
       var response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
         isGetExpenseLoading.value = false;
         var responseData = jsonDecode(response.body);
-        List jobData = responseData["data"];
-        userList.value = jobData;
+        List jobData = responseData["expenses"];
+        expenseList.value = jobData;
       } else {
         debugPrint("statusCode${response.statusCode}");
         isGetExpenseLoading.value = false;
