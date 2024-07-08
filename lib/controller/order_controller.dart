@@ -15,7 +15,8 @@ import '../constant/vars.dart';
 class OrderController extends GetxController {
   TextEditingController customerCompanyIdNoTextEditingController = TextEditingController();
   TextEditingController machineIdsTextEditingController = TextEditingController();
-  TextEditingController deliveryDateTextEditingController = TextEditingController();
+  // TextEditingController deliveryDateTextEditingController = TextEditingController();
+  TextEditingController date = TextEditingController();
   TextEditingController totalPaymentEditingController = TextEditingController();
   TextEditingController advancePaymentEditingController = TextEditingController();
   TextEditingController assignOrderIdEditingController = TextEditingController();
@@ -23,26 +24,26 @@ class OrderController extends GetxController {
   TextEditingController updatedAtEditingController = TextEditingController();
 
   RxBool isOrderLoading = false.obs;
-  RxBool isGetUserLoading = false.obs;
-  RxBool isDeleteUserLoading = false.obs;
-  RxBool isUpdateUserLoading = false.obs;
+  RxBool isGetOrderLoading = false.obs;
+  RxBool isDeleteOrderLoading = false.obs;
+  RxBool isUpdateOrderLoading = false.obs;
 
   String customerCompany = '';
 
 
-  RxList<dynamic> userList = <dynamic>[].obs;
+  RxList<dynamic> orderList = <dynamic>[].obs;
   File? imgFile;
 
-  Future<bool> pickImageFromGallery() async {
-    XFile? pickImage =
-    await ImagePicker().pickImage(source: ImageSource.gallery);
-    if (pickImage != null) {
-      imgFile = File(pickImage.path);
-      return true;
-    } else {
-      return false;
-    }
-  }
+  // Future<bool> pickImageFromGallery() async {
+  //   XFile? pickImage =
+  //   await ImagePicker().pickImage(source: ImageSource.gallery);
+  //   if (pickImage != null) {
+  //     imgFile = File(pickImage.path);
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }
 
   // Future<void> addUser() async {
   //   Map<String, dynamic> body = {
@@ -76,14 +77,14 @@ class OrderController extends GetxController {
   Future<void> addOrder() async {
     Map<String, dynamic> body = {
       "user_id": modelUser.value.id,
-      "customer_company_id": customerCompanyIdNoTextEditingController.text,
-      "machine_ids": machineIdsTextEditingController.text,
-      "delivery_date": deliveryDateTextEditingController.text,
+      "customer_company_id": '1',
+      "machine_ids": '2',
+      "delivery_date": date.text,
       "total_payment": totalPaymentEditingController.text,
       "advance_payment": advancePaymentEditingController.text,
       "assign_order_id": assignOrderIdEditingController.text,
-      "created_at": createdAtEditingController.text,
-      "updated_at": updatedAtEditingController.text,
+      // "created_at": createdAtEditingController.text,
+      // "updated_at": updatedAtEditingController.text,
     };
     try {
       String url = "${baseURL}order/create";
@@ -107,26 +108,26 @@ class OrderController extends GetxController {
 
   Future getOrder() async {
     try {
-      String url = "${baseURL}user/getAll";
+      String url = "${baseURL}order/getAll";
       log("API => $url");
-      isGetUserLoading.value = true;
+      isGetOrderLoading.value = true;
       var response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
-        isGetUserLoading.value = false;
+        isGetOrderLoading.value = false;
         var responseData = jsonDecode(response.body);
-        List jobData = responseData["data"];
-        userList.value = jobData;
+        List jobData = responseData["orders"];
+        orderList.value = jobData;
       } else {
         debugPrint("statusCode${response.statusCode}");
-        isGetUserLoading.value = false;
+        isGetOrderLoading.value = false;
       }
     } catch (e) {
       debugPrint("Errors:$e");
-      isGetUserLoading.value = false;
+      isGetOrderLoading.value = false;
     }
   }
 
-  Future<void> updateUser(id) async {
+  Future<void> updateOrder(id) async {
     Map<String, dynamic> body = {
       // "name": userNameTextEditingController.text,
       // "contact_no": contactNoTextEditingController.text,
@@ -135,49 +136,49 @@ class OrderController extends GetxController {
       // "fingerprint": fingerprintEditingController,
     };
     try {
-      String url = "${baseURL}user/update";
+      String url = "${baseURL}order/update";
       log("API => $url");
-      isUpdateUserLoading.value = true;
+      isUpdateOrderLoading.value = true;
       var response = await http.post(Uri.parse(url), body: body);
       if (response.statusCode == 200) {
         jsonDecode(response.body);
         Get.back();
         getOrder();
-        isUpdateUserLoading.value = false;
+        isUpdateOrderLoading.value = false;
       } else {
         debugPrint("statusCode${response.statusCode}");
-        isUpdateUserLoading.value = false;
+        isUpdateOrderLoading.value = false;
       }
     } catch (e) {
       debugPrint("Error${e.toString()}");
-      isUpdateUserLoading.value = false;
+      isUpdateOrderLoading.value = false;
     }
   }
 
   Future<void> deleteUser(id) async {
     try {
-      String url = "${baseURL}user/delete";
+      String url = "${baseURL}order/delete";
       log("API => $url");
 
-      isDeleteUserLoading.value = true;
+      isDeleteOrderLoading.value = true;
       var response = await http.post(Uri.parse(url), body: {"id": id});
       if (response.statusCode == 200) {
         var responseData = jsonDecode(response.body);
-        isDeleteUserLoading.value = false;
+        isDeleteOrderLoading.value = false;
         if (responseData["status"] == 1) {
           showToast(responseData["message"]);
-          isDeleteUserLoading.value = false;
+          isDeleteOrderLoading.value = false;
         } else {
           showToast(responseData["message"]);
-          isDeleteUserLoading.value = false;
+          isDeleteOrderLoading.value = false;
         }
       } else {
         debugPrint("statusCode===>${response.statusCode}");
-        isDeleteUserLoading.value = false;
+        isDeleteOrderLoading.value = false;
       }
     } catch (e) {
       debugPrint("Error:${e.toString()}");
-      isDeleteUserLoading.value = false;
+      isDeleteOrderLoading.value = false;
     }
   }
 }
