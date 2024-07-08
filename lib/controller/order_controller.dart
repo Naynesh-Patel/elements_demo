@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'dart:ffi';
 import 'dart:io';
 
+import 'package:elements/controller/machinery_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -11,6 +12,7 @@ import 'package:image_picker/image_picker.dart';
 import '../constant/methods.dart';
 import '../constant/urls.dart';
 import '../constant/vars.dart';
+import 'customer_controller.dart';
 
 class OrderController extends GetxController {
   TextEditingController customerCompanyIdNoTextEditingController = TextEditingController();
@@ -29,6 +31,9 @@ class OrderController extends GetxController {
   RxBool isUpdateOrderLoading = false.obs;
 
   String customerCompany = '';
+
+  MachineryController machineryController= Get.find();
+  CustomerController customerController = Get.find();
 
 
   RxList<dynamic> orderList = <dynamic>[].obs;
@@ -77,8 +82,8 @@ class OrderController extends GetxController {
   Future<void> addOrder() async {
     Map<String, dynamic> body = {
       "user_id": modelUser.value.id,
-      "customer_company_id": '1',
-      "machine_ids": '2',
+      "customer_company_id": customerController.companyTextEditingController.text,
+      "machine_ids": machineryController.machineNameTextEditingController.text,
       "delivery_date": date.text,
       "total_payment": totalPaymentEditingController.text,
       "advance_payment": advancePaymentEditingController.text,

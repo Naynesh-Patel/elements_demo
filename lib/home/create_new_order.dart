@@ -1,6 +1,7 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/controller/customer_controller.dart';
 import 'package:elements/controller/home_controller.dart';
+import 'package:elements/controller/machinery_controller.dart';
 import 'package:elements/controller/order_controller.dart';
 import 'package:elements/home/select_customer_company.dart';
 import 'package:elements/home/select_machine.dart';
@@ -25,7 +26,7 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
   final _formKey = GlobalKey<FormState>();
   OrderController orderController = Get.find();
   CustomerController customerController = Get.find();
-
+  MachineryController machineryController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -94,12 +95,19 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                     )),
                 verticalSpacing(),
                 CustomTextField(
+                    focusNode: FocusNode(),
+                    readOnly: true,
                     onTap: () {
-                      Get.to(const SelectMachine());
+                      Get.to(const SelectMachine())?.then((value){
+                        machineryController.machineNameTextEditingController.text=value;
+                        setState(() {
+
+                        });
+                      },);
                     },
                     hintText: "Select Machine Type*",
                     labelText: "Machine Type*",
-                    textEditingController: orderController.machineIdsTextEditingController,
+                    textEditingController: machineryController.machineNameTextEditingController,
 
                     // autoValidateMode: AutovalidateMode.onUserInteraction,
                     // validator: (value) {
