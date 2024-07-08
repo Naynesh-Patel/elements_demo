@@ -1,11 +1,13 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/controller/home_controller.dart';
+import 'package:elements/controller/order_controller.dart';
 import 'package:elements/home/create_new_order.dart';
 import 'package:elements/home/invoice.dart';
 import 'package:elements/home/view_order_detail.dart';
 import 'package:elements/widget/app%20bar/home_app_bar.dart';
 import 'package:elements/widget/button/small_button.dart';
+import 'package:elements/widget/custom_loader.dart';
 import 'package:elements/widget/dialogs/custom_dialogbox.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,12 +24,16 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
   int currentIndex = 0;
 
   HomeController controller = Get.find();
+  OrderController orderController = Get.find();
+
 
   @override
   void initState() {
     tabController = TabController(length: 3, vsync: this);
     super.initState();
+    orderController.getOrder();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -46,26 +52,28 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
         //   ),
         // ],
       ),
-      body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _widgetTabBarView(),
-            const SizedBox(
-              height: 16,
-            ),
-            Obx(() => controller.selectTab.value == 1
-                ? InkWell(
-                    onTap: () {
-                      Get.to(const ViewOrderDetails());
-                    },
-                    child: _onGoingView(),
-                  )
-                : controller.selectTab.value == 2
-                    ? _upComingView()
-                    : _completeView()),
-          ],
+      body: SingleChildScrollView(
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _widgetTabBarView(),
+              const SizedBox(
+                height: 16,
+              ),
+              Obx(() => controller.selectTab.value == 1
+                  ? InkWell(
+                      onTap: () {
+                        Get.to(const ViewOrderDetails());
+                      },
+                      child: _onGoingView(),
+                    )
+                  : controller.selectTab.value == 2
+                      ? _upComingView()
+                      : _completeView()),
+            ],
+          ),
         ),
       ),
       // drawer: drawer(),
@@ -158,101 +166,117 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
   }
 
   Widget _onGoingView() {
-    return SingleChildScrollView(
-      child: Container(
-        width: double.maxFinite,
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(4),
-            border: Border.all(color: AppColor.borderColor)),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                _keyValue(
-                  "OD",
-                  "1-06-2024",
-                ),
-                _keyValue(
-                  "DD",
-                  "18-06-2024",
-                ),
-              ],
-            ),
-            verticalSpacing(),
-            _keyValue(
-              "Client",
-              "Ramesh",
-            ),
-            verticalSpacing(),
-            _keyValue(
-              "Machine Type",
-              "Containership",
-            ),
-            verticalSpacing(),
-            _keyValue(
-              "Total Payment",
-              "20000",
-            ),
-            verticalSpacing(),
-            _keyValue(
-              "Advance Payment",
-              "12000",
-            ),
-            verticalSpacing(),
-            _keyValue(
-              "Assigned Order",
-              "Manager 1",
-            ),
-            verticalSpacing(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                SmallButton(
-                  title: "Invoice",
-                  textColor: AppColor.selectColor,
-                  onTap: () {
-                    Get.to(const Invoice());
-                  },
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                SmallButton(
-                    title: "  Edit  ",
+    return Obx(() => orderController.isDeleteOrderLoading.value ? const CustomLoader()
+    :ListView.separated(
+      physics: const BouncingScrollPhysics(),
+      shrinkWrap: true,
+      itemCount: orderController.orderList.length,
+      separatorBuilder: (context, index) {
+        return const SizedBox(
+          height: 10,
+        );
+      },
+      itemBuilder: (context, index) {
+        return Container(
+          width: double.maxFinite,
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(4),
+              border: Border.all(color: AppColor.borderColor)),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  _keyValue(
+                    "OD",
+                    '18-09-2024',
+                  ),
+                  _keyValue(
+                    "DD",
+                    orderController.orderList[index]['delivery_date'],
+                  ),
+                ],
+              ),
+              verticalSpacing(),
+              _keyValue(
+                "Client",
+                orderController.orderList[index]['customer_company_id'],
+              ),
+              verticalSpacing(),
+              _keyValue(
+                "Machine Type",
+                orderController.orderList[index]['machine_ids'],
+              ),
+              verticalSpacing(),
+              _keyValue(
+                "Total Payment",
+                orderController.orderList[index]['total_payment'],
+              ),
+              verticalSpacing(),
+              _keyValue(
+                "Advance Payment",
+                orderController.orderList[index]['advance_payment'],
+              ),
+              verticalSpacing(),
+              _keyValue(
+                "Assigned Order",
+                orderController.orderList[index]['assign_order_id'],
+              ),
+              verticalSpacing(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  SmallButton(
+                    title: "Invoice",
+                    textColor: AppColor.selectColor,
                     onTap: () {
-                      Get.to(const ViewOrderDetails(
-                        isUpdate: true,
-                      ));
+                      Get.to(const Invoice());
                     },
-                    textColor: const Color(0xff555555)),
-                const SizedBox(
-                  width: 10,
-                ),
-                SmallButton(
-                    title: "Cancel",
-                    onTap: () {
-                      CustomDialogBox.showDeleteDialog(
-                        context: context,
-                        bodyText:
-                            "Do you really want to cancel these records? This process cannot be undone.",
-                        onCancelTap: () {
-                          Get.back();
-                        },
-                        onDeleteTap: () {
-                          Get.back();
-                        },
-                      );
-                    },
-                    textColor: const Color(0xffB50A0A)),
-              ],
-            )
-          ],
-        ),
-      ),
-    );
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  SmallButton(
+                      title: "  Edit  ",
+                      onTap: () {
+                        Get.to(const ViewOrderDetails(
+                          isUpdate: true,
+                        ));
+                      },
+                      textColor: const Color(0xff555555)),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  SmallButton(
+                      title: "Cancel",
+                      onTap: () {
+                        CustomDialogBox.showDeleteDialog(
+                          context: context,
+                          bodyText:
+                          "Do you really want to cancel these records? This process cannot be undone.",
+                          onCancelTap: () {
+                            Get.back();
+                          },
+                          onDeleteTap: () {
+                            orderController.deleteUser(orderController.orderList[index]['id']);
+                            orderController.orderList.removeAt(index);
+                            Get.back();
+                          },
+                        );
+                      },
+                      textColor: const Color(0xffB50A0A)),
+                ],
+              )
+            ],
+          ),
+        );
+      },
+
+    ));
+
+
   }
 
   Widget _upComingView() {
