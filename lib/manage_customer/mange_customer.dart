@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/manage_customer/customer_view_detail.dart';
@@ -92,26 +94,14 @@ class _MangeCustomerState extends State<MangeCustomer> {
                                         ],
                                       ),
                                       Spacer(),
-                                      Stack(
-                                        children: [
-                                          controller.imgFile == null
-                                              ? Image.asset(
-                                                  'assets/images/user_p.png',
-                                                  height: 60,
-                                                  width: 60,
-                                                )
-                                              : SizedBox(
-                                                  height: 80,
-                                                  width: 80,
-                                                  child: ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              50.0),
-                                                      child: Image.file(
-                                                        controller.imgFile!,
-                                                        fit: BoxFit.cover,
-                                                      ))),
-                                        ],
+                                      SizedBox(
+                                          height: 80,
+                                          width: 80,
+                                          child: ClipRRect(
+                                              borderRadius:
+                                              BorderRadius.circular(
+                                                  50.0),
+                                              child: Image.memory(controller.base64ToImage("")))
                                       ),
                                     ],
                                   ),
