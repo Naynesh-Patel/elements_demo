@@ -6,7 +6,6 @@ import 'package:elements/controller/setting_controller.dart';
 import 'package:elements/machinery/mange_machinery.dart';
 import 'package:elements/manage_customer/mange_customer.dart';
 import 'package:elements/mange_spareparts/mange_spareparts.dart';
-import 'package:elements/salsemen/mange_salesmen.dart';
 import 'package:elements/user/mange_user.dart';
 import 'package:elements/widget/app%20bar/home_app_bar.dart';
 import 'package:elements/widget/dialogs/custom_dialogbox.dart';
@@ -95,22 +94,22 @@ class _SettingTabState extends State<SettingTab> {
                     Get.to(const MangeUser());
                   },
                 ),
-                _customTile(
-                  title: "Manage Salesmen",
-                  imgPath: "assets/images/mange_salesmen.png",
-                  isSvg: false,
-                  index: 4,
-                  onTap: () {
-                    controller.selectMenu.value = 4;
-                    Get.to(const MangeSalesmen());
-                  },
-                ),
+                // _customTile(
+                //   title: "Manage Salesmen",
+                //   imgPath: "assets/images/mange_salesmen.png",
+                //   isSvg: false,
+                //   index: 4,
+                //   onTap: () {
+                //     controller.selectMenu.value = 4;
+                //     Get.to(const MangeSalesmen());
+                //   },
+                // ),
                 _customTile(
                   title: "Manage Customer Company",
                   imgPath: "assets/svg/mange_compny.svg",
-                  index: 5,
+                  index: 4,
                   onTap: () {
-                    controller.selectMenu.value = 5;
+                    controller.selectMenu.value = 4;
                     Get.to(const MangeCustomer());
                   },
                 ),
@@ -126,9 +125,9 @@ class _SettingTabState extends State<SettingTab> {
                 _customTile(
                   title: "Bill History",
                   imgPath: "assets/svg/bil_history.svg",
-                  index: 6,
+                  index: 5,
                   onTap: () {
-                    controller.selectMenu.value = 6;
+                    controller.selectMenu.value = 5;
                     Get.to(const BillHistory());
                   },
                 ),
@@ -136,9 +135,9 @@ class _SettingTabState extends State<SettingTab> {
                   title: "Change Password",
                   isSvg: false,
                   imgPath: "assets/images/padlock.png",
-                  index: 7,
+                  index: 6,
                   onTap: () {
-                    controller.selectMenu.value = 7;
+                    controller.selectMenu.value = 6;
                     Get.to(const ChangePassword());
                   },
                 ),
@@ -146,7 +145,7 @@ class _SettingTabState extends State<SettingTab> {
                   title: "Logout",
                   isSvg: false,
                   imgPath: "assets/images/logout.png",
-                  index: 8,
+                  index: 7,
                   onTap: () {
                     CustomDialogBox.showLogoutDialog(
                       context: context,

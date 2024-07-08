@@ -50,9 +50,12 @@ class _ViewMachineryState extends State<ViewMachinery> {
             Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const CustomTextField(
-                  hintText: "Machine Name",
+                CustomTextField(
+                  textEditingController:
+                      controller.machineNameTextEditingController,
+                  hintText: "Machine Nameddd",
                   labelText: "Machine Name*",
+                  enable: false,
                 ),
                 const SizedBox(
                   height: 16,

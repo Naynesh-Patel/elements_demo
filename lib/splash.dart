@@ -1,12 +1,12 @@
 import 'package:elements/auth/login.dart';
 import 'package:elements/constant/app_colors.dart';
-import 'package:elements/constant/vars.dart';
-import 'package:elements/model/model_user.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
+import 'constant/vars.dart';
 import 'dashboard.dart';
+import 'model/model_user.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});
@@ -42,8 +42,8 @@ class _SplashState extends State<Splash> {
 
   _timer() {
     Future.delayed(const Duration(seconds: 2), () {
-      if (GetStorage().read("isLogin") ?? false) {
-        modelUser.value = ModelUser.fromJson(GetStorage().read("user"));
+      if (GetStorage().read('isLogin') ?? false) {
+        modelUser.value = ModelUser.fromJson(GetStorage().read('user'));
         Get.off(const DashBoard());
       } else {
         Get.off(const Login());

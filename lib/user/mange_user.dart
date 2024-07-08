@@ -120,38 +120,38 @@ class _MangeUserState extends State<MangeUser> {
                       .copyWith(color: AppColor.blackLightColor),
                 ),
               ),
-              Expanded(
-                  child: InkWell(
-                onTap: () {
-                  Get.to(AddUser(
-                    model: controller.userList[index],
-                  ));
-                },
-                child: Text(
-                  "Edit",
-                  textAlign: TextAlign.end,
-                  style: AppTextStyle.textStyleLight12
-                      .copyWith(color: AppColor.blackLightColor),
-                ),
-              )),
-              const SizedBox(
-                width: 20,
-              ),
-              Expanded(
-                  child: InkWell(
-                onTap: () {
-                  setState(() {
-                    controller.deleteUser(controller.userList[index]['id']);
-                    controller.userList.removeAt(index);
-                  });
-                },
-                child: Text(
-                  "Delete",
-                  textAlign: TextAlign.end,
-                  style: AppTextStyle.textStyleLight12
-                      .copyWith(color: AppColor.blackLightColor),
-                ),
-              )),
+              // Expanded(
+              //     child: InkWell(
+              //   onTap: () {
+              //     Get.to(AddUser(
+              //       model: controller.userList[index],
+              //     ));
+              //   },
+              //   child: Text(
+              //     "Edit",
+              //     textAlign: TextAlign.end,
+              //     style: AppTextStyle.textStyleLight12
+              //         .copyWith(color: AppColor.blackLightColor),
+              //   ),
+              // )),
+              // const SizedBox(
+              //   width: 20,
+              // ),
+              // Expanded(
+              //     child: InkWell(
+              //   onTap: () {
+              //     setState(() {
+              //       controller.deleteUser(controller.userList[index]['id']);
+              //       controller.userList.removeAt(index);
+              //     });
+              //   },
+              //   child: Text(
+              //     "Delete",
+              //     textAlign: TextAlign.end,
+              //     style: AppTextStyle.textStyleLight12
+              //         .copyWith(color: AppColor.blackLightColor),
+              //   ),
+              // )),
             ],
           ),
           const SizedBox(
@@ -200,13 +200,14 @@ class _MangeUserState extends State<MangeUser> {
               ),
             ),
           ),
-          Expanded(
-            child: Text("Authoriy", style: AppTextStyle.textStyleRegular14),
-          ),
-          const Expanded(
-            child: Text("Edit", style: TextStyle(color: Colors.green)),
-          ),
-          const Text("Delete", style: TextStyle(color: Colors.red)),
+          // Expanded(
+          //   child: Text("Authoriy", style: AppTextStyle.textStyleRegular14),
+          // ),
+          Text("Authoriy", style: AppTextStyle.textStyleRegular14),
+          // const Expanded(
+          //   child: Text("Edit", style: TextStyle(color: Colors.green)),
+          // ),
+          // const Text("Delete", style: TextStyle(color: Colors.red)),
         ],
       ),
     );
