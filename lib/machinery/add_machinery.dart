@@ -9,8 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AddMachinery extends StatefulWidget {
+  final dynamic model;
   final bool isUpdate;
-  const AddMachinery({super.key, this.isUpdate = false});
+  const AddMachinery({super.key, this.isUpdate = false, this.model});
 
   @override
   State<AddMachinery> createState() => _AddMachineryState();
@@ -37,11 +38,33 @@ class _AddMachineryState extends State<AddMachinery> {
   final _formKey = GlobalKey<FormState>();
 
   @override
+  void initState() {
+    if (widget.model != null) {
+      controller.machineNameTextEditingController.text =
+          widget.model['machine_name'] ?? '';
+      controller.qtyTextEditingController.text = widget.model['qty'] ?? '';
+      controller.machinetypeEditingController.text =
+          widget.model['machine_type'] ?? '';
+      controller.manufactureDurationTextEditingController.text =
+          widget.model['manufacture_duration'] ?? '';
+      controller.qtyTextEditingController.text = widget.model['oty'] ?? '';
+    } else {
+      controller.machineNameTextEditingController.clear();
+      controller.qtyTextEditingController.clear();
+      controller.machinetypeEditingController.clear();
+      controller.manufactureDurationTextEditingController.clear();
+    }
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: CustomAppBar(
-          title: widget.isUpdate ? "Update Machinery Details" : "Add Machinery",
+          title: widget.model != null
+              ? "Update Machinery Details"
+              : "Add Machinery",
           onPressed: () {
             Get.back();
           },
@@ -58,60 +81,64 @@ class _AddMachineryState extends State<AddMachinery> {
                   Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                       CustomTextField(
+                      CustomTextField(
+                        textEditingController:
+                            controller.machineNameTextEditingController,
                         hintText: "Machine Name",
                         labelText: "Machine Name*",
                         autoValidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
-                          if(value!.isEmpty){
+                          if (value!.isEmpty) {
                             return "Please Enter Machine Name";
-                          }
-                          else{
+                          } else {
                             return null;
                           }
                         },
                       ),
                       verticalSpacing(),
-                       CustomTextField(
+                      CustomTextField(
+                        textEditingController:
+                            controller.machinetypeEditingController,
                         hintText: "Machine Type",
                         labelText: "Machine Type*",
                         autoValidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
-                          if(value!.isEmpty){
+                          if (value!.isEmpty) {
                             return "Please Enter Machine Type";
-                          }
-                          else{
+                          } else {
                             return null;
                           }
                         },
                       ),
                       verticalSpacing(),
-                       CustomTextField(
+                      CustomTextField(
+                        textEditingController:
+                            controller.qtyTextEditingController,
                         hintText: "Qty",
                         labelText: "Qty*",
-                         autoValidateMode: AutovalidateMode.onUserInteraction,
-                         validator: (value) {
-                           if(value!.isEmpty){
-                             return "Please Enter Qty";
-                           }
-                           else{
-                             return null;
-                           }
-                         },
+                        autoValidateMode: AutovalidateMode.onUserInteraction,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Please Enter Qty";
+                          } else {
+                            return null;
+                          }
+                        },
                       ),
                       verticalSpacing(),
-                       CustomTextField(
+                      CustomTextField(
+                        textEditingController:
+                            controller.manufactureDurationTextEditingController,
                         hintText: "Eg. 30 days",
                         labelText: "Manufacture Duration*",
-                         autoValidateMode: AutovalidateMode.onUserInteraction,
-                         validator: (value) {
-                           if(value!.isEmpty){
-                             return "Please Enter Manufacture Duration";
-                           }
-                           else{
-                             return null;
-                           }
-                         },
+                        autoValidateMode: AutovalidateMode.onUserInteraction,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Please Enter Manufacture Duration";
+                          } else {
+                            return null;
+                          }
+                        },
                       ),
                       verticalSpacing(),
                       Row(
@@ -150,7 +177,8 @@ class _AddMachineryState extends State<AddMachinery> {
                             itemCount: controller.machineryList.length,
                             itemBuilder: (context, index) {
                               return Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 children: [
                                   InkWell(
                                     borderRadius: BorderRadius.circular(6.0),
@@ -158,11 +186,11 @@ class _AddMachineryState extends State<AddMachinery> {
                                       if (controller.machineryList[index]
                                               .isSelected.value ==
                                           false) {
-                                        controller.machineryList[index].isSelected
-                                            .value = true;
+                                        controller.machineryList[index]
+                                            .isSelected.value = true;
                                       } else {
-                                        controller.machineryList[index].isSelected
-                                            .value = false;
+                                        controller.machineryList[index]
+                                            .isSelected.value = false;
                                       }
                                       debugPrint(
                                           "Select = ${controller.machineryList[index].isSelected.value}");
@@ -173,14 +201,17 @@ class _AddMachineryState extends State<AddMachinery> {
                                           horizontal: 4.0, vertical: 4.0),
                                       decoration: BoxDecoration(
                                           border: Border.all(
-                                              color: AppColor.dropDownHintColor),
+                                              color:
+                                                  AppColor.dropDownHintColor),
                                           borderRadius:
                                               BorderRadius.circular(6.0)),
                                       child: Obx(() => Icon(
                                             Icons.check_rounded,
                                             size: 14,
-                                            color: controller.machineryList[index]
-                                                    .isSelected.value
+                                            color: controller
+                                                    .machineryList[index]
+                                                    .isSelected
+                                                    .value
                                                 ? AppColor.blackColor
                                                 : Colors.transparent,
                                           )),
@@ -205,24 +236,28 @@ class _AddMachineryState extends State<AddMachinery> {
                                         border: Border.all(
                                             color: const Color(0xffD1D1D1))),
                                     child: TextField(
-                                      controller:
-                                          controller.qtyTextEditingController,
-                                      textAlignVertical: TextAlignVertical.center,
+                                      controller: controller
+                                          .sparepartsTextEditingController,
+                                      textAlignVertical:
+                                          TextAlignVertical.center,
                                       textAlign: TextAlign.center,
                                       keyboardType: TextInputType.number,
                                       decoration: InputDecoration(
                                         border: InputBorder.none,
                                         contentPadding:
                                             const EdgeInsets.symmetric(
-                                                horizontal: 8.0, vertical: 13.0),
+                                                horizontal: 8.0,
+                                                vertical: 13.0),
                                         hintText: 'Qty',
-                                        hintStyle: AppTextStyle.textStyleRegular14
+                                        hintStyle: AppTextStyle
+                                            .textStyleRegular14
                                             .copyWith(
                                                 color:
                                                     AppColor.dropDownHintColor),
                                         labelStyle: AppTextStyle
                                             .textStyleRegular16
-                                            .copyWith(color: AppColor.blackColor),
+                                            .copyWith(
+                                                color: AppColor.blackColor),
                                         helperStyle: AppTextStyle
                                             .textStyleRegular16
                                             .copyWith(
@@ -237,7 +272,8 @@ class _AddMachineryState extends State<AddMachinery> {
                                 ],
                               );
                             },
-                            separatorBuilder: (BuildContext context, int index) {
+                            separatorBuilder:
+                                (BuildContext context, int index) {
                               return const SizedBox(
                                 height: 12.0,
                               );
@@ -252,14 +288,15 @@ class _AddMachineryState extends State<AddMachinery> {
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: CustomButton(
             color: AppColor.buttonColor,
-            buttonText: widget.isUpdate ? "Update" : "Add",
+            buttonText: widget.model != null ? "Update" : "Add",
             onTap: () {
-              if (_formKey.currentState!.validate()){
-
-                Get.back();
-
+              if (_formKey.currentState!.validate()) {
+                if (widget.model != null) {
+                  controller.updateMachinery(widget.model['id']);
+                } else {
+                  controller.addMachinery();
+                }
               }
-
             },
           ),
         ));

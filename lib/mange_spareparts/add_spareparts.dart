@@ -24,6 +24,20 @@ class _AddSparepartsState extends State<AddSpareparts> {
   HomeController controller = Get.find();
   final _formKey = GlobalKey<FormState>();
   SparepartsController sparepartsController = Get.find();
+  int totalCount = 0;
+  int sum = 0;
+
+  void incrementSum() {
+    setState(() {
+      sum++;
+    });
+  }
+
+  void decrementSum() {
+    setState(() {
+      sum--;
+    });
+  }
 
   @override
   void initState() {
@@ -32,9 +46,12 @@ class _AddSparepartsState extends State<AddSpareparts> {
           widget.model['name'] ?? '';
       sparepartsController.qtyTypeTextEditingController.text =
           widget.model['qty'] ?? '';
+      sparepartsController.totalQtyTextEditingController.text =
+          widget.model['qty'] ?? '';
     } else {
       sparepartsController.nameTextEditingController.clear();
       sparepartsController.qtyTypeTextEditingController.clear();
+      sparepartsController.totalQtyTextEditingController.clear();
     }
     super.initState();
   }
@@ -125,9 +142,16 @@ class _AddSparepartsState extends State<AddSpareparts> {
                   CustomTextField(
                     textInputType: TextInputType.number,
                     textEditingController:
-                        sparepartsController.qtyTypeTextEditingController,
+                        sparepartsController.newqtyTypeTextEditingController,
                     hintText: "New Qty",
                     labelText: "Add New Qty",
+                    onChange: (p0) {
+                      if (p0.isEmpty) {
+                        total(int.parse("0"));
+                      } else {
+                        total(int.parse(p0));
+                      }
+                    },
                     focusNode: controller.sparepartsNewQtyFocusNode,
                   ),
                   const SizedBox(
@@ -135,9 +159,14 @@ class _AddSparepartsState extends State<AddSpareparts> {
                   ),
                   Row(
                     children: [
+                      Text(
+                        "Total Qty : ",
+                        style: AppTextStyle.textStyleLight14
+                            .copyWith(color: AppColor.dropDownHintColor),
+                      ),
                       Expanded(
                           child: Text(
-                        "Total Qty : 30",
+                        sparepartsController.totalQtyTextEditingController.text,
                         style: AppTextStyle.textStyleLight14
                             .copyWith(color: AppColor.dropDownHintColor),
                       )),
@@ -205,5 +234,13 @@ class _AddSparepartsState extends State<AddSpareparts> {
     return const SizedBox(
       height: 26.0,
     );
+  }
+
+  total(int value) {
+    sparepartsController.totalQtyTextEditingController.text =
+        (int.parse(sparepartsController.qtyTypeTextEditingController.text) +
+                value)
+            .toString();
+    setState(() {});
   }
 }

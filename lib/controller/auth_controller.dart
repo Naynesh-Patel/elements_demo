@@ -1,16 +1,15 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:elements/auth/login.dart';
 import 'package:elements/constant/vars.dart';
 import 'package:elements/dashboard.dart';
-import 'package:elements/splash.dart';
 import 'package:elements/widget/dialogs/custom_dialogbox.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
+import '../constant/methods.dart';
 import '../constant/urls.dart';
 import '../model/model_user.dart';
 
@@ -61,7 +60,7 @@ class AuthController extends GetxController {
       var response = await http.post(Uri.parse(url), body: body);
       if (response.statusCode == 200) {
         var responseData = jsonDecode(response.body);
-        box.write("user",responseData['user']);
+        box.write("user", responseData['user']);
         modelUser.value = ModelUser.fromJson(responseData['user']);
         CustomDialogBox.showPasswordReset(context: context);
       } else {
@@ -88,8 +87,8 @@ class AuthController extends GetxController {
         var responseData = jsonDecode(response.body);
         jsonDecode(response.body);
         if (responseData['status'] == 1) {
-          box.write("user",responseData['user']);
-          box.write("isLogin", true);
+          box.write('user', responseData['user']);
+          box.write('isLogin', true);
           modelUser.value = ModelUser.fromJson(responseData['user']);
           Get.off(() => const DashBoard());
         } else {
@@ -103,6 +102,29 @@ class AuthController extends GetxController {
     } catch (e) {
       debugPrint("Error${e.toString()}");
       isLoginLoading.value = false;
+    }
+  }
+
+  Future deleteAccount() async {
+    try {
+      String url = "${baseURL}user/delete_account";
+      log("API => $url");
+
+      var response = await http.post(Uri.parse(url), body: {
+        "user_id": modelUser.value.id,
+      });
+      if (response.statusCode == 200) {
+        var responseData = jsonDecode(response.body);
+        if (responseData['status'] == 1) {
+          showToast(responseData['message']);
+        } else {
+          showToast(responseData['message']);
+        }
+      } else {
+        debugPrint("StatusCode=>${response.statusCode.toString()}");
+      }
+    } catch (e) {
+      debugPrint("Error=>${e.toString()}");
     }
   }
 }

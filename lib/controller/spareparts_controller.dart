@@ -10,7 +10,9 @@ import 'package:http/http.dart' as http;
 class SparepartsController extends GetxController {
   TextEditingController nameTextEditingController = TextEditingController();
   TextEditingController qtyTypeTextEditingController = TextEditingController();
-  TextEditingController newTypeTextEditingController = TextEditingController();
+  TextEditingController newqtyTypeTextEditingController =
+      TextEditingController();
+  TextEditingController totalQtyTextEditingController = TextEditingController();
 
   RxBool isSparepartsLoading = false.obs;
   RxBool isGetSparepartsLoading = false.obs;
@@ -94,7 +96,7 @@ class SparepartsController extends GetxController {
   Future<void> updateSpareparts(id) async {
     Map<String, dynamic> body = {
       "name": nameTextEditingController.text,
-      "qty": qtyTypeTextEditingController.text,
+      "qty": totalQtyTextEditingController.text,
       "id": id,
     };
     try {

@@ -68,20 +68,26 @@ class _ViewSparepartsDetailsState extends State<ViewSparepartsDetails> {
         body: Container(
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               _tableTopContent(),
-              Obx(
-                () => ListView.builder(
-                  itemCount: controller.sparepartsList.length,
-                  itemBuilder: (context, index) {
-                    return _tableView(
-                      name: controller.sparepartsList[index]['name'] ?? '',
-                      date: controller.sparepartsList[index]['name'] ?? '',
-                      qty: controller.sparepartsList[index]['name'] ?? '',
-                    );
-                  },
+              SizedBox(
+                height: Get.height * 0.4,
+                child: Obx(
+                  () => ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: controller.sparepartsList.length,
+                    itemBuilder: (context, index) {
+                      return _tableView(
+                        name: controller.sparepartsList[index]['name'] ?? '',
+                        date:
+                            controller.sparepartsList[index]['create_at'] ?? '',
+                        qty: controller.sparepartsList[index]['qty'] ?? '',
+                      );
+                    },
+                  ),
                 ),
-              )
+              ),
             ],
           ),
         ));
