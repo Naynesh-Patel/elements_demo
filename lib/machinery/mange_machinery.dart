@@ -11,7 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MangeMachinery extends StatefulWidget {
-  const MangeMachinery({super.key});
+  final dynamic model;
+  const MangeMachinery({super.key, this.model});
 
   @override
   State<MangeMachinery> createState() => _MangeMachineryState();
@@ -50,7 +51,9 @@ class _MangeMachineryState extends State<MangeMachinery> {
                   itemBuilder: (context, index) {
                     return InkWell(
                       onTap: () {
-                        Get.to(const ViewMachinery());
+                        Get.to(ViewMachinery(
+                          model: controller.addMachineryList[index],
+                        ));
                       },
                       child: Container(
                         padding: const EdgeInsets.symmetric(
@@ -95,7 +98,9 @@ class _MangeMachineryState extends State<MangeMachinery> {
                                   title: " View ",
                                   textColor: AppColor.selectColor,
                                   onTap: () {
-                                    Get.to(const ViewMachinery());
+                                    Get.to(ViewMachinery(
+                                      model: controller.addMachineryList[index],
+                                    ));
                                   },
                                 ),
                                 const SizedBox(

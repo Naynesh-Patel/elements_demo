@@ -1,10 +1,7 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/widget/button/small_button.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -141,9 +138,7 @@ class CustomDialogBox {
     );
   }
 
-
-
-  static showPasswordReset({required BuildContext context}){
+  static showPasswordReset({required BuildContext context}) {
     return showDialog(
       barrierColor: const Color(0x00ffffff),
       barrierDismissible: true,
@@ -164,17 +159,20 @@ class CustomDialogBox {
                   child: Stack(
                     alignment: Alignment.center,
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 10.0,
                       ),
                       Container(
                         width: Get.width,
                         height: Get.height * 0.110,
-                        decoration:  BoxDecoration(
-                        color: AppColor.whiteColor,
-                          borderRadius: BorderRadius.circular(8.0)
-                        ),
-                        child: Center(child: Text("Password Reset Successfully",style: AppTextStyle.textStyleRegular16,)),
+                        decoration: BoxDecoration(
+                            color: AppColor.whiteColor,
+                            borderRadius: BorderRadius.circular(8.0)),
+                        child: Center(
+                            child: Text(
+                          "Password Reset Successfully",
+                          style: AppTextStyle.textStyleRegular16,
+                        )),
                       ),
                       Positioned(
                         top: 2,
@@ -185,12 +183,16 @@ class CustomDialogBox {
                           child: Container(
                             height: 60,
                             width: 60,
-                            padding: EdgeInsets.all(16.0),
+                            padding: const EdgeInsets.all(16.0),
                             decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                color: AppColor.buttonColor
+                                color: AppColor.buttonColor),
+                            child: Image.asset(
+                              "assets/images/check.png",
+                              color: AppColor.whiteColor,
+                              height: 10,
+                              width: 10,
                             ),
-                            child: Image.asset("assets/images/check.png",color: AppColor.whiteColor,height: 10,width: 10,),
                           ),
                         ),
                       ),
@@ -201,9 +203,7 @@ class CustomDialogBox {
             ),
           ),
         );
-      },);
+      },
+    );
   }
-
-
-
 }

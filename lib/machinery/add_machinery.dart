@@ -114,6 +114,7 @@ class _AddMachineryState extends State<AddMachinery> {
                       CustomTextField(
                         textEditingController:
                             controller.qtyTextEditingController,
+                        textInputType: TextInputType.number,
                         hintText: "Qty",
                         labelText: "Qty*",
                         autoValidateMode: AutovalidateMode.onUserInteraction,
