@@ -2,14 +2,13 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:elements/constant/methods.dart';
+import 'package:elements/constant/urls.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
-
-import '../constant/methods.dart';
-import '../constant/urls.dart';
 
 class SalesmenController extends GetxController {
   File? imgFile;

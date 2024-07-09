@@ -36,7 +36,7 @@ class MachineryController extends GetxController {
     Map<String, dynamic> body = {
       "id": modelUser.value.id,
       "machine_name": machineNameTextEditingController.text,
-      // "qty": qtyTextEditingController.text,
+      "qty": qtyTextEditingController.text,
       "machine_type": machinetypeEditingController.text,
       "manufacture_duration": manufactureDurationTextEditingController.text,
       "spareparts": sparepartsTextEditingController.text,
@@ -86,7 +86,7 @@ class MachineryController extends GetxController {
     Map<String, dynamic> body = {
       "id": id,
       "machine_name": machineNameTextEditingController.text,
-      // "qty": qtyTextEditingController.text,
+      "qty": qtyTextEditingController.text,
       "machine_type": machinetypeEditingController.text,
       "manufacture_duration": manufactureDurationTextEditingController.text,
       "spareparts": sparepartsTextEditingController.text,

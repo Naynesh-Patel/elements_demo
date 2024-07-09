@@ -1,3 +1,4 @@
+import 'package:elements/controller/customer_controller.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:elements/widget/custom_text_field.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,7 @@ class CustomerViewDetail extends StatefulWidget {
 }
 
 class _CustomerViewDetailState extends State<CustomerViewDetail> {
+  CustomerController controller = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,21 +72,19 @@ class _CustomerViewDetailState extends State<CustomerViewDetail> {
                 const SizedBox(
                   height: 15,
                 ),
-                const CustomTextField(
+                CustomTextField(
+                  enable: false,
+                  textEditingController:
+                      controller.companyTextEditingController,
                   hintText: "tata",
                   labelText: "Company",
                 ),
                 const SizedBox(
                   height: 20,
                 ),
-                const CustomTextField(
-                  hintText: "Ratan tata",
-                  labelText: "Owner Name",
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const CustomTextField(
+                CustomTextField(
+                  enable: false,
+                  textEditingController: controller.ownerTextEditingController,
                   hintText: "Ratan tata",
                   labelText: "Owner Name",
                 ),
@@ -92,6 +92,9 @@ class _CustomerViewDetailState extends State<CustomerViewDetail> {
                   height: 20,
                 ),
                 CustomTextField(
+                  enable: false,
+                  textEditingController:
+                      controller.contactTextEditingController,
                   onTap: () async {
                     final call = Uri.parse('tel:+91 7359085239');
                     if (await canLaunchUrl(call)) {
@@ -111,11 +114,14 @@ class _CustomerViewDetailState extends State<CustomerViewDetail> {
                 const SizedBox(
                   height: 20,
                 ),
-                const CustomTextField(
-                  textInputType: TextInputType.numberWithOptions(),
+                CustomTextField(
+                  enable: false,
+                  textEditingController:
+                      controller.addressTextEditingController,
+                  textInputType: const TextInputType.numberWithOptions(),
                   hintText: "Surat,Gujrat",
                   labelText: "Address",
-                  suffixFixIcon: Icon(
+                  suffixFixIcon: const Icon(
                     Icons.location_on_outlined,
                     size: 24,
                   ),
@@ -124,6 +130,9 @@ class _CustomerViewDetailState extends State<CustomerViewDetail> {
                   height: 20,
                 ),
                 CustomTextField(
+                  enable: false,
+                  textEditingController:
+                      controller.websiteTextEditingController,
                   textInputType: const TextInputType.numberWithOptions(),
                   hintText: " www.tatasteel.com",
                   labelText: "Website",
@@ -132,7 +141,10 @@ class _CustomerViewDetailState extends State<CustomerViewDetail> {
                 const SizedBox(
                   height: 20,
                 ),
-                const CustomTextField(
+                CustomTextField(
+                  enable: false,
+                  textEditingController:
+                      controller.referenceTextEditingController,
                   hintText: "L & T Pvt",
                   labelText: "Reference By",
                 ),

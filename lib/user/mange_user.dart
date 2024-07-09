@@ -1,13 +1,13 @@
 import 'package:elements/constant/app_colors.dart';
+import 'package:elements/controller/user_controller.dart';
+import 'package:elements/date_piker.dart';
 import 'package:elements/user/add_user.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
+import 'package:elements/widget/custom_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../constant/app_text_style.dart';
-import '../controller/user_controller.dart';
-import '../date_piker.dart';
-import '../widget/custom_loader.dart';
 
 class MangeUser extends StatefulWidget {
   const MangeUser({super.key});
