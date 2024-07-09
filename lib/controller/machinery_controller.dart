@@ -1,14 +1,13 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:elements/constant/methods.dart';
+import 'package:elements/constant/urls.dart';
 import 'package:elements/constant/vars.dart';
 import 'package:elements/model/model_machinery.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-
-import '../constant/methods.dart';
-import '../constant/urls.dart';
 
 class MachineryController extends GetxController {
   RxList<ModelMachinery> machineryList = <ModelMachinery>[].obs;
