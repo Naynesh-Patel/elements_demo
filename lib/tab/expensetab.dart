@@ -1,11 +1,13 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
+import 'package:elements/constant/methods.dart';
 import 'package:elements/controller/expense_controller.dart';
 import 'package:elements/expense/add_expense.dart';
 import 'package:elements/expense/view_expense_details.dart';
 import 'package:elements/widget/app%20bar/home_app_bar.dart';
 import 'package:elements/widget/custom_loader.dart';
 import 'package:elements/widget/dialogs/custom_dialogbox.dart';
+import 'package:elements/widget/empty_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -46,9 +48,7 @@ class _ExpensetTabState extends State<ExpensetTab> {
                 () => expenseController.isGetExpenseLoading.value
                     ? const CustomLoader()
                     : expenseController.expenseList.isEmpty
-                        ? const Center(
-                            child: Text("Dara Not Found"),
-                          )
+                        ? const EmptyView()
                         : ListView.separated(
                             shrinkWrap: true,
                             // scrollDirection: Axis.vertical,
@@ -79,22 +79,15 @@ class _ExpensetTabState extends State<ExpensetTab> {
                                             children: [
                                               _keyValue(
                                                   "Name",
-                                                  expenseController.expenseList[
-                                                          index]['name'] ??
-                                                      ''),
+                                                  expenseController.expenseList[index]['name'] ?? ''),
                                               verticalSpacing(),
                                               _keyValue(
                                                   "Expense Type",
-                                                  expenseController.expenseList[
-                                                              index]
-                                                          ['expense_type'] ??
-                                                      ''),
+                                                  expenseController.expenseList[index]['expense_type'] ?? ''),
                                               verticalSpacing(),
                                               _keyValue(
                                                   "Price",
-                                                  expenseController.expenseList[
-                                                          index]['price'] ??
-                                                      ''),
+                                                  expenseController.expenseList[index]['price'] ?? ''),
                                             ],
                                           ),
                                         ),
@@ -106,10 +99,8 @@ class _ExpensetTabState extends State<ExpensetTab> {
                                           children: [
                                             _keyValue(
                                                 "DD",
-                                                expenseController
-                                                            .expenseList[index]
-                                                        ['created_at'] ??
-                                                    ''),
+                                                getDateInDDMMYY(DateTime.parse(expenseController.expenseList[index]['created_at'] ?? '')),
+                                                ),
                                             Row(
                                               children: [
                                                 InkWell(
@@ -155,15 +146,7 @@ class _ExpensetTabState extends State<ExpensetTab> {
                                                         Get.back();
                                                       },
                                                       onDeleteTap: () {
-                                                        expenseController
-                                                            .deleteExpense(
-                                                                expenseController
-                                                                        .expenseList[
-                                                                    index]['id']);
-                                                        expenseController
-                                                            .expenseList
-                                                            .removeAt(index);
-                                                        Get.back();
+                                                        expenseController.deleteExpense(index: index);
                                                       },
                                                     );
                                                   },

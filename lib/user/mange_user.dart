@@ -1,4 +1,5 @@
 import 'package:elements/constant/app_colors.dart';
+import 'package:elements/constant/methods.dart';
 import 'package:elements/controller/user_controller.dart';
 import 'package:elements/date_piker.dart';
 import 'package:elements/user/add_user.dart';
@@ -58,9 +59,11 @@ class _MangeUserState extends State<MangeUser> {
                             children: [
                               _tableView(
                                 name: controller.userList[index]['name'],
-                                date: controller.userList[index]['create_at'],
+                                date: getDateInDDMMYY(DateTime.parse(
+                                    controller.userList[index]['create_at'])),
                                 Authoriy: controller.userList[index]
                                     ['user_type'],
+                                index: index
                               ),
                             ],
                           );
@@ -92,6 +95,7 @@ class _MangeUserState extends State<MangeUser> {
     required String Authoriy,
     name,
     date,
+    required int index
   }) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -120,6 +124,50 @@ class _MangeUserState extends State<MangeUser> {
                       .copyWith(color: AppColor.blackLightColor),
                 ),
               ),
+              PopupMenuButton<String>(
+                  // elevation: 50,
+                  padding: EdgeInsets.zero,
+                  constraints: const BoxConstraints(),
+                  child: const Icon(
+                    Icons.more_vert,
+                   ),
+                  onSelected: (String value) {
+                    if(value == "Edit"){
+                      Get.to(()=>AddUser(model:controller.userList[index],));
+                    }else{
+                      controller.deleteUser(index:index)
+                    }
+                  },
+                  itemBuilder: (BuildContext context) =>
+                      <PopupMenuEntry<String>>[
+                        PopupMenuItem<String>(
+                            value: 'Edit',
+                            child: Center(
+                                child: Text(
+                              'Edit',
+                              textAlign: TextAlign.center,
+                              style: AppTextStyle.textStyleRegular14.copyWith(),
+                            ))),
+                        PopupMenuItem<String>(
+                          value: 'Delete',
+                          child: Center(
+                            child: Text(
+                              'Delete',
+                              style: AppTextStyle.textStyleRegular14
+                                  .copyWith(color: Colors.red),
+                            ),
+                          ),
+                        ),
+                      ]),
+              // IconButton(
+              //     padding: EdgeInsets.symmetric(horizontal: 0.0,vertical: 0.0),
+              //     constraints: const BoxConstraints(),
+              //     style: const ButtonStyle(
+              //       tapTargetSize: MaterialTapTargetSize.shrinkWrap, // the '2023' part
+              //     ),
+              //     onPressed: () {
+              //
+              // }, icon: const Icon(Icons.more_vert,color: Colors.black,))
               // Expanded(
               //     child: InkWell(
               //   onTap: () {
@@ -165,7 +213,7 @@ class _MangeUserState extends State<MangeUser> {
 
   Widget _tableTopContent() {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
+      padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
       decoration: const BoxDecoration(color: Color(0xffF1F1F1)),
       child: Row(
         children: [
@@ -185,6 +233,7 @@ class _MangeUserState extends State<MangeUser> {
                 children: [
                   Text(
                     "Date",
+                    textAlign: TextAlign.center,
                     style: AppTextStyle.textStyleRegular14
                         .copyWith(color: AppColor.selectColor),
                   ),

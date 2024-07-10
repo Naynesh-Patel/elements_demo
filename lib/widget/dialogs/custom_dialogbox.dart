@@ -34,7 +34,7 @@ class CustomDialogBox {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  "Are You Sure Cancel?",
+                  "Are You Sure Delete?",
                   textAlign: TextAlign.center,
                   style: AppTextStyle.textStyleBold16,
                 ),
@@ -141,65 +141,70 @@ class CustomDialogBox {
   static showPasswordReset({required BuildContext context}) {
     return showDialog(
       barrierColor: const Color(0x00ffffff),
-      barrierDismissible: true,
+      barrierDismissible: false,
       context: context,
       builder: (context) {
-        return Container(
-          color: Colors.black26,
-          child: AlertDialog(
-            backgroundColor: Colors.transparent,
-            surfaceTintColor: Colors.transparent,
-            contentPadding: EdgeInsets.zero,
-            content: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  height: Get.height * 0.22,
-                  width: Get.width,
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      const SizedBox(
-                        height: 10.0,
-                      ),
-                      Container(
-                        width: Get.width,
-                        height: Get.height * 0.110,
-                        decoration: BoxDecoration(
-                            color: AppColor.whiteColor,
-                            borderRadius: BorderRadius.circular(8.0)),
-                        child: Center(
-                            child: Text(
-                          "Password Reset Successfully",
-                          style: AppTextStyle.textStyleRegular16,
-                        )),
-                      ),
-                      Positioned(
-                        top: 2,
-                        child: InkWell(
-                          onTap: () {
-                            Get.back();
-                          },
-                          child: Container(
-                            height: 60,
-                            width: 60,
-                            padding: const EdgeInsets.all(16.0),
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: AppColor.buttonColor),
-                            child: Image.asset(
-                              "assets/images/check.png",
+        return GestureDetector(
+          onTap: () {
+            Get.back();
+          },
+          child: Container(
+            color: Colors.black26,
+            child: AlertDialog(
+              backgroundColor: Colors.transparent,
+              surfaceTintColor: Colors.transparent,
+              contentPadding: EdgeInsets.zero,
+              content: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: Get.height * 0.22,
+                    width: Get.width,
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        const SizedBox(
+                          height: 10.0,
+                        ),
+                        Container(
+                          width: Get.width,
+                          height: Get.height * 0.110,
+                          decoration: BoxDecoration(
                               color: AppColor.whiteColor,
-                              height: 10,
-                              width: 10,
+                              borderRadius: BorderRadius.circular(8.0)),
+                          child: Center(
+                              child: Text(
+                            "Password Update Successfully",
+                            style: AppTextStyle.textStyleRegular16,
+                          )),
+                        ),
+                        Positioned(
+                          top: 2,
+                          child: InkWell(
+                            onTap: () {
+                              Get.back();
+                            },
+                            child: Container(
+                              height: 60,
+                              width: 60,
+                              padding: const EdgeInsets.all(16.0),
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: AppColor.buttonColor),
+                              child: Image.asset(
+                                "assets/images/check.png",
+                                color: AppColor.whiteColor,
+                                height: 10,
+                                width: 10,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         );

@@ -204,6 +204,7 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: CustomButton(
             color: AppColor.buttonColor,
+            isLoading: false.obs,
             buttonText: 'Done',
             onTap: () {
               if (_formKey.currentState!.validate()){

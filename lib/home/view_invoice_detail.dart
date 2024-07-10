@@ -136,6 +136,7 @@ class _ViewInvoiceDetailsState extends State<ViewInvoiceDetails> {
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: CustomButton(
             color: AppColor.buttonColor,
+            isLoading: false.obs,
             buttonText: 'Download Pdf',
             onTap: () {},
           ),

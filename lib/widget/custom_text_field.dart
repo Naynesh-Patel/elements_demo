@@ -33,6 +33,7 @@ class CustomTextField extends StatefulWidget {
   final String? errorText;
   final Function(String)? onFieldSubmitted;
   final Function(String?)? onSaved;
+  final TextCapitalization textCapitalization;
   const CustomTextField({
     super.key,
     this.textEditingController,
@@ -64,6 +65,7 @@ class CustomTextField extends StatefulWidget {
     this.onSaved,
     this.labelText,
     this.obscureText,
+    this.textCapitalization = TextCapitalization. none
   });
 
   @override
@@ -99,6 +101,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       controller: widget.textEditingController,
       focusNode: widget.focusNode,
       keyboardType: widget.textInputType ?? TextInputType.text,
+      textCapitalization: widget.textCapitalization,
       showCursor: true,
       enabled: widget.enable ?? true,
       readOnly: widget.readOnly ?? false,

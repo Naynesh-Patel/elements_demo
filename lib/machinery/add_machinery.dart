@@ -289,6 +289,7 @@ class _AddMachineryState extends State<AddMachinery> {
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: CustomButton(
             color: AppColor.buttonColor,
+            isLoading: false.obs,
             buttonText: widget.model != null ? "Update" : "Add",
             onTap: () {
               if (_formKey.currentState!.validate()) {

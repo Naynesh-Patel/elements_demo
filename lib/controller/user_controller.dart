@@ -1,11 +1,12 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
+import 'package:local_auth/local_auth.dart';
 
 import '../constant/methods.dart';
 import '../constant/urls.dart';
@@ -26,16 +27,23 @@ class UserController extends GetxController {
 
   RxList<dynamic> userList = <dynamic>[].obs;
   File? imgFile;
+  String base64Image = "";
 
   Future<bool> pickImageFromGallery() async {
     XFile? pickImage =
         await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickImage != null) {
       imgFile = File(pickImage.path);
+      imageToBase64(file: imgFile!);
       return true;
     } else {
       return false;
     }
+  }
+
+  imageToBase64({required File file}) async {
+    Uint8List bytes = await file.readAsBytes();
+    base64Image = '${base64.encode(bytes)}';
   }
 
   // Future<void> addUser() async {
@@ -74,6 +82,7 @@ class UserController extends GetxController {
       "address": addressTextEditingController.text,
       "user_type": userRoleTextEditingController.text,
       "fingerprint": fingerprintEditingController.text,
+      "photo": base64Image,
     };
     try {
       String url = "${baseURL}user/insert";
@@ -81,9 +90,13 @@ class UserController extends GetxController {
       isUserLoading.value = true;
       var response = await http.post(Uri.parse(url), body: body);
       if (response.statusCode == 200) {
-        jsonDecode(response.body);
-        getUser();
-        Get.back();
+        var responseData = jsonDecode(response.body);
+        if(responseData['status']==1){
+          getUser();
+          Get.back();
+        }else{
+          debugPrint("Error Message ${responseData['message']}");
+        }
         isUserLoading.value = false;
       } else {
         debugPrint("statusCode${response.statusCode}");
@@ -174,18 +187,19 @@ class UserController extends GetxController {
     }
   }
 
-  Future<void> deleteUser(id) async {
+  Future<void> deleteUser({int index}) async {
     try {
       String url = "${baseURL}user/delete";
       log("API => $url");
 
       isDeleteUserLoading.value = true;
-      var response = await http.post(Uri.parse(url), body: {"id": id});
+      var response = await http.post(Uri.parse(url), body: {"id": userList[index]['id']});
       if (response.statusCode == 200) {
         var responseData = jsonDecode(response.body);
         isDeleteUserLoading.value = false;
         if (responseData["status"] == 1) {
           showToast(responseData["message"]);
+          userList.removeAt(index);
           isDeleteUserLoading.value = false;
         } else {
           showToast(responseData["message"]);
@@ -200,4 +214,43 @@ class UserController extends GetxController {
       isDeleteUserLoading.value = false;
     }
   }
+
+
+  final LocalAuthentication auth = LocalAuthentication();
+
+  getFingerPrint() async {
+
+    bool canCheckBiometrics = await checkBiometricsAvailable();
+
+    if(canCheckBiometrics){
+      try {
+          await auth.authenticate(
+          localizedReason: 'Authenticate to punch ',
+          options: const AuthenticationOptions(
+            stickyAuth: true,
+          ),
+        ).then((value){
+            // final store = BiometricStorage().getStorage('mystorage');
+            // debugPrint("Store FingerPrint =>${store}");
+          });
+      } catch (e) {
+        debugPrint("Biometric Error : ${e.toString()}");
+      }
+    }else{
+      debugPrint("Biometric Not Available");
+    }
+
+
+  }
+
+  Future<bool> checkBiometricsAvailable() async {
+    try {
+      return await auth.canCheckBiometrics;
+    } catch (e) {
+      return false;
+    }
+  }
+
+
+
 }

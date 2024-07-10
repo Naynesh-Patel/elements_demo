@@ -193,6 +193,7 @@ class _AddSalesmenState extends State<AddSalesmen> {
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: CustomButton(
             color: AppColor.buttonColor,
+            isLoading: false.obs,
             buttonText: widget.isUpdate ? 'Update' : 'Add',
             onTap: () {
               if (_formKey.currentState!.validate()) {

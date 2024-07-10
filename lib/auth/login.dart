@@ -127,7 +127,8 @@ class _LoginState extends State<Login> {
                           ? const CustomButtonLoader()
                           : CustomButton(
                               color: AppColor.buttonColor,
-                              buttonText: 'Login',
+                             isLoading: false.obs,
+                               buttonText: 'Login',
                               onTap: () {
                                 if (_formKey.currentState!.validate()) {
                                   controller.login();
