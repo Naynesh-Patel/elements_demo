@@ -106,7 +106,8 @@ class _AddCustomerState extends State<AddCustomer> {
                                     child: ClipRRect(
                                         borderRadius:
                                             BorderRadius.circular(50.0),
-                                        child: Image.memory(base64Decode(controller.base64Image),
+                                        child: Image.memory(
+                                          base64Decode(controller.base64Image),
                                           // controller.imgFile!,
                                           fit: BoxFit.cover,
                                         ))),
@@ -141,7 +142,7 @@ class _AddCustomerState extends State<AddCustomer> {
                         labelText: "Company",
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return "Enter Company*";
+                            return "Please Enter Company";
                           } else {
                             return null;
                           }
@@ -155,7 +156,7 @@ class _AddCustomerState extends State<AddCustomer> {
                         labelText: "Owner Name",
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return "Enter Owner Name";
+                            return "Please Enter Owner Name";
                           } else {
                             return null;
                           }
@@ -170,7 +171,7 @@ class _AddCustomerState extends State<AddCustomer> {
                         labelText: "Contact No",
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return "Enter Contact No";
+                            return "Please Enter Contact No";
                           } else {
                             return null;
                           }
@@ -191,7 +192,7 @@ class _AddCustomerState extends State<AddCustomer> {
                         labelText: "Address",
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return "Enter Address";
+                            return "Please Enter Address";
                           } else {
                             return null;
                           }
@@ -211,7 +212,7 @@ class _AddCustomerState extends State<AddCustomer> {
                         labelText: "Website",
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return "Enter Website";
+                            return "Please Enter Website";
                           } else {
                             return null;
                           }
@@ -236,7 +237,7 @@ class _AddCustomerState extends State<AddCustomer> {
                         labelText: "Reference By",
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return "Enter Reference";
+                            return "Please Enter Reference";
                           } else {
                             return null;
                           }
@@ -252,7 +253,7 @@ class _AddCustomerState extends State<AddCustomer> {
                             "",
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return "Enter GST No";
+                            return "Please Enter GST No";
                           } else {
                             return null;
                           }
@@ -277,6 +278,7 @@ class _AddCustomerState extends State<AddCustomer> {
                     if (_formKey.currentState!.validate()) {
                       if (widget.model != null) {
                         controller.updateCustomer(widget.model['id']);
+                        Get.back();
                       } else {
                         controller.addCustomer();
                       }

@@ -95,13 +95,17 @@ class _MangeCustomerState extends State<MangeCustomer> {
                                       ),
                                       Spacer(),
                                       SizedBox(
-                                          height: 80,
-                                          width: 80,
-                                          child: ClipRRect(
-                                              borderRadius:
-                                              BorderRadius.circular(
-                                                  50.0),
-                                              child: Image.memory(base64Decode(controller.customerList[index]['photo']),fit: BoxFit.cover,)),
+                                        height: 80,
+                                        width: 80,
+                                        child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(50.0),
+                                            child: Image.memory(
+                                              base64Decode(
+                                                  controller.customerList[index]
+                                                      ['photo']),
+                                              fit: BoxFit.cover,
+                                            )),
                                       ),
                                     ],
                                   ),
