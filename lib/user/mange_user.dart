@@ -135,7 +135,7 @@ class _MangeUserState extends State<MangeUser> {
                     if(value == "Edit"){
                       Get.to(()=>AddUser(model:controller.userList[index],));
                     }else{
-                      controller.deleteUser(index:index)
+                      controller.deleteUser(index:index);
                     }
                   },
                   itemBuilder: (BuildContext context) =>
