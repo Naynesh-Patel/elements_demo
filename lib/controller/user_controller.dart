@@ -187,7 +187,7 @@ class UserController extends GetxController {
     }
   }
 
-  Future<void> deleteUser({int index}) async {
+  Future<void> deleteUser({required int index}) async {
     try {
       String url = "${baseURL}user/delete";
       log("API => $url");
