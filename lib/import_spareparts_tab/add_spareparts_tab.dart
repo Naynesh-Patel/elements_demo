@@ -36,12 +36,12 @@ class _AddSparepartsTabState extends State<AddSparepartsTab> {
             children: [
               const CustomTextField(
                 hintText: "Steel",
-                labelText: "Name*",
+                labelText: "Name",
               ),
               verticalSpacing(),
               const CustomTextField(
                 hintText: "20",
-                labelText: "Qty*",
+                labelText: "Qty",
               ),
             ],
           ),

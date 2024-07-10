@@ -17,9 +17,11 @@ class CustomTextField extends StatefulWidget {
   final Widget? suffix;
   final int? maxLength;
   final bool? readOnly;
+  final bool? showCursor;
   final bool? obscureText;
   final bool? enable;
   final bool? autofocus;
+  final bool? enableInteractiveSelection;
   final Function()? onTap;
   final Function(String)? onChange;
   final double? paddingHorizontal;
@@ -45,8 +47,10 @@ class CustomTextField extends StatefulWidget {
     this.prefixIconConstraints,
     this.maxLength,
     this.readOnly,
+    this.showCursor,
     this.enable,
     this.autofocus,
+    this.enableInteractiveSelection,
     this.onTap,
     this.onChange,
     this.paddingHorizontal,
@@ -102,6 +106,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       maxLength: widget.maxLength,
       onChanged: widget.onChange,
       autofocus: widget.autofocus ?? false,
+      enableInteractiveSelection: widget.enableInteractiveSelection ??true,
       style: widget.style ??
           AppTextStyle.textStyleRegular14
               .copyWith(letterSpacing: widget.maxLength == 10 ? 2.0 : 1.0),

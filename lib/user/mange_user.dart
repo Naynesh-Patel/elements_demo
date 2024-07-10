@@ -1,13 +1,13 @@
 import 'package:elements/constant/app_colors.dart';
+import 'package:elements/controller/user_controller.dart';
+import 'package:elements/date_piker.dart';
 import 'package:elements/user/add_user.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
+import 'package:elements/widget/custom_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../constant/app_text_style.dart';
-import '../controller/user_controller.dart';
-import '../date_piker.dart';
-import '../widget/custom_loader.dart';
 
 class MangeUser extends StatefulWidget {
   const MangeUser({super.key});
@@ -58,7 +58,7 @@ class _MangeUserState extends State<MangeUser> {
                             children: [
                               _tableView(
                                 name: controller.userList[index]['name'],
-                                date: "15/9/2024",
+                                date: controller.userList[index]['create_at'],
                                 Authoriy: controller.userList[index]
                                     ['user_type'],
                               ),
@@ -120,38 +120,38 @@ class _MangeUserState extends State<MangeUser> {
                       .copyWith(color: AppColor.blackLightColor),
                 ),
               ),
-              Expanded(
-                  child: InkWell(
-                onTap: () {
-                  Get.to(AddUser(
-                    model: controller.userList[index],
-                  ));
-                },
-                child: Text(
-                  "Edit",
-                  textAlign: TextAlign.end,
-                  style: AppTextStyle.textStyleLight12
-                      .copyWith(color: AppColor.blackLightColor),
-                ),
-              )),
-              const SizedBox(
-                width: 20,
-              ),
-              Expanded(
-                  child: InkWell(
-                onTap: () {
-                  setState(() {
-                    controller.deleteUser(controller.userList[index]['id']);
-                    controller.userList.removeAt(index);
-                  });
-                },
-                child: Text(
-                  "Delete",
-                  textAlign: TextAlign.end,
-                  style: AppTextStyle.textStyleLight12
-                      .copyWith(color: AppColor.blackLightColor),
-                ),
-              )),
+              // Expanded(
+              //     child: InkWell(
+              //   onTap: () {
+              //     Get.to(AddUser(
+              //       model: controller.userList[index],
+              //     ));
+              //   },
+              //   child: Text(
+              //     "Edit",
+              //     textAlign: TextAlign.end,
+              //     style: AppTextStyle.textStyleLight12
+              //         .copyWith(color: AppColor.blackLightColor),
+              //   ),
+              // )),
+              // const SizedBox(
+              //   width: 20,
+              // ),
+              // Expanded(
+              //     child: InkWell(
+              //   onTap: () {
+              //     setState(() {
+              //       controller.deleteUser(controller.userList[index]['id']);
+              //       controller.userList.removeAt(index);
+              //     });
+              //   },
+              //   child: Text(
+              //     "Delete",
+              //     textAlign: TextAlign.end,
+              //     style: AppTextStyle.textStyleLight12
+              //         .copyWith(color: AppColor.blackLightColor),
+              //   ),
+              // )),
             ],
           ),
           const SizedBox(
@@ -200,13 +200,14 @@ class _MangeUserState extends State<MangeUser> {
               ),
             ),
           ),
-          Expanded(
-            child: Text("Authoriy", style: AppTextStyle.textStyleRegular14),
-          ),
-          const Expanded(
-            child: Text("Edit", style: TextStyle(color: Colors.green)),
-          ),
-          const Text("Delete", style: TextStyle(color: Colors.red)),
+          // Expanded(
+          //   child: Text("Authoriy", style: AppTextStyle.textStyleRegular14),
+          // ),
+          Text("Authoriy", style: AppTextStyle.textStyleRegular14),
+          // const Expanded(
+          //   child: Text("Edit", style: TextStyle(color: Colors.green)),
+          // ),
+          // const Text("Delete", style: TextStyle(color: Colors.red)),
         ],
       ),
     );

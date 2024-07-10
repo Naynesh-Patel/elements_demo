@@ -107,7 +107,7 @@ class _AddSalesmenState extends State<AddSalesmen> {
                     // },
                     hintText: "Select User Role",
                     labelText: "User Role",
-                    itemList: const ["Admin", "Usre", "Seller"],
+                    itemList: const ["Admin", "User", "Seller"],
                     onTap: (value) {
                       debugPrint("Select => $value");
                     },

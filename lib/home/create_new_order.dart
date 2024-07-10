@@ -1,5 +1,9 @@
 import 'package:elements/constant/app_colors.dart';
+import 'package:elements/controller/customer_controller.dart';
 import 'package:elements/controller/home_controller.dart';
+import 'package:elements/controller/machinery_controller.dart';
+import 'package:elements/controller/order_controller.dart';
+import 'package:elements/home/select_customer_company.dart';
 import 'package:elements/home/select_machine.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:elements/widget/button/custom_button.dart';
@@ -18,8 +22,11 @@ class CreateNewOrder extends StatefulWidget {
 
 class _CreateNewOrderState extends State<CreateNewOrder> {
   HomeController controller = Get.find();
-  TextEditingController date = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
+  OrderController orderController = Get.find();
+  CustomerController customerController = Get.find();
+  MachineryController machineryController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -48,21 +55,60 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
             key: _formKey,
             child: Column(
               children: [
-                WidgetDropDownFromField(
-                  hintText: "Select Customer/Company",
-                  labelText: "Customer/Company*",
-                  itemList: const ["Admin", "User", "Seller"],
-                  onTap: (value) {
-                    debugPrint("Select => $value");
-                  },
-                ),
+                // WidgetDropDownFromField(
+                //   hintText: "Select Customer/Company",
+                //   labelText: "Customer/Company*",
+                //   itemList: const ["Admin", "User", "Seller"],
+                //   onTap: (value) {
+                //     debugPrint("Select => $value");
+                //     // orderController.customerCompany=value;
+                //   },
+                // ),
+                CustomTextField(
+                  focusNode: FocusNode(),
+                  readOnly: true,
+
+                    onTap: () {
+                       Get.to(const SelectCustomerCompany())?.then((value){
+                         customerController.companyTextEditingController.text=value;
+                         setState(() {
+
+                         });
+                       });
+                    },
+                    hintText: "Select Customer/Company",
+                    labelText: "Customer/Company*",
+                    textEditingController: customerController.companyTextEditingController,
+                    // autoValidateMode: AutovalidateMode.onUserInteraction,
+                    // validator: (value) {
+                    //   if(value!.isEmpty){
+                    //     return "Please Enter Machine Type";
+                    //   }
+                    //   else{
+                    //     return null;
+                    //   }
+                    // },
+                    suffixFixIcon: const Icon(
+                      Icons.arrow_forward_ios_rounded,
+                      size: 18,
+                      color: AppColor.blackColor,
+                    )),
                 verticalSpacing(),
                 CustomTextField(
+                    focusNode: FocusNode(),
+                    readOnly: true,
                     onTap: () {
-                      Get.to(const SelectMachine());
+                      Get.to(const SelectMachine())?.then((value){
+                        machineryController.machineNameTextEditingController.text=value;
+                        setState(() {
+
+                        });
+                      },);
                     },
                     hintText: "Select Machine Type*",
                     labelText: "Machine Type*",
+                    textEditingController: machineryController.machineNameTextEditingController,
+
                     // autoValidateMode: AutovalidateMode.onUserInteraction,
                     // validator: (value) {
                     //   if(value!.isEmpty){
@@ -83,7 +129,8 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                     datePicker();
                   },
                   child: CustomTextField(
-                      textEditingController: date,
+                    textEditingController: orderController.date,
+                      // textEditingController: orderController.deliveryDateTextEditingController,
                       hintText: "Select Delivery Date",
                       labelText: "Delivery Date*",
                       enable: false,
@@ -108,6 +155,7 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                   labelText: "Total Payment",
                   textInputType: TextInputType.number,
                   focusNode: controller.paymentFocusNode,
+                  textEditingController: orderController.totalPaymentEditingController,
                   autoValidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
                     if(value!.isEmpty){
@@ -123,8 +171,7 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                   hintText: "Advance Payment",
                   labelText: "Advance Payment",
                   textInputType: TextInputType.number,
-                  textEditingController:
-                      controller.advancePaymentTextEditingController,
+                  textEditingController: orderController.advancePaymentEditingController,
                   focusNode: controller.advancedPaymentFocusNode,
                   autoValidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
@@ -140,7 +187,8 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                 CustomTextField(
                     hintText: "Select Manager Role",
                     labelText: "Assigns Order*",
-                    enable: false,
+                    // enable: false,
+                    textEditingController: orderController.assignOrderIdEditingController,
                     focusNode: FocusNode(),
                     suffixFixIcon: const Icon(
                       Icons.arrow_forward_ios_rounded,
@@ -160,8 +208,8 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
             onTap: () {
               if (_formKey.currentState!.validate()){
 
-                Get.back();
-
+               orderController.addOrder();
+               Get.back();
               }
             },
           ),
@@ -181,8 +229,8 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
         firstDate: DateTime(2024),
         lastDate: DateTime(2050));
     if (datePicked != null) {
-      var pickDate = DateFormat('dd/MM/yyyy').format(datePicked);
-      date.text = pickDate;
+      // var pickDate = DateFormat('dd/MM/yyyy').format(datePicked);
+      orderController.date.text = datePicked.toString();
       print(
           'Date Selected:${datePicked.day}-${datePicked.month}-${datePicked.year}');
     }

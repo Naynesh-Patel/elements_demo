@@ -1,15 +1,16 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
+import 'package:elements/controller/expense_controller.dart';
 import 'package:elements/expense/add_expense.dart';
 import 'package:elements/expense/view_expense_details.dart';
 import 'package:elements/widget/app%20bar/home_app_bar.dart';
+import 'package:elements/widget/custom_loader.dart';
 import 'package:elements/widget/dialogs/custom_dialogbox.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class ExpensetTab extends StatefulWidget {
-  // ExpenseController expenseController = Get.find();
   final bool isUpdate;
 
   const ExpensetTab({super.key, this.isUpdate = false});
@@ -19,122 +20,191 @@ class ExpensetTab extends StatefulWidget {
 }
 
 class _ExpensetTabState extends State<ExpensetTab> {
+  ExpenseController expenseController = Get.find();
+
+  @override
+  void initState() {
+    setState(() {
+      expenseController.getExpense();
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColor.whiteColor,
       appBar: HomeAppBar(
         title: "Expense",
-        // action: [
-        //   SvgPicture.asset(
-        //     "assets/svg/ic_notification.svg",
-        //     height: 20,
-        //     width: 20,
-        //   ),
-        //   const SizedBox(
-        //     width: 16,
-        //   ),
-        // ],
       ),
-      body: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-        child: Column(
-          children: [
-            InkWell(
-              onTap: () {
-                Get.to(const ViewExpenseDetails());
-              },
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(4),
-                    border: Border.all(color: AppColor.borderColor, width: 1)),
-                child: IntrinsicHeight(
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            _keyValue("Name", "Ramesh"),
-                            verticalSpacing(),
-                            _keyValue("Expense Type", "Tea"),
-                            verticalSpacing(),
-                            _keyValue("Price", "₹ 20 "),
-                          ],
-                        ),
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          _keyValue("DD", "16-2-2024"),
-                          Row(
-                            children: [
-                              InkWell(
-                                borderRadius: BorderRadius.circular(10),
+      body: SingleChildScrollView(
+        child: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+          child: Column(
+            children: [
+              Obx(
+                () => expenseController.isGetExpenseLoading.value
+                    ? const CustomLoader()
+                    : expenseController.expenseList.isEmpty
+                        ? const Center(
+                            child: Text("Dara Not Found"),
+                          )
+                        : ListView.separated(
+                            shrinkWrap: true,
+                            // scrollDirection: Axis.vertical,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: expenseController.expenseList.length,
+                            itemBuilder: (context, index) {
+                              return InkWell(
                                 onTap: () {
-                                  Get.to(const AddExpense(
-                                    isUpdate: true,
-                                  ));
+                                  Get.to(const ViewExpenseDetails());
                                 },
                                 child: Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        border: Border.all(
-                                            color: const Color(0xffD1D1D1))),
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 10, horizontal: 10),
-                                    child: SvgPicture.asset(
-                                      'assets/svg/ic_edit.svg',
-                                      height: 16,
-                                      width: 16,
-                                    )),
-                              ),
-                              const SizedBox(
-                                width: 12,
-                              ),
-                              InkWell(
-                                borderRadius: BorderRadius.circular(10),
-                                onTap: () {
-                                  CustomDialogBox.showDeleteDialog(
-                                    context: context,
-                                    bodyText:
-                                        "Do you really want to cancel these records? This process cannot be undone.",
-                                    onCancelTap: () {
-                                      Get.back();
-                                    },
-                                    onDeleteTap: () {
-                                      Get.back();
-                                    },
-                                  );
-                                },
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      border: Border.all(
-                                          color: const Color(0xffD1D1D1))),
                                   padding: const EdgeInsets.symmetric(
-                                      vertical: 10, horizontal: 10),
-                                  child: const Icon(
-                                    Icons.delete,
-                                    size: 16,
-                                    weight: 16,
+                                      horizontal: 10, vertical: 10),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(4),
+                                      border: Border.all(
+                                          color: AppColor.borderColor,
+                                          width: 1)),
+                                  child: IntrinsicHeight(
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.stretch,
+                                      children: [
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              _keyValue(
+                                                  "Name",
+                                                  expenseController.expenseList[
+                                                          index]['name'] ??
+                                                      ''),
+                                              verticalSpacing(),
+                                              _keyValue(
+                                                  "Expense Type",
+                                                  expenseController.expenseList[
+                                                              index]
+                                                          ['expense_type'] ??
+                                                      ''),
+                                              verticalSpacing(),
+                                              _keyValue(
+                                                  "Price",
+                                                  expenseController.expenseList[
+                                                          index]['price'] ??
+                                                      ''),
+                                            ],
+                                          ),
+                                        ),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            _keyValue(
+                                                "DD",
+                                                expenseController
+                                                            .expenseList[index]
+                                                        ['created_at'] ??
+                                                    ''),
+                                            Row(
+                                              children: [
+                                                InkWell(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  onTap: () {
+                                                    Get.to(AddExpense(
+                                                      model: expenseController
+                                                          .expenseList[index],
+                                                    ));
+                                                  },
+                                                  child: Container(
+                                                      decoration: BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                          border: Border.all(
+                                                              color: const Color(
+                                                                  0xffD1D1D1))),
+                                                      padding: const EdgeInsets
+                                                          .symmetric(
+                                                          vertical: 10,
+                                                          horizontal: 10),
+                                                      child: SvgPicture.asset(
+                                                        'assets/svg/ic_edit.svg',
+                                                        height: 16,
+                                                        width: 16,
+                                                      )),
+                                                ),
+                                                const SizedBox(
+                                                  width: 12,
+                                                ),
+                                                InkWell(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  onTap: () {
+                                                    CustomDialogBox
+                                                        .showDeleteDialog(
+                                                      context: context,
+                                                      bodyText:
+                                                          "Do you really want to cancel these records? This process cannot be undone.",
+                                                      onCancelTap: () {
+                                                        Get.back();
+                                                      },
+                                                      onDeleteTap: () {
+                                                        expenseController
+                                                            .deleteExpense(
+                                                                expenseController
+                                                                        .expenseList[
+                                                                    index]['id']);
+                                                        expenseController
+                                                            .expenseList
+                                                            .removeAt(index);
+                                                        Get.back();
+                                                      },
+                                                    );
+                                                  },
+                                                  child: Container(
+                                                    decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10),
+                                                        border: Border.all(
+                                                            color: const Color(
+                                                                0xffD1D1D1))),
+                                                    padding: const EdgeInsets
+                                                        .symmetric(
+                                                        vertical: 10,
+                                                        horizontal: 10),
+                                                    child: const Icon(
+                                                      Icons.delete,
+                                                      size: 16,
+                                                      weight: 16,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
+                              );
+                            },
+                            separatorBuilder: (context, index) {
+                              return const SizedBox(
+                                height: 10,
+                              );
+                            },
+                          ),
               ),
-            )
-          ],
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(

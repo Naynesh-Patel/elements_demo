@@ -5,19 +5,30 @@ import 'package:elements/machinery/add_machinery.dart';
 import 'package:elements/machinery/view_machinery.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:elements/widget/button/small_button.dart';
+import 'package:elements/widget/custom_loader.dart';
 import 'package:elements/widget/dialogs/custom_dialogbox.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MangeMachinery extends StatefulWidget {
-  const MangeMachinery({super.key});
+  final dynamic model;
+  const MangeMachinery({super.key, this.model});
 
   @override
   State<MangeMachinery> createState() => _MangeMachineryState();
 }
 
 class _MangeMachineryState extends State<MangeMachinery> {
+  @override
+  void initState() {
+    setState(() {
+      controller.getMachinery();
+    });
+    super.initState();
+  }
+
   MachineryController controller = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,104 +41,122 @@ class _MangeMachineryState extends State<MangeMachinery> {
       ),
       body: Container(
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Flexible(
-                    child: Text(
-                  "Total Machinery Stock  : 20",
-                  style: AppTextStyle.textStyleRegular14,
-                )),
-                SmallButton(
-                    title: "Update",
-                    onTap: () {
-                      Get.to(const AddMachinery(
-                        isUpdate: true,
-                      ));
+        child: Obx(() => controller.isGetMachineryLoading.value
+            ? const CustomLoader()
+            : controller.addMachineryList.isEmpty
+                ? const Center(
+                    child: Text("Data Not Found"),
+                  )
+                : ListView.separated(
+                    shrinkWrap: true,
+                    itemCount: controller.addMachineryList.length,
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () {
+                          Get.to(ViewMachinery(
+                            model: controller.addMachineryList[index],
+                          ));
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 10),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(4),
+                              border: Border.all(
+                                  color: const Color(0xffE6E6E6), width: 1)),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              _keyValue(
+                                "Machine Name",
+                                controller.addMachineryList[index]
+                                        ['machine_name'] ??
+                                    '',
+                              ),
+                              verticalSpacing(),
+                              _keyValue(
+                                "Machine Type",
+                                controller.addMachineryList[index]
+                                        ['machine_type'] ??
+                                    '',
+                              ),
+                              verticalSpacing(),
+                              _keyValue(
+                                "Qty",
+                                controller.addMachineryList[index]['qty'] ?? '',
+                              ),
+                              verticalSpacing(),
+                              _keyValue(
+                                "Manufacture Duration",
+                                controller.addMachineryList[index]
+                                        ['manufacture_duration'] ??
+                                    '',
+                              ),
+                              verticalSpacing(),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  SmallButton(
+                                    title: " View ",
+                                    textColor: AppColor.selectColor,
+                                    onTap: () {
+                                      Get.to(ViewMachinery(
+                                        model:
+                                            controller.addMachineryList[index],
+                                      ));
+                                    },
+                                  ),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  SmallButton(
+                                      title: "Edit",
+                                      onTap: () {
+                                        Get.to(AddMachinery(
+                                          model: controller
+                                              .addMachineryList[index],
+                                        ));
+                                      },
+                                      textColor: const Color(0xff555555)),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  SmallButton(
+                                      title: "Delete",
+                                      onTap: () {
+                                        CustomDialogBox.showDeleteDialog(
+                                          context: context,
+                                          bodyText:
+                                              "Do you really want to cancel these records? This process cannot be undone.",
+                                          onCancelTap: () {
+                                            Get.back();
+                                          },
+                                          onDeleteTap: () {
+                                            setState(() {
+                                              controller.deleteMachinery(
+                                                  controller.addMachineryList[
+                                                      index]['id']);
+                                              controller.addMachineryList
+                                                  .removeAt(index);
+                                              Get.back();
+                                            });
+                                          },
+                                        );
+                                      },
+                                      textColor: const Color(0xffB50A0A)),
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                      );
                     },
-                    textColor: AppColor.selectColor)
-              ],
-            ),
-            const SizedBox(height: 16),
-            InkWell(
-              onTap: () {
-                Get.to(const ViewMachinery());
-              },
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(4),
-                    border:
-                        Border.all(color: const Color(0xffE6E6E6), width: 1)),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _keyValue(
-                      "Machine Name",
-                      "Containership",
-                    ),
-                    verticalSpacing(),
-                    _keyValue(
-                      "Machine Type",
-                      "Steel Cutting",
-                    ),
-                    verticalSpacing(),
-                    _keyValue(
-                      "Qty",
-                      "1",
-                    ),
-                    verticalSpacing(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        SmallButton(
-                          title: " View ",
-                          textColor: AppColor.selectColor,
-                          onTap: () {
-                            Get.to(const ViewMachinery());
-                          },
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        SmallButton(
-                            title: "Edit",
-                            onTap: () {
-                              Get.to(const AddMachinery(
-                                isUpdate: true,
-                              ));
-                            },
-                            textColor: const Color(0xff555555)),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        SmallButton(
-                            title: "Delete",
-                            onTap: () {
-                              CustomDialogBox.showDeleteDialog(
-                                context: context,
-                                bodyText:
-                                    "Do you really want to cancel these records? This process cannot be undone.",
-                                onCancelTap: () {
-                                  Get.back();
-                                },
-                                onDeleteTap: () {
-                                  Get.back();
-                                },
-                              );
-                            },
-                            textColor: const Color(0xffB50A0A)),
-                      ],
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
+                    separatorBuilder: (BuildContext context, int index) {
+                      return const SizedBox(
+                        height: 15,
+                      );
+                    },
+                  )),
       ),
       floatingActionButton: FloatingActionButton(
           elevation: 10.0,

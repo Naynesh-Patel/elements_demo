@@ -144,7 +144,6 @@ class CustomerController extends GetxController {
     try {
       String url = "${baseURL}customer/delete";
       log("API => $url");
-
       isGetCustomerDeleteLoading.value = true;
       var response = await http.post(Uri.parse(url), body: {"id": id});
       if (response.statusCode == 200) {
