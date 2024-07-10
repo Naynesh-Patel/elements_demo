@@ -90,7 +90,7 @@ class _AddSparepartsState extends State<AddSpareparts> {
                   textEditingController:
                       sparepartsController.nameTextEditingController,
                   hintText: "Steel Bolt",
-                  labelText: "Name*",
+                  labelText: "Name",
                   focusNode: sparepartsController.sparepartsNameFocusNode,
                   validator: (value) {
                     if (value!.isEmpty) {
@@ -144,7 +144,7 @@ class _AddSparepartsState extends State<AddSpareparts> {
                     textEditingController:
                         sparepartsController.newqtyTypeTextEditingController,
                     hintText: "New Qty",
-                    labelText: "Add New Qty",
+                    labelText: "Please Enter Add New Qty",
                     onChange: (p0) {
                       if (p0.isEmpty) {
                         total(int.parse("0"));
@@ -201,7 +201,7 @@ class _AddSparepartsState extends State<AddSpareparts> {
                     focusNode: sparepartsController.sparepartsQtyFocusNode,
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return "Enter Qty";
+                        return "Please Enter Qty";
                       } else {
                         return null;
                       }

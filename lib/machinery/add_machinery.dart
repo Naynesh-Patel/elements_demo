@@ -67,7 +67,6 @@ class _AddMachineryState extends State<AddMachinery> {
           onPressed: () {
             Get.back();
           },
-          // action: [IconButton(onPressed: () {}, icon: const Icon(Icons.add))],
         ),
         body: Form(
           key: _formKey,

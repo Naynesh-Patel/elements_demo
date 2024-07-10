@@ -10,8 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ViewOrderDetails extends StatefulWidget {
+  final dynamic model;
   final bool isUpdate;
-  const ViewOrderDetails({super.key, this.isUpdate = false});
+  const ViewOrderDetails({super.key, this.isUpdate = false, this.model});
 
   @override
   State<ViewOrderDetails> createState() => _ViewOrderDetailsState();
@@ -104,8 +105,8 @@ class _ViewOrderDetailsState extends State<ViewOrderDetails> {
                               decoration: BoxDecoration(
                                   color: const Color(0xffFFFFFF),
                                   borderRadius: BorderRadius.circular(6),
-                                  border:
-                                      Border.all(color: const Color(0xffD1D1D1))),
+                                  border: Border.all(
+                                      color: const Color(0xffD1D1D1))),
                               padding: const EdgeInsets.symmetric(
                                   vertical: 10, horizontal: 10),
                               child: const Icon(
@@ -123,15 +124,14 @@ class _ViewOrderDetailsState extends State<ViewOrderDetails> {
                 const SizedBox(
                   height: 20,
                 ),
-                 CustomTextField(
+                CustomTextField(
                     hintText: "18-10-2024",
                     labelText: "Delivery Date",
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                     validator: (value) {
-                      if(value!.isEmpty){
+                      if (value!.isEmpty) {
                         return "Please Enter Delivery Date";
-                      }
-                      else{
+                      } else {
                         return null;
                       }
                     },
@@ -142,15 +142,14 @@ class _ViewOrderDetailsState extends State<ViewOrderDetails> {
                 const SizedBox(
                   height: 20,
                 ),
-                 CustomTextField(
+                CustomTextField(
                   hintText: "Rs 50,000",
                   labelText: "Total Payment",
                   autoValidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
-                    if(value!.isEmpty){
+                    if (value!.isEmpty) {
                       return "Please Enter Total Payment";
-                    }
-                    else{
+                    } else {
                       return null;
                     }
                   },
@@ -198,10 +197,8 @@ class _ViewOrderDetailsState extends State<ViewOrderDetails> {
             isLoading: false.obs,
             buttonText: widget.isUpdate ? "Update" : "Add",
             onTap: () {
-              if (_formKey.currentState!.validate()){
-
+              if (_formKey.currentState!.validate()) {
                 Get.back();
-
               }
             },
           ),

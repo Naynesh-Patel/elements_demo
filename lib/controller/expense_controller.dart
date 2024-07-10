@@ -30,7 +30,7 @@ class ExpenseController extends GetxController {
       "expense_type": expenseTypeTextEditingController.text,
       "price": priceTextEditingController.text,
       "user_id": modelUser.value.id,
-      "company_id": '7',
+      "company_id": '2',
     };
     try {
       String url = "${baseURL}expense/create";
@@ -80,7 +80,7 @@ class ExpenseController extends GetxController {
       "expense_type": expenseTypeTextEditingController.text,
       "price": priceTextEditingController.text,
       "user_id": modelUser.value.id,
-      "company_id": '7',
+      "company_id": '2',
     };
     try {
       String url = "${baseURL}expense/update";
@@ -130,5 +130,4 @@ class ExpenseController extends GetxController {
       isDeleteExpenseLoading.value = false;
     }
   }
-
 }

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
@@ -22,7 +23,7 @@ class CustomerController extends GetxController {
   TextEditingController emailTextEditingController = TextEditingController();
   TextEditingController websiteTextEditingController = TextEditingController();
   TextEditingController referenceTextEditingController =
-  TextEditingController();
+      TextEditingController();
   TextEditingController gstinTextEditingController = TextEditingController();
   TextEditingController photoTextEditingController = TextEditingController();
   TextEditingController addressTextEditingController = TextEditingController();
@@ -34,10 +35,10 @@ class CustomerController extends GetxController {
 
   Future<bool> pickImageFromGallery() async {
     XFile? pickImage =
-    await ImagePicker().pickImage(source: ImageSource.gallery);
+        await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickImage != null) {
       imgFile = File(pickImage.path);
-      imageToBase64(file:imgFile!);
+      imageToBase64(file: imgFile!);
       return true;
     } else {
       return false;
@@ -46,9 +47,8 @@ class CustomerController extends GetxController {
 
   imageToBase64({required File file}) async {
     Uint8List bytes = await file.readAsBytes();
-    base64Image = '${base64.encode(bytes)}';
+    base64Image = base64.encode(bytes);
   }
-
 
   Future<void> addCustomer() async {
     Map<String, dynamic> body = {
@@ -171,7 +171,4 @@ class CustomerController extends GetxController {
       isGetCustomerDeleteLoading.value = false;
     }
   }
-
-
-
 }
