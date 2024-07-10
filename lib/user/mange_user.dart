@@ -129,7 +129,7 @@ class _MangeUserState extends State<MangeUser> {
                         Get.back();
                       },
                       onDeleteTap: () {
-                        controller.deleteUser(controller.userList[index]['id']);
+                        controller.deleteUser(index:controller.userList[index]['id']);
                         controller.userList.removeAt(index);
                       },
                     );
