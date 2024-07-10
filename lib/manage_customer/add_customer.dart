@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/controller/customer_controller.dart';
@@ -99,8 +101,8 @@ class _AddCustomerState extends State<AddCustomer> {
                                     child: ClipRRect(
                                         borderRadius:
                                             BorderRadius.circular(50.0),
-                                        child: Image.file(
-                                          controller.imgFile!,
+                                        child: Image.memory(base64Decode(controller.base64Image),
+                                          // controller.imgFile!,
                                           fit: BoxFit.cover,
                                         ))),
                             InkWell(

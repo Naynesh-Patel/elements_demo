@@ -101,7 +101,7 @@ class _MangeCustomerState extends State<MangeCustomer> {
                                               borderRadius:
                                               BorderRadius.circular(
                                                   50.0),
-                                              child: Image.memory(controller.base64ToImage("")))
+                                              child: Image.memory(base64Decode(controller.customerList[index]['photo']),fit: BoxFit.cover,)),
                                       ),
                                     ],
                                   ),

@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
@@ -40,9 +39,6 @@ class CustomerController extends GetxController {
     if (pickImage != null) {
       imgFile = File(pickImage.path);
       imageToBase64(file:imgFile!);
-      // bytes = await imgFile!.readAsBytes();
-      // List<int> imageBytes = await imgFile!.readAsBytes();
-      // base64Image = base64Encode(imageBytes);
       return true;
     } else {
       return false;
@@ -54,19 +50,6 @@ class CustomerController extends GetxController {
     base64Image = '${base64.encode(bytes)}';
   }
 
-
-  // Uint8List base64ToImage(String base64String) {
-  //   // If the base64 string contains the prefix, remove it
-  //   if (base64String.startsWith('data:image')) {
-  //     final startIndex = base64String.indexOf('base64,') + 7;
-  //     base64String = base64String.substring(startIndex);
-  //   }
-  //   return base64Decode(base64String);
-  // }
-
-  base64ToImage(String string){
-    return base64Decode(string.split(',').last);
-  }
 
   Future<void> addCustomer() async {
     Map<String, dynamic> body = {
@@ -184,29 +167,6 @@ class CustomerController extends GetxController {
     }
   }
 
-
-  // Uint8List base64ToImage(String base64String) {
-  //   String cleanBase64 = base64String.replaceAll('\n', '').replaceAll('\r', '').replaceAll(' ', '');
-  //
-  //   // Ensure the string length is a multiple of four
-  //   int remainder = cleanBase64.length % 4;
-  //   while (cleanBase64.length % 4 != 0) {
-  //     cleanBase64 = cleanBase64.padRight(cleanBase64.length + (4 - remainder), '=');
-  //   }
-  //
-  //   return base64Decode(cleanBase64);
-  //   }
-
-  decodeB64ToUtf8(String message) {
-    String cleanBase64 = message.replaceAll('\n', '').replaceAll('\r', '').replaceAll(' ', '').replaceAll(" ", "+");
-    return base64Decode(message);
-  }
-
-  String padBase64(String rawBase64) {
-    return (rawBase64.length % 4 > 0)
-        ? rawBase64 += List.filled(4 - (rawBase64.length % 4), "_").join("")
-        : rawBase64;
-  }
 
 
 }
