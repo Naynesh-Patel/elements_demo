@@ -171,27 +171,27 @@ class UserController extends GetxController {
     try {
       String url = "${baseURL}user/update";
       log("API => $url");
-      isUpdateUserLoading.value = true;
+      isUserLoading.value = true;
       var response = await http.post(Uri.parse(url), body: body);
       if (response.statusCode == 200) {
         var responseData = jsonDecode(response.body);
         if(responseData['status']==1){
           Get.back();
           getUser();
-          isUpdateUserLoading.value = false;
+          isUserLoading.value = false;
         }else{
           showToast(responseData['message']);
           debugPrint("Error Message ${responseData['message']}");
-          isUpdateUserLoading.value = false;
+          isUserLoading.value = false;
         }
 
       } else {
         debugPrint("statusCode${response.statusCode}");
-        isUpdateUserLoading.value = false;
+        isUserLoading.value = false;
       }
     } catch (e) {
       debugPrint("Error${e.toString()}");
-      isUpdateUserLoading.value = false;
+      isUserLoading.value = false;
     }
   }
 
