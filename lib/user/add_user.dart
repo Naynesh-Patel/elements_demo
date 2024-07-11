@@ -150,6 +150,7 @@ class _AddUserState extends State<AddUser> {
                         controller.userRoleTextEditingController.text = value;
                         _formKey.currentState?.validate();
                         debugPrint("Select => $value");
+                        _formKey.currentState?.validate();
                       },
                     ),
                     verticalSpacing(),

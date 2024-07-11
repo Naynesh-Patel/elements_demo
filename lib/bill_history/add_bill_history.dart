@@ -55,6 +55,7 @@ class _AddBillHistoryState extends State<AddBillHistory>
                   itemList: const ["Admin", "Usre", "Seller"],
                   onTap: (value) {
                     debugPrint("Select => $value");
+                    _formKey.currentState?.validate();
                   },
                 ),
                 const SizedBox(
@@ -64,9 +65,12 @@ class _AddBillHistoryState extends State<AddBillHistory>
                   hintText: "Select Company Name",
                   labelText: "Customer/Company Name*",
                   itemList: const ["Admin", "Usre", "Seller"],
+                  // autovalidateMode: AutovalidateMode.onUserInteraction,
                   onTap: (value) {
                     debugPrint("Select => $value");
+                    _formKey.currentState?.validate();
                   },
+
                 ),
                 const SizedBox(
                   height: 15,
@@ -77,6 +81,7 @@ class _AddBillHistoryState extends State<AddBillHistory>
                   itemList: const ["Admin", "Usre", "Seller"],
                   onTap: (value) {
                     debugPrint("Select => $value");
+                    _formKey.currentState?.validate();
                   },
                 ),
                 verticalSpacing(),
@@ -96,6 +101,8 @@ class _AddBillHistoryState extends State<AddBillHistory>
                 CustomTextField(
                   labelText: "Mobile No.*",
                   hintText: "9989898958",
+                  maxLength: 10,
+
                   validator: (value) {
                     if (value!.isEmpty) {
                       return "Please Enter Mobile No";
