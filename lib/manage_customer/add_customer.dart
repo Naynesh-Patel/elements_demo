@@ -122,6 +122,7 @@ class _AddCustomerState extends State<AddCustomer> {
                     alignment: Alignment.bottomRight,
                     children: [
                       widget.model != null ?
+                      controller.imgFile == null ?
                       SizedBox(
                         height: 80,
                         width: 80,
@@ -134,7 +135,16 @@ class _AddCustomerState extends State<AddCustomer> {
                             width: 80,
                           ),
                         ),
-                      ):
+                      ):SizedBox(
+                        height: 80,
+                        width: 80,
+                        child: ClipRRect(
+                            borderRadius:
+                            BorderRadius.circular(50.0),
+                            child: Image.file(controller.imgFile!,
+                              // controller.imgFile!,
+                              fit: BoxFit.cover,
+                            ))) :
                       controller.imgFile == null
                           ? Image.asset(
                         'assets/images/camera.png',
