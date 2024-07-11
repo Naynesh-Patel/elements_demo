@@ -122,19 +122,15 @@ class _LoginState extends State<Login> {
                     const SizedBox(
                       height: 20,
                     ),
-                    Obx(
-                      () => controller.isLoginLoading.value
-                          ? const CustomButtonLoader()
-                          : CustomButton(
-                              color: AppColor.buttonColor,
-                             isLoading: false.obs,
-                               buttonText: 'Login',
-                              onTap: () {
-                                if (_formKey.currentState!.validate()) {
-                                  controller.login();
-                                }
-                              },
-                            ),
+                    CustomButton(
+                      color: AppColor.buttonColor,
+                      isLoading: controller.isLoginLoading,
+                      buttonText: 'Login',
+                      onTap: () {
+                        if (_formKey.currentState!.validate()) {
+                          controller.login();
+                        }
+                      },
                     ),
                   ],
                 ),

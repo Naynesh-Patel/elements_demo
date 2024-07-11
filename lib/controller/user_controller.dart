@@ -43,7 +43,7 @@ class UserController extends GetxController {
 
   imageToBase64({required File file}) async {
     Uint8List bytes = await file.readAsBytes();
-    base64Image = '${base64.encode(bytes)}';
+    base64Image = base64.encode(bytes);
   }
 
   // Future<void> addUser() async {
@@ -95,6 +95,7 @@ class UserController extends GetxController {
           getUser();
           Get.back();
         }else{
+          showToast(responseData['message']);
           debugPrint("Error Message ${responseData['message']}");
         }
         isUserLoading.value = false;
@@ -173,10 +174,17 @@ class UserController extends GetxController {
       isUpdateUserLoading.value = true;
       var response = await http.post(Uri.parse(url), body: body);
       if (response.statusCode == 200) {
-        jsonDecode(response.body);
-        Get.back();
-        getUser();
-        isUpdateUserLoading.value = false;
+        var responseData = jsonDecode(response.body);
+        if(responseData['status']==1){
+          Get.back();
+          getUser();
+          isUpdateUserLoading.value = false;
+        }else{
+          showToast(responseData['message']);
+          debugPrint("Error Message ${responseData['message']}");
+          isUpdateUserLoading.value = false;
+        }
+
       } else {
         debugPrint("statusCode${response.statusCode}");
         isUpdateUserLoading.value = false;

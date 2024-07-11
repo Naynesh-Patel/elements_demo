@@ -100,9 +100,12 @@ class AuthController extends GetxController {
           box.write('user', responseData['user']);
           box.write('isLogin', true);
           modelUser.value = ModelUser.fromJson(responseData['user']);
+          isLoginLoading.value = false;
           // Navigate to Dashboard
           Get.off(() => const DashBoard());
         } else {
+          isLoginLoading.value = false;
+          showToast(responseData['message']);
           debugPrint('User not found');
         }
         isLoginLoading.value = false;

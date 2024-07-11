@@ -46,6 +46,7 @@ class _AddUserState extends State<AddUser> {
       controller.contactNoTextEditingController.clear();
       controller.fingerprintEditingController.clear();
       controller.base64Image = "";
+      controller.imgFile = null;
     }
     super.initState();
   }
@@ -89,7 +90,7 @@ class _AddUserState extends State<AddUser> {
                               width: 80,
                               child: ClipRRect(
                                   borderRadius: BorderRadius.circular(50.0),
-                                  child: Image.memory(jsonDecode(controller.base64Image),
+                                  child: Image.memory(base64Decode(controller.base64Image),
                                     fit: BoxFit.cover,
                                   ))) : SizedBox(
                               height: 80,
@@ -143,8 +144,11 @@ class _AddUserState extends State<AddUser> {
                       hintText: "Select User Role",
                       labelText: "User Role",
                       itemList: const ["Admin", "User", "Seller"],
+                      value: controller.userRoleTextEditingController.text,
+                      // autovalidateMode: AutovalidateMode.onUserInteraction,
                       onTap: (value) {
                         controller.userRoleTextEditingController.text = value;
+                        _formKey.currentState?.validate();
                         debugPrint("Select => $value");
                       },
                     ),
@@ -154,6 +158,7 @@ class _AddUserState extends State<AddUser> {
                           controller.userNameTextEditingController,
                       hintText: "Name",
                       labelText: "User Name",
+                      textCapitalization: TextCapitalization.words,
                       validator: (value) {
                         if (value!.isEmpty) {
                           return "Please Enter User Name";
@@ -168,6 +173,7 @@ class _AddUserState extends State<AddUser> {
                       textEditingController:
                           controller.contactNoTextEditingController,
                       textInputType: const TextInputType.numberWithOptions(),
+                      textCapitalization: TextCapitalization.words,
                       hintText: "99656 25693",
                       labelText: "Contact No.",
                       maxLength: 10,
@@ -184,6 +190,7 @@ class _AddUserState extends State<AddUser> {
                     CustomTextField(
                       textEditingController:
                           controller.addressTextEditingController,
+                      textCapitalization: TextCapitalization.words,
                       hintText: "Surat,Gujrat",
                       labelText: "Address",
                       autoValidateMode: AutovalidateMode.onUserInteraction,
@@ -206,6 +213,7 @@ class _AddUserState extends State<AddUser> {
                         hintText: "Upload Fingerprint",
                         labelText: "Upload Fingerprint",
                         autoValidateMode: AutovalidateMode.onUserInteraction,
+                        textCapitalization: TextCapitalization.words,
                         enable: false,
                         // validator: (value) {
                         //   if (value!.isEmpty) {
