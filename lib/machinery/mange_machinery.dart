@@ -49,103 +49,96 @@ class _MangeMachineryState extends State<MangeMachinery> {
                     shrinkWrap: true,
                     itemCount: controller.addMachineryList.length,
                     itemBuilder: (context, index) {
-                      return InkWell(
-                        onTap: () {
-                          Get.to(AddMachinery(
-                              isView: true,
-                              model: controller.addMachineryList[index]));
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 10),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(4),
-                              border: Border.all(
-                                  color: const Color(0xffE6E6E6), width: 1)),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              _keyValue(
-                                "Machine Name",
-                                controller.addMachineryList[index]
-                                        ['machine_name'] ??
-                                    '',
-                              ),
-                              verticalSpacing(),
-                              _keyValue(
-                                "Machine Type",
-                                controller.addMachineryList[index]
-                                        ['machine_type'] ??
-                                    '',
-                              ),
-                              verticalSpacing(),
-                              _keyValue(
-                                "Qty",
-                                controller.addMachineryList[index]['qty'] ?? '',
-                              ),
-                              verticalSpacing(),
-                              _keyValue(
-                                "Manufacture Duration",
-                                controller.addMachineryList[index]
-                                        ['manufacture_duration'] ??
-                                    '',
-                              ),
-                              verticalSpacing(),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  SmallButton(
-                                    title: " View ",
-                                    textColor: AppColor.selectColor,
+                      return Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 10),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(4),
+                            border: Border.all(
+                                color: const Color(0xffE6E6E6), width: 1)),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            _keyValue(
+                              "Machine Name",
+                              controller.addMachineryList[index]
+                                      ['machine_name'] ??
+                                  '',
+                            ),
+                            verticalSpacing(),
+                            _keyValue(
+                              "Machine Type",
+                              controller.addMachineryList[index]
+                                      ['machine_type'] ??
+                                  '',
+                            ),
+                            verticalSpacing(),
+                            _keyValue(
+                              "Qty",
+                              controller.addMachineryList[index]['qty'] ?? '',
+                            ),
+                            verticalSpacing(),
+                            _keyValue(
+                              "Manufacture Duration",
+                              controller.addMachineryList[index]
+                                      ['manufacture_duration'] ??
+                                  '',
+                            ),
+                            verticalSpacing(),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                SmallButton(
+                                  title: " View ",
+                                  textColor: AppColor.selectColor,
+                                  onTap: () {
+                                    Get.to(AddMachinery(
+                                        isView: true,
+                                        model: controller
+                                            .addMachineryList[index]));
+                                  },
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                SmallButton(
+                                    title: "Edit",
                                     onTap: () {
                                       Get.to(AddMachinery(
-                                          isView: true,
-                                          model: controller
-                                              .addMachineryList[index]));
+                                        model: controller
+                                            .addMachineryList[index],
+                                      ));
                                     },
-                                  ),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  SmallButton(
-                                      title: "Edit",
-                                      onTap: () {
-                                        Get.to(AddMachinery(
-                                          model: controller
-                                              .addMachineryList[index],
-                                        ));
-                                      },
-                                      textColor: const Color(0xff555555)),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  SmallButton(
-                                      title: "Delete",
-                                      onTap: () {
-                                        CustomDialogBox.showDeleteDialog(
-                                          context: context,
-                                          bodyText:
-                                              "Do you really want to cancel these records? This process cannot be undone.",
-                                          onCancelTap: () {
+                                    textColor: const Color(0xff555555)),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                SmallButton(
+                                    title: "Delete",
+                                    onTap: () {
+                                      CustomDialogBox.showDeleteDialog(
+                                        context: context,
+                                        bodyText:
+                                            "Do you really want to cancel these records? This process cannot be undone.",
+                                        onCancelTap: () {
+                                          Get.back();
+                                        },
+                                        onDeleteTap: () {
+                                          setState(() {
+                                            controller.deleteMachinery(
+                                                controller.addMachineryList[
+                                                    index]['id']);
+                                            controller.addMachineryList
+                                                .removeAt(index);
                                             Get.back();
-                                          },
-                                          onDeleteTap: () {
-                                            setState(() {
-                                              controller.deleteMachinery(
-                                                  controller.addMachineryList[
-                                                      index]['id']);
-                                              controller.addMachineryList
-                                                  .removeAt(index);
-                                              Get.back();
-                                            });
-                                          },
-                                        );
-                                      },
-                                      textColor: const Color(0xffB50A0A)),
-                                ],
-                              )
-                            ],
-                          ),
+                                          });
+                                        },
+                                      );
+                                    },
+                                    textColor: const Color(0xffB50A0A)),
+                              ],
+                            )
+                          ],
                         ),
                       );
                     },
