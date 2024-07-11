@@ -23,6 +23,9 @@ class AddMachinery extends StatefulWidget {
 class _AddMachineryState extends State<AddMachinery> {
   MachineryController controller = Get.find();
 
+  final controllers = TextEditingController();
+  bool validate = false;
+
   RxList<dynamic> sparepartsList = [
     {
       "name": "1",
@@ -198,7 +201,6 @@ class _AddMachineryState extends State<AddMachinery> {
                                       }
                                       debugPrint(
                                           "Select = ${controller.machineryList[index].isSelected.value}");
-                                      // setState(() {});
                                     },
                                     child: Container(
                                       padding: const EdgeInsets.symmetric(
@@ -232,45 +234,68 @@ class _AddMachineryState extends State<AddMachinery> {
                                               color: const Color(0xff555555)),
                                     ),
                                   ),
-                                  Container(
-                                    width: 115,
-                                    height: 42,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(4),
-                                      border: Border.all(
-                                          color: const Color(0xffD1D1D1)),
-                                    ),
-                                    child: TextField(
-                                      controller: controller
+                                  Expanded(
+                                    child: CustomTextField(
+                                      textInputType: TextInputType.number,
+                                      textEditingController: controller
                                           .sparepartsTextEditingController,
-                                      textAlignVertical:
-                                          TextAlignVertical.center,
-                                      textAlign: TextAlign.center,
-                                      keyboardType: TextInputType.number,
-                                      decoration: InputDecoration(
-                                        border: InputBorder.none,
-                                        contentPadding:
-                                            const EdgeInsets.symmetric(
-                                                horizontal: 8.0,
-                                                vertical: 13.0),
-                                        hintText: 'Qty',
-                                        hintStyle: AppTextStyle
-                                            .textStyleRegular14
-                                            .copyWith(
-                                                color:
-                                                    AppColor.dropDownHintColor),
-                                        labelStyle: AppTextStyle
-                                            .textStyleRegular16
-                                            .copyWith(
-                                                color: AppColor.blackColor),
-                                        helperStyle: AppTextStyle
-                                            .textStyleRegular16
-                                            .copyWith(
-                                                color:
-                                                    AppColor.dropDownHintColor),
-                                      ),
+                                      hintText: "Qty",
+                                      autoValidateMode:
+                                          AutovalidateMode.onUserInteraction,
+                                      validator: (value) {
+                                        if (value!.isEmpty) {
+                                          return "Enter spareparts";
+                                        } else {
+                                          return null;
+                                        }
+                                      },
                                     ),
                                   ),
+                                  // Container(
+                                  //   width: 115,
+                                  //   height: 42,
+                                  //   decoration: BoxDecoration(
+                                  //     borderRadius: BorderRadius.circular(4),
+                                  //     border:
+                                  //         Border.all(color: Color(0xffD1D1D1)),
+                                  //   ),
+                                  //   child: TextField(
+                                  //     controller: controller
+                                  //         .sparepartsTextEditingController,
+                                  //     textAlignVertical:
+                                  //         TextAlignVertical.center,
+                                  //     textAlign: TextAlign.center,
+                                  //     keyboardType: TextInputType.number,
+                                  //     decoration: InputDecoration(
+                                  //       errorText: validate
+                                  //           ? "Value Can't Be Empty"
+                                  //           : null,
+                                  //       // errorText: _validate
+                                  //       //     ? "Please Enter spareparts"
+                                  //       //     : null,
+                                  //       border: InputBorder.none,
+                                  //       contentPadding:
+                                  //           const EdgeInsets.symmetric(
+                                  //               horizontal: 8.0,
+                                  //               vertical: 13.0),
+                                  //       hintText: 'Qty',
+                                  //       hintStyle: AppTextStyle
+                                  //           .textStyleRegular14
+                                  //           .copyWith(
+                                  //               color:
+                                  //                   AppColor.dropDownHintColor),
+                                  //       labelStyle: AppTextStyle
+                                  //           .textStyleRegular16
+                                  //           .copyWith(
+                                  //               color: AppColor.blackColor),
+                                  //       helperStyle: AppTextStyle
+                                  //           .textStyleRegular16
+                                  //           .copyWith(
+                                  //               color:
+                                  //                   AppColor.dropDownHintColor),
+                                  //     ),
+                                  //   ),
+                                  // ),
                                   const SizedBox(
                                     width: 10.0,
                                   ),

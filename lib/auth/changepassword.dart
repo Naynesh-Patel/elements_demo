@@ -49,10 +49,10 @@ class _ChangePasswordState extends State<ChangePassword> {
                 validator: (value) {
                   if (value!.isEmpty) {
                     return "Enter Old Password";
-                  } else if (controller.oldPasswordTextEditingController.text !=
+                  } /*else if (controller.oldPasswordTextEditingController.text !=
                       modelUser.value.password) {
                     return "Old Ppassword is not match";
-                  }
+                  }*/
                   return null;
                 },
                 suffixFixIcon: IconButton(

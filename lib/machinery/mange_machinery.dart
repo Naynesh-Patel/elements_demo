@@ -6,6 +6,7 @@ import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:elements/widget/button/small_button.dart';
 import 'package:elements/widget/custom_loader.dart';
 import 'package:elements/widget/dialogs/custom_dialogbox.dart';
+import 'package:elements/widget/empty_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -43,9 +44,7 @@ class _MangeMachineryState extends State<MangeMachinery> {
         child: Obx(() => controller.isGetMachineryLoading.value
             ? const CustomLoader()
             : controller.addMachineryList.isEmpty
-                ? const Center(
-                    child: Text("Data Not Found"),
-                  )
+                ? const EmptyView()
                 : ListView.separated(
                     shrinkWrap: true,
                     itemCount: controller.addMachineryList.length,
