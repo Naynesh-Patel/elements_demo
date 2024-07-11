@@ -48,6 +48,7 @@ class _AttendanceTabState extends State<AttendanceTab> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColor.whiteColor,
         appBar: HomeAppBar(
           title: "Attendance",
           action: [

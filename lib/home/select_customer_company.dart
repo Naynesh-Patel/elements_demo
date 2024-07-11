@@ -3,6 +3,7 @@ import 'package:elements/controller/customer_controller.dart';
 import 'package:elements/controller/machinery_controller.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:elements/widget/custom_loader.dart';
+import 'package:elements/widget/empty_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -35,7 +36,7 @@ class _SelectCustomerCompanyState extends State<SelectCustomerCompany> {
             Get.back();
           },
         ),
-        body:  Obx(() => customerController.isGetCustomerLoading.value ? const CustomLoader() : ListView.separated(
+        body:  Obx(() => customerController.isGetCustomerLoading.value ? const CustomLoader() : customerController.customerList.isEmpty ? const EmptyView() : ListView.separated(
           shrinkWrap: true,
           itemCount: customerController.customerList.length,
           physics: const BouncingScrollPhysics(),

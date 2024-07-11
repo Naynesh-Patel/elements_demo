@@ -70,6 +70,7 @@ class AuthController extends GetxController {
           CustomDialogBox.showPasswordReset(context: context);
           isPasswordLoading.value = false;
         } else {
+          showToast(responseData['message']);
           isPasswordLoading.value = false;
         }
       } else {
