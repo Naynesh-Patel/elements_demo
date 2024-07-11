@@ -94,7 +94,7 @@ class _LoginState extends State<Login> {
                         obscureText: controller.loginPasswordVisible,
                         textEditingController:
                             controller.passwordTextEditingController,
-                        maxLength: 6,
+                        maxLength: 10,
                         hintText: "Password",
                         labelText: "Password*",
                         autoValidateMode: AutovalidateMode.onUserInteraction,
@@ -127,8 +127,8 @@ class _LoginState extends State<Login> {
                           ? const CustomButtonLoader()
                           : CustomButton(
                               color: AppColor.buttonColor,
-                             isLoading: false.obs,
-                               buttonText: 'Login',
+                              isLoading: false.obs,
+                              buttonText: 'Login',
                               onTap: () {
                                 if (_formKey.currentState!.validate()) {
                                   controller.login();
