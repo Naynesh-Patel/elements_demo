@@ -9,6 +9,8 @@ import 'package:elements/widget/dialogs/custom_dialogbox.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../widget/empty_view.dart';
+
 class MangeMachinery extends StatefulWidget {
   final dynamic model;
   const MangeMachinery({super.key, this.model});
@@ -43,9 +45,7 @@ class _MangeMachineryState extends State<MangeMachinery> {
         child: Obx(() => controller.isGetMachineryLoading.value
             ? const CustomLoader()
             : controller.addMachineryList.isEmpty
-                ? const Center(
-                    child: Text("Data Not Found"),
-                  )
+                ? const EmptyView()
                 : ListView.separated(
                     shrinkWrap: true,
                     itemCount: controller.addMachineryList.length,
