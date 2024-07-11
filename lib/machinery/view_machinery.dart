@@ -214,14 +214,6 @@ class _ViewMachineryState extends State<ViewMachinery> {
           ],
         ),
       ),
-      // bottomNavigationBar: Container(
-      //   margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-      //   child: CustomButton(
-      //     color: AppColor.buttonColor,
-      //     buttonText: 'Add',
-      //     onTap: () {},
-      //   ),
-      // )
     );
   }
 }
