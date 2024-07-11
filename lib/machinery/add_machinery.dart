@@ -11,7 +11,10 @@ import 'package:get/get.dart';
 class AddMachinery extends StatefulWidget {
   final dynamic model;
   final bool isUpdate;
-  const AddMachinery({super.key, this.isUpdate = false, this.model});
+  final bool isView;
+
+  const AddMachinery(
+      {super.key, this.isUpdate = false, this.isView = false, this.model});
 
   @override
   State<AddMachinery> createState() => _AddMachineryState();
@@ -61,9 +64,11 @@ class _AddMachineryState extends State<AddMachinery> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: CustomAppBar(
-          title: widget.model != null
-              ? "Update Machinery Details"
-              : "Add Machinery",
+          title: widget.isView
+              ? "View Machinery"
+              : widget.model != null
+                  ? "Update Machinery Details"
+                  : "Add Machinery",
           onPressed: () {
             Get.back();
           },

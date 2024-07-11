@@ -191,9 +191,10 @@ class _AddCustomerState extends State<AddCustomer> {
                   textCapitalization: TextCapitalization.words,
                   hintText: "Enter Company",
                   labelText: "Company",
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return "Enter Company*";
+                      return "Please Enter Company*";
                     } else {
                       return null;
                     }
@@ -205,9 +206,10 @@ class _AddCustomerState extends State<AddCustomer> {
                   controller.ownerTextEditingController,
                   hintText: "Enter Owner Name",
                   labelText: "Owner Name",
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return "Enter Owner Name";
+                      return "Please Enter Owner Name";
                     } else {
                       return null;
                     }
@@ -220,9 +222,10 @@ class _AddCustomerState extends State<AddCustomer> {
                   maxLength: 10,
                   hintText: "99656 25693",
                   labelText: "Contact No",
+                    autoValidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return "Enter Contact No";
+                      return "Please Enter Contact No";
                     } else {
                       return null;
                     }
@@ -237,13 +240,14 @@ class _AddCustomerState extends State<AddCustomer> {
                 ),
                 verticalSpacing(),
                 CustomTextField(
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
                   textEditingController:
                   controller.addressTextEditingController,
                   hintText: "Enter Address",
                   labelText: "Address",
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return "Enter Address";
+                      return "Please Enter Address";
                     } else {
                       return null;
                     }
@@ -261,13 +265,13 @@ class _AddCustomerState extends State<AddCustomer> {
                   controller.websiteTextEditingController,
                   hintText: "www.machinepro.com",
                   labelText: "Website",
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return "Enter Website";
-                    } else {
-                      return null;
-                    }
-                  },
+                  // validator: (value) {
+                  //   if (value!.isEmpty) {
+                  //     return "Enter Website";
+                  //   } else {
+                  //     return null;
+                  //   }
+                  // },
                   suffixFixIcon: widget.isView
                       ? Container(
                       padding: const EdgeInsets.all(14.0),
@@ -286,13 +290,13 @@ class _AddCustomerState extends State<AddCustomer> {
                   controller.referenceTextEditingController,
                   hintText: "L & T Pvt",
                   labelText: "Reference By",
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return "Enter Reference";
-                    } else {
-                      return null;
-                    }
-                  },
+                  // validator: (value) {
+                  //   if (value!.isEmpty) {
+                  //     return "Enter Reference";
+                  //   } else {
+                  //     return null;
+                  //   }
+                  // },
                 ),
                 verticalSpacing(),
                 CustomTextField(
@@ -302,13 +306,13 @@ class _AddCustomerState extends State<AddCustomer> {
                   hintText: "GD5456892098",
                   labelText: "GST No"
                       "",
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return "Enter GST No";
-                    } else {
-                      return null;
-                    }
-                  },
+                  // validator: (value) {
+                  //   if (value!.isEmpty) {
+                  //     return "Enter GST No";
+                  //   } else {
+                  //     return null;
+                  //   }
+                  // },
                 ),
               ],
             ),

@@ -94,7 +94,7 @@ class _LoginState extends State<Login> {
                         obscureText: controller.loginPasswordVisible,
                         textEditingController:
                             controller.passwordTextEditingController,
-                        maxLength: 6,
+                        maxLength: 10,
                         hintText: "Password",
                         labelText: "Password*",
                         autoValidateMode: AutovalidateMode.onUserInteraction,

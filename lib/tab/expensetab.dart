@@ -79,15 +79,22 @@ class _ExpensetTabState extends State<ExpensetTab> {
                                             children: [
                                               _keyValue(
                                                   "Name",
-                                                  expenseController.expenseList[index]['name'] ?? ''),
+                                                  expenseController.expenseList[
+                                                          index]['name'] ??
+                                                      ''),
                                               verticalSpacing(),
                                               _keyValue(
                                                   "Expense Type",
-                                                  expenseController.expenseList[index]['expense_type'] ?? ''),
+                                                  expenseController.expenseList[
+                                                              index]
+                                                          ['expense_type'] ??
+                                                      ''),
                                               verticalSpacing(),
                                               _keyValue(
                                                   "Price",
-                                                  expenseController.expenseList[index]['price'] ?? ''),
+                                                  expenseController.expenseList[
+                                                          index]['price'] ??
+                                                      ''),
                                             ],
                                           ),
                                         ),
@@ -98,9 +105,13 @@ class _ExpensetTabState extends State<ExpensetTab> {
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             _keyValue(
-                                                "DD",
-                                                getDateInDDMMYY(DateTime.parse(expenseController.expenseList[index]['created_at'] ?? '')),
-                                                ),
+                                              "DD",
+                                              getDateInDDMMYY(DateTime.parse(
+                                                  expenseController.expenseList[
+                                                              index]
+                                                          ['created_at'] ??
+                                                      '')),
+                                            ),
                                             Row(
                                               children: [
                                                 InkWell(
@@ -146,7 +157,9 @@ class _ExpensetTabState extends State<ExpensetTab> {
                                                         Get.back();
                                                       },
                                                       onDeleteTap: () {
-                                                        expenseController.deleteExpense(index: index);
+                                                        expenseController
+                                                            .deleteExpense(
+                                                                index: index);
                                                       },
                                                     );
                                                   },

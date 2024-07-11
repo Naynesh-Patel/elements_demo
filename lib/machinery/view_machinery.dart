@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ViewMachinery extends StatefulWidget {
-  const ViewMachinery({super.key, required model});
+  const ViewMachinery({super.key, required model, required bool isView});
 
   @override
   State<ViewMachinery> createState() => _ViewMachineryState();
