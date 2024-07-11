@@ -12,6 +12,7 @@ class AddCustomer extends StatefulWidget {
   final bool isUpdate;
   final bool isView;
   final dynamic model;
+
   const AddCustomer(
       {super.key, this.isUpdate = false, this.isView = false, this.model});
 
@@ -27,12 +28,17 @@ class _AddCustomerState extends State<AddCustomer> {
   void initState() {
     // controller.updateCustomer(widget.model['id']);
     if (widget.model != null) {
-      controller.companyTextEditingController.text = widget.model['company'] ?? '';
-      controller.contactTextEditingController.text = widget.model['contact'] ?? '';
-      controller.referenceTextEditingController.text = widget.model['reference'] ?? '';
+      controller.companyTextEditingController.text =
+          widget.model['company'] ?? '';
+      controller.contactTextEditingController.text =
+          widget.model['contact'] ?? '';
+      controller.referenceTextEditingController.text =
+          widget.model['reference'] ?? '';
       controller.ownerTextEditingController.text = widget.model['owner'] ?? '';
-      controller.addressTextEditingController.text = widget.model['address'] ?? '';
-      controller.websiteTextEditingController.text = widget.model['website'] ?? '';
+      controller.addressTextEditingController.text =
+          widget.model['address'] ?? '';
+      controller.websiteTextEditingController.text =
+          widget.model['website'] ?? '';
       controller.gstinTextEditingController.text = widget.model['gstin'] ?? '';
       controller.base64Image = widget.model['photo'] ?? '';
     } else {
@@ -54,10 +60,10 @@ class _AddCustomerState extends State<AddCustomer> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: CustomAppBar(
-          title:  widget.isView ?
-          "View Customer/Company Details"
-        : widget.model != null
-              ? "Update Customer/Company Details"
+          title: widget.isView
+              ? "View Customer/Company Details"
+              : widget.model != null
+                  ? "Update Customer/Company Details"
                   : "Add Customer/Company",
           onPressed: () {
             Get.back();
@@ -65,7 +71,7 @@ class _AddCustomerState extends State<AddCustomer> {
         ),
         body: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
-          child: widget.isView ? viewOnly () : addEdit(),
+          child: widget.isView ? viewOnly() : addEdit(),
         ),
         bottomNavigationBar: widget.isView
             ? const SizedBox.shrink()
@@ -95,15 +101,14 @@ class _AddCustomerState extends State<AddCustomer> {
     );
   }
 
-  Widget addEdit(){
+  Widget addEdit() {
     return Form(
       key: _formKey,
-      child:  Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            margin:
-            const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+            margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -121,50 +126,51 @@ class _AddCustomerState extends State<AddCustomer> {
                   child: Stack(
                     alignment: Alignment.bottomRight,
                     children: [
-                      widget.model != null ?
-                      controller.imgFile == null ?
-                      SizedBox(
-                        height: 80,
-                        width: 80,
-                        child: ClipRRect(
-                          borderRadius:
-                          BorderRadius.circular(50.0),
-                          child: Image.memory(base64Decode(controller.base64Image),
-                            fit: BoxFit.cover,
-                            height: 80,
-                            width: 80,
-                          ),
-                        ),
-                      ):SizedBox(
-                        height: 80,
-                        width: 80,
-                        child: ClipRRect(
-                            borderRadius:
-                            BorderRadius.circular(50.0),
-                            child: Image.file(controller.imgFile!,
-                              // controller.imgFile!,
-                              fit: BoxFit.cover,
-                            ))) :
-                      controller.imgFile == null
-                          ? Image.asset(
-                        'assets/images/camera.png',
-                        height: 80,
-                        width: 80,
-                      )
-                          : SizedBox(
-                          height: 80,
-                          width: 80,
-                          child: ClipRRect(
-                              borderRadius:
-                              BorderRadius.circular(50.0),
-                              child: Image.file(controller.imgFile!,
-                                // controller.imgFile!,
-                                fit: BoxFit.cover,
-                              ))),
+                      widget.model != null
+                          ? controller.imgFile == null
+                              ? SizedBox(
+                                  height: 80,
+                                  width: 80,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(50.0),
+                                    child: Image.memory(
+                                      base64Decode(controller.base64Image),
+                                      fit: BoxFit.cover,
+                                      height: 80,
+                                      width: 80,
+                                    ),
+                                  ),
+                                )
+                              : SizedBox(
+                                  height: 80,
+                                  width: 80,
+                                  child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(50.0),
+                                      child: Image.file(
+                                        controller.imgFile!,
+                                        // controller.imgFile!,
+                                        fit: BoxFit.cover,
+                                      )))
+                          : controller.imgFile == null
+                              ? Image.asset(
+                                  'assets/images/camera.png',
+                                  height: 80,
+                                  width: 80,
+                                )
+                              : SizedBox(
+                                  height: 80,
+                                  width: 80,
+                                  child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(50.0),
+                                      child: Image.file(
+                                        controller.imgFile!,
+                                        // controller.imgFile!,
+                                        fit: BoxFit.cover,
+                                      ))),
                       InkWell(
                         onTap: () async {
                           bool refresh =
-                          await controller.pickImageFromGallery();
+                              await controller.pickImageFromGallery();
                           if (refresh) {
                             setState(() {});
                           }
@@ -187,7 +193,7 @@ class _AddCustomerState extends State<AddCustomer> {
                 verticalSpacing(),
                 CustomTextField(
                   textEditingController:
-                  controller.companyTextEditingController,
+                      controller.companyTextEditingController,
                   textCapitalization: TextCapitalization.words,
                   hintText: "Enter Company",
                   labelText: "Company",
@@ -202,8 +208,7 @@ class _AddCustomerState extends State<AddCustomer> {
                 ),
                 verticalSpacing(),
                 CustomTextField(
-                  textEditingController:
-                  controller.ownerTextEditingController,
+                  textEditingController: controller.ownerTextEditingController,
                   hintText: "Enter Owner Name",
                   labelText: "Owner Name",
                   autoValidateMode: AutovalidateMode.onUserInteraction,
@@ -218,11 +223,11 @@ class _AddCustomerState extends State<AddCustomer> {
                 verticalSpacing(),
                 CustomTextField(
                   textEditingController:
-                  controller.contactTextEditingController,
+                      controller.contactTextEditingController,
                   maxLength: 10,
                   hintText: "99656 25693",
                   labelText: "Contact No",
-                    autoValidateMode: AutovalidateMode.onUserInteraction,
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return "Please Enter Contact No";
@@ -233,16 +238,16 @@ class _AddCustomerState extends State<AddCustomer> {
                   textInputType: const TextInputType.numberWithOptions(),
                   suffixFixIcon: widget.isView
                       ? const Icon(
-                    Icons.phone,
-                    size: 20,
-                  )
+                          Icons.phone,
+                          size: 20,
+                        )
                       : const SizedBox.shrink(),
                 ),
                 verticalSpacing(),
                 CustomTextField(
                   autoValidateMode: AutovalidateMode.onUserInteraction,
                   textEditingController:
-                  controller.addressTextEditingController,
+                      controller.addressTextEditingController,
                   hintText: "Enter Address",
                   labelText: "Address",
                   validator: (value) {
@@ -254,15 +259,15 @@ class _AddCustomerState extends State<AddCustomer> {
                   },
                   suffixFixIcon: widget.isView
                       ? const Icon(
-                    Icons.location_on_outlined,
-                    size: 20,
-                  )
+                          Icons.location_on_outlined,
+                          size: 20,
+                        )
                       : const SizedBox.shrink(),
                 ),
                 verticalSpacing(),
                 CustomTextField(
                   textEditingController:
-                  controller.websiteTextEditingController,
+                      controller.websiteTextEditingController,
                   hintText: "www.machinepro.com",
                   labelText: "Website",
                   // validator: (value) {
@@ -274,20 +279,20 @@ class _AddCustomerState extends State<AddCustomer> {
                   // },
                   suffixFixIcon: widget.isView
                       ? Container(
-                      padding: const EdgeInsets.all(14.0),
-                      child: Image.asset(
-                        "assets/images/world_wide_web.png",
-                        height: 16,
-                        width: 5,
-                        fit: BoxFit.cover,
-                        color: AppColor.blackColor,
-                      ))
+                          padding: const EdgeInsets.all(14.0),
+                          child: Image.asset(
+                            "assets/images/world_wide_web.png",
+                            height: 16,
+                            width: 5,
+                            fit: BoxFit.cover,
+                            color: AppColor.blackColor,
+                          ))
                       : const SizedBox.shrink(),
                 ),
                 verticalSpacing(),
                 CustomTextField(
                   textEditingController:
-                  controller.referenceTextEditingController,
+                      controller.referenceTextEditingController,
                   hintText: "L & T Pvt",
                   labelText: "Reference By",
                   // validator: (value) {
@@ -301,8 +306,7 @@ class _AddCustomerState extends State<AddCustomer> {
                 verticalSpacing(),
                 CustomTextField(
                   textInputType: TextInputType.number,
-                  textEditingController:
-                  controller.gstinTextEditingController,
+                  textEditingController: controller.gstinTextEditingController,
                   hintText: "GD5456892098",
                   labelText: "GST No"
                       "",
@@ -322,18 +326,17 @@ class _AddCustomerState extends State<AddCustomer> {
     );
   }
 
-
-  Widget viewOnly(){
+  Widget viewOnly() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          margin:
-          const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+          margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Profile :',
+              Text(
+                'Profile :',
                 style: AppTextStyle.textStyleRegular16
                     .copyWith(color: AppColor.blackLightColor),
               ),
@@ -341,19 +344,25 @@ class _AddCustomerState extends State<AddCustomer> {
                 height: 20,
               ),
               Center(
-                child: SizedBox(
-                  height: 80,
-                  width: 80,
-                  child: ClipRRect(
-                    borderRadius:
-                    BorderRadius.circular(50.0),
-                    child: Image.memory(base64Decode(controller.base64Image),
-                      fit: BoxFit.cover,
-                      height: 80,
-                      width: 80,
-                    ),
-                  ),
-                ),
+                child: widget.model['photo'] == ""
+                    ? Image.asset(
+                        'assets/images/user_profile.png',
+                        height: 80,
+                        width: 80,
+                      )
+                    : SizedBox(
+                        height: 80,
+                        width: 80,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(50.0),
+                          child: Image.memory(
+                            base64Decode(controller.base64Image),
+                            fit: BoxFit.cover,
+                            height: 80,
+                            width: 80,
+                          ),
+                        ),
+                      ),
               ),
               verticalSpacing(),
               CustomTextField(
@@ -369,57 +378,56 @@ class _AddCustomerState extends State<AddCustomer> {
               ),
               verticalSpacing(),
               CustomTextField(
-                textEditingController:
-                controller.contactTextEditingController,
+                  textEditingController:
+                      controller.contactTextEditingController,
                   labelText: "Contact No",
-                enable: false,
-                suffixFixIcon: const Icon(
-                  Icons.phone,
-                  size: 20,
-                  color: AppColor.blackColor,
-                )
-              ),
+                  enable: false,
+                  suffixFixIcon: const Icon(
+                    Icons.phone,
+                    size: 20,
+                    color: AppColor.blackColor,
+                  )),
               verticalSpacing(),
               CustomTextField(
                 textEditingController: controller.addressTextEditingController,
                 labelText: "Address",
+                enable: false,
                 suffixFixIcon: const Icon(
-                Icons.location_on_outlined,
-                size: 20,
-              ),
+                  Icons.location_on_outlined,
+                  size: 20,
+                ),
               ),
               verticalSpacing(),
               CustomTextField(
-                textEditingController:
-                controller.websiteTextEditingController,
+                  textEditingController:
+                      controller.websiteTextEditingController,
                   labelText: "Website",
-                suffixFixIcon: Container(
-                    padding: const EdgeInsets.all(14.0),
-                    child: Image.asset(
-                      "assets/images/world_wide_web.png",
-                      height: 16,
-                      width: 5,
-                      fit: BoxFit.cover,
-                      color: AppColor.blackColor,
-                    ))
-              ),
+                  enable: false,
+                  suffixFixIcon: Container(
+                      padding: const EdgeInsets.all(14.0),
+                      child: Image.asset(
+                        "assets/images/world_wide_web.png",
+                        height: 16,
+                        width: 5,
+                        fit: BoxFit.cover,
+                        color: AppColor.blackColor,
+                      ))),
               verticalSpacing(),
               CustomTextField(
                 textEditingController:
-                controller.referenceTextEditingController,
+                    controller.referenceTextEditingController,
                 labelText: "Reference By",
+                enable: false,
               ),
               verticalSpacing(),
               CustomTextField(
-             textEditingController: controller.gstinTextEditingController,
-                  labelText: "GST No"
-              ),
+                  enable: false,
+                  textEditingController: controller.gstinTextEditingController,
+                  labelText: "GST No"),
             ],
           ),
         ),
       ],
     );
   }
-
-
 }
