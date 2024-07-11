@@ -146,6 +146,7 @@ class _AddUserState extends State<AddUser> {
                       onTap: (value) {
                         controller.userRoleTextEditingController.text = value;
                         debugPrint("Select => $value");
+                        _formKey.currentState?.validate();
                       },
                     ),
                     verticalSpacing(),

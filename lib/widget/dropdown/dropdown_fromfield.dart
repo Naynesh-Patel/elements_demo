@@ -8,6 +8,7 @@ class WidgetDropDownFromField extends StatefulWidget {
   final List<dynamic> itemList;
   final String hintText;
   final String labelText;
+  // final dynamic? autovalidateMode;
   final String? errorMsg;
   final String? Function(dynamic)? validator;
   final ValueSetter<dynamic> onTap;
@@ -16,6 +17,7 @@ class WidgetDropDownFromField extends StatefulWidget {
       this.validator,
       required this.hintText,
        this.errorMsg,
+      // this.autovalidateMode,
       required this.onTap,
       required this.itemList,
       required this.labelText});
