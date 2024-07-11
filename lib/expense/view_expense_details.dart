@@ -1,11 +1,11 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
+import 'package:elements/controller/expense_controller.dart';
+import 'package:elements/date_piker.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../date_piker.dart';
-import '../controller/expense_controller.dart';
+import 'package:intl/intl.dart';
 
 class ViewExpenseDetails extends StatefulWidget {
   const ViewExpenseDetails({super.key});
@@ -209,5 +209,9 @@ class _ViewExpenseDetailsState extends State<ViewExpenseDetails> {
         ],
       ),
     );
+  }
+
+  dateTimeFormet(date) {
+    return DateFormat('dd-MM-yyyy').format(date); // you can set your formet
   }
 }

@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
@@ -29,21 +30,25 @@ class CustomerController extends GetxController {
 
   RxList<dynamic> customerList = <dynamic>[].obs;
 
-
   File? imgFile;
   String base64Image = "";
+  late Uint8List bytes;
 
   Future<bool> pickImageFromGallery() async {
     XFile? pickImage =
         await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickImage != null) {
       imgFile = File(pickImage.path);
-      List<int> imageBytes = imgFile!.readAsBytesSync();
-      base64Image = base64Encode(imageBytes);
+      imageToBase64(file: imgFile!);
       return true;
     } else {
       return false;
     }
+  }
+
+  imageToBase64({required File file}) async {
+    Uint8List bytes = await file.readAsBytes();
+    base64Image = base64.encode(bytes);
   }
 
   Future<void> addCustomer() async {
@@ -139,7 +144,6 @@ class CustomerController extends GetxController {
     try {
       String url = "${baseURL}customer/delete";
       log("API => $url");
-
       isGetCustomerDeleteLoading.value = true;
       var response = await http.post(Uri.parse(url), body: {"id": id});
       if (response.statusCode == 200) {

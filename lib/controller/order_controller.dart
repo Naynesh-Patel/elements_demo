@@ -1,13 +1,11 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'dart:ffi';
 import 'dart:io';
 
 import 'package:elements/controller/machinery_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:image_picker/image_picker.dart';
 
 import '../constant/methods.dart';
 import '../constant/urls.dart';
@@ -15,13 +13,17 @@ import '../constant/vars.dart';
 import 'customer_controller.dart';
 
 class OrderController extends GetxController {
-  TextEditingController customerCompanyIdNoTextEditingController = TextEditingController();
-  TextEditingController machineIdsTextEditingController = TextEditingController();
+  TextEditingController customerCompanyIdNoTextEditingController =
+      TextEditingController();
+  TextEditingController machineIdsTextEditingController =
+      TextEditingController();
   // TextEditingController deliveryDateTextEditingController = TextEditingController();
   TextEditingController date = TextEditingController();
   TextEditingController totalPaymentEditingController = TextEditingController();
-  TextEditingController advancePaymentEditingController = TextEditingController();
-  TextEditingController assignOrderIdEditingController = TextEditingController();
+  TextEditingController advancePaymentEditingController =
+      TextEditingController();
+  TextEditingController assignOrderIdEditingController =
+      TextEditingController();
   TextEditingController createdAtEditingController = TextEditingController();
   TextEditingController updatedAtEditingController = TextEditingController();
 
@@ -32,9 +34,8 @@ class OrderController extends GetxController {
 
   String customerCompany = '';
 
-  MachineryController machineryController= Get.find();
+  MachineryController machineryController = Get.find();
   CustomerController customerController = Get.find();
-
 
   RxList<dynamic> orderList = <dynamic>[].obs;
   File? imgFile;
@@ -82,7 +83,8 @@ class OrderController extends GetxController {
   Future<void> addOrder() async {
     Map<String, dynamic> body = {
       "user_id": modelUser.value.id,
-      "customer_company_id": customerController.companyTextEditingController.text,
+      "customer_company_id":
+          customerController.companyTextEditingController.text,
       "machine_ids": machineryController.machineNameTextEditingController.text,
       "delivery_date": date.text,
       "total_payment": totalPaymentEditingController.text,
@@ -134,11 +136,17 @@ class OrderController extends GetxController {
 
   Future<void> updateOrder(id) async {
     Map<String, dynamic> body = {
-      // "name": userNameTextEditingController.text,
-      // "contact_no": contactNoTextEditingController.text,
-      // "address": addressTextEditingController.text,
-      // "user_type": userRoleTextEditingController.text,
-      // "fingerprint": fingerprintEditingController,
+      "user_id": modelUser.value.id,
+      "customer_company_id":
+          customerController.companyTextEditingController.text,
+
+      "machine_ids": machineryController.machineNameTextEditingController.text,
+      "delivery_date": date.text,
+      "total_payment": totalPaymentEditingController.text,
+      "advance_payment": advancePaymentEditingController.text,
+      "assign_order_id": assignOrderIdEditingController.text,
+      // "created_at": createdAtEditingController.text,
+      // "updated_at": updatedAtEditingController.text,
     };
     try {
       String url = "${baseURL}order/update";

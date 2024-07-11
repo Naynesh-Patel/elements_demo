@@ -47,7 +47,6 @@ class _AddMachineryState extends State<AddMachinery> {
           widget.model['machine_type'] ?? '';
       controller.manufactureDurationTextEditingController.text =
           widget.model['manufacture_duration'] ?? '';
-      controller.qtyTextEditingController.text = widget.model['oty'] ?? '';
     } else {
       controller.machineNameTextEditingController.clear();
       controller.qtyTextEditingController.clear();
@@ -68,7 +67,6 @@ class _AddMachineryState extends State<AddMachinery> {
           onPressed: () {
             Get.back();
           },
-          // action: [IconButton(onPressed: () {}, icon: const Icon(Icons.add))],
         ),
         body: Form(
           key: _formKey,
@@ -85,7 +83,7 @@ class _AddMachineryState extends State<AddMachinery> {
                         textEditingController:
                             controller.machineNameTextEditingController,
                         hintText: "Machine Name",
-                        labelText: "Machine Name*",
+                        labelText: "Machine Name",
                         autoValidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
                           if (value!.isEmpty) {
@@ -100,7 +98,7 @@ class _AddMachineryState extends State<AddMachinery> {
                         textEditingController:
                             controller.machinetypeEditingController,
                         hintText: "Machine Type",
-                        labelText: "Machine Type*",
+                        labelText: "Machine Type",
                         autoValidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
                           if (value!.isEmpty) {
@@ -114,8 +112,9 @@ class _AddMachineryState extends State<AddMachinery> {
                       CustomTextField(
                         textEditingController:
                             controller.qtyTextEditingController,
+                        textInputType: TextInputType.number,
                         hintText: "Qty",
-                        labelText: "Qty*",
+                        labelText: "Qty",
                         autoValidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
                           if (value!.isEmpty) {
@@ -130,7 +129,7 @@ class _AddMachineryState extends State<AddMachinery> {
                         textEditingController:
                             controller.manufactureDurationTextEditingController,
                         hintText: "Eg. 30 days",
-                        labelText: "Manufacture Duration*",
+                        labelText: "Manufacture Duration",
                         autoValidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
                           if (value!.isEmpty) {
@@ -232,9 +231,10 @@ class _AddMachineryState extends State<AddMachinery> {
                                     width: 115,
                                     height: 42,
                                     decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(4),
-                                        border: Border.all(
-                                            color: const Color(0xffD1D1D1))),
+                                      borderRadius: BorderRadius.circular(4),
+                                      border: Border.all(
+                                          color: const Color(0xffD1D1D1)),
+                                    ),
                                     child: TextField(
                                       controller: controller
                                           .sparepartsTextEditingController,

@@ -96,7 +96,6 @@ class _AddExpenseState extends State<AddExpense> {
             onTap: () {
               expenseController.addExpense();
               Get.back();
-
               if (_formKey.currentState!.validate()) {
                 if (widget.model != null) {
                   expenseController.updateExpense(widget.model['id']);

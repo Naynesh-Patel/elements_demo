@@ -13,7 +13,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomeTab extends StatefulWidget {
-  const HomeTab({super.key});
+  final dynamic model;
+  const HomeTab({super.key, this.model});
 
   @override
   State<HomeTab> createState() => _HomeTabState();
@@ -241,8 +242,8 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
                         SmallButton(
                             title: "  Edit  ",
                             onTap: () {
-                              Get.to(const ViewOrderDetails(
-                                isUpdate: true,
+                              Get.to(CreateNewOrder(
+                                model: orderController.orderList[index],
                               ));
                             },
                             textColor: const Color(0xff555555)),

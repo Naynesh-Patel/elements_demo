@@ -12,6 +12,7 @@ class SparepartsController extends GetxController {
   TextEditingController qtyTypeTextEditingController = TextEditingController();
   TextEditingController newqtyTypeTextEditingController =
       TextEditingController();
+
   TextEditingController totalQtyTextEditingController = TextEditingController();
 
   RxBool isSparepartsLoading = false.obs;

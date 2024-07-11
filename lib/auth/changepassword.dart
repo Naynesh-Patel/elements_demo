@@ -3,7 +3,6 @@ import 'package:elements/constant/vars.dart';
 import 'package:elements/controller/auth_controller.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:elements/widget/button/custom_button.dart';
-import 'package:elements/widget/dialogs/custom_dialogbox.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -23,7 +22,7 @@ class _ChangePasswordState extends State<ChangePassword> {
 
   @override
   void initState() {
-    // controller.changePassword();
+    controller.changePassword();
     super.initState();
   }
 
@@ -57,7 +56,8 @@ class _ChangePasswordState extends State<ChangePassword> {
                 validator: (value) {
                   if (value!.isEmpty) {
                     return "Enter Old Password";
-                  } else if(controller.oldPasswordTextEditingController.text != modelUser.value.password){
+                  } else if (controller.oldPasswordTextEditingController.text !=
+                      modelUser.value.password) {
                     return "Old Ppassword is not match";
                   }
                   return null;

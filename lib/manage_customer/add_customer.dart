@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/controller/customer_controller.dart';
@@ -35,12 +37,17 @@ class _AddCustomerState extends State<AddCustomer> {
       controller.ownerTextEditingController.text = widget.model['owner'] ?? '';
       controller.addressTextEditingController.text =
           widget.model['address'] ?? '';
+      controller.websiteTextEditingController.text =
+          widget.model['website'] ?? '';
+      controller.gstinTextEditingController.text = widget.model['gstin'] ?? '';
     } else {
       controller.companyTextEditingController.clear();
       controller.contactTextEditingController.clear();
       controller.referenceTextEditingController.clear();
       controller.ownerTextEditingController.clear();
       controller.addressTextEditingController.clear();
+      controller.websiteTextEditingController.clear();
+      controller.gstinTextEditingController.clear();
     }
     super.initState();
   }
@@ -99,8 +106,9 @@ class _AddCustomerState extends State<AddCustomer> {
                                     child: ClipRRect(
                                         borderRadius:
                                             BorderRadius.circular(50.0),
-                                        child: Image.file(
-                                          controller.imgFile!,
+                                        child: Image.memory(
+                                          base64Decode(controller.base64Image),
+                                          // controller.imgFile!,
                                           fit: BoxFit.cover,
                                         ))),
                             InkWell(
@@ -131,10 +139,10 @@ class _AddCustomerState extends State<AddCustomer> {
                         textEditingController:
                             controller.companyTextEditingController,
                         hintText: "Enter Company",
-                        labelText: "Company*",
+                        labelText: "Company",
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return "Enter Company*";
+                            return "Please Enter Company";
                           } else {
                             return null;
                           }
@@ -145,10 +153,10 @@ class _AddCustomerState extends State<AddCustomer> {
                         textEditingController:
                             controller.ownerTextEditingController,
                         hintText: "Enter Owner Name",
-                        labelText: "Owner Name*",
+                        labelText: "Owner Name",
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return "Enter Owner Name*";
+                            return "Please Enter Owner Name";
                           } else {
                             return null;
                           }
@@ -160,10 +168,10 @@ class _AddCustomerState extends State<AddCustomer> {
                             controller.contactTextEditingController,
                         maxLength: 10,
                         hintText: "99656 25693",
-                        labelText: "Contact No.*",
+                        labelText: "Contact No",
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return "Enter Contact No.*";
+                            return "Please Enter Contact No";
                           } else {
                             return null;
                           }
@@ -184,7 +192,7 @@ class _AddCustomerState extends State<AddCustomer> {
                         labelText: "Address",
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return "Enter Address*";
+                            return "Please Enter Address";
                           } else {
                             return null;
                           }
@@ -202,13 +210,13 @@ class _AddCustomerState extends State<AddCustomer> {
                             controller.websiteTextEditingController,
                         hintText: "www.machinepro.com",
                         labelText: "Website",
-                        // validator: (value) {
-                        //   if (value!.isEmpty) {
-                        //     return "Enter Website*";
-                        //   } else {
-                        //     return null;
-                        //   }
-                        // },
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Please Enter Website";
+                          } else {
+                            return null;
+                          }
+                        },
                         suffixFixIcon: widget.isView
                             ? Container(
                                 padding: const EdgeInsets.all(14.0),
@@ -227,27 +235,29 @@ class _AddCustomerState extends State<AddCustomer> {
                             controller.referenceTextEditingController,
                         hintText: "L & T Pvt",
                         labelText: "Reference By",
-                        // validator: (value) {
-                        //   if (value!.isEmpty) {
-                        //     return "Enter Reference*";
-                        //   } else {
-                        //     return null;
-                        //   }
-                        // },
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Please Enter Reference";
+                          } else {
+                            return null;
+                          }
+                        },
                       ),
                       verticalSpacing(),
                       CustomTextField(
+                        textInputType: TextInputType.number,
                         textEditingController:
                             controller.gstinTextEditingController,
                         hintText: "GD5456892098",
-                        labelText: "GST No.",
-                        // validator: (value) {
-                        //   if (value!.isEmpty) {
-                        //     return "Enter GST No*";
-                        //   } else {
-                        //     return null;
-                        //   }
-                        // },
+                        labelText: "GST No"
+                            "",
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Please Enter GST No";
+                          } else {
+                            return null;
+                          }
+                        },
                       ),
                     ],
                   ),
@@ -268,6 +278,7 @@ class _AddCustomerState extends State<AddCustomer> {
                     if (_formKey.currentState!.validate()) {
                       if (widget.model != null) {
                         controller.updateCustomer(widget.model['id']);
+                        Get.back();
                       } else {
                         controller.addCustomer();
                       }

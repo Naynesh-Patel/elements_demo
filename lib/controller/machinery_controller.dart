@@ -1,14 +1,13 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:elements/constant/methods.dart';
+import 'package:elements/constant/urls.dart';
 import 'package:elements/constant/vars.dart';
 import 'package:elements/model/model_machinery.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-
-import '../constant/methods.dart';
-import '../constant/urls.dart';
 
 class MachineryController extends GetxController {
   RxList<ModelMachinery> machineryList = <ModelMachinery>[].obs;
@@ -36,7 +35,7 @@ class MachineryController extends GetxController {
     Map<String, dynamic> body = {
       "id": modelUser.value.id,
       "machine_name": machineNameTextEditingController.text,
-      // "qty": qtyTextEditingController.text,
+      "qty": qtyTextEditingController.text,
       "machine_type": machinetypeEditingController.text,
       "manufacture_duration": manufactureDurationTextEditingController.text,
       "spareparts": sparepartsTextEditingController.text,
@@ -86,7 +85,7 @@ class MachineryController extends GetxController {
     Map<String, dynamic> body = {
       "id": id,
       "machine_name": machineNameTextEditingController.text,
-      // "qty": qtyTextEditingController.text,
+      "qty": qtyTextEditingController.text,
       "machine_type": machinetypeEditingController.text,
       "manufacture_duration": manufactureDurationTextEditingController.text,
       "spareparts": sparepartsTextEditingController.text,

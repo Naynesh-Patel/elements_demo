@@ -1,13 +1,14 @@
 import 'package:elements/constant/app_colors.dart';
+import 'package:elements/controller/user_controller.dart';
+import 'package:elements/date_piker.dart';
 import 'package:elements/user/add_user.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
+import 'package:elements/widget/custom_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../constant/app_text_style.dart';
-import '../controller/user_controller.dart';
-import '../date_piker.dart';
-import '../widget/custom_loader.dart';
+import '../widget/dialogs/custom_dialogbox.dart';
 
 class MangeUser extends StatefulWidget {
   const MangeUser({super.key});
@@ -112,12 +113,29 @@ class _MangeUserState extends State<MangeUser> {
                       textAlign: TextAlign.center,
                       style: AppTextStyle.textStyleLight12
                           .copyWith(color: AppColor.blackLightColor))),
+
               Expanded(
-                child: Text(
-                  Authoriy,
-                  textAlign: TextAlign.end,
-                  style: AppTextStyle.textStyleLight12
-                      .copyWith(color: AppColor.blackLightColor),
+                child: InkWell(
+                  onTap: () {
+                    CustomDialogBox.showDeleteDialog(
+                      context: context,
+                      bodyText:
+                          "Do you really want to cancel these records? This process cannot be undone.",
+                      onCancelTap: () {
+                        Get.back();
+                      },
+                      onDeleteTap: () {
+                        controller.deleteUser(controller.userList[index]['id']);
+                        controller.userList.removeAt(index);
+                      },
+                    );
+                  },
+                  child: Text(
+                    "$Authoriy...",
+                    textAlign: TextAlign.end,
+                    style: AppTextStyle.textStyleLight12
+                        .copyWith(color: AppColor.blackLightColor),
+                  ),
                 ),
               ),
               // Expanded(
