@@ -1,12 +1,10 @@
 import 'package:elements/constant/app_colors.dart';
-import 'package:elements/constant/vars.dart';
 import 'package:elements/controller/auth_controller.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:elements/widget/button/custom_button.dart';
+import 'package:elements/widget/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../widget/custom_text_field.dart';
 
 class ChangePassword extends StatefulWidget {
   final dynamic model;
@@ -19,7 +17,6 @@ class ChangePassword extends StatefulWidget {
 
 class _ChangePasswordState extends State<ChangePassword> {
   AuthController controller = Get.find();
-
 
   final _formKey = GlobalKey<FormState>();
 
@@ -49,10 +46,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                 validator: (value) {
                   if (value!.isEmpty) {
                     return "Enter Old Password";
-                  } /*else if (controller.oldPasswordTextEditingController.text !=
-                      modelUser.value.password) {
-                    return "Old Ppassword is not match";
-                  }*/
+                  }
                   return null;
                 },
                 suffixFixIcon: IconButton(
