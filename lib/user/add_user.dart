@@ -139,7 +139,7 @@ class _AddUserState extends State<AddUser> {
                       ),
                     ),
                     verticalSpacing(),
-                    WidgetDropDownFromField(
+                    WidgetDropDownFromField (
                       hintText: "Select User Role",
                       labelText: "User Role",
                       itemList: const ["Admin", "User", "Seller"],
