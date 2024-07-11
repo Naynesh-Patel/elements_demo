@@ -75,6 +75,7 @@ class ExpenseController extends GetxController {
 
   Future<void> updateExpense(id) async {
     Map<String, dynamic> body = {
+      'id':id,
       "name": nameTextEditingController.text,
       "expense_type": expenseTypeTextEditingController.text,
       "price": priceTextEditingController.text,
@@ -82,37 +83,39 @@ class ExpenseController extends GetxController {
       "company_id": '2',
     };
     try {
-      String url = "${baseURL}user/update";
+      String url = "${baseURL}expense/update";
       log("API => $url");
-      isUpdateExpenseLoading.value = true;
+      isExpenseLoading.value = true;
       var response = await http.post(Uri.parse(url), body: body);
       if (response.statusCode == 200) {
         jsonDecode(response.body);
         Get.back();
         getExpense();
-        isUpdateExpenseLoading.value = false;
+        isExpenseLoading.value = false;
       } else {
         debugPrint("statusCode${response.statusCode}");
-        isUpdateExpenseLoading.value = false;
+        isExpenseLoading.value = false;
       }
     } catch (e) {
       debugPrint("Error${e.toString()}");
-      isUpdateExpenseLoading.value = false;
+      isExpenseLoading.value = false;
     }
   }
 
-  Future<void> deleteExpense(id) async {
+  Future<void> deleteExpense({required int index}) async {
     try {
-      String url = "${baseURL}user/delete";
+      String url = "${baseURL}expense/delete";
       log("API => $url");
 
       isDeleteExpenseLoading.value = true;
-      var response = await http.post(Uri.parse(url), body: {"id": id});
+      var response = await http.post(Uri.parse(url), body: {"id": expenseList[index]['id']});
       if (response.statusCode == 200) {
         var responseData = jsonDecode(response.body);
         isDeleteExpenseLoading.value = false;
         if (responseData["status"] == 1) {
           showToast(responseData["message"]);
+          expenseList.removeAt(index);
+          Get.back();
           isDeleteExpenseLoading.value = false;
         } else {
           showToast(responseData["message"]);

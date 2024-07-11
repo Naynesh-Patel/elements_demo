@@ -10,31 +10,28 @@ import 'package:get/get.dart';
 import '../controller/expense_controller.dart';
 
 class AddExpense extends StatefulWidget {
-  final bool isUpdate;
   final dynamic model;
-  const AddExpense({super.key, this.isUpdate = false, this.model});
+  const AddExpense({super.key,this.model});
 
   @override
   State<AddExpense> createState() => _AddExpenseState();
 }
 
 class _AddExpenseState extends State<AddExpense> {
+
   HomeController controller = Get.find();
   ExpenseController expenseController = Get.find();
+  CustomerController customerController = Get.find();
 
   final _formKey = GlobalKey<FormState>();
-  CustomerController customerController = Get.find();
 
   @override
   void initState() {
     // controller.updateCustomer(widget.model['id']);
     if (widget.model != null) {
-      expenseController.nameTextEditingController.text =
-          widget.model['name'] ?? '';
-      expenseController.expenseTypeTextEditingController.text =
-          widget.model['expense_type'] ?? '';
-      expenseController.priceTextEditingController.text =
-          widget.model['price'] ?? '';
+      expenseController.nameTextEditingController.text = widget.model['name'] ?? '';
+      expenseController.expenseTypeTextEditingController.text = widget.model['expense_type'] ?? '';
+      expenseController.priceTextEditingController.text = widget.model['price'] ?? '';
     } else {
       expenseController.expenseTypeTextEditingController.clear();
       expenseController.nameTextEditingController.clear();
@@ -64,9 +61,14 @@ class _AddExpenseState extends State<AddExpense> {
                 CustomTextField(
                   hintText: "Name",
                   labelText: "Name",
-                  textEditingController:
-                      expenseController.nameTextEditingController,
-                  focusNode: controller.expenseNameFocusNode,
+                  textEditingController: expenseController.nameTextEditingController,
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (p0) {
+                    if(p0!.isEmpty){
+                      return "Please enter the name";
+                    }
+                    return null;
+                  },
                 ),
                 verticalSpacing(),
                 CustomTextField(
@@ -74,7 +76,13 @@ class _AddExpenseState extends State<AddExpense> {
                       expenseController.expenseTypeTextEditingController,
                   hintText: "Tea",
                   labelText: "Expense Type",
-                  focusNode: controller.expenseTypeFocusNode,
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (p0) {
+                    if(p0!.isEmpty){
+                      return "Please enter the type";
+                    }
+                    return null;
+                  },
                 ),
                 verticalSpacing(),
                 CustomTextField(
@@ -82,7 +90,14 @@ class _AddExpenseState extends State<AddExpense> {
                       expenseController.priceTextEditingController,
                   hintText: "₹ 20 ",
                   labelText: "Price",
-                  focusNode: controller.expensePriceFocusNode,
+                  autoValidateMode: AutovalidateMode.onUserInteraction,
+                  textInputType: TextInputType.number,
+                  validator: (p0) {
+                    if(p0!.isEmpty){
+                      return "Please enter the price";
+                    }
+                    return null;
+                  },
                 ),
               ],
             ),
@@ -92,14 +107,12 @@ class _AddExpenseState extends State<AddExpense> {
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: CustomButton(
             color: AppColor.buttonColor,
+            isLoading: expenseController.isExpenseLoading,
             buttonText: widget.model != null ? 'Update' : 'Done',
             onTap: () {
-              expenseController.addExpense();
-              Get.back();
               if (_formKey.currentState!.validate()) {
                 if (widget.model != null) {
                   expenseController.updateExpense(widget.model['id']);
-                  Get.back();
                 } else {
                   expenseController.addExpense();
                 }

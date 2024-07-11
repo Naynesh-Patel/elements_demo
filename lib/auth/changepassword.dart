@@ -20,15 +20,8 @@ class ChangePassword extends StatefulWidget {
 class _ChangePasswordState extends State<ChangePassword> {
   AuthController controller = Get.find();
 
-  @override
-  void initState() {
-    controller.changePassword();
-    super.initState();
-  }
 
   final _formKey = GlobalKey<FormState>();
-
-  String confirmPassword = '';
 
   @override
   Widget build(BuildContext context) {
@@ -112,8 +105,8 @@ class _ChangePasswordState extends State<ChangePassword> {
                   obscureText: controller.changePasswordVisible,
                   textEditingController:
                       controller.confrimeTextEditingController,
-                  hintText: "Confrime Password",
-                  labelText: "Confrime Password",
+                  hintText: "Confirm Password",
+                  labelText: "Confirm Password",
                   validator: (value) {
                     if (value != null && value.isEmpty) {
                       return 'Conform password is required please enter';
@@ -146,6 +139,7 @@ class _ChangePasswordState extends State<ChangePassword> {
         margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         child: CustomButton(
           color: AppColor.buttonColor,
+          isLoading: controller.isPasswordLoading,
           buttonText: 'Change Password',
           onTap: () {
             if (_formKey.currentState!.validate()) {

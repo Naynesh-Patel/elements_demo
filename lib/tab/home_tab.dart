@@ -13,8 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomeTab extends StatefulWidget {
-  final dynamic model;
-  const HomeTab({super.key, this.model});
+  const HomeTab({super.key});
 
   @override
   State<HomeTab> createState() => _HomeTabState();
@@ -40,16 +39,6 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
       backgroundColor: AppColor.whiteColor,
       appBar: HomeAppBar(
         title: "MachinePro",
-        // action: [
-        //   SvgPicture.asset(
-        //     "assets/svg/ic_notification.svg",
-        //     height: 20,
-        //     width: 20,
-        //   ),
-        //   const SizedBox(
-        //     width: 16,
-        //   ),
-        // ],
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -62,12 +51,7 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
                 height: 16,
               ),
               Obx(() => controller.selectTab.value == 1
-                  ? InkWell(
-                      onTap: () {
-                        Get.to(const ViewOrderDetails());
-                      },
-                      child: _onGoingView(),
-                    )
+                  ? _onGoingView()
                   : controller.selectTab.value == 2
                       ? _upComingView()
                       : _completeView()),
@@ -177,101 +161,106 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
               );
             },
             itemBuilder: (context, index) {
-              return Container(
-                width: double.maxFinite,
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 16.0, vertical: 16.0),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(4),
-                    border: Border.all(color: AppColor.borderColor)),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        _keyValue(
-                          "OD",
-                          '18-09-2024',
-                        ),
-                        _keyValue(
-                          "DD",
-                          orderController.orderList[index]['delivery_date'],
-                        ),
-                      ],
-                    ),
-                    verticalSpacing(),
-                    _keyValue(
-                      "Client",
-                      orderController.orderList[index]['customer_company_id'],
-                    ),
-                    verticalSpacing(),
-                    _keyValue(
-                      "Machine Type",
-                      orderController.orderList[index]['machine_ids'],
-                    ),
-                    verticalSpacing(),
-                    _keyValue(
-                      "Total Payment",
-                      orderController.orderList[index]['total_payment'],
-                    ),
-                    verticalSpacing(),
-                    _keyValue(
-                      "Advance Payment",
-                      orderController.orderList[index]['advance_payment'],
-                    ),
-                    verticalSpacing(),
-                    _keyValue(
-                      "Assigned Order",
-                      orderController.orderList[index]['assign_order_id'],
-                    ),
-                    verticalSpacing(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        SmallButton(
-                          title: "Invoice",
-                          textColor: AppColor.selectColor,
-                          onTap: () {
-                            Get.to(const Invoice());
-                          },
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        SmallButton(
-                            title: "  Edit  ",
+              return InkWell(
+                onTap: () {
+                  Get.to(const ViewOrderDetails());
+                },
+                child: Container(
+                  width: double.maxFinite,
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 16.0, vertical: 16.0),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4),
+                      border: Border.all(color: AppColor.borderColor)),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          _keyValue(
+                            "OD",
+                            '18-09-2024',
+                          ),
+                          _keyValue(
+                            "DD",
+                            orderController.orderList[index]['delivery_date'],
+                          ),
+                        ],
+                      ),
+                      verticalSpacing(),
+                      _keyValue(
+                        "Client",
+                        orderController.orderList[index]['customer_company_id'],
+                      ),
+                      verticalSpacing(),
+                      _keyValue(
+                        "Machine Type",
+                        orderController.orderList[index]['machine_ids'],
+                      ),
+                      verticalSpacing(),
+                      _keyValue(
+                        "Total Payment",
+                        orderController.orderList[index]['total_payment'],
+                      ),
+                      verticalSpacing(),
+                      _keyValue(
+                        "Advance Payment",
+                        orderController.orderList[index]['advance_payment'],
+                      ),
+                      verticalSpacing(),
+                      _keyValue(
+                        "Assigned Order",
+                        orderController.orderList[index]['assign_order_id'],
+                      ),
+                      verticalSpacing(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          SmallButton(
+                            title: "Invoice",
+                            textColor: AppColor.selectColor,
                             onTap: () {
-                              Get.to(CreateNewOrder(
-                                model: orderController.orderList[index],
-                              ));
+                              Get.to(const Invoice());
                             },
-                            textColor: const Color(0xff555555)),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        SmallButton(
-                            title: "Cancel",
-                            onTap: () {
-                              CustomDialogBox.showDeleteDialog(
-                                context: context,
-                                bodyText:
-                                    "Do you really want to cancel these records? This process cannot be undone.",
-                                onCancelTap: () {
-                                  Get.back();
-                                },
-                                onDeleteTap: () {
-                                  orderController.deleteUser(
-                                      orderController.orderList[index]['id']);
-                                  orderController.orderList.removeAt(index);
-                                  Get.back();
-                                },
-                              );
-                            },
-                            textColor: const Color(0xffB50A0A)),
-                      ],
-                    )
-                  ],
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          SmallButton(
+                              title: "  Edit  ",
+                              onTap: () {
+                                Get.to(const ViewOrderDetails(
+                                  isUpdate: true,
+                                ));
+                              },
+                              textColor: const Color(0xff555555)),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          SmallButton(
+                              title: "Cancel",
+                              onTap: () {
+                                CustomDialogBox.showDeleteDialog(
+                                  context: context,
+                                  bodyText:
+                                      "Do you really want to cancel these records? This process cannot be undone.",
+                                  onCancelTap: () {
+                                    Get.back();
+                                  },
+                                  onDeleteTap: () {
+                                    orderController.deleteUser(
+                                        orderController.orderList[index]['id']);
+                                    orderController.orderList.removeAt(index);
+                                    Get.back();
+                                  },
+                                );
+                              },
+                              textColor: const Color(0xffB50A0A)),
+                        ],
+                      )
+                    ],
+                  ),
                 ),
               );
             },

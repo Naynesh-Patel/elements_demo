@@ -32,7 +32,6 @@ class CustomerController extends GetxController {
 
   File? imgFile;
   String base64Image = "";
-  late Uint8List bytes;
 
   Future<bool> pickImageFromGallery() async {
     XFile? pickImage =
@@ -123,33 +122,40 @@ class CustomerController extends GetxController {
     try {
       String url = "${baseURL}customer/update";
       log("API => $url");
-      isGetCustomerUpdateLoading.value = true;
+      isCustomerLoading.value = true;
       var response = await http.post(Uri.parse(url), body: body);
       if (response.statusCode == 200) {
-        jsonDecode(response.body);
-        Get.back();
-        getcustomer();
-        isGetCustomerUpdateLoading.value = false;
+        var responseData = jsonDecode(response.body);
+        if(responseData['status']==1){
+          isCustomerLoading.value = false;
+          Get.back();
+          getcustomer();
+        }else{
+          debugPrint("Error${responseData['message']}");
+          isCustomerLoading.value = false;
+        }
       } else {
         debugPrint("statusCode${response.statusCode}");
-        isGetCustomerUpdateLoading.value = false;
+        isCustomerLoading.value = false;
       }
     } catch (e) {
       debugPrint("Error${e.toString()}");
-      isGetCustomerUpdateLoading.value = false;
+      isCustomerLoading.value = false;
     }
   }
 
-  Future<void> deletecustomer(id) async {
+  Future<void> deleteCustomer({required int index}) async {
     try {
       String url = "${baseURL}customer/delete";
       log("API => $url");
       isGetCustomerDeleteLoading.value = true;
-      var response = await http.post(Uri.parse(url), body: {"id": id});
+      var response = await http.post(Uri.parse(url), body: {"id":customerList[index]['id']});
       if (response.statusCode == 200) {
         var responseData = jsonDecode(response.body);
         isGetCustomerDeleteLoading.value = false;
         if (responseData["status"] == 1) {
+          customerList.removeAt(index);
+          Get.back();
           showToast(responseData["message"]);
           isGetCustomerDeleteLoading.value = false;
         } else {

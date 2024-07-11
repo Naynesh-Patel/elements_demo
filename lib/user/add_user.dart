@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/controller/user_controller.dart';
@@ -27,8 +29,7 @@ class _AddUserState extends State<AddUser> {
   @override
   void initState() {
     if (widget.model != null) {
-      controller.userRoleTextEditingController.text =
-          widget.model['user_type'] ?? '';
+      controller.userRoleTextEditingController.text = widget.model['user_type'] ?? '';
       controller.userNameTextEditingController.text =
           widget.model['name'] ?? '';
       controller.addressTextEditingController.text =
@@ -37,12 +38,14 @@ class _AddUserState extends State<AddUser> {
           widget.model['contact_no'] ?? '';
       controller.fingerprintEditingController.text =
           widget.model['fingerprint'] ?? '';
+      controller.base64Image = widget.model['photo'] ?? '';
     } else {
       controller.userRoleTextEditingController.clear();
       controller.userNameTextEditingController.clear();
       controller.addressTextEditingController.clear();
       controller.contactNoTextEditingController.clear();
       controller.fingerprintEditingController.clear();
+      controller.base64Image = "";
     }
     super.initState();
   }
@@ -81,6 +84,22 @@ class _AddUserState extends State<AddUser> {
                       child: Stack(
                         alignment: Alignment.bottomRight,
                         children: [
+                          widget.model != null ? controller.imgFile == null ? SizedBox(
+                              height: 80,
+                              width: 80,
+                              child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(50.0),
+                                  child: Image.memory(jsonDecode(controller.base64Image),
+                                    fit: BoxFit.cover,
+                                  ))) : SizedBox(
+                              height: 80,
+                              width: 80,
+                              child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(50.0),
+                                  child: Image.file(
+                                    controller.imgFile!,
+                                    fit: BoxFit.cover,
+                                  ))):
                           controller.imgFile == null
                               ? Image.asset(
                                   'assets/images/camera.png',
@@ -177,19 +196,25 @@ class _AddUserState extends State<AddUser> {
                       },
                     ),
                     verticalSpacing(),
-                    CustomTextField(
-                      textEditingController:
-                          controller.fingerprintEditingController,
-                      hintText: "Upload Fingerprint",
-                      labelText: "Upload Fingerprint",
-                      autoValidateMode: AutovalidateMode.onUserInteraction,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Please Enter Fingerprint";
-                        } else {
-                          return null;
-                        }
+                    InkWell(
+                      onTap: () {
+                        controller.getFingerPrint();
                       },
+                      child: CustomTextField(
+                        textEditingController:
+                            controller.fingerprintEditingController,
+                        hintText: "Upload Fingerprint",
+                        labelText: "Upload Fingerprint",
+                        autoValidateMode: AutovalidateMode.onUserInteraction,
+                        enable: false,
+                        // validator: (value) {
+                        //   if (value!.isEmpty) {
+                        //     return "Please Enter Fingerprint";
+                        //   } else {
+                        //     return null;
+                        //   }
+                        // },
+                      ),
                     ),
                     verticalSpacing(),
 
@@ -251,6 +276,7 @@ class _AddUserState extends State<AddUser> {
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: CustomButton(
             color: AppColor.buttonColor,
+            isLoading: controller.isUserLoading,
             buttonText: widget.model != null ? 'Update' : 'Add',
             onTap: () {
               if (_formKey.currentState!.validate()) {

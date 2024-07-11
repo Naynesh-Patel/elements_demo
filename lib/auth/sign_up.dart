@@ -161,6 +161,7 @@ class _SignUpState extends State<SignUp> {
               ),
               CustomButton(
                 color: AppColor.buttonColor,
+                isLoading: false.obs,
                 buttonText: 'Sign Up',
                 onTap: () {
                   Get.to(const DashBoard());

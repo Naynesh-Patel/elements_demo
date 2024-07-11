@@ -6,6 +6,7 @@ import 'package:elements/manage_customer/customer_view_detail.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:elements/widget/button/small_button.dart';
 import 'package:elements/widget/dialogs/custom_dialogbox.dart';
+import 'package:elements/widget/empty_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -47,135 +48,122 @@ class _MangeCustomerState extends State<MangeCustomer> {
           child: Obx(
             () => controller.isGetCustomerLoading.value
                 ? const CustomLoader()
-                : Column(
-                    children: [
-                      ListView.separated(
-                        shrinkWrap: true,
-                        scrollDirection: Axis.vertical,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: controller.customerList.length,
-                        itemBuilder: (context, index) {
-                          return InkWell(
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 10),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(4),
-                                  border: Border.all(
-                                      color: const Color(0xffE6E6E6),
-                                      width: 1)),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          _keyValue(
-                                              "Name",
-                                              controller.customerList[index]
-                                                      ['company'] ??
-                                                  ''),
-                                          verticalSpacing(),
-                                          _keyValue(
-                                              "Contact No",
-                                              controller.customerList[index]
-                                                      ['contact'] ??
-                                                  ''),
-                                          verticalSpacing(),
-                                          _keyValue(
-                                              "Reference By",
-                                              controller.customerList[index]
-                                                      ['reference'] ??
-                                                  ''),
-                                          verticalSpacing(),
-                                        ],
-                                      ),
-                                      Spacer(),
-                                      SizedBox(
-                                        height: 80,
-                                        width: 80,
-                                        child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(50.0),
-                                            child: Image.memory(
-                                              base64Decode(
-                                                  controller.customerList[index]
-                                                      ['photo']),
-                                              fit: BoxFit.cover,
-                                            )),
-                                      ),
-                                    ],
-                                  ),
-                                  verticalSpacing(),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      SmallButton(
-                                        title: "  View  ",
-                                        textColor: AppColor.selectColor,
-                                        onTap: () {
-                                          Get.to(
-                                              const AddCustomer(isView: true));
-                                        },
-                                      ),
-                                      const SizedBox(
-                                        width: 12.0,
-                                      ),
-                                      SmallButton(
-                                        title: "  Edit  ",
-                                        onTap: () {
-                                          Get.to(AddCustomer(
-                                            model:
-                                                controller.customerList[index],
-                                          ));
-                                        },
-                                      ),
-                                      const SizedBox(
-                                        width: 12.0,
-                                      ),
-                                      SmallButton(
-                                        title: "Delete",
-                                        textColor: AppColor.cancelColor,
-                                        onTap: () {
-                                          CustomDialogBox.showDeleteDialog(
-                                            context: context,
-                                            bodyText:
-                                                "Do you really want to cancel these records? This process cannot be undone.",
-                                            onCancelTap: () {
-                                              Get.back();
-                                            },
-                                            onDeleteTap: () {
-                                              controller.deletecustomer(
-                                                  controller.customerList[index]
-                                                      ['id']);
-                                              controller.customerList
-                                                  .removeAt(index);
-                                              Get.back();
-                                            },
-                                          );
-                                        },
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
+                : controller.customerList.isEmpty ? const EmptyView():
+            ListView.separated(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.vertical,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: controller.customerList.length,
+                  itemBuilder: (context, index) {
+                    return InkWell(
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 10),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(4),
+                            border: Border.all(
+                                color: const Color(0xffE6E6E6),
+                                width: 1)),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                  children: [
+                                    _keyValue(
+                                        "Name",
+                                        controller.customerList[index]
+                                                ['company'] ??
+                                            ''),
+                                    verticalSpacing(),
+                                    _keyValue(
+                                        "Contact No",
+                                        controller.customerList[index]
+                                                ['contact'] ??
+                                            ''),
+                                    verticalSpacing(),
+                                    _keyValue(
+                                        "Reference By",
+                                        controller.customerList[index]
+                                                ['reference'] ??
+                                            ''),
+                                    verticalSpacing(),
+                                  ],
+                                ),
+                                Spacer(),
+                                SizedBox(
+                                    height: 80,
+                                    width: 80,
+                                    child: ClipRRect(
+                                        borderRadius:
+                                        BorderRadius.circular(
+                                            50.0),
+                                        child: Image.memory(base64Decode(controller.customerList[index]['photo']),fit: BoxFit.cover,)),
+                                ),
+                              ],
                             ),
-                            onTap: () {
-                              Get.to(const CustomerViewDetail());
-                            },
-                          );
-                        },
-                        separatorBuilder: (BuildContext context, int index) {
-                          return const SizedBox(
-                            height: 16,
-                          );
-                        },
-                      )
-                    ],
-                  ),
+                            verticalSpacing(),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                SmallButton(
+                                  title: "  View  ",
+                                  textColor: AppColor.selectColor,
+                                  onTap: () {
+                                    Get.to(AddCustomer(isView: true,model:controller.customerList[index]));
+                                  },
+                                ),
+                                const SizedBox(
+                                  width: 12.0,
+                                ),
+                                SmallButton(
+                                  title: "  Edit  ",
+                                  onTap: () {
+                                    Get.to(AddCustomer(
+                                      model:
+                                          controller.customerList[index],
+                                    ));
+                                  },
+                                ),
+                                const SizedBox(
+                                  width: 12.0,
+                                ),
+                                SmallButton(
+                                  title: "Delete",
+                                  textColor: AppColor.cancelColor,
+                                  onTap: () {
+                                    CustomDialogBox.showDeleteDialog(
+                                      context: context,
+                                      bodyText:
+                                          "Do you really want to cancel these records? This process cannot be undone.",
+                                      onCancelTap: () {
+                                        Get.back();
+                                      },
+                                      onDeleteTap: () {
+                                        controller.deleteCustomer(index: index);
+                                      },
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      onTap: () {
+                        Get.to(const CustomerViewDetail());
+                      },
+                    );
+                  },
+                  separatorBuilder: (BuildContext context, int index) {
+                    return const SizedBox(
+                      height: 16,
+                    );
+                  },
+                ),
           ),
         ),
       ),

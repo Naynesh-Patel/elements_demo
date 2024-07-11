@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/controller/customer_controller.dart';
@@ -28,18 +27,14 @@ class _AddCustomerState extends State<AddCustomer> {
   void initState() {
     // controller.updateCustomer(widget.model['id']);
     if (widget.model != null) {
-      controller.companyTextEditingController.text =
-          widget.model['company'] ?? '';
-      controller.contactTextEditingController.text =
-          widget.model['contact'] ?? '';
-      controller.referenceTextEditingController.text =
-          widget.model['reference'] ?? '';
+      controller.companyTextEditingController.text = widget.model['company'] ?? '';
+      controller.contactTextEditingController.text = widget.model['contact'] ?? '';
+      controller.referenceTextEditingController.text = widget.model['reference'] ?? '';
       controller.ownerTextEditingController.text = widget.model['owner'] ?? '';
-      controller.addressTextEditingController.text =
-          widget.model['address'] ?? '';
-      controller.websiteTextEditingController.text =
-          widget.model['website'] ?? '';
+      controller.addressTextEditingController.text = widget.model['address'] ?? '';
+      controller.websiteTextEditingController.text = widget.model['website'] ?? '';
       controller.gstinTextEditingController.text = widget.model['gstin'] ?? '';
+      controller.base64Image = widget.model['photo'] ?? '';
     } else {
       controller.companyTextEditingController.clear();
       controller.contactTextEditingController.clear();
@@ -48,6 +43,8 @@ class _AddCustomerState extends State<AddCustomer> {
       controller.addressTextEditingController.clear();
       controller.websiteTextEditingController.clear();
       controller.gstinTextEditingController.clear();
+      controller.base64Image = "";
+      controller.imgFile = null;
     }
     super.initState();
   }
@@ -57,10 +54,10 @@ class _AddCustomerState extends State<AddCustomer> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: CustomAppBar(
-          title: widget.model != null
+          title:  widget.isView ?
+          "View Customer/Company Details"
+        : widget.model != null
               ? "Update Customer/Company Details"
-              : widget.isView
-                  ? "View Customer/Company Details"
                   : "Add Customer/Company",
           onPressed: () {
             Get.back();
@@ -68,203 +65,7 @@ class _AddCustomerState extends State<AddCustomer> {
         ),
         body: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
-          child: Form(
-            key: _formKey,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  margin:
-                      const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        widget.model != null || widget.isView
-                            ? 'Profile :'
-                            : 'Add Profile :',
-                        style: AppTextStyle.textStyleRegular16
-                            .copyWith(color: AppColor.blackLightColor),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Center(
-                        child: Stack(
-                          alignment: Alignment.bottomRight,
-                          children: [
-                            controller.imgFile == null
-                                ? Image.asset(
-                                    'assets/images/camera.png',
-                                    height: 80,
-                                    width: 80,
-                                  )
-                                : SizedBox(
-                                    height: 80,
-                                    width: 80,
-                                    child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(50.0),
-                                        child: Image.memory(
-                                          base64Decode(controller.base64Image),
-                                          // controller.imgFile!,
-                                          fit: BoxFit.cover,
-                                        ))),
-                            InkWell(
-                              onTap: () async {
-                                bool refresh =
-                                    await controller.pickImageFromGallery();
-                                if (refresh) {
-                                  setState(() {});
-                                }
-                              },
-                              child: Container(
-                                  padding: const EdgeInsets.all(5),
-                                  decoration: BoxDecoration(
-                                      color: const Color(0xff01959F),
-                                      // shape: BoxShape.circle,
-                                      borderRadius: BorderRadius.circular(15)),
-                                  child: const Icon(
-                                    Icons.add,
-                                    color: Colors.white,
-                                    size: 18,
-                                  )),
-                            )
-                          ],
-                        ),
-                      ),
-                      verticalSpacing(),
-                      CustomTextField(
-                        textEditingController:
-                            controller.companyTextEditingController,
-                        hintText: "Enter Company",
-                        labelText: "Company",
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "Please Enter Company";
-                          } else {
-                            return null;
-                          }
-                        },
-                      ),
-                      verticalSpacing(),
-                      CustomTextField(
-                        textEditingController:
-                            controller.ownerTextEditingController,
-                        hintText: "Enter Owner Name",
-                        labelText: "Owner Name",
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "Please Enter Owner Name";
-                          } else {
-                            return null;
-                          }
-                        },
-                      ),
-                      verticalSpacing(),
-                      CustomTextField(
-                        textEditingController:
-                            controller.contactTextEditingController,
-                        maxLength: 10,
-                        hintText: "99656 25693",
-                        labelText: "Contact No",
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "Please Enter Contact No";
-                          } else {
-                            return null;
-                          }
-                        },
-                        textInputType: const TextInputType.numberWithOptions(),
-                        suffixFixIcon: widget.isView
-                            ? const Icon(
-                                Icons.phone,
-                                size: 20,
-                              )
-                            : const SizedBox.shrink(),
-                      ),
-                      verticalSpacing(),
-                      CustomTextField(
-                        textEditingController:
-                            controller.addressTextEditingController,
-                        hintText: "Enter Address",
-                        labelText: "Address",
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "Please Enter Address";
-                          } else {
-                            return null;
-                          }
-                        },
-                        suffixFixIcon: widget.isView
-                            ? const Icon(
-                                Icons.location_on_outlined,
-                                size: 20,
-                              )
-                            : const SizedBox.shrink(),
-                      ),
-                      verticalSpacing(),
-                      CustomTextField(
-                        textEditingController:
-                            controller.websiteTextEditingController,
-                        hintText: "www.machinepro.com",
-                        labelText: "Website",
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "Please Enter Website";
-                          } else {
-                            return null;
-                          }
-                        },
-                        suffixFixIcon: widget.isView
-                            ? Container(
-                                padding: const EdgeInsets.all(14.0),
-                                child: Image.asset(
-                                  "assets/images/world_wide_web.png",
-                                  height: 16,
-                                  width: 5,
-                                  fit: BoxFit.cover,
-                                  color: AppColor.blackColor,
-                                ))
-                            : const SizedBox.shrink(),
-                      ),
-                      verticalSpacing(),
-                      CustomTextField(
-                        textEditingController:
-                            controller.referenceTextEditingController,
-                        hintText: "L & T Pvt",
-                        labelText: "Reference By",
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "Please Enter Reference";
-                          } else {
-                            return null;
-                          }
-                        },
-                      ),
-                      verticalSpacing(),
-                      CustomTextField(
-                        textInputType: TextInputType.number,
-                        textEditingController:
-                            controller.gstinTextEditingController,
-                        hintText: "GD5456892098",
-                        labelText: "GST No"
-                            "",
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "Please Enter GST No";
-                          } else {
-                            return null;
-                          }
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
+          child: widget.isView ? viewOnly () : addEdit(),
         ),
         bottomNavigationBar: widget.isView
             ? const SizedBox.shrink()
@@ -273,12 +74,12 @@ class _AddCustomerState extends State<AddCustomer> {
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 child: CustomButton(
                   color: AppColor.buttonColor,
+                  isLoading: controller.isCustomerLoading,
                   buttonText: widget.model != null ? 'Update' : 'Add',
                   onTap: () {
                     if (_formKey.currentState!.validate()) {
                       if (widget.model != null) {
                         controller.updateCustomer(widget.model['id']);
-                        Get.back();
                       } else {
                         controller.addCustomer();
                       }
@@ -293,4 +94,318 @@ class _AddCustomerState extends State<AddCustomer> {
       height: 26.0,
     );
   }
+
+  Widget addEdit(){
+    return Form(
+      key: _formKey,
+      child:  Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            margin:
+            const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  widget.model != null || widget.isView
+                      ? 'Profile :'
+                      : 'Add Profile :',
+                  style: AppTextStyle.textStyleRegular16
+                      .copyWith(color: AppColor.blackLightColor),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Center(
+                  child: Stack(
+                    alignment: Alignment.bottomRight,
+                    children: [
+                      widget.model != null ?
+                      SizedBox(
+                        height: 80,
+                        width: 80,
+                        child: ClipRRect(
+                          borderRadius:
+                          BorderRadius.circular(50.0),
+                          child: Image.memory(base64Decode(controller.base64Image),
+                            fit: BoxFit.cover,
+                            height: 80,
+                            width: 80,
+                          ),
+                        ),
+                      ):
+                      controller.imgFile == null
+                          ? Image.asset(
+                        'assets/images/camera.png',
+                        height: 80,
+                        width: 80,
+                      )
+                          : SizedBox(
+                          height: 80,
+                          width: 80,
+                          child: ClipRRect(
+                              borderRadius:
+                              BorderRadius.circular(50.0),
+                              child: Image.file(controller.imgFile!,
+                                // controller.imgFile!,
+                                fit: BoxFit.cover,
+                              ))),
+                      InkWell(
+                        onTap: () async {
+                          bool refresh =
+                          await controller.pickImageFromGallery();
+                          if (refresh) {
+                            setState(() {});
+                          }
+                        },
+                        child: Container(
+                            padding: const EdgeInsets.all(5),
+                            decoration: BoxDecoration(
+                                color: const Color(0xff01959F),
+                                // shape: BoxShape.circle,
+                                borderRadius: BorderRadius.circular(15)),
+                            child: const Icon(
+                              Icons.add,
+                              color: Colors.white,
+                              size: 18,
+                            )),
+                      )
+                    ],
+                  ),
+                ),
+                verticalSpacing(),
+                CustomTextField(
+                  textEditingController:
+                  controller.companyTextEditingController,
+                  textCapitalization: TextCapitalization.words,
+                  hintText: "Enter Company",
+                  labelText: "Company",
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Enter Company*";
+                    } else {
+                      return null;
+                    }
+                  },
+                ),
+                verticalSpacing(),
+                CustomTextField(
+                  textEditingController:
+                  controller.ownerTextEditingController,
+                  hintText: "Enter Owner Name",
+                  labelText: "Owner Name",
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Enter Owner Name";
+                    } else {
+                      return null;
+                    }
+                  },
+                ),
+                verticalSpacing(),
+                CustomTextField(
+                  textEditingController:
+                  controller.contactTextEditingController,
+                  maxLength: 10,
+                  hintText: "99656 25693",
+                  labelText: "Contact No",
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Enter Contact No";
+                    } else {
+                      return null;
+                    }
+                  },
+                  textInputType: const TextInputType.numberWithOptions(),
+                  suffixFixIcon: widget.isView
+                      ? const Icon(
+                    Icons.phone,
+                    size: 20,
+                  )
+                      : const SizedBox.shrink(),
+                ),
+                verticalSpacing(),
+                CustomTextField(
+                  textEditingController:
+                  controller.addressTextEditingController,
+                  hintText: "Enter Address",
+                  labelText: "Address",
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Enter Address";
+                    } else {
+                      return null;
+                    }
+                  },
+                  suffixFixIcon: widget.isView
+                      ? const Icon(
+                    Icons.location_on_outlined,
+                    size: 20,
+                  )
+                      : const SizedBox.shrink(),
+                ),
+                verticalSpacing(),
+                CustomTextField(
+                  textEditingController:
+                  controller.websiteTextEditingController,
+                  hintText: "www.machinepro.com",
+                  labelText: "Website",
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Enter Website";
+                    } else {
+                      return null;
+                    }
+                  },
+                  suffixFixIcon: widget.isView
+                      ? Container(
+                      padding: const EdgeInsets.all(14.0),
+                      child: Image.asset(
+                        "assets/images/world_wide_web.png",
+                        height: 16,
+                        width: 5,
+                        fit: BoxFit.cover,
+                        color: AppColor.blackColor,
+                      ))
+                      : const SizedBox.shrink(),
+                ),
+                verticalSpacing(),
+                CustomTextField(
+                  textEditingController:
+                  controller.referenceTextEditingController,
+                  hintText: "L & T Pvt",
+                  labelText: "Reference By",
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Enter Reference";
+                    } else {
+                      return null;
+                    }
+                  },
+                ),
+                verticalSpacing(),
+                CustomTextField(
+                  textInputType: TextInputType.number,
+                  textEditingController:
+                  controller.gstinTextEditingController,
+                  hintText: "GD5456892098",
+                  labelText: "GST No"
+                      "",
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Enter GST No";
+                    } else {
+                      return null;
+                    }
+                  },
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+
+  Widget viewOnly(){
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          margin:
+          const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Profile :',
+                style: AppTextStyle.textStyleRegular16
+                    .copyWith(color: AppColor.blackLightColor),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Center(
+                child: SizedBox(
+                  height: 80,
+                  width: 80,
+                  child: ClipRRect(
+                    borderRadius:
+                    BorderRadius.circular(50.0),
+                    child: Image.memory(base64Decode(controller.base64Image),
+                      fit: BoxFit.cover,
+                      height: 80,
+                      width: 80,
+                    ),
+                  ),
+                ),
+              ),
+              verticalSpacing(),
+              CustomTextField(
+                textEditingController: controller.companyTextEditingController,
+                labelText: "Company",
+                enable: false,
+              ),
+              verticalSpacing(),
+              CustomTextField(
+                textEditingController: controller.ownerTextEditingController,
+                labelText: "Owner Name",
+                enable: false,
+              ),
+              verticalSpacing(),
+              CustomTextField(
+                textEditingController:
+                controller.contactTextEditingController,
+                  labelText: "Contact No",
+                enable: false,
+                suffixFixIcon: const Icon(
+                  Icons.phone,
+                  size: 20,
+                  color: AppColor.blackColor,
+                )
+              ),
+              verticalSpacing(),
+              CustomTextField(
+                textEditingController: controller.addressTextEditingController,
+                labelText: "Address",
+                suffixFixIcon: const Icon(
+                Icons.location_on_outlined,
+                size: 20,
+              ),
+              ),
+              verticalSpacing(),
+              CustomTextField(
+                textEditingController:
+                controller.websiteTextEditingController,
+                  labelText: "Website",
+                suffixFixIcon: Container(
+                    padding: const EdgeInsets.all(14.0),
+                    child: Image.asset(
+                      "assets/images/world_wide_web.png",
+                      height: 16,
+                      width: 5,
+                      fit: BoxFit.cover,
+                      color: AppColor.blackColor,
+                    ))
+              ),
+              verticalSpacing(),
+              CustomTextField(
+                textEditingController:
+                controller.referenceTextEditingController,
+                labelText: "Reference By",
+              ),
+              verticalSpacing(),
+              CustomTextField(
+             textEditingController: controller.gstinTextEditingController,
+                  labelText: "GST No"
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+
 }
