@@ -103,20 +103,20 @@ class SparepartsController extends GetxController {
     try {
       String url = "${baseURL}sparepart/update";
       log("API => $url");
-      isUpdateSparepartsLoading.value = true;
+      isSparepartsLoading.value = true;
       var response = await http.post(Uri.parse(url), body: body);
       if (response.statusCode == 200) {
         jsonDecode(response.body);
         Get.back();
         getSpareparts();
-        isUpdateSparepartsLoading.value = false;
+        isSparepartsLoading.value = false;
       } else {
         debugPrint("statusCode${response.statusCode}");
-        isUpdateSparepartsLoading.value = false;
+        isSparepartsLoading.value = false;
       }
     } catch (e) {
       debugPrint("Error${e.toString()}");
-      isUpdateSparepartsLoading.value = false;
+      isSparepartsLoading.value = false;
     }
   }
 

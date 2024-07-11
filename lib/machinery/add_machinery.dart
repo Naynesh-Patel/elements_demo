@@ -23,6 +23,9 @@ class AddMachinery extends StatefulWidget {
 class _AddMachineryState extends State<AddMachinery> {
   MachineryController controller = Get.find();
 
+  final _text = TextEditingController(); //texteditingcontroller
+  bool _validate = false; //variable to store the bool value
+
   RxList<dynamic> sparepartsList = [
     {
       "name": "1",
@@ -248,6 +251,9 @@ class _AddMachineryState extends State<AddMachinery> {
                                       textAlign: TextAlign.center,
                                       keyboardType: TextInputType.number,
                                       decoration: InputDecoration(
+                                        // errorText: _validate
+                                        //     ? "Please Enter spareparts"
+                                        //     : null,
                                         border: InputBorder.none,
                                         contentPadding:
                                             const EdgeInsets.symmetric(

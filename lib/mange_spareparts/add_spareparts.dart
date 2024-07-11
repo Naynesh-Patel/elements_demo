@@ -52,6 +52,7 @@ class _AddSparepartsState extends State<AddSpareparts> {
       sparepartsController.nameTextEditingController.clear();
       sparepartsController.qtyTypeTextEditingController.clear();
       sparepartsController.totalQtyTextEditingController.clear();
+      sparepartsController.newqtyTypeTextEditingController.clear();
     }
     super.initState();
   }
@@ -89,6 +90,7 @@ class _AddSparepartsState extends State<AddSpareparts> {
                 CustomTextField(
                   textEditingController:
                       sparepartsController.nameTextEditingController,
+                  textCapitalization: TextCapitalization.words,
                   hintText: "Steel Bolt",
                   labelText: "Name",
                   focusNode: sparepartsController.sparepartsNameFocusNode,
@@ -216,7 +218,8 @@ class _AddSparepartsState extends State<AddSpareparts> {
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: CustomButton(
             color: AppColor.buttonColor,
-            isLoading: false.obs,
+            // isLoading: false.obs,
+            isLoading: sparepartsController.isSparepartsLoading,
             buttonText: widget.model != null ? 'Update' : 'Add',
             onTap: () {
               if (_formKey.currentState!.validate()) {
