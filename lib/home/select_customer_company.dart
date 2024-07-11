@@ -1,10 +1,9 @@
-import 'package:elements/constant/app_colors.dart';
-import 'package:elements/constant/app_text_style.dart';
+import 'dart:convert';
 import 'package:elements/controller/customer_controller.dart';
 import 'package:elements/controller/machinery_controller.dart';
-import 'package:elements/model/model_machinery.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
-import 'package:elements/widget/button/custom_button.dart';
+import 'package:elements/widget/custom_loader.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -19,9 +18,8 @@ class _SelectCustomerCompanyState extends State<SelectCustomerCompany> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    customerController.getcustomer();
+    customerController.getCustomer();
   }
 
   MachineryController controller = Get.find();
@@ -36,38 +34,62 @@ class _SelectCustomerCompanyState extends State<SelectCustomerCompany> {
           onPressed: () {
             Get.back();
           },
-          // action: [
-          //   IconButton(
-          //       onPressed: () {
-          //         controller.machineryList.add(
-          //           ModelMachinery(
-          //             qtyController: TextEditingController(),
-          //             isSelected: false.obs,
-          //           ),
-          //         );
-          //       },
-          //       icon: const Icon(Icons.add))
-          // ],
         ),
-        body:  Obx(() => Column(
-          children: [
-            Expanded(
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: customerController.customerList.length,
-                physics: BouncingScrollPhysics(),
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    subtitle: Text(customerController.customerList[index]['owner']??''),
-                    title: Text(customerController.customerList[index]['company']??''),
-                    onTap: () {
-                      Get.back(result: customerController.customerList[index]['owner'].toString() );
-                      },
-                  );
-                },),
-            ),
-          ],
-        )),
+        body:  Obx(() => customerController.isGetCustomerLoading.value ? const CustomLoader() : ListView.separated(
+          shrinkWrap: true,
+          itemCount: customerController.customerList.length,
+          physics: const BouncingScrollPhysics(),
+          padding: const EdgeInsets.symmetric(vertical: 16.0),
+          itemBuilder: (context, index) {
+            return InkWell(
+              onTap: () {
+                customerController.companyTextEditingController.text = customerController.customerList[index]['company'];
+                Get.back();
+              },
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: IntrinsicHeight(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      SizedBox(
+                        height: 45,
+                        width: 45,
+                        child: customerController.customerList[index]['photo'] == "" ? Image.asset(
+                          'assets/images/user_profile.png',
+                          fit: BoxFit.cover,
+                        ) : ClipRRect(
+                            borderRadius:
+                            BorderRadius.circular(
+                                50.0),
+                            child: Image.memory(
+                              base64Decode(customerController.customerList[index]
+                              ['photo']),
+                              fit: BoxFit.cover,
+                            )),
+                      ),
+                      const SizedBox(width: 8.0,),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(customerController.customerList[index]['company']??''),
+                            const SizedBox(height: 4.0,),
+                            Text(customerController.customerList[index]['owner']??''),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          }, separatorBuilder: (BuildContext context, int index) {
+            return const SizedBox(
+              height: 20.0,
+            );
+        },)),
     );
   }
 }

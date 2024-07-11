@@ -19,6 +19,7 @@ class OrderController extends GetxController {
       TextEditingController();
   // TextEditingController deliveryDateTextEditingController = TextEditingController();
   TextEditingController date = TextEditingController();
+  TextEditingController formatDate = TextEditingController();
   TextEditingController totalPaymentEditingController = TextEditingController();
   TextEditingController advancePaymentEditingController =
       TextEditingController();
@@ -34,7 +35,6 @@ class OrderController extends GetxController {
 
   String customerCompany = '';
 
-  MachineryController machineryController = Get.find();
   CustomerController customerController = Get.find();
 
   RxList<dynamic> orderList = <dynamic>[].obs;
@@ -85,7 +85,7 @@ class OrderController extends GetxController {
       "user_id": modelUser.value.id,
       "customer_company_id":
           customerController.companyTextEditingController.text,
-      "machine_ids": machineryController.machineNameTextEditingController.text,
+      "machine_ids": customerController.machineNameTextEditingController.text,
       "delivery_date": date.text,
       "total_payment": totalPaymentEditingController.text,
       "advance_payment": advancePaymentEditingController.text,
@@ -99,10 +99,16 @@ class OrderController extends GetxController {
       isOrderLoading.value = true;
       var response = await http.post(Uri.parse(url), body: body);
       if (response.statusCode == 200) {
-        jsonDecode(response.body);
-        getOrder();
-        Get.back();
-        isOrderLoading.value = false;
+        var responseData = jsonDecode(response.body);
+        if(responseData['status']=="success"){
+          isOrderLoading.value = false;
+          Get.back();
+          getOrder();
+        }else{
+          showToast(responseData['message']);
+          isOrderLoading.value = false;
+        }
+
       } else {
         debugPrint("statusCode${response.statusCode}");
         isOrderLoading.value = false;
@@ -140,7 +146,7 @@ class OrderController extends GetxController {
       "customer_company_id":
           customerController.companyTextEditingController.text,
 
-      "machine_ids": machineryController.machineNameTextEditingController.text,
+      "machine_ids": customerController.machineNameTextEditingController.text,
       "delivery_date": date.text,
       "total_payment": totalPaymentEditingController.text,
       "advance_payment": advancePaymentEditingController.text,

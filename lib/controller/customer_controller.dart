@@ -18,6 +18,7 @@ class CustomerController extends GetxController {
   RxBool isGetCustomerUpdateLoading = false.obs;
 
   TextEditingController companyTextEditingController = TextEditingController();
+  TextEditingController machineNameTextEditingController = TextEditingController();
   TextEditingController ownerTextEditingController = TextEditingController();
   TextEditingController contactTextEditingController = TextEditingController();
   TextEditingController emailTextEditingController = TextEditingController();
@@ -69,7 +70,7 @@ class CustomerController extends GetxController {
       var response = await http.post(Uri.parse(url), body: body);
       if (response.statusCode == 200) {
         jsonDecode(response.body);
-        getcustomer();
+        getCustomer();
         Get.back();
         isCustomerLoading.value = false;
       } else {
@@ -82,7 +83,7 @@ class CustomerController extends GetxController {
     }
   }
 
-  Future getcustomer() async {
+  Future getCustomer() async {
     try {
       String url = "${baseURL}customer/getAll";
       log("API => $url");
@@ -90,12 +91,16 @@ class CustomerController extends GetxController {
       isGetCustomerLoading.value = true;
       var response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
-        isGetCustomerLoading.value = false;
         var responseData = jsonDecode(response.body);
-        List jobData = responseData["data"];
-        // Get.back();
-        // getcustomer();
-        customerList.value = jobData;
+        if(responseData['status']=="success"){
+          List jobData = responseData["data"];
+          customerList.value = jobData;
+          isGetCustomerLoading.value = false;
+        }else{
+          debugPrint("Error ${responseData['error']}");
+          isGetCustomerLoading.value = false;
+        }
+
       } else {
         debugPrint("statusCode${response.statusCode}");
         isGetCustomerLoading.value = false;
@@ -129,7 +134,7 @@ class CustomerController extends GetxController {
         if(responseData['status']==1){
           isCustomerLoading.value = false;
           Get.back();
-          getcustomer();
+          getCustomer();
         }else{
           debugPrint("Error${responseData['message']}");
           isCustomerLoading.value = false;

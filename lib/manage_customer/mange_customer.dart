@@ -27,7 +27,7 @@ class _MangeCustomerState extends State<MangeCustomer> {
   @override
   void initState() {
     setState(() {
-      controller.getcustomer();
+      controller.getCustomer();
     });
     super.initState();
   }

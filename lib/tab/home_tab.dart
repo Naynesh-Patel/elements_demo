@@ -1,9 +1,13 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
+import 'package:elements/constant/methods.dart';
 import 'package:elements/controller/home_controller.dart';
 import 'package:elements/controller/order_controller.dart';
 import 'package:elements/home/create_new_order.dart';
 import 'package:elements/home/invoice.dart';
+import 'package:elements/home/tab/complete_tab.dart';
+import 'package:elements/home/tab/ongoing_tab.dart';
+import 'package:elements/home/tab/upcoming_tab.dart';
 import 'package:elements/home/view_order_detail.dart';
 import 'package:elements/widget/app%20bar/home_app_bar.dart';
 import 'package:elements/widget/button/small_button.dart';
@@ -40,23 +44,21 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
       appBar: HomeAppBar(
         title: "MachinePro",
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _widgetTabBarView(),
-              const SizedBox(
-                height: 16,
-              ),
-              Obx(() => controller.selectTab.value == 1
-                  ? _onGoingView()
-                  : controller.selectTab.value == 2
-                      ? _upComingView()
-                      : _completeView()),
-            ],
-          ),
+      body: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _widgetTabBarView(),
+            const SizedBox(
+              height: 16,
+            ),
+            Obx(() => Expanded(child: controller.selectTab.value == 1
+                ? const OnGoingTab()
+                : controller.selectTab.value == 2
+                ? const UpComingTab()
+                : const CompleteTab())),
+          ],
         ),
       ),
       // drawer: drawer(),
@@ -148,178 +150,4 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
         ));
   }
 
-  Widget _onGoingView() {
-    return Obx(() => orderController.isGetOrderLoading.value
-        ? const CustomLoader()
-        : ListView.separated(
-            physics: const BouncingScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: orderController.orderList.length,
-            separatorBuilder: (context, index) {
-              return const SizedBox(
-                height: 10,
-              );
-            },
-            itemBuilder: (context, index) {
-              return InkWell(
-                onTap: () {
-                  Get.to(const ViewOrderDetails());
-                },
-                child: Container(
-                  width: double.maxFinite,
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 16.0, vertical: 16.0),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(4),
-                      border: Border.all(color: AppColor.borderColor)),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          _keyValue(
-                            "OD",
-                            '18-09-2024',
-                          ),
-                          _keyValue(
-                            "DD",
-                            orderController.orderList[index]['delivery_date'],
-                          ),
-                        ],
-                      ),
-                      verticalSpacing(),
-                      _keyValue(
-                        "Client",
-                        orderController.orderList[index]['customer_company_id'],
-                      ),
-                      verticalSpacing(),
-                      _keyValue(
-                        "Machine Type",
-                        orderController.orderList[index]['machine_ids'],
-                      ),
-                      verticalSpacing(),
-                      _keyValue(
-                        "Total Payment",
-                        orderController.orderList[index]['total_payment'],
-                      ),
-                      verticalSpacing(),
-                      _keyValue(
-                        "Advance Payment",
-                        orderController.orderList[index]['advance_payment'],
-                      ),
-                      verticalSpacing(),
-                      _keyValue(
-                        "Assigned Order",
-                        orderController.orderList[index]['assign_order_id'],
-                      ),
-                      verticalSpacing(),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          SmallButton(
-                            title: "Invoice",
-                            textColor: AppColor.selectColor,
-                            onTap: () {
-                              Get.to(const Invoice());
-                            },
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          SmallButton(
-                              title: "  Edit  ",
-                              onTap: () {
-                                Get.to(const ViewOrderDetails(
-                                  isUpdate: true,
-                                ));
-                              },
-                              textColor: const Color(0xff555555)),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          SmallButton(
-                              title: "Cancel",
-                              onTap: () {
-                                CustomDialogBox.showDeleteDialog(
-                                  context: context,
-                                  bodyText:
-                                      "Do you really want to cancel these records? This process cannot be undone.",
-                                  onCancelTap: () {
-                                    Get.back();
-                                  },
-                                  onDeleteTap: () {
-                                    orderController.deleteUser(
-                                        orderController.orderList[index]['id']);
-                                    orderController.orderList.removeAt(index);
-                                    Get.back();
-                                  },
-                                );
-                              },
-                              textColor: const Color(0xffB50A0A)),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              );
-            },
-          ));
-  }
-
-  Widget _upComingView() {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          _emptyView(),
-        ],
-      ),
-    );
-  }
-
-  Widget _completeView() {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          _emptyView(),
-        ],
-      ),
-    );
-  }
-
-  Widget _keyValue(key, value) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Text(
-          "$key : ",
-          style: AppTextStyle.textStyleRegular16
-              .copyWith(color: const Color(0xff272727)),
-        ),
-        Flexible(
-            child: Text(
-          "$value",
-          style: AppTextStyle.textStyleRegular14
-              .copyWith(color: const Color(0xff555555)),
-        )),
-      ],
-    );
-  }
-
-  Widget _emptyView() {
-    return Container(
-      height: Get.height * 0.55,
-      padding: const EdgeInsets.symmetric(horizontal: 110.0),
-      child: Image.asset(
-        alignment: Alignment.center,
-        "assets/images/no_order.png",
-      ),
-    );
-  }
-
-  Widget verticalSpacing() {
-    return const SizedBox(
-      height: 8,
-    );
-  }
 }

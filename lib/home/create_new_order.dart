@@ -1,4 +1,5 @@
 import 'package:elements/constant/app_colors.dart';
+import 'package:elements/constant/methods.dart';
 import 'package:elements/controller/customer_controller.dart';
 import 'package:elements/controller/home_controller.dart';
 import 'package:elements/controller/machinery_controller.dart';
@@ -30,21 +31,21 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
   @override
   void initState() {
     if (widget.model != null) {
-      orderController.customerCompanyIdNoTextEditingController.text =
-          widget.model['customer_company_id'] ?? '';
-      orderController.totalPaymentEditingController.text =
-          widget.model['total_payment'] ?? '';
-      orderController.advancePaymentEditingController.text =
-          widget.model['advance_payment'] ?? '';
-      customerController.companyTextEditingController.text =
-          widget.model['advance_payment'] ?? '';
-      machineryController.machineNameTextEditingController.text =
-          widget.model['machine_ids'] ?? '';
+      orderController.customerCompanyIdNoTextEditingController.text = widget.model['customer_company_id'] ?? '';
+      orderController.totalPaymentEditingController.text = widget.model['total_payment'] ?? '';
+      orderController.advancePaymentEditingController.text = widget.model['advance_payment'] ?? '';
+      customerController.companyTextEditingController.text = widget.model['advance_payment'] ?? '';
+      machineryController.machineNameTextEditingController.text = widget.model['machine_ids'] ?? '';
     } else {
       orderController.customerCompanyIdNoTextEditingController.clear();
+      orderController.machineIdsTextEditingController.clear();
+      orderController.date.clear();
+      orderController.assignOrderIdEditingController.clear();
+      orderController.formatDate.clear();
       orderController.totalPaymentEditingController.clear();
       orderController.advancePaymentEditingController.clear();
       customerController.companyTextEditingController.clear();
+      customerController.machineNameTextEditingController.clear();
       machineryController.machineNameTextEditingController.clear();
     }
     super.initState();
@@ -55,17 +56,6 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
     return Scaffold(
         backgroundColor: AppColor.whiteColor,
         appBar: CustomAppBar(
-          // action: [
-          //   Padding(
-          //       padding: const EdgeInsets.only(right: 10),
-          //       child: IconButton(
-          //           onPressed: () {
-          //             Get.to(const ViewOrderDetails());
-          //           },
-          //           icon: const Icon(
-          //             Icons.add,
-          //           )))
-          // ],
           title:
               widget.model != null ? 'Update  New Order' : 'Create  New Order',
           onPressed: () {
@@ -78,38 +68,24 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
             key: _formKey,
             child: Column(
               children: [
-                // WidgetDropDownFromField(
-                //   hintText: "Select Customer/Company",
-                //   labelText: "Customer/Company*",
-                //   itemList: const ["Admin", "User", "Seller"],
-                //   onTap: (value) {
-                //     debugPrint("Select => $value");
-                //     // orderController.customerCompany=value;
-                //   },
-                // ),
                 CustomTextField(
                     focusNode: FocusNode(),
                     readOnly: true,
                     onTap: () {
-                      Get.to(const SelectCustomerCompany())?.then((value) {
-                        customerController.companyTextEditingController.text =
-                            value;
-                        setState(() {});
-                      });
+                      Get.to(const SelectCustomerCompany());
                     },
                     hintText: "Select Customer/Company",
                     labelText: "Customer/Company",
-                    textEditingController:
-                        customerController.companyTextEditingController,
-                    // autoValidateMode: AutovalidateMode.onUserInteraction,
-                    // validator: (value) {
-                    //   if(value!.isEmpty){
-                    //     return "Please Enter Machine Type";
-                    //   }
-                    //   else{
-                    //     return null;
-                    //   }
-                    // },
+                    textEditingController: customerController.companyTextEditingController,
+                    autoValidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (value) {
+                      if(value!.isEmpty){
+                        return "Please Enter Machine Type";
+                      }
+                      else{
+                        return null;
+                      }
+                    },
                     suffixFixIcon: const Icon(
                       Icons.arrow_forward_ios_rounded,
                       size: 18,
@@ -120,27 +96,20 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                     focusNode: FocusNode(),
                     readOnly: true,
                     onTap: () {
-                      Get.to(const SelectMachine())?.then(
-                        (value) {
-                          machineryController
-                              .machineNameTextEditingController.text = value;
-                          setState(() {});
-                        },
-                      );
+                      Get.to(const SelectMachine());
                     },
                     hintText: "Select Machine Type*",
                     labelText: "Machine Type",
-                    textEditingController:
-                        machineryController.machineNameTextEditingController,
-                    // autoValidateMode: AutovalidateMode.onUserInteraction,
-                    // validator: (value) {
-                    //   if(value!.isEmpty){
-                    //     return "Please Enter Machine Type";
-                    //   }
-                    //   else{
-                    //     return null;
-                    //   }
-                    // },
+                    textEditingController: customerController.machineNameTextEditingController,
+                    autoValidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (value) {
+                      if(value!.isEmpty){
+                        return "Please Enter Machine Type";
+                      }
+                      else{
+                        return null;
+                      }
+                    },
                     suffixFixIcon: const Icon(
                       Icons.arrow_forward_ios_rounded,
                       size: 18,
@@ -152,7 +121,7 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                     datePicker();
                   },
                   child: CustomTextField(
-                      textEditingController: orderController.date,
+                      textEditingController: orderController.formatDate,
                       // textEditingController: orderController.deliveryDateTextEditingController,
                       hintText: "Select Delivery Date",
                       labelText: "Delivery Date",
@@ -169,6 +138,7 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                       suffixFixIcon: const Icon(
                         Icons.date_range,
                         size: 22,
+                        color: Colors.black,
                       )),
                 ),
                 verticalSpacing(),
@@ -226,7 +196,7 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: CustomButton(
             color: AppColor.buttonColor,
-            isLoading: false.obs,
+            isLoading: orderController.isOrderLoading,
             buttonText: 'Done',
             onTap: () {
               if (_formKey.currentState!.validate()) {
@@ -254,8 +224,10 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
         firstDate: DateTime(2024),
         lastDate: DateTime(2050));
     if (datePicked != null) {
-      // var pickDate = DateFormat('dd/MM/yyyy').format(datePicked);
+      var pickDate = getDateInDDMMYY(datePicked);
+      orderController.formatDate.text = pickDate;
       orderController.date.text = datePicked.toString();
+      _formKey.currentState?.validate();
     }
   }
 }
