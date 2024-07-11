@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/controller/customer_controller.dart';
 import 'package:elements/controller/machinery_controller.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
@@ -54,7 +55,7 @@ class _SelectCustomerCompanyState extends State<SelectCustomerCompany> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       SizedBox(
-                        height: 45,
+                        height: 50,
                         width: 45,
                         child: customerController.customerList[index]['photo'] == "" ? Image.asset(
                           'assets/images/user_profile.png',
@@ -75,9 +76,9 @@ class _SelectCustomerCompanyState extends State<SelectCustomerCompany> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(customerController.customerList[index]['company']??''),
-                            const SizedBox(height: 4.0,),
-                            Text(customerController.customerList[index]['owner']??''),
+                            Text(customerController.customerList[index]['company']??'',style: AppTextStyle.textStyleRegular16.copyWith(color: const Color(0xff272727),)),
+                            const SizedBox(height: 2.0,),
+                            Text(customerController.customerList[index]['owner']??'',style: AppTextStyle.textStyleRegular14.copyWith(color: const Color(0xff555555),)),
                           ],
                         ),
                       ),
