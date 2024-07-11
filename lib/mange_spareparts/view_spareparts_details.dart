@@ -4,6 +4,7 @@ import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../constant/methods.dart';
 import '../controller/spareparts_controller.dart';
 import '../date_piker.dart';
 import '../widget/button/small_button.dart';
@@ -80,8 +81,11 @@ class _ViewSparepartsDetailsState extends State<ViewSparepartsDetails> {
                     itemBuilder: (context, index) {
                       return _tableView(
                         name: controller.sparepartsList[index]['name'] ?? '',
-                        date:
-                            controller.sparepartsList[index]['create_at'] ?? '',
+                        // date:
+                        //     controller.sparepartsList[index]['create_at'] ?? '',
+
+                        date: getDateInDDMMYY(DateTime.parse(
+                            controller.sparepartsList[index]['create_at'])),
                         qty: controller.sparepartsList[index]['qty'] ?? '',
                       );
                     },
