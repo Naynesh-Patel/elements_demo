@@ -31,11 +31,16 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
   @override
   void initState() {
     if (widget.model != null) {
-      orderController.customerCompanyIdNoTextEditingController.text = widget.model['customer_company_id'] ?? '';
-      orderController.totalPaymentEditingController.text = widget.model['total_payment'] ?? '';
-      orderController.advancePaymentEditingController.text = widget.model['advance_payment'] ?? '';
-      customerController.companyTextEditingController.text = widget.model['advance_payment'] ?? '';
-      machineryController.machineNameTextEditingController.text = widget.model['machine_ids'] ?? '';
+      orderController.customerCompanyIdNoTextEditingController.text =
+          widget.model['customer_company_id'] ?? '';
+      orderController.totalPaymentEditingController.text =
+          widget.model['total_payment'] ?? '';
+      orderController.advancePaymentEditingController.text =
+          widget.model['advance_payment'] ?? '';
+      customerController.companyTextEditingController.text =
+          widget.model['advance_payment'] ?? '';
+      machineryController.machineNameTextEditingController.text =
+          widget.model['machine_ids'] ?? '';
     } else {
       orderController.customerCompanyIdNoTextEditingController.clear();
       orderController.machineIdsTextEditingController.clear();
@@ -76,13 +81,13 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                     },
                     hintText: "Select Customer/Company",
                     labelText: "Customer/Company",
-                    textEditingController: customerController.companyTextEditingController,
+                    textEditingController:
+                        customerController.companyTextEditingController,
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                     validator: (value) {
-                      if(value!.isEmpty){
+                      if (value!.isEmpty) {
                         return "Please Enter Machine Type";
-                      }
-                      else{
+                      } else {
                         return null;
                       }
                     },
@@ -100,13 +105,13 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                     },
                     hintText: "Select Machine Type*",
                     labelText: "Machine Type",
-                    textEditingController: customerController.machineNameTextEditingController,
+                    textEditingController:
+                        customerController.machineNameTextEditingController,
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                     validator: (value) {
-                      if(value!.isEmpty){
+                      if (value!.isEmpty) {
                         return "Please Enter Machine Type";
-                      }
-                      else{
+                      } else {
                         return null;
                       }
                     },
