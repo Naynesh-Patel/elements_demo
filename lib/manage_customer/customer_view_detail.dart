@@ -48,7 +48,7 @@ class _CustomerViewDetailState extends State<CustomerViewDetail> {
                     alignment: Alignment.bottomRight,
                     children: [
                       Image.asset(
-                        'assets/images/user_p.png',
+                        'assets/images/user_profile.png',
                         height: 80,
                         width: 80,
                       ),
@@ -67,16 +67,13 @@ class _CustomerViewDetailState extends State<CustomerViewDetail> {
                   ),
                 ),
                 const SizedBox(
-                  height: 15,
-                ),
-                const SizedBox(
-                  height: 15,
+                  height: 30,
                 ),
                 CustomTextField(
                   enable: false,
                   textEditingController:
                       controller.companyTextEditingController,
-                  hintText: "tata",
+                  hintText: "",
                   labelText: "Company",
                 ),
                 const SizedBox(
@@ -85,7 +82,7 @@ class _CustomerViewDetailState extends State<CustomerViewDetail> {
                 CustomTextField(
                   enable: false,
                   textEditingController: controller.ownerTextEditingController,
-                  hintText: "Ratan tata",
+                  hintText: "",
                   labelText: "Owner Name",
                 ),
                 const SizedBox(
@@ -104,7 +101,7 @@ class _CustomerViewDetailState extends State<CustomerViewDetail> {
                     }
                   },
                   textInputType: const TextInputType.numberWithOptions(),
-                  hintText: "99656 25693",
+                  hintText: "",
                   labelText: "Contact No.",
                   suffixFixIcon: const Icon(
                     Icons.call,
@@ -119,7 +116,7 @@ class _CustomerViewDetailState extends State<CustomerViewDetail> {
                   textEditingController:
                       controller.addressTextEditingController,
                   textInputType: const TextInputType.numberWithOptions(),
-                  hintText: "Surat,Gujrat",
+                  hintText: "",
                   labelText: "Address",
                   suffixFixIcon: const Icon(
                     Icons.location_on_outlined,
@@ -134,7 +131,7 @@ class _CustomerViewDetailState extends State<CustomerViewDetail> {
                   textEditingController:
                       controller.websiteTextEditingController,
                   textInputType: const TextInputType.numberWithOptions(),
-                  hintText: " www.tatasteel.com",
+                  hintText: "",
                   labelText: "Website",
                   suffixFixIcon: Image.asset("assets/images/website.png"),
                 ),
@@ -145,7 +142,7 @@ class _CustomerViewDetailState extends State<CustomerViewDetail> {
                   enable: false,
                   textEditingController:
                       controller.referenceTextEditingController,
-                  hintText: "L & T Pvt",
+                  hintText: "",
                   labelText: "Reference By",
                 ),
               ],
