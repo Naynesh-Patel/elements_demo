@@ -74,6 +74,7 @@ class _AddMachineryState extends State<AddMachinery> {
                   : "Add Machinery",
           onPressed: () {
             Get.back();
+
           },
         ),
         body: SingleChildScrollView(
