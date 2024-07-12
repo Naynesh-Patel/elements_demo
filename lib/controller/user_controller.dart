@@ -226,7 +226,7 @@ class UserController extends GetxController {
 
   final LocalAuthentication auth = LocalAuthentication();
 
-  getFingerPrint() async {
+                 getFingerPrint() async {
 
     bool canCheckBiometrics = await checkBiometricsAvailable();
 
