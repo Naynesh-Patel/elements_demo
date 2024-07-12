@@ -1,5 +1,6 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
+import 'package:elements/constant/methods.dart';
 import 'package:elements/controller/expense_controller.dart';
 import 'package:elements/date_piker.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
@@ -51,6 +52,7 @@ class _ViewExpenseDetailsState extends State<ViewExpenseDetails> {
           child: Container(
               height: Get.height,
               margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -64,9 +66,9 @@ class _ViewExpenseDetailsState extends State<ViewExpenseDetails> {
                               _tableView(
                                 name:
                                     controller.expenseList[index]['name'] ?? '',
-                                date: controller.expenseList[index]
-                                        ['created_at'] ??
-                                    '',
+                                date: getDateInDDMMYY(DateTime.parse(controller
+                                        .expenseList[index]['created_at'] ??
+                                    '')),
                                 type: controller.expenseList[index]
                                         ['expense_type'] ??
                                     '',
@@ -76,7 +78,7 @@ class _ViewExpenseDetailsState extends State<ViewExpenseDetails> {
                             ],
                           );
                         },
-                      ))
+                      )),
                 ],
               )
               // child: DataTable2(

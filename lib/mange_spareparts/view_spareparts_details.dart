@@ -83,7 +83,6 @@ class _ViewSparepartsDetailsState extends State<ViewSparepartsDetails> {
                         name: controller.sparepartsList[index]['name'] ?? '',
                         // date:
                         //     controller.sparepartsList[index]['create_at'] ?? '',
-
                         date: getDateInDDMMYY(DateTime.parse(
                             controller.sparepartsList[index]['create_at'])),
                         qty: controller.sparepartsList[index]['qty'] ?? '',

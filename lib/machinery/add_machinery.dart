@@ -1,12 +1,14 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/controller/machinery_controller.dart';
-import 'package:elements/model/model_machinery.dart';
+import 'package:elements/controller/spareparts_controller.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:elements/widget/button/custom_button.dart';
 import 'package:elements/widget/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../mange_spareparts/add_spareparts.dart';
 
 class AddMachinery extends StatefulWidget {
   final dynamic model;
@@ -22,6 +24,7 @@ class AddMachinery extends StatefulWidget {
 
 class _AddMachineryState extends State<AddMachinery> {
   MachineryController controller = Get.find();
+  SparepartsController sparepartsController = Get.find();
 
   final controllers = TextEditingController();
   bool validate = false;
@@ -45,6 +48,7 @@ class _AddMachineryState extends State<AddMachinery> {
 
   @override
   void initState() {
+    sparepartsController.getSpareparts();
     if (widget.model != null) {
       controller.machineNameTextEditingController.text =
           widget.model['machine_name'] ?? '';
@@ -74,7 +78,6 @@ class _AddMachineryState extends State<AddMachinery> {
                   : "Add Machinery",
           onPressed: () {
             Get.back();
-
           },
         ),
         body: SingleChildScrollView(
@@ -339,6 +342,7 @@ class _AddMachineryState extends State<AddMachinery> {
                   CustomTextField(
                     textEditingController:
                         controller.manufactureDurationTextEditingController,
+                    textInputType: TextInputType.number,
                     hintText: "Eg. 30 days",
                     labelText: "Manufacture Duration",
                     autoValidateMode: AutovalidateMode.onUserInteraction,
@@ -366,12 +370,7 @@ class _AddMachineryState extends State<AddMachinery> {
                                 .shrinkWrap, // the '2023' part
                           ),
                           onPressed: () {
-                            controller.machineryList.add(
-                              ModelMachinery(
-                                qtyController: TextEditingController(),
-                                isSelected: false.obs,
-                              ),
-                            );
+                            Get.to(const AddSpareparts());
                           },
                           icon: const Icon(
                             Icons.add,
@@ -382,129 +381,254 @@ class _AddMachineryState extends State<AddMachinery> {
                   const SizedBox(
                     height: 16,
                   ),
-                  Obx(() => ListView.separated(
-                        shrinkWrap: true,
-                        itemCount: controller.machineryList.length,
-                        itemBuilder: (context, index) {
-                          return Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  // Obx(() => ListView.separated(
+                  //       shrinkWrap: true,
+                  //       itemCount: controller.machineryList.length,
+                  //       itemBuilder: (context, index) {
+                  //         return Row(
+                  //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  //           children: [
+                  //             InkWell(
+                  //               borderRadius: BorderRadius.circular(6.0),
+                  //               onTap: () {
+                  //                 if (controller.machineryList[index].isSelected
+                  //                         .value ==
+                  //                     false) {
+                  //                   controller.machineryList[index].isSelected
+                  //                       .value = true;
+                  //                 } else {
+                  //                   controller.machineryList[index].isSelected
+                  //                       .value = false;
+                  //                 }
+                  //                 debugPrint(
+                  //                     "Select = ${controller.machineryList[index].isSelected.value}");
+                  //               },
+                  //               child: Container(
+                  //                 padding: const EdgeInsets.symmetric(
+                  //                     horizontal: 4.0, vertical: 4.0),
+                  //                 decoration: BoxDecoration(
+                  //                     border: Border.all(
+                  //                         color: AppColor.dropDownHintColor),
+                  //                     borderRadius: BorderRadius.circular(6.0)),
+                  //                 child: Obx(() => Icon(
+                  //                       Icons.check_rounded,
+                  //                       size: 14,
+                  //                       color: controller.machineryList[index]
+                  //                               .isSelected.value
+                  //                           ? AppColor.blackColor
+                  //                           : Colors.transparent,
+                  //                     )),
+                  //               ),
+                  //             ),
+                  //             const SizedBox(
+                  //               width: 10.0,
+                  //             ),
+                  //
+                  //             // Expanded(
+                  //             //   child: Text(
+                  //             //     'Spareparts ${index + 1}',
+                  //             //     style: AppTextStyle.textStyleRegular16
+                  //             //         .copyWith(color: const Color(0xff555555)),
+                  //             //   ),
+                  //             // ),
+                  //             // Expanded(
+                  //             //   child: CustomTextField(
+                  //             //     textInputType: TextInputType.number,
+                  //             //     textEditingController: controller
+                  //             //         .sparepartsTextEditingController,
+                  //             //     hintText: "Qty",
+                  //             //     autoValidateMode:
+                  //             //         AutovalidateMode.onUserInteraction,
+                  //             //     validator: (value) {
+                  //             //       if (value!.isEmpty) {
+                  //             //         return "Enter spareparts";
+                  //             //       } else {
+                  //             //         return null;
+                  //             //       }
+                  //             //     },
+                  //             //   ),
+                  //             // ),
+                  //             // Container(
+                  //             //   width: 115,
+                  //             //   height: 42,
+                  //             //   decoration: BoxDecoration(
+                  //             //     borderRadius: BorderRadius.circular(4),
+                  //             //     border:
+                  //             //         Border.all(color: Color(0xffD1D1D1)),
+                  //             //   ),
+                  //             //   child: TextField(
+                  //             //     controller: controller
+                  //             //         .sparepartsTextEditingController,
+                  //             //     textAlignVertical:
+                  //             //         TextAlignVertical.center,
+                  //             //     textAlign: TextAlign.center,
+                  //             //     keyboardType: TextInputType.number,
+                  //             //     decoration: InputDecoration(
+                  //             //       errorText: validate
+                  //             //           ? "Value Can't Be Empty"
+                  //             //           : null,
+                  //             //       // errorText: _validate
+                  //             //       //     ? "Please Enter spareparts"
+                  //             //       //     : null,
+                  //             //       border: InputBorder.none,
+                  //             //       contentPadding:
+                  //             //           const EdgeInsets.symmetric(
+                  //             //               horizontal: 8.0,
+                  //             //               vertical: 13.0),
+                  //             //       hintText: 'Qty',
+                  //             //       hintStyle: AppTextStyle
+                  //             //           .textStyleRegular14
+                  //             //           .copyWith(
+                  //             //               color:
+                  //             //                   AppColor.dropDownHintColor),
+                  //             //       labelStyle: AppTextStyle
+                  //             //           .textStyleRegular16
+                  //             //           .copyWith(
+                  //             //               color: AppColor.blackColor),
+                  //             //       helperStyle: AppTextStyle
+                  //             //           .textStyleRegular16
+                  //             //           .copyWith(
+                  //             //               color:
+                  //             //                   AppColor.dropDownHintColor),
+                  //             //     ),
+                  //             //   ),
+                  //             // ),
+                  //             const SizedBox(
+                  //               width: 10.0,
+                  //             ),
+                  //           ],
+                  //         );
+                  //       },
+                  //       separatorBuilder: (BuildContext context, int index) {
+                  //         return const SizedBox(
+                  //           height: 12.0,
+                  //         );
+                  //       },
+                  //     )),
+                  Obx(
+                    () => ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: sparepartsController.sparepartsList.length,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          contentPadding: const EdgeInsets.all(0),
+                          title: Row(
                             children: [
-                              InkWell(
-                                borderRadius: BorderRadius.circular(6.0),
-                                onTap: () {
-                                  if (controller.machineryList[index].isSelected
-                                          .value ==
-                                      false) {
-                                    controller.machineryList[index].isSelected
-                                        .value = true;
-                                  } else {
-                                    controller.machineryList[index].isSelected
-                                        .value = false;
-                                  }
-                                  debugPrint(
-                                      "Select = ${controller.machineryList[index].isSelected.value}");
-                                },
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 4.0, vertical: 4.0),
-                                  decoration: BoxDecoration(
-                                      border: Border.all(
-                                          color: AppColor.dropDownHintColor),
-                                      borderRadius: BorderRadius.circular(6.0)),
-                                  child: Obx(() => Icon(
-                                        Icons.check_rounded,
-                                        size: 14,
-                                        color: controller.machineryList[index]
-                                                .isSelected.value
-                                            ? AppColor.blackColor
-                                            : Colors.transparent,
-                                      )),
-                                ),
-                              ),
+                              Text(sparepartsController.sparepartsList[index]
+                                      ['name'] ??
+                                  ''.capitalizeFirst),
                               const SizedBox(
-                                width: 10.0,
+                                width: 2,
                               ),
-                              Expanded(
-                                child: Text(
-                                  'Spareparts ${index + 1}',
-                                  style: AppTextStyle.textStyleRegular16
-                                      .copyWith(color: const Color(0xff555555)),
-                                ),
-                              ),
-                              Expanded(
-                                child: CustomTextField(
-                                  textInputType: TextInputType.number,
-                                  textEditingController: controller
-                                      .sparepartsTextEditingController,
-                                  hintText: "Qty",
-                                  autoValidateMode:
-                                      AutovalidateMode.onUserInteraction,
-                                  validator: (value) {
-                                    if (value!.isEmpty) {
-                                      return "Enter spareparts";
-                                    } else {
-                                      return null;
-                                    }
-                                  },
-                                ),
-                              ),
-                              // Container(
-                              //   width: 115,
-                              //   height: 42,
-                              //   decoration: BoxDecoration(
-                              //     borderRadius: BorderRadius.circular(4),
-                              //     border:
-                              //         Border.all(color: Color(0xffD1D1D1)),
-                              //   ),
-                              //   child: TextField(
-                              //     controller: controller
-                              //         .sparepartsTextEditingController,
-                              //     textAlignVertical:
-                              //         TextAlignVertical.center,
-                              //     textAlign: TextAlign.center,
-                              //     keyboardType: TextInputType.number,
-                              //     decoration: InputDecoration(
-                              //       errorText: validate
-                              //           ? "Value Can't Be Empty"
-                              //           : null,
-                              //       // errorText: _validate
-                              //       //     ? "Please Enter spareparts"
-                              //       //     : null,
-                              //       border: InputBorder.none,
-                              //       contentPadding:
-                              //           const EdgeInsets.symmetric(
-                              //               horizontal: 8.0,
-                              //               vertical: 13.0),
-                              //       hintText: 'Qty',
-                              //       hintStyle: AppTextStyle
-                              //           .textStyleRegular14
-                              //           .copyWith(
-                              //               color:
-                              //                   AppColor.dropDownHintColor),
-                              //       labelStyle: AppTextStyle
-                              //           .textStyleRegular16
-                              //           .copyWith(
-                              //               color: AppColor.blackColor),
-                              //       helperStyle: AppTextStyle
-                              //           .textStyleRegular16
-                              //           .copyWith(
-                              //               color:
-                              //                   AppColor.dropDownHintColor),
-                              //     ),
-                              //   ),
-                              // ),
-                              const SizedBox(
-                                width: 10.0,
-                              ),
+                              Text('${index + 1}'),
                             ],
-                          );
-                        },
-                        separatorBuilder: (BuildContext context, int index) {
-                          return const SizedBox(
-                            height: 12.0,
-                          );
-                        },
-                      )),
+                          ),
+                          trailing: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Container(
+                                width: 115,
+                                height: 42,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(4),
+                                    border: Border.all(
+                                        color: const Color(0xffD1D1D1))),
+                                child: TextField(
+                                  // enabled: false,
+                                  keyboardType:
+                                      const TextInputType.numberWithOptions(),
+                                  maxLength: 3,
+                                  textAlignVertical: TextAlignVertical.center,
+                                  textAlign: TextAlign.center,
+                                  controller: controller
+                                      .sparepartsTextEditingController,
+                                  decoration: InputDecoration(
+                                      counterText: '',
+                                      border: InputBorder.none,
+                                      contentPadding:
+                                          const EdgeInsets.symmetric(
+                                              horizontal: 8.0, vertical: 13),
+                                      hintText: sparepartsController
+                                              .sparepartsList[index]['qty'] ??
+                                          '',
+                                      helperStyle: AppTextStyle.textStyleLight16
+                                          .copyWith(
+                                              color:
+                                                  AppColor.dropDownHintColor),
+                                      hintStyle: AppTextStyle.textStyleLight14
+                                          .copyWith(
+                                              color:
+                                                  AppColor.dropDownHintColor)),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 12,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  sparepartsController.deleteSpareparts(
+                                      sparepartsController.sparepartsList[index]
+                                          ['id']);
+                                  sparepartsController.sparepartsList
+                                      .removeAt(index);
+                                },
+                                borderRadius: BorderRadius.circular(5),
+                                child: Image.asset(
+                                  "assets/images/remove.png",
+                                  color: Colors.red,
+                                  height: 30,
+                                ),
+                              ),
+                              // InkWell(
+                              //   borderRadius: BorderRadius.circular(10),
+                              //   onTap: () {
+                              //     Get.to(AddSpareparts(
+                              //       model: sparepartsController
+                              //           .sparepartsList[index],
+                              //     ));
+                              //   },
+                              //   child: Container(
+                              //       decoration: BoxDecoration(
+                              //           // color: const Color(0xffFFFFFF),
+                              //           borderRadius: BorderRadius.circular(4),
+                              //           border: Border.all(
+                              //               color: const Color(0xffD1D1D1))),
+                              //       padding: const EdgeInsets.symmetric(
+                              //           vertical: 12, horizontal: 12),
+                              //       child: SvgPicture.asset(
+                              //         'assets/svg/ic_edit.svg',
+                              //         height: 16,
+                              //         width: 16,
+                              //       )),
+                              // ),
+                              // InkWell(
+                              //   borderRadius: BorderRadius.circular(10),
+                              //   onTap: () {
+                              //     Get.to(AddSpareparts(
+                              //       model: sparepartsController
+                              //           .sparepartsList[index],
+                              //     ));
+                              //   },
+                              //   child: Container(
+                              //       decoration: BoxDecoration(
+                              //           // color: const Color(0xffFFFFFF),
+                              //           borderRadius: BorderRadius.circular(4),
+                              //           border: Border.all(
+                              //               color: const Color(0xffD1D1D1))),
+                              //       padding: const EdgeInsets.symmetric(
+                              //           vertical: 12, horizontal: 12),
+                              //       child: SvgPicture.asset(
+                              //         'assets/svg/delete.svg',
+                              //         height: 16,
+                              //         width: 16,
+                              //       )),
+                              // ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  ),
                 ],
               ),
             ],

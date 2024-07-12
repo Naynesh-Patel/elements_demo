@@ -62,17 +62,6 @@ class _AddSparepartsState extends State<AddSpareparts> {
     return Scaffold(
         backgroundColor: AppColor.whiteColor,
         appBar: CustomAppBar(
-          // action: [
-          //   Padding(
-          //       padding: const EdgeInsets.only(right: 10),
-          //       child: IconButton(
-          //           onPressed: () {
-          //             Get.to(const ViewSparepartsDetails());
-          //           },
-          //           icon: const Icon(
-          //             Icons.add,
-          //           )))
-          // ],
           title: widget.model != null
               ? "Update Import Spareparts "
               : "Add Import Spareparts",
@@ -113,18 +102,6 @@ class _AddSparepartsState extends State<AddSpareparts> {
                         "Add Qty",
                         style: AppTextStyle.textStyleRegular18,
                       ),
-                      // IconButton(
-                      //     padding: EdgeInsets.zero,
-                      //     constraints: const BoxConstraints(),
-                      //     style: const ButtonStyle(
-                      //       tapTargetSize: MaterialTapTargetSize
-                      //           .shrinkWrap, // the '2023' part
-                      //     ),
-                      //     onPressed: () {},
-                      //     icon: const Icon(
-                      //       Icons.add,
-                      //       size: 24,
-                      //     )),
                     ],
                   ),
                   const SizedBox(

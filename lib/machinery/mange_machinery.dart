@@ -105,8 +105,8 @@ class _MangeMachineryState extends State<MangeMachinery> {
                                     title: "Edit",
                                     onTap: () {
                                       Get.to(AddMachinery(
-                                        model: controller
-                                            .addMachineryList[index],
+                                        model:
+                                            controller.addMachineryList[index],
                                       ));
                                     },
                                     textColor: const Color(0xff555555)),
@@ -126,8 +126,9 @@ class _MangeMachineryState extends State<MangeMachinery> {
                                         onDeleteTap: () {
                                           setState(() {
                                             controller.deleteMachinery(
-                                                controller.addMachineryList[
-                                                    index]['id']);
+                                                controller
+                                                        .addMachineryList[index]
+                                                    ['id']);
                                             controller.addMachineryList
                                                 .removeAt(index);
                                             Get.back();

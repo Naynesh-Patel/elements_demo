@@ -1,9 +1,11 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/controller/spareparts_controller.dart';
+import 'package:elements/mange_spareparts/add_spareparts.dart';
 import 'package:elements/widget/app%20bar/home_app_bar.dart';
 import 'package:elements/widget/custom_loader.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 class SparepartsTab extends StatefulWidget {
@@ -103,32 +105,31 @@ class _SparepartsTabState extends State<SparepartsTab> {
                                                     .dropDownHintColor)),
                                   ),
                                 ),
-                                // const SizedBox(
-                                //   width: 12,
-                                // ),
-                                // InkWell(
-                                //   borderRadius: BorderRadius.circular(10),
-                                //   onTap: () {
-                                //     Get.to(AddSpareparts(
-                                //       model: controller.sparepartsList[index],
-                                //     ));
-                                //   },
-                                //   child: Container(
-                                //       decoration: BoxDecoration(
-                                //           // color: const Color(0xffFFFFFF),
-                                //           borderRadius:
-                                //               BorderRadius.circular(4),
-                                //           border: Border.all(
-                                //               color:
-                                //                   const Color(0xffD1D1D1))),
-                                //       padding: const EdgeInsets.symmetric(
-                                //           vertical: 12, horizontal: 12),
-                                //       child: SvgPicture.asset(
-                                //         'assets/svg/ic_edit.svg',
-                                //         height: 16,
-                                //         width: 16,
-                                //       )),
-                                // ),
+                                const SizedBox(
+                                  width: 12,
+                                ),
+                                InkWell(
+                                  borderRadius: BorderRadius.circular(10),
+                                  onTap: () {
+                                    Get.to(AddSpareparts(
+                                      model: controller.sparepartsList[index],
+                                    ));
+                                  },
+                                  child: Container(
+                                      decoration: BoxDecoration(
+                                          // color: const Color(0xffFFFFFF),
+                                          borderRadius:
+                                              BorderRadius.circular(4),
+                                          border: Border.all(
+                                              color: const Color(0xffD1D1D1))),
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 12, horizontal: 12),
+                                      child: SvgPicture.asset(
+                                        'assets/svg/ic_edit.svg',
+                                        height: 16,
+                                        width: 16,
+                                      )),
+                                ),
                               ],
                             ),
                           );

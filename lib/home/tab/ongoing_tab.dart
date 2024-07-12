@@ -11,6 +11,8 @@ import 'package:elements/widget/empty_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../create_new_order.dart';
+
 class OnGoingTab extends StatefulWidget {
   const OnGoingTab({super.key});
 
@@ -109,7 +111,7 @@ class _OnGoingTabState extends State<OnGoingTab> {
                               SmallButton(
                                   title: "  Edit  ",
                                   onTap: () {
-                                    Get.to(ViewOrderDetails(
+                                    Get.to(CreateNewOrder(
                                       model: orderController.orderList[index],
                                     ));
                                   },
@@ -118,7 +120,7 @@ class _OnGoingTabState extends State<OnGoingTab> {
                                 width: 10,
                               ),
                               SmallButton(
-                                  title: "Cancel",
+                                  title: "Delete",
                                   onTap: () {
                                     CustomDialogBox.showDeleteDialog(
                                       context: context,
@@ -164,17 +166,6 @@ class _OnGoingTabState extends State<OnGoingTab> {
               .copyWith(color: const Color(0xff555555)),
         )),
       ],
-    );
-  }
-
-  Widget _emptyView() {
-    return Container(
-      height: Get.height * 0.55,
-      padding: const EdgeInsets.symmetric(horizontal: 110.0),
-      child: Image.asset(
-        alignment: Alignment.center,
-        "assets/images/no_order.png",
-      ),
     );
   }
 
