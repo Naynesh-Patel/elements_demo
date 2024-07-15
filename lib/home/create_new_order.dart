@@ -14,7 +14,8 @@ import 'package:get/get.dart';
 
 class CreateNewOrder extends StatefulWidget {
   final dynamic model;
-  const CreateNewOrder({super.key, this.model});
+  final bool isView;
+  const CreateNewOrder({super.key, this.model, this.isView = false});
 
   @override
   State<CreateNewOrder> createState() => _CreateNewOrderState();
@@ -31,14 +32,12 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
   @override
   void initState() {
     if (widget.model != null) {
-      orderController.customerCompanyIdNoTextEditingController.text =
-          widget.model['customer_company_id'] ?? '';
       orderController.totalPaymentEditingController.text =
           widget.model['total_payment'] ?? '';
       orderController.advancePaymentEditingController.text =
           widget.model['advance_payment'] ?? '';
       customerController.companyTextEditingController.text =
-          widget.model['advance_payment'] ?? '';
+          widget.model['customer_company_id'] ?? '';
       machineryController.machineNameTextEditingController.text =
           widget.model['machine_ids'] ?? '';
     } else {
@@ -61,8 +60,11 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
     return Scaffold(
         backgroundColor: AppColor.whiteColor,
         appBar: CustomAppBar(
-          title:
-              widget.model != null ? 'Update  New Order' : 'Create  New Order',
+          title: widget.isView
+              ? "View Order Details"
+              : widget.model != null
+                  ? 'Update  New Order'
+                  : 'Create  New Order',
           onPressed: () {
             Get.back();
           },
@@ -197,23 +199,26 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
             ),
           ),
         ),
-        bottomNavigationBar: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-          child: CustomButton(
-            color: AppColor.buttonColor,
-            isLoading: orderController.isOrderLoading,
-            buttonText: 'Done',
-            onTap: () {
-              if (_formKey.currentState!.validate()) {
-                if (widget.model != null) {
-                  orderController.updateOrder(widget.model['id']);
-                } else {
-                  orderController.addOrder();
-                }
-              }
-            },
-          ),
-        ));
+        bottomNavigationBar: widget.isView
+            ? const SizedBox.shrink()
+            : Container(
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                child: CustomButton(
+                  color: AppColor.buttonColor,
+                  isLoading: orderController.isOrderLoading,
+                  buttonText: 'Done',
+                  onTap: () {
+                    if (_formKey.currentState!.validate()) {
+                      if (widget.model != null) {
+                        orderController.updateOrder(widget.model['id']);
+                      } else {
+                        orderController.addOrder();
+                      }
+                    }
+                  },
+                ),
+              ));
   }
 
   Widget verticalSpacing() {

@@ -3,13 +3,14 @@ import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/constant/methods.dart';
 import 'package:elements/controller/order_controller.dart';
 import 'package:elements/home/invoice.dart';
-import 'package:elements/home/view_order_detail.dart';
 import 'package:elements/widget/button/small_button.dart';
 import 'package:elements/widget/custom_loader.dart';
 import 'package:elements/widget/dialogs/custom_dialogbox.dart';
 import 'package:elements/widget/empty_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../create_new_order.dart';
 
 class CompleteTab extends StatefulWidget {
   const CompleteTab({super.key});
@@ -39,7 +40,9 @@ class _CompleteTabState extends State<CompleteTab> {
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: () {
-                      Get.to(const ViewOrderDetails());
+                      Get.to(CreateNewOrder(
+                          isView: true,
+                          model: orderController.orderList[index]));
                     },
                     child: Container(
                       width: double.maxFinite,
@@ -111,8 +114,8 @@ class _CompleteTabState extends State<CompleteTab> {
                               SmallButton(
                                   title: "  Edit  ",
                                   onTap: () {
-                                    Get.to(const ViewOrderDetails(
-                                      isUpdate: true,
+                                    Get.to(CreateNewOrder(
+                                      model: orderController.orderList[index],
                                     ));
                                   },
                                   textColor: const Color(0xff555555)),

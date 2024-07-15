@@ -3,7 +3,6 @@ import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/constant/methods.dart';
 import 'package:elements/controller/order_controller.dart';
 import 'package:elements/home/invoice.dart';
-import 'package:elements/home/view_order_detail.dart';
 import 'package:elements/widget/button/small_button.dart';
 import 'package:elements/widget/custom_loader.dart';
 import 'package:elements/widget/dialogs/custom_dialogbox.dart';
@@ -41,7 +40,10 @@ class _OnGoingTabState extends State<OnGoingTab> {
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: () {
-                      Get.to(const ViewOrderDetails());
+                      // Get.to(const ViewOrderDetails());
+                      Get.to(CreateNewOrder(
+                          isView: true,
+                          model: orderController.orderList[index]));
                     },
                     child: Container(
                       width: double.maxFinite,

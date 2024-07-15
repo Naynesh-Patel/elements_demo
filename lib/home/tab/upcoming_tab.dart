@@ -4,13 +4,14 @@ import 'package:elements/constant/methods.dart';
 import 'package:elements/controller/customer_controller.dart';
 import 'package:elements/controller/order_controller.dart';
 import 'package:elements/home/invoice.dart';
-import 'package:elements/home/view_order_detail.dart';
 import 'package:elements/widget/button/small_button.dart';
 import 'package:elements/widget/custom_loader.dart';
 import 'package:elements/widget/dialogs/custom_dialogbox.dart';
 import 'package:elements/widget/empty_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../create_new_order.dart';
 
 class UpComingTab extends StatefulWidget {
   const UpComingTab({super.key});
@@ -41,7 +42,9 @@ class _UpComingTabState extends State<UpComingTab> {
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: () {
-                      Get.to(const ViewOrderDetails());
+                      Get.to(CreateNewOrder(
+                          isView: true,
+                          model: orderController.orderList[index]));
                     },
                     child: Container(
                       width: double.maxFinite,
@@ -71,8 +74,8 @@ class _UpComingTabState extends State<UpComingTab> {
                           verticalSpacing(),
                           _keyValue(
                             "Client",
-                            customerController.customerList[index]['owner'] ??
-                                "",
+                            orderController.orderList[index]
+                                ['customer_company_id'],
                           ),
                           verticalSpacing(),
                           _keyValue(
@@ -111,8 +114,8 @@ class _UpComingTabState extends State<UpComingTab> {
                               SmallButton(
                                   title: "  Edit  ",
                                   onTap: () {
-                                    Get.to(const ViewOrderDetails(
-                                      isUpdate: true,
+                                    Get.to(CreateNewOrder(
+                                      model: orderController.orderList[index],
                                     ));
                                   },
                                   textColor: const Color(0xff555555)),

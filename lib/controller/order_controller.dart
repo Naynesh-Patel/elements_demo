@@ -143,7 +143,6 @@ class OrderController extends GetxController {
       "user_id": modelUser.value.id,
       "customer_company_id":
           customerController.companyTextEditingController.text,
-
       "machine_ids": customerController.machineNameTextEditingController.text,
       "delivery_date": date.text,
       "total_payment": totalPaymentEditingController.text,
