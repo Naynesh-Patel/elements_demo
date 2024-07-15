@@ -38,11 +38,13 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
           widget.model['advance_payment'] ?? '';
       customerController.companyTextEditingController.text =
           widget.model['customer_company_id'] ?? '';
-      machineryController.machineNameTextEditingController.text =
+      customerController.machineNameTextEditingController.text =
           widget.model['machine_ids'] ?? '';
+      orderController.assignOrderIdEditingController.text =
+          widget.model['assign_order_id'] ?? '';
+      orderController.formatDate.text = widget.model['delivery_date'] ?? '';
     } else {
       orderController.customerCompanyIdNoTextEditingController.clear();
-      orderController.machineIdsTextEditingController.clear();
       orderController.date.clear();
       orderController.assignOrderIdEditingController.clear();
       orderController.formatDate.clear();
@@ -50,7 +52,6 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
       orderController.advancePaymentEditingController.clear();
       customerController.companyTextEditingController.clear();
       customerController.machineNameTextEditingController.clear();
-      machineryController.machineNameTextEditingController.clear();
     }
     super.initState();
   }
@@ -120,7 +121,6 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                     suffixFixIcon: const Icon(
                       Icons.arrow_forward_ios_rounded,
                       size: 18,
-                      color: AppColor.blackColor,
                     )),
                 verticalSpacing(),
                 InkWell(

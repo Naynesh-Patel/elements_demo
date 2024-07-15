@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
@@ -91,10 +92,10 @@ class UserController extends GetxController {
       var response = await http.post(Uri.parse(url), body: body);
       if (response.statusCode == 200) {
         var responseData = jsonDecode(response.body);
-        if(responseData['status']==1){
+        if (responseData['status'] == 1) {
           getUser();
           Get.back();
-        }else{
+        } else {
           showToast(responseData['message']);
           debugPrint("Error Message ${responseData['message']}");
         }
@@ -175,16 +176,15 @@ class UserController extends GetxController {
       var response = await http.post(Uri.parse(url), body: body);
       if (response.statusCode == 200) {
         var responseData = jsonDecode(response.body);
-        if(responseData['status']==1){
+        if (responseData['status'] == 1) {
           Get.back();
           getUser();
           isUserLoading.value = false;
-        }else{
+        } else {
           showToast(responseData['message']);
           debugPrint("Error Message ${responseData['message']}");
           isUserLoading.value = false;
         }
-
       } else {
         debugPrint("statusCode${response.statusCode}");
         isUserLoading.value = false;
@@ -201,7 +201,8 @@ class UserController extends GetxController {
       log("API => $url");
 
       isDeleteUserLoading.value = true;
-      var response = await http.post(Uri.parse(url), body: {"id": userList[index]['id']});
+      var response =
+          await http.post(Uri.parse(url), body: {"id": userList[index]['id']});
       if (response.statusCode == 200) {
         var responseData = jsonDecode(response.body);
         isDeleteUserLoading.value = false;
@@ -223,32 +224,30 @@ class UserController extends GetxController {
     }
   }
 
-
   final LocalAuthentication auth = LocalAuthentication();
 
-                 getFingerPrint() async {
-
+  getFingerPrint() async {
     bool canCheckBiometrics = await checkBiometricsAvailable();
 
-    if(canCheckBiometrics){
+    if (canCheckBiometrics) {
       try {
-          await auth.authenticate(
+        await auth
+            .authenticate(
           localizedReason: 'Authenticate to punch ',
           options: const AuthenticationOptions(
             stickyAuth: true,
           ),
-        ).then((value){
-            // final store = BiometricStorage().getStorage('mystorage');
-            // debugPrint("Store FingerPrint =>${store}");
-          });
+        )
+            .then((value) {
+          // final store = BiometricStorage().getStorage('mystorage');
+          // debugPrint("Store FingerPrint =>${store}");
+        });
       } catch (e) {
         debugPrint("Biometric Error : ${e.toString()}");
       }
-    }else{
+    } else {
       debugPrint("Biometric Not Available");
     }
-
-
   }
 
   Future<bool> checkBiometricsAvailable() async {
@@ -258,7 +257,4 @@ class UserController extends GetxController {
       return false;
     }
   }
-
-
-
 }

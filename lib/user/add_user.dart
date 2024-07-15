@@ -29,7 +29,8 @@ class _AddUserState extends State<AddUser> {
   @override
   void initState() {
     if (widget.model != null) {
-      controller.userRoleTextEditingController.text = widget.model['user_type'] ?? '';
+      controller.userRoleTextEditingController.text =
+          widget.model['user_type'] ?? '';
       controller.userNameTextEditingController.text =
           widget.model['name'] ?? '';
       controller.addressTextEditingController.text =
@@ -85,37 +86,50 @@ class _AddUserState extends State<AddUser> {
                       child: Stack(
                         alignment: Alignment.bottomRight,
                         children: [
-                          widget.model != null ? controller.imgFile == null ? SizedBox(
-                              height: 80,
-                              width: 80,
-                              child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(50.0),
-                                  child: Image.memory(base64Decode(controller.base64Image),
-                                    fit: BoxFit.cover,
-                                  ))) : SizedBox(
-                              height: 80,
-                              width: 80,
-                              child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(50.0),
-                                  child: Image.file(
-                                    controller.imgFile!,
-                                    fit: BoxFit.cover,
-                                  ))):
-                          controller.imgFile == null
-                              ? Image.asset(
-                                  'assets/images/camera.png',
-                                  height: 80,
-                                  width: 80,
-                                )
-                              : SizedBox(
-                                  height: 80,
-                                  width: 80,
-                                  child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(50.0),
-                                      child: Image.file(
-                                        controller.imgFile!,
-                                        fit: BoxFit.cover,
-                                      ))),
+                          widget.model != null
+                              ? controller.imgFile == null
+                                  ? SizedBox(
+                                      height: 80,
+                                      width: 80,
+                                      child: ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(50.0),
+                                        child: Image.memory(
+                                          base64Decode(controller.base64Image),
+                                          fit: BoxFit.cover,
+                                          height: 80,
+                                          width: 80,
+                                        ),
+                                      ),
+                                    )
+                                  : SizedBox(
+                                      height: 80,
+                                      width: 80,
+                                      child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(50.0),
+                                          child: Image.file(
+                                            controller.imgFile!,
+                                            // controller.imgFile!,
+                                            fit: BoxFit.cover,
+                                          )))
+                              : controller.imgFile == null
+                                  ? Image.asset(
+                                      'assets/images/camera.png',
+                                      height: 80,
+                                      width: 80,
+                                    )
+                                  : SizedBox(
+                                      height: 80,
+                                      width: 80,
+                                      child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(50.0),
+                                          child: Image.file(
+                                            controller.imgFile!,
+                                            // controller.imgFile!,
+                                            fit: BoxFit.cover,
+                                          ))),
                           InkWell(
                             onTap: () async {
                               bool refresh =
@@ -226,7 +240,6 @@ class _AddUserState extends State<AddUser> {
                       ),
                     ),
                     verticalSpacing(),
-
                     // DropdownButtonFormField<String>(
                     //   isExpanded: true,
                     //

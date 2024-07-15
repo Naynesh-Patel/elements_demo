@@ -16,6 +16,7 @@ class OrderController extends GetxController {
       TextEditingController();
   TextEditingController machineIdsTextEditingController =
       TextEditingController();
+
   // TextEditingController deliveryDateTextEditingController = TextEditingController();
   TextEditingController date = TextEditingController();
   TextEditingController formatDate = TextEditingController();
@@ -89,8 +90,6 @@ class OrderController extends GetxController {
       "total_payment": totalPaymentEditingController.text,
       "advance_payment": advancePaymentEditingController.text,
       "assign_order_id": assignOrderIdEditingController.text,
-      // "created_at": createdAtEditingController.text,
-      // "updated_at": updatedAtEditingController.text,
     };
     try {
       String url = "${baseURL}order/create";
@@ -148,8 +147,6 @@ class OrderController extends GetxController {
       "total_payment": totalPaymentEditingController.text,
       "advance_payment": advancePaymentEditingController.text,
       "assign_order_id": assignOrderIdEditingController.text,
-      // "created_at": createdAtEditingController.text,
-      // "updated_at": updatedAtEditingController.text,
     };
     try {
       String url = "${baseURL}order/update";

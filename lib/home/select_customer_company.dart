@@ -53,7 +53,6 @@ class _SelectCustomerCompanyState extends State<SelectCustomerCompany> {
                       onTap: () {
                         customerController.companyTextEditingController.text =
                             customerController.customerList[index]['owner'];
-
                         Get.back();
                       },
                       child: Container(
@@ -87,7 +86,6 @@ class _SelectCustomerCompanyState extends State<SelectCustomerCompany> {
                               Expanded(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
-                                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                         customerController.customerList[index]
@@ -106,7 +104,7 @@ class _SelectCustomerCompanyState extends State<SelectCustomerCompany> {
                                             '',
                                         style: AppTextStyle.textStyleRegular14
                                             .copyWith(
-                                          color: const Color(0xff555555),
+                                          color: Color(0xff555555),
                                         )),
                                   ],
                                 ),

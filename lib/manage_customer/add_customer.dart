@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/controller/customer_controller.dart';
@@ -308,8 +309,7 @@ class _AddCustomerState extends State<AddCustomer> {
                   textInputType: TextInputType.number,
                   textEditingController: controller.gstinTextEditingController,
                   hintText: "GD5456892098",
-                  labelText: "GST No"
-                      "",
+                  labelText: "GST No",
                   // validator: (value) {
                   //   if (value!.isEmpty) {
                   //     return "Enter GST No";

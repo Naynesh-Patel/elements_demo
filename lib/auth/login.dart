@@ -7,8 +7,6 @@ import 'package:elements/widget/dropdown/dropdown_fromfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../widget/custom_button_loader.dart';
-
 class Login extends StatefulWidget {
   const Login({super.key});
 
@@ -56,7 +54,7 @@ class _LoginState extends State<Login> {
                     ),
                     WidgetDropDownFromField(
                       hintText: "Select User Type",
-                      labelText: "User Type*",
+                      labelText: "User Type",
                       itemList: const ["Admin", "Manager", "Salesman"],
                       onTap: (value) {
                         controller.userTypeTextEditingController.text = value;
@@ -78,7 +76,7 @@ class _LoginState extends State<Login> {
                           controller.mobileNumberTextEditingController,
                       maxLength: 10,
                       hintText: "Mobile No",
-                      labelText: "Mobile No*",
+                      labelText: "Mobile No",
                       autoValidateMode: AutovalidateMode.onUserInteraction,
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -94,9 +92,8 @@ class _LoginState extends State<Login> {
                         obscureText: controller.loginPasswordVisible,
                         textEditingController:
                             controller.passwordTextEditingController,
-                        maxLength: 10,
                         hintText: "Password",
-                        labelText: "Password*",
+                        labelText: "Password",
                         autoValidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
                           if (value!.isEmpty) {
