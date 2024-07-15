@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../constant/app_text_style.dart';
-import '../widget/dialogs/custom_dialogbox.dart';
 
 class MangeUser extends StatefulWidget {
   const MangeUser({super.key});
@@ -59,13 +58,12 @@ class _MangeUserState extends State<MangeUser> {
                           return Column(
                             children: [
                               _tableView(
-                                name: controller.userList[index]['name'],
-                                date: getDateInDDMMYY(DateTime.parse(
-                                    controller.userList[index]['create_at'])),
-                                Authoriy: controller.userList[index]
-                                    ['user_type'],
-                                index: index
-                              ),
+                                  name: controller.userList[index]['name'],
+                                  date: getDateInDDMMYY(DateTime.parse(
+                                      controller.userList[index]['create_at'])),
+                                  Authoriy: controller.userList[index]
+                                      ['user_type'],
+                                  index: index),
                             ],
                           );
                         },
@@ -91,13 +89,13 @@ class _MangeUserState extends State<MangeUser> {
     );
   }
 
-  Widget _tableView({
-    // ignore: non_constant_identifier_names
-    required String Authoriy,
-    name,
-    date,
-    required int index
-  }) {
+  Widget _tableView(
+      {
+      // ignore: non_constant_identifier_names
+      required String Authoriy,
+      name,
+      date,
+      required int index}) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Column(
@@ -119,27 +117,11 @@ class _MangeUserState extends State<MangeUser> {
                           .copyWith(color: AppColor.blackLightColor))),
 
               Expanded(
-                child: InkWell(
-                  onTap: () {
-                    CustomDialogBox.showDeleteDialog(
-                      context: context,
-                      bodyText:
-                          "Do you really want to cancel these records? This process cannot be undone.",
-                      onCancelTap: () {
-                        Get.back();
-                      },
-                      onDeleteTap: () {
-                        controller.deleteUser(index:controller.userList[index]['id']);
-                        controller.userList.removeAt(index);
-                      },
-                    );
-                  },
-                  child: Text(
-                    "$Authoriy...",
-                    textAlign: TextAlign.end,
-                    style: AppTextStyle.textStyleLight12
-                        .copyWith(color: AppColor.blackLightColor),
-                  ),
+                child: Text(
+                  "$Authoriy...",
+                  textAlign: TextAlign.end,
+                  style: AppTextStyle.textStyleLight12
+                      .copyWith(color: AppColor.blackLightColor),
                 ),
               ),
               PopupMenuButton<String>(
@@ -148,12 +130,14 @@ class _MangeUserState extends State<MangeUser> {
                   constraints: const BoxConstraints(),
                   child: const Icon(
                     Icons.more_vert,
-                   ),
+                  ),
                   onSelected: (String value) {
-                    if(value == "Edit"){
-                      Get.to(()=>AddUser(model:controller.userList[index],));
-                    }else{
-                      controller.deleteUser(index:index);
+                    if (value == "Edit") {
+                      Get.to(() => AddUser(
+                            model: controller.userList[index],
+                          ));
+                    } else {
+                      controller.deleteUser(index: index);
                     }
                   },
                   itemBuilder: (BuildContext context) =>
