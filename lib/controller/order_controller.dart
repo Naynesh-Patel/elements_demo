@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:elements/controller/machinery_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -100,15 +99,14 @@ class OrderController extends GetxController {
       var response = await http.post(Uri.parse(url), body: body);
       if (response.statusCode == 200) {
         var responseData = jsonDecode(response.body);
-        if(responseData['status']=="success"){
+        if (responseData['status'] == "success") {
           isOrderLoading.value = false;
           Get.back();
           getOrder();
-        }else{
+        } else {
           showToast(responseData['message']);
           isOrderLoading.value = false;
         }
-
       } else {
         debugPrint("statusCode${response.statusCode}");
         isOrderLoading.value = false;

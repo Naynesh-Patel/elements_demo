@@ -1,6 +1,7 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/constant/methods.dart';
+import 'package:elements/controller/customer_controller.dart';
 import 'package:elements/controller/order_controller.dart';
 import 'package:elements/home/invoice.dart';
 import 'package:elements/home/view_order_detail.dart';
@@ -20,6 +21,7 @@ class UpComingTab extends StatefulWidget {
 
 class _UpComingTabState extends State<UpComingTab> {
   OrderController orderController = Get.find();
+  CustomerController customerController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -69,8 +71,8 @@ class _UpComingTabState extends State<UpComingTab> {
                           verticalSpacing(),
                           _keyValue(
                             "Client",
-                            orderController.orderList[index]
-                                ['customer_company_id'],
+                            customerController.customerList[index]['owner'] ??
+                                "",
                           ),
                           verticalSpacing(),
                           _keyValue(
