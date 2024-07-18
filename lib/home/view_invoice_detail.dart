@@ -143,11 +143,9 @@
 //         ));
 //   }
 // }
-import 'package:elements/constant/app_colors.dart';
-import 'package:elements/widget/button/custom_button.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
-import 'package:get/get.dart';
 
 void main() => runApp(const ViewInvoiceDetails());
 
@@ -164,9 +162,9 @@ class ViewInvoiceDetails extends StatelessWidget {
 }
 
 class PDFScreen extends StatelessWidget {
-  final String pdfPath = 'https://codinghouse.in/machinepro/pdf/OrderNo-40.pdf';
+  const PDFScreen({super.key}); //
 
-  const PDFScreen({super.key}); // Update with your PDF file path
+  final String pdfPath = 'https://codinghouse.in/machinepro/pdf/OrderNo-40.pdf';
 
   @override
   Widget build(BuildContext context) {
@@ -174,17 +172,12 @@ class PDFScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('PDF Viewer'),
       ),
-      body: PDFView(
-        filePath: pdfPath,
-      ),
-      bottomNavigationBar: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-        child: CustomButton(
-          color: AppColor.buttonColor,
-          isLoading: false.obs,
-          buttonText: 'Download Pdf',
-          onTap: () {},
-        ),
+      body: const PDFView(
+        filePath: "https://codinghouse.in/machinepro/pdf/OrderNo-40.pdf",
+        enableSwipe: true,
+        swipeHorizontal: true,
+        autoSpacing: false,
+        pageFling: false,
       ),
     );
   }

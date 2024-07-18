@@ -194,4 +194,31 @@ class OrderController extends GetxController {
       isDeleteOrderLoading.value = false;
     }
   }
+
+  Future<void> pdf(id) async {
+    Map<String, dynamic> body = {
+      "id": id,
+    };
+    try {
+      String url = "${baseURL}order/generatePdf?id=40";
+      log("API => $url");
+      isPdfLoading.value = true;
+      var response = await http.post(Uri.parse(url), body: body);
+      if (response.statusCode == 200) {
+        var responseData = jsonDecode(response.body);
+        if (responseData['status'] == "success") {
+          isPdfLoading.value = false;
+        } else {
+          showToast(responseData['message']);
+          isPdfLoading.value = false;
+        }
+      } else {
+        debugPrint("statusCode${response.statusCode}");
+        isPdfLoading.value = false;
+      }
+    } catch (e) {
+      debugPrint("Error${e.toString()}");
+      isPdfLoading.value = false;
+    }
+  }
 }
