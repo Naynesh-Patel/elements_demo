@@ -2,7 +2,9 @@ import 'dart:convert';
 
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
+import 'package:elements/controller/company_controller.dart';
 import 'package:elements/controller/user_controller.dart';
+import 'package:elements/user/select_company.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:elements/widget/button/custom_button.dart';
 import 'package:elements/widget/custom_text_field.dart';
@@ -13,7 +15,10 @@ import 'package:get/get.dart';
 class AddUser extends StatefulWidget {
   final bool isUpdate;
   final dynamic model;
-  const AddUser({super.key, this.isUpdate = false, this.model});
+  final bool isView;
+
+  const AddUser(
+      {super.key, this.isUpdate = false, this.model, this.isView = false});
 
   @override
   State<AddUser> createState() => _AddUserState();
@@ -24,12 +29,14 @@ class _AddUserState extends State<AddUser> {
   int index = 0;
 
   UserController controller = Get.find();
+  CompanyController companyController = Get.find();
 
   final _formKey = GlobalKey<FormState>();
+
   @override
   void initState() {
     if (widget.model != null) {
-      controller.userRoleTextEditingController.text =
+      controller.usersRoleTextEditingController.text =
           widget.model['user_type'] ?? '';
       controller.userNameTextEditingController.text =
           widget.model['name'] ?? '';
@@ -39,13 +46,16 @@ class _AddUserState extends State<AddUser> {
           widget.model['contact_no'] ?? '';
       controller.fingerprintEditingController.text =
           widget.model['fingerprint'] ?? '';
+      companyController.selectCompanyTextEditingController.text =
+          widget.model['name'] ?? '';
       controller.base64Image = widget.model['photo'] ?? '';
     } else {
-      controller.userRoleTextEditingController.clear();
+      controller.usersRoleTextEditingController.clear();
       controller.userNameTextEditingController.clear();
       controller.addressTextEditingController.clear();
       controller.contactNoTextEditingController.clear();
       controller.fingerprintEditingController.clear();
+      companyController.selectCompanyTextEditingController.clear();
       controller.base64Image = "";
       controller.imgFile = null;
     }
@@ -60,7 +70,11 @@ class _AddUserState extends State<AddUser> {
           onPressed: () {
             Get.back();
           },
-          title: widget.model != null ? "Update User Details" : "Add User",
+          title: widget.isView
+              ? "User View Deatils"
+              : widget.model != null
+                  ? "Update User Details"
+                  : "Add User",
         ),
         body: Form(
           key: _formKey,
@@ -147,7 +161,6 @@ class _AddUserState extends State<AddUser> {
                                 child: const Icon(
                                   Icons.add,
                                   color: Colors.white,
-                                  size: 18,
                                 )),
                           )
                         ],
@@ -157,16 +170,37 @@ class _AddUserState extends State<AddUser> {
                     WidgetDropDownFromField(
                       hintText: "Select User Role",
                       labelText: "User Role",
-                      itemList: const ["Admin", "User", "Seller"],
-                      value: controller.userRoleTextEditingController.text,
-                      // autovalidateMode: AutovalidateMode.onUserInteraction,
+                      itemList: const ["Salesman", "Worker", "Manger"],
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
                       onTap: (value) {
-                        controller.userRoleTextEditingController.text = value;
+                        controller.usersRoleTextEditingController.text = value;
                         _formKey.currentState?.validate();
                         debugPrint("Select => $value");
                         _formKey.currentState?.validate();
                       },
                     ),
+                    verticalSpacing(),
+                    CustomTextField(
+                        // focusNode: FocusNode(),
+                        // readOnly: true,
+                        onTap: () {
+                          Get.to(const SelectCompany());
+                        },
+                        hintText: "Select Company",
+                        textEditingController: companyController
+                            .selectCompanyTextEditingController,
+                        autoValidateMode: AutovalidateMode.onUserInteraction,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Please Enter Company";
+                          } else {
+                            return null;
+                          }
+                        },
+                        suffixFixIcon: const Icon(
+                          Icons.arrow_forward_ios_rounded,
+                          size: 18,
+                        )),
                     verticalSpacing(),
                     CustomTextField(
                       textEditingController:
@@ -230,87 +264,35 @@ class _AddUserState extends State<AddUser> {
                         autoValidateMode: AutovalidateMode.onUserInteraction,
                         textCapitalization: TextCapitalization.words,
                         enable: false,
-                        // validator: (value) {
-                        //   if (value!.isEmpty) {
-                        //     return "Please Enter Fingerprint";
-                        //   } else {
-                        //     return null;
-                        //   }
-                        // },
                       ),
                     ),
                     verticalSpacing(),
-                    // DropdownButtonFormField<String>(
-                    //   isExpanded: true,
-                    //
-                    //   items: [
-                    //     DropdownMenuItem(child: Text('Jack'),value: 'Jack',),
-                    //     DropdownMenuItem(child: Text('Jay'),value: 'Jay',),
-                    //     DropdownMenuItem(child: Text('Femil'),value: 'Femil',),
-                    //     DropdownMenuItem(child: Text('Nehal'),value: 'Nehal',),
-                    //   ],
-                    //   onChanged: (value) {},
-                    //
-                    //   decoration: InputDecoration(
-                    //     labelText: 'Naam',
-                    //       floatingLabelBehavior: FloatingLabelBehavior.always,
-                    //       labelStyle: TextStyle(
-                    //         color: Colors.black
-                    //       ),
-                    //       hintText: 'User',
-                    //       hintStyle: TextStyle(
-                    //         color: Colors.grey
-                    //       ),
-                    //       contentPadding:
-                    //       EdgeInsets.symmetric(vertical: 0.0, horizontal: 20),
-                    //     errorBorder: OutlineInputBorder(
-                    //         borderSide: const BorderSide(width: 1,color: Colors.red),
-                    //         borderRadius: BorderRadius.circular(10)),
-                    //     border: OutlineInputBorder(
-                    //       borderSide: BorderSide(color: AppColor.borderColor),
-                    //         // borderSide: BorderSide.none,
-                    //         borderRadius: BorderRadius.all(Radius.circular(6.0))
-                    //     ),
-                    //     enabledBorder: OutlineInputBorder(
-                    //       borderSide: BorderSide(color: AppColor.borderColor),
-                    //         // borderSide: BorderSide.none,
-                    //         borderRadius: BorderRadius.all(Radius.circular(6.0))),
-                    //     focusedBorder: OutlineInputBorder(
-                    //       borderSide: BorderSide(color: AppColor.borderColor),
-                    //         // borderSide: BorderSide.none,
-                    //         borderRadius: BorderRadius.all(Radius.circular(6.0))),
-                    //   ),
-                    //   validator: (value) {
-                    //     if (value == null || value.isEmpty) {
-                    //       return 'Select some role';
-                    //     } else {
-                    //       return null;
-                    //     }
-                    //   },
-                    // )
                   ],
                 ),
               ),
             ],
           ),
         ),
-        bottomNavigationBar: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-          child: CustomButton(
-            color: AppColor.buttonColor,
-            isLoading: controller.isUserLoading,
-            buttonText: widget.model != null ? 'Update' : 'Add',
-            onTap: () {
-              if (_formKey.currentState!.validate()) {
-                if (widget.model != null) {
-                  controller.updateUser(widget.model['id']);
-                } else {
-                  controller.addUser();
-                }
-              }
-            },
-          ),
-        ));
+        bottomNavigationBar: widget.isView
+            ? const SizedBox.shrink()
+            : Container(
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                child: CustomButton(
+                  color: AppColor.buttonColor,
+                  isLoading: controller.isUserLoading,
+                  buttonText: widget.model != null ? 'Update' : 'Add',
+                  onTap: () {
+                    if (_formKey.currentState!.validate()) {
+                      if (widget.model != null) {
+                        controller.updateUser(widget.model['id']);
+                      } else {
+                        controller.addUser();
+                      }
+                    }
+                  },
+                ),
+              ));
   }
 
   Widget verticalSpacing() {

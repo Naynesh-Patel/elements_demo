@@ -6,15 +6,19 @@ import 'package:elements/controller/machinery_controller.dart';
 import 'package:elements/controller/order_controller.dart';
 import 'package:elements/home/select_customer_company.dart';
 import 'package:elements/home/select_machine.dart';
+import 'package:elements/home/select_order.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:elements/widget/button/custom_button.dart';
 import 'package:elements/widget/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../controller/user_controller.dart';
+
 class CreateNewOrder extends StatefulWidget {
   final dynamic model;
   final bool isView;
+
   const CreateNewOrder({super.key, this.model, this.isView = false});
 
   @override
@@ -28,6 +32,7 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
   final _formKey = GlobalKey<FormState>();
   OrderController orderController = Get.find();
   MachineryController machineryController = Get.find();
+  UserController userController = Get.find();
 
   @override
   void initState() {
@@ -184,10 +189,13 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                 ),
                 verticalSpacing(),
                 CustomTextField(
+                    onTap: () {
+                      Get.to(const SelectOrder());
+                    },
                     hintText: "Select Manager Role",
                     labelText: "Assigns Order",
                     textEditingController:
-                        orderController.assignOrderIdEditingController,
+                        userController.usersRoleTextEditingController,
                     focusNode: FocusNode(),
                     suffixFixIcon: const Icon(
                       Icons.arrow_forward_ios_rounded,
@@ -211,9 +219,24 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                   onTap: () {
                     if (_formKey.currentState!.validate()) {
                       if (widget.model != null) {
-                        orderController.updateOrder(widget.model['id']);
+                        orderController.updateOrder(
+                          widget.model['id'],
+                          machineId: orderController.orderList[0]
+                              ['machine_ids'],
+                          orderId: orderController.orderList[0]
+                              ['assign_order_id'],
+                          companyId: orderController.orderList[0]
+                              ['customer_company_id'],
+                        );
                       } else {
-                        orderController.addOrder();
+                        orderController.addOrder(
+                          orderId: orderController.orderList[0]
+                              ['assign_order_id'],
+                          companyId: orderController.orderList[0]
+                              ['customer_company_id'],
+                          machineId: orderController.orderList[0]
+                              ['machine_ids'],
+                        );
                       }
                     }
                   },

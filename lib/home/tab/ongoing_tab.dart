@@ -61,12 +61,14 @@ class _OnGoingTabState extends State<OnGoingTab> {
                               _keyValue(
                                 "OD",
                                 getDateInDDMMYY(DateTime.parse(orderController
-                                    .orderList[index]['created_at'])),
+                                        .orderList[index]['created_at'] ??
+                                    "")),
                               ),
                               _keyValue(
                                 "DD",
                                 getDateInDDMMYY(DateTime.parse(orderController
-                                    .orderList[index]['delivery_date'])),
+                                        .orderList[index]['delivery_date'] ??
+                                    "")),
                               ),
                             ],
                           ),
@@ -74,27 +76,34 @@ class _OnGoingTabState extends State<OnGoingTab> {
                           _keyValue(
                             "Client",
                             orderController.orderList[index]
-                                ['customer_company_id'],
+                                    ['customer_company_id'] ??
+                                "",
                           ),
                           verticalSpacing(),
                           _keyValue(
                             "Machine Type",
-                            orderController.orderList[index]['machine_ids'],
+                            orderController.orderList[index]['machine_ids'] ??
+                                "",
                           ),
                           verticalSpacing(),
                           _keyValue(
                             "Total Payment",
-                            orderController.orderList[index]['total_payment'],
+                            orderController.orderList[index]['total_payment'] ??
+                                "",
                           ),
                           verticalSpacing(),
                           _keyValue(
                             "Advance Payment",
-                            orderController.orderList[index]['advance_payment'],
+                            orderController.orderList[index]
+                                    ['advance_payment'] ??
+                                "",
                           ),
                           verticalSpacing(),
                           _keyValue(
                             "Assigned Order",
-                            orderController.orderList[index]['assign_order_id'],
+                            orderController.orderList[index]
+                                    ['assign_order_id'] ??
+                                "",
                           ),
                           verticalSpacing(),
                           Row(

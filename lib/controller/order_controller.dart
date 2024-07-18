@@ -2,13 +2,13 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:elements/constant/vars.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 import '../constant/methods.dart';
 import '../constant/urls.dart';
-import '../constant/vars.dart';
 import 'customer_controller.dart';
 
 class OrderController extends GetxController {
@@ -28,6 +28,7 @@ class OrderController extends GetxController {
   TextEditingController createdAtEditingController = TextEditingController();
   TextEditingController updatedAtEditingController = TextEditingController();
 
+  RxBool isPdfLoading = false.obs;
   RxBool isOrderLoading = false.obs;
   RxBool isGetOrderLoading = false.obs;
   RxBool isDeleteOrderLoading = false.obs;
@@ -80,16 +81,15 @@ class OrderController extends GetxController {
   //   }
   // }
 
-  Future<void> addOrder() async {
+  Future<void> addOrder({companyId, machineId, orderId}) async {
     Map<String, dynamic> body = {
       "user_id": modelUser.value.id,
-      "customer_company_id":
-          customerController.companyTextEditingController.text,
-      "machine_ids": customerController.machineNameTextEditingController.text,
+      "customer_company_id": companyId.toString(),
+      "machine_ids": machineId.toString(),
       "delivery_date": date.text,
       "total_payment": totalPaymentEditingController.text,
       "advance_payment": advancePaymentEditingController.text,
-      "assign_order_id": assignOrderIdEditingController.text,
+      "assign_order_id": orderId.toString(),
     };
     try {
       String url = "${baseURL}order/create";
@@ -137,16 +137,16 @@ class OrderController extends GetxController {
     }
   }
 
-  Future<void> updateOrder(id) async {
+  Future<void> updateOrder(model, {companyId, machineId, orderId}) async {
     Map<String, dynamic> body = {
+      "id": modelUser.value.id,
       "user_id": modelUser.value.id,
-      "customer_company_id":
-          customerController.companyTextEditingController.text,
-      "machine_ids": customerController.machineNameTextEditingController.text,
+      "customer_company_id": companyId.toString(),
+      "machine_ids": machineId.toString(),
       "delivery_date": date.text,
       "total_payment": totalPaymentEditingController.text,
       "advance_payment": advancePaymentEditingController.text,
-      "assign_order_id": assignOrderIdEditingController.text,
+      "assign_order_id": orderId.toString(),
     };
     try {
       String url = "${baseURL}order/update";

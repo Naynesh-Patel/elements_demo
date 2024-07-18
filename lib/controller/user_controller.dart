@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:elements/constant/vars.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
@@ -15,7 +16,8 @@ import '../constant/urls.dart';
 class UserController extends GetxController {
   TextEditingController userNameTextEditingController = TextEditingController();
   TextEditingController addressTextEditingController = TextEditingController();
-  TextEditingController userRoleTextEditingController = TextEditingController();
+  TextEditingController usersRoleTextEditingController =
+      TextEditingController();
   TextEditingController contactNoTextEditingController =
       TextEditingController();
 
@@ -78,10 +80,11 @@ class UserController extends GetxController {
 
   Future<void> addUser() async {
     Map<String, dynamic> body = {
+      "compny_id": modelUser.value.id,
       "name": userNameTextEditingController.text,
       "contact_no": contactNoTextEditingController.text,
       "address": addressTextEditingController.text,
-      "user_type": userRoleTextEditingController.text,
+      "user_type": usersRoleTextEditingController.text,
       "fingerprint": fingerprintEditingController.text,
       "photo": base64Image,
     };
@@ -131,42 +134,14 @@ class UserController extends GetxController {
     }
   }
 
-  // Future<void> updateUser(id) async {
-  //   Map<String, dynamic> body = {
-  //     "id": id,
-  //     "name": userNameTextEditingController.text,
-  //     "contact_no": contactNoTextEditingController.text,
-  //     "address": addressTextEditingController.text,
-  //     "user_type": userRoleTextEditingController.text,
-  //     "fingerprint": fingerprintEditingController.text,
-  //   };
-  //   try {
-  //     String url = "${baseURL}user/update";
-  //     log("API => $url");
-  //     isUpdateUserLoading.value = true;
-  //     var response = await http.post(Uri.parse(url), body: body);
-  //     if (response.statusCode == 200) {
-  //       jsonDecode(response.body);
-  //       Get.back();
-  //       getUser();
-  //       isUpdateUserLoading.value = false;
-  //     } else {
-  //       debugPrint("statusCode${response.statusCode}");
-  //       isUpdateUserLoading.value = false;
-  //     }
-  //   } catch (e) {
-  //     debugPrint("Error${e.toString()}");
-  //     isUpdateUserLoading.value = false;
-  //   }
-  // }
-
   Future<void> updateUser(id) async {
     Map<String, dynamic> body = {
       "id": id,
+      "compny_id": modelUser.value.id,
       "name": userNameTextEditingController.text,
       "contact_no": contactNoTextEditingController.text,
       "address": addressTextEditingController.text,
-      "user_type": userRoleTextEditingController.text,
+      "user_type": usersRoleTextEditingController.text,
       "fingerprint": fingerprintEditingController.text,
     };
     try {
@@ -194,32 +169,56 @@ class UserController extends GetxController {
       isUserLoading.value = false;
     }
   }
+  //
+  // Future<void> deleteUser(id) async {
+  //   try {
+  //     String url = "${baseURL}user/delete";
+  //     log("API => $url");
+  //
+  //     isDeleteUserLoading.value = true;
+  //     var response =
+  //         await http.post(Uri.parse(url), body: {"id": userList[index]['id']});
+  //     if (response.statusCode == 200) {
+  //       var responseData = jsonDecode(response.body);
+  //       isDeleteUserLoading.value = false;
+  //       if (responseData["status"] == 1) {
+  //         showToast(responseData["message"]);
+  //         userList.removeAt(index);
+  //         isDeleteUserLoading.value = false;
+  //       } else {
+  //         showToast(responseData["message"]);
+  //         isDeleteUserLoading.value = false;
+  //       }
+  //     } else {
+  //       debugPrint("statusCode===>${response.statusCode}");
+  //       isDeleteUserLoading.value = false;
+  //     }
+  //   } catch (e) {
+  //     debugPrint("Error:${e.toString()}");
+  //     isDeleteUserLoading.value = false;
+  //   }
+  // }
 
-  Future<void> deleteUser({required int index}) async {
+  Future deleteUser(id) async {
     try {
       String url = "${baseURL}user/delete";
       log("API => $url");
 
       isDeleteUserLoading.value = true;
-      var response =
-          await http.post(Uri.parse(url), body: {"id": userList[index]['id']});
+      var response = await http.post(Uri.parse(url), body: {
+        "id": id,
+      });
+      isDeleteUserLoading.value = false;
       if (response.statusCode == 200) {
-        var responseData = jsonDecode(response.body);
         isDeleteUserLoading.value = false;
-        if (responseData["status"] == 1) {
-          showToast(responseData["message"]);
-          userList.removeAt(index);
-          isDeleteUserLoading.value = false;
-        } else {
-          showToast(responseData["message"]);
-          isDeleteUserLoading.value = false;
-        }
+        var responseData = jsonDecode(response.body);
+        if (responseData["status"] == 1) {}
       } else {
-        debugPrint("statusCode===>${response.statusCode}");
+        debugPrint("statusCode::${response.statusCode}");
         isDeleteUserLoading.value = false;
       }
     } catch (e) {
-      debugPrint("Error:${e.toString()}");
+      debugPrint("Error:$e");
       isDeleteUserLoading.value = false;
     }
   }
