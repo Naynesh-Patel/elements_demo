@@ -79,7 +79,10 @@ class _InvoiceState extends State<Invoice> {
               ),
               InkWell(
                 onTap: () {
-                  Get.to(const ViewInvoiceDetails());
+                  Get.to(const ViewInvoiceDetails(
+                    pdfUrl:
+                        'https://codinghouse.in/machinepro/pdf/OrderNo-40.pdf',
+                  ));
                 },
                 child: Container(
                     padding: const EdgeInsets.symmetric(

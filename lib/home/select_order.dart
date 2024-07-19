@@ -25,7 +25,7 @@ class _SelectOrderState extends State<SelectOrder> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    userController.getUser;
+    userController.getUser();
   }
 
   @override

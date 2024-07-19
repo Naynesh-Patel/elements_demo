@@ -133,8 +133,7 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                     datePicker();
                   },
                   child: CustomTextField(
-                      textEditingController: orderController.formatDate,
-                      // textEditingController: orderController.deliveryDateTextEditingController,
+                      textEditingController: orderController.date,
                       hintText: "Select Delivery Date",
                       labelText: "Delivery Date",
                       enable: false,
@@ -175,8 +174,7 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                   hintText: "Advance Payment",
                   labelText: "Advance Payment",
                   textInputType: TextInputType.number,
-                  textEditingController:
-                      orderController.advancePaymentEditingController,
+                  textEditingController:orderController.advancePaymentEditingController,
                   focusNode: controller.advancedPaymentFocusNode,
                   autoValidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
@@ -195,7 +193,7 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                     hintText: "Select Manager Role",
                     labelText: "Assigns Order",
                     textEditingController:
-                        userController.usersRoleTextEditingController,
+                        orderController.assignOrderIdEditingController,
                     focusNode: FocusNode(),
                     suffixFixIcon: const Icon(
                       Icons.arrow_forward_ios_rounded,
@@ -215,7 +213,7 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                 child: CustomButton(
                   color: AppColor.buttonColor,
                   isLoading: orderController.isOrderLoading,
-                  buttonText: 'Done',
+                  buttonText: widget.model != null ? 'Update' : 'Done',
                   onTap: () {
                     if (_formKey.currentState!.validate()) {
                       if (widget.model != null) {

@@ -39,6 +39,7 @@ class OrderController extends GetxController {
   CustomerController customerController = Get.find();
 
   RxList<dynamic> orderList = <dynamic>[].obs;
+  RxList<dynamic> pdfList = <dynamic>[].obs;
   File? imgFile;
 
   // Future<bool> pickImageFromGallery() async {
@@ -195,21 +196,21 @@ class OrderController extends GetxController {
     }
   }
 
-  Future<void> pdf(id) async {
-    Map<String, dynamic> body = {
-      "id": id,
-    };
+  Future pdf() async {
     try {
       String url = "${baseURL}order/generatePdf?id=40";
       log("API => $url");
+      pdfList.clear();
       isPdfLoading.value = true;
-      var response = await http.post(Uri.parse(url), body: body);
+      var response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
         var responseData = jsonDecode(response.body);
         if (responseData['status'] == "success") {
+          List jobData = responseData["data"];
+          pdfList.value = jobData;
           isPdfLoading.value = false;
         } else {
-          showToast(responseData['message']);
+          debugPrint("Error ${responseData['error']}");
           isPdfLoading.value = false;
         }
       } else {
@@ -217,7 +218,7 @@ class OrderController extends GetxController {
         isPdfLoading.value = false;
       }
     } catch (e) {
-      debugPrint("Error${e.toString()}");
+      debugPrint("Errors:$e");
       isPdfLoading.value = false;
     }
   }
