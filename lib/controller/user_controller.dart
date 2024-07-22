@@ -23,7 +23,23 @@ class UserController extends GetxController {
 
   TextEditingController fingerprintEditingController = TextEditingController();
 
+  TextEditingController allowMachineryEditingController =
+      TextEditingController();
+
+  TextEditingController allowSparepartsTextEditingController =
+      TextEditingController();
+
+  TextEditingController allowBillTextEditingController =
+      TextEditingController();
+
+  TextEditingController allowUserTextEditingController =
+      TextEditingController();
+
+  TextEditingController allowCustomerTextEditingController =
+      TextEditingController();
+
   RxBool isUserLoading = false.obs;
+  RxBool isUpdateLoading = false.obs;
   RxBool isGetUserLoading = false.obs;
   RxBool isDeleteUserLoading = false.obs;
   RxBool isUpdateUserLoading = false.obs;
@@ -169,6 +185,7 @@ class UserController extends GetxController {
       isUserLoading.value = false;
     }
   }
+
   //
   // Future<void> deleteUser(id) async {
   //   try {
@@ -246,6 +263,39 @@ class UserController extends GetxController {
       }
     } else {
       debugPrint("Biometric Not Available");
+    }
+  }
+
+  Future<void> updateAccess({companyId}) async {
+    Map<String, dynamic> body = {
+      "id": companyId.toString(),
+      "is_allow_machinery": true,
+      "is_allow_spareparts": true,
+      "is_allow_user": true,
+      "is_allow_customer": true,
+      "is_allow_bill": true,
+    };
+    try {
+      String url = "${baseURL}user/updateAccess";
+      log("API => $url");
+      isUpdateLoading.value = true;
+      var response = await http.post(Uri.parse(url), body: body);
+      if (response.statusCode == 200) {
+        var responseData = jsonDecode(response.body);
+        if (responseData['status'] == 1) {
+          isUpdateLoading.value = false;
+        } else {
+          showToast(responseData['message']);
+          debugPrint("Error Message ${responseData['message']}");
+          isUpdateLoading.value = false;
+        }
+      } else {
+        debugPrint("statusCode${response.statusCode}");
+        isUpdateLoading.value = false;
+      }
+    } catch (e) {
+      debugPrint("Error${e.toString()}");
+      isUpdateLoading.value = false;
     }
   }
 

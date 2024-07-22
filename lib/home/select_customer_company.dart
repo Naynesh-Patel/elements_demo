@@ -53,6 +53,8 @@ class _SelectCustomerCompanyState extends State<SelectCustomerCompany> {
                       onTap: () {
                         customerController.companyTextEditingController.text =
                             customerController.customerList[index]['owner'];
+                        customerController.id.text =
+                            customerController.customerList[index]['id'];
                         Get.back();
                       },
                       child: Container(

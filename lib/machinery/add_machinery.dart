@@ -381,130 +381,6 @@ class _AddMachineryState extends State<AddMachinery> {
                   const SizedBox(
                     height: 16,
                   ),
-                  // Obx(() => ListView.separated(
-                  //       shrinkWrap: true,
-                  //       itemCount: controller.machineryList.length,
-                  //       itemBuilder: (context, index) {
-                  //         return Row(
-                  //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  //           children: [
-                  //             InkWell(
-                  //               borderRadius: BorderRadius.circular(6.0),
-                  //               onTap: () {
-                  //                 if (controller.machineryList[index].isSelected
-                  //                         .value ==
-                  //                     false) {
-                  //                   controller.machineryList[index].isSelected
-                  //                       .value = true;
-                  //                 } else {
-                  //                   controller.machineryList[index].isSelected
-                  //                       .value = false;
-                  //                 }
-                  //                 debugPrint(
-                  //                     "Select = ${controller.machineryList[index].isSelected.value}");
-                  //               },
-                  //               child: Container(
-                  //                 padding: const EdgeInsets.symmetric(
-                  //                     horizontal: 4.0, vertical: 4.0),
-                  //                 decoration: BoxDecoration(
-                  //                     border: Border.all(
-                  //                         color: AppColor.dropDownHintColor),
-                  //                     borderRadius: BorderRadius.circular(6.0)),
-                  //                 child: Obx(() => Icon(
-                  //                       Icons.check_rounded,
-                  //                       size: 14,
-                  //                       color: controller.machineryList[index]
-                  //                               .isSelected.value
-                  //                           ? AppColor.blackColor
-                  //                           : Colors.transparent,
-                  //                     )),
-                  //               ),
-                  //             ),
-                  //             const SizedBox(
-                  //               width: 10.0,
-                  //             ),
-                  //
-                  //             // Expanded(
-                  //             //   child: Text(
-                  //             //     'Spareparts ${index + 1}',
-                  //             //     style: AppTextStyle.textStyleRegular16
-                  //             //         .copyWith(color: const Color(0xff555555)),
-                  //             //   ),
-                  //             // ),
-                  //             // Expanded(
-                  //             //   child: CustomTextField(
-                  //             //     textInputType: TextInputType.number,
-                  //             //     textEditingController: controller
-                  //             //         .sparepartsTextEditingController,
-                  //             //     hintText: "Qty",
-                  //             //     autoValidateMode:
-                  //             //         AutovalidateMode.onUserInteraction,
-                  //             //     validator: (value) {
-                  //             //       if (value!.isEmpty) {
-                  //             //         return "Enter spareparts";
-                  //             //       } else {
-                  //             //         return null;
-                  //             //       }
-                  //             //     },
-                  //             //   ),
-                  //             // ),
-                  //             // Container(
-                  //             //   width: 115,
-                  //             //   height: 42,
-                  //             //   decoration: BoxDecoration(
-                  //             //     borderRadius: BorderRadius.circular(4),
-                  //             //     border:
-                  //             //         Border.all(color: Color(0xffD1D1D1)),
-                  //             //   ),
-                  //             //   child: TextField(
-                  //             //     controller: controller
-                  //             //         .sparepartsTextEditingController,
-                  //             //     textAlignVertical:
-                  //             //         TextAlignVertical.center,
-                  //             //     textAlign: TextAlign.center,
-                  //             //     keyboardType: TextInputType.number,
-                  //             //     decoration: InputDecoration(
-                  //             //       errorText: validate
-                  //             //           ? "Value Can't Be Empty"
-                  //             //           : null,
-                  //             //       // errorText: _validate
-                  //             //       //     ? "Please Enter spareparts"
-                  //             //       //     : null,
-                  //             //       border: InputBorder.none,
-                  //             //       contentPadding:
-                  //             //           const EdgeInsets.symmetric(
-                  //             //               horizontal: 8.0,
-                  //             //               vertical: 13.0),
-                  //             //       hintText: 'Qty',
-                  //             //       hintStyle: AppTextStyle
-                  //             //           .textStyleRegular14
-                  //             //           .copyWith(
-                  //             //               color:
-                  //             //                   AppColor.dropDownHintColor),
-                  //             //       labelStyle: AppTextStyle
-                  //             //           .textStyleRegular16
-                  //             //           .copyWith(
-                  //             //               color: AppColor.blackColor),
-                  //             //       helperStyle: AppTextStyle
-                  //             //           .textStyleRegular16
-                  //             //           .copyWith(
-                  //             //               color:
-                  //             //                   AppColor.dropDownHintColor),
-                  //             //     ),
-                  //             //   ),
-                  //             // ),
-                  //             const SizedBox(
-                  //               width: 10.0,
-                  //             ),
-                  //           ],
-                  //         );
-                  //       },
-                  //       separatorBuilder: (BuildContext context, int index) {
-                  //         return const SizedBox(
-                  //           height: 12.0,
-                  //         );
-                  //       },
-                  //     )),
                   Obx(
                     () => ListView.builder(
                       shrinkWrap: true,
@@ -568,6 +444,21 @@ class _AddMachineryState extends State<AddMachinery> {
                                     border: Border.all(
                                         color: const Color(0xffD1D1D1))),
                                 child: TextField(
+                                  onTap: () {
+                                    if (sparepartsController
+                                            .sparepartsList[index]
+                                            .isSelected
+                                            .value ==
+                                        false) {
+                                      sparepartsController.sparepartsList[index]
+                                          .isSelected.value = true;
+                                    } else {
+                                      sparepartsController.sparepartsList[index]
+                                          .isSelected.value = true;
+                                    }
+                                    debugPrint(
+                                        "Select = ${sparepartsController.sparepartsList[index].isSelected.value}");
+                                  },
                                   keyboardType:
                                       const TextInputType.numberWithOptions(),
                                   maxLength: 3,

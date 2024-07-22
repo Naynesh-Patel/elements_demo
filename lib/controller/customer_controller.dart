@@ -18,7 +18,9 @@ class CustomerController extends GetxController {
   RxBool isGetCustomerUpdateLoading = false.obs;
 
   TextEditingController companyTextEditingController = TextEditingController();
-  TextEditingController machineNameTextEditingController = TextEditingController();
+  TextEditingController id = TextEditingController();
+  TextEditingController machineNameTextEditingController =
+      TextEditingController();
   TextEditingController ownerTextEditingController = TextEditingController();
   TextEditingController contactTextEditingController = TextEditingController();
   TextEditingController emailTextEditingController = TextEditingController();
@@ -92,15 +94,14 @@ class CustomerController extends GetxController {
       var response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
         var responseData = jsonDecode(response.body);
-        if(responseData['status']=="success"){
+        if (responseData['status'] == "success") {
           List jobData = responseData["data"];
           customerList.value = jobData;
           isGetCustomerLoading.value = false;
-        }else{
+        } else {
           debugPrint("Error ${responseData['error']}");
           isGetCustomerLoading.value = false;
         }
-
       } else {
         debugPrint("statusCode${response.statusCode}");
         isGetCustomerLoading.value = false;
@@ -131,11 +132,11 @@ class CustomerController extends GetxController {
       var response = await http.post(Uri.parse(url), body: body);
       if (response.statusCode == 200) {
         var responseData = jsonDecode(response.body);
-        if(responseData['status']==1){
+        if (responseData['status'] == 1) {
           isCustomerLoading.value = false;
           Get.back();
           getCustomer();
-        }else{
+        } else {
           debugPrint("Error${responseData['message']}");
           isCustomerLoading.value = false;
         }
@@ -154,7 +155,8 @@ class CustomerController extends GetxController {
       String url = "${baseURL}customer/delete";
       log("API => $url");
       isGetCustomerDeleteLoading.value = true;
-      var response = await http.post(Uri.parse(url), body: {"id":customerList[index]['id']});
+      var response = await http
+          .post(Uri.parse(url), body: {"id": customerList[index]['id']});
       if (response.statusCode == 200) {
         var responseData = jsonDecode(response.body);
         isGetCustomerDeleteLoading.value = false;

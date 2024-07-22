@@ -234,37 +234,33 @@ class _ViewInvoiceDetailsState extends State<ViewInvoiceDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.black,
-        appBar: CustomAppBar(
-          title: 'PDF Viewer',
-          onPressed: () {
-            Get.back();
-          },
-        ),
-        body: errorMessage.isNotEmpty
-            ? Center(child: Text(errorMessage))
-            : localPath == null
-                ? const CustomLoader()
-                : Container(
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: 15, vertical: 15),
-                    child: PDFView(
-                      filePath: localPath!,
-                      enableSwipe: true,
-                      swipeHorizontal: true,
-                      autoSpacing: false,
-                      pageFling: false,
-                      fitPolicy: FitPolicy.BOTH,
-                      onRender: (pages) {
-                        setState(() {});
-                      },
-                      onError: (error) {
-                        setState(() {
-                          errorMessage = error.toString();
-                        });
-                      },
-                      onViewCreated: (PDFViewController pdfViewController) {},
-                    ),
-                  ));
+      appBar: CustomAppBar(
+        title: 'PDF Viewer',
+        onPressed: () {
+          Get.back();
+        },
+      ),
+      body: errorMessage.isNotEmpty
+          ? Center(child: Text(errorMessage))
+          : localPath == null
+              ? const CustomLoader()
+              : PDFView(
+                  filePath: localPath!,
+                  enableSwipe: true,
+                  swipeHorizontal: true,
+                  autoSpacing: false,
+                  pageFling: false,
+                  fitPolicy: FitPolicy.BOTH,
+                  onRender: (pages) {
+                    setState(() {});
+                  },
+                  onError: (error) {
+                    setState(() {
+                      errorMessage = error.toString();
+                    });
+                  },
+                  onViewCreated: (PDFViewController pdfViewController) {},
+                ),
+    );
   }
 }
