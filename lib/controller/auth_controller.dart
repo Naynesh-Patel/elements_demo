@@ -100,6 +100,7 @@ class AuthController extends GetxController {
           // Store user info and login status
           box.write('user', responseData['user']);
           box.write('isLogin', true);
+          userType.value = "${responseData['user']['user_type']}";
           modelUser.value = ModelUser.fromJson(responseData['user']);
           isLoginLoading.value = false;
           // Navigate to Dashboard

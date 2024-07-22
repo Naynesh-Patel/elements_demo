@@ -1,11 +1,12 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
+import 'package:elements/constant/vars.dart';
 import 'package:elements/controller/home_controller.dart';
 import 'package:elements/controller/order_controller.dart';
 import 'package:elements/home/create_new_order.dart';
 import 'package:elements/home/tab/complete_tab.dart';
 import 'package:elements/home/tab/ongoing_tab.dart';
-import 'package:elements/home/tab/upcoming_tab.dart';
+import 'package:elements/home/tab/pending_tab.dart';
 import 'package:elements/widget/app%20bar/home_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -49,15 +50,15 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
             ),
             Obx(() => Expanded(
                 child: controller.selectTab.value == 1
-                    ? const OnGoingTab()
+                    ? const PendingTab()
                     : controller.selectTab.value == 2
-                        ? const UpComingTab()
+                        ? const OnGoingTab()
                         : const CompleteTab())),
           ],
         ),
       ),
       // drawer: drawer(),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: Obx(()=> userType.value == "manager" ? const SizedBox.shrink() : FloatingActionButton(
           elevation: 10.0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(36),
@@ -69,7 +70,7 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
           child: const Icon(
             Icons.add,
             color: Colors.white,
-          )),
+          ))),
     );
   }
 
@@ -82,13 +83,13 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
         children: [
           Expanded(
             child: _tabBox(
-              title: "Ongoing",
+              title: "Pending",
               index: 1,
             ),
           ),
           Expanded(
             child: _tabBox(
-              title: "Upcoming",
+              title: "Ongoing",
               index: 2,
             ),
           ),

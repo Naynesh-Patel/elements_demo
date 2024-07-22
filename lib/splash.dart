@@ -44,6 +44,7 @@ class _SplashState extends State<Splash> {
     Future.delayed(const Duration(seconds: 2), () {
       if (GetStorage().read('isLogin') ?? false) {
         modelUser.value = ModelUser.fromJson(GetStorage().read('user'));
+        userType.value = "${modelUser.value.userType}";
         Get.off(const DashBoard());
       } else {
         Get.off(const Login());
