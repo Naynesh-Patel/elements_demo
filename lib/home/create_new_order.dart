@@ -4,6 +4,7 @@ import 'package:elements/controller/customer_controller.dart';
 import 'package:elements/controller/home_controller.dart';
 import 'package:elements/controller/machinery_controller.dart';
 import 'package:elements/controller/order_controller.dart';
+import 'package:elements/controller/user_controller.dart';
 import 'package:elements/home/select_customer_company.dart';
 import 'package:elements/home/select_machine.dart';
 import 'package:elements/home/select_order.dart';
@@ -12,8 +13,6 @@ import 'package:elements/widget/button/custom_button.dart';
 import 'package:elements/widget/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../controller/user_controller.dart';
 
 class CreateNewOrder extends StatefulWidget {
   final dynamic model;
@@ -174,7 +173,8 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                   hintText: "Advance Payment",
                   labelText: "Advance Payment",
                   textInputType: TextInputType.number,
-                  textEditingController:orderController.advancePaymentEditingController,
+                  textEditingController:
+                      orderController.advancePaymentEditingController,
                   focusNode: controller.advancedPaymentFocusNode,
                   autoValidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
