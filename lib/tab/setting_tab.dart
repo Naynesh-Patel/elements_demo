@@ -39,33 +39,37 @@ class _SettingTabState extends State<SettingTab> {
           title: "Setting",
         ),
         body: SingleChildScrollView(
-          child: Obx(()=> userType.value == "manager" ? managerView() : adminView() ),
+          child: Obx(
+              () => userType.value == "manager" ? managerView() : adminView()),
         ));
   }
 
-
-  Widget managerView(){
+  Widget managerView() {
     return Column(
       children: [
-        _customTile(
-          title: "Manage Machinery",
-          imgPath: "assets/svg/mange_user.svg",
-          index: 1,
-          onTap: () {
-            controller.selectMenu.value = 1;
-            Get.to(const MangeMachinery());
-          },
-        ),
-        _customTile(
-          title: "Manage Spareparts",
-          imgPath: "assets/images/mange.png",
-          isSvg: false,
-          index: 2,
-          onTap: () {
-            controller.selectMenu.value = 2;
-            Get.to(const MangeSpareparts());
-          },
-        ),
+        modelUser.value.isAllowMachinery == "1"
+            ? _customTile(
+                title: "Manage Machinery",
+                imgPath: "assets/svg/mange_user.svg",
+                index: 1,
+                onTap: () {
+                  controller.selectMenu.value = 1;
+                  Get.to(const MangeMachinery());
+                },
+              )
+            : SizedBox(),
+        modelUser.value.isAllowSpareparts == "1"
+            ? _customTile(
+                title: "Manage Spareparts",
+                imgPath: "assets/images/mange.png",
+                isSvg: false,
+                index: 2,
+                onTap: () {
+                  controller.selectMenu.value = 2;
+                  Get.to(const MangeSpareparts());
+                },
+              )
+            : SizedBox(),
         _customTile(
           title: "Logout",
           isSvg: false,
@@ -87,29 +91,33 @@ class _SettingTabState extends State<SettingTab> {
     );
   }
 
-  Widget adminView(){
+  Widget adminView() {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        _customTile(
-          title: "Manage Machinery",
-          imgPath: "assets/svg/mange_user.svg",
-          index: 1,
-          onTap: () {
-            controller.selectMenu.value = 1;
-            Get.to(const MangeMachinery());
-          },
-        ),
-        _customTile(
-          title: "Manage Spareparts",
-          imgPath: "assets/images/mange.png",
-          isSvg: false,
-          index: 2,
-          onTap: () {
-            controller.selectMenu.value = 2;
-            Get.to(const MangeSpareparts());
-          },
-        ),
+        modelUser.value.isAllowMachinery == "1"
+            ? _customTile(
+                title: "Manage Machinery",
+                imgPath: "assets/svg/mange_user.svg",
+                index: 1,
+                onTap: () {
+                  controller.selectMenu.value = 1;
+                  Get.to(const MangeMachinery());
+                },
+              )
+            : SizedBox(),
+        modelUser.value.isAllowSpareparts == "1"
+            ? _customTile(
+                title: "Manage Spareparts",
+                imgPath: "assets/images/mange.png",
+                isSvg: false,
+                index: 2,
+                onTap: () {
+                  controller.selectMenu.value = 2;
+                  Get.to(const MangeSpareparts());
+                },
+              )
+            : SizedBox(),
         // _customTile(
         //   title: "Import Spareparts",
         //   imgPath: "assets/images/import_spareparts.png",
@@ -120,15 +128,17 @@ class _SettingTabState extends State<SettingTab> {
         //     Get.to(const ImportSpareparts());
         //   },
         // ),
-        _customTile(
-          title: "Manage User",
-          imgPath: "assets/svg/all_users.svg",
-          index: 3,
-          onTap: () {
-            controller.selectMenu.value = 3;
-            Get.to(const MangeUser());
-          },
-        ),
+        modelUser.value.isAllowUser == "1"
+            ? _customTile(
+                title: "Manage User",
+                imgPath: "assets/svg/all_users.svg",
+                index: 3,
+                onTap: () {
+                  controller.selectMenu.value = 3;
+                  Get.to(const MangeUser());
+                },
+              )
+            : SizedBox(),
         // _customTile(
         //   title: "Manage Salesmen",
         //   imgPath: "assets/images/mange_salesmen.png",
@@ -139,15 +149,17 @@ class _SettingTabState extends State<SettingTab> {
         //     Get.to(const MangeSalesmen());
         //   },
         // ),
-        _customTile(
-          title: "Manage Customer Company",
-          imgPath: "assets/svg/mange_compny.svg",
-          index: 4,
-          onTap: () {
-            controller.selectMenu.value = 4;
-            Get.to(const MangeCustomer());
-          },
-        ),
+        modelUser.value.isAllowCustomer == "1"
+            ? _customTile(
+                title: "Manage Customer Company",
+                imgPath: "assets/svg/mange_compny.svg",
+                index: 4,
+                onTap: () {
+                  controller.selectMenu.value = 4;
+                  Get.to(const MangeCustomer());
+                },
+              )
+            : SizedBox(),
         // _customTile(
         //   title: "Manage Machine Stock",
         //   imgPath: "assets/svg/mange_product.svg",
@@ -157,15 +169,17 @@ class _SettingTabState extends State<SettingTab> {
         //     Get.to(const MangeProduct());
         //   },
         // ),
-        _customTile(
-          title: "Bill History",
-          imgPath: "assets/svg/bil_history.svg",
-          index: 5,
-          onTap: () {
-            controller.selectMenu.value = 5;
-            Get.to(const BillHistory());
-          },
-        ),
+        modelUser.value.isAllowBill == "1"
+            ? _customTile(
+                title: "Bill History",
+                imgPath: "assets/svg/bil_history.svg",
+                index: 5,
+                onTap: () {
+                  controller.selectMenu.value = 5;
+                  Get.to(const BillHistory());
+                },
+              )
+            : SizedBox(),
         _customTile(
           title: "Change Password",
           isSvg: false,
@@ -197,8 +211,12 @@ class _SettingTabState extends State<SettingTab> {
     );
   }
 
-
-  Widget _customTile({void Function()? onTap, required int index, required String title, required String imgPath, bool isSvg = true}) {
+  Widget _customTile(
+      {void Function()? onTap,
+      required int index,
+      required String title,
+      required String imgPath,
+      bool isSvg = true}) {
     return ListTile(
       leading: isSvg
           ? SvgPicture.asset(
