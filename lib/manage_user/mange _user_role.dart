@@ -1,15 +1,14 @@
 import 'package:elements/constant/app_colors.dart';
+import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/controller/customer_controller.dart';
 import 'package:elements/controller/expense_controller.dart';
 import 'package:elements/controller/user_controller.dart';
-import 'package:elements/home/select_customer_company.dart';
-import 'package:elements/widget/app%20bar/home_app_bar.dart';
+import 'package:elements/manage_user/select_user.dart';
+import 'package:elements/widget/app%20bar/custom_appbar.dart';
+import 'package:elements/widget/button/custom_button.dart';
 import 'package:elements/widget/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../constant/app_text_style.dart';
-import '../widget/button/custom_button.dart';
 
 class ManageUserRole extends StatefulWidget {
   final bool isUpdate;
@@ -25,37 +24,13 @@ class _ManageUserRoleState extends State<ManageUserRole> {
 
   UserController userController = Get.find();
   CustomerController customerController = Get.find();
-
   final _formKey = GlobalKey<FormState>();
 
-  List<dynamic> userRoleList = [
-    {
-      "name": "Allow Machinery",
-      "select": false,
-    },
-    {
-      "name": "Allow Spareparts",
-      "select": false,
-    },
-    {
-      "name": "Allow User",
-      "select": false,
-    },
-    {
-      "name": "Allow Customer",
-      "select": false,
-    },
-    {
-      "name": "Allow Bill",
-      "select": false,
-    },
-  ];
+  bool isSelect = true;
 
   @override
   void initState() {
-    setState(() {
-      expenseController.getExpense();
-    });
+    customerController.companyTextEditingController.clear();
     super.initState();
   }
 
@@ -63,8 +38,11 @@ class _ManageUserRoleState extends State<ManageUserRole> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: AppColor.whiteColor,
-        appBar: HomeAppBar(
+        appBar: CustomAppBar(
           title: "Manage User Role",
+          onPressed: () {
+            Get.back();
+          },
         ),
         body: Form(
             key: _formKey,
@@ -75,16 +53,17 @@ class _ManageUserRoleState extends State<ManageUserRole> {
                   CustomTextField(
                       focusNode: FocusNode(),
                       readOnly: true,
+                      showCursor: false,
                       onTap: () {
-                        Get.to(const SelectCustomerCompany());
+                        Get.to(const SelectUser());
                       },
-                      labelText: "Allow User",
+                      labelText: "Manage User",
                       textEditingController:
                           customerController.companyTextEditingController,
                       autoValidateMode: AutovalidateMode.onUserInteraction,
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return "Please Enter Allow Machinery";
+                          return "Please Enter Manage User";
                         } else {
                           return null;
                         }
@@ -100,7 +79,8 @@ class _ManageUserRoleState extends State<ManageUserRole> {
                   SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: List.generate(userRoleList.length, (index) {
+                      children: List.generate(
+                          userController.userRoleList.length, (index) {
                         return Container(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 10, vertical: 10),
@@ -111,7 +91,7 @@ class _ManageUserRoleState extends State<ManageUserRole> {
                             children: [
                               Expanded(
                                 child: Text(
-                                  "${userRoleList[index]['name']}",
+                                  "${userController.userRoleList[index]['name']}",
                                   style: AppTextStyle.textStyleRegular14,
                                 ),
                               ),
@@ -121,13 +101,19 @@ class _ManageUserRoleState extends State<ManageUserRole> {
                               InkWell(
                                 borderRadius: BorderRadius.circular(6.0),
                                 onTap: () {
-                                  if (userRoleList[index]['select'] == null) {
-                                    userRoleList[index]['select'] = true;
-                                  } else if (userRoleList[index]['select'] ==
+                                  if (userController.userRoleList[index]
+                                          ['select'] ==
+                                      null) {
+                                    userController.userRoleList[index]
+                                        ['select'] = true;
+                                  } else if (userController.userRoleList[index]
+                                          ['select'] ==
                                       true) {
-                                    userRoleList[index]['select'] = false;
+                                    userController.userRoleList[index]
+                                        ['select'] = false;
                                   } else {
-                                    userRoleList[index]['select'] = true;
+                                    userController.userRoleList[index]
+                                        ['select'] = true;
                                   }
                                   setState(() {});
                                 },
@@ -141,10 +127,11 @@ class _ManageUserRoleState extends State<ManageUserRole> {
                                   child: Icon(
                                     Icons.check_rounded,
                                     size: 14,
-                                    color:
-                                        userRoleList[index]['select'] ?? false
-                                            ? AppColor.blackColor
-                                            : Colors.transparent,
+                                    color: userController.userRoleList[index]
+                                                ['select'] ??
+                                            false
+                                        ? AppColor.blackColor
+                                        : Colors.transparent,
                                   ),
                                 ),
                               ),

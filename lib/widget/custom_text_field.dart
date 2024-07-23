@@ -18,6 +18,7 @@ class CustomTextField extends StatefulWidget {
   final int? maxLength;
   final bool? readOnly;
   final bool? showCursor;
+
   final bool? obscureText;
   final bool? enable;
   final bool? autofocus;
@@ -34,39 +35,38 @@ class CustomTextField extends StatefulWidget {
   final Function(String)? onFieldSubmitted;
   final Function(String?)? onSaved;
   final TextCapitalization textCapitalization;
-  const CustomTextField({
-    super.key,
-    this.textEditingController,
-    this.focusNode,
-    this.hintText,
-    this.label,
-    this.initialValue,
-    this.textInputType,
-    this.suffixFixIcon,
-    this.suffix,
-    this.preFixWidget,
-    this.prefixIconConstraints,
-    this.maxLength,
-    this.readOnly,
-    this.showCursor,
-    this.enable,
-    this.autofocus,
-    this.enableInteractiveSelection,
-    this.onTap,
-    this.onChange,
-    this.paddingHorizontal,
-    this.style,
-    this.maxLines,
-    this.validator,
-    this.autoValidateMode,
-    this.inputFormatters,
-    this.errorText,
-    this.onFieldSubmitted,
-    this.onSaved,
-    this.labelText,
-    this.obscureText,
-    this.textCapitalization = TextCapitalization. none
-  });
+  const CustomTextField(
+      {super.key,
+      this.textEditingController,
+      this.focusNode,
+      this.hintText,
+      this.label,
+      this.initialValue,
+      this.textInputType,
+      this.suffixFixIcon,
+      this.suffix,
+      this.preFixWidget,
+      this.prefixIconConstraints,
+      this.maxLength,
+      this.readOnly,
+      this.showCursor,
+      this.enable,
+      this.autofocus,
+      this.enableInteractiveSelection,
+      this.onTap,
+      this.onChange,
+      this.paddingHorizontal,
+      this.style,
+      this.maxLines,
+      this.validator,
+      this.autoValidateMode,
+      this.inputFormatters,
+      this.errorText,
+      this.onFieldSubmitted,
+      this.onSaved,
+      this.labelText,
+      this.obscureText,
+      this.textCapitalization = TextCapitalization.none});
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -102,14 +102,14 @@ class _CustomTextFieldState extends State<CustomTextField> {
       focusNode: widget.focusNode,
       keyboardType: widget.textInputType ?? TextInputType.text,
       textCapitalization: widget.textCapitalization,
-      showCursor: true,
+      showCursor: widget.showCursor ?? true,
       enabled: widget.enable ?? true,
       readOnly: widget.readOnly ?? false,
       cursorColor: Colors.black,
       maxLength: widget.maxLength,
       onChanged: widget.onChange,
       autofocus: widget.autofocus ?? false,
-      enableInteractiveSelection: widget.enableInteractiveSelection ??true,
+      enableInteractiveSelection: widget.enableInteractiveSelection ?? true,
       style: widget.style ??
           AppTextStyle.textStyleRegular14
               .copyWith(letterSpacing: widget.maxLength == 10 ? 2.0 : 1.0),
@@ -122,7 +122,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           fillColor: Colors.white,
           errorStyle: const TextStyle(color: Colors.red),
           prefixIcon: widget.preFixWidget ?? null,
-          suffixIcon: widget.suffixFixIcon ,
+          suffixIcon: widget.suffixFixIcon,
           suffix: widget.suffix ?? const SizedBox.shrink(),
           // prefixIconConstraints: prefixIconConstraints ??
           //     const BoxConstraints(maxWidth: 16, minWidth: 10),

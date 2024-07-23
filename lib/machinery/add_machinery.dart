@@ -500,7 +500,7 @@ class _AddMachineryState extends State<AddMachinery> {
                                 child: Image.asset(
                                   "assets/images/remove.png",
                                   color: Colors.red,
-                                  height: 30,
+                                  height: 20,
                                 ),
                               ),
                               // InkWell(

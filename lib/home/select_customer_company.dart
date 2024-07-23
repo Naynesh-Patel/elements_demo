@@ -106,7 +106,7 @@ class _SelectCustomerCompanyState extends State<SelectCustomerCompany> {
                                             '',
                                         style: AppTextStyle.textStyleRegular14
                                             .copyWith(
-                                          color: Color(0xff555555),
+                                          color: const Color(0xff555555),
                                         )),
                                   ],
                                 ),

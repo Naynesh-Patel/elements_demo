@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:elements/constant/methods.dart';
+import 'package:elements/constant/urls.dart';
 import 'package:elements/constant/vars.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -10,31 +12,24 @@ import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:local_auth/local_auth.dart';
 
-import '../constant/methods.dart';
-import '../constant/urls.dart';
-
 class UserController extends GetxController {
   TextEditingController userNameTextEditingController = TextEditingController();
   TextEditingController addressTextEditingController = TextEditingController();
   TextEditingController usersRoleTextEditingController =
       TextEditingController();
+
   TextEditingController contactNoTextEditingController =
       TextEditingController();
 
   TextEditingController fingerprintEditingController = TextEditingController();
-
   TextEditingController allowMachineryEditingController =
       TextEditingController();
-
   TextEditingController allowSparepartsTextEditingController =
       TextEditingController();
-
   TextEditingController allowBillTextEditingController =
       TextEditingController();
-
   TextEditingController allowUserTextEditingController =
       TextEditingController();
-
   TextEditingController allowCustomerTextEditingController =
       TextEditingController();
 
@@ -47,6 +42,14 @@ class UserController extends GetxController {
   RxList<dynamic> userList = <dynamic>[].obs;
   File? imgFile;
   String base64Image = "";
+
+  String userId = "";
+
+  bool isMachinery = true;
+  bool isSpareparts = true;
+  bool isUser = true;
+  bool isCustomer = true;
+  bool isBill = true;
 
   Future<bool> pickImageFromGallery() async {
     XFile? pickImage =
@@ -64,35 +67,6 @@ class UserController extends GetxController {
     Uint8List bytes = await file.readAsBytes();
     base64Image = base64.encode(bytes);
   }
-
-  // Future<void> addUser() async {
-  //   Map<String, dynamic> body = {
-  //     "name": userNameTextEditingController.text,
-  //     "contact_no": contactNoTextEditingController.text,
-  //     "address": addressTextEditingController.text,
-  //     "user_type": userRoleTextEditingController.text,
-  //     "fingerprint": fingerprintEditingController,
-  //   };
-  //   try {
-  //     String url = "${baseURL}user/insert";
-  //     log("API => $url");
-  //     isUserLoading.value = true;
-  //     var response = await http.post(Uri.parse(url), body: body);
-  //     if (response.statusCode == 200) {
-  //       jsonDecode(response.body);
-  //       Get.back();
-  //       getUser();
-  //
-  //       isUserLoading.value = false;
-  //     } else {
-  //       debugPrint("statusCode${response.statusCode}");
-  //       isUserLoading.value = false;
-  //     }
-  //   } catch (e) {
-  //     debugPrint("Error${e.toString()}");
-  //     isUserLoading.value = false;
-  //   }
-  // }
 
   Future<void> addUser() async {
     Map<String, dynamic> body = {
@@ -186,36 +160,6 @@ class UserController extends GetxController {
     }
   }
 
-  //
-  // Future<void> deleteUser(id) async {
-  //   try {
-  //     String url = "${baseURL}user/delete";
-  //     log("API => $url");
-  //
-  //     isDeleteUserLoading.value = true;
-  //     var response =
-  //         await http.post(Uri.parse(url), body: {"id": userList[index]['id']});
-  //     if (response.statusCode == 200) {
-  //       var responseData = jsonDecode(response.body);
-  //       isDeleteUserLoading.value = false;
-  //       if (responseData["status"] == 1) {
-  //         showToast(responseData["message"]);
-  //         userList.removeAt(index);
-  //         isDeleteUserLoading.value = false;
-  //       } else {
-  //         showToast(responseData["message"]);
-  //         isDeleteUserLoading.value = false;
-  //       }
-  //     } else {
-  //       debugPrint("statusCode===>${response.statusCode}");
-  //       isDeleteUserLoading.value = false;
-  //     }
-  //   } catch (e) {
-  //     debugPrint("Error:${e.toString()}");
-  //     isDeleteUserLoading.value = false;
-  //   }
-  // }
-
   Future deleteUser(id) async {
     try {
       String url = "${baseURL}user/delete";
@@ -244,7 +188,6 @@ class UserController extends GetxController {
 
   getFingerPrint() async {
     bool canCheckBiometrics = await checkBiometricsAvailable();
-
     if (canCheckBiometrics) {
       try {
         await auth
@@ -266,15 +209,42 @@ class UserController extends GetxController {
     }
   }
 
-  Future<void> updateAccess({companyId}) async {
+  List<dynamic> userRoleList = [
+    {
+      "name": "Allow Machinery",
+      "select": false,
+      "key": "is_allow_machinery",
+    },
+    {
+      "name": "Allow Spareparts",
+      "select": false,
+      "key": "is_allow_spareparts",
+    },
+    {
+      "name": "Allow User",
+      "select": false,
+      "key": "is_allow_user",
+    },
+    {
+      "name": "Allow Customer",
+      "select": false,
+      "key": "is_allow_customer",
+    },
+    {
+      "name": "Allow Bill",
+      "select": false,
+      "key": "is_allow_bill",
+    },
+  ];
+
+  Future<void> updateAccess() async {
     Map<String, dynamic> body = {
-      "id": companyId.toString(),
-      "is_allow_machinery": true,
-      "is_allow_spareparts": true,
-      "is_allow_user": true,
-      "is_allow_customer": true,
-      "is_allow_bill": true,
+      "id": userId,
     };
+    for (int i = 0; i < userRoleList.length; i++) {
+      body[userRoleList[i]['key']] =
+          userRoleList[i]['select'] ?? false ? 1.toString() : 0.toString();
+    }
     try {
       String url = "${baseURL}user/updateAccess";
       log("API => $url");
@@ -284,6 +254,7 @@ class UserController extends GetxController {
         var responseData = jsonDecode(response.body);
         if (responseData['status'] == 1) {
           isUpdateLoading.value = false;
+          Get.back();
         } else {
           showToast(responseData['message']);
           debugPrint("Error Message ${responseData['message']}");

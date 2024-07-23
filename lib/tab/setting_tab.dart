@@ -6,13 +6,14 @@ import 'package:elements/controller/setting_controller.dart';
 import 'package:elements/machinery/mange_machinery.dart';
 import 'package:elements/manage_customer/mange_customer.dart';
 import 'package:elements/mange_spareparts/mange_spareparts.dart';
-import 'package:elements/user/mange%20_user_role.dart';
 import 'package:elements/user/mange_user.dart';
 import 'package:elements/widget/app%20bar/home_app_bar.dart';
 import 'package:elements/widget/dialogs/custom_dialogbox.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+
+import '../manage_user/mange _user_role.dart';
 
 class SettingTab extends StatefulWidget {
   const SettingTab({super.key});
@@ -133,7 +134,7 @@ class _SettingTabState extends State<SettingTab> {
                   },
                 ),
                 _customTile(
-                  title: "User Role",
+                  title: "Manage Role",
                   imgPath: "assets/svg/bil_history.svg",
                   index: 6,
                   onTap: () {
