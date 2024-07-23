@@ -1,5 +1,6 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/methods.dart';
+import 'package:elements/constant/vars.dart';
 import 'package:elements/controller/customer_controller.dart';
 import 'package:elements/controller/home_controller.dart';
 import 'package:elements/controller/machinery_controller.dart';
@@ -76,7 +77,7 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
         ),
         body: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-          child: Form(
+          child: Obx(()=> userType.value == "manager" ? managerView() : Form(
             key: _formKey,
             child: Column(
               children: [
@@ -89,7 +90,7 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                     hintText: "Select Customer/Company",
                     labelText: "Customer/Company",
                     textEditingController:
-                        customerController.companyTextEditingController,
+                    customerController.companyTextEditingController,
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                     validator: (value) {
                       if (value!.isEmpty) {
@@ -113,7 +114,7 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                     hintText: "Select Machine Type*",
                     labelText: "Machine Type",
                     textEditingController:
-                        customerController.machineNameTextEditingController,
+                    customerController.machineNameTextEditingController,
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                     validator: (value) {
                       if (value!.isEmpty) {
@@ -158,7 +159,7 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                   textInputType: TextInputType.number,
                   focusNode: controller.paymentFocusNode,
                   textEditingController:
-                      orderController.totalPaymentEditingController,
+                  orderController.totalPaymentEditingController,
                   autoValidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
                     if (value!.isEmpty) {
@@ -174,7 +175,7 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                   labelText: "Advance Payment",
                   textInputType: TextInputType.number,
                   textEditingController:
-                      orderController.advancePaymentEditingController,
+                  orderController.advancePaymentEditingController,
                   focusNode: controller.advancedPaymentFocusNode,
                   autoValidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
@@ -193,7 +194,7 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                     hintText: "Select Manager Role",
                     labelText: "Assigns Order",
                     textEditingController:
-                        orderController.assignOrderIdEditingController,
+                    orderController.assignOrderIdEditingController,
                     focusNode: FocusNode(),
                     suffixFixIcon: const Icon(
                       Icons.arrow_forward_ios_rounded,
@@ -203,7 +204,7 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                 verticalSpacing(),
               ],
             ),
-          ),
+          )),
         ),
         bottomNavigationBar: widget.isView
             ? const SizedBox.shrink()
@@ -241,6 +242,53 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                 ),
               ));
   }
+
+
+  Widget managerView(){
+    return Column(
+      children: [
+        CustomTextField(
+            focusNode: FocusNode(),
+            readOnly: true,
+            enable: false,
+            hintText: "Select Customer/Company",
+            labelText: "Customer/Company",
+            textEditingController:
+            customerController.companyTextEditingController,
+            suffixFixIcon: const Icon(
+              Icons.arrow_forward_ios_rounded,
+              size: 18,
+              color: AppColor.blackColor,
+            )),
+        verticalSpacing(),
+        CustomTextField(
+            focusNode: FocusNode(),
+            readOnly: true,
+            enable: false,
+            hintText: "Select Machine Type*",
+            labelText: "Machine Type",
+            textEditingController:
+            customerController.machineNameTextEditingController,
+            suffixFixIcon: const Icon(
+              Icons.arrow_forward_ios_rounded,
+              size: 18,
+            )),
+        verticalSpacing(),
+        CustomTextField(
+            textEditingController: orderController.date,
+            hintText: "Select Delivery Date",
+            labelText: "Delivery Date",
+            enable: false,
+            suffixFixIcon: const Icon(
+              Icons.date_range,
+              size: 22,
+              color: Colors.black,
+            )),
+        verticalSpacing(),
+      ],
+    );
+  }
+
 
   Widget verticalSpacing() {
     return const SizedBox(

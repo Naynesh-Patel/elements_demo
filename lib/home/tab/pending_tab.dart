@@ -2,6 +2,7 @@ import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/constant/methods.dart';
 import 'package:elements/constant/vars.dart';
+import 'package:elements/controller/customer_controller.dart';
 import 'package:elements/controller/order_controller.dart';
 import 'package:elements/home/invoice.dart';
 import 'package:elements/widget/button/small_button.dart';
@@ -13,15 +14,16 @@ import 'package:get/get.dart';
 
 import '../create_new_order.dart';
 
-class OnGoingTab extends StatefulWidget {
-  const OnGoingTab({super.key});
+class PendingTab extends StatefulWidget {
+  const PendingTab({super.key});
 
   @override
-  State<OnGoingTab> createState() => _OnGoingTabState();
+  State<PendingTab> createState() => _PendingTabState();
 }
 
-class _OnGoingTabState extends State<OnGoingTab> {
+class _PendingTabState extends State<PendingTab> {
   OrderController orderController = Get.find();
+  CustomerController customerController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +43,6 @@ class _OnGoingTabState extends State<OnGoingTab> {
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: () {
-                      // Get.to(const ViewOrderDetails());
                       Get.to(CreateNewOrder(
                           isView: true,
                           model: orderController.orderList[index]));
@@ -51,6 +52,7 @@ class _OnGoingTabState extends State<OnGoingTab> {
                 },
               ));
   }
+
 
   adminView({required int index}){
     return Container(
@@ -214,7 +216,7 @@ class _OnGoingTabState extends State<OnGoingTab> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               SmallButton(
-                  title: "  End  ",
+                  title: "  Start  ",
                   onTap: () {
                     Get.to(CreateNewOrder(
                       model: orderController.orderList[index],
@@ -236,7 +238,6 @@ class _OnGoingTabState extends State<OnGoingTab> {
     );
   }
 
-
   Widget _keyValue(key, value) {
     return Row(
       mainAxisSize: MainAxisSize.min,
@@ -253,6 +254,17 @@ class _OnGoingTabState extends State<OnGoingTab> {
               .copyWith(color: const Color(0xff555555)),
         )),
       ],
+    );
+  }
+
+  Widget emptyView() {
+    return Container(
+      height: Get.height * 0.55,
+      padding: const EdgeInsets.symmetric(horizontal: 110.0),
+      child: Image.asset(
+        alignment: Alignment.center,
+        "assets/images/no_order.png",
+      ),
     );
   }
 

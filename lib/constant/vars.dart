@@ -8,3 +8,4 @@ String androidVersion = "";
 String iosVersion = "";
 
 Rx<ModelUser> modelUser = ModelUser().obs;
+RxString userType = "".obs;
