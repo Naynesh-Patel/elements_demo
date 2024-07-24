@@ -5,6 +5,7 @@ import 'package:elements/widget/button/small_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../constant/vars.dart';
 import '../date_piker.dart';
 
 class AttendanceTab extends StatefulWidget {
@@ -48,20 +49,23 @@ class _AttendanceTabState extends State<AttendanceTab> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.whiteColor,
+        backgroundColor: AppColor.whiteColor,
         appBar: HomeAppBar(
           title: "Attendance",
           action: [
-            IconButton(
-              onPressed: () {
-                filterDialog();
-              },
-              icon: Image.asset(
-                "assets/images/filtter.png",
-                height: 20,
-                width: 20,
-              ),
-            ),
+            userType.value == "manager"
+                ? const SizedBox()
+                : IconButton(
+                    onPressed: () {
+                      filterDialog();
+                    },
+                    icon: Image.asset(
+                      "assets/images/filtter.png",
+                      height: 20,
+                      width: 20,
+                    ),
+                  ),
+
             const SizedBox(
               width: 5,
             ),
@@ -421,12 +425,14 @@ class _AttendanceTabState extends State<AttendanceTab> {
       decoration: const BoxDecoration(color: Color(0xffF1F1F1)),
       child: Row(
         children: [
-          Expanded(
-              child: Text(
-            "Name",
-            style: AppTextStyle.textStyleRegular14
-                .copyWith(color: AppColor.selectColor),
-          )),
+          userType.value == "manager"
+              ? const SizedBox()
+              : Expanded(
+                  child: Text(
+                  "Name",
+                  style: AppTextStyle.textStyleRegular14
+                      .copyWith(color: AppColor.selectColor),
+                )),
           Expanded(
             child: InkWell(
               onTap: () {
@@ -475,10 +481,12 @@ class _AttendanceTabState extends State<AttendanceTab> {
           ),
           Row(
             children: [
-              Expanded(
-                  child: Text(name,
-                      style: AppTextStyle.textStyleLight12
-                          .copyWith(color: const Color(0xff555555)))),
+              userType.value == "manager"
+                  ? const SizedBox()
+                  : Expanded(
+                      child: Text(name,
+                          style: AppTextStyle.textStyleLight12
+                              .copyWith(color: const Color(0xff555555)))),
               Expanded(
                   child: Text("$date",
                       style: AppTextStyle.textStyleLight12

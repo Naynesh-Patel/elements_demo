@@ -37,6 +37,7 @@ class UserController extends GetxController {
   RxBool isUpdateLoading = false.obs;
   RxBool isGetUserLoading = false.obs;
   RxBool isDeleteUserLoading = false.obs;
+  RxBool isGetUserByLoading = false.obs;
   RxBool isUpdateUserLoading = false.obs;
 
   RxList<dynamic> userList = <dynamic>[].obs;
@@ -45,11 +46,11 @@ class UserController extends GetxController {
 
   String userId = "";
 
-  bool isMachinery = true;
-  bool isSpareparts = true;
-  bool isUser = true;
-  bool isCustomer = true;
-  bool isBill = true;
+  RxBool isAllowMachinery = false.obs;
+  RxBool isAllowSpareparts = false.obs;
+  RxBool isAllowUser = false.obs;
+  RxBool isAllowCustomer = false.obs;
+  RxBool isAllowBill = false.obs;
 
   Future<bool> pickImageFromGallery() async {
     XFile? pickImage =
@@ -181,6 +182,34 @@ class UserController extends GetxController {
     } catch (e) {
       debugPrint("Error:$e");
       isDeleteUserLoading.value = false;
+    }
+  }
+
+  Future getUserById(id) async {
+    try {
+      String url = "${baseURL}user/getUserById";
+      log("API => $url");
+
+      isGetUserByLoading.value = true;
+      var response = await http.post(Uri.parse(url), body: {
+        "id": id,
+      });
+      isGetUserByLoading.value = false;
+      if (response.statusCode == 200) {
+        isGetUserByLoading.value = false;
+        var responseData = jsonDecode(response.body);
+        if (responseData['data']['is_allow_machinery'] == "1") {}
+        if (responseData['data']['is_allow_machinery'] == "1") {}
+        if (responseData['data']['is_allow_machinery'] == "1") {}
+        if (responseData['data']['is_allow_machinery'] == "1") {}
+        if (responseData['data']['is_allow_machinery'] == "1") {}
+      } else {
+        debugPrint("statusCode::${response.statusCode}");
+        isGetUserByLoading.value = false;
+      }
+    } catch (e) {
+      debugPrint("Error:$e");
+      isGetUserByLoading.value = false;
     }
   }
 

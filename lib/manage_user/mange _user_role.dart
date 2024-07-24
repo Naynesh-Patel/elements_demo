@@ -59,7 +59,7 @@ class _ManageUserRoleState extends State<ManageUserRole> {
                       },
                       labelText: "Manage User",
                       textEditingController:
-                          customerController.companyTextEditingController,
+                          userController.userNameTextEditingController,
                       autoValidateMode: AutovalidateMode.onUserInteraction,
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -74,73 +74,23 @@ class _ManageUserRoleState extends State<ManageUserRole> {
                         color: AppColor.blackColor,
                       )),
                   const SizedBox(
-                    height: 10,
+                    height: 20,
                   ),
-                  SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: List.generate(
-                          userController.userRoleList.length, (index) {
-                        return Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 10),
-                          margin: const EdgeInsets.only(bottom: 8.0),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Expanded(
-                                child: Text(
-                                  "${userController.userRoleList[index]['name']}",
-                                  style: AppTextStyle.textStyleRegular14,
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 4.0,
-                              ),
-                              InkWell(
-                                borderRadius: BorderRadius.circular(6.0),
-                                onTap: () {
-                                  if (userController.userRoleList[index]
-                                          ['select'] ==
-                                      null) {
-                                    userController.userRoleList[index]
-                                        ['select'] = true;
-                                  } else if (userController.userRoleList[index]
-                                          ['select'] ==
-                                      true) {
-                                    userController.userRoleList[index]
-                                        ['select'] = false;
-                                  } else {
-                                    userController.userRoleList[index]
-                                        ['select'] = true;
-                                  }
-                                  setState(() {});
-                                },
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 4.0, vertical: 4.0),
-                                  decoration: BoxDecoration(
-                                      border: Border.all(
-                                          color: AppColor.dropDownHintColor),
-                                      borderRadius: BorderRadius.circular(6.0)),
-                                  child: Icon(
-                                    Icons.check_rounded,
-                                    size: 14,
-                                    color: userController.userRoleList[index]
-                                                ['select'] ??
-                                            false
-                                        ? AppColor.blackColor
-                                        : Colors.transparent,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                      }),
-                    ),
-                  ),
+                  allowItems(
+                      isSelect: userController.isAllowMachinery,
+                      title: "Allow Machinery"),
+                  allowItems(
+                      isSelect: userController.isAllowMachinery,
+                      title: "Allow Customer"),
+                  allowItems(
+                      isSelect: userController.isAllowSpareparts,
+                      title: "Allow Spareparts"),
+                  allowItems(
+                      isSelect: userController.isAllowBill,
+                      title: "Allow Bill"),
+                  allowItems(
+                      isSelect: userController.isAllowCustomer,
+                      title: "Allow Machinery"),
                 ],
               ),
             )),
@@ -160,6 +110,85 @@ class _ManageUserRoleState extends State<ManageUserRole> {
   Widget verticalSpacing() {
     return const SizedBox(
       height: 6.0,
+    );
+  }
+
+  Widget allowItems({required String title, required RxBool isSelect}) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      margin: const EdgeInsets.only(bottom: 8.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Expanded(
+            child: Text(
+              title,
+              style: AppTextStyle.textStyleRegular14,
+            ),
+          ),
+          const SizedBox(
+            width: 4.0,
+          ),
+          InkWell(
+            borderRadius: BorderRadius.circular(6.0),
+            onTap: () {
+              isSelect.value = !isSelect.value;
+            },
+            child: Container(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 4.0, vertical: 4.0),
+              decoration: BoxDecoration(
+                  border: Border.all(color: AppColor.dropDownHintColor),
+                  borderRadius: BorderRadius.circular(6.0)),
+              child: Obx(() => Icon(
+                    Icons.check_rounded,
+                    size: 14,
+                    color: isSelect.value
+                        ? AppColor.blackColor
+                        : Colors.transparent,
+                  )),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  keyVelue(onTab, key) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      child: Row(
+        children: [
+          Expanded(
+            child: Text(
+              key,
+              style: AppTextStyle.textStyleRegular14,
+            ),
+          ),
+          const SizedBox(
+            width: 4,
+          ),
+          InkWell(
+            borderRadius: BorderRadius.circular(6.0),
+            onTap: () {
+              onTab;
+            },
+            child: Container(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 4.0, vertical: 4.0),
+              decoration: BoxDecoration(
+                  border: Border.all(color: AppColor.dropDownHintColor),
+                  borderRadius: BorderRadius.circular(6.0)),
+              child: const Icon(
+                Icons.check_rounded,
+                size: 14,
+                color: AppColor.blackColor,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

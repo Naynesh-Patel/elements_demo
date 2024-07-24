@@ -144,6 +144,7 @@ class _ViewExpenseDetailsState extends State<ViewExpenseDetails> {
 
   Widget _tableView({required String type, price, name, date}) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(
           height: 12.0,

@@ -2,13 +2,12 @@ import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/controller/machinery_controller.dart';
 import 'package:elements/controller/spareparts_controller.dart';
+import 'package:elements/mange_spareparts/add_spareparts.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:elements/widget/button/custom_button.dart';
 import 'package:elements/widget/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../mange_spareparts/add_spareparts.dart';
 
 class AddMachinery extends StatefulWidget {
   final dynamic model;
@@ -60,8 +59,6 @@ class _AddMachineryState extends State<AddMachinery> {
     } else {
       controller.machineNameTextEditingController.clear();
       controller.qtyTextEditingController.clear();
-      controller.machinetypeEditingController.clear();
-      controller.manufactureDurationTextEditingController.clear();
     }
     super.initState();
   }
