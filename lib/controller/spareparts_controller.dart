@@ -12,6 +12,8 @@ class SparepartsController extends GetxController {
   TextEditingController qtyTypeTextEditingController = TextEditingController();
   TextEditingController newqtyTypeTextEditingController =
       TextEditingController();
+  TextEditingController sparepartsTextEditingController =
+      TextEditingController();
 
   TextEditingController totalQtyTextEditingController = TextEditingController();
 

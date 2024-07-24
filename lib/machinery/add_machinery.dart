@@ -390,46 +390,9 @@ class _AddMachineryState extends State<AddMachinery> {
                           contentPadding: const EdgeInsets.all(0),
                           title: Row(
                             children: [
-                              // InkWell(
-                              //   borderRadius: BorderRadius.circular(6.0),
-                              //   onTap: () {
-                              //     if (sparepartsController.sparepartsList[index]
-                              //             .isSelected.value ==
-                              //         false) {
-                              //       sparepartsController.sparepartsList[index]
-                              //           .isSelected.value = true;
-                              //     } else {
-                              //       sparepartsController.sparepartsList[index]
-                              //           .isSelected.value = true;
-                              //     }
-                              //     debugPrint(
-                              //         "Select = ${sparepartsController.sparepartsList[index].isSelected.value}");
-                              //   },
-                              //   child: Container(
-                              //     padding: const EdgeInsets.symmetric(
-                              //         horizontal: 4.0, vertical: 4.0),
-                              //     decoration: BoxDecoration(
-                              //         border: Border.all(
-                              //             color: AppColor.dropDownHintColor),
-                              //         borderRadius: BorderRadius.circular(6.0)),
-                              //     child: Obx(() => Icon(
-                              //           Icons.check_rounded,
-                              //           size: 14,
-                              //           color: sparepartsController
-                              //                   .sparepartsList[index]
-                              //                   .isSelected
-                              //                   .value
-                              //               ? AppColor.blackColor
-                              //               : Colors.transparent,
-                              //         )),
-                              //   ),
-                              // ),
                               Text(sparepartsController.sparepartsList[index]
                                       ['name'] ??
                                   ''.capitalizeFirst),
-                              const SizedBox(
-                                width: 2,
-                              ),
                               Text('${index + 1}'),
                             ],
                           ),
@@ -494,7 +457,7 @@ class _AddMachineryState extends State<AddMachinery> {
                                       sparepartsController.sparepartsList[index]
                                           ['id']);
                                   sparepartsController.sparepartsList
-                                      .removeAt(index);
+                                      .remove(index);
                                 },
                                 borderRadius: BorderRadius.circular(5),
                                 child: Image.asset(

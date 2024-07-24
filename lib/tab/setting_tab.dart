@@ -6,6 +6,7 @@ import 'package:elements/constant/vars.dart';
 import 'package:elements/controller/setting_controller.dart';
 import 'package:elements/machinery/mange_machinery.dart';
 import 'package:elements/manage_customer/mange_customer.dart';
+import 'package:elements/manage_user/mange%20_user_role.dart';
 import 'package:elements/mange_spareparts/mange_spareparts.dart';
 import 'package:elements/user/mange_user.dart';
 import 'package:elements/widget/app%20bar/home_app_bar.dart';
@@ -57,7 +58,7 @@ class _SettingTabState extends State<SettingTab> {
                   Get.to(const MangeMachinery());
                 },
               )
-            : SizedBox(),
+            : const SizedBox(),
         modelUser.value.isAllowSpareparts == "1"
             ? _customTile(
                 title: "Manage Spareparts",
@@ -69,7 +70,7 @@ class _SettingTabState extends State<SettingTab> {
                   Get.to(const MangeSpareparts());
                 },
               )
-            : SizedBox(),
+            : const SizedBox(),
         _customTile(
           title: "Logout",
           isSvg: false,
@@ -105,7 +106,7 @@ class _SettingTabState extends State<SettingTab> {
                   Get.to(const MangeMachinery());
                 },
               )
-            : SizedBox(),
+            : const SizedBox(),
         modelUser.value.isAllowSpareparts == "1"
             ? _customTile(
                 title: "Manage Spareparts",
@@ -117,7 +118,7 @@ class _SettingTabState extends State<SettingTab> {
                   Get.to(const MangeSpareparts());
                 },
               )
-            : SizedBox(),
+            : const SizedBox(),
         // _customTile(
         //   title: "Import Spareparts",
         //   imgPath: "assets/images/import_spareparts.png",
@@ -138,7 +139,7 @@ class _SettingTabState extends State<SettingTab> {
                   Get.to(const MangeUser());
                 },
               )
-            : SizedBox(),
+            : const SizedBox(),
         // _customTile(
         //   title: "Manage Salesmen",
         //   imgPath: "assets/images/mange_salesmen.png",
@@ -159,7 +160,7 @@ class _SettingTabState extends State<SettingTab> {
                   Get.to(const MangeCustomer());
                 },
               )
-            : SizedBox(),
+            : const SizedBox(),
         // _customTile(
         //   title: "Manage Machine Stock",
         //   imgPath: "assets/svg/mange_product.svg",
@@ -169,6 +170,16 @@ class _SettingTabState extends State<SettingTab> {
         //     Get.to(const MangeProduct());
         //   },
         // ),
+        _customTile(
+          isSvg: false,
+          title: "User Role",
+          imgPath: "assets/images/talk.png",
+          index: 6,
+          onTap: () {
+            controller.selectMenu.value = 5;
+            Get.to(const ManageUserRole());
+          },
+        ),
         modelUser.value.isAllowBill == "1"
             ? _customTile(
                 title: "Bill History",
@@ -179,7 +190,7 @@ class _SettingTabState extends State<SettingTab> {
                   Get.to(const BillHistory());
                 },
               )
-            : SizedBox(),
+            : const SizedBox(),
         _customTile(
           title: "Change Password",
           isSvg: false,

@@ -1,5 +1,6 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/controller/customer_controller.dart';
+import 'package:elements/controller/expense_controller.dart';
 import 'package:elements/controller/home_controller.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:elements/widget/button/custom_button.dart';
@@ -7,18 +8,15 @@ import 'package:elements/widget/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../controller/expense_controller.dart';
-
 class AddExpense extends StatefulWidget {
   final dynamic model;
-  const AddExpense({super.key,this.model});
+  const AddExpense({super.key, this.model});
 
   @override
   State<AddExpense> createState() => _AddExpenseState();
 }
 
 class _AddExpenseState extends State<AddExpense> {
-
   HomeController controller = Get.find();
   ExpenseController expenseController = Get.find();
   CustomerController customerController = Get.find();
@@ -29,9 +27,12 @@ class _AddExpenseState extends State<AddExpense> {
   void initState() {
     // controller.updateCustomer(widget.model['id']);
     if (widget.model != null) {
-      expenseController.nameTextEditingController.text = widget.model['name'] ?? '';
-      expenseController.expenseTypeTextEditingController.text = widget.model['expense_type'] ?? '';
-      expenseController.priceTextEditingController.text = widget.model['price'] ?? '';
+      expenseController.nameTextEditingController.text =
+          widget.model['name'] ?? '';
+      expenseController.expenseTypeTextEditingController.text =
+          widget.model['expense_type'] ?? '';
+      expenseController.priceTextEditingController.text =
+          widget.model['price'] ?? '';
     } else {
       expenseController.expenseTypeTextEditingController.clear();
       expenseController.nameTextEditingController.clear();
@@ -61,10 +62,11 @@ class _AddExpenseState extends State<AddExpense> {
                 CustomTextField(
                   hintText: "Name",
                   labelText: "Name",
-                  textEditingController: expenseController.nameTextEditingController,
+                  textEditingController:
+                      expenseController.nameTextEditingController,
                   autoValidateMode: AutovalidateMode.onUserInteraction,
                   validator: (p0) {
-                    if(p0!.isEmpty){
+                    if (p0!.isEmpty) {
                       return "Please enter the name";
                     }
                     return null;
@@ -78,7 +80,7 @@ class _AddExpenseState extends State<AddExpense> {
                   labelText: "Expense Type",
                   autoValidateMode: AutovalidateMode.onUserInteraction,
                   validator: (p0) {
-                    if(p0!.isEmpty){
+                    if (p0!.isEmpty) {
                       return "Please enter the type";
                     }
                     return null;
@@ -93,7 +95,7 @@ class _AddExpenseState extends State<AddExpense> {
                   autoValidateMode: AutovalidateMode.onUserInteraction,
                   textInputType: TextInputType.number,
                   validator: (p0) {
-                    if(p0!.isEmpty){
+                    if (p0!.isEmpty) {
                       return "Please enter the price";
                     }
                     return null;
