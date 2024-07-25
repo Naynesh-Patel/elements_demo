@@ -22,16 +22,16 @@ class UserController extends GetxController {
       TextEditingController();
 
   TextEditingController fingerprintEditingController = TextEditingController();
-  TextEditingController allowMachineryEditingController =
-      TextEditingController();
-  TextEditingController allowSparepartsTextEditingController =
-      TextEditingController();
-  TextEditingController allowBillTextEditingController =
-      TextEditingController();
-  TextEditingController allowUserTextEditingController =
-      TextEditingController();
-  TextEditingController allowCustomerTextEditingController =
-      TextEditingController();
+  // TextEditingController allowMachineryEditingController =
+  //     TextEditingController();
+  // TextEditingController allowSparepartsTextEditingController =
+  //     TextEditingController();
+  // TextEditingController allowBillTextEditingController =
+  //     TextEditingController();
+  // TextEditingController allowUserTextEditingController =
+  //     TextEditingController();
+  // TextEditingController allowCustomerTextEditingController =
+  //     TextEditingController();
 
   RxBool isUserLoading = false.obs;
   RxBool isUpdateLoading = false.obs;
