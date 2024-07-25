@@ -11,6 +11,7 @@ import 'package:http/http.dart' as http;
 
 class MachineryController extends GetxController {
   RxList<ModelMachinery> machineryList = <ModelMachinery>[].obs;
+
   RxList<dynamic> addMachineryList = <dynamic>[].obs;
   TextEditingController qtyTextEditingController = TextEditingController();
   TextEditingController machineNameTextEditingController =

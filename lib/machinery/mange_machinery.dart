@@ -67,11 +67,10 @@ class _MangeMachineryState extends State<MangeMachinery> {
                             ),
                             verticalSpacing(),
                             _keyValue(
-                              "Machine Type",
-                              controller.addMachineryList[index]
-                                      ['machine_type'] ??
-                                  '',
-                            ),
+                                "Machine Type",
+                                controller.addMachineryList[index]
+                                        ['machine_type'] ??
+                                    ''),
                             verticalSpacing(),
                             _keyValue(
                               "Qty",

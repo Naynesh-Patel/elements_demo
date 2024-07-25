@@ -80,7 +80,7 @@ class _ManageUserRoleState extends State<ManageUserRole> {
                       isSelect: userController.isAllowMachinery,
                       title: "Allow Machinery"),
                   allowItems(
-                      isSelect: userController.isAllowMachinery,
+                      isSelect: userController.isAllowCustomer,
                       title: "Allow Customer"),
                   allowItems(
                       isSelect: userController.isAllowSpareparts,
@@ -89,8 +89,8 @@ class _ManageUserRoleState extends State<ManageUserRole> {
                       isSelect: userController.isAllowBill,
                       title: "Allow Bill"),
                   allowItems(
-                      isSelect: userController.isAllowCustomer,
-                      title: "Allow Machinery"),
+                      isSelect: userController.isAllowUser,
+                      title: "Allow User"),
                 ],
               ),
             )),

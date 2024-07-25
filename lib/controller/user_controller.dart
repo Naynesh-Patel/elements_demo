@@ -199,10 +199,10 @@ class UserController extends GetxController {
         isGetUserByLoading.value = false;
         var responseData = jsonDecode(response.body);
         if (responseData['data']['is_allow_machinery'] == "1") {}
-        if (responseData['data']['is_allow_machinery'] == "1") {}
-        if (responseData['data']['is_allow_machinery'] == "1") {}
-        if (responseData['data']['is_allow_machinery'] == "1") {}
-        if (responseData['data']['is_allow_machinery'] == "1") {}
+        if (responseData['data']['is_allow_spareparts'] == "1") {}
+        if (responseData['data']['is_allow_user'] == "1") {}
+        if (responseData['data']['is_allow_customer'] == "1") {}
+        if (responseData['data']['is_allow_bill'] == "1") {}
       } else {
         debugPrint("statusCode::${response.statusCode}");
         isGetUserByLoading.value = false;

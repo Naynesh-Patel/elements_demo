@@ -59,6 +59,8 @@ class _AddMachineryState extends State<AddMachinery> {
     } else {
       controller.machineNameTextEditingController.clear();
       controller.qtyTextEditingController.clear();
+      controller.manufactureDurationTextEditingController.clear();
+      controller.machinetypeEditingController.clear();
     }
     super.initState();
   }
@@ -453,6 +455,7 @@ class _AddMachineryState extends State<AddMachinery> {
                                   sparepartsController.deleteSpareparts(
                                       sparepartsController.sparepartsList[index]
                                           ['id']);
+
                                   sparepartsController.sparepartsList
                                       .remove(index);
                                 },
