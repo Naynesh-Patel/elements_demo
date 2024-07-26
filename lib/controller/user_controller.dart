@@ -266,36 +266,38 @@ class UserController extends GetxController {
     },
   ];
 
-  Future<void> updateAccess() async {
+  Future updateAccess() async {
     Map<String, dynamic> body = {
       "id": userId,
+      "is_allow_machinery": isAllowMachinery.value ? "1" : "0",
+      "is_allow_spareparts": isAllowSpareparts.value ? "1" : "0",
+      "is_allow_user": isAllowUser.value ? "1" : "0",
+      "is_allow_customer": isAllowCustomer.value ? "1" : "0",
+      "is_allow_bill": isAllowBill.value ? "1" : "0",
     };
-    for (int i = 0; i < userRoleList.length; i++) {
-      body[userRoleList[i]['key']] =
-          userRoleList[i]['select'] ?? false ? 1.toString() : 0.toString();
-    }
     try {
       String url = "${baseURL}user/updateAccess";
       log("API => $url");
-      isUpdateLoading.value = true;
+      isUpdateUserLoading.value = true;
       var response = await http.post(Uri.parse(url), body: body);
       if (response.statusCode == 200) {
         var responseData = jsonDecode(response.body);
         if (responseData['status'] == 1) {
-          isUpdateLoading.value = false;
-          Get.back();
+          isUpdateUserLoading.value = false;
+
+          // Get.back();
         } else {
-          showToast(responseData['message']);
           debugPrint("Error Message ${responseData['message']}");
-          isUpdateLoading.value = false;
+          isUpdateUserLoading.value = false;
         }
+        showToast(responseData['message']);
       } else {
         debugPrint("statusCode${response.statusCode}");
-        isUpdateLoading.value = false;
+        isUpdateUserLoading.value = false;
       }
     } catch (e) {
       debugPrint("Error${e.toString()}");
-      isUpdateLoading.value = false;
+      isUpdateUserLoading.value = false;
     }
   }
 

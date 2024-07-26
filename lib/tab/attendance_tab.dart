@@ -53,9 +53,8 @@ class _AttendanceTabState extends State<AttendanceTab> {
         appBar: HomeAppBar(
           title: "Attendance",
           action: [
-            userType.value == "manager"
-                ? const SizedBox()
-                : IconButton(
+            userType.value == "admin"
+                ? IconButton(
                     onPressed: () {
                       filterDialog();
                     },
@@ -64,8 +63,8 @@ class _AttendanceTabState extends State<AttendanceTab> {
                       height: 20,
                       width: 20,
                     ),
-                  ),
-
+                  )
+                : const SizedBox(),
             const SizedBox(
               width: 5,
             ),
@@ -425,7 +424,7 @@ class _AttendanceTabState extends State<AttendanceTab> {
       decoration: const BoxDecoration(color: Color(0xffF1F1F1)),
       child: Row(
         children: [
-          userType.value == "manager"
+          userType.value == "admin"
               ? const SizedBox()
               : Expanded(
                   child: Text(
@@ -481,16 +480,12 @@ class _AttendanceTabState extends State<AttendanceTab> {
           ),
           Row(
             children: [
-              userType.value == "manager"
+              userType.value == "admin"
                   ? const SizedBox()
                   : Expanded(
-                      child: Text(name,
+                      child: Text("$date",
                           style: AppTextStyle.textStyleLight12
                               .copyWith(color: const Color(0xff555555)))),
-              Expanded(
-                  child: Text("$date",
-                      style: AppTextStyle.textStyleLight12
-                          .copyWith(color: const Color(0xff555555)))),
               if (isWeeklyOff) ...[
                 Expanded(
                   flex: 2,

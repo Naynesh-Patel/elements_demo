@@ -41,7 +41,7 @@ class _SettingTabState extends State<SettingTab> {
         ),
         body: SingleChildScrollView(
           child: Obx(
-              () => userType.value == "manager" ? managerView() : adminView()),
+              () => userType.value == "admin" ? adminView() : managerView()),
         ));
   }
 
@@ -71,6 +71,39 @@ class _SettingTabState extends State<SettingTab> {
                 },
               )
             : const SizedBox(),
+        modelUser.value.isAllowUser == "1"
+            ? _customTile(
+                title: "Manage User",
+                imgPath: "assets/svg/all_users.svg",
+                index: 3,
+                onTap: () {
+                  controller.selectMenu.value = 3;
+                  Get.to(const MangeUser());
+                },
+              )
+            : SizedBox(),
+        modelUser.value.isAllowCustomer == "1"
+            ? _customTile(
+                title: "Manage Customer Company",
+                imgPath: "assets/svg/mange_compny.svg",
+                index: 4,
+                onTap: () {
+                  controller.selectMenu.value = 4;
+                  Get.to(const MangeCustomer());
+                },
+              )
+            : SizedBox(),
+        modelUser.value.isAllowBill == "1"
+            ? _customTile(
+                title: "Bill History",
+                imgPath: "assets/svg/bil_history.svg",
+                index: 5,
+                onTap: () {
+                  controller.selectMenu.value = 5;
+                  Get.to(const BillHistory());
+                },
+              )
+            : SizedBox(),
         _customTile(
           title: "Logout",
           isSvg: false,

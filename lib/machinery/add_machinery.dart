@@ -455,7 +455,6 @@ class _AddMachineryState extends State<AddMachinery> {
                                   sparepartsController.deleteSpareparts(
                                       sparepartsController.sparepartsList[index]
                                           ['id']);
-
                                   sparepartsController.sparepartsList
                                       .remove(index);
                                 },

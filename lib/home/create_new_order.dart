@@ -47,11 +47,13 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
           widget.model['machine_ids'] ?? '';
       orderController.assignOrderIdEditingController.text =
           widget.model['assign_order_id'] ?? '';
+      userController.usersRoleTextEditingController.text =
+          widget.model['user_role'] ?? '';
       orderController.formatDate.text = widget.model['delivery_date'] ?? '';
     } else {
       orderController.customerCompanyIdNoTextEditingController.clear();
       orderController.date.clear();
-      orderController.assignOrderIdEditingController.clear();
+      userController.usersRoleTextEditingController.clear();
       orderController.formatDate.clear();
       orderController.totalPaymentEditingController.clear();
       orderController.advancePaymentEditingController.clear();
@@ -77,134 +79,137 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
         ),
         body: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-          child: Obx(()=> userType.value == "manager" ? managerView() : Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                CustomTextField(
-                    focusNode: FocusNode(),
-                    readOnly: true,
-                    onTap: () {
-                      Get.to(const SelectCustomerCompany());
-                    },
-                    hintText: "Select Customer/Company",
-                    labelText: "Customer/Company",
-                    textEditingController:
-                    customerController.companyTextEditingController,
-                    autoValidateMode: AutovalidateMode.onUserInteraction,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Please Enter Machine Type";
-                      } else {
-                        return null;
-                      }
-                    },
-                    suffixFixIcon: const Icon(
-                      Icons.arrow_forward_ios_rounded,
-                      size: 18,
-                      color: AppColor.blackColor,
-                    )),
-                verticalSpacing(),
-                CustomTextField(
-                    focusNode: FocusNode(),
-                    readOnly: true,
-                    onTap: () {
-                      Get.to(const SelectMachine());
-                    },
-                    hintText: "Select Machine Type*",
-                    labelText: "Machine Type",
-                    textEditingController:
-                    customerController.machineNameTextEditingController,
-                    autoValidateMode: AutovalidateMode.onUserInteraction,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Please Enter Machine Type";
-                      } else {
-                        return null;
-                      }
-                    },
-                    suffixFixIcon: const Icon(
-                      Icons.arrow_forward_ios_rounded,
-                      size: 18,
-                    )),
-                verticalSpacing(),
-                InkWell(
-                  onTap: () async {
-                    datePicker();
-                  },
-                  child: CustomTextField(
-                      textEditingController: orderController.date,
-                      hintText: "Select Delivery Date",
-                      labelText: "Delivery Date",
-                      enable: false,
-                      focusNode: controller.deliveryDateFocusNode,
-                      autoValidateMode: AutovalidateMode.onUserInteraction,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Please Enter Delivery Date";
-                        } else {
-                          return null;
-                        }
-                      },
-                      suffixFixIcon: const Icon(
-                        Icons.date_range,
-                        size: 22,
-                        color: Colors.black,
-                      )),
-                ),
-                verticalSpacing(),
-                CustomTextField(
-                  hintText: "Total Payment",
-                  labelText: "Total Payment",
-                  textInputType: TextInputType.number,
-                  focusNode: controller.paymentFocusNode,
-                  textEditingController:
-                  orderController.totalPaymentEditingController,
-                  autoValidateMode: AutovalidateMode.onUserInteraction,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return "Please Enter Total Payment";
-                    } else {
-                      return null;
-                    }
-                  },
-                ),
-                verticalSpacing(),
-                CustomTextField(
-                  hintText: "Advance Payment",
-                  labelText: "Advance Payment",
-                  textInputType: TextInputType.number,
-                  textEditingController:
-                  orderController.advancePaymentEditingController,
-                  focusNode: controller.advancedPaymentFocusNode,
-                  autoValidateMode: AutovalidateMode.onUserInteraction,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return "Please Enter Advance Payment";
-                    } else {
-                      return null;
-                    }
-                  },
-                ),
-                verticalSpacing(),
-                CustomTextField(
-                    onTap: () {
-                      Get.to(const SelectOrder());
-                    },
-                    hintText: "Select Manager Role",
-                    labelText: "Assigns Order",
-                    textEditingController:
-                    orderController.assignOrderIdEditingController,
-                    focusNode: FocusNode(),
-                    suffixFixIcon: const Icon(
-                      Icons.arrow_forward_ios_rounded,
-                      size: 18,
-                      color: AppColor.blackColor,
-                    )),
-                verticalSpacing(),
-              ],
-            ),
-          )),
+          child: Obx(() => userType.value == "admin"
+              ? Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      CustomTextField(
+                          focusNode: FocusNode(),
+                          readOnly: true,
+                          onTap: () {
+                            Get.to(const SelectCustomerCompany());
+                          },
+                          hintText: "Select Customer/Company",
+                          labelText: "Customer/Company",
+                          textEditingController:
+                              customerController.companyTextEditingController,
+                          autoValidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Please Enter Machine Type";
+                            } else {
+                              return null;
+                            }
+                          },
+                          suffixFixIcon: const Icon(
+                            Icons.arrow_forward_ios_rounded,
+                            size: 18,
+                            color: AppColor.blackColor,
+                          )),
+                      verticalSpacing(),
+                      CustomTextField(
+                          focusNode: FocusNode(),
+                          readOnly: true,
+                          onTap: () {
+                            Get.to(const SelectMachine());
+                          },
+                          hintText: "Select Machine Type*",
+                          labelText: "Machine Type",
+                          textEditingController: customerController
+                              .machineNameTextEditingController,
+                          autoValidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Please Enter Machine Type";
+                            } else {
+                              return null;
+                            }
+                          },
+                          suffixFixIcon: const Icon(
+                            Icons.arrow_forward_ios_rounded,
+                            size: 18,
+                          )),
+                      verticalSpacing(),
+                      InkWell(
+                        onTap: () async {
+                          datePicker();
+                        },
+                        child: CustomTextField(
+                            textEditingController: orderController.date,
+                            hintText: "Select Delivery Date",
+                            labelText: "Delivery Date",
+                            enable: false,
+                            focusNode: controller.deliveryDateFocusNode,
+                            autoValidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return "Please Enter Delivery Date";
+                              } else {
+                                return null;
+                              }
+                            },
+                            suffixFixIcon: const Icon(
+                              Icons.date_range,
+                              size: 22,
+                              color: Colors.black,
+                            )),
+                      ),
+                      verticalSpacing(),
+                      CustomTextField(
+                        hintText: "Total Payment",
+                        labelText: "Total Payment",
+                        textInputType: TextInputType.number,
+                        focusNode: controller.paymentFocusNode,
+                        textEditingController:
+                            orderController.totalPaymentEditingController,
+                        autoValidateMode: AutovalidateMode.onUserInteraction,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Please Enter Total Payment";
+                          } else {
+                            return null;
+                          }
+                        },
+                      ),
+                      verticalSpacing(),
+                      CustomTextField(
+                        hintText: "Advance Payment",
+                        labelText: "Advance Payment",
+                        textInputType: TextInputType.number,
+                        textEditingController:
+                            orderController.advancePaymentEditingController,
+                        focusNode: controller.advancedPaymentFocusNode,
+                        autoValidateMode: AutovalidateMode.onUserInteraction,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Please Enter Advance Payment";
+                          } else {
+                            return null;
+                          }
+                        },
+                      ),
+                      verticalSpacing(),
+                      CustomTextField(
+                          onTap: () {
+                            Get.to(const SelectOrder());
+                          },
+                          hintText: "Select Manager Role",
+                          labelText: "Assigns Order",
+                          textEditingController:
+                              userController.usersRoleTextEditingController,
+                          focusNode: FocusNode(),
+                          suffixFixIcon: const Icon(
+                            Icons.arrow_forward_ios_rounded,
+                            size: 18,
+                            color: AppColor.blackColor,
+                          )),
+                      verticalSpacing(),
+                    ],
+                  ),
+                )
+              : managerView()),
         ),
         bottomNavigationBar: widget.isView
             ? const SizedBox.shrink()
@@ -243,8 +248,7 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
               ));
   }
 
-
-  Widget managerView(){
+  Widget managerView() {
     return Column(
       children: [
         CustomTextField(
@@ -254,7 +258,7 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
             hintText: "Select Customer/Company",
             labelText: "Customer/Company",
             textEditingController:
-            customerController.companyTextEditingController,
+                customerController.companyTextEditingController,
             suffixFixIcon: const Icon(
               Icons.arrow_forward_ios_rounded,
               size: 18,
@@ -268,7 +272,7 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
             hintText: "Select Machine Type*",
             labelText: "Machine Type",
             textEditingController:
-            customerController.machineNameTextEditingController,
+                customerController.machineNameTextEditingController,
             suffixFixIcon: const Icon(
               Icons.arrow_forward_ios_rounded,
               size: 18,
@@ -288,7 +292,6 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
       ],
     );
   }
-
 
   Widget verticalSpacing() {
     return const SizedBox(

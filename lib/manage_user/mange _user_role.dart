@@ -12,8 +12,9 @@ import 'package:get/get.dart';
 
 class ManageUserRole extends StatefulWidget {
   final bool isUpdate;
+  final dynamic model;
 
-  const ManageUserRole({super.key, this.isUpdate = false});
+  const ManageUserRole({super.key, this.isUpdate = false, this.model});
 
   @override
   State<ManageUserRole> createState() => _ManageUserRoleState();
@@ -97,7 +98,7 @@ class _ManageUserRoleState extends State<ManageUserRole> {
         bottomNavigationBar: Container(
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: CustomButton(
-            isLoading: false.obs,
+            isLoading: userController.isUpdateUserLoading,
             color: AppColor.buttonColor,
             buttonText: 'Update',
             onTap: () {

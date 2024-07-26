@@ -58,19 +58,21 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
         ),
       ),
       // drawer: drawer(),
-      floatingActionButton: Obx(()=> userType.value == "manager" ? const SizedBox.shrink() : FloatingActionButton(
-          elevation: 10.0,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(36),
-          ),
-          backgroundColor: AppColor.buttonColor,
-          onPressed: () {
-            Get.to(const CreateNewOrder());
-          },
-          child: const Icon(
-            Icons.add,
-            color: Colors.white,
-          ))),
+      floatingActionButton: Obx(() => userType.value == "admin"
+          ? FloatingActionButton(
+              elevation: 10.0,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(36),
+              ),
+              backgroundColor: AppColor.buttonColor,
+              onPressed: () {
+                Get.to(const CreateNewOrder());
+              },
+              child: const Icon(
+                Icons.add,
+                color: Colors.white,
+              ))
+          : const SizedBox.shrink()),
     );
   }
 

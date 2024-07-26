@@ -47,18 +47,18 @@ class _PendingTabState extends State<PendingTab> {
                           isView: true,
                           model: orderController.orderList[index]));
                     },
-                    child: Obx(()=> userType.value == "manager" ? managerView(index: index) : adminView(index: index)),
+                    child: Obx(() => userType.value == "admin"
+                        ? adminView(index: index)
+                        : managerView(index: index)),
                   );
                 },
               ));
   }
 
-
-  adminView({required int index}){
+  adminView({required int index}) {
     return Container(
       width: double.maxFinite,
-      padding: const EdgeInsets.symmetric(
-          horizontal: 16.0, vertical: 16.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(4),
           border: Border.all(color: AppColor.borderColor)),
@@ -70,21 +70,20 @@ class _PendingTabState extends State<PendingTab> {
             children: [
               _keyValue(
                 "OD",
-                getDateInDDMMYY(DateTime.parse(orderController
-                    .orderList[index]['created_at'])),
+                getDateInDDMMYY(DateTime.parse(
+                    orderController.orderList[index]['created_at'])),
               ),
               _keyValue(
                 "DD",
-                getDateInDDMMYY(DateTime.parse(orderController
-                    .orderList[index]['delivery_date'])),
+                getDateInDDMMYY(DateTime.parse(
+                    orderController.orderList[index]['delivery_date'])),
               ),
             ],
           ),
           verticalSpacing(),
           _keyValue(
             "Client",
-            orderController.orderList[index]
-            ['customer_company_id'],
+            orderController.orderList[index]['customer_company_id'],
           ),
           verticalSpacing(),
           _keyValue(
@@ -137,16 +136,14 @@ class _PendingTabState extends State<PendingTab> {
                     CustomDialogBox.showDeleteDialog(
                       context: context,
                       bodyText:
-                      "Do you really want to cancel these records? This process cannot be undone.",
+                          "Do you really want to cancel these records? This process cannot be undone.",
                       onCancelTap: () {
                         Get.back();
                       },
                       onDeleteTap: () {
-                        orderController.deleteUser(
-                            orderController.orderList[index]
-                            ['id']);
-                        orderController.orderList
-                            .removeAt(index);
+                        orderController
+                            .deleteUser(orderController.orderList[index]['id']);
+                        orderController.orderList.removeAt(index);
                         Get.back();
                       },
                     );
@@ -159,11 +156,10 @@ class _PendingTabState extends State<PendingTab> {
     );
   }
 
-  managerView({required int index}){
+  managerView({required int index}) {
     return Container(
       width: double.maxFinite,
-      padding: const EdgeInsets.symmetric(
-          horizontal: 16.0, vertical: 16.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(4),
           border: Border.all(color: AppColor.borderColor)),
@@ -175,21 +171,20 @@ class _PendingTabState extends State<PendingTab> {
             children: [
               _keyValue(
                 "OD",
-                getDateInDDMMYY(DateTime.parse(orderController
-                    .orderList[index]['created_at'])),
+                getDateInDDMMYY(DateTime.parse(
+                    orderController.orderList[index]['created_at'])),
               ),
               _keyValue(
                 "DD",
-                getDateInDDMMYY(DateTime.parse(orderController
-                    .orderList[index]['delivery_date'])),
+                getDateInDDMMYY(DateTime.parse(
+                    orderController.orderList[index]['delivery_date'])),
               ),
             ],
           ),
           verticalSpacing(),
           _keyValue(
             "Client",
-            orderController.orderList[index]
-            ['customer_company_id'],
+            orderController.orderList[index]['customer_company_id'],
           ),
           verticalSpacing(),
           _keyValue(
