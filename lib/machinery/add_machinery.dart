@@ -2,7 +2,7 @@ import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/controller/machinery_controller.dart';
 import 'package:elements/controller/spareparts_controller.dart';
-import 'package:elements/mange_spareparts/add_spareparts.dart';
+import 'package:elements/machinery/spareparts_list.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:elements/widget/button/custom_button.dart';
 import 'package:elements/widget/custom_text_field.dart';
@@ -56,8 +56,11 @@ class _AddMachineryState extends State<AddMachinery> {
           widget.model['machine_type'] ?? '';
       controller.manufactureDurationTextEditingController.text =
           widget.model['manufacture_duration'] ?? '';
+      controller.sparepartsTextEditingController.text =
+          widget.model['name'] ?? '';
     } else {
       controller.machineNameTextEditingController.clear();
+      controller.sparepartsTextEditingController.clear();
       controller.qtyTextEditingController.clear();
       controller.manufactureDurationTextEditingController.clear();
       controller.machinetypeEditingController.clear();
@@ -369,7 +372,7 @@ class _AddMachineryState extends State<AddMachinery> {
                                 .shrinkWrap, // the '2023' part
                           ),
                           onPressed: () {
-                            Get.to(const AddSpareparts());
+                            Get.to(const SparepartList());
                           },
                           icon: const Icon(
                             Icons.add,
@@ -383,14 +386,37 @@ class _AddMachineryState extends State<AddMachinery> {
                   Obx(
                     () => ListView.builder(
                       shrinkWrap: true,
-                      itemCount: sparepartsController.sparepartsList.length,
+                      itemCount:
+                          sparepartsController.selectSparepartsList.length,
                       itemBuilder: (context, index) {
                         return ListTile(
                           contentPadding: const EdgeInsets.all(0),
+                          leading: InkWell(
+                            borderRadius: BorderRadius.circular(6.0),
+                            onTap: () {
+                              controller.isSelect.value =
+                                  !controller.isSelect.value;
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 4.0, vertical: 4.0),
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: AppColor.dropDownHintColor),
+                                  borderRadius: BorderRadius.circular(6.0)),
+                              child: Obx(() => Icon(
+                                    Icons.check_rounded,
+                                    size: 14,
+                                    color: controller.isSelect.value
+                                        ? AppColor.blackColor
+                                        : Colors.transparent,
+                                  )),
+                            ),
+                          ),
                           title: Row(
                             children: [
-                              Text(sparepartsController.sparepartsList[index]
-                                      ['name'] ??
+                              Text(sparepartsController
+                                      .selectSparepartsList[index]['name'] ??
                                   ''.capitalizeFirst),
                               Text('${index + 1}'),
                             ],
@@ -407,19 +433,19 @@ class _AddMachineryState extends State<AddMachinery> {
                                         color: const Color(0xffD1D1D1))),
                                 child: TextField(
                                   onTap: () {
-                                    if (sparepartsController
-                                            .sparepartsList[index]
-                                            .isSelected
-                                            .value ==
-                                        false) {
-                                      sparepartsController.sparepartsList[index]
-                                          .isSelected.value = true;
-                                    } else {
-                                      sparepartsController.sparepartsList[index]
-                                          .isSelected.value = true;
-                                    }
-                                    debugPrint(
-                                        "Select = ${sparepartsController.sparepartsList[index].isSelected.value}");
+                                    // if (sparepartsController
+                                    //         .sparepartsList[index]
+                                    //         .isSelected
+                                    //         .value ==
+                                    //     false) {
+                                    //   sparepartsController.sparepartsList[index]
+                                    //       .isSelected.value = true;
+                                    // } else {
+                                    //   sparepartsController.sparepartsList[index]
+                                    //       .isSelected.value = true;
+                                    // }
+                                    // debugPrint(
+                                    //     "Select = ${sparepartsController.sparepartsList[index].isSelected.value}");
                                   },
                                   keyboardType:
                                       const TextInputType.numberWithOptions(),
@@ -435,7 +461,8 @@ class _AddMachineryState extends State<AddMachinery> {
                                           const EdgeInsets.symmetric(
                                               horizontal: 8.0, vertical: 13),
                                       hintText: sparepartsController
-                                              .sparepartsList[index]['qty'] ??
+                                                  .selectSparepartsList[index]
+                                              ['qty'] ??
                                           '',
                                       helperStyle: AppTextStyle.textStyleLight16
                                           .copyWith(
@@ -465,50 +492,6 @@ class _AddMachineryState extends State<AddMachinery> {
                                   height: 20,
                                 ),
                               ),
-                              // InkWell(
-                              //   borderRadius: BorderRadius.circular(10),
-                              //   onTap: () {
-                              //     Get.to(AddSpareparts(
-                              //       model: sparepartsController
-                              //           .sparepartsList[index],
-                              //     ));
-                              //   },
-                              //   child: Container(
-                              //       decoration: BoxDecoration(
-                              //           // color: const Color(0xffFFFFFF),
-                              //           borderRadius: BorderRadius.circular(4),
-                              //           border: Border.all(
-                              //               color: const Color(0xffD1D1D1))),
-                              //       padding: const EdgeInsets.symmetric(
-                              //           vertical: 12, horizontal: 12),
-                              //       child: SvgPicture.asset(
-                              //         'assets/svg/ic_edit.svg',
-                              //         height: 16,
-                              //         width: 16,
-                              //       )),
-                              // ),
-                              // InkWell(
-                              //   borderRadius: BorderRadius.circular(10),
-                              //   onTap: () {
-                              //     Get.to(AddSpareparts(
-                              //       model: sparepartsController
-                              //           .sparepartsList[index],
-                              //     ));
-                              //   },
-                              //   child: Container(
-                              //       decoration: BoxDecoration(
-                              //           // color: const Color(0xffFFFFFF),
-                              //           borderRadius: BorderRadius.circular(4),
-                              //           border: Border.all(
-                              //               color: const Color(0xffD1D1D1))),
-                              //       padding: const EdgeInsets.symmetric(
-                              //           vertical: 12, horizontal: 12),
-                              //       child: SvgPicture.asset(
-                              //         'assets/svg/delete.svg',
-                              //         height: 16,
-                              //         width: 16,
-                              //       )),
-                              // ),
                             ],
                           ),
                         );

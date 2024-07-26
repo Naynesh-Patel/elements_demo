@@ -27,6 +27,9 @@ class SparepartsController extends GetxController {
   FocusNode sparepartsNewQtyFocusNode = FocusNode();
 
   RxList<dynamic> sparepartsList = <dynamic>[].obs;
+  RxList<dynamic> selectSparepartsList = <dynamic>[].obs;
+
+  RxBool isSelect = true.obs;
 
   // TextEditingController newQtyTypeTextEditingController = TextEditingController();
 

@@ -32,6 +32,8 @@ class MachineryController extends GetxController {
   FocusNode sparepartsQtyFocusNode = FocusNode();
   FocusNode sparepartsNewQtyFocusNode = FocusNode();
 
+  RxBool isSelect = true.obs;
+
   Future<void> addMachinery() async {
     Map<String, dynamic> body = {
       "id": modelUser.value.id,
