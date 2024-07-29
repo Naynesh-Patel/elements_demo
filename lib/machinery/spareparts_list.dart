@@ -114,7 +114,7 @@ class _SparepartListState extends State<SparepartList> {
                 )),
       bottomNavigationBar: CustomButton(
           color: AppColor.buttonColor,
-          buttonText: "done",
+          buttonText: "Done",
           onTap: () {
             sparepartsController.selectSparepartsList.value =
                 sparepartsController.sparepartsList
