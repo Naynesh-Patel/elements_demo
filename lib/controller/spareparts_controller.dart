@@ -55,7 +55,7 @@ class SparepartsController extends GetxController {
     Map<String, dynamic> body = {
       "name": nameTextEditingController.text,
       "qty": qtyTypeTextEditingController.text,
-      // "user_id": id,
+      /* "user_id": modelUser.value.id,*/
     };
     try {
       String url = "${baseURL}sparepart/insert";

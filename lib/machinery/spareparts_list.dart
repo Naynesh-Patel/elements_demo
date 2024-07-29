@@ -32,7 +32,7 @@ class _SparepartListState extends State<SparepartList> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: CustomAppBar(
-        title: 'Sparepart',
+        title: 'Spareparts',
         onPressed: () {
           Get.back();
         },
@@ -116,10 +116,31 @@ class _SparepartListState extends State<SparepartList> {
           color: AppColor.buttonColor,
           buttonText: "Done",
           onTap: () {
-            sparepartsController.selectSparepartsList.value =
-                sparepartsController.sparepartsList
-                    .where((item) => item['isSelect'] == true)
-                    .toList();
+            // List<> spareparts = [
+            //   {
+            //     'id': '',
+            //     'name': '',
+            //     'name': '',
+            //
+            //   }
+            // ];
+            sparepartsController.selectSparepartsList.clear();
+            for (int i = 0;
+                i < sparepartsController.sparepartsList.length;
+                i++) {
+              if (sparepartsController.sparepartsList[i]['isSelect'] == true) {
+                Map<String, dynamic> d = {
+                  'id': sparepartsController.sparepartsList[i]['id'],
+                  'name': sparepartsController.sparepartsList[i]['name'],
+                  'controller': TextEditingController(),
+                };
+                sparepartsController.selectSparepartsList.add(d);
+              }
+            }
+            // sparepartsController.selectSparepartsList.value =
+            //     sparepartsController.sparepartsList
+            //         .where((item) => item['isSelect'] == true)
+            //         .toList();
             Get.back();
           },
           isLoading: false.obs),

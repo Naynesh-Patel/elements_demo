@@ -3,14 +3,13 @@ import 'dart:developer';
 
 import 'package:elements/constant/methods.dart';
 import 'package:elements/constant/urls.dart';
-import 'package:elements/constant/vars.dart';
-import 'package:elements/model/model_machinery.dart';
+import 'package:elements/controller/spareparts_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 class MachineryController extends GetxController {
-  RxList<ModelMachinery> machineryList = <ModelMachinery>[].obs;
+  // RxList<ModelMachinery> machineryList = <ModelMachinery>[].obs;
 
   RxList<dynamic> addMachineryList = <dynamic>[].obs;
   TextEditingController qtyTextEditingController = TextEditingController();
@@ -22,6 +21,8 @@ class MachineryController extends GetxController {
 
   TextEditingController sparepartsTextEditingController =
       TextEditingController();
+
+  RxList<dynamic> selectSparepartsList = <dynamic>[].obs;
 
   RxBool isMachineryLoading = false.obs;
   RxBool isGetMachineryLoading = false.obs;
@@ -35,14 +36,27 @@ class MachineryController extends GetxController {
   RxBool isSelect = true.obs;
 
   Future<void> addMachinery() async {
+    SparepartsController sparepartsController = Get.find();
+    List<dynamic> spareparts = [];
+    for (int i = 0; i < sparepartsController.selectSparepartsList.length; i++) {
+      Map<String, dynamic> d = {
+        'id': sparepartsController.selectSparepartsList[i]['id'],
+        'name': sparepartsController.selectSparepartsList[i]['name'],
+        'qty': sparepartsController.selectSparepartsList[i]['controller'].text,
+      };
+      spareparts.add(d);
+    }
+
     Map<String, dynamic> body = {
-      "id": modelUser.value.id,
+      // "id": modelUser.value.id,
       "machine_name": machineNameTextEditingController.text,
       "qty": qtyTextEditingController.text,
       "machine_type": machinetypeEditingController.text,
       "manufacture_duration": manufactureDurationTextEditingController.text,
-      "spareparts": sparepartsTextEditingController.text,
+      // "spareparts": spareparts.toString(),
+      "spareparts": jsonEncode(spareparts),
     };
+
     try {
       String url = "${baseURL}machine/add";
       log("API => $url");
@@ -63,7 +77,7 @@ class MachineryController extends GetxController {
     }
   }
 
-  Future getMachinery() async {
+  Future<void> getMachinery() async {
     try {
       String url = "${baseURL}machine/getAll";
       log("API => $url");
@@ -85,13 +99,24 @@ class MachineryController extends GetxController {
   }
 
   Future<void> updateMachinery(id) async {
+    SparepartsController sparepartsController = Get.find();
+    List<dynamic> spareparts = [];
+    for (int i = 0; i < sparepartsController.selectSparepartsList.length; i++) {
+      Map<String, dynamic> d = {
+        'id': sparepartsController.selectSparepartsList[i]['id'],
+        'name': sparepartsController.selectSparepartsList[i]['name'],
+        'qty': sparepartsController.selectSparepartsList[i]['controller'].text,
+      };
+      spareparts.add(d);
+    }
+
     Map<String, dynamic> body = {
       "id": id,
       "machine_name": machineNameTextEditingController.text,
       "qty": qtyTextEditingController.text,
       "machine_type": machinetypeEditingController.text,
       "manufacture_duration": manufactureDurationTextEditingController.text,
-      "spareparts": sparepartsTextEditingController.text,
+      "spareparts": jsonEncode(spareparts),
     };
     try {
       String url = "${baseURL}machine/update";

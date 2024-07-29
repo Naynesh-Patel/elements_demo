@@ -82,7 +82,7 @@ class OrderController extends GetxController {
   //   }
   // }
 
-  Future<void> addOrder({companyId, machineId, orderId}) async {
+  Future<void> addOrder({companyId, machineId, managerId}) async {
     Map<String, dynamic> body = {
       "user_id": modelUser.value.id,
       "customer_company_id": companyId.toString(),
@@ -90,7 +90,7 @@ class OrderController extends GetxController {
       "delivery_date": date.text,
       "total_payment": totalPaymentEditingController.text,
       "advance_payment": advancePaymentEditingController.text,
-      "assign_order_id": orderId.toString(),
+      "assign_order_id": managerId.toString(),
     };
     try {
       String url = "${baseURL}order/create";
@@ -138,7 +138,7 @@ class OrderController extends GetxController {
     }
   }
 
-  Future<void> updateOrder(model, {companyId, machineId, orderId}) async {
+  Future<void> updateOrder(model, {companyId, machineId, managerId}) async {
     Map<String, dynamic> body = {
       "id": modelUser.value.id,
       "user_id": modelUser.value.id,
@@ -147,7 +147,7 @@ class OrderController extends GetxController {
       "delivery_date": date.text,
       "total_payment": totalPaymentEditingController.text,
       "advance_payment": advancePaymentEditingController.text,
-      "assign_order_id": orderId.toString(),
+      "assign_order_id": managerId.toString(),
     };
     try {
       String url = "${baseURL}order/update";

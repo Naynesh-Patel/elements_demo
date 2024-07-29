@@ -42,34 +42,68 @@ class _SelectMachineState extends State<SelectMachine> {
               : ListView.builder(
                   shrinkWrap: true,
                   itemCount: machineryController.addMachineryList.length,
-                  physics: const BouncingScrollPhysics(),
+                  // physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
-                    return InkWell(
-                      onTap: () {
-                        customerController
-                                .machineNameTextEditingController.text =
-                            machineryController.addMachineryList[index]
-                                ['machine_name'];
-                        Get.back();
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16.0, vertical: 16.0),
-                        decoration: const BoxDecoration(
-                            border: Border(
-                                bottom:
-                                    BorderSide(color: AppColor.borderColor))),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              machineryController.addMachineryList[index]
-                                  ['machine_name'],
-                              style: AppTextStyle.textStyleRegular16,
+                    return Container(
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 15, vertical: 15),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: InkWell(
+                              onTap: () {
+                                customerController
+                                        .machineNameTextEditingController.text =
+                                    machineryController.addMachineryList[index]
+                                        ['machine_name'];
+                                Get.back();
+                              },
+                              child: Text(
+                                machineryController.addMachineryList[index]
+                                    ['machine_name'],
+                                style: AppTextStyle.textStyleRegular16,
+                              ),
                             ),
-                          ],
-                        ),
+                          ),
+                          InkWell(
+                            borderRadius: BorderRadius.circular(6.0),
+                            onTap: () {
+                              if (machineryController.addMachineryList[index]
+                                      ['isSelect'] ==
+                                  null) {
+                                machineryController.addMachineryList[index]
+                                    ['isSelect'] = true;
+                              } else if (machineryController
+                                      .addMachineryList[index]['isSelect'] ==
+                                  true) {
+                                machineryController.addMachineryList[index]
+                                    ['isSelect'] = false;
+                              } else {
+                                machineryController.addMachineryList[index]
+                                    ['isSelect'] = true;
+                              }
+                              setState(() {});
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 4.0, vertical: 4.0),
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: AppColor.dropDownHintColor),
+                                  borderRadius: BorderRadius.circular(6.0)),
+                              child: Obx(() => Icon(
+                                    Icons.check_rounded,
+                                    size: 14,
+                                    color: machineryController
+                                                    .addMachineryList[index]
+                                                ['isSelect'] ??
+                                            false
+                                        ? AppColor.blackColor
+                                        : Colors.transparent,
+                                  )),
+                            ),
+                          ),
+                        ],
                       ),
                     );
                   },

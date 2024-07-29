@@ -8,7 +8,7 @@ import 'package:elements/controller/order_controller.dart';
 import 'package:elements/controller/user_controller.dart';
 import 'package:elements/home/select_customer_company.dart';
 import 'package:elements/home/select_machine.dart';
-import 'package:elements/home/select_order.dart';
+import 'package:elements/home/select_manager.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:elements/widget/button/custom_button.dart';
 import 'package:elements/widget/custom_text_field.dart';
@@ -34,6 +34,7 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
   MachineryController machineryController = Get.find();
   UserController userController = Get.find();
 
+  String managerId = "";
   @override
   void initState() {
     if (widget.model != null) {
@@ -192,8 +193,13 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                       ),
                       verticalSpacing(),
                       CustomTextField(
-                          onTap: () {
-                            Get.to(const SelectOrder());
+                          onTap: () async {
+                            var result = await Get.to(const SelectManager());
+                            if (result != null) {
+                              userController.usersRoleTextEditingController
+                                  .text = result['name'];
+                              managerId = result['id'];
+                            }
                           },
                           hintText: "Select Manager Role",
                           labelText: "Assigns Order",
@@ -227,14 +233,14 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                           widget.model['id'],
                           machineId: orderController.orderList[0]
                               ['machine_ids'],
-                          orderId: orderController.orderList[0]
+                          managerId: orderController.orderList[0]
                               ['assign_order_id'],
                           companyId: orderController.orderList[0]
                               ['customer_company_id'],
                         );
                       } else {
                         orderController.addOrder(
-                          orderId: orderController.orderList[0]
+                          managerId: orderController.orderList[0]
                               ['assign_order_id'],
                           companyId: orderController.orderList[0]
                               ['customer_company_id'],

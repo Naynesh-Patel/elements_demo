@@ -8,14 +8,14 @@ import 'package:elements/widget/empty_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SelectOrder extends StatefulWidget {
-  const SelectOrder({super.key});
+class SelectManager extends StatefulWidget {
+  const SelectManager({super.key});
 
   @override
-  State<SelectOrder> createState() => _SelectOrderState();
+  State<SelectManager> createState() => _SelectManagerState();
 }
 
-class _SelectOrderState extends State<SelectOrder> {
+class _SelectManagerState extends State<SelectManager> {
   MachineryController machineryController = Get.find();
   CustomerController customerController = Get.find();
 
@@ -33,7 +33,7 @@ class _SelectOrderState extends State<SelectOrder> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: CustomAppBar(
-        title: 'Select Order',
+        title: 'Select Manager',
         onPressed: () {
           Get.back();
         },
@@ -49,9 +49,7 @@ class _SelectOrderState extends State<SelectOrder> {
                   itemBuilder: (context, index) {
                     return InkWell(
                       onTap: () {
-                        userController.usersRoleTextEditingController.text =
-                            userController.userList[index]['user_type'] ?? "";
-                        Get.back();
+                        Get.back(result: userController.userList[index]);
                       },
                       child: Container(
                         padding: const EdgeInsets.symmetric(
@@ -64,7 +62,7 @@ class _SelectOrderState extends State<SelectOrder> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              userController.userList[index]['user_type'] ?? "",
+                              userController.userList[index]['name'] ?? "",
                             ),
                           ],
                         ),
