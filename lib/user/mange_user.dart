@@ -33,7 +33,7 @@ class _MangeUserState extends State<MangeUser> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: CustomAppBar(
-        title: 'Mange User',
+        title: 'Manage User',
         onPressed: () {
           Get.back();
         },
