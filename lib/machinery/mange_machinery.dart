@@ -46,10 +46,10 @@ class _MangeMachineryState extends State<MangeMachinery> {
             : controller.addMachineryList.isEmpty
                 ? const EmptyView()
                 : SingleChildScrollView(
-                  physics: const BouncingScrollPhysics(),
-                  child: Column(
-                    children: [
-                      ListView.separated(
+                    physics: const BouncingScrollPhysics(),
+                    child: Column(
+                      children: [
+                        ListView.separated(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount: controller.addMachineryList.length,
@@ -60,7 +60,8 @@ class _MangeMachineryState extends State<MangeMachinery> {
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(4),
                                   border: Border.all(
-                                      color: const Color(0xffE6E6E6), width: 1)),
+                                      color: const Color(0xffE6E6E6),
+                                      width: 1)),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -76,11 +77,6 @@ class _MangeMachineryState extends State<MangeMachinery> {
                                       controller.addMachineryList[index]
                                               ['machine_type'] ??
                                           ''),
-                                  verticalSpacing(),
-                                  _keyValue(
-                                    "Qty",
-                                    controller.addMachineryList[index]['qty'] ?? '',
-                                  ),
                                   verticalSpacing(),
                                   _keyValue(
                                     "Manufacture Duration",
@@ -109,8 +105,8 @@ class _MangeMachineryState extends State<MangeMachinery> {
                                           title: "Edit",
                                           onTap: () {
                                             Get.to(AddMachinery(
-                                              model:
-                                                  controller.addMachineryList[index],
+                                              model: controller
+                                                  .addMachineryList[index],
                                             ));
                                           },
                                           textColor: const Color(0xff555555)),
@@ -131,8 +127,8 @@ class _MangeMachineryState extends State<MangeMachinery> {
                                                 setState(() {
                                                   controller.deleteMachinery(
                                                       controller
-                                                              .addMachineryList[index]
-                                                          ['id']);
+                                                              .addMachineryList[
+                                                          index]['id']);
                                                   controller.addMachineryList
                                                       .removeAt(index);
                                                   Get.back();
@@ -153,10 +149,12 @@ class _MangeMachineryState extends State<MangeMachinery> {
                             );
                           },
                         ),
-                      SizedBox(height: Get.height*0.120,),
-                    ],
-                  ),
-                )),
+                        SizedBox(
+                          height: Get.height * 0.120,
+                        ),
+                      ],
+                    ),
+                  )),
       ),
       floatingActionButton: FloatingActionButton(
           elevation: 10.0,

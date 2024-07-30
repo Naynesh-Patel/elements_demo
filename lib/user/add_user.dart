@@ -28,6 +28,8 @@ class _AddUserState extends State<AddUser> {
   bool value = false;
   int index = 0;
 
+  String? selectedValue;
+
   UserController controller = Get.find();
   CompanyController companyController = Get.find();
 
@@ -101,25 +103,29 @@ class _AddUserState extends State<AddUser> {
                         alignment: Alignment.bottomRight,
                         children: [
                           widget.model != null
-                              ? controller.imgFile == null ? controller.base64Image == "" ?Image.asset(
-                        'assets/images/user_profile.png',color: Colors.black54,
-                        height: 80,
-                        width: 80,
-                      ) :
-                                  SizedBox(
-                                      height: 80,
-                                      width: 80,
-                                      child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(50.0),
-                                        child: Image.memory(
-                                          base64Decode(controller.base64Image),
-                                          fit: BoxFit.cover,
+                              ? controller.imgFile == null
+                                  ? controller.base64Image == ""
+                                      ? Image.asset(
+                                          'assets/images/user_profile.png',
+                                          color: Colors.black54,
                                           height: 80,
                                           width: 80,
-                                        ),
-                                      ),
-                                    )
+                                        )
+                                      : SizedBox(
+                                          height: 80,
+                                          width: 80,
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(50.0),
+                                            child: Image.memory(
+                                              base64Decode(
+                                                  controller.base64Image),
+                                              fit: BoxFit.cover,
+                                              height: 80,
+                                              width: 80,
+                                            ),
+                                          ),
+                                        )
                                   : SizedBox(
                                       height: 80,
                                       width: 80,
@@ -165,6 +171,7 @@ class _AddUserState extends State<AddUser> {
                                 child: const Icon(
                                   Icons.add,
                                   color: Colors.white,
+                                  size: 18,
                                 )),
                           )
                         ],
@@ -173,14 +180,19 @@ class _AddUserState extends State<AddUser> {
                     verticalSpacing(),
                     WidgetDropDownFromField(
                       hintText: "Select User Role",
+                      // hintText: controller.usersRoleTextEditingController.text,
                       labelText: "User Role",
-                      itemList: const ["Salesman", "Worker", "Manger"],
+                      itemList: const ["Salesman", "Worker", "Manager"],
+                      value: controller
+                          .usersRoleTextEditingController.text.capitalizeFirst!,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       onTap: (value) {
                         controller.usersRoleTextEditingController.text = value;
+                        selectedValue = value;
                         _formKey.currentState?.validate();
                         debugPrint("Select => $value");
                         _formKey.currentState?.validate();
+                        setState(() {});
                       },
                     ),
                     verticalSpacing(),
@@ -266,6 +278,13 @@ class _AddUserState extends State<AddUser> {
                         hintText: "Upload Fingerprint",
                         labelText: "Upload Fingerprint",
                         autoValidateMode: AutovalidateMode.onUserInteraction,
+                        // validator: (value) {
+                        //   if (value!.isEmpty) {
+                        //     return "Please Upload Fingerprint";
+                        //   } else {
+                        //     return null;
+                        //   }
+                        // },
                         textCapitalization: TextCapitalization.words,
                         enable: false,
                       ),

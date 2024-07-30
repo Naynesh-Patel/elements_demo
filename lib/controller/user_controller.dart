@@ -4,7 +4,6 @@ import 'dart:io';
 
 import 'package:elements/constant/methods.dart';
 import 'package:elements/constant/urls.dart';
-import 'package:elements/constant/vars.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
@@ -22,16 +21,6 @@ class UserController extends GetxController {
       TextEditingController();
 
   TextEditingController fingerprintEditingController = TextEditingController();
-  // TextEditingController allowMachineryEditingController =
-  //     TextEditingController();
-  // TextEditingController allowSparepartsTextEditingController =
-  //     TextEditingController();
-  // TextEditingController allowBillTextEditingController =
-  //     TextEditingController();
-  // TextEditingController allowUserTextEditingController =
-  //     TextEditingController();
-  // TextEditingController allowCustomerTextEditingController =
-  //     TextEditingController();
 
   RxBool isUserLoading = false.obs;
   RxBool isUpdateLoading = false.obs;
@@ -71,7 +60,7 @@ class UserController extends GetxController {
 
   Future<void> addUser() async {
     Map<String, dynamic> body = {
-      "compny_id": modelUser.value.id,
+      // "compny_id": modelUser.value.companyId,
       "name": userNameTextEditingController.text,
       "contact_no": contactNoTextEditingController.text,
       "address": addressTextEditingController.text,
@@ -104,7 +93,7 @@ class UserController extends GetxController {
     }
   }
 
-  Future getUser() async {
+  Future<void> getUser() async {
     try {
       String url = "${baseURL}user/getAll";
       log("API => $url");
@@ -128,36 +117,37 @@ class UserController extends GetxController {
   Future<void> updateUser(id) async {
     Map<String, dynamic> body = {
       "id": id,
-      "compny_id": modelUser.value.id,
+      // "compny_id": modelUser.value.companyId,
       "name": userNameTextEditingController.text,
       "contact_no": contactNoTextEditingController.text,
       "address": addressTextEditingController.text,
       "user_type": usersRoleTextEditingController.text,
       "fingerprint": fingerprintEditingController.text,
+      "photo": base64Image,
     };
     try {
       String url = "${baseURL}user/update";
       log("API => $url");
-      isUserLoading.value = true;
+      isUpdateLoading.value = true;
       var response = await http.post(Uri.parse(url), body: body);
       if (response.statusCode == 200) {
         var responseData = jsonDecode(response.body);
         if (responseData['status'] == 1) {
-          Get.back();
           getUser();
-          isUserLoading.value = false;
+          Get.back();
+          isUpdateLoading.value = false;
         } else {
           showToast(responseData['message']);
           debugPrint("Error Message ${responseData['message']}");
-          isUserLoading.value = false;
+          isUpdateLoading.value = false;
         }
       } else {
         debugPrint("statusCode${response.statusCode}");
-        isUserLoading.value = false;
+        isUpdateLoading.value = false;
       }
     } catch (e) {
       debugPrint("Error${e.toString()}");
-      isUserLoading.value = false;
+      isUpdateLoading.value = false;
     }
   }
 

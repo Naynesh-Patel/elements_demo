@@ -11,11 +11,11 @@ String modelUserToJson(ModelUser data) => json.encode(data.toJson());
 class ModelUser {
   String? id;
   String? name;
-  dynamic companyId;
+  String? companyId;
   String? contactNo;
   String? password;
   String? userType;
-  dynamic photo;
+  String? photo;
   String? address;
   String? fingerprint;
   String? isAllowMachinery;

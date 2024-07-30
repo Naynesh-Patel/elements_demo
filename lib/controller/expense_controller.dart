@@ -1,13 +1,12 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:elements/constant/methods.dart';
+import 'package:elements/constant/urls.dart';
 import 'package:elements/constant/vars.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-
-import '../constant/methods.dart';
-import '../constant/urls.dart';
 
 class ExpenseController extends GetxController {
   TextEditingController nameTextEditingController = TextEditingController();
@@ -75,7 +74,7 @@ class ExpenseController extends GetxController {
 
   Future<void> updateExpense(id) async {
     Map<String, dynamic> body = {
-      'id':id,
+      'id': id,
       "name": nameTextEditingController.text,
       "expense_type": expenseTypeTextEditingController.text,
       "price": priceTextEditingController.text,
@@ -108,7 +107,8 @@ class ExpenseController extends GetxController {
       log("API => $url");
 
       isDeleteExpenseLoading.value = true;
-      var response = await http.post(Uri.parse(url), body: {"id": expenseList[index]['id']});
+      var response = await http
+          .post(Uri.parse(url), body: {"id": expenseList[index]['id']});
       if (response.statusCode == 200) {
         var responseData = jsonDecode(response.body);
         isDeleteExpenseLoading.value = false;

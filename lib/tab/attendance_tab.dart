@@ -425,13 +425,13 @@ class _AttendanceTabState extends State<AttendanceTab> {
       child: Row(
         children: [
           userType.value == "admin"
-              ? const SizedBox()
-              : Expanded(
+              ? Expanded(
                   child: Text(
                   "Name",
                   style: AppTextStyle.textStyleRegular14
                       .copyWith(color: AppColor.selectColor),
-                )),
+                ))
+              : const SizedBox(),
           Expanded(
             child: InkWell(
               onTap: () {
@@ -481,11 +481,17 @@ class _AttendanceTabState extends State<AttendanceTab> {
           Row(
             children: [
               userType.value == "admin"
-                  ? const SizedBox()
-                  : Expanded(
-                      child: Text("$date",
-                          style: AppTextStyle.textStyleLight12
-                              .copyWith(color: const Color(0xff555555)))),
+                  ? Expanded(
+                      child: Text(
+                      name,
+                      style: AppTextStyle.textStyleRegular14
+                          .copyWith(color: AppColor.blackColor),
+                    ))
+                  : const SizedBox(),
+              Expanded(
+                  child: Text("$date",
+                      style: AppTextStyle.textStyleLight12
+                          .copyWith(color: const Color(0xff555555)))),
               if (isWeeklyOff) ...[
                 Expanded(
                   flex: 2,

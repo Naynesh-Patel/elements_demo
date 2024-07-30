@@ -57,15 +57,14 @@ class _AddMachineryState extends State<AddMachinery> {
     if (widget.model != null) {
       controller.machineNameTextEditingController.text =
           widget.model['machine_name'] ?? '';
-      controller.qtyTextEditingController.text = widget.model['qty'] ?? '';
+      // controller.qtyTextEditingController.text = widget.model['qty'] ?? '';
       controller.machinetypeEditingController.text =
           widget.model['machine_type'] ?? '';
       controller.manufactureDurationTextEditingController.text =
           widget.model['manufacture_duration'] ?? '';
       controller.sparepartsTextEditingController.text =
           widget.model['name'] ?? '';
-      List<dynamic> jsonList =
-          jsonDecode(json.decode(widget.model['spareparts']));
+      List<dynamic> jsonList = jsonDecode(widget.model['spareparts']);
       for (int i = 0; i < jsonList.length; i++) {
         sparepartsController.selectSparepartsList.add({
           'id': jsonList[i]['id'],
@@ -147,15 +146,15 @@ class _AddMachineryState extends State<AddMachinery> {
           const SizedBox(
             height: 16,
           ),
-          CustomTextField(
-            textEditingController: controller.qtyTextEditingController,
-            hintText: "Qty",
-            labelText: "Qty",
-            enable: false,
-          ),
-          const SizedBox(
-            height: 16,
-          ),
+          // CustomTextField(
+          //   textEditingController: controller.qtyTextEditingController,
+          //   hintText: "Qty",
+          //   labelText: "Qty",
+          //   enable: false,
+          // ),
+          // const SizedBox(
+          //   height: 16,
+          // ),
           CustomTextField(
             textEditingController:
                 controller.manufactureDurationTextEditingController,
@@ -315,21 +314,21 @@ class _AddMachineryState extends State<AddMachinery> {
               },
             ),
             verticalSpacing(),
-            CustomTextField(
-              textEditingController: controller.qtyTextEditingController,
-              textInputType: TextInputType.number,
-              hintText: "Qty",
-              labelText: "Qty",
-              autoValidateMode: AutovalidateMode.onUserInteraction,
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return "Please Enter Qty";
-                } else {
-                  return null;
-                }
-              },
-            ),
-            verticalSpacing(),
+            // CustomTextField(
+            //   textEditingController: controller.qtyTextEditingController,
+            //   textInputType: TextInputType.number,
+            //   hintText: "Qty",
+            //   labelText: "Qty",
+            //   autoValidateMode: AutovalidateMode.onUserInteraction,
+            //   validator: (value) {
+            //     if (value!.isEmpty) {
+            //       return "Please Enter Qty";
+            //     } else {
+            //       return null;
+            //     }
+            //   },
+            // ),
+            // verticalSpacing(),
             CustomTextField(
               textEditingController:
                   controller.manufactureDurationTextEditingController,

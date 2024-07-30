@@ -14,16 +14,17 @@ class WidgetDropDownFromField extends StatefulWidget {
   final ValueSetter<dynamic> onTap;
   final AutovalidateMode? autovalidateMode;
 
-  const WidgetDropDownFromField(
-      {super.key,
-      this.validator,
-      required this.hintText,
-      this.errorMsg,
-      this.autovalidateMode,
-      this.value = "",
-      required this.onTap,
-      required this.itemList,
-      required this.labelText});
+  const WidgetDropDownFromField({
+    super.key,
+    this.validator,
+    required this.hintText,
+    this.errorMsg,
+    this.autovalidateMode,
+    this.value = "",
+    required this.onTap,
+    required this.itemList,
+    required this.labelText,
+  });
 
   @override
   State<WidgetDropDownFromField> createState() =>
@@ -70,6 +71,7 @@ class _WidgetDropDownFromFieldState extends State<WidgetDropDownFromField> {
                       },
                       autovalidateMode: widget.autovalidateMode,
                       isExpanded: true,
+
                       hint: widget.value.isEmpty
                           ? Text(
                               widget.hintText,
@@ -81,7 +83,7 @@ class _WidgetDropDownFromFieldState extends State<WidgetDropDownFromField> {
                               style: AppTextStyle.textStyleRegular16
                                   .copyWith(color: AppColor.dropDownHintColor),
                             ),
-                      value: widget.value.isEmpty ?  null : widget.value,
+                      value: widget.value.isEmpty ? null : widget.value,
                       decoration: const InputDecoration(
                         enabledBorder: OutlineInputBorder(
                             // borderSide: BorderSide(color: AppColor.borderColor),
