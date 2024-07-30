@@ -26,7 +26,7 @@ class _DashBoardState extends State<DashBoard> {
     const HomeTab(),
     const SparepartsTab(),
     const AttendanceTab(),
-    const ExpensetTab(),
+    const ExpenseTab(),
     const SettingTab(),
   ];
 
