@@ -46,7 +46,7 @@ class _MangeSparepartsState extends State<MangeSpareparts> {
             ? const CustomLoader()
             : controller.sparepartsList.isEmpty
                 ? const EmptyView()
-                : ListView.separated(
+                : ListView.builder(
                     itemCount: controller.sparepartsList.length,
                     itemBuilder: (context, index) {
                       return Column(
@@ -165,6 +165,9 @@ class _MangeSparepartsState extends State<MangeSpareparts> {
                                         ),
                                       ),
                                     ],
+                                  ),
+                                  const SizedBox(
+                                    height: 40,
                                   )
                                 ],
                               ),
@@ -172,11 +175,7 @@ class _MangeSparepartsState extends State<MangeSpareparts> {
                           ),
                         ],
                       );
-                    }, separatorBuilder: (BuildContext context, int index) {
-                      return const SizedBox(
-                        height: 20,
-                      );
-        },
+                    },
                   )),
       ),
       floatingActionButton: FloatingActionButton(
