@@ -92,7 +92,7 @@ class _SelectUserState extends State<SelectUser> {
                             children: [
                               SizedBox(
                                 height: 50,
-                                width: 45,
+                                width: 50,
                                 child: userController.userList[index]
                                             ['photo'] ==
                                         ""
@@ -116,6 +116,8 @@ class _SelectUserState extends State<SelectUser> {
                               Expanded(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
                                         userController.userList[index]
