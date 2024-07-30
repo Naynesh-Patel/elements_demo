@@ -101,8 +101,12 @@ class _AddUserState extends State<AddUser> {
                         alignment: Alignment.bottomRight,
                         children: [
                           widget.model != null
-                              ? controller.imgFile == null
-                                  ? SizedBox(
+                              ? controller.imgFile == null ? controller.base64Image == "" ?Image.asset(
+                        'assets/images/user_profile.png',color: Colors.black54,
+                        height: 80,
+                        width: 80,
+                      ) :
+                                  SizedBox(
                                       height: 80,
                                       width: 80,
                                       child: ClipRRect(

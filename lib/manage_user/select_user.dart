@@ -88,13 +88,15 @@ class _SelectUserState extends State<SelectUser> {
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         child: IntrinsicHeight(
                           child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SizedBox(
                                 height: 50,
-                                width: 45,
+                                width: 50,
                                 child: userController.userList[index]
-                                            ['photo'] ==
+                                            ['photo'] == null || userController.userList[index]
+                                ['photo'] ==
                                         ""
                                     ? Image.asset(
                                         'assets/images/user_profile.png',
@@ -111,25 +113,17 @@ class _SelectUserState extends State<SelectUser> {
                                         )),
                               ),
                               const SizedBox(
-                                width: 8.0,
+                                width: 12.0,
                               ),
                               Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                        userController.userList[index]
-                                                ['name'] ??
-                                            ''.toString(),
-                                        style: AppTextStyle.textStyleRegular16
-                                            .copyWith(
-                                          color: const Color(0xff272727),
-                                        )),
-                                    const SizedBox(
-                                      height: 2.0,
-                                    ),
-                                  ],
-                                ),
+                                child: Text(
+                                    userController.userList[index]
+                                    ['name'] ??
+                                        ''.toString(),
+                                    style: AppTextStyle.textStyleRegular16
+                                        .copyWith(
+                                      color: const Color(0xff272727),
+                                    )),
                               ),
                             ],
                           ),
