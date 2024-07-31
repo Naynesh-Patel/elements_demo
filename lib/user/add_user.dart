@@ -199,13 +199,15 @@ class _AddUserState extends State<AddUser> {
                     CustomTextField(
                         // focusNode: FocusNode(),
                         // readOnly: true,
+
                         onTap: () {
                           Get.to(const SelectCompany());
                         },
                         hintText: "Select Company",
                         textEditingController: companyController
                             .selectCompanyTextEditingController,
-                        autoValidateMode: AutovalidateMode.onUserInteraction,
+
+                        // autoValidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
                           if (value!.isEmpty) {
                             return "Please Enter Company";

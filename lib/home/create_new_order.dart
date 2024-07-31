@@ -40,16 +40,18 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
     if (widget.model != null) {
       orderController.totalPaymentEditingController.text =
           widget.model['total_payment'] ?? '';
+      userController.usersRoleTextEditingController.text =
+          widget.model['name'] ?? '';
       orderController.advancePaymentEditingController.text =
           widget.model['advance_payment'] ?? '';
       customerController.companyTextEditingController.text =
           widget.model['customer_company_id'] ?? '';
       customerController.machineNameTextEditingController.text =
           widget.model['machine_ids'] ?? '';
-      orderController.assignOrderIdEditingController.text =
-          widget.model['assign_order_id'] ?? '';
       userController.usersRoleTextEditingController.text =
-          widget.model['user_role'] ?? '';
+          widget.model['assign_order_id'] ?? '';
+      // userController.usersRoleTextEditingController.text =
+      //     widget.model['user_role'] ?? '';
       orderController.formatDate.text = widget.model['delivery_date'] ?? '';
     } else {
       orderController.customerCompanyIdNoTextEditingController.clear();
