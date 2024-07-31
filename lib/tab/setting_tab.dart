@@ -92,7 +92,7 @@ class _SettingTabState extends State<SettingTab> {
                   Get.to(const MangeCustomer());
                 },
               )
-            : SizedBox(),
+            : const SizedBox(),
         modelUser.value.isAllowBill == "1"
             ? _customTile(
                 title: "Bill History",
@@ -103,7 +103,7 @@ class _SettingTabState extends State<SettingTab> {
                   Get.to(const BillHistory());
                 },
               )
-            : SizedBox(),
+            : const SizedBox(),
         _customTile(
           title: "Logout",
           isSvg: false,

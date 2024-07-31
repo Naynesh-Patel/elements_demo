@@ -46,10 +46,10 @@ class _MangeUserState extends State<MangeUser> {
                 ? const EmptyView()
                 : SingleChildScrollView(
                     physics: const BouncingScrollPhysics(),
-                  child: Column(
-                    children: [
-                      ListView.builder(
-                        shrinkWrap: true,
+                    child: Column(
+                      children: [
+                        ListView.builder(
+                          shrinkWrap: true,
                           itemCount: controller.userList.length,
                           physics: const NeverScrollableScrollPhysics(),
                           itemBuilder: (context, index) {
@@ -63,16 +63,20 @@ class _MangeUserState extends State<MangeUser> {
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(4),
                                       border: Border.all(
-                                          color: const Color(0xffE6E6E6), width: 1)),
+                                          color: const Color(0xffE6E6E6),
+                                          width: 1)),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           _keyValue(
                                               "Name",
-                                              controller.userList[index]['name'] ??
+                                              controller.userList[index]
+                                                      ['name'] ??
                                                   ''),
                                           const SizedBox(
                                             height: 5,
@@ -88,7 +92,8 @@ class _MangeUserState extends State<MangeUser> {
                                         height: 10,
                                       ),
                                       Row(
-                                        mainAxisAlignment: MainAxisAlignment.end,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
                                         children: [
                                           SmallButton(
                                             title: " View ",
@@ -96,7 +101,8 @@ class _MangeUserState extends State<MangeUser> {
                                             onTap: () {
                                               Get.to(AddUser(
                                                   isView: true,
-                                                  model: controller.userList[index]));
+                                                  model: controller
+                                                      .userList[index]));
                                             },
                                           ),
                                           const SizedBox(
@@ -106,17 +112,20 @@ class _MangeUserState extends State<MangeUser> {
                                               title: "Edit",
                                               onTap: () {
                                                 Get.to(AddUser(
-                                                  model: controller.userList[index],
+                                                  model: controller
+                                                      .userList[index],
                                                 ));
                                               },
-                                              textColor: const Color(0xff555555)),
+                                              textColor:
+                                                  const Color(0xff555555)),
                                           const SizedBox(
                                             width: 10,
                                           ),
                                           SmallButton(
                                               title: "Delete",
                                               onTap: () {
-                                                CustomDialogBox.showDeleteDialog(
+                                                CustomDialogBox
+                                                    .showDeleteDialog(
                                                   context: context,
                                                   bodyText:
                                                       "Do you really want to cancel these records? This process cannot be undone.",
@@ -125,8 +134,9 @@ class _MangeUserState extends State<MangeUser> {
                                                   },
                                                   onDeleteTap: () {
                                                     setState(() {
-                                                      controller.deleteUser(controller
-                                                          .userList[index]['id']);
+                                                      controller.deleteUser(
+                                                          controller.userList[
+                                                              index]['id']);
                                                       controller.userList
                                                           .removeAt(index);
                                                       Get.back();
@@ -134,7 +144,8 @@ class _MangeUserState extends State<MangeUser> {
                                                   },
                                                 );
                                               },
-                                              textColor: const Color(0xffB50A0A)),
+                                              textColor:
+                                                  const Color(0xffB50A0A)),
                                         ],
                                       )
                                       // Row(
@@ -205,10 +216,12 @@ class _MangeUserState extends State<MangeUser> {
                             );
                           },
                         ),
-                      SizedBox(height: Get.height*0.120,),
-                    ],
-                  ),
-                )),
+                        SizedBox(
+                          height: Get.height * 0.120,
+                        ),
+                      ],
+                    ),
+                  )),
       ),
       floatingActionButton: FloatingActionButton(
           elevation: 10.0,

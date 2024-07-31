@@ -48,9 +48,10 @@ class _AddUserState extends State<AddUser> {
           widget.model['contact_no'] ?? '';
       controller.fingerprintEditingController.text =
           widget.model['fingerprint'] ?? '';
+
+      controller.base64Image = widget.model['photo'] ?? '';
       companyController.selectCompanyTextEditingController.text =
           widget.model['name'] ?? '';
-      controller.base64Image = widget.model['photo'] ?? '';
     } else {
       controller.usersRoleTextEditingController.clear();
       controller.userNameTextEditingController.clear();
@@ -199,14 +200,12 @@ class _AddUserState extends State<AddUser> {
                     CustomTextField(
                         // focusNode: FocusNode(),
                         // readOnly: true,
-
                         onTap: () {
                           Get.to(const SelectCompany());
                         },
                         hintText: "Select Company",
                         textEditingController: companyController
                             .selectCompanyTextEditingController,
-
                         // autoValidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
                           if (value!.isEmpty) {

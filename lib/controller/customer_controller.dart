@@ -114,6 +114,7 @@ class CustomerController extends GetxController {
 
   Future<void> updateCustomer(id) async {
     Map<String, dynamic> body = {
+      "id": id,
       'company': companyTextEditingController.text,
       'owner': ownerTextEditingController.text,
       'contact': contactTextEditingController.text,
@@ -123,7 +124,6 @@ class CustomerController extends GetxController {
       'gstin': gstinTextEditingController.text,
       'photo': base64Image,
       'address': addressTextEditingController.text,
-      "id": id,
     };
     try {
       String url = "${baseURL}customer/update";
