@@ -180,7 +180,6 @@ class _AddCustomerState extends State<AddCustomer> {
                             padding: const EdgeInsets.all(5),
                             decoration: BoxDecoration(
                                 color: const Color(0xff01959F),
-                                // shape: BoxShape.circle,
                                 borderRadius: BorderRadius.circular(15)),
                             child: const Icon(
                               Icons.add,
@@ -424,6 +423,7 @@ class _AddCustomerState extends State<AddCustomer> {
                   enable: false,
                   textEditingController: controller.gstinTextEditingController,
                   labelText: "GST No"),
+              verticalSpacing(),
             ],
           ),
         ),

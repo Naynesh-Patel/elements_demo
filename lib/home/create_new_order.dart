@@ -52,7 +52,7 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
           widget.model['assign_order_id'] ?? '';
       // userController.usersRoleTextEditingController.text =
       //     widget.model['user_role'] ?? '';
-      orderController.formatDate.text = widget.model['delivery_date'] ?? '';
+      orderController.date.text = widget.model['delivery_date'] ?? '';
     } else {
       orderController.customerCompanyIdNoTextEditingController.clear();
       orderController.date.clear();

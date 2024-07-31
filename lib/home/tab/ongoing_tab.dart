@@ -41,7 +41,6 @@ class _OnGoingTabState extends State<OnGoingTab> {
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: () {
-                      // Get.to(const ViewOrderDetails());
                       Get.to(CreateNewOrder(
                           isView: true,
                           model: orderController.orderList[index]));

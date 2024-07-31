@@ -2,16 +2,15 @@ import 'dart:convert';
 
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
+import 'package:elements/controller/customer_controller.dart';
+import 'package:elements/manage_customer/add_customer.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:elements/widget/button/small_button.dart';
+import 'package:elements/widget/custom_loader.dart';
 import 'package:elements/widget/dialogs/custom_dialogbox.dart';
 import 'package:elements/widget/empty_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../controller/customer_controller.dart';
-import '../widget/custom_loader.dart';
-import 'add_customer.dart';
 
 class MangeCustomer extends StatefulWidget {
   const MangeCustomer({super.key});
@@ -49,10 +48,10 @@ class _MangeCustomerState extends State<MangeCustomer> {
               : controller.customerList.isEmpty
                   ? const EmptyView()
                   : SingleChildScrollView(
-                    physics: const BouncingScrollPhysics(),
-                    child: Column(
-                      children: [
-                        ListView.separated(
+                      physics: const BouncingScrollPhysics(),
+                      child: Column(
+                        children: [
+                          ListView.separated(
                             shrinkWrap: true,
                             scrollDirection: Axis.vertical,
                             physics: const NeverScrollableScrollPhysics(),
@@ -95,11 +94,13 @@ class _MangeCustomerState extends State<MangeCustomer> {
                                             verticalSpacing(),
                                           ],
                                         ),
-                                        Spacer(),
-                                        controller.customerList[index]['photo'] ==
+                                        const Spacer(),
+                                        controller.customerList[index]
+                                                    ['photo'] ==
                                                 ""
                                             ? Image.asset(
-                                                'assets/images/user_profile.png',color: Colors.black54,
+                                                'assets/images/user_profile.png',
+                                                color: Colors.black54,
                                                 height: 80,
                                                 width: 80,
                                               )
@@ -112,8 +113,8 @@ class _MangeCustomerState extends State<MangeCustomer> {
                                                             50.0),
                                                     child: Image.memory(
                                                       base64Decode(controller
-                                                              .customerList[index]
-                                                          ['photo']),
+                                                              .customerList[
+                                                          index]['photo']),
                                                       fit: BoxFit.cover,
                                                     )),
                                               ),
@@ -140,8 +141,8 @@ class _MangeCustomerState extends State<MangeCustomer> {
                                           title: "  Edit  ",
                                           onTap: () {
                                             Get.to(AddCustomer(
-                                              model:
-                                                  controller.customerList[index],
+                                              model: controller
+                                                  .customerList[index],
                                             ));
                                           },
                                         ),
@@ -172,16 +173,19 @@ class _MangeCustomerState extends State<MangeCustomer> {
                                 ),
                               );
                             },
-                            separatorBuilder: (BuildContext context, int index) {
+                            separatorBuilder:
+                                (BuildContext context, int index) {
                               return const SizedBox(
                                 height: 16,
                               );
                             },
                           ),
-                        SizedBox(height: Get.height*0.120,),
-                      ],
+                          SizedBox(
+                            height: Get.height * 0.120,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
