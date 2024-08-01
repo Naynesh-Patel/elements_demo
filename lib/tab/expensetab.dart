@@ -42,6 +42,7 @@ class _ExpenseTabState extends State<ExpenseTab> {
       body: Container(
         margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Obx(
               () => expenseController.isGetExpenseLoading.value
