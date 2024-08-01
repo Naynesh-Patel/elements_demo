@@ -38,6 +38,7 @@ class _ExpenseTabState extends State<ExpenseTab> {
       backgroundColor: AppColor.whiteColor,
       appBar: HomeAppBar(
         title: "Expense",
+
       ),
       body: Container(
         margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
