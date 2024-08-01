@@ -36,179 +36,173 @@ class _ExpenseTabState extends State<ExpenseTab> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColor.whiteColor,
-      appBar: HomeAppBar(
+      appBar: const HomeAppBar(
         title: "Expense",
-
       ),
       body: Container(
         margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Obx(
+        child: Obx(
               () => expenseController.isGetExpenseLoading.value
-                  ? const CustomLoader()
-                  : expenseController.expenseList.isEmpty
-                      ? const EmptyView()
-                      : SingleChildScrollView(
-                        physics: const BouncingScrollPhysics(),
-                        child: Column(
-                          children: [
-                            ListView.separated(
-                                shrinkWrap: true,
-                                // scrollDirection: Axis.vertical,
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemCount: expenseController.expenseList.length,
-                                itemBuilder: (context, index) {
-                                  return InkWell(
-                                    onTap: () {
-                                      Get.to(const ViewExpenseDetails());
-                                    },
-                                    child: Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 10, vertical: 10),
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(4),
-                                          border: Border.all(
-                                              color: AppColor.borderColor,
-                                              width: 1)),
-                                      child: IntrinsicHeight(
-                                        child: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.stretch,
-                                          children: [
-                                            Expanded(
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  _keyValue(
-                                                      "Name",
-                                                      expenseController.expenseList[
-                                                              index]['name'] ??
-                                                          ''),
-                                                  verticalSpacing(),
-                                                  _keyValue(
-                                                      "Expense Type",
-                                                      expenseController.expenseList[
-                                                                  index]
-                                                              ['expense_type'] ??
-                                                          ''),
-                                                  verticalSpacing(),
-                                                  _keyValue(
-                                                      "Price",
-                                                      expenseController.expenseList[
-                                                              index]['price'] ??
-                                                          ''),
-                                                ],
-                                              ),
-                                            ),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.end,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                _keyValue(
-                                                  "DD",
-                                                  getDateInDDMMYY(DateTime.parse(
-                                                      expenseController.expenseList[
-                                                                  index]
-                                                              ['created_at'] ??
-                                                          '')),
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    InkWell(
-                                                      borderRadius:
-                                                          BorderRadius.circular(10),
-                                                      onTap: () {
-                                                        Get.to(AddExpense(
-                                                          model: expenseController
-                                                              .expenseList[index],
-                                                        ));
-                                                      },
-                                                      child: Container(
-                                                          decoration: BoxDecoration(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(10),
-                                                              border: Border.all(
-                                                                  color: const Color(
-                                                                      0xffD1D1D1))),
-                                                          padding: const EdgeInsets
-                                                              .symmetric(
-                                                              vertical: 10,
-                                                              horizontal: 10),
-                                                          child: SvgPicture.asset(
-                                                            'assets/svg/ic_edit.svg',
-                                                            height: 16,
-                                                            width: 16,
-                                                          )),
-                                                    ),
-                                                    const SizedBox(
-                                                      width: 12,
-                                                    ),
-                                                    InkWell(
-                                                      borderRadius:
-                                                          BorderRadius.circular(10),
-                                                      onTap: () {
-                                                        CustomDialogBox
-                                                            .showDeleteDialog(
-                                                          context: context,
-                                                          bodyText:
-                                                              "Do you really want to cancel these records? This process cannot be undone.",
-                                                          onCancelTap: () {
-                                                            Get.back();
-                                                          },
-                                                          onDeleteTap: () {
-                                                            expenseController
-                                                                .deleteExpense(
-                                                                    index: index);
-                                                          },
-                                                        );
-                                                      },
-                                                      child: Container(
-                                                        decoration: BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(10),
-                                                            border: Border.all(
-                                                                color: const Color(
-                                                                    0xffD1D1D1))),
-                                                        padding: const EdgeInsets
-                                                            .symmetric(
-                                                            vertical: 10,
-                                                            horizontal: 10),
-                                                        child: const Icon(
-                                                          Icons.delete,
-                                                          size: 16,
-                                                          weight: 16,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                )
-                                              ],
-                                            ),
-                                          ],
+              ? const CustomLoader()
+              : expenseController.expenseList.isEmpty
+              ? const EmptyView()
+              : SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Column(
+              children: [
+                ListView.separated(
+                  shrinkWrap: true,
+                  // scrollDirection: Axis.vertical,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: expenseController.expenseList.length,
+                  itemBuilder: (context, index) {
+                    return InkWell(
+                      onTap: () {
+                        Get.to(const ViewExpenseDetails());
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 10),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(4),
+                            border: Border.all(
+                                color: AppColor.borderColor,
+                                width: 1)),
+                        child: IntrinsicHeight(
+                          child: Row(
+                            crossAxisAlignment:
+                            CrossAxisAlignment.stretch,
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment:
+                                  CrossAxisAlignment.start,
+                                  children: [
+                                    _keyValue(
+                                        "Name",
+                                        expenseController.expenseList[
+                                        index]['name'] ??
+                                            ''),
+                                    verticalSpacing(),
+                                    _keyValue(
+                                        "Expense Type",
+                                        expenseController.expenseList[
+                                        index]
+                                        ['expense_type'] ??
+                                            ''),
+                                    verticalSpacing(),
+                                    _keyValue(
+                                        "Price",
+                                        expenseController.expenseList[
+                                        index]['price'] ??
+                                            ''),
+                                  ],
+                                ),
+                              ),
+                              Column(
+                                crossAxisAlignment:
+                                CrossAxisAlignment.end,
+                                mainAxisAlignment:
+                                MainAxisAlignment.spaceBetween,
+                                children: [
+                                  _keyValue(
+                                    "DD",
+                                    getDateInDDMMYY(DateTime.parse(
+                                        expenseController.expenseList[
+                                        index]
+                                        ['created_at'] ??
+                                            '')),
+                                  ),
+                                  Row(
+                                    children: [
+                                      InkWell(
+                                        borderRadius:
+                                        BorderRadius.circular(10),
+                                        onTap: () {
+                                          Get.to(AddExpense(
+                                            model: expenseController
+                                                .expenseList[index],
+                                          ));
+                                        },
+                                        child: Container(
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                BorderRadius
+                                                    .circular(10),
+                                                border: Border.all(
+                                                    color: const Color(
+                                                        0xffD1D1D1))),
+                                            padding: const EdgeInsets
+                                                .symmetric(
+                                                vertical: 10,
+                                                horizontal: 10),
+                                            child: SvgPicture.asset(
+                                              'assets/svg/ic_edit.svg',
+                                              height: 16,
+                                              width: 16,
+                                            )),
+                                      ),
+                                      const SizedBox(
+                                        width: 12,
+                                      ),
+                                      InkWell(
+                                        borderRadius:
+                                        BorderRadius.circular(10),
+                                        onTap: () {
+                                          CustomDialogBox
+                                              .showDeleteDialog(
+                                            context: context,
+                                            bodyText:
+                                            "Do you really want to cancel these records? This process cannot be undone.",
+                                            onCancelTap: () {
+                                              Get.back();
+                                            },
+                                            onDeleteTap: () {
+                                              expenseController
+                                                  .deleteExpense(
+                                                  index: index);
+                                            },
+                                          );
+                                        },
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                              BorderRadius
+                                                  .circular(10),
+                                              border: Border.all(
+                                                  color: const Color(
+                                                      0xffD1D1D1))),
+                                          padding: const EdgeInsets
+                                              .symmetric(
+                                              vertical: 10,
+                                              horizontal: 10),
+                                          child: const Icon(
+                                            Icons.delete,
+                                            size: 16,
+                                            weight: 16,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  );
-                                },
-                                separatorBuilder: (context, index) {
-                                  return const SizedBox(
-                                    height: 10,
-                                  );
-                                },
+                                    ],
+                                  )
+                                ],
                               ),
-                            SizedBox(height: Get.height*0.120,),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
+                    );
+                  },
+                  separatorBuilder: (context, index) {
+                    return const SizedBox(
+                      height: 10,
+                    );
+                  },
+                ),
+                // SizedBox(height: Get.height*0.120,),
+              ],
             ),
-          ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(

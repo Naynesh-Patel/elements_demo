@@ -183,7 +183,6 @@
 //   }
 // }
 import 'dart:io';
-
 import 'package:elements/controller/order_controller.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:elements/widget/custom_loader.dart';
@@ -192,6 +191,7 @@ import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ViewInvoiceDetails extends StatefulWidget {
   final String pdfUrl;
@@ -240,10 +240,13 @@ class _ViewInvoiceDetailsState extends State<ViewInvoiceDetails> {
           Get.back();
         },
       ),
+      // body: SfPdfViewer.file(
+      //     File('https://codinghouse.in/machinepro/pdf/OrderNo-40.pdf')),
+
       body: errorMessage.isNotEmpty
           ? Center(child: Text(errorMessage))
           : localPath == null
-              ? const CustomLoader()
+              ?  const CustomLoader()
               : PDFView(
                   filePath: localPath!,
                   enableSwipe: true,
@@ -252,7 +255,8 @@ class _ViewInvoiceDetailsState extends State<ViewInvoiceDetails> {
                   pageFling: false,
                   fitPolicy: FitPolicy.BOTH,
                   onRender: (pages) {
-                    setState(() {});
+                    setState(() {
+                    });
                   },
                   onError: (error) {
                     setState(() {
@@ -263,4 +267,16 @@ class _ViewInvoiceDetailsState extends State<ViewInvoiceDetails> {
                 ),
     );
   }
+
+
+  launchURL() async {
+    const url = 'https://codinghouse.in/machinepro/pdf/OrderNo-40.pdf';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+
 }

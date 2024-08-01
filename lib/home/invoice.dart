@@ -1,5 +1,6 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
+import 'package:elements/controller/order_controller.dart';
 import 'package:elements/home/view_invoice_detail.dart';
 import 'package:elements/home/view_order_detail.dart';
 import 'package:elements/widget/dialogs/custom_dialogbox.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:share/share.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Invoice extends StatefulWidget {
   const Invoice({super.key});
@@ -16,6 +18,7 @@ class Invoice extends StatefulWidget {
 }
 
 class _InvoiceState extends State<Invoice> {
+  OrderController orderController=Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,10 +82,11 @@ class _InvoiceState extends State<Invoice> {
               ),
               InkWell(
                 onTap: () {
-                  Get.to(const ViewInvoiceDetails(
-                    pdfUrl:
-                        'https://codinghouse.in/machinepro/pdf/OrderNo-40.pdf',
-                  ));
+                  // Get.to(const ViewInvoiceDetails(
+                  //   pdfUrl:
+                  //       'https://codinghouse.in/machinepro/pdf/OrderNo-40.pdf',
+                  // ));
+                  orderController.launchURL();
                 },
                 child: Container(
                     padding: const EdgeInsets.symmetric(
@@ -238,4 +242,7 @@ class _InvoiceState extends State<Invoice> {
     const String subject = 'Look what I found!';
     Share.share(text, subject: subject);
   }
+
+
+
 }

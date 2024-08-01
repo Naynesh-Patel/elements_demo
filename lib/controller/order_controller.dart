@@ -6,6 +6,7 @@ import 'package:elements/constant/vars.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher.dart';
 
 import '../constant/methods.dart';
 import '../constant/urls.dart';
@@ -220,6 +221,16 @@ class OrderController extends GetxController {
     } catch (e) {
       debugPrint("Errors:$e");
       isPdfLoading.value = false;
+    }
+  }
+
+
+  launchURL() async {
+    const url = 'https://codinghouse.in/machinepro/pdf/OrderNo-40.pdf';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
     }
   }
 }
