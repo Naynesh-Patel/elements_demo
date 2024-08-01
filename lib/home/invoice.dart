@@ -1,7 +1,6 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/controller/order_controller.dart';
-import 'package:elements/home/view_invoice_detail.dart';
 import 'package:elements/home/view_order_detail.dart';
 import 'package:elements/widget/dialogs/custom_dialogbox.dart';
 import 'package:flutter/material.dart';
@@ -81,12 +80,14 @@ class _InvoiceState extends State<Invoice> {
                 height: 16,
               ),
               InkWell(
-                onTap: () {
+                onTap: () async {
                   // Get.to(const ViewInvoiceDetails(
                   //   pdfUrl:
                   //       'https://codinghouse.in/machinepro/pdf/OrderNo-40.pdf',
                   // ));
-                  orderController.launchURL();
+                  // Get.to(PDFViewPage(pdfUrl:"https://codinghouse.in/machinepro/pdf/OrderNo-40.pdf",));
+                  _launchPdf();
+                  // orderController.launchURL();/
                 },
                 child: Container(
                     padding: const EdgeInsets.symmetric(
@@ -241,6 +242,15 @@ class _InvoiceState extends State<Invoice> {
     const String text = 'Hello, check out my awesome app!';
     const String subject = 'Look what I found!';
     Share.share(text, subject: subject);
+  }
+
+
+  Future<void> _launchPdf() async {
+    final Uri uri = Uri.parse('https://codinghouse.in/machinepro/pdf/OrderNo-40.pdf');
+    if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+      print('Cannot launch: $uri');
+      throw 'Could not launch $uri';
+    }
   }
 
 
