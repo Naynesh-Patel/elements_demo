@@ -178,21 +178,20 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                       ),
                       verticalSpacing(),
                       CustomTextField(
-                        hintText: "Advance Payment",
-                        labelText: "Advance Payment",
-                        textInputType: TextInputType.number,
-                        textEditingController:
-                            orderController.advancePaymentEditingController,
-                        focusNode: controller.advancedPaymentFocusNode,
-                        autoValidateMode: AutovalidateMode.onUserInteraction,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "Please Enter Advance Payment";
-                          } else {
-                            return null;
-                          }
-                        },
-                      ),
+                          hintText: "Advance Payment",
+                          labelText: "Advance Payment",
+                          textInputType: TextInputType.number,
+                          textEditingController:
+                              orderController.advancePaymentEditingController,
+                          focusNode: controller.advancedPaymentFocusNode,
+                          autoValidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Please Enter Advance Payment";
+                            } else {
+                              return null;
+                            }
+                          }),
                       verticalSpacing(),
                       CustomTextField(
                           onTap: () async {
