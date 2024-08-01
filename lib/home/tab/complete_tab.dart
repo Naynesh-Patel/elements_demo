@@ -2,15 +2,14 @@ import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/constant/methods.dart';
 import 'package:elements/constant/vars.dart';
-import 'package:elements/controller/order_controller.dart';
-import 'package:elements/home/invoice.dart';
-import 'package:elements/widget/button/small_button.dart';
 import 'package:elements/widget/custom_loader.dart';
 import 'package:elements/widget/dialogs/custom_dialogbox.dart';
 import 'package:elements/widget/empty_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../controller/order_controller.dart';
+import '../../widget/button/small_button.dart';
 import '../create_new_order.dart';
 
 class CompleteTab extends StatefulWidget {

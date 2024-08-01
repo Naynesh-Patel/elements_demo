@@ -36,7 +36,7 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColor.whiteColor,
-      appBar: HomeAppBar(
+      appBar: const HomeAppBar(
         title: "MachinePro",
       ),
       body: Container(

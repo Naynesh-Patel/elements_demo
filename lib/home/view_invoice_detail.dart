@@ -182,101 +182,120 @@
 //     );
 //   }
 // }
-import 'dart:io';
-import 'package:elements/controller/order_controller.dart';
-import 'package:elements/widget/app%20bar/custom_appbar.dart';
-import 'package:elements/widget/custom_loader.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_pdfview/flutter_pdfview.dart';
-import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
-import 'package:path_provider/path_provider.dart';
-import 'package:url_launcher/url_launcher.dart';
 
-class ViewInvoiceDetails extends StatefulWidget {
-  final String pdfUrl;
-
-  const ViewInvoiceDetails({super.key, required this.pdfUrl});
-
-  @override
-  // ignore: library_private_types_in_public_api
-  _ViewInvoiceDetailsState createState() => _ViewInvoiceDetailsState();
-}
-
-class _ViewInvoiceDetailsState extends State<ViewInvoiceDetails> {
-  String? localPath;
-  String errorMessage = '';
-  OrderController orderController = Get.find();
-
-  @override
-  void initState() {
-    super.initState();
-    _downloadPdf();
-  }
-
-  Future<void> _downloadPdf() async {
-    try {
-      final response = await http.get(Uri.parse(widget.pdfUrl));
-      final bytes = response.bodyBytes;
-      final dir = await getApplicationDocumentsDirectory();
-      final file = File('${dir.path}/temp.pdf');
-      await file.writeAsBytes(bytes, flush: true);
-      setState(() {
-        localPath = file.path;
-      });
-    } catch (e) {
-      setState(() {
-        errorMessage = e.toString();
-      });
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(
-        title: 'PDF Viewer',
-        onPressed: () {
-          Get.back();
-        },
-      ),
-      // body: SfPdfViewer.file(
-      //     File('https://codinghouse.in/machinepro/pdf/OrderNo-40.pdf')),
-
-      body: errorMessage.isNotEmpty
-          ? Center(child: Text(errorMessage))
-          : localPath == null
-              ?  const CustomLoader()
-              : PDFView(
-                  filePath: localPath!,
-                  enableSwipe: true,
-                  swipeHorizontal: true,
-                  autoSpacing: false,
-                  pageFling: false,
-                  fitPolicy: FitPolicy.BOTH,
-                  onRender: (pages) {
-                    setState(() {
-                    });
-                  },
-                  onError: (error) {
-                    setState(() {
-                      errorMessage = error.toString();
-                    });
-                  },
-                  onViewCreated: (PDFViewController pdfViewController) {},
-                ),
-    );
-  }
-
-
-  launchURL() async {
-    const url = 'https://codinghouse.in/machinepro/pdf/OrderNo-40.pdf';
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
-
-
-}
+// //   final String pdfPath = 'https://codinghouse.in/machinepro/pdf/OrderNo-40.pdf';
+// //
+// //   @override
+// //   Widget build(BuildContext context) {
+// //     return Scaffold(
+// //       appBar: AppBar(
+// //         title: const Text('PDF Viewer'),
+// //       ),
+// //       body: PDFView(
+// //         filePath: pdfPath,
+// //         enableSwipe: true,
+// //         swipeHorizontal: true,
+// //         autoSpacing: false,
+// //         pageFling: false,
+// //       ),
+// //     );
+// //   }
+// // }
+// import 'dart:io';
+// import 'package:elements/controller/order_controller.dart';
+// import 'package:elements/widget/app%20bar/custom_appbar.dart';
+// import 'package:elements/widget/custom_loader.dart';
+// import 'package:flutter/material.dart';
+// import 'package:flutter_pdfview/flutter_pdfview.dart';
+// import 'package:get/get.dart';
+// import 'package:http/http.dart' as http;
+// import 'package:path_provider/path_provider.dart';
+// import 'package:url_launcher/url_launcher.dart';
+//
+// class ViewInvoiceDetails extends StatefulWidget {
+//   final String pdfUrl;
+//
+//   const ViewInvoiceDetails({super.key, required this.pdfUrl});
+//
+//   @override
+//   // ignore: library_private_types_in_public_api
+//   _ViewInvoiceDetailsState createState() => _ViewInvoiceDetailsState();
+// }
+//
+// class _ViewInvoiceDetailsState extends State<ViewInvoiceDetails> {
+//   String? localPath;
+//   String errorMessage = '';
+//   OrderController orderController = Get.find();
+//
+//   @override
+//   void initState() {
+//     super.initState();
+//     _downloadPdf();
+//   }
+//
+//   Future<void> _downloadPdf() async {
+//     try {
+//       final response = await http.get(Uri.parse(widget.pdfUrl));
+//       final bytes = response.bodyBytes;
+//       final dir = await getApplicationDocumentsDirectory();
+//       final file = File('${dir.path}/temp.pdf');
+//       await file.writeAsBytes(bytes, flush: true);
+//       setState(() {
+//         localPath = file.path;
+//       });
+//     } catch (e) {
+//       setState(() {
+//         errorMessage = e.toString();
+//       });
+//     }
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: CustomAppBar(
+//         title: 'PDF Viewer',
+//         onPressed: () {
+//           Get.back();
+//         },
+//       ),
+//       // body: SfPdfViewer.file(
+//       //     File('https://codinghouse.in/machinepro/pdf/OrderNo-40.pdf')),
+//
+//       body: errorMessage.isNotEmpty
+//           ? Center(child: Text(errorMessage))
+//           : localPath == null
+//               ?  const CustomLoader()
+//               : PDFView(
+//                   filePath: localPath!,
+//                   enableSwipe: true,
+//                   swipeHorizontal: true,
+//                   autoSpacing: false,
+//                   pageFling: false,
+//                   fitPolicy: FitPolicy.BOTH,
+//                   onRender: (pages) {
+//                     setState(() {
+//                     });
+//                   },
+//                   onError: (error) {
+//                     setState(() {
+//                       errorMessage = error.toString();
+//                     });
+//                   },
+//                   onViewCreated: (PDFViewController pdfViewController) {},
+//                 ),
+//     );
+//   }
+//
+//
+//   launchURL() async {
+//     const url = 'https://codinghouse.in/machinepro/pdf/OrderNo-40.pdf';
+//     if (await canLaunch(url)) {
+//       await launch(url);
+//     } else {
+//       throw 'Could not launch $url';
+//     }
+//   }
+//
+//
+// }

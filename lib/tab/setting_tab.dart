@@ -37,7 +37,6 @@ class _SettingTabState extends State<SettingTab> {
     return Scaffold(
         backgroundColor: AppColor.whiteColor,
         appBar: const HomeAppBar(
-
           title: "Setting",
         ),
         body: SingleChildScrollView(

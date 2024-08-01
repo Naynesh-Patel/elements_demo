@@ -1,6 +1,6 @@
 import 'package:elements/bill_history/add_bill_history.dart';
 import 'package:elements/constant/app_colors.dart';
-import 'package:elements/home/view_invoice_detail.dart';
+import 'package:elements/controller/order_controller.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:elements/widget/dialogs/custom_dialogbox.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +18,7 @@ class BillHistory extends StatefulWidget {
 class _BillHistoryState extends State<BillHistory> {
   bool value = false;
   int index = 0;
+  OrderController orderController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -61,10 +62,11 @@ class _BillHistoryState extends State<BillHistory> {
             ),
             InkWell(
               onTap: () {
-                Get.to(const ViewInvoiceDetails(
-                  pdfUrl:
-                      'https://codinghouse.in/machinepro/pdf/OrderNo-40.pdf',
-                ));
+                // orderController.launchURL();
+                // Get.to(const ViewInvoiceDetails(
+                //   pdfUrl:
+                //       'https://codinghouse.in/machinepro/pdf/OrderNo-40.pdf',
+                // ));
               },
               child: Container(
                   padding:
