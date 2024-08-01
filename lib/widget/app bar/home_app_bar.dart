@@ -6,7 +6,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget{
   final String title;
   final List<Widget>? action;
 
-  HomeAppBar({Key? key,required this.title,this.action}) : preferredSize = const Size.fromHeight(kToolbarHeight), super(key: key);
+  const HomeAppBar({Key? key,required this.title,this.action}) : preferredSize = const Size.fromHeight(kToolbarHeight), super(key: key);
 
   @override
   final Size preferredSize;
@@ -15,6 +15,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget{
   Widget build(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false,
+      centerTitle: false,
       backgroundColor: AppColor.bgAppBarColor,
       title:  Text(
           title,

@@ -111,7 +111,8 @@ class _CompleteTabState extends State<CompleteTab> {
                 title: "Invoice",
                 textColor: AppColor.selectColor,
                 onTap: () {
-                  Get.to(const Invoice());
+                  // Get.to(const Invoice());
+                  orderController.launchURL();
                 },
               ),
               const SizedBox(

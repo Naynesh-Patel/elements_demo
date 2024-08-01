@@ -36,7 +36,8 @@ class _SettingTabState extends State<SettingTab> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: AppColor.whiteColor,
-        appBar: HomeAppBar(
+        appBar: const HomeAppBar(
+
           title: "Setting",
         ),
         body: SingleChildScrollView(
@@ -81,7 +82,7 @@ class _SettingTabState extends State<SettingTab> {
                   Get.to(const MangeUser());
                 },
               )
-            : SizedBox(),
+            : const SizedBox(),
         modelUser.value.isAllowCustomer == "1"
             ? _customTile(
                 title: "Manage Customer Company",
