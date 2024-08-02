@@ -224,7 +224,8 @@ class OrderController extends GetxController {
     }
   }
 
-  Future<void> launchURL() async {
+
+  launchURL() async {
     const url = 'https://codinghouse.in/machinepro/pdf/OrderNo-40.pdf';
     if (await canLaunch(url)) {
       await launch(url);
