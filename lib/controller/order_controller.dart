@@ -226,12 +226,12 @@ class OrderController extends GetxController {
   }
 
 
-  launchURL() async {
-    const url = 'https://codinghouse.in/machinepro/pdf/OrderNo-40.pdf';
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
+  Future<void> launchURL() async {
+    final Uri uri =
+    Uri.parse('https://codinghouse.in/machinepro/pdf/OrderNo-40.pdf');
+    if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+      print('Cannot launch: $uri');
+      throw 'Could not launch $uri';
     }
   }
 }
