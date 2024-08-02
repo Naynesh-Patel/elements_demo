@@ -228,33 +228,33 @@ class UserController extends GetxController {
     }
   }
 
-  List<dynamic> userRoleList = [
-    {
-      "name": "Allow Machinery",
-      "select": false,
-      "key": "is_allow_machinery",
-    },
-    {
-      "name": "Allow Spareparts",
-      "select": false,
-      "key": "is_allow_spareparts",
-    },
-    {
-      "name": "Allow User",
-      "select": false,
-      "key": "is_allow_user",
-    },
-    {
-      "name": "Allow Customer",
-      "select": false,
-      "key": "is_allow_customer",
-    },
-    {
-      "name": "Allow Bill",
-      "select": false,
-      "key": "is_allow_bill",
-    },
-  ];
+  // List<dynamic> userRoleList = [
+  //   {
+  //     "name": "Allow Machinery",
+  //     "select": false,
+  //     "key": "is_allow_machinery",
+  //   },
+  //   {
+  //     "name": "Allow Spareparts",
+  //     "select": false,
+  //     "key": "is_allow_spareparts",
+  //   },
+  //   {
+  //     "name": "Allow User",
+  //     "select": false,
+  //     "key": "is_allow_user",
+  //   },
+  //   {
+  //     "name": "Allow Customer",
+  //     "select": false,
+  //     "key": "is_allow_customer",
+  //   },
+  //   {
+  //     "name": "Allow Bill",
+  //     "select": false,
+  //     "key": "is_allow_bill",
+  //   },
+  // ];
 
   Future updateAccess() async {
     Map<String, dynamic> body = {

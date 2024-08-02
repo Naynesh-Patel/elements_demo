@@ -1,5 +1,4 @@
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
-import 'package:date_picker_plus/date_picker_plus.dart';
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
@@ -21,11 +20,11 @@ class _DatePikerState extends State<DatePiker> {
       appBar: CustomAppBar(
         title: 'Ramesh',
         onPressed: () {
-          Get.back();
+         Get.back();
         },
       ),
       body: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        margin:  const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         child: Column(
           children: [
             CalendarDatePicker2(
@@ -43,9 +42,7 @@ class _DatePikerState extends State<DatePiker> {
                 lastMonthIcon: const Icon(Icons.arrow_back_ios_rounded,size: 16,color: AppColor.blackColor,),
                 // hideYearPickerDividers: true,
                 // selectedDayTextStyle: AppTextStyle.textStyleRegular14.copyWith(color: AppColor.whiteColor)
-
               ),
-
               onValueChanged: (dates) {},
               value: [DateTime.now()],
             ),
