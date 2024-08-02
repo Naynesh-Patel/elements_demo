@@ -1,3 +1,4 @@
+
 import 'package:elements/bill_history/add_bill_history.dart';
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/controller/order_controller.dart';
@@ -67,6 +68,8 @@ class _BillHistoryState extends State<BillHistory> {
                 //   pdfUrl:
                 //       'https://codinghouse.in/machinepro/pdf/OrderNo-40.pdf',
                 // ));
+                orderController.launchURL();
+
               },
               child: Container(
                   padding:

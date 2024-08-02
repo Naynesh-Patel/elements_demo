@@ -1,5 +1,4 @@
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
-import 'package:date_picker_plus/date_picker_plus.dart';
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
@@ -21,7 +20,7 @@ class _DatePikerState extends State<DatePiker> {
       appBar: CustomAppBar(
         title: 'Ramesh',
         onPressed: () {
-          Get.back();
+        Get.back();
         },
       ),
       body: Container(
@@ -34,20 +33,20 @@ class _DatePikerState extends State<DatePiker> {
                 calendarViewMode: CalendarDatePicker2Mode.day,
                 controlsHeight: 50.0,
                 controlsTextStyle: AppTextStyle.textStyleRegular16,
-                customModePickerIcon: const SizedBox(),
+                customModePickerIcon:const SizedBox(),
                 dayTextStyle: AppTextStyle.textStyleRegular14.copyWith(color: AppColor.dropDownHintColor),
                 disabledDayTextStyle: AppTextStyle.textStyleRegular14,
                 weekdayLabelTextStyle: AppTextStyle.textStyleRegular14,
                   selectedDayHighlightColor:AppColor.selectDateColor,
-                 nextMonthIcon: const Icon(Icons.arrow_forward_ios_rounded,size: 16,color: AppColor.blackColor,),
-                lastMonthIcon: const Icon(Icons.arrow_back_ios_rounded,size: 16,color: AppColor.blackColor,),
+                 nextMonthIcon:const Icon(Icons.arrow_forward_ios_rounded,size: 16,color: AppColor.blackColor,),
+                lastMonthIcon:const Icon(Icons.arrow_back_ios_rounded,size: 16,color: AppColor.blackColor,),
                 // hideYearPickerDividers: true,
                 // selectedDayTextStyle: AppTextStyle.textStyleRegular14.copyWith(color: AppColor.whiteColor)
-
               ),
-
               onValueChanged: (dates) {},
-              value: [DateTime.now()],
+              value: [
+                DateTime.now()
+              ],
             ),
             // SizedBox(
             //   width: Get.width,
@@ -93,7 +92,7 @@ class _DatePikerState extends State<DatePiker> {
                   height: 16,
                 ),
                 _keyValue("Absent", "3"),
-                const SizedBox(
+                  const SizedBox(
                   height: 16,
                 ),
                 _keyValue("Week Off", "4"),

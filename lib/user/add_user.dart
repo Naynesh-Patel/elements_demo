@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/controller/company_controller.dart';
@@ -17,9 +16,7 @@ class AddUser extends StatefulWidget {
   final dynamic model;
   final bool isView;
 
-  const AddUser(
-      {super.key, this.isUpdate = false, this.model, this.isView = false});
-
+  const AddUser( {super.key, this.isUpdate = false, this.model, this.isView = false});
   @override
   State<AddUser> createState() => _AddUserState();
 }
@@ -48,7 +45,6 @@ class _AddUserState extends State<AddUser> {
           widget.model['contact_no'] ?? '';
       controller.fingerprintEditingController.text =
           widget.model['fingerprint'] ?? '';
-
       controller.base64Image = widget.model['photo'] ?? '';
       companyController.selectCompanyTextEditingController.text =
           widget.model['name'] ?? '';
@@ -86,8 +82,7 @@ class _AddUserState extends State<AddUser> {
             shrinkWrap: true,
             children: [
               Container(
-                margin:
-                    const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                margin:  const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -119,8 +114,7 @@ class _AddUserState extends State<AddUser> {
                                             borderRadius:
                                                 BorderRadius.circular(50.0),
                                             child: Image.memory(
-                                              base64Decode(
-                                                  controller.base64Image),
+                                              base64Decode( controller.base64Image),
                                               fit: BoxFit.cover,
                                               height: 80,
                                               width: 80,

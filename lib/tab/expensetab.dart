@@ -10,7 +10,13 @@ import 'package:elements/widget/dialogs/custom_dialogbox.dart';
 import 'package:elements/widget/empty_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/get_instance.dart';
+import 'package:get/get_navigation/get_navigation.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+
+
+
 
 class ExpenseTab extends StatefulWidget {
   final bool isUpdate;
@@ -52,16 +58,16 @@ class _ExpenseTabState extends State<ExpenseTab> {
               children: [
                 ListView.separated(
                   shrinkWrap: true,
-                  // scrollDirection: Axis.vertical,
+                  // scrollDirection: Axis.vertical,vertical
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: expenseController.expenseList.length,
                   itemBuilder: (context, index) {
                     return InkWell(
                       onTap: () {
-                        Get.to(const ViewExpenseDetails());
+                        Get.to( ViewExpenseDetails());
                       },
                       child: Container(
-                        padding: const EdgeInsets.symmetric(
+                        padding:  const EdgeInsets.symmetric(
                             horizontal: 10, vertical: 10),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(4),
@@ -100,18 +106,15 @@ class _ExpenseTabState extends State<ExpenseTab> {
                                 ),
                               ),
                               Column(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.end,
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   _keyValue(
                                     "DD",
                                     getDateInDDMMYY(DateTime.parse(
                                         expenseController.expenseList[
                                         index]
-                                        ['created_at'] ??
-                                            '')),
+                                        ['created_at']??'')),
                                   ),
                                   Row(
                                     children: [
@@ -120,19 +123,13 @@ class _ExpenseTabState extends State<ExpenseTab> {
                                         BorderRadius.circular(10),
                                         onTap: () {
                                           Get.to(AddExpense(
-                                            model: expenseController
-                                                .expenseList[index],
+                                            model: expenseController.expenseList[index],
                                           ));
                                         },
                                         child: Container(
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                BorderRadius
-                                                    .circular(10),
-                                                border: Border.all(
-                                                    color: const Color(
-                                                        0xffD1D1D1))),
-                                            padding: const EdgeInsets
+                                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),
+                                                border: Border.all( color: const Color( 0xffD1D1D1))),
+                                            padding:  const EdgeInsets
                                                 .symmetric(
                                                 vertical: 10,
                                                 horizontal: 10),
@@ -142,7 +139,7 @@ class _ExpenseTabState extends State<ExpenseTab> {
                                               width: 16,
                                             )),
                                       ),
-                                      const SizedBox(
+                                       const SizedBox(
                                         width: 12,
                                       ),
                                       InkWell(

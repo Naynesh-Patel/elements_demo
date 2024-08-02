@@ -142,7 +142,7 @@ class OrderController extends GetxController {
   Future<void> updateOrder(model, {companyId, machineId, managerId}) async {
     Map<String, dynamic> body = {
       "id": modelUser.value.id,
-      "user_id": modelUser.value.id,
+      "user_id": modelUser.value.userType,
       "customer_company_id": companyId.toString(),
       "machine_ids": machineId.toString(),
       "delivery_date": date.text,
@@ -157,6 +157,7 @@ class OrderController extends GetxController {
       var response = await http.post(Uri.parse(url), body: body);
       if (response.statusCode == 200) {
         jsonDecode(response.body);
+        // export PATH="$PATH:/Volumes/Storage/flutter/bin"
         Get.back();
         getOrder();
         isUpdateOrderLoading.value = false;

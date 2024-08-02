@@ -64,8 +64,7 @@ class _ViewExpenseDetailsState extends State<ViewExpenseDetails> {
                           return Column(
                             children: [
                               _tableView(
-                                name:
-                                    controller.expenseList[index]['name'] ?? '',
+                                name:controller.expenseList[index]['name'] ?? '',
                                 date: getDateInDDMMYY(DateTime.parse(controller
                                         .expenseList[index]['created_at'] ??
                                     '')),

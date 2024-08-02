@@ -50,8 +50,6 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
           widget.model['machine_ids'] ?? '';
       userController.usersRoleTextEditingController.text =
           widget.model['assign_order_id'] ?? '';
-      // userController.usersRoleTextEditingController.text =
-      //     widget.model['user_role'] ?? '';
       orderController.date.text = widget.model['delivery_date'] ?? '';
     } else {
       orderController.customerCompanyIdNoTextEditingController.clear();
@@ -91,7 +89,7 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                           focusNode: FocusNode(),
                           readOnly: true,
                           onTap: () {
-                            Get.to(const SelectCustomerCompany());
+                            Get.to( const SelectCustomerCompany());
                           },
                           hintText: "Select Customer/Company",
                           labelText: "Customer/Company",

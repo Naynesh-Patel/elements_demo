@@ -17,7 +17,7 @@ class AddExpense extends StatefulWidget {
 }
 
 class _AddExpenseState extends State<AddExpense> {
-  HomeController controller = Get.find();
+  HomeController controller=Get.find();
   ExpenseController expenseController = Get.find();
   CustomerController customerController = Get.find();
 
@@ -46,8 +46,7 @@ class _AddExpenseState extends State<AddExpense> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: CustomAppBar(
-          title:
-              widget.model != null ? "Update Expense Details" : "Add Expense",
+          title:widget.model != null ? "Update Expense Details" : "Add Expense",
           onPressed: () {
             Get.back();
           },
