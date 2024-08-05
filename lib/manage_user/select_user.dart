@@ -82,7 +82,7 @@ class _SelectUserState extends State<SelectUser> {
                             userController.userList[index]['name'] ?? "";
                         userController.userId =
                             userController.userList[index]['id'] ?? "";
-                        Get.back();
+                        Get.back(result: true);
                       },
                       child: Container(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),

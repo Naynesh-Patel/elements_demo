@@ -201,5 +201,33 @@ class SparepartsController extends GetxController {
 
   }
 
+  selectSparepart(){
+    List _sList = [];
+    _sList.addAll(selectSparepartsList);
+    selectSparepartsList.clear();
+    for (int i = 0; i < sparepartsList.length; i++) {
+      if (sparepartsList[i]['isSelect'] == true) {
+        int index = _sList.indexWhere((item) => item["id"] == sparepartsList[i]['id']);
+        Map<String, dynamic> d = {};
+        if(index != -1){
+           d = {
+            'id': sparepartsList[i]['id'],
+            'name': sparepartsList[i]['name'],
+            'controller': TextEditingController(text: _sList[index]['controller'].text),
+          };
+        }else{
+            d = {
+            'id': sparepartsList[i]['id'],
+            'name': sparepartsList[i]['name'],
+            'controller': TextEditingController(),
+          };
+        }
+        selectSparepartsList.add(d);
+      }
+    }
+    Get.back();
+  }
+
+
 
 }

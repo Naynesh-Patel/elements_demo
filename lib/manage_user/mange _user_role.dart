@@ -32,6 +32,7 @@ class _ManageUserRoleState extends State<ManageUserRole> {
   @override
   void initState() {
     customerController.companyTextEditingController.clear();
+    userController.isShowAllowItems.value = false;
     super.initState();
   }
 
@@ -55,10 +56,14 @@ class _ManageUserRoleState extends State<ManageUserRole> {
                       focusNode: FocusNode(),
                       readOnly: true,
                       showCursor: false,
-                      onTap: () {
-                        Get.to(const SelectUser());
+                      onTap: () async {
+                        bool isShow =  await Get.to(const SelectUser());
+                        if(isShow){
+                          userController.isShowAllowItems.value = true;
+                        }
                       },
-                      labelText: "Manage User",
+                      labelText: "User",
+                      hintText: "Select User",
                       textEditingController:
                           userController.userNameTextEditingController,
                       autoValidateMode: AutovalidateMode.onUserInteraction,
@@ -77,25 +82,35 @@ class _ManageUserRoleState extends State<ManageUserRole> {
                   const SizedBox(
                     height: 20,
                   ),
-                  allowItems(
-                      isSelect: userController.isAllowMachinery,
-                      title: "Allow Machinery"),
-                  allowItems(
-                      isSelect: userController.isAllowCustomer,
-                      title: "Allow Customer"),
-                  allowItems(
-                      isSelect: userController.isAllowSpareparts,
-                      title: "Allow Spareparts"),
-                  allowItems(
-                      isSelect: userController.isAllowBill,
-                      title: "Allow Bill"),
-                  allowItems(
-                      isSelect: userController.isAllowUser,
-                      title: "Allow User"),
+                  Obx((){
+                    if(userController.isShowAllowItems.value){
+                      return Column(
+                        children: [
+                          allowItems(
+                              isSelect: userController.isAllowMachinery,
+                              title: "Allow Machinery"),
+                          allowItems(
+                              isSelect: userController.isAllowCustomer,
+                              title: "Allow Customer"),
+                          allowItems(
+                              isSelect: userController.isAllowSpareparts,
+                              title: "Allow Spareparts"),
+                          allowItems(
+                              isSelect: userController.isAllowBill,
+                              title: "Allow Bill"),
+                          allowItems(
+                              isSelect: userController.isAllowUser,
+                              title: "Allow User"),
+                        ],
+                      );
+                    }else{
+                      return const SizedBox.shrink();
+                    }
+                  }),
                 ],
               ),
             )),
-        bottomNavigationBar: Container(
+        bottomNavigationBar: Obx(()=>userController.isShowAllowItems.value ? Container(
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: CustomButton(
             isLoading: userController.isUpdateUserLoading,
@@ -105,7 +120,7 @@ class _ManageUserRoleState extends State<ManageUserRole> {
               userController.updateAccess();
             },
           ),
-        ));
+        ): const SizedBox.shrink()));
   }
 
   Widget verticalSpacing() {

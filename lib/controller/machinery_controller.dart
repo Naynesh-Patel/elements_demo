@@ -121,20 +121,20 @@ class MachineryController extends GetxController {
     try {
       String url = "${baseURL}machine/update";
       log("API => $url");
-      isUpdateMachineryLoading.value = true;
+      isMachineryLoading.value = true;
       var response = await http.post(Uri.parse(url), body: body);
       if (response.statusCode == 200) {
         jsonDecode(response.body);
         Get.back();
         getMachinery();
-        isUpdateMachineryLoading.value = false;
+        isMachineryLoading.value = false;
       } else {
         debugPrint("statusCode${response.statusCode}");
-        isUpdateMachineryLoading.value = false;
+        isMachineryLoading.value = false;
       }
     } catch (e) {
       debugPrint("Error${e.toString()}");
-      isUpdateMachineryLoading.value = false;
+      isMachineryLoading.value = false;
     }
   }
 

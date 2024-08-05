@@ -13,7 +13,7 @@ class CustomDialogBox {
 
   static showDeleteDialog({
     required BuildContext context,
-    required String bodyText,
+    String? bodyText,
     required Function() onCancelTap,
     required Function() onDeleteTap,
   }) {
@@ -38,15 +38,15 @@ class CustomDialogBox {
                   textAlign: TextAlign.center,
                   style: AppTextStyle.textStyleBold16,
                 ),
-                const SizedBox(
-                  height: 8.0,
-                ),
-                Text(
-                  bodyText,
-                  textAlign: TextAlign.center,
-                  style: AppTextStyle.textStyleLight12
-                      .copyWith(color: const Color(0xff949494)),
-                ),
+                // const SizedBox(
+                //   height: 8.0,
+                // ),
+                // Text(
+                //   bodyText,
+                //   textAlign: TextAlign.center,
+                //   style: AppTextStyle.textStyleLight12
+                //       .copyWith(color: const Color(0xff949494)),
+                // ),
                 const SizedBox(
                   height: 16.0,
                 ),
@@ -188,7 +188,7 @@ class CustomDialogBox {
                               height: 60,
                               width: 60,
                               padding: const EdgeInsets.all(16.0),
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                   shape: BoxShape.circle,
                                   color: AppColor.buttonColor),
                               child: Image.asset(
