@@ -334,11 +334,11 @@ class _AddCustomerState extends State<AddCustomer> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Profile :',
-                style: AppTextStyle.textStyleRegular16
-                    .copyWith(color: AppColor.blackLightColor),
-              ),
+              // Text(
+              //   'Profile :',
+              //   style: AppTextStyle.textStyleRegular16
+              //       .copyWith(color: AppColor.blackLightColor),
+              // ),
               const SizedBox(
                 height: 20,
               ),
@@ -346,19 +346,19 @@ class _AddCustomerState extends State<AddCustomer> {
                 child: widget.model['photo'] == ""
                     ? Image.asset(
                         'assets/images/user_profile.png',
-                        height: 80,
-                        width: 80,
+                        height: 120,
+                        width: 120,
                       )
                     : SizedBox(
-                        height: 80,
-                        width: 80,
+                        height: 120,
+                        width: 120,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(50.0),
                           child: Image.memory(
                             base64Decode(controller.base64Image),
                             fit: BoxFit.cover,
-                            height: 80,
-                            width: 80,
+                            height: 120,
+                            width: 120,
                           ),
                         ),
                       ),
