@@ -38,6 +38,32 @@ Future<DateTime?> openDatePicker(context,
   );
 }
 
+String getDateInDDMMMYY(date) {
+  var d12 = DateFormat('dd-MMM-yyyy').format(date);
+  return d12;
+}
+
+
+int daysBetween(f, t) {
+  DateTime from=DateFormat("dd-MMM-yyyy").parse(f);
+  DateTime to=DateFormat("dd-MMM-yyyy").parse(t);
+  from = DateTime(from.year, from.month, from.day);
+  to = DateTime(to.year, to.month, to.day);
+  int daysCount= (from.difference(to).inHours / 24).round();
+  if(daysCount == 0){
+    return 1;
+  }else{
+    return daysCount.abs();
+  }
+
+  // return (DateFormat("dd-MMM-yyyy")
+  //             .parse(to)
+  //             .difference(DateFormat("dd-MMM-yyyy").parse(from))
+  //             .inHours /
+  //         24)
+  //     .round();
+}
+
 String getDate(String date) {
   DateTime dateTime = DateTime.parse(date);
   var outputFormat = DateFormat('dd MMM yyyy');

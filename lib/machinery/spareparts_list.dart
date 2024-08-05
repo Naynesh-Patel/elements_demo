@@ -7,7 +7,6 @@ import 'package:elements/widget/custom_text_field.dart';
 import 'package:elements/widget/empty_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../constant/app_colors.dart';
 
 class SparepartList extends StatefulWidget {

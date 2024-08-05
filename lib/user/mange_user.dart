@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/controller/user_controller.dart';
@@ -47,28 +49,51 @@ class _MangeUserState extends State<MangeUser> {
                 : SingleChildScrollView(
                     physics: const BouncingScrollPhysics(),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         ListView.builder(
                           shrinkWrap: true,
                           itemCount: controller.userList.length,
                           physics: const NeverScrollableScrollPhysics(),
                           itemBuilder: (context, index) {
-                            return Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const SizedBox(height: 16),
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 10, vertical: 10),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(4),
-                                      border: Border.all(
-                                          color: const Color(0xffE6E6E6),
-                                          width: 1)),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                            return Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 10),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(4),
+                                  border: Border.all(
+                                      color: const Color(0xffE6E6E6),
+                                      width: 1)),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
                                     children: [
+                                      controller.userList[index]['photo'] == ""
+                                          ? Image.asset(
+                                        'assets/images/user_profile.png',
+                                        color: Colors.black54,
+                                        height: 80,
+                                        width: 80,
+                                      )
+                                          : SizedBox(
+                                        height: 80,
+                                        width: 80,
+                                        child: ClipRRect(
+                                            borderRadius:
+                                            BorderRadius.circular(
+                                                50.0),
+                                            child: Image.memory(
+                                              base64Decode(controller
+                                                  .userList[index]
+                                              ['photo']),
+                                              fit: BoxFit.cover,
+                                            )),
+                                      ),
+
+                                      const SizedBox(
+                                        width: 60,
+                                      ),
                                       Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
@@ -88,132 +113,252 @@ class _MangeUserState extends State<MangeUser> {
                                                   ''),
                                         ],
                                       ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.end,
-                                        children: [
-                                          SmallButton(
-                                            title: " View ",
-                                            textColor: AppColor.selectColor,
-                                            onTap: () {
-                                              Get.to(AddUser(
-                                                  isView: true,
-                                                  model: controller
-                                                      .userList[index]));
-                                            },
-                                          ),
-                                          const SizedBox(
-                                            width: 10,
-                                          ),
-                                          SmallButton(
-                                              title: "Edit",
-                                              onTap: () {
-                                                Get.to(AddUser(
-                                                  model: controller
-                                                      .userList[index],
-                                                ));
-                                              },
-                                              textColor:
-                                                  const Color(0xff555555)),
-                                          const SizedBox(
-                                            width: 10,
-                                          ),
-                                          SmallButton(
-                                              title: "Delete",
-                                              onTap: () {
-                                                CustomDialogBox
-                                                    .showDeleteDialog(
-                                                  context: context,
-                                                  bodyText:
-                                                      "Do you really want to cancel these records? This process cannot be undone.",
-                                                  onCancelTap: () {
-                                                    Get.back();
-                                                  },
-                                                  onDeleteTap: () {
-                                                    setState(() {
-                                                      controller.deleteUser(
-                                                          controller.userList[
-                                                              index]['id']);
-                                                      controller.userList
-                                                          .removeAt(index);
-                                                      Get.back();
-                                                    });
-                                                  },
-                                                );
-                                              },
-                                              textColor:
-                                                  const Color(0xffB50A0A)),
-                                        ],
-                                      )
-                                      // Row(
-                                      //   children: [
-                                      //     InkWell(
-                                      //       onTap: () {
-                                      //         Get.to(AddUser(
-                                      //           model: controller.userList[index],
-                                      //         ));
-                                      //       },
-                                      //       borderRadius: BorderRadius.circular(5),
-                                      //       child: Container(
-                                      //         padding: const EdgeInsets.all(6),
-                                      //         decoration: BoxDecoration(
-                                      //             border: Border.all(
-                                      //                 color:
-                                      //                     const Color(0xffC9C9C9)),
-                                      //             borderRadius:
-                                      //                 BorderRadius.circular(5)),
-                                      //         child: const Icon(
-                                      //           Icons.edit,
-                                      //           color: Color(0xff555555),
-                                      //         ),
-                                      //       ),
-                                      //     ),
-                                      //     const SizedBox(width: 10),
-                                      //     InkWell(
-                                      //       onTap: () {
-                                      //         CustomDialogBox.showDeleteDialog(
-                                      //           context: context,
-                                      //           bodyText:
-                                      //               "Do you really want to cancel these records? This process cannot be undone.",
-                                      //           onCancelTap: () {
-                                      //             Get.back();
-                                      //           },
-                                      //           onDeleteTap: () {
-                                      //             setState(() {
-                                      //               controller.deleteUser(controller
-                                      //                   .userList[index]['id']);
-                                      //               controller.userList
-                                      //                   .removeAt(index);
-                                      //               Get.back();
-                                      //             });
-                                      //           },
-                                      //         );
-                                      //       },
-                                      //       borderRadius: BorderRadius.circular(5),
-                                      //       child: Container(
-                                      //         padding: const EdgeInsets.all(6),
-                                      //         decoration: BoxDecoration(
-                                      //             border: Border.all(
-                                      //                 color:
-                                      //                     const Color(0xffC9C9C9)),
-                                      //             borderRadius:
-                                      //                 BorderRadius.circular(5)),
-                                      //         child: const Icon(
-                                      //           Icons.delete,
-                                      //           color: Color(0xff555555),
-                                      //         ),
-                                      //       ),
-                                      //     ),
-                                      //   ],
-                                      // )
+
                                     ],
                                   ),
-                                ),
-                              ],
+                                  verticalSpacing(),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      SmallButton(
+                                        title: "  View  ",
+                                        textColor: AppColor.selectColor,
+                                        onTap: () {
+                                          Get.to(AddUser(
+                                              isView: true,
+                                              model:
+                                                  controller.userList[index]));
+                                        },
+                                      ),
+                                      const SizedBox(
+                                        width: 12.0,
+                                      ),
+                                      SmallButton(
+                                        title: "  Edit  ",
+                                        onTap: () {
+                                          Get.to(AddUser(
+                                            model: controller.userList[index],
+                                          ));
+                                        },
+                                      ),
+                                      const SizedBox(
+                                        width: 12.0,
+                                      ),
+                                      SmallButton(
+                                        title: "Delete",
+                                        textColor: AppColor.cancelColor,
+                                        onTap: () {
+                                          CustomDialogBox.showDeleteDialog(
+                                            context: context,
+                                            bodyText:
+                                                "Do you really want to cancel these records? This process cannot be undone.",
+                                            onCancelTap: () {
+                                              Get.back();
+                                            },
+                                            onDeleteTap: () {
+                                              controller.deleteUser(controller
+                                                  .userList[index]['id']);
+                                              controller.userList
+                                                  .removeAt(index);
+                                              Get.back();
+                                            },
+                                          );
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             );
+                            //   Container(
+                            //
+                            //     padding: const EdgeInsets.symmetric(
+                            //         horizontal: 10, vertical: 10),
+                            //     decoration: BoxDecoration(
+                            //         borderRadius: BorderRadius.circular(4),
+                            //         border: Border.all(
+                            //             color: const Color(0xffE6E6E6),
+                            //             width: 1)),
+                            //     child:Column(
+                            //       crossAxisAlignment: CrossAxisAlignment.start,
+                            //       children: [
+                            //         Row(
+                            //           // mainAxisAlignment: MainAxisAlignment.end,
+                            //           children: [
+                            //             controller.userList[index]
+                            //             ['photo'] ==
+                            //                 ""
+                            //                 ? Image.asset(
+                            //               'assets/images/user_profile.png',
+                            //               color: Colors.black54,
+                            //               height: 80,
+                            //               width: 80,
+                            //             )
+                            //                 : SizedBox(
+                            //               height: 80,
+                            //               width: 80,
+                            //               child: ClipRRect(
+                            //                   borderRadius:
+                            //                   BorderRadius.circular(
+                            //                       50.0),
+                            //                   child: Image.memory(
+                            //                     base64Decode(controller
+                            //                         .userList[
+                            //                     index]['photo']),
+                            //                     fit: BoxFit.cover,
+                            //                   )
+                            //               ),
+                            //
+                            //             ),
+                            //             Column(
+                            //               crossAxisAlignment: CrossAxisAlignment.start,
+                            //               // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            //               children: [
+                            //                 _keyValue(
+                            //                     "Name",
+                            //                     controller.userList[index]
+                            //                     ['name'] ??
+                            //                         ''),
+                            //                 const SizedBox(
+                            //                   height: 5,
+                            //                 ),
+                            //                 _keyValue(
+                            //                     "Authoriy",
+                            //                     controller.userList[index]
+                            //                     ['user_type'] ??
+                            //                         ''),
+                            //               ],
+                            //             ),
+                            //
+                            //
+                            //             const SizedBox(
+                            //               height: 10,
+                            //             ),
+                            //
+                            //             // Row(
+                            //             //   children: [
+                            //             //     InkWell(
+                            //             //       onTap: () {
+                            //             //         Get.to(AddUser(
+                            //             //           model: controller.userList[index],
+                            //             //         ));
+                            //             //       },
+                            //             //       borderRadius: BorderRadius.circular(5),
+                            //             //       child: Container(
+                            //             //         padding: const EdgeInsets.all(6),
+                            //             //         decoration: BoxDecoration(
+                            //             //             border: Border.all(
+                            //             //                 color:
+                            //             //                     const Color(0xffC9C9C9)),
+                            //             //             borderRadius:
+                            //             //                 BorderRadius.circular(5)),
+                            //             //         child: const Icon(
+                            //             //           Icons.edit,
+                            //             //           color: Color(0xff555555),
+                            //             //         ),
+                            //             //       ),
+                            //             //     ),
+                            //             //     const SizedBox(width: 10),
+                            //             //     InkWell(
+                            //             //       onTap: () {
+                            //             //         CustomDialogBox.showDeleteDialog(
+                            //             //           context: context,
+                            //             //           bodyText:
+                            //             //               "Do you really want to cancel these records? This process cannot be undone.",
+                            //             //           onCancelTap: () {
+                            //             //             Get.back();
+                            //             //           },
+                            //             //           onDeleteTap: () {
+                            //             //             setState(() {
+                            //             //               controller.deleteUser(controller
+                            //             //                   .userList[index]['id']);
+                            //             //               controller.userList
+                            //             //                   .removeAt(index);
+                            //             //               Get.back();
+                            //             //             });
+                            //             //           },
+                            //             //         );
+                            //             //       },
+                            //             //       borderRadius: BorderRadius.circular(5),
+                            //             //       child: Container(
+                            //             //         padding: const EdgeInsets.all(6),
+                            //             //         decoration: BoxDecoration(
+                            //             //             border: Border.all(
+                            //             //                 color:
+                            //             //                     const Color(0xffC9C9C9)),
+                            //             //             borderRadius:
+                            //             //                 BorderRadius.circular(5)),
+                            //             //         child: const Icon(
+                            //             //           Icons.delete,
+                            //             //           color: Color(0xff555555),
+                            //             //         ),
+                            //             //       ),
+                            //             //     ),
+                            //             //   ],
+                            //             // )
+                            //           ],
+                            //         ),
+                            //
+                            //         Row(
+                            //           // mainAxisAlignment:
+                            //           // MainAxisAlignment.end,
+                            //           children: [
+                            //             SmallButton(
+                            //               title: " View ",
+                            //               textColor: AppColor.selectColor,
+                            //               onTap: () {
+                            //                 Get.to(AddUser(
+                            //                     isView: true,
+                            //                     model: controller
+                            //                         .userList[index]));
+                            //               },
+                            //             ),
+                            //             const SizedBox(
+                            //               width: 10,
+                            //             ),
+                            //             SmallButton(
+                            //                 title: "Edit",
+                            //                 onTap: () {
+                            //                   Get.to(AddUser(
+                            //                     model: controller
+                            //                         .userList[index],
+                            //                   ));
+                            //                 },
+                            //                 textColor:
+                            //                 const Color(0xff555555)),
+                            //             const SizedBox(
+                            //               width: 10,
+                            //             ),
+                            //             SmallButton(
+                            //                 title: "Delete",
+                            //                 onTap: () {
+                            //                   CustomDialogBox
+                            //                       .showDeleteDialog(
+                            //                     context: context,
+                            //                     bodyText:
+                            //                     "Do you really want to cancel these records? This process cannot be undone.",
+                            //                     onCancelTap: () {
+                            //                       Get.back();
+                            //                     },
+                            //                     onDeleteTap: () {
+                            //                       setState(() {
+                            //                         controller.deleteUser(
+                            //                             controller.userList[
+                            //                             index]['id']);
+                            //                         controller.userList
+                            //                             .removeAt(index);
+                            //                         Get.back();
+                            //                       });
+                            //                     },
+                            //                   );
+                            //                 },
+                            //                 textColor:
+                            //                 const Color(0xffB50A0A)),
+                            //           ],
+                            //         )
+                            //       ],
+                            //     )
+                            // );
                           },
                         ),
                         SizedBox(

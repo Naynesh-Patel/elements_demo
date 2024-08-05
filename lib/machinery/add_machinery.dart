@@ -74,6 +74,7 @@ class _AddMachineryState extends State<AddMachinery> {
           'controller': TextEditingController(text: jsonList[i]['qty'])
         });
       }
+      debugPrint(jsonList.toString());
     } else {
       controller.machineNameTextEditingController.clear();
       controller.qtyTextEditingController.clear();
