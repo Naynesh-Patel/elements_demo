@@ -70,7 +70,7 @@ class _AddUserState extends State<AddUser> {
             Get.back();
           },
           title: widget.isView
-              ? "User View Deatils"
+              ? "User View Details"
               : widget.model != null
                   ? "Update User Details"
                   : "Add User",
@@ -175,11 +175,11 @@ class _AddUserState extends State<AddUser> {
                     verticalSpacing(),
                     WidgetDropDownFromField(
                       hintText: "Select User Role",
+                      enable: widget.isView ? false : true,
                       // hintText: controller.usersRoleTextEditingController.text,
                       labelText: "User Role",
                       itemList: const ["Salesman", "Worker", "Manager"],
-                      value: controller
-                          .usersRoleTextEditingController.text.capitalizeFirst!,
+                      value: controller.usersRoleTextEditingController.text.capitalizeFirst!,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       onTap: (value) {
                         controller.usersRoleTextEditingController.text = value;
@@ -193,11 +193,17 @@ class _AddUserState extends State<AddUser> {
                     verticalSpacing(),
                     CustomTextField(
                         // focusNode: FocusNode(),
-                        // readOnly: true,
-                        onTap: () {
-                          Get.to(const SelectCompany());
-                        },
+                        readOnly: true,
+                         enable: widget.isView ? false : true,
+                      onTap: () {
+                        Get.to(const SelectCompany())?.then((val){
+                          _formKey.currentState!.validate();
+                        });
+                      },
+                      // enable: false,
+                      showCursor: false,
                         hintText: "Select Company",
+                        labelText: "Company",
                         textEditingController: companyController
                             .selectCompanyTextEditingController,
                         // autoValidateMode: AutovalidateMode.onUserInteraction,
@@ -219,6 +225,7 @@ class _AddUserState extends State<AddUser> {
                       hintText: "Name",
                       labelText: "User Name",
                       textCapitalization: TextCapitalization.words,
+                      enable:  widget.isView ? false : true,
                       validator: (value) {
                         if (value!.isEmpty) {
                           return "Please Enter User Name";
@@ -237,11 +244,14 @@ class _AddUserState extends State<AddUser> {
                       hintText: "99656 25693",
                       labelText: "Contact No.",
                       maxLength: 10,
+                      enable:  widget.isView ? false : true,
                       autoValidateMode: AutovalidateMode.onUserInteraction,
                       validator: (value) {
                         if (value!.isEmpty) {
                           return "Please Enter Contact No";
-                        } else {
+                        } else if(value.length != 10){
+                          return "Please Enter 10 Digits Contact No";
+                        }else {
                           return null;
                         }
                       },
@@ -251,9 +261,10 @@ class _AddUserState extends State<AddUser> {
                       textEditingController:
                           controller.addressTextEditingController,
                       textCapitalization: TextCapitalization.words,
-                      hintText: "Surat,Gujrat",
+                      hintText: "Surat,Gujarat",
                       labelText: "Address",
                       autoValidateMode: AutovalidateMode.onUserInteraction,
+                      enable:  widget.isView ? false : true,
                       validator: (value) {
                         if (value!.isEmpty) {
                           return "Please Enter Address";
