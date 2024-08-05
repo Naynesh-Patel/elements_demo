@@ -62,6 +62,7 @@ class _ManageUserRoleState extends State<ManageUserRole> {
                           userController.isShowAllowItems.value = true;
                         }
                       },
+
                       labelText: "User",
                       hintText: "Select User",
                       textEditingController:
