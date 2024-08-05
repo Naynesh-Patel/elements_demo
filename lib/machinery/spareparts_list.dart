@@ -47,61 +47,80 @@ class _SparepartListState extends State<SparepartList> {
                   physics: const BouncingScrollPhysics(),
                   padding: const EdgeInsets.symmetric(vertical: 16.0),
                   itemBuilder: (context, index) {
-                    return Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: IntrinsicHeight(
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              child: Text(
-                                  sparepartsController.sparepartsList[index]
-                                          ['name'] ??
-                                      ''.toString(),
-                                  style:
-                                      AppTextStyle.textStyleRegular16.copyWith(
-                                    color: const Color(0xff272727),
-                                  )),
-                            ),
-                            InkWell(
-                              borderRadius: BorderRadius.circular(6.0),
-                              onTap: () {
-                                if (sparepartsController.sparepartsList[index]
-                                        ['isSelect'] ==
-                                    null) {
-                                  sparepartsController.sparepartsList[index]
-                                      ['isSelect'] = true;
-                                } else if (sparepartsController
-                                        .sparepartsList[index]['isSelect'] ==
-                                    true) {
-                                  sparepartsController.sparepartsList[index]
-                                      ['isSelect'] = false;
-                                } else {
-                                  sparepartsController.sparepartsList[index]
-                                      ['isSelect'] = true;
-                                }
-                                setState(() {});
-                              },
-                              child: Container(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 4.0, vertical: 4.0),
-                                decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: AppColor.dropDownHintColor),
-                                    borderRadius: BorderRadius.circular(6.0)),
-                                child: Obx(() => Icon(
-                                      Icons.check_rounded,
-                                      size: 14,
-                                      color: sparepartsController
-                                                      .sparepartsList[index]
-                                                  ['isSelect'] ??
-                                              false
-                                          ? AppColor.blackColor
-                                          : Colors.transparent,
+                    return InkWell(
+                      onTap: (){
+                        if (sparepartsController.sparepartsList[index]
+                        ['isSelect'] ==
+                            null) {
+                          sparepartsController.sparepartsList[index]
+                          ['isSelect'] = true;
+                        } else if (sparepartsController
+                            .sparepartsList[index]['isSelect'] ==
+                            true) {
+                          sparepartsController.sparepartsList[index]
+                          ['isSelect'] = false;
+                        } else {
+                          sparepartsController.sparepartsList[index]
+                          ['isSelect'] = true;
+                        }
+                        setState(() {});
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: IntrinsicHeight(
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                child: Text(
+                                    sparepartsController.sparepartsList[index]
+                                    ['name'] ??
+                                        ''.toString(),
+                                    style:
+                                    AppTextStyle.textStyleRegular16.copyWith(
+                                      color: const Color(0xff272727),
                                     )),
                               ),
-                            ),
-                          ],
+                              InkWell(
+                                borderRadius: BorderRadius.circular(6.0),
+                                onTap: () {
+                                  if (sparepartsController.sparepartsList[index]
+                                  ['isSelect'] ==
+                                      null) {
+                                    sparepartsController.sparepartsList[index]
+                                    ['isSelect'] = true;
+                                  } else if (sparepartsController
+                                      .sparepartsList[index]['isSelect'] ==
+                                      true) {
+                                    sparepartsController.sparepartsList[index]
+                                    ['isSelect'] = false;
+                                  } else {
+                                    sparepartsController.sparepartsList[index]
+                                    ['isSelect'] = true;
+                                  }
+                                  setState(() {});
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 4.0, vertical: 4.0),
+                                  decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: AppColor.dropDownHintColor),
+                                      borderRadius: BorderRadius.circular(6.0)),
+                                  child: Obx(() => Icon(
+                                    Icons.check_rounded,
+                                    size: 14,
+                                    color: sparepartsController
+                                        .sparepartsList[index]
+                                    ['isSelect'] ??
+                                        false
+                                        ? AppColor.blackColor
+                                        : Colors.transparent,
+                                  )),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     );

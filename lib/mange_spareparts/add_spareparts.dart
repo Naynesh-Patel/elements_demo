@@ -140,13 +140,13 @@ class _AddSparepartsState extends State<AddSpareparts> {
                     children: [
                       Text(
                         "Total Qty : ",
-                        style: AppTextStyle.textStyleLight14
-                            .copyWith(color: AppColor.dropDownHintColor),
+                        style: AppTextStyle.textStyleBold14
+                            .copyWith(color: AppColor.blackColor),
                       ),
                       Expanded(
                           child: Text(
                         sparepartsController.totalQtyTextEditingController.text,
-                        style: AppTextStyle.textStyleLight14
+                        style: AppTextStyle.textStyleBold14
                             .copyWith(color: AppColor.dropDownHintColor),
                       )),
                       // OutlinedButton(
