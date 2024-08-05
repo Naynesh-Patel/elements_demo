@@ -149,7 +149,7 @@ class _AddUserState extends State<AddUser> {
                                             // controller.imgFile!,
                                             fit: BoxFit.cover,
                                           ))),
-                          InkWell(
+                          !widget.isView ? InkWell(
                             onTap: () async {
                               bool refresh =
                                   await controller.pickImageFromGallery();
@@ -168,7 +168,7 @@ class _AddUserState extends State<AddUser> {
                                   color: Colors.white,
                                   size: 18,
                                 )),
-                          )
+                          ) : const SizedBox.shrink()
                         ],
                       ),
                     ),
