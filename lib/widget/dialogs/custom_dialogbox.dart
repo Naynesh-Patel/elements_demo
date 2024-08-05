@@ -188,7 +188,7 @@ class CustomDialogBox {
                               height: 60,
                               width: 60,
                               padding: const EdgeInsets.all(16.0),
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                   shape: BoxShape.circle,
                                   color: AppColor.buttonColor),
                               child: Image.asset(
