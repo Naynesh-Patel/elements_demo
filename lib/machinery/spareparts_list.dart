@@ -22,7 +22,7 @@ class _SparepartListState extends State<SparepartList> {
   @override
   void initState() {
     super.initState();
-    sparepartsController.getSpareparts();
+    sparepartsController.getSpareparts(isMultiSelection: true);
   }
 
   SparepartsController sparepartsController = Get.find();
@@ -131,38 +131,41 @@ class _SparepartListState extends State<SparepartList> {
                     );
                   },
                 )),
-      bottomNavigationBar: CustomButton(
-          color: AppColor.buttonColor,
-          buttonText: "Done",
-          onTap: () {
-            // List<> spareparts = [
-            //   {
-            //     'id': '',
-            //     'name': '',
-            //     'name': '',
-            //
-            //   }
-            // ];
-            sparepartsController.selectSparepartsList.clear();
-            for (int i = 0;
-                i < sparepartsController.sparepartsList.length;
-                i++) {
-              if (sparepartsController.sparepartsList[i]['isSelect'] == true) {
-                Map<String, dynamic> d = {
-                  'id': sparepartsController.sparepartsList[i]['id'],
-                  'name': sparepartsController.sparepartsList[i]['name'],
-                  'controller': TextEditingController(),
-                };
-                sparepartsController.selectSparepartsList.add(d);
+      bottomNavigationBar: Obx(()=> sparepartsController.isGetSparepartsLoading.value || sparepartsController.sparepartsList.isEmpty ? const SizedBox.shrink() : Container(
+        margin: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 10.0),
+        child: CustomButton(
+            color: AppColor.buttonColor,
+            buttonText: "Done",
+            onTap: () {
+              // List<> spareparts = [
+              //   {
+              //     'id': '',
+              //     'name': '',
+              //     'name': '',
+              //
+              //   }
+              // ];
+              sparepartsController.selectSparepartsList.clear();
+              for (int i = 0;
+              i < sparepartsController.sparepartsList.length;
+              i++) {
+                if (sparepartsController.sparepartsList[i]['isSelect'] == true) {
+                  Map<String, dynamic> d = {
+                    'id': sparepartsController.sparepartsList[i]['id'],
+                    'name': sparepartsController.sparepartsList[i]['name'],
+                    'controller': TextEditingController(),
+                  };
+                  sparepartsController.selectSparepartsList.add(d);
+                }
               }
-            }
-            // sparepartsController.selectSparepartsList.value =
-            //     sparepartsController.sparepartsList
-            //         .where((item) => item['isSelect'] == true)
-            //         .toList();
-            Get.back();
-          },
-          isLoading: false.obs),
+              // sparepartsController.selectSparepartsList.value =
+              //     sparepartsController.sparepartsList
+              //         .where((item) => item['isSelect'] == true)
+              //         .toList();
+              Get.back();
+            },
+            isLoading: false.obs),
+      ) ),
     );
   }
 }

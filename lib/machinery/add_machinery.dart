@@ -78,6 +78,7 @@ class _AddMachineryState extends State<AddMachinery> {
       controller.qtyTextEditingController.clear();
       controller.manufactureDurationTextEditingController.clear();
       controller.machinetypeEditingController.clear();
+      sparepartsController.selectSparepartsList.clear();
     }
     super.initState();
   }
@@ -273,7 +274,7 @@ class _AddMachineryState extends State<AddMachinery> {
           //   ),
           // ),
           Obx(
-                () => ListView.builder(
+                () => ListView.separated(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemCount: sparepartsController.selectSparepartsList.length,
@@ -497,7 +498,7 @@ class _AddMachineryState extends State<AddMachinery> {
                   ],
 
                 );
-              },
+              }, separatorBuilder: (BuildContext context, int index) { return SizedBox(height: 15,) ;},
             ),
           ),
         ],
@@ -600,7 +601,7 @@ class _AddMachineryState extends State<AddMachinery> {
               height: 16,
             ),
             Obx(
-              () => ListView.builder(
+              () => ListView.separated(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: sparepartsController.selectSparepartsList.length,
@@ -758,76 +759,76 @@ class _AddMachineryState extends State<AddMachinery> {
                   //     ],
                   //   ),
                   // );
-                  return  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                    Expanded(
-                      flex: 2,
-
-                      child:   Padding(
-                        padding: EdgeInsets.only(bottom: 20),
-                        child: Text(sparepartsController.selectSparepartsList[index]
+                  return  Container(
+                    // color: Colors.yellow,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                      Expanded(
+                        flex: 2,
+                        child:   Text(sparepartsController.selectSparepartsList[index]
                         ['name'] ??
-                            ''.capitalizeFirst.toString()),
-                      )
-                    ),
-                      // Text('${index + 1}'),
-                     Expanded(child:  CustomTextField(
-                       hintText: "Qty",
-
-                       onTap: () {
-                         // if (sparepartsController
-                         //             .sparepartsList[index]
-                         //         ['isSelect'] ==
-                         //     null) {
-                         //   sparepartsController.sparepartsList[index]
-                         //       ['isSelect'] = true;
-                         // } else if (sparepartsController
-                         //             .selectSparepartsList[index]
-                         //         ['isSelect'] ==
-                         //     true) {
-                         //   sparepartsController.selectSparepartsList[index]
-                         //       ['isSelect'] = false;
-                         // } else {
-                         //   sparepartsController.selectSparepartsList[index]
-                         //       ['isSelect'] = true;
-                         // }
-                         // setState(() {});
-                       },
-                       textEditingController: sparepartsController
-                           .selectSparepartsList[index]['controller'],
-                       textInputType: TextInputType.number,
-                       validator: (value) {
-                         if (value!.isEmpty) {
-                           return "";
-                         } else {
-                           return null;
-                         }
-                       },
-                       autoValidateMode:
-                       AutovalidateMode.onUserInteraction,
-                     ),),
-
-                      const SizedBox(
-                        width: 12,
+                            ''.capitalizeFirst.toString())
                       ),
-                     Padding(padding: EdgeInsets.only(bottom: 20),child:  InkWell(
-                       onTap: () {
-                         sparepartsController.selectSparepartsList
-                             .removeAt(index);
-                       },
-                       borderRadius: BorderRadius.circular(5),
-                       child: Image.asset(
-                         "assets/images/remove.png",
-                         color: Colors.red,
-                         height: 20,
-                       ),
-                     ),)
-                    ],
+                        // Text('${index + 1}'),
+                       Expanded(child:  CustomTextField(
+                         hintText: "Qty",
+                         onTap: () {
+                           // if (sparepartsController
+                           //             .sparepartsList[index]
+                           //         ['isSelect'] ==
+                           //     null) {
+                           //   sparepartsController.sparepartsList[index]
+                           //       ['isSelect'] = true;
+                           // } else if (sparepartsController
+                           //             .selectSparepartsList[index]
+                           //         ['isSelect'] ==
+                           //     true) {
+                           //   sparepartsController.selectSparepartsList[index]
+                           //       ['isSelect'] = false;
+                           // } else {
+                           //   sparepartsController.selectSparepartsList[index]
+                           //       ['isSelect'] = true;
+                           // }
+                           // setState(() {});
+                         },
+                         textEditingController: sparepartsController
+                             .selectSparepartsList[index]['controller'],
+                         textInputType: TextInputType.number,
+                         validator: (value) {
+                           if (value!.isEmpty) {
+                             return "";
+                           } else {
+                             return null;
+                           }
+                         },
+                         autoValidateMode:
+                         AutovalidateMode.onUserInteraction,
+                       ),),
 
+                        const SizedBox(
+                          width: 12,
+                        ),
+                       InkWell(
+                         onTap: () {
+                           sparepartsController.selectSparepartsList
+                               .removeAt(index);
+                         },
+                         borderRadius: BorderRadius.circular(5),
+                         child: Image.asset(
+                           "assets/images/remove.png",
+                           color: Colors.red,
+                           height: 20,
+                         ),
+                       )
+                      ],
+
+                    ),
                   );
-                },
+                }, separatorBuilder: (BuildContext context, int index) { return const SizedBox(
+                height: 15,
+              ); },
               ),
             ),
           ],

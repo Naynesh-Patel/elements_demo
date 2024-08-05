@@ -78,7 +78,7 @@ class SparepartsController extends GetxController {
     }
   }
 
-  Future getSpareparts() async {
+  Future getSpareparts({bool isMultiSelection = false}) async {
     try {
       String url = "${baseURL}sparepart/getAll";
       log("API => $url");
@@ -89,6 +89,9 @@ class SparepartsController extends GetxController {
         var responseData = jsonDecode(response.body);
         List jobData = responseData["data"];
         sparepartsList.value = jobData;
+        if(isMultiSelection){
+          containValueIsExitOrNot();
+        }
       } else {
         debugPrint("statusCode${response.statusCode}");
         isGetSparepartsLoading.value = false;
@@ -175,4 +178,17 @@ class SparepartsController extends GetxController {
       isDeleteSparepartsLoading.value = false;
     }
   }
+
+
+  containValueIsExitOrNot(){
+    for(int i =0; i< selectSparepartsList.length;i++){
+      int index = sparepartsList.indexWhere((item) => item["id"] == selectSparepartsList[i]['id']);
+      if(index != -1){
+        sparepartsList[index]['isSelect'] = true;
+      }
+    }
+
+  }
+
+
 }
