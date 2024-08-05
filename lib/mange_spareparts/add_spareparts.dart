@@ -123,6 +123,7 @@ class _AddSparepartsState extends State<AddSpareparts> {
                     textEditingController:
                         sparepartsController.newqtyTypeTextEditingController,
                     hintText: "New Qty",
+                    autofocus: true,
                     labelText: "Please Enter Add New Qty",
                     onChange: (p0) {
                       if (p0.isEmpty) {
@@ -175,6 +176,7 @@ class _AddSparepartsState extends State<AddSpareparts> {
                         sparepartsController.qtyTypeTextEditingController,
                     hintText: "Qty",
                     labelText: "Qty",
+
                     // enable: false,
                     textInputType: TextInputType.number,
                     focusNode: sparepartsController.sparepartsQtyFocusNode,
