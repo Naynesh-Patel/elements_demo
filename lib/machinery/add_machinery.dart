@@ -65,6 +65,8 @@ class _AddMachineryState extends State<AddMachinery> {
       controller.sparepartsTextEditingController.text =
           widget.model['name'] ?? '';
       List<dynamic> jsonList = jsonDecode(widget.model['spareparts']);
+      debugPrint("LENGTH => ${jsonList.length}");
+      sparepartsController.selectSparepartsList.clear();
       for (int i = 0; i < jsonList.length; i++) {
         sparepartsController.selectSparepartsList.add({
           'id': jsonList[i]['id'],
@@ -72,7 +74,6 @@ class _AddMachineryState extends State<AddMachinery> {
           'controller': TextEditingController(text: jsonList[i]['qty'])
         });
       }
-      debugPrint(jsonList.toString());
     } else {
       controller.machineNameTextEditingController.clear();
       controller.qtyTextEditingController.clear();
@@ -108,7 +109,7 @@ class _AddMachineryState extends State<AddMachinery> {
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 child: CustomButton(
                   color: AppColor.buttonColor,
-                  isLoading: false.obs,
+                  isLoading: controller.isMachineryLoading,
                   buttonText: widget.model != null ? "Update" : "Add",
                   onTap: () {
                     if (_formKey.currentState!.validate()) {
@@ -448,6 +449,7 @@ class _AddMachineryState extends State<AddMachinery> {
                     // Text('${index + 1}'),
                     Expanded(child:  CustomTextField(
                       hintText: "Qty",
+                      enable: false,
                       onTap: () {
                         // if (sparepartsController
                         //             .sparepartsList[index]
@@ -480,9 +482,6 @@ class _AddMachineryState extends State<AddMachinery> {
                       autoValidateMode:
                       AutovalidateMode.onUserInteraction,
                     ),),
-                    const SizedBox(
-                      width: 12,
-                    ),
                     // Padding(padding: EdgeInsets.only(bottom: 20),child:  InkWell(
                     //   onTap: () {
                     //     sparepartsController.selectSparepartsList

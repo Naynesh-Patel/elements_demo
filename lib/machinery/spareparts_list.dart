@@ -3,6 +3,7 @@ import 'package:elements/controller/spareparts_controller.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:elements/widget/button/custom_button.dart';
 import 'package:elements/widget/custom_loader.dart';
+import 'package:elements/widget/custom_text_field.dart';
 import 'package:elements/widget/empty_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,13 +20,14 @@ class SparepartList extends StatefulWidget {
 }
 
 class _SparepartListState extends State<SparepartList> {
+
+  SparepartsController sparepartsController = Get.find();
+
   @override
   void initState() {
     super.initState();
     sparepartsController.getSpareparts(isMultiSelection: true);
   }
-
-  SparepartsController sparepartsController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +38,118 @@ class _SparepartListState extends State<SparepartList> {
         onPressed: () {
           Get.back();
         },
+        action: [
+          IconButton(onPressed: () {
+            showDialog(
+              context: context,
+              barrierDismissible: false, // user must tap button!
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                  contentPadding: EdgeInsets.zero,
+                  backgroundColor: Colors.white,
+                  content: Container(
+                    padding:
+                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          "Add Spareparts",
+                          style: AppTextStyle.textStyleBold16,
+                        ),
+                        const SizedBox(
+                          height: 16.0,
+                        ),
+                        CustomTextField(
+                          textEditingController: sparepartsController.nameTextEditingController,
+                          textCapitalization: TextCapitalization.words,
+                          hintText: "Steel Bolt",
+                          labelText: "Name",
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Please Enter Name";
+                            } else {
+                              return null;
+                            }
+                          },
+                        ),
+                        const SizedBox(
+                          height: 16.0,
+                        ),
+                        CustomTextField(
+                          hintText: "10",
+                          labelText: "Qty",
+                          textInputType: TextInputType.number,
+                          textEditingController: sparepartsController.qtyTypeTextEditingController,
+                        ),
+                        const SizedBox(
+                          height: 16.0,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: InkWell(
+                                onTap:(){
+                                  Get.back();
+                                },
+                                borderRadius: BorderRadius.circular(5),
+                                child: Container(
+                                  width: Get.width,
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                        BorderRadius.circular(5),
+                                        color:Colors.transparent,
+                                        border: Border.all(
+                                            color:
+                                            const Color(0xffC9C9C9))),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 16, vertical: 10),
+                                    child: Text(
+                                        "Cancel",textAlign: TextAlign.center,
+                                        style: AppTextStyle.textStyleRegular14.copyWith(color: AppColor.blackColor)
+                                    )),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 16.0,
+                            ),
+                            Expanded(
+                              child: InkWell(
+                                onTap:(){
+                                  sparepartsController.addSpareparts();
+                                },
+                                borderRadius: BorderRadius.circular(5),
+                                child: Container(
+                                    width: Get.width,
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                        BorderRadius.circular(5),
+                                        color:AppColor.selectColor,
+                                        border: Border.all(
+                                            color:AppColor.selectColor)),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 16, vertical: 10),
+                                    child: Text(
+                                        "Add",textAlign: TextAlign.center,
+                                        style: AppTextStyle.textStyleRegular14.copyWith(color : AppColor.whiteColor,)
+                                    )),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            );
+          }, icon: const Icon(Icons.add,color: AppColor.blackColor,))
+        ],
       ),
       body: Obx(() => sparepartsController.isGetSparepartsLoading.value
           ? const CustomLoader()
@@ -145,27 +259,29 @@ class _SparepartListState extends State<SparepartList> {
               //
               //   }
               // ];
-              sparepartsController.selectSparepartsList.clear();
-              for (int i = 0;
-              i < sparepartsController.sparepartsList.length;
-              i++) {
-                if (sparepartsController.sparepartsList[i]['isSelect'] == true) {
-                  Map<String, dynamic> d = {
-                    'id': sparepartsController.sparepartsList[i]['id'],
-                    'name': sparepartsController.sparepartsList[i]['name'],
-                    'controller': TextEditingController(),
-                  };
-                  sparepartsController.selectSparepartsList.add(d);
-                }
-              }
+              sparepartsController.selectSparepart();
+              // sparepartsController.selectSparepartsList.clear();
+              // for (int i = 0;
+              // i < sparepartsController.sparepartsList.length;
+              // i++) {
+              //   if (sparepartsController.sparepartsList[i]['isSelect'] == true) {
+              //     Map<String, dynamic> d = {
+              //       'id': sparepartsController.sparepartsList[i]['id'],
+              //       'name': sparepartsController.sparepartsList[i]['name'],
+              //       'controller': TextEditingController(),
+              //     };
+              //     sparepartsController.selectSparepartsList.add(d);
+              //   }
+              // }
               // sparepartsController.selectSparepartsList.value =
               //     sparepartsController.sparepartsList
               //         .where((item) => item['isSelect'] == true)
               //         .toList();
-              Get.back();
             },
             isLoading: false.obs),
       ) ),
     );
   }
+
+
 }
