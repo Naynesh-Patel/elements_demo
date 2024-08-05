@@ -87,7 +87,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar:  CustomAppBar(
-        title: 'Select Check-In Date"',
+        title: 'Select Date',
         onPressed: (){
           Get.back();
         },

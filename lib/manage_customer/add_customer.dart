@@ -133,7 +133,7 @@ class _AddCustomerState extends State<AddCustomer> {
                                   height: 120,
                                   width: 120,
                                   child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(50.0),
+                                    borderRadius: BorderRadius.circular(60.0),
                                     child: Image.memory(
                                       base64Decode(controller.base64Image),
                                       fit: BoxFit.cover,
@@ -353,7 +353,7 @@ class _AddCustomerState extends State<AddCustomer> {
                         height: 120,
                         width: 120,
                         child: ClipRRect(
-                          borderRadius: BorderRadius.circular(50.0),
+                          borderRadius: BorderRadius.circular(60.0),
                           child: Image.memory(
                             base64Decode(controller.base64Image),
                             fit: BoxFit.cover,
