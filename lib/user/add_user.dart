@@ -125,6 +125,7 @@ class _AddUserState extends State<AddUser> {
                                       height: 120,
                                       width: 120,
                                       child: ClipRRect(
+
                                           borderRadius:
                                               BorderRadius.circular(60.0),
                                           child: Image.file(
