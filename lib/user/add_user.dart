@@ -86,11 +86,11 @@ class _AddUserState extends State<AddUser> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Add Profile :',
-                      style: AppTextStyle.textStyleRegular16
-                          .copyWith(color: AppColor.blackLightColor),
-                    ),
+                    // Text(
+                    //   'Add Profile :',
+                    //   style: AppTextStyle.textStyleRegular16
+                    //       .copyWith(color: AppColor.blackLightColor),
+                    // ),
                     const SizedBox(
                       height: 15,
                     ),
@@ -104,26 +104,26 @@ class _AddUserState extends State<AddUser> {
                                       ? Image.asset(
                                           'assets/images/user_profile.png',
                                           color: Colors.black54,
-                                          height: 80,
-                                          width: 80,
+                                          height: 100,
+                                          width: 100,
                                         )
                                       : SizedBox(
-                                          height: 80,
-                                          width: 80,
+                                          height: 100,
+                                          width: 100,
                                           child: ClipRRect(
                                             borderRadius:
                                                 BorderRadius.circular(50.0),
                                             child: Image.memory(
                                               base64Decode( controller.base64Image),
                                               fit: BoxFit.cover,
-                                              height: 80,
-                                              width: 80,
+                                              height: 100,
+                                              width: 100,
                                             ),
                                           ),
                                         )
                                   : SizedBox(
-                                      height: 80,
-                                      width: 80,
+                                      height: 100,
+                                      width: 100,
                                       child: ClipRRect(
                                           borderRadius:
                                               BorderRadius.circular(50.0),
@@ -135,12 +135,12 @@ class _AddUserState extends State<AddUser> {
                               : controller.imgFile == null
                                   ? Image.asset(
                                       'assets/images/camera.png',
-                                      height: 80,
-                                      width: 80,
+                                      height: 100,
+                                      width: 100,
                                     )
                                   : SizedBox(
-                                      height: 80,
-                                      width: 80,
+                                      height: 100,
+                                      width: 100,
                                       child: ClipRRect(
                                           borderRadius:
                                               BorderRadius.circular(50.0),

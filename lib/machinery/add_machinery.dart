@@ -273,233 +273,232 @@ class _AddMachineryState extends State<AddMachinery> {
           //     },
           //   ),
           // ),
-          Obx(
-                () => ListView.separated(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: sparepartsController.selectSparepartsList.length,
-              itemBuilder: (context, index) {
-                // return ListTile(
-                //   contentPadding: const EdgeInsets.all(0),
-                //   // leading: InkWell(
-                //   //   borderRadius: BorderRadius.circular(6.0),
-                //   //   onTap: () {
-                //   //     controller.isSelect.value =
-                //   //         !controller.isSelect.value;
-                //   //   },
-                //   //   child: Container(
-                //   //     padding: const EdgeInsets.symmetric(
-                //   //         horizontal: 4.0, vertical: 4.0),
-                //   //     decoration: BoxDecoration(
-                //   //         border: Border.all(
-                //   //             color: AppColor.dropDownHintColor),
-                //   //         borderRadius: BorderRadius.circular(6.0)),
-                //   //     child: Obx(() => Icon(
-                //   //           Icons.check_rounded,
-                //   //           size: 14,
-                //   //           color: controller.isSelect.value
-                //   //               ? AppColor.blackColor
-                //   //               : Colors.transparent,
-                //   //         )),
-                //   //   ),
-                //   // ),
-                //   title: Row(
-                //     children: [
-                //       Text(sparepartsController.selectSparepartsList[index]
-                //               ['name'] ??
-                //           ''.capitalizeFirst.toString()),
-                //       // Text('${index + 1}'),
-                //     ],
-                //   ),
-                //   trailing: Row(
-                //     mainAxisSize: MainAxisSize.min,
-                //     children: [
-                //       Container(
-                //         width: 115,
-                //         height: 42,
-                //         decoration: BoxDecoration(
-                //             borderRadius: BorderRadius.circular(4),
-                //             border:
-                //                 Border.all(color: const Color(0xffD1D1D1))),
-                //         child: CustomTextField(
-                //           onTap: () {
-                //             // if (sparepartsController
-                //             //             .sparepartsList[index]
-                //             //         ['isSelect'] ==
-                //             //     null) {
-                //             //   sparepartsController.sparepartsList[index]
-                //             //       ['isSelect'] = true;
-                //             // } else if (sparepartsController
-                //             //             .selectSparepartsList[index]
-                //             //         ['isSelect'] ==
-                //             //     true) {
-                //             //   sparepartsController.selectSparepartsList[index]
-                //             //       ['isSelect'] = false;
-                //             // } else {
-                //             //   sparepartsController.selectSparepartsList[index]
-                //             //       ['isSelect'] = true;
-                //             // }
-                //             // setState(() {});
-                //           },
-                //           textEditingController: sparepartsController
-                //               .selectSparepartsList[index]['controller'],
-                //           textInputType: TextInputType.number,
-                //           validator: (value) {
-                //             if (value!.isEmpty) {
-                //               return "";
-                //             } else {
-                //               return null;
-                //             }
-                //           },
-                //           autoValidateMode:
-                //               AutovalidateMode.onUserInteraction,
-                //         ),
-                //         // TextField(
-                //         //   onTap: () {
-                //         //     // if (sparepartsController
-                //         //     //         .sparepartsList[index]
-                //         //     //         .isSelected
-                //         //     //         .value ==
-                //         //     //     false) {
-                //         //     //   sparepartsController.sparepartsList[index]
-                //         //     //       .isSelected.value = true;
-                //         //     // } else {
-                //         //     //   sparepartsController.sparepartsList[index]
-                //         //     //       .isSelected.value = true;
-                //         //     // }
-                //         //     // debugPrint(
-                //         //     //     "Select = ${sparepartsController.sparepartsList[index].isSelected.value}");
-                //         //     if (sparepartsController
-                //         //                 .sparepartsList[index]
-                //         //             ['isSelect'] ==
-                //         //         null) {
-                //         //       sparepartsController.sparepartsList[index]
-                //         //           ['isSelect'] = true;
-                //         //     } else if (sparepartsController
-                //         //                 .sparepartsList[index]
-                //         //             ['isSelect'] ==
-                //         //         true) {
-                //         //       sparepartsController.sparepartsList[index]
-                //         //           ['isSelect'] = false;
-                //         //     } else {
-                //         //       sparepartsController.sparepartsList[index]
-                //         //           ['isSelect'] = true;
-                //         //     }
-                //         //     setState(() {});
-                //         //   },
-                //         //   keyboardType:
-                //         //       const TextInputType.numberWithOptions(),
-                //         //   maxLength: 3,
-                //         //   textAlignVertical: TextAlignVertical.center,
-                //         //   textAlign: TextAlign.center,
-                //         //   controller: sparepartsController.qtyTypeTextEditingController.map((controller) => controller.text).toList(),
-                //         //   decoration: InputDecoration(
-                //         //       counterText: '',
-                //         //       border: InputBorder.none,
-                //         //       contentPadding:
-                //         //           const EdgeInsets.symmetric(
-                //         //               horizontal: 8.0, vertical: 13),
-                //         //       // hintText: sparepartsController
-                //         //       //             .selectSparepartsList[index]
-                //         //       //         ['qty'] ??
-                //         //       //     '',
-                //         //       helperStyle: AppTextStyle.textStyleLight16
-                //         //           .copyWith(
-                //         //               color:
-                //         //                   AppColor.dropDownHintColor),
-                //         //       hintStyle: AppTextStyle.textStyleLight14
-                //         //           .copyWith(
-                //         //               color:
-                //         //                   AppColor.dropDownHintColor)),
-                //         // ),
-                //       ),
-                //
-                //       const SizedBox(
-                //         width: 12,
-                //       ),
-                //       InkWell(
-                //         onTap: () {
-                //           sparepartsController.selectSparepartsList
-                //               .removeAt(index);
-                //         },
-                //         borderRadius: BorderRadius.circular(5),
-                //         child: Image.asset(
-                //           "assets/images/remove.png",
-                //           color: Colors.red,
-                //           height: 20,
-                //         ),
-                //       ),
-                //     ],
-                //   ),
-                // );
-                return  Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Expanded(
-                        flex: 2,
-                        child:   Padding(
-                          padding: const EdgeInsets.only(bottom: 20),
-                          child: Text(sparepartsController.selectSparepartsList[index]
-                          ['name'] ??
-                              ''.capitalizeFirst.toString()),
-                        )
-                    ),
-                    // Text('${index + 1}'),
-                    Expanded(child:  CustomTextField(
-                      hintText: "Qty",
-                      onTap: () {
-                        // if (sparepartsController
-                        //             .sparepartsList[index]
-                        //         ['isSelect'] ==
-                        //     null) {
-                        //   sparepartsController.sparepartsList[index]
-                        //       ['isSelect'] = true;
-                        // } else if (sparepartsController
-                        //             .selectSparepartsList[index]
-                        //         ['isSelect'] ==
-                        //     true) {
-                        //   sparepartsController.selectSparepartsList[index]
-                        //       ['isSelect'] = false;
-                        // } else {
-                        //   sparepartsController.selectSparepartsList[index]
-                        //       ['isSelect'] = true;
-                        // }
-                        // setState(() {});
-                      },
-                      textEditingController: sparepartsController
-                          .selectSparepartsList[index]['controller'],
-                      textInputType: TextInputType.number,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "";
-                        } else {
-                          return null;
-                        }
-                      },
-                      autoValidateMode:
-                      AutovalidateMode.onUserInteraction,
-                    ),),
-                    const SizedBox(
-                      width: 12,
-                    ),
-                    // Padding(padding: EdgeInsets.only(bottom: 20),child:  InkWell(
-                    //   onTap: () {
-                    //     sparepartsController.selectSparepartsList
-                    //         .removeAt(index);
-                    //   },
-                    //   borderRadius: BorderRadius.circular(5),
-                    //   child: Image.asset(
-                    //     "assets/images/remove.png",
-                    //     color: Colors.red,
-                    //     height: 20,
-                    //   ),
-                    // ),)
-                  ],
+          Obx(  () => ListView.separated(
+            shrinkWrap: true,
+            physics:  const NeverScrollableScrollPhysics(),
+            itemCount: sparepartsController.selectSparepartsList.length,
+            itemBuilder: (context, index) {
+              // return ListTile(
+              //   contentPadding: const EdgeInsets.all(0),
+              //   // leading: InkWell(
+              //   //   borderRadius: BorderRadius.circular(6.0),
+              //   //   onTap: () {
+              //   //     controller.isSelect.value =
+              //   //         !controller.isSelect.value;
+              //   //   },
+              //   //   child: Container(
+              //   //     padding: const EdgeInsets.symmetric(
+              //   //         horizontal: 4.0, vertical: 4.0),
+              //   //     decoration: BoxDecoration(
+              //   //         border: Border.all(
+              //   //             color: AppColor.dropDownHintColor),
+              //   //         borderRadius: BorderRadius.circular(6.0)),
+              //   //     child: Obx(() => Icon(
+              //   //           Icons.check_rounded,
+              //   //           size: 14,
+              //   //           color: controller.isSelect.value
+              //   //               ? AppColor.blackColor
+              //   //               : Colors.transparent,
+              //   //         )),
+              //   //   ),
+              //   // ),
+              //   title: Row(
+              //     children: [
+              //       Text(sparepartsController.selectSparepartsList[index]
+              //               ['name'] ??
+              //           ''.capitalizeFirst.toString()),
+              //       // Text('${index + 1}'),
+              //     ],
+              //   ),
+              //   trailing: Row(
+              //     mainAxisSize: MainAxisSize.min,
+              //     children: [
+              //       Container(
+              //         width: 115,
+              //         height: 42,
+              //         decoration: BoxDecoration(
+              //             borderRadius: BorderRadius.circular(4),
+              //             border:
+              //                 Border.all(color: const Color(0xffD1D1D1))),
+              //         child: CustomTextField(
+              //           onTap: () {
+              //             // if (sparepartsController
+              //             //             .sparepartsList[index]
+              //             //         ['isSelect'] ==
+              //             //     null) {
+              //             //   sparepartsController.sparepartsList[index]
+              //             //       ['isSelect'] = true;
+              //             // } else if (sparepartsController
+              //             //             .selectSparepartsList[index]
+              //             //         ['isSelect'] ==
+              //             //     true) {
+              //             //   sparepartsController.selectSparepartsList[index]
+              //             //       ['isSelect'] = false;
+              //             // } else {
+              //             //   sparepartsController.selectSparepartsList[index]
+              //             //       ['isSelect'] = true;
+              //             // }
+              //             // setState(() {});
+              //           },
+              //           textEditingController: sparepartsController
+              //               .selectSparepartsList[index]['controller'],
+              //           textInputType: TextInputType.number,
+              //           validator: (value) {
+              //             if (value!.isEmpty) {
+              //               return "";
+              //             } else {
+              //               return null;
+              //             }
+              //           },
+              //           autoValidateMode:
+              //               AutovalidateMode.onUserInteraction,
+              //         ),
+              //         // TextField(
+              //         //   onTap: () {
+              //         //     // if (sparepartsController
+              //         //     //         .sparepartsList[index]
+              //         //     //         .isSelected
+              //         //     //         .value ==
+              //         //     //     false) {
+              //         //     //   sparepartsController.sparepartsList[index]
+              //         //     //       .isSelected.value = true;
+              //         //     // } else {
+              //         //     //   sparepartsController.sparepartsList[index]
+              //         //     //       .isSelected.value = true;
+              //         //     // }
+              //         //     // debugPrint(
+              //         //     //     "Select = ${sparepartsController.sparepartsList[index].isSelected.value}");
+              //         //     if (sparepartsController
+              //         //                 .sparepartsList[index]
+              //         //             ['isSelect'] ==
+              //         //         null) {
+              //         //       sparepartsController.sparepartsList[index]
+              //         //           ['isSelect'] = true;
+              //         //     } else if (sparepartsController
+              //         //                 .sparepartsList[index]
+              //         //             ['isSelect'] ==
+              //         //         true) {
+              //         //       sparepartsController.sparepartsList[index]
+              //         //           ['isSelect'] = false;
+              //         //     } else {
+              //         //       sparepartsController.sparepartsList[index]
+              //         //           ['isSelect'] = true;
+              //         //     }
+              //         //     setState(() {});
+              //         //   },
+              //         //   keyboardType:
+              //         //       const TextInputType.numberWithOptions(),
+              //         //   maxLength: 3,
+              //         //   textAlignVertical: TextAlignVertical.center,
+              //         //   textAlign: TextAlign.center,
+              //         //   controller: sparepartsController.qtyTypeTextEditingController.map((controller) => controller.text).toList(),
+              //         //   decoration: InputDecoration(
+              //         //       counterText: '',
+              //         //       border: InputBorder.none,
+              //         //       contentPadding:
+              //         //           const EdgeInsets.symmetric(
+              //         //               horizontal: 8.0, vertical: 13),
+              //         //       // hintText: sparepartsController
+              //         //       //             .selectSparepartsList[index]
+              //         //       //         ['qty'] ??
+              //         //       //     '',
+              //         //       helperStyle: AppTextStyle.textStyleLight16
+              //         //           .copyWith(
+              //         //               color:
+              //         //                   AppColor.dropDownHintColor),
+              //         //       hintStyle: AppTextStyle.textStyleLight14
+              //         //           .copyWith(
+              //         //               color:
+              //         //                   AppColor.dropDownHintColor)),
+              //         // ),
+              //       ),
+              //
+              //       const SizedBox(
+              //         width: 12,
+              //       ),
+              //       InkWell(
+              //         onTap: () {
+              //           sparepartsController.selectSparepartsList
+              //               .removeAt(index);
+              //         },
+              //         borderRadius: BorderRadius.circular(5),
+              //         child: Image.asset(
+              //           "assets/images/remove.png",
+              //           color: Colors.red,
+              //           height: 20,
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // );
+              return  Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Expanded(
+                      flex: 2,
+                      child:   Padding(
+                        padding:  const EdgeInsets.only(bottom: 20),
+                        child: Text(sparepartsController.selectSparepartsList[index]
+                        ['name'] ??
+                            ''.capitalizeFirst.toString()),
+                      )
+                  ),
+                  // Text('${index + 1}'),
+                  Expanded(child:  CustomTextField(
+                    hintText: "Qty",
+                    onTap: () {
+                      // if (sparepartsController
+                      //             .sparepartsList[index]
+                      //         ['isSelect'] ==
+                      //     null) {
+                      //   sparepartsController.sparepartsList[index]
+                      //       ['isSelect'] = true;
+                      // } else if (sparepartsController
+                      //             .selectSparepartsList[index]
+                      //         ['isSelect'] ==
+                      //     true) {
+                      //   sparepartsController.selectSparepartsList[index]
+                      //       ['isSelect'] = false;
+                      // } else {
+                      //   sparepartsController.selectSparepartsList[index]
+                      //       ['isSelect'] = true;
+                      // }
+                      // setState(() {});
+                    },
+                    textEditingController: sparepartsController
+                        .selectSparepartsList[index]['controller'],
+                    textInputType: TextInputType.number,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "";
+                      } else {
+                        return null;
+                      }
+                    },
+                    autoValidateMode:
+                    AutovalidateMode.onUserInteraction,
+                  ),),
+                  const SizedBox(
+                    width: 12,
+                  ),
+                  // Padding(padding: EdgeInsets.only(bottom: 20),child:  InkWell(
+                  //   onTap: () {
+                  //     sparepartsController.selectSparepartsList
+                  //         .removeAt(index);
+                  //   },
+                  //   borderRadius: BorderRadius.circular(5),
+                  //   child: Image.asset(
+                  //     "assets/images/remove.png",
+                  //     color: Colors.red,
+                  //     height: 20,
+                  //   ),
+                  // ),)
+                ],
 
-                );
-              }, separatorBuilder: (BuildContext context, int index) { return SizedBox(height: 15,) ;},
-            ),
+              );
+            }, separatorBuilder: (BuildContext context, int index) { return const SizedBox(height: 15,) ;},
+          ),
           ),
         ],
       ),

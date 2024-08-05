@@ -29,7 +29,18 @@ class SparepartsController extends GetxController {
   RxList<dynamic> sparepartsList = <dynamic>[].obs;
   RxList<dynamic> selectSparepartsList = <dynamic>[].obs;
 
+  DateTime? startDate;
+  DateTime? endDate;
+
+
+
+
   RxBool isSelect = true.obs;
+
+
+  TextEditingController startTextEditingController = TextEditingController(
+      text: getDateInDDMMMYY(DateTime.parse(DateTime.now().add(const Duration(days: 1)).toString())).toString());
+  TextEditingController endTextEditingController = TextEditingController();
 
   // TextEditingController newQtyTypeTextEditingController = TextEditingController();
 

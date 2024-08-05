@@ -20,6 +20,7 @@ class MangeSpareparts extends StatefulWidget {
 class _MangeSparepartsState extends State<MangeSpareparts> {
   SparepartsController controller = Get.find();
   bool value = false;
+
   int index = 0;
 
   @override
@@ -47,11 +48,11 @@ class _MangeSparepartsState extends State<MangeSpareparts> {
             : controller.sparepartsList.isEmpty
                 ? const EmptyView()
                 : SingleChildScrollView(
-                   physics: const BouncingScrollPhysics(),
-                  child: Column(
-                    children: [
-                      ListView.builder(
-                        shrinkWrap: true,
+                    physics: const BouncingScrollPhysics(),
+                    child: Column(
+                      children: [
+                        ListView.builder(
+                          shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount: controller.sparepartsList.length,
                           itemBuilder: (context, index) {
@@ -75,10 +76,10 @@ class _MangeSparepartsState extends State<MangeSpareparts> {
                                 //         textColor: AppColor.selectColor)
                                 //   ],
                                 // ),
-                                const SizedBox(height: 16),
+                                 const SizedBox(height: 16),
                                 InkWell(
                                   onTap: () {
-                                    Get.to(const ViewSparepartsDetails());
+                                    Get.to(  ViewSparepartsDetails(name: controller.sparepartsList[ index]['name'] ?? '',));
                                   },
                                   child: Container(
                                     padding: const EdgeInsets.symmetric(
@@ -92,20 +93,11 @@ class _MangeSparepartsState extends State<MangeSpareparts> {
                                       children: [
                                         Expanded(
                                           child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            crossAxisAlignment:  CrossAxisAlignment.start,
                                             children: [
-                                              _keyValue(
-                                                  "Name",
-                                                  controller.sparepartsList[index]
-                                                          ['name'] ??
-                                                      ''),
-                                              verticalSpacing(),
-                                              _keyValue(
-                                                  "Qty",
-                                                  controller.sparepartsList[index]
-                                                          ['qty'] ??
-                                                      ''),
+                                              _keyValue( "Name", controller.sparepartsList[index]['name'] ?? ''),
+                                               verticalSpacing(),
+                                              _keyValue( "Qty",  controller.sparepartsList[  index]['qty'] ?? ''),
                                             ],
                                           ),
                                         ),
@@ -113,20 +105,15 @@ class _MangeSparepartsState extends State<MangeSpareparts> {
                                           children: [
                                             InkWell(
                                               onTap: () {
-                                                Get.to(AddSpareparts(
-                                                  model: controller
-                                                      .sparepartsList[index],
-                                                ));
+                                                Get.to(AddSpareparts( model: controller.sparepartsList[index],));
                                               },
-                                              borderRadius: BorderRadius.circular(5),
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
                                               child: Container(
                                                 padding: const EdgeInsets.all(6),
-                                                decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                        color:
-                                                            const Color(0xffC9C9C9)),
-                                                    borderRadius:
-                                                        BorderRadius.circular(5)),
+                                                decoration: BoxDecoration(border: Border.all(color: const Color( 0xffC9C9C9)),
+                                                    borderRadius: BorderRadius.circular(  5)),
+
                                                 child: const Icon(
                                                   Icons.edit,
                                                   color: Color(0xff555555),
@@ -136,7 +123,8 @@ class _MangeSparepartsState extends State<MangeSpareparts> {
                                             const SizedBox(width: 10),
                                             InkWell(
                                               onTap: () {
-                                                CustomDialogBox.showDeleteDialog(
+                                                CustomDialogBox
+                                                    .showDeleteDialog(
                                                   context: context,
                                                   bodyText:
                                                       "Do you really want to cancel these records? This process cannot be undone.",
@@ -146,7 +134,8 @@ class _MangeSparepartsState extends State<MangeSpareparts> {
                                                   onDeleteTap: () {
                                                     setState(() {
                                                       controller.deleteSpareparts(
-                                                          controller.sparepartsList[
+                                                          controller
+                                                                  .sparepartsList[
                                                               index]['id']);
                                                       controller.sparepartsList
                                                           .removeAt(index);
@@ -155,15 +144,18 @@ class _MangeSparepartsState extends State<MangeSpareparts> {
                                                   },
                                                 );
                                               },
-                                              borderRadius: BorderRadius.circular(5),
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
                                               child: Container(
-                                                padding: const EdgeInsets.all(6),
+                                                padding:
+                                                    const EdgeInsets.all(6),
                                                 decoration: BoxDecoration(
                                                     border: Border.all(
-                                                        color:
-                                                            const Color(0xffC9C9C9)),
+                                                        color: const Color(
+                                                            0xffC9C9C9)),
                                                     borderRadius:
-                                                        BorderRadius.circular(5)),
+                                                        BorderRadius.circular(
+                                                            5)),
                                                 child: const Icon(
                                                   Icons.delete,
                                                   color: Color(0xff555555),
@@ -180,10 +172,12 @@ class _MangeSparepartsState extends State<MangeSpareparts> {
                             );
                           },
                         ),
-                      SizedBox(height: Get.height*0.120,),
-                    ],
-                  ),
-                )),
+                        SizedBox(
+                          height: Get.height * 0.120,
+                        ),
+                      ],
+                    ),
+                  )),
       ),
       floatingActionButton: FloatingActionButton(
           elevation: 10.0,
