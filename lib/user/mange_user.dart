@@ -51,7 +51,7 @@ class _MangeUserState extends State<MangeUser> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        ListView.builder(
+                        ListView.separated(
                           shrinkWrap: true,
                           itemCount: controller.userList.length,
                           physics: const NeverScrollableScrollPhysics(),
@@ -67,56 +67,63 @@ class _MangeUserState extends State<MangeUser> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Row(
-                                    children: [
-                                      controller.userList[index]['photo'] == ""
-                                          ? Image.asset(
-                                        'assets/images/user_profile.png',
-                                        color: Colors.black54,
-                                        height: 80,
-                                        width: 80,
-                                      )
-                                          : SizedBox(
-                                        height: 80,
-                                        width: 80,
-                                        child: ClipRRect(
-                                            borderRadius:
-                                            BorderRadius.circular(
-                                                50.0),
-                                            child: Image.memory(
-                                              base64Decode(controller
-                                                  .userList[index]
-                                              ['photo']),
-                                              fit: BoxFit.cover,
-                                            )),
-                                      ),
-
-                                      const SizedBox(
-                                        width: 60,
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          _keyValue(
-                                              "Name",
-                                              controller.userList[index]
-                                                      ['name'] ??
-                                                  ''),
-                                          const SizedBox(
-                                            height: 5,
+                                  IntrinsicHeight(
+                                    // color: Colors.yellow,
+                                    child: Row(
+                                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                                      children: [
+                                        controller.userList[index]['photo'] == ""
+                                            ? Image.asset(
+                                          'assets/images/user_profile.png',
+                                          color: Colors.black54,
+                                          height: 60,
+                                          width: 60,
+                                        )
+                                            : SizedBox(
+                                          height: 60,
+                                          width: 60,
+                                          child: ClipRRect(
+                                              borderRadius:
+                                              BorderRadius.circular(
+                                                  35.0),
+                                              child: Image.memory(
+                                                base64Decode(controller
+                                                    .userList[index]
+                                                ['photo']),
+                                                fit: BoxFit.cover,
+                                              )),
+                                        ),
+                                        const SizedBox(width: 12.0,),
+                                        Container(
+                                          // color: Colors.red,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            children: [
+                                              _keyValue(
+                                                  "Name",
+                                                  controller.userList[index]
+                                                          ['name'] ??
+                                                      ''),
+                                              const SizedBox(
+                                                height: 4,
+                                              ),
+                                              _keyValue(
+                                                  "Authoriy",
+                                                  controller.userList[index]
+                                                          ['user_type'] ??
+                                                      ''),
+                                            ],
                                           ),
-                                          _keyValue(
-                                              "Authoriy",
-                                              controller.userList[index]
-                                                      ['user_type'] ??
-                                                  ''),
-                                        ],
-                                      ),
+                                        ),
 
-                                    ],
+                                      ],
+                                    ),
                                   ),
-                                  verticalSpacing(),
+                                  const SizedBox(
+                                    height: 8,
+                                  ),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
@@ -359,7 +366,9 @@ class _MangeUserState extends State<MangeUser> {
                             //       ],
                             //     )
                             // );
-                          },
+                          }, separatorBuilder: (BuildContext context, int index) {
+                            return const SizedBox(height: 16.0,);
+                        },
                         ),
                         SizedBox(
                           height: Get.height * 0.120,
