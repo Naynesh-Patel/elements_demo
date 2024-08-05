@@ -28,6 +28,7 @@ class UserController extends GetxController {
   RxBool isDeleteUserLoading = false.obs;
   RxBool isGetUserByLoading = false.obs;
   RxBool isUpdateUserLoading = false.obs;
+  RxBool isShowAllowItems = false.obs;
 
   RxList<dynamic> userList = <dynamic>[].obs;
   File? imgFile;

@@ -56,125 +56,133 @@ class _MangeUserState extends State<MangeUser> {
                           itemCount: controller.userList.length,
                           physics: const NeverScrollableScrollPhysics(),
                           itemBuilder: (context, index) {
-                            return Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 10),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(4),
-                                  border: Border.all(
-                                      color: const Color(0xffE6E6E6),
-                                      width: 1)),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  IntrinsicHeight(
-                                    // color: Colors.yellow,
-                                    child: Row(
-                                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                                      children: [
-                                        controller.userList[index]['photo'] == ""
-                                            ? Image.asset(
-                                          'assets/images/user_profile.png',
-                                          color: Colors.black54,
-                                          height: 60,
-                                          width: 60,
-                                        )
-                                            : SizedBox(
-                                          height: 60,
-                                          width: 60,
-                                          child: ClipRRect(
-                                              borderRadius:
-                                              BorderRadius.circular(
-                                                  35.0),
-                                              child: Image.memory(
-                                                base64Decode(controller
-                                                    .userList[index]
-                                                ['photo']),
-                                                fit: BoxFit.cover,
-                                              )),
-                                        ),
-                                        const SizedBox(width: 12.0,),
-                                        Container(
-                                          // color: Colors.red,
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            children: [
-                                              _keyValue(
-                                                  "Name",
-                                                  controller.userList[index]
-                                                          ['name'] ??
-                                                      ''),
-                                              const SizedBox(
-                                                height: 4,
-                                              ),
-                                              _keyValue(
-                                                  "Authoriy",
-                                                  controller.userList[index]
-                                                          ['user_type'] ??
-                                                      ''),
-                                            ],
+                            return InkWell(
+                              onTap: () {
+                                Get.to(AddUser(
+                                    isView: true,
+                                    model:
+                                    controller.userList[index]));
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 10),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(4),
+                                    border: Border.all(
+                                        color: const Color(0xffE6E6E6),
+                                        width: 1)),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    IntrinsicHeight(
+                                      // color: Colors.yellow,
+                                      child: Row(
+                                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                                        children: [
+                                          controller.userList[index]['photo'] == ""
+                                              ? Image.asset(
+                                            'assets/images/user_profile.png',
+                                            color: Colors.black54,
+                                            height: 60,
+                                            width: 60,
+                                          )
+                                              : SizedBox(
+                                            height: 60,
+                                            width: 60,
+                                            child: ClipRRect(
+                                                borderRadius:
+                                                BorderRadius.circular(
+                                                    35.0),
+                                                child: Image.memory(
+                                                  base64Decode(controller
+                                                      .userList[index]
+                                                  ['photo']),
+                                                  fit: BoxFit.cover,
+                                                )),
                                           ),
-                                        ),
+                                          const SizedBox(width: 12.0,),
+                                          Container(
+                                            // color: Colors.red,
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                _keyValue(
+                                                    "Name",
+                                                    controller.userList[index]
+                                                            ['name'] ??
+                                                        ''),
+                                                const SizedBox(
+                                                  height: 4,
+                                                ),
+                                                _keyValue(
+                                                    "Authoriy",
+                                                    controller.userList[index]
+                                                            ['user_type'] ??
+                                                        ''),
+                                              ],
+                                            ),
+                                          ),
 
+                                        ],
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        SmallButton(
+                                          title: "  View  ",
+                                          textColor: AppColor.selectColor,
+                                          onTap: () {
+                                            Get.to(AddUser(
+                                                isView: true,
+                                                model:
+                                                    controller.userList[index]));
+                                          },
+                                        ),
+                                        const SizedBox(
+                                          width: 12.0,
+                                        ),
+                                        SmallButton(
+                                          title: "  Edit  ",
+                                          onTap: () {
+                                            Get.to(AddUser(
+                                              model: controller.userList[index],
+                                            ));
+                                          },
+                                        ),
+                                        const SizedBox(
+                                          width: 12.0,
+                                        ),
+                                        SmallButton(
+                                          title: "Delete",
+                                          textColor: AppColor.cancelColor,
+                                          onTap: () {
+                                            CustomDialogBox.showDeleteDialog(
+                                              context: context,
+                                              bodyText:
+                                                  "Do you really want to cancel these records? This process cannot be undone.",
+                                              onCancelTap: () {
+                                                Get.back();
+                                              },
+                                              onDeleteTap: () {
+                                                controller.deleteUser(controller
+                                                    .userList[index]['id']);
+                                                controller.userList
+                                                    .removeAt(index);
+                                                Get.back();
+                                              },
+                                            );
+                                          },
+                                        ),
                                       ],
                                     ),
-                                  ),
-                                  const SizedBox(
-                                    height: 8,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      SmallButton(
-                                        title: "  View  ",
-                                        textColor: AppColor.selectColor,
-                                        onTap: () {
-                                          Get.to(AddUser(
-                                              isView: true,
-                                              model:
-                                                  controller.userList[index]));
-                                        },
-                                      ),
-                                      const SizedBox(
-                                        width: 12.0,
-                                      ),
-                                      SmallButton(
-                                        title: "  Edit  ",
-                                        onTap: () {
-                                          Get.to(AddUser(
-                                            model: controller.userList[index],
-                                          ));
-                                        },
-                                      ),
-                                      const SizedBox(
-                                        width: 12.0,
-                                      ),
-                                      SmallButton(
-                                        title: "Delete",
-                                        textColor: AppColor.cancelColor,
-                                        onTap: () {
-                                          CustomDialogBox.showDeleteDialog(
-                                            context: context,
-                                            bodyText:
-                                                "Do you really want to cancel these records? This process cannot be undone.",
-                                            onCancelTap: () {
-                                              Get.back();
-                                            },
-                                            onDeleteTap: () {
-                                              controller.deleteUser(controller
-                                                  .userList[index]['id']);
-                                              controller.userList
-                                                  .removeAt(index);
-                                              Get.back();
-                                            },
-                                          );
-                                        },
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             );
                             //   Container(
