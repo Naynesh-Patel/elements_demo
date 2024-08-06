@@ -120,7 +120,7 @@ class _ExpenseTabState extends State<ExpenseTab> {
                                           title: "  View  ",
                                           textColor: AppColor.selectColor,
                                           onTap: () {
-                                            Get.to(  ViewExpenseDetails(name: expenseController.expenseList[ index]['name'] ?? '',));
+                                            Get.to( ViewExpenseDetails(name: expenseController.expenseList[ index]['name'] ?? '',));
                                           },
                                         ),
                                         const SizedBox(
@@ -149,31 +149,8 @@ class _ExpenseTabState extends State<ExpenseTab> {
                                                 Get.back();
                                               },
                                               onDeleteTap: () {
-                                                CustomDialogBox
-                                                    .showDeleteDialog(
-                                                  context: context,
-                                                  bodyText:
-                                                  "Do you really want to cancel these records? This process cannot be undone.",
-                                                  onCancelTap: () {
-                                                    Get.back();
-                                                  },
-                                                  onDeleteTap: () {
-                                                    CustomDialogBox
-                                                        .showDeleteDialog(
-                                                      context: context,
-                                                      bodyText:
-                                                      "Do you really want to cancel these records? This process cannot be undone.",
-                                                      onCancelTap: () {
-                                                        Get.back();
-                                                      },
-                                                      onDeleteTap: () {
-                                                        expenseController
-                                                            .deleteExpense(
-                                                            index: index);
-                                                      },
-                                                    );
-                                                  },
-                                                );
+                                                expenseController.deleteExpense(
+                                                    index: index);
                                               },
                                             );
                                           },
