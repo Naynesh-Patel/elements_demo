@@ -83,16 +83,16 @@ class _MangeUserState extends State<MangeUser> {
                                               ? Image.asset(
                                             'assets/images/user_profile.png',
                                             color: Colors.black54,
-                                            height: 60,
-                                            width: 60,
+                                            height: 80,
+                                            width: 80,
                                           )
                                               : SizedBox(
-                                            height: 60,
-                                            width: 60,
+                                            height: 80,
+                                            width: 80,
                                             child: ClipRRect(
                                                 borderRadius:
                                                 BorderRadius.circular(
-                                                    35.0),
+                                                    50.0),
                                                 child: Image.memory(
                                                   base64Decode(controller
                                                       .userList[index]

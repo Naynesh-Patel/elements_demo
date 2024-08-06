@@ -4,6 +4,7 @@ import 'package:elements/controller/spareparts_controller.dart';
 import 'package:elements/mange_spareparts/add_spareparts.dart';
 import 'package:elements/mange_spareparts/view_spareparts_details.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
+import 'package:elements/widget/button/small_button.dart';
 import 'package:elements/widget/custom_loader.dart';
 import 'package:elements/widget/dialogs/custom_dialogbox.dart';
 import 'package:elements/widget/empty_view.dart';
@@ -89,81 +90,140 @@ class _MangeSparepartsState extends State<MangeSpareparts> {
                                         border: Border.all(
                                             color: const Color(0xffE6E6E6),
                                             width: 1)),
-                                    child: Row(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Expanded(
-                                          child: Column(
-                                            crossAxisAlignment:  CrossAxisAlignment.start,
-                                            children: [
-                                              _keyValue( "Name", controller.sparepartsList[index]['name'] ?? ''),
-                                               verticalSpacing(),
-                                              _keyValue( "Qty",  controller.sparepartsList[  index]['qty'] ?? ''),
-                                            ],
-                                          ),
-                                        ),
-                                        Row(
+                                        Column(
+                                          crossAxisAlignment:  CrossAxisAlignment.start,
                                           children: [
-                                            InkWell(
+                                            _keyValue( "Name", controller.sparepartsList[index]['name'] ?? ''),
+                                            verticalSpacing(),
+                                            _keyValue( "Qty",  controller.sparepartsList[  index]['qty'] ?? ''),
+                                          ],
+                                        ),
+                                        // Row(
+                                        //   children: [
+                                        //     InkWell(
+                                        //       onTap: () {
+                                        //         Get.to(AddSpareparts( model: controller.sparepartsList[index],));
+                                        //       },
+                                        //       borderRadius:
+                                        //           BorderRadius.circular(5),
+                                        //       child: Container(
+                                        //         padding: const EdgeInsets.all(6),
+                                        //         decoration: BoxDecoration(border: Border.all(color: const Color( 0xffC9C9C9)),
+                                        //             borderRadius: BorderRadius.circular(  5)),
+                                        //
+                                        //         child: const Icon(
+                                        //           Icons.edit,
+                                        //           color: Color(0xff555555),
+                                        //         ),
+                                        //       ),
+                                        //     ),
+                                        //     const SizedBox(width: 10),
+                                        //     InkWell(
+                                        //       onTap: () {
+                                        //         CustomDialogBox
+                                        //             .showDeleteDialog(
+                                        //           context: context,
+                                        //           bodyText:
+                                        //               "Do you really want to cancel these records? This process cannot be undone.",
+                                        //           onCancelTap: () {
+                                        //             Get.back();
+                                        //           },
+                                        //           onDeleteTap: () {
+                                        //             setState(() {
+                                        //               controller.deleteSpareparts(
+                                        //                   controller
+                                        //                           .sparepartsList[
+                                        //                       index]['id']);
+                                        //               controller.sparepartsList
+                                        //                   .removeAt(index);
+                                        //               Get.back();
+                                        //             });
+                                        //           },
+                                        //         );
+                                        //       },
+                                        //       borderRadius:
+                                        //           BorderRadius.circular(5),
+                                        //       child: Container(
+                                        //         padding:
+                                        //             const EdgeInsets.all(6),
+                                        //         decoration: BoxDecoration(
+                                        //             border: Border.all(
+                                        //                 color: const Color(
+                                        //                     0xffC9C9C9)),
+                                        //             borderRadius:
+                                        //                 BorderRadius.circular(
+                                        //                     5)),
+                                        //         child: const Icon(
+                                        //           Icons.delete,
+                                        //           color: Color(0xff555555),
+                                        //         ),
+                                        //       ),
+                                        //     ),
+                                        //   ],
+                                        // ),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.end,
+                                          children: [
+                                            SmallButton(
+                                              title: "  View  ",
+                                              textColor: AppColor.selectColor,
+                                              onTap: () {
+                                                Get.to(  ViewSparepartsDetails(name: controller.sparepartsList[ index]['name'] ?? '',));
+                                              },
+                                            ),
+                                            const SizedBox(
+                                              width: 12.0,
+                                            ),
+                                            SmallButton(
+                                              title: "  Edit  ",
                                               onTap: () {
                                                 Get.to(AddSpareparts( model: controller.sparepartsList[index],));
                                               },
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                              child: Container(
-                                                padding: const EdgeInsets.all(6),
-                                                decoration: BoxDecoration(border: Border.all(color: const Color( 0xffC9C9C9)),
-                                                    borderRadius: BorderRadius.circular(  5)),
-
-                                                child: const Icon(
-                                                  Icons.edit,
-                                                  color: Color(0xff555555),
-                                                ),
-                                              ),
                                             ),
-                                            const SizedBox(width: 10),
-                                            InkWell(
+                                            const SizedBox(
+                                              width: 12.0,
+                                            ),
+                                            SmallButton(
+                                              title: "Delete",
+                                              textColor: AppColor.cancelColor,
                                               onTap: () {
-                                                CustomDialogBox
-                                                    .showDeleteDialog(
+                                                CustomDialogBox.showDeleteDialog(
                                                   context: context,
                                                   bodyText:
-                                                      "Do you really want to cancel these records? This process cannot be undone.",
+                                                  "Do you really want to cancel these records? This process cannot be undone.",
                                                   onCancelTap: () {
                                                     Get.back();
                                                   },
                                                   onDeleteTap: () {
-                                                    setState(() {
-                                                      controller.deleteSpareparts(
-                                                          controller
+                                                    CustomDialogBox
+                                                        .showDeleteDialog(
+                                                      context: context,
+                                                      bodyText:
+                                                      "Do you really want to cancel these records? This process cannot be undone.",
+                                                      onCancelTap: () {
+                                                        Get.back();
+                                                      },
+                                                      onDeleteTap: () {
+                                                        setState(() {
+                                                          controller.deleteSpareparts(
+                                                              controller
                                                                   .sparepartsList[
                                                               index]['id']);
-                                                      controller.sparepartsList
-                                                          .removeAt(index);
-                                                      Get.back();
-                                                    });
+                                                          controller.sparepartsList
+                                                              .removeAt(index);
+                                                          Get.back();
+                                                        });
+                                                      },
+                                                    );
                                                   },
                                                 );
                                               },
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                              child: Container(
-                                                padding:
-                                                    const EdgeInsets.all(6),
-                                                decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                        color: const Color(
-                                                            0xffC9C9C9)),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5)),
-                                                child: const Icon(
-                                                  Icons.delete,
-                                                  color: Color(0xff555555),
-                                                ),
-                                              ),
                                             ),
                                           ],
-                                        )
+                                        ),
                                       ],
                                     ),
                                   ),

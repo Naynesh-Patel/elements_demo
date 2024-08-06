@@ -4,12 +4,14 @@ import 'package:elements/constant/methods.dart';
 import 'package:elements/controller/expense_controller.dart';
 import 'package:elements/date_piker.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
+import 'package:elements/widget/custom_datepiker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class ViewExpenseDetails extends StatefulWidget {
-  const ViewExpenseDetails({super.key});
+  final  String name;
+  const ViewExpenseDetails({super.key,required this.name});
 
   @override
   State<ViewExpenseDetails> createState() => _ViewExpenseDetailsState();
@@ -45,7 +47,7 @@ class _ViewExpenseDetailsState extends State<ViewExpenseDetails> {
           //         ),
           //       )),
           // ],
-          title: 'View Expense',
+          title: widget.name,
         ),
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
@@ -150,7 +152,7 @@ class _ViewExpenseDetailsState extends State<ViewExpenseDetails> {
         ),
         Row(
           children: [
-            Expanded(child: Text(name, style: AppTextStyle.textStyleRegular13)),
+            // Expanded(child: Text(name, style: AppTextStyle.textStyleRegular13)),
             Expanded(
                 child: Text("$date", style: AppTextStyle.textStyleRegular13)),
             Expanded(
@@ -173,16 +175,16 @@ class _ViewExpenseDetailsState extends State<ViewExpenseDetails> {
       decoration: const BoxDecoration(color: Color(0xffF1F1F1)),
       child: Row(
         children: [
-          Expanded(
-              child: Text(
-            "Name",
-            style: AppTextStyle.textStyleRegular14
-                .copyWith(color: AppColor.selectColor),
-          )),
+          // Expanded(
+          //     child: Text(
+          //   "Name",
+          //   style: AppTextStyle.textStyleRegular14
+          //       .copyWith(color: AppColor.selectColor),
+          // )),
           Expanded(
             child: InkWell(
               onTap: () {
-                Get.to(const DatePiker());
+                Get.to(const CustomDatePicker());
               },
               child: Row(
                 mainAxisSize: MainAxisSize.min,
