@@ -21,7 +21,6 @@ class MangeSpareparts extends StatefulWidget {
 class _MangeSparepartsState extends State<MangeSpareparts> {
   SparepartsController controller = Get.find();
   bool value = false;
-
   int index = 0;
 
   @override
@@ -77,7 +76,7 @@ class _MangeSparepartsState extends State<MangeSpareparts> {
                                 //         textColor: AppColor.selectColor)
                                 //   ],
                                 // ),
-                                 const SizedBox(height: 16),
+                                const SizedBox(height: 16),
                                 InkWell(
                                   onTap: () {
                                     controller.getHistory(sparepartId: controller.sparepartsList[ index]['id']);
@@ -89,7 +88,7 @@ class _MangeSparepartsState extends State<MangeSpareparts> {
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(4),
                                         border: Border.all(
-                                            color: const Color(0xffE6E6E6),
+                                            color:const Color(0xffE6E6E6),
                                             width: 1)),
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -97,9 +96,11 @@ class _MangeSparepartsState extends State<MangeSpareparts> {
                                         Column(
                                           crossAxisAlignment:  CrossAxisAlignment.start,
                                           children: [
-                                            _keyValue( "Name", controller.sparepartsList[index]['name'] ?? ''),
-                                            verticalSpacing(),
-                                            _keyValue( "Qty",  controller.sparepartsList[  index]['qty'] ?? ''),
+                                            _keyValue( "description", "Spareparts"),
+                                             verticalSpacing(),
+                                            _keyValue( "Name",controller.sparepartsList[index]['name'] ?? ''),
+                                             verticalSpacing(),
+                                            _keyValue( "Qty",controller.sparepartsList[index]['qty'] ?? ''),
                                           ],
                                         ),
                                         // Row(
@@ -172,10 +173,10 @@ class _MangeSparepartsState extends State<MangeSpareparts> {
                                               title: "  View  ",
                                               textColor: AppColor.selectColor,
                                               onTap: () {
-                                                Get.to(  ViewSparepartsDetails(name: controller.sparepartsList[ index]['name'] ?? '',));
+                                                Get.to(ViewSparepartsDetails(name: controller.sparepartsList[ index]['name'] ??'',));
                                               },
                                             ),
-                                            const SizedBox(
+                                              const SizedBox(
                                               width: 12.0,
                                             ),
                                             SmallButton(
@@ -199,10 +200,18 @@ class _MangeSparepartsState extends State<MangeSpareparts> {
                                                     Get.back();
                                                   },
                                                   onDeleteTap: () {
-                                                    controller.deleteSpareparts(
-                                                        index: index);
+                                                    setState(() {
+                                                      controller.deleteSpareparts(
+                                                          controller
+                                                              .sparepartsList[
+                                                          index]['id']);
+                                                      controller.sparepartsList
+                                                          .removeAt(index);
+                                                   Get.back();
+                                                    });
                                                   },
                                                 );
+
                                               },
                                             ),
                                           ],

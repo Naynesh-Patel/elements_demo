@@ -15,6 +15,8 @@ class CustomDatePicker extends StatefulWidget {
   final TextEditingController? txtEndDate;
   final TextEditingController? noOfNight;
   final RefreshContent? refreshContent;
+
+
   final bool isFromReadymade;
   final DateTime? minDate;
   final DateTime? maxDate;
