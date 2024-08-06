@@ -15,14 +15,19 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      initialBinding: BindingController(),
-      theme: ThemeData(
-        fontFamily: "Kanit",
-        // useMaterial3: true,
+    return MediaQuery(
+      data:  MediaQueryData.fromView(View.of(context)).copyWith(
+          textScaler: TextScaler.noScaling,
       ),
-      home: const Splash(),
+      child: GetMaterialApp(
+        debugShowCheckedModeBanner: false,
+        initialBinding: BindingController(),
+        theme: ThemeData(
+          fontFamily: "Kanit",
+          // useMaterial3: true,
+        ),
+        home: const Splash(),
+      ),
     );
   }
 }

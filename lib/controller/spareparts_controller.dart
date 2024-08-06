@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:elements/constant/methods.dart';
 import 'package:elements/constant/urls.dart';
+import 'package:elements/constant/vars.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -22,11 +23,14 @@ class SparepartsController extends GetxController {
   RxBool isDeleteSparepartsLoading = false.obs;
   RxBool isUpdateSparepartsLoading = false.obs;
 
+  RxBool isLoading = false.obs;
+
   FocusNode sparepartsNameFocusNode = FocusNode();
   FocusNode sparepartsQtyFocusNode = FocusNode();
   FocusNode sparepartsNewQtyFocusNode = FocusNode();
 
   RxList<dynamic> sparepartsList = <dynamic>[].obs;
+  RxList<dynamic> historyList = <dynamic>[].obs;
   RxList<dynamic> selectSparepartsList = <dynamic>[].obs;
 
   DateTime? startDate;
@@ -66,7 +70,7 @@ class SparepartsController extends GetxController {
     Map<String, dynamic> body = {
       "name": nameTextEditingController.text,
       "qty": qtyTypeTextEditingController.text,
-      /* "user_id": modelUser.value.id,*/
+       "user_id": modelUser.value.id,
     };
     try {
       String url = "${baseURL}sparepart/insert";
@@ -110,6 +114,27 @@ class SparepartsController extends GetxController {
     } catch (e) {
       debugPrint("Errors:$e");
       isGetSparepartsLoading.value = false;
+    }
+  }
+
+  Future getHistory({required String sparepartId}) async {
+    try {
+      String url = "${baseURL}sparepart/getHistory?id=$sparepartId";
+      log("API => $url");
+      isLoading.value = true;
+      var response = await http.get(Uri.parse(url));
+      if (response.statusCode == 200) {
+        var responseData = jsonDecode(response.body);
+        List h = responseData["data"];
+        sparepartsList.value = h;
+        isLoading.value = false;
+      } else {
+        debugPrint("statusCode${response.statusCode}");
+        isLoading.value = false;
+      }
+    } catch (e) {
+      debugPrint("Errors:$e");
+      isLoading.value = false;
     }
   }
 

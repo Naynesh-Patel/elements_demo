@@ -80,6 +80,7 @@ class _MangeSparepartsState extends State<MangeSpareparts> {
                                  const SizedBox(height: 16),
                                 InkWell(
                                   onTap: () {
+                                    controller.getHistory(sparepartId: controller.sparepartsList[ index]['id']);
                                     Get.to(  ViewSparepartsDetails(name: controller.sparepartsList[ index]['name'] ?? '',));
                                   },
                                   child: Container(
