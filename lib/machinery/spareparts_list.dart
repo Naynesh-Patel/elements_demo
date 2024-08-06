@@ -1,3 +1,4 @@
+import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/controller/spareparts_controller.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
@@ -7,13 +8,9 @@ import 'package:elements/widget/custom_text_field.dart';
 import 'package:elements/widget/empty_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../constant/app_colors.dart';
 
-class SparepartList extends StatefulWidget {
-  const SparepartList({
-    super.key,
-  });
 
+class SparepartList extends StatefulWidget {const SparepartList({ super.key, });
   @override
   State<SparepartList> createState() => _SparepartListState();
 }

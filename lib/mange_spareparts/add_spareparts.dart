@@ -115,7 +115,7 @@ class _AddSparepartsState extends State<AddSpareparts> {
                         sparepartsController.qtyTypeTextEditingController,
                     focusNode: sparepartsController.sparepartsQtyFocusNode,
                   ),
-                  const SizedBox(
+                   const SizedBox(
                     height: 16.0,
                   ),
                   CustomTextField(
