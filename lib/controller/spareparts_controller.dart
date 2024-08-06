@@ -165,6 +165,9 @@ class SparepartsController extends GetxController {
 
 
 
+
+
+
   Future<void> deleteSpareparts({required int index}) async {
     try {
       String url = "${baseURL}sparepart/delete";
