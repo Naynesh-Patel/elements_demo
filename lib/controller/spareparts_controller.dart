@@ -163,32 +163,7 @@ class SparepartsController extends GetxController {
   //   }
   // }
 
-  // Future<void> deleteSpareparts(id, {required  index}) async {
-  //   try {
-  //     String url = "${baseURL}sparepart/delete";
-  //     log("API => $url");
-  //
-  //     isDeleteSparepartsLoading.value = true;
-  //     var response = await http.post(Uri.parse(url), body: {"id": id});
-  //     if (response.statusCode == 200) {
-  //       var responseData = jsonDecode(response.body);
-  //       isDeleteSparepartsLoading.value = false;
-  //       if (responseData["status"] == 1) {
-  //         showToast(responseData["message"]);
-  //         isDeleteSparepartsLoading.value = false;
-  //       } else {
-  //         showToast(responseData["message"]);
-  //         isDeleteSparepartsLoading.value = false;
-  //       }
-  //     } else {
-  //       debugPrint("statusCode===>${response.statusCode}");
-  //       isDeleteSparepartsLoading.value = false;
-  //     }
-  //   } catch (e) {
-  //     debugPrint("Error:${e.toString()}");
-  //     isDeleteSparepartsLoading.value = false;
-  //   }
-  // }
+
 
   Future<void> deleteSpareparts({required int index}) async {
     try {
@@ -196,26 +171,26 @@ class SparepartsController extends GetxController {
       log("API => $url");
       isDeleteSparepartsLoading.value = true;
       var response = await http
-          .post(Uri.parse(url), body: {"id": sparepartsList[index]['id']});
+          .post(Uri.parse(url), body: {'id': sparepartsList[index]['id']});
       if (response.statusCode == 200) {
         var responseData = jsonDecode(response.body);
-        isDeleteSparepartsLoading.value  = false;
+        isDeleteSparepartsLoading.value = false;
         if (responseData["status"] == 1) {
+          showToast(responseData["message"]);
           sparepartsList.removeAt(index);
           Get.back();
-          showToast(responseData["message"]);
-          isDeleteSparepartsLoading.value  = false;
+          isDeleteSparepartsLoading.value = false;
         } else {
           showToast(responseData["message"]);
-          isDeleteSparepartsLoading.value  = false;
+          isDeleteSparepartsLoading.value = false;
         }
       } else {
         debugPrint("statusCode===>${response.statusCode}");
-        isDeleteSparepartsLoading.value  = false;
+        isDeleteSparepartsLoading.value = false;
       }
     } catch (e) {
       debugPrint("Error:${e.toString()}");
-      isDeleteSparepartsLoading.value  = false;
+      isDeleteSparepartsLoading.value = false;
     }
   }
 
