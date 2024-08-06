@@ -58,31 +58,33 @@ class CustomerController extends GetxController {
   }
 
 
-  void webSite(String url) async {
-    final Uri uri = Uri.parse(url);
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri);
+  webURL() async {
+    const url = 'https://flutter.dev';
+    if (await canLaunchUrl(Uri.parse(url))) {
+      await launchUrl(Uri.parse(url));
     } else {
       throw 'Could not launch $url';
     }
   }
 
-
-
-  void openMap(String query) async {
-    final Uri uri = Uri.parse('https://www.google.com/maps/search/?api=1&query=$query');
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri);
+  launchMap({String lat = "47.6", String long = "-122.3"}) async{
+    var mapSchema = 'geo:$lat,$long';
+    if (await canLaunch(mapSchema)) {
+      await launch(mapSchema);
     } else {
-      throw 'Could not launch $uri';
+      throw 'Could not launch $mapSchema';
     }
   }
+
+
+
+
+
 
   imageToBase64({required File file}) async {
     Uint8List bytes = await file.readAsBytes();
     base64Image = base64.encode(bytes);
   }
-
   Future<void> addCustomer() async {
     Map<String, dynamic> body = {
       'company': companyTextEditingController.text,

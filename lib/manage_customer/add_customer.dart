@@ -381,11 +381,44 @@ class _AddCustomerState extends State<AddCustomer> {
                 enable: false,
               ),
               verticalSpacing(),
+              // Stack(
+              //   alignment: Alignment.centerRight,
+              //   children: [
+              //     InkWell(
+              //       child: const Icon(
+              //         Icons.phone,
+              //         size: 20,
+              //         color: AppColor.blackColor,
+              //       ),
+              //       onTap: (){
+              //         controller.makePhoneCall("7359085239");
+              //
+              //       },
+              //     ),
+              //     CustomTextField(
+              //         textEditingController:
+              //         controller.contactTextEditingController,
+              //         labelText: "Contact No",
+              //         // enable: false,
+              //         // suffixFixIcon: InkWell(
+              //         //   child: const Icon(
+              //         //     Icons.phone,
+              //         //     size: 20,
+              //         //     color: AppColor.blackColor,
+              //         //   ),
+              //         //   onTap: (){
+              //         //     controller.makePhoneCall("7359085239");
+              //         //
+              //         //   },
+              //         // ),
+              //     ),
+              //   ],
+              // ),
               CustomTextField(
                   textEditingController:
                       controller.contactTextEditingController,
                   labelText: "Contact No",
-                  // enable: false,
+                  enable: false,
                   suffixFixIcon: InkWell(
                     child: const Icon(
                       Icons.phone,
@@ -401,7 +434,7 @@ class _AddCustomerState extends State<AddCustomer> {
               CustomTextField(
                 textEditingController: controller.addressTextEditingController,
                 labelText: "Address",
-                // enable: false,
+                enable: false,
                 suffixFixIcon: InkWell(
                   child: const Icon(
                     color: Colors.black,
@@ -409,9 +442,8 @@ class _AddCustomerState extends State<AddCustomer> {
                     size: 20,
                   ),
                   onTap: (){
-                    // Get.to(const MapSample());
-
-                    // controller.openMap('1600 Amphitheatre Parkway, Mountain View, CA');
+                    controller.launchMap();
+                   // controller.openMap("", "");
                   },
                 )
               ),
@@ -421,9 +453,10 @@ class _AddCustomerState extends State<AddCustomer> {
                   textEditingController:
                       controller.websiteTextEditingController,
                   labelText: "Website",
-                  // enable: false,
-                  suffixFixIcon: InkWell(onTap: (){
-                    controller.webSite("https://www.example.com");
+                  enable: false,
+                  suffixFixIcon: InkWell(
+                    onTap: (){
+                    controller.webURL();
                   },
                     child: Container(
                       padding: const EdgeInsets.all(14.0),
@@ -437,11 +470,9 @@ class _AddCustomerState extends State<AddCustomer> {
                     ),
                   )
               ),
-
               verticalSpacing(),
               CustomTextField(
-                textEditingController:
-                    controller.referenceTextEditingController,
+                textEditingController: controller.referenceTextEditingController,
                 labelText: "Reference By",
                 enable: false,
               ),

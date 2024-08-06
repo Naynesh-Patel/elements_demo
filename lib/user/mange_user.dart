@@ -101,36 +101,33 @@ class _MangeUserState extends State<MangeUser> {
                                                 )),
                                           ),
                                           const SizedBox(width: 12.0,),
-                                          Container(
-                                            // color: Colors.red,
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment: MainAxisAlignment.center,
-                                              children: [
-                                                _keyValue(
-                                                    "Name",
-                                                    controller.userList[index]
-                                                            ['name'] ??
-                                                        ''),
-                                                const SizedBox(
-                                                  height: 4,
-                                                ),
-                                                _keyValue(
-                                                    "Job Role",
-                                                    controller.userList[index]
-                                                            ['user_type'] ??
-                                                        ''),
-                                                const SizedBox(
-                                                  height: 4,
-                                                ),
-                                                _keyValue(
-                                                    "Mobile No",
-                                                    controller.userList[index]
-                                                    ['contact_no'] ??
-                                                        ''),
-                                              ],
-                                            ),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            children: [
+                                              _keyValue(
+                                                  "Name",
+                                                  controller.userList[index]
+                                                          ['name'] ??
+                                                      ''),
+                                              const SizedBox(
+                                                height: 4,
+                                              ),
+                                              _keyValue(
+                                                  "Job Role",
+                                                  controller.userList[index]
+                                                          ['user_type'] ??
+                                                      ''),
+                                              const SizedBox(
+                                                height: 4,
+                                              ),
+                                              _keyValue(
+                                                  "Mobile No",
+                                                  controller.userList[index]
+                                                  ['contact_no'] ??
+                                                      ''),
+                                            ],
                                           ),
 
                                         ],
