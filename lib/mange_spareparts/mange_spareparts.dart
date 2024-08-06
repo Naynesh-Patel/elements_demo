@@ -169,6 +169,7 @@ class _MangeSparepartsState extends State<MangeSpareparts> {
                                         //     ),
                                         //   ],
                                         // ),
+                                        const SizedBox(height: 8,),
                                         Row(
                                           mainAxisAlignment: MainAxisAlignment.end,
                                           children: [

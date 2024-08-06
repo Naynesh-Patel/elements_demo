@@ -46,352 +46,348 @@ class _MangeUserState extends State<MangeUser> {
             ? const CustomLoader()
             : controller.userList.isEmpty
                 ? const EmptyView()
-                : SingleChildScrollView(
-                    physics: const BouncingScrollPhysics(),
+                :   ListView(
+                  shrinkWrap: true,
+                  physics: const BouncingScrollPhysics(),
+                  children: [
+                    ListView.separated(
+                              shrinkWrap: true,
+                              itemCount: controller.userList.length,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemBuilder: (context, index) {
+                                return InkWell(
+                                  onTap: () {
+                    Get.to(AddUser(
+                      isView: true,
+                      model:
+                      controller.userList[index], name:controller.userList[index]["name"]??"",));
+                                  },
+                                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 10, vertical: 10),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(4),
+                        border: Border.all(
+                            color: const Color(0xffE6E6E6),
+                            width: 1)),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        ListView.separated(
-                          shrinkWrap: true,
-                          itemCount: controller.userList.length,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemBuilder: (context, index) {
-                            return InkWell(
+                        IntrinsicHeight(
+                          // color: Colors.yellow,
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              controller.userList[index]['photo'] == ""
+                                  ? Image.asset(
+                                'assets/images/user_profile.png',
+                                color: Colors.black54,
+                                height: 80,
+                                width: 80,
+                              )
+                                  : SizedBox(
+                                height: 80,
+                                width: 80,
+                                child: ClipRRect(
+                                    borderRadius:
+                                    BorderRadius.circular(
+                                        50.0),
+                                    child: Image.memory(
+                                      base64Decode(controller
+                                          .userList[index]
+                                      ['photo']),
+                                      fit: BoxFit.cover,
+                                    )),
+                              ),
+                              const SizedBox(width: 12.0,),
+                              Container(
+                                // color: Colors.red,
+                                child: Column(
+                                  crossAxisAlignment:
+                                  CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    _keyValue(
+                                        "Name",
+                                        controller.userList[index]
+                                        ['name'] ??
+                                            ''),
+                                    const SizedBox(
+                                      height: 4,
+                                    ),
+                                    _keyValue(
+                                        "Job Role",
+                                        controller.userList[index]
+                                        ['user_type'] ??
+                                            ''),
+                                    const SizedBox(
+                                      height: 4,
+                                    ),
+                                    _keyValue(
+                                        "Mobile No",
+                                        controller.userList[index]
+                                        ['contact_no'] ??
+                                            ''),
+                                  ],
+                                ),
+                              ),
+
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 8,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            SmallButton(
+                              title: "  View  ",
+                              textColor: AppColor.selectColor,
                               onTap: () {
                                 Get.to(AddUser(
                                   isView: true,
                                   model:
                                   controller.userList[index], name:controller.userList[index]["name"]??"",));
                               },
-                              child: Container(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 10),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(4),
-                                    border: Border.all(
-                                        color: const Color(0xffE6E6E6),
-                                        width: 1)),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    IntrinsicHeight(
-                                      // color: Colors.yellow,
-                                      child: Row(
-                                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                                        children: [
-                                          controller.userList[index]['photo'] == ""
-                                              ? Image.asset(
-                                            'assets/images/user_profile.png',
-                                            color: Colors.black54,
-                                            height: 80,
-                                            width: 80,
-                                          )
-                                              : SizedBox(
-                                            height: 80,
-                                            width: 80,
-                                            child: ClipRRect(
-                                                borderRadius:
-                                                BorderRadius.circular(
-                                                    50.0),
-                                                child: Image.memory(
-                                                  base64Decode(controller
-                                                      .userList[index]
-                                                  ['photo']),
-                                                  fit: BoxFit.cover,
-                                                )),
-                                          ),
-                                          const SizedBox(width: 12.0,),
-                                          Container(
-                                            // color: Colors.red,
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment: MainAxisAlignment.center,
-                                              children: [
-                                                _keyValue(
-                                                    "Name",
-                                                    controller.userList[index]
-                                                            ['name'] ??
-                                                        ''),
-                                                const SizedBox(
-                                                  height: 4,
-                                                ),
-                                                _keyValue(
-                                                    "Job Role",
-                                                    controller.userList[index]
-                                                            ['user_type'] ??
-                                                        ''),
-                                                const SizedBox(
-                                                  height: 4,
-                                                ),
-                                                _keyValue(
-                                                    "Mobile No",
-                                                    controller.userList[index]
-                                                    ['contact_no'] ??
-                                                        ''),
-                                              ],
-                                            ),
-                                          ),
-
-                                        ],
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 8,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        SmallButton(
-                                          title: "  View  ",
-                                          textColor: AppColor.selectColor,
-                                          onTap: () {
-                                            Get.to(AddUser(
-                                                isView: true,
-                                                model:
-                                                    controller.userList[index], name:controller.userList[index]["name"]??"",));
-                                          },
-                                        ),
-                                        const SizedBox(
-                                          width: 12.0,
-                                        ),
-                                        SmallButton(
-                                          title: "  Edit  ",
-                                          onTap: () {
-                                            Get.to(AddUser(
-                                              model: controller.userList[index], name: '',
-                                            ));
-                                          },
-                                        ),
-                                        const SizedBox(
-                                          width: 12.0,
-                                        ),
-                                        SmallButton(
-                                          title: "Delete",
-                                          textColor: AppColor.cancelColor,
-                                          onTap: () {
-                                            CustomDialogBox.showDeleteDialog(
-                                              context: context,
-                                              bodyText:
-                                                  "Do you really want to cancel these records? This process cannot be undone.",
-                                              onCancelTap: () {
-                                                Get.back();
-                                              },
-                                              onDeleteTap: () {
-                                                controller.deleteUser(controller
-                                                    .userList[index]['id']);
-                                                controller.userList
-                                                    .removeAt(index);
-                                                Get.back();
-                                              },
-                                            );
-                                          },
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            );
-                            //   Container(
-                            //
-                            //     padding: const EdgeInsets.symmetric(
-                            //         horizontal: 10, vertical: 10),
-                            //     decoration: BoxDecoration(
-                            //         borderRadius: BorderRadius.circular(4),
-                            //         border: Border.all(
-                            //             color: const Color(0xffE6E6E6),
-                            //             width: 1)),
-                            //     child:Column(
-                            //       crossAxisAlignment: CrossAxisAlignment.start,
-                            //       children: [
-                            //         Row(
-                            //           // mainAxisAlignment: MainAxisAlignment.end,
-                            //           children: [
-                            //             controller.userList[index]
-                            //             ['photo'] ==
-                            //                 ""
-                            //                 ? Image.asset(
-                            //               'assets/images/user_profile.png',
-                            //               color: Colors.black54,
-                            //               height: 80,
-                            //               width: 80,
-                            //             )
-                            //                 : SizedBox(
-                            //               height: 80,
-                            //               width: 80,
-                            //               child: ClipRRect(
-                            //                   borderRadius:
-                            //                   BorderRadius.circular(
-                            //                       50.0),
-                            //                   child: Image.memory(
-                            //                     base64Decode(controller
-                            //                         .userList[
-                            //                     index]['photo']),
-                            //                     fit: BoxFit.cover,
-                            //                   )
-                            //               ),
-                            //
-                            //             ),
-                            //             Column(
-                            //               crossAxisAlignment: CrossAxisAlignment.start,
-                            //               // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            //               children: [
-                            //                 _keyValue(
-                            //                     "Name",
-                            //                     controller.userList[index]
-                            //                     ['name'] ??
-                            //                         ''),
-                            //                 const SizedBox(
-                            //                   height: 5,
-                            //                 ),
-                            //                 _keyValue(
-                            //                     "Authoriy",
-                            //                     controller.userList[index]
-                            //                     ['user_type'] ??
-                            //                         ''),
-                            //               ],
-                            //             ),
-                            //
-                            //
-                            //             const SizedBox(
-                            //               height: 10,
-                            //             ),
-                            //
-                            //             // Row(
-                            //             //   children: [
-                            //             //     InkWell(
-                            //             //       onTap: () {
-                            //             //         Get.to(AddUser(
-                            //             //           model: controller.userList[index],
-                            //             //         ));
-                            //             //       },
-                            //             //       borderRadius: BorderRadius.circular(5),
-                            //             //       child: Container(
-                            //             //         padding: const EdgeInsets.all(6),
-                            //             //         decoration: BoxDecoration(
-                            //             //             border: Border.all(
-                            //             //                 color:
-                            //             //                     const Color(0xffC9C9C9)),
-                            //             //             borderRadius:
-                            //             //                 BorderRadius.circular(5)),
-                            //             //         child: const Icon(
-                            //             //           Icons.edit,
-                            //             //           color: Color(0xff555555),
-                            //             //         ),
-                            //             //       ),
-                            //             //     ),
-                            //             //     const SizedBox(width: 10),
-                            //             //     InkWell(
-                            //             //       onTap: () {
-                            //             //         CustomDialogBox.showDeleteDialog(
-                            //             //           context: context,
-                            //             //           bodyText:
-                            //             //               "Do you really want to cancel these records? This process cannot be undone.",
-                            //             //           onCancelTap: () {
-                            //             //             Get.back();
-                            //             //           },
-                            //             //           onDeleteTap: () {
-                            //             //             setState(() {
-                            //             //               controller.deleteUser(controller
-                            //             //                   .userList[index]['id']);
-                            //             //               controller.userList
-                            //             //                   .removeAt(index);
-                            //             //               Get.back();
-                            //             //             });
-                            //             //           },
-                            //             //         );
-                            //             //       },
-                            //             //       borderRadius: BorderRadius.circular(5),
-                            //             //       child: Container(
-                            //             //         padding: const EdgeInsets.all(6),
-                            //             //         decoration: BoxDecoration(
-                            //             //             border: Border.all(
-                            //             //                 color:
-                            //             //                     const Color(0xffC9C9C9)),
-                            //             //             borderRadius:
-                            //             //                 BorderRadius.circular(5)),
-                            //             //         child: const Icon(
-                            //             //           Icons.delete,
-                            //             //           color: Color(0xff555555),
-                            //             //         ),
-                            //             //       ),
-                            //             //     ),
-                            //             //   ],
-                            //             // )
-                            //           ],
-                            //         ),
-                            //
-                            //         Row(
-                            //           // mainAxisAlignment:
-                            //           // MainAxisAlignment.end,
-                            //           children: [
-                            //             SmallButton(
-                            //               title: " View ",
-                            //               textColor: AppColor.selectColor,
-                            //               onTap: () {
-                            //                 Get.to(AddUser(
-                            //                     isView: true,
-                            //                     model: controller
-                            //                         .userList[index]));
-                            //               },
-                            //             ),
-                            //             const SizedBox(
-                            //               width: 10,
-                            //             ),
-                            //             SmallButton(
-                            //                 title: "Edit",
-                            //                 onTap: () {
-                            //                   Get.to(AddUser(
-                            //                     model: controller
-                            //                         .userList[index],
-                            //                   ));
-                            //                 },
-                            //                 textColor:
-                            //                 const Color(0xff555555)),
-                            //             const SizedBox(
-                            //               width: 10,
-                            //             ),
-                            //             SmallButton(
-                            //                 title: "Delete",
-                            //                 onTap: () {
-                            //                   CustomDialogBox
-                            //                       .showDeleteDialog(
-                            //                     context: context,
-                            //                     bodyText:
-                            //                     "Do you really want to cancel these records? This process cannot be undone.",
-                            //                     onCancelTap: () {
-                            //                       Get.back();
-                            //                     },
-                            //                     onDeleteTap: () {
-                            //                       setState(() {
-                            //                         controller.deleteUser(
-                            //                             controller.userList[
-                            //                             index]['id']);
-                            //                         controller.userList
-                            //                             .removeAt(index);
-                            //                         Get.back();
-                            //                       });
-                            //                     },
-                            //                   );
-                            //                 },
-                            //                 textColor:
-                            //                 const Color(0xffB50A0A)),
-                            //           ],
-                            //         )
-                            //       ],
-                            //     )
-                            // );
-                          }, separatorBuilder: (BuildContext context, int index) {
-                            return const SizedBox(height: 16.0,);
-                        },
-                        ),
-                        SizedBox(
-                          height: Get.height * 0.120,
+                            ),
+                            const SizedBox(
+                              width: 12.0,
+                            ),
+                            SmallButton(
+                              title: "  Edit  ",
+                              onTap: () {
+                                Get.to(AddUser(
+                                  model: controller.userList[index], name: '',
+                                ));
+                              },
+                            ),
+                            const SizedBox(
+                              width: 12.0,
+                            ),
+                            SmallButton(
+                              title: "Delete",
+                              textColor: AppColor.cancelColor,
+                              onTap: () {
+                                CustomDialogBox.showDeleteDialog(
+                                  context: context,
+                                  bodyText:
+                                  "Do you really want to cancel these records? This process cannot be undone.",
+                                  onCancelTap: () {
+                                    Get.back();
+                                  },
+                                  onDeleteTap: () {
+                                    controller.deleteUser(controller
+                                        .userList[index]['id']);
+                                    controller.userList
+                                        .removeAt(index);
+                                    Get.back();
+                                  },
+                                );
+                              },
+                            ),
+                          ],
                         ),
                       ],
                     ),
-                  )),
+                                  ),
+                                );
+                                //   Container(
+                                //
+                                //     padding: const EdgeInsets.symmetric(
+                                //         horizontal: 10, vertical: 10),
+                                //     decoration: BoxDecoration(
+                                //         borderRadius: BorderRadius.circular(4),
+                                //         border: Border.all(
+                                //             color: const Color(0xffE6E6E6),
+                                //             width: 1)),
+                                //     child:Column(
+                                //       crossAxisAlignment: CrossAxisAlignment.start,
+                                //       children: [
+                                //         Row(
+                                //           // mainAxisAlignment: MainAxisAlignment.end,
+                                //           children: [
+                                //             controller.userList[index]
+                                //             ['photo'] ==
+                                //                 ""
+                                //                 ? Image.asset(
+                                //               'assets/images/user_profile.png',
+                                //               color: Colors.black54,
+                                //               height: 80,
+                                //               width: 80,
+                                //             )
+                                //                 : SizedBox(
+                                //               height: 80,
+                                //               width: 80,
+                                //               child: ClipRRect(
+                                //                   borderRadius:
+                                //                   BorderRadius.circular(
+                                //                       50.0),
+                                //                   child: Image.memory(
+                                //                     base64Decode(controller
+                                //                         .userList[
+                                //                     index]['photo']),
+                                //                     fit: BoxFit.cover,
+                                //                   )
+                                //               ),
+                                //
+                                //             ),
+                                //             Column(
+                                //               crossAxisAlignment: CrossAxisAlignment.start,
+                                //               // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                //               children: [
+                                //                 _keyValue(
+                                //                     "Name",
+                                //                     controller.userList[index]
+                                //                     ['name'] ??
+                                //                         ''),
+                                //                 const SizedBox(
+                                //                   height: 5,
+                                //                 ),
+                                //                 _keyValue(
+                                //                     "Authoriy",
+                                //                     controller.userList[index]
+                                //                     ['user_type'] ??
+                                //                         ''),
+                                //               ],
+                                //             ),
+                                //
+                                //
+                                //             const SizedBox(
+                                //               height: 10,
+                                //             ),
+                                //
+                                //             // Row(
+                                //             //   children: [
+                                //             //     InkWell(
+                                //             //       onTap: () {
+                                //             //         Get.to(AddUser(
+                                //             //           model: controller.userList[index],
+                                //             //         ));
+                                //             //       },
+                                //             //       borderRadius: BorderRadius.circular(5),
+                                //             //       child: Container(
+                                //             //         padding: const EdgeInsets.all(6),
+                                //             //         decoration: BoxDecoration(
+                                //             //             border: Border.all(
+                                //             //                 color:
+                                //             //                     const Color(0xffC9C9C9)),
+                                //             //             borderRadius:
+                                //             //                 BorderRadius.circular(5)),
+                                //             //         child: const Icon(
+                                //             //           Icons.edit,
+                                //             //           color: Color(0xff555555),
+                                //             //         ),
+                                //             //       ),
+                                //             //     ),
+                                //             //     const SizedBox(width: 10),
+                                //             //     InkWell(
+                                //             //       onTap: () {
+                                //             //         CustomDialogBox.showDeleteDialog(
+                                //             //           context: context,
+                                //             //           bodyText:
+                                //             //               "Do you really want to cancel these records? This process cannot be undone.",
+                                //             //           onCancelTap: () {
+                                //             //             Get.back();
+                                //             //           },
+                                //             //           onDeleteTap: () {
+                                //             //             setState(() {
+                                //             //               controller.deleteUser(controller
+                                //             //                   .userList[index]['id']);
+                                //             //               controller.userList
+                                //             //                   .removeAt(index);
+                                //             //               Get.back();
+                                //             //             });
+                                //             //           },
+                                //             //         );
+                                //             //       },
+                                //             //       borderRadius: BorderRadius.circular(5),
+                                //             //       child: Container(
+                                //             //         padding: const EdgeInsets.all(6),
+                                //             //         decoration: BoxDecoration(
+                                //             //             border: Border.all(
+                                //             //                 color:
+                                //             //                     const Color(0xffC9C9C9)),
+                                //             //             borderRadius:
+                                //             //                 BorderRadius.circular(5)),
+                                //             //         child: const Icon(
+                                //             //           Icons.delete,
+                                //             //           color: Color(0xff555555),
+                                //             //         ),
+                                //             //       ),
+                                //             //     ),
+                                //             //   ],
+                                //             // )
+                                //           ],
+                                //         ),
+                                //
+                                //         Row(
+                                //           // mainAxisAlignment:
+                                //           // MainAxisAlignment.end,
+                                //           children: [
+                                //             SmallButton(
+                                //               title: " View ",
+                                //               textColor: AppColor.selectColor,
+                                //               onTap: () {
+                                //                 Get.to(AddUser(
+                                //                     isView: true,
+                                //                     model: controller
+                                //                         .userList[index]));
+                                //               },
+                                //             ),
+                                //             const SizedBox(
+                                //               width: 10,
+                                //             ),
+                                //             SmallButton(
+                                //                 title: "Edit",
+                                //                 onTap: () {
+                                //                   Get.to(AddUser(
+                                //                     model: controller
+                                //                         .userList[index],
+                                //                   ));
+                                //                 },
+                                //                 textColor:
+                                //                 const Color(0xff555555)),
+                                //             const SizedBox(
+                                //               width: 10,
+                                //             ),
+                                //             SmallButton(
+                                //                 title: "Delete",
+                                //                 onTap: () {
+                                //                   CustomDialogBox
+                                //                       .showDeleteDialog(
+                                //                     context: context,
+                                //                     bodyText:
+                                //                     "Do you really want to cancel these records? This process cannot be undone.",
+                                //                     onCancelTap: () {
+                                //                       Get.back();
+                                //                     },
+                                //                     onDeleteTap: () {
+                                //                       setState(() {
+                                //                         controller.deleteUser(
+                                //                             controller.userList[
+                                //                             index]['id']);
+                                //                         controller.userList
+                                //                             .removeAt(index);
+                                //                         Get.back();
+                                //                       });
+                                //                     },
+                                //                   );
+                                //                 },
+                                //                 textColor:
+                                //                 const Color(0xffB50A0A)),
+                                //           ],
+                                //         )
+                                //       ],
+                                //     )
+                                // );
+                              }, separatorBuilder: (BuildContext context, int index) {
+                              return const SizedBox(height: 16.0,);
+                            },
+                            ),
+                    SizedBox(height: Get.height*0.120,)
+                  ],
+                )),
       ),
       floatingActionButton: FloatingActionButton(
           elevation: 10.0,

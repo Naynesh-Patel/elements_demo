@@ -32,7 +32,7 @@ class _SmallButtonState extends State<SmallButton> {
                   color:
                   const Color(0xffC9C9C9))),
           padding: const EdgeInsets.symmetric(
-              horizontal: 16, vertical: 10),
+              horizontal: 10, vertical: 4),
           child: Text(
               widget.title,
               style: AppTextStyle.textStyleRegular14.copyWith(color: widget.textColor ?? AppColor.blackColor)

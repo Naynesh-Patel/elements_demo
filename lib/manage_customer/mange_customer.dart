@@ -101,8 +101,7 @@ class _MangeCustomerState extends State<MangeCustomer> {
                                                   fit: BoxFit.cover,
                                                 )),
                                           ),
-                                          SizedBox(width: 40,),
-
+                                          const SizedBox(width: 12.0,),
                                           Column(
                                             crossAxisAlignment:
                                             CrossAxisAlignment.start,
