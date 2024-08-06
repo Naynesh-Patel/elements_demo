@@ -47,7 +47,7 @@ class _ViewExpenseDetailsState extends State<ViewExpenseDetails> {
           //         ),
           //       )),
           // ],
-          title: widget.name,
+          title:widget.name,
         ),
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
@@ -67,7 +67,7 @@ class _ViewExpenseDetailsState extends State<ViewExpenseDetails> {
                             children: [
                               _tableView(
                                 // name:controller.expenseList[index]['name'] ?? '',
-                                date: getDateInDDMMYY(DateTime.parse(controller.expenseList[index]['created_at'] ??    '')),
+                                date: getDateInDDMMYY(DateTime.parse(controller.expenseList[index]['created_at'] ??'')),
                                 type: controller.expenseList[index] ['expense_type']??'',
                                 price: controller.expenseList[index]['price']?? '',
                               ),

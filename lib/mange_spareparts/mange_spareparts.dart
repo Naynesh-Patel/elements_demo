@@ -96,8 +96,8 @@ class _MangeSparepartsState extends State<MangeSpareparts> {
                                         Column(
                                           crossAxisAlignment:  CrossAxisAlignment.start,
                                           children: [
-                                            _keyValue( "description", "Spareparts"),
-                                             verticalSpacing(),
+                                            // _keyValue( "description", "Spareparts"),
+                                            //  verticalSpacing(),
                                             _keyValue( "Name",controller.sparepartsList[index]['name'] ?? ''),
                                              verticalSpacing(),
                                             _keyValue( "Qty",controller.sparepartsList[index]['qty'] ?? ''),

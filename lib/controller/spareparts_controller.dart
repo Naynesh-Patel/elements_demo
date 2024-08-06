@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:elements/constant/methods.dart';
 import 'package:elements/constant/urls.dart';
 import 'package:elements/constant/vars.dart';
@@ -40,8 +39,7 @@ class SparepartsController extends GetxController {
   RxBool isSelect = true.obs;
 
 
-  TextEditingController startTextEditingController = TextEditingController(
-      text: getDateInDDMMMYY(DateTime.parse(DateTime.now().add(const Duration(days: 1)).toString())).toString());
+  TextEditingController startTextEditingController = TextEditingController(text: getDateInDDMMMYY(DateTime.parse(DateTime.now().add(const Duration(days: 1)).toString())).toString());
   TextEditingController endTextEditingController = TextEditingController();
 
   // TextEditingController newQtyTypeTextEditingController = TextEditingController();
@@ -68,7 +66,7 @@ class SparepartsController extends GetxController {
     Map<String, dynamic> body = {
       "name": nameTextEditingController.text,
       "qty": qtyTypeTextEditingController.text,
-       "user_id": modelUser.value.id,
+      "user_id": modelUser.value.id,
     };
     try {
       String url = "${baseURL}sparepart/insert";
@@ -77,7 +75,6 @@ class SparepartsController extends GetxController {
       var response = await http.post(Uri.parse(url), body: body);
       if (response.statusCode == 200) {
         jsonDecode(response.body);
-
         getSpareparts();
         Get.back();
         isSparepartsLoading.value = false;

@@ -170,29 +170,29 @@ class _ViewSparepartsDetailsState extends State<ViewSparepartsDetails> {
           Expanded(
             flex: 2,
             child: InkWell(
-              onTap: () {
-                Get.to(const CustomDatePicker());
+              onTap: () async {
+                var result=await Get.to(const CustomDatePicker());
+                if(result!=null){
+
+                }
               },
-              child: Container(
-                // color: Colors.red,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Date",textAlign: TextAlign.center,
-                      style: AppTextStyle.textStyleRegular14
-                          .copyWith(color: AppColor.selectColor),
-                    ),
-                    const SizedBox(
-                      width: 2.0,
-                    ),
-                    Image.asset(
-                      "assets/images/date.png",
-                      height: 14,
-                      width: 14,
-                    ),
-                  ],
-                ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Date",textAlign: TextAlign.center,
+                    style: AppTextStyle.textStyleRegular14
+                        .copyWith(color: AppColor.selectColor),
+                  ),
+                  const SizedBox(
+                    width: 2.0,
+                  ),
+                  Image.asset(
+                    "assets/images/date.png",
+                    height: 14,
+                    width: 14,
+                  ),
+                ],
               ),
             ),
           ),

@@ -15,8 +15,9 @@ class AddUser extends StatefulWidget {
   final bool isUpdate;
   final dynamic model;
   final bool isView;
+  final String name;
 
-  const AddUser( {super.key, this.isUpdate = false, this.model, this.isView = false});
+  const AddUser( {super.key, this.isUpdate = false, this.model, this.isView = false,required this.name});
   @override
   State<AddUser> createState() => _AddUserState();
 }
@@ -70,7 +71,7 @@ class _AddUserState extends State<AddUser> {
             Get.back();
           },
           title: widget.isView
-              ? "User View Details"
+              ? widget.name
               : widget.model != null
                   ? "Update User Details"
                   : "Add User",
@@ -275,28 +276,28 @@ class _AddUserState extends State<AddUser> {
                       },
                     ),
                     verticalSpacing(),
-                    InkWell(
-                      onTap: () {
-                        controller.getFingerPrint();
-                      },
-                      child: CustomTextField(
-                        textEditingController:
-                            controller.fingerprintEditingController,
-                        hintText: "Upload Fingerprint",
-                        labelText: "Upload Fingerprint",
-                        autoValidateMode: AutovalidateMode.onUserInteraction,
-                        // validator: (value) {
-                        //   if (value!.isEmpty) {
-                        //     return "Please Upload Fingerprint";
-                        //   } else {
-                        //     return null;
-                        //   }
-                        // },
-                        textCapitalization: TextCapitalization.words,
-                        enable: false,
-                      ),
-                    ),
-                    verticalSpacing(),
+                    // InkWell(
+                    //   onTap: () {
+                    //     controller.getFingerPrint();
+                    //   },
+                    //   child: CustomTextField(
+                    //     textEditingController:
+                    //         controller.fingerprintEditingController,
+                    //     hintText: "Upload Fingerprint",
+                    //     labelText: "Upload Fingerprint",
+                    //     autoValidateMode: AutovalidateMode.onUserInteraction,
+                    //     // validator: (value) {
+                    //     //   if (value!.isEmpty) {
+                    //     //     return "Please Upload Fingerprint";
+                    //     //   } else {
+                    //     //     return null;
+                    //     //   }
+                    //     // },
+                    //     textCapitalization: TextCapitalization.words,
+                    //     enable: false,
+                    //   ),
+                    // ),
+                    // verticalSpacing(),
                   ],
                 ),
               ),

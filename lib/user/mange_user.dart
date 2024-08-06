@@ -59,9 +59,9 @@ class _MangeUserState extends State<MangeUser> {
                             return InkWell(
                               onTap: () {
                                 Get.to(AddUser(
-                                    isView: true,
-                                    model:
-                                    controller.userList[index]));
+                                  isView: true,
+                                  model:
+                                  controller.userList[index], name:controller.userList[index]["name"]??"",));
                               },
                               child: Container(
                                 padding: const EdgeInsets.symmetric(
@@ -101,28 +101,28 @@ class _MangeUserState extends State<MangeUser> {
                                                 )),
                                           ),
                                           const SizedBox(width: 12.0,),
-                                          Container(
-                                            // color: Colors.red,
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment: MainAxisAlignment.center,
-                                              children: [
-                                                _keyValue(
-                                                    "Name",
-                                                    controller.userList[index]
-                                                            ['name'] ??
-                                                        ''),
-                                                const SizedBox(
-                                                  height: 4,
-                                                ),
-                                                _keyValue(
-                                                    "Authoriy",
-                                                    controller.userList[index]
-                                                            ['user_type'] ??
-                                                        ''),
-                                              ],
-                                            ),
+                                          Column(
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            children: [
+                                              _keyValue(
+                                                  "Name",
+                                                  controller.userList[index]
+                                                  ['name'] ??
+                                                      ''),
+                                              const SizedBox(
+                                                height: 4,
+                                              ),
+                                              _keyValue(
+                                                  "Authoriy",
+                                                  controller.userList[index]
+                                                  ['user_type'] ??
+                                                      ''),
+                                              const SizedBox(
+                                                height: 10,
+                                              ),
+                                            ],
                                           ),
 
                                         ],
@@ -141,7 +141,7 @@ class _MangeUserState extends State<MangeUser> {
                                             Get.to(AddUser(
                                                 isView: true,
                                                 model:
-                                                    controller.userList[index]));
+                                                    controller.userList[index], name:controller.userList[index]["name"]??"",));
                                           },
                                         ),
                                         const SizedBox(
@@ -151,7 +151,7 @@ class _MangeUserState extends State<MangeUser> {
                                           title: "  Edit  ",
                                           onTap: () {
                                             Get.to(AddUser(
-                                              model: controller.userList[index],
+                                              model: controller.userList[index], name: '',
                                             ));
                                           },
                                         ),
@@ -392,7 +392,7 @@ class _MangeUserState extends State<MangeUser> {
           ),
           backgroundColor: AppColor.buttonColor,
           onPressed: () {
-            Get.to(const AddUser());
+            Get.to(const AddUser(name: '',));
           },
           child: const Icon(
             Icons.add,
@@ -589,7 +589,7 @@ class _MangeUserState extends State<MangeUser> {
       children: [
         Text(
           "$key : ",
-          style: AppTextStyle.textStyleRegular16,
+          style: AppTextStyle.textStyleRegular14,
         ),
         Flexible(
             child: Text(

@@ -176,7 +176,7 @@ class _SparepartListState extends State<SparepartList> {
                         setState(() {});
                       },
                       child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 15.0,vertical: 8),
                         child: IntrinsicHeight(
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -237,7 +237,7 @@ class _SparepartListState extends State<SparepartList> {
                   },
                   separatorBuilder: (BuildContext context, int index) {
                     return const SizedBox(
-                      height: 20.0,
+                      height: 10,
                     );
                   },
                 )),

@@ -7,9 +7,7 @@ import 'package:get/get.dart';
 
 class AddSparepartsTab extends StatefulWidget {
   final bool isUpdate;
-  const AddSparepartsTab({
-    super.key,
-    this.isUpdate = false,
+  const AddSparepartsTab({ super.key,this.isUpdate = false,
   });
 
   @override
@@ -24,8 +22,7 @@ class _AddSparepartsTabState extends State<AddSparepartsTab> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: CustomAppBar(
-          title:
-              widget.isUpdate ? "Update Spareparts Details " : "Add Spareparts",
+          title:widget.isUpdate ? "Update Spareparts Details " : "Add Spareparts",
           onPressed: () {
             Get.back();
           },
@@ -34,7 +31,7 @@ class _AddSparepartsTabState extends State<AddSparepartsTab> {
           margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
           child: Column(
             children: [
-              const CustomTextField(
+               const CustomTextField(
                 hintText: "Steel",
                 labelText: "Name",
               ),

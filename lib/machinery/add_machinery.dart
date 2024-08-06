@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/controller/machinery_controller.dart';
@@ -127,7 +126,7 @@ class _AddMachineryState extends State<AddMachinery> {
 
   Widget viewOnly() {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -159,8 +158,7 @@ class _AddMachineryState extends State<AddMachinery> {
           //   height: 16,
           // ),
           CustomTextField(
-            textEditingController:
-                controller.manufactureDurationTextEditingController,
+            textEditingController:controller.manufactureDurationTextEditingController,
             hintText: "Eg. 30 days",
             labelText: "Manufacture Duration",
             enable: false,
@@ -498,7 +496,11 @@ class _AddMachineryState extends State<AddMachinery> {
                   ],
 
                 );
-              }, separatorBuilder: (BuildContext context, int index) { return SizedBox(height: 15,) ;},
+              }, separatorBuilder: (BuildContext context, int index) {
+
+                return const SizedBox(height: 15,);
+
+                },
             ),
           ),
         ],

@@ -1,7 +1,5 @@
 import 'dart:convert';
-
 import 'package:elements/constant/app_colors.dart';
-import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/controller/customer_controller.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:elements/widget/button/custom_button.dart';
@@ -9,13 +7,19 @@ import 'package:elements/widget/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+
+
 class AddCustomer extends StatefulWidget {
   final bool isUpdate;
   final bool isView;
+  String name;
+
+
   final dynamic model;
 
-  const AddCustomer(
-      {super.key, this.isUpdate = false, this.isView = false, this.model});
+
+   AddCustomer(
+      {super.key, this.isUpdate = false, this.isView = false, this.model,required this.name});
 
   @override
   State<AddCustomer> createState() => _AddCustomerState();
@@ -62,7 +66,7 @@ class _AddCustomerState extends State<AddCustomer> {
         backgroundColor: Colors.white,
         appBar: CustomAppBar(
           title: widget.isView
-              ? "View Customer/Company Details"
+              ? widget.name
               : widget.model != null
                   ? "Update Customer/Company Details"
                   : "Add Customer/Company",
@@ -236,13 +240,13 @@ class _AddCustomerState extends State<AddCustomer> {
                     }
                   },
                   textInputType: const TextInputType.numberWithOptions(),
-                  suffixFixIcon: widget.isView
-                      ? const Icon(
-                          Icons.phone,
-                          size: 20,
-                        )
+                  suffixFixIcon:  widget.isView
+                      ?  const Icon(
+                    Icons.phone,
+                    size: 20,
+                  )
                       : const SizedBox.shrink(),
-                ),
+                  ),
                 verticalSpacing(),
                 CustomTextField(
                   autoValidateMode: AutovalidateMode.onUserInteraction,
@@ -259,6 +263,7 @@ class _AddCustomerState extends State<AddCustomer> {
                   },
                   suffixFixIcon: widget.isView
                       ? const Icon(
+                    color: Colors.black,
                           Icons.location_on_outlined,
                           size: 20,
                         )
@@ -277,16 +282,16 @@ class _AddCustomerState extends State<AddCustomer> {
                   //     return null;
                   //   }
                   // },
-                  suffixFixIcon: widget.isView
+                  suffixFixIcon:widget.isView
                       ? Container(
-                          padding: const EdgeInsets.all(14.0),
-                          child: Image.asset(
-                            "assets/images/world_wide_web.png",
-                            height: 16,
-                            width: 5,
-                            fit: BoxFit.cover,
-                            color: AppColor.blackColor,
-                          ))
+                      padding: const EdgeInsets.all(14.0),
+                      child: Image.asset(
+                        "assets/images/world_wide_web.png",
+                        height: 16,
+                        width: 5,
+                        fit: BoxFit.cover,
+                        color: AppColor.blackColor,
+                      ))
                       : const SizedBox.shrink(),
                 ),
                 verticalSpacing(),
@@ -380,29 +385,47 @@ class _AddCustomerState extends State<AddCustomer> {
                   textEditingController:
                       controller.contactTextEditingController,
                   labelText: "Contact No",
-                  enable: false,
-                  suffixFixIcon: const Icon(
-                    Icons.phone,
-                    size: 20,
-                    color: AppColor.blackColor,
+                  // enable: false,
+                  suffixFixIcon: InkWell(
+                    child: const Icon(
+                      Icons.phone,
+                      size: 20,
+                      color: AppColor.blackColor,
+                    ),
+                    onTap: (){
+                      controller.makePhoneCall("7359085239");
+
+                    },
                   )),
               verticalSpacing(),
               CustomTextField(
                 textEditingController: controller.addressTextEditingController,
                 labelText: "Address",
-                enable: false,
-                suffixFixIcon: const Icon(
-                  Icons.location_on_outlined,
-                  size: 20,
-                ),
+                // enable: false,
+                suffixFixIcon: InkWell(
+                  child: const Icon(
+                    color: Colors.black,
+                    Icons.location_on_outlined,
+                    size: 20,
+                  ),
+                  onTap: (){
+                    Get.to(const MapSample());
+
+                    // controller.openMap('1600 Amphitheatre Parkway, Mountain View, CA');
+                  },
+                )
               ),
+
               verticalSpacing(),
               CustomTextField(
                   textEditingController:
                       controller.websiteTextEditingController,
                   labelText: "Website",
-                  enable: false,
-                  suffixFixIcon: Container(
+                  // enable: false,
+                  suffixFixIcon: InkWell(onTap: (){
+                    controller.webSite("https://www.example.com");
+                  },
+                    child: Container(
                       padding: const EdgeInsets.all(14.0),
                       child: Image.asset(
                         "assets/images/world_wide_web.png",
@@ -410,7 +433,11 @@ class _AddCustomerState extends State<AddCustomer> {
                         width: 5,
                         fit: BoxFit.cover,
                         color: AppColor.blackColor,
-                      ))),
+                      ),
+                    ),
+                  )
+              ),
+
               verticalSpacing(),
               CustomTextField(
                 textEditingController:

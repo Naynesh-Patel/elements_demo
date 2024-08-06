@@ -60,9 +60,9 @@ class _MangeCustomerState extends State<MangeCustomer> {
                               return InkWell(
                                 onTap: (){
                                   Get.to(AddCustomer(
-                                      isView: true,
-                                      model: controller
-                                          .customerList[index]));
+                                    isView: true,
+                                    model: controller
+                                        .customerList[index], name: controller.customerList[index]["company"]??"",));
                                 },
                                 child: Container(
                                   padding: const EdgeInsets.symmetric(
@@ -126,7 +126,6 @@ class _MangeCustomerState extends State<MangeCustomer> {
                                             ],
                                           ),
                                           const Spacer(),
-
                                         ],
                                       ),
                                       verticalSpacing(),
@@ -140,7 +139,7 @@ class _MangeCustomerState extends State<MangeCustomer> {
                                               Get.to(AddCustomer(
                                                   isView: true,
                                                   model: controller
-                                                      .customerList[index]));
+                                                      .customerList[index], name: controller.customerList[index]["company"]??"",));
                                             },
                                           ),
                                           const SizedBox(
@@ -151,7 +150,7 @@ class _MangeCustomerState extends State<MangeCustomer> {
                                             onTap: () {
                                               Get.to(AddCustomer(
                                                 model: controller
-                                                    .customerList[index],
+                                                    .customerList[index], name: '',
                                               ));
                                             },
                                           ),
@@ -205,7 +204,7 @@ class _MangeCustomerState extends State<MangeCustomer> {
           ),
           backgroundColor: AppColor.buttonColor,
           onPressed: () {
-            Get.to(const AddCustomer());
+            Get.to( AddCustomer(name: '',));
           },
           child: const Icon(
             Icons.add,
