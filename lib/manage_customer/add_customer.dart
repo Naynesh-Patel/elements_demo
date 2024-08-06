@@ -409,7 +409,7 @@ class _AddCustomerState extends State<AddCustomer> {
                     size: 20,
                   ),
                   onTap: (){
-                    Get.to(const MapSample());
+                    // Get.to(const MapSample());
 
                     // controller.openMap('1600 Amphitheatre Parkway, Mountain View, CA');
                   },
