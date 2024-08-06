@@ -36,6 +36,8 @@ class _SparepartListState extends State<SparepartList> {
         },
         action: [
           IconButton(onPressed: () {
+            sparepartsController.nameTextEditingController.clear();
+            sparepartsController.qtyTypeTextEditingController.clear();
             showDialog(
               context: context,
               barrierDismissible: false, // user must tap button!
@@ -176,7 +178,7 @@ class _SparepartListState extends State<SparepartList> {
                         setState(() {});
                       },
                       child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 15.0,vertical: 8),
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0,vertical: 16.0),
                         child: IntrinsicHeight(
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -237,7 +239,7 @@ class _SparepartListState extends State<SparepartList> {
                   },
                   separatorBuilder: (BuildContext context, int index) {
                     return const SizedBox(
-                      height: 10,
+                      height: 0.0,
                     );
                   },
                 )),

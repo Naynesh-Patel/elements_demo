@@ -10,8 +10,8 @@ import 'package:get/get.dart';
 
 
 class ViewSparepartsDetails extends StatefulWidget {
-final  String name;
-  const ViewSparepartsDetails( {super.key,required this.name});
+  final Map<String,dynamic> model;
+  const ViewSparepartsDetails( {super.key,required this.model});
 
   @override
   State<ViewSparepartsDetails> createState() => _ViewSparepartsDetailsState();
@@ -30,9 +30,9 @@ class _ViewSparepartsDetailsState extends State<ViewSparepartsDetails> {
           onPressed: () {
             Get.back();
           },
-          title: widget.name,
+          title: widget.model['name'],
         ),
-        body: Obx(()=> controller.isLoading.value ? const CustomLoader() : controller.historyList.isNotEmpty ? SingleChildScrollView(
+        body: Obx(()=> controller.isLoading.value ? const CustomLoader() : SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Container(
               height: Get.height,
@@ -41,8 +41,13 @@ class _ViewSparepartsDetailsState extends State<ViewSparepartsDetails> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   tableTopContent(),
-                  Obx(() => ListView.builder(
+                  Obx(() => controller.historyList.isEmpty ?  Container(
+                      height: Get.height * 0.520,
+                      width: Get.width,
+                      // color: Colors.red,
+                      child: const Center(child: Text("No Data"))) : ListView.builder(
                     shrinkWrap: true,
+                    reverse: true,
                     itemCount: controller.historyList.length,
                     itemBuilder: (context, index) {
                       return Column(
@@ -117,7 +122,7 @@ class _ViewSparepartsDetailsState extends State<ViewSparepartsDetails> {
             //   ),
             // ),
           ),
-        ) : const Center(child: Text("No Data"))));
+        ) ));
   }
 
   Widget _tableView({required String type, price, date}) {
@@ -171,28 +176,34 @@ class _ViewSparepartsDetailsState extends State<ViewSparepartsDetails> {
             flex: 2,
             child: InkWell(
               onTap: () async {
-                var result=await Get.to(const CustomDatePicker());
-                if(result!=null){
-
+                bool? result = await Get.to( CustomDatePicker(
+                  startDefaultDate: controller.startDate,
+                  endDefaultDate: controller.endDate,
+                ));
+                if(result == true){
+                  controller.getHistory(sparepartId: widget.model['id']);
                 }
               },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Date",textAlign: TextAlign.center,
-                    style: AppTextStyle.textStyleRegular14
-                        .copyWith(color: AppColor.selectColor),
-                  ),
-                  const SizedBox(
-                    width: 2.0,
-                  ),
-                  Image.asset(
-                    "assets/images/date.png",
-                    height: 14,
-                    width: 14,
-                  ),
-                ],
+              child: Container(
+                // color: Colors.red,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Date",textAlign: TextAlign.center,
+                      style: AppTextStyle.textStyleRegular14
+                          .copyWith(color: AppColor.selectColor),
+                    ),
+                    const SizedBox(
+                      width: 2.0,
+                    ),
+                    Image.asset(
+                      "assets/images/date.png",
+                      height: 14,
+                      width: 14,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

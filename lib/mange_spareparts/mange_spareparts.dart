@@ -54,6 +54,7 @@ class _MangeSparepartsState extends State<MangeSpareparts> {
                         ListView.builder(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
+                          reverse: true,
                           itemCount: controller.sparepartsList.length,
                           itemBuilder: (context, index) {
                             return Column(
@@ -79,8 +80,10 @@ class _MangeSparepartsState extends State<MangeSpareparts> {
                                 const SizedBox(height: 16),
                                 InkWell(
                                   onTap: () {
+                                    controller.startDate = null;
+                                    controller.endDate = null;
                                     controller.getHistory(sparepartId: controller.sparepartsList[ index]['id']);
-                                    Get.to(  ViewSparepartsDetails(name: controller.sparepartsList[ index]['name'] ?? '',));
+                                    Get.to(  ViewSparepartsDetails(model: controller.sparepartsList[ index],));
                                   },
                                   child: Container(
                                     padding: const EdgeInsets.symmetric(
@@ -173,7 +176,10 @@ class _MangeSparepartsState extends State<MangeSpareparts> {
                                               title: "  View  ",
                                               textColor: AppColor.selectColor,
                                               onTap: () {
-                                                Get.to(ViewSparepartsDetails(name: controller.sparepartsList[ index]['name'] ??'',));
+                                                controller.startDate = null;
+                                                controller.endDate = null;
+                                                controller.getHistory(sparepartId: controller.sparepartsList[ index]['id']);
+                                                Get.to(  ViewSparepartsDetails(model: controller.sparepartsList[ index],));
                                               },
                                             ),
                                               const SizedBox(

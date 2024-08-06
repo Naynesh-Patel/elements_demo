@@ -113,8 +113,16 @@ class SparepartsController extends GetxController {
   }
 
   Future getHistory({required String sparepartId}) async {
+    historyList.clear();
+    String url = "";
     try {
-      String url = "${baseURL}sparepart/getHistory?id=$sparepartId";
+      if(startDate != null && endDate != null){
+       url = "${baseURL}sparepart/getHistory?id=$sparepartId&start_date=$startDate&end_date=$endDate"/*.replaceAll(" ","")*/;
+      }else if(startDate != null && endDate == null){
+        url = "${baseURL}sparepart/getHistory?id=$sparepartId&start_date=$startDate"/*.replaceAll(" ","")*/;
+      }else{
+        url = "${baseURL}sparepart/getHistory?id=$sparepartId";
+      }
       log("API => $url");
       isLoading.value = true;
       var response = await http.get(Uri.parse(url));
@@ -234,28 +242,60 @@ class SparepartsController extends GetxController {
 
   }
 
+  // selectSparepart(){
+  //   List _sList = [];
+  //   _sList.addAll(selectSparepartsList);
+  //   selectSparepartsList.clear();
+  //   for (int i = 0; i < sparepartsList.length; i++) {
+  //     if (sparepartsList[i]['isSelect'] == true) {
+  //       int index = _sList.indexWhere((item) => item["id"] == sparepartsList[i]['id']);
+  //       Map<String, dynamic> d = {};
+  //       if(index != -1){
+  //          d = {
+  //           'id': sparepartsList[i]['id'],
+  //           'name': sparepartsList[i]['name'],
+  //           'controller': TextEditingController(text: _sList[index]['controller'].text),
+  //         };
+  //       }else{
+  //           d = {
+  //           'id': sparepartsList[i]['id'],
+  //           'name': sparepartsList[i]['name'],
+  //           'controller': TextEditingController(),
+  //         };
+  //       }
+  //       selectSparepartsList.add(d);
+  //     }
+  //   }
+  //   Get.back();
+  // }
+
   selectSparepart(){
     List _sList = [];
     _sList.addAll(selectSparepartsList);
-    selectSparepartsList.clear();
+    // selectSparepartsList.clear();
     for (int i = 0; i < sparepartsList.length; i++) {
       if (sparepartsList[i]['isSelect'] == true) {
         int index = _sList.indexWhere((item) => item["id"] == sparepartsList[i]['id']);
         Map<String, dynamic> d = {};
-        if(index != -1){
-           d = {
+        if(index == -1){
+          d = {
             'id': sparepartsList[i]['id'],
             'name': sparepartsList[i]['name'],
-            'controller': TextEditingController(text: _sList[index]['controller'].text),
+            'controller': TextEditingController(),
           };
-        }else{
+          selectSparepartsList.add(d);
+        }/*else{
             d = {
             'id': sparepartsList[i]['id'],
             'name': sparepartsList[i]['name'],
             'controller': TextEditingController(),
           };
+        }*/
+      }else{
+        int index = _sList.indexWhere((item) => item["id"] == sparepartsList[i]['id']);
+        if(index != -1){
+          selectSparepartsList.removeAt(index);
         }
-        selectSparepartsList.add(d);
       }
     }
     Get.back();
