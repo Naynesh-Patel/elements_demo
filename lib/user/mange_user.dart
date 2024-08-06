@@ -117,9 +117,17 @@ class _MangeUserState extends State<MangeUser> {
                                                   height: 4,
                                                 ),
                                                 _keyValue(
-                                                    "Authoriy",
+                                                    "Job Role",
                                                     controller.userList[index]
                                                             ['user_type'] ??
+                                                        ''),
+                                                const SizedBox(
+                                                  height: 4,
+                                                ),
+                                                _keyValue(
+                                                    "Mobile No",
+                                                    controller.userList[index]
+                                                    ['contact_no'] ??
                                                         ''),
                                               ],
                                             ),

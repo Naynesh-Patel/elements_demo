@@ -120,7 +120,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       decoration: InputDecoration(
           errorText: widget.errorText,
           fillColor: Colors.white,
-          errorStyle: const TextStyle(color: Colors.red),
+          errorStyle: const TextStyle(color: Colors.red,fontSize: 0.0),
           prefixIcon: widget.preFixWidget ?? null,
           suffixIcon: widget.suffixFixIcon,
           suffix: widget.suffix ?? const SizedBox.shrink(),

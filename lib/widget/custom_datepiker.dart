@@ -18,8 +18,9 @@ class CustomDatePicker extends StatefulWidget {
 
 
   final bool isFromReadymade;
-  final DateTime? minDate;
-  final DateTime? maxDate;
+  final DateTime? startDefaultDate;
+  final DateTime? endDefaultDate;
+
 
   const CustomDatePicker(
       {super.key,
@@ -28,8 +29,8 @@ class CustomDatePicker extends StatefulWidget {
       this.noOfNight,
       this.refreshContent,
       this.isFromReadymade = false,
-      this.minDate,
-      this.maxDate});
+      this.startDefaultDate,
+      this.endDefaultDate});
 
   @override
   State<CustomDatePicker> createState() => _CustomDatePickerState();
@@ -47,6 +48,12 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
   void initState() {
     // TODO: implement initState
     super.initState();
+
+    startDefaultDate = widget.startDefaultDate;
+    endDefaultDate = widget.endDefaultDate;
+    sparepartsController.startDate = widget.startDefaultDate;
+    sparepartsController.endDate = widget.endDefaultDate;
+
     // if (widget.txtStartDate!.text.isNotEmpty) {
     //   startDefaultDate = DateFormat("dd-MMM-yyyy").parse(widget.txtStartDate!.text.toString());
     //   endDefaultDate = DateFormat("dd-MMM-yyyy").parse(widget.txtEndDate!.text.toString());
@@ -62,8 +69,8 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
       if (args.value is PickerDateRange) {
         startDate = DateFormat('dd-MMM-yyyy').format(args.value.startDate);
         endDate = DateFormat('dd-MMM-yyyy').format(args.value.endDate ?? args.value.startDate);
-        sparepartsController.startDate =DateFormat("dd-MMM-yyyy").parse(startDate);
-        sparepartsController.endDate = DateFormat("dd-MMM-yyyy").parse(endDate);
+        sparepartsController.startDate = args.value.startDate ;
+        sparepartsController.endDate = args.value.endDate ;
         widget.txtStartDate?.text = startDate;
         widget.txtEndDate?.text = endDate;
         // widget.txtEndDate!.text=endDate;
@@ -103,9 +110,9 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
               selectionMode: widget.isFromReadymade
                   ? DateRangePickerSelectionMode.single
                   : DateRangePickerSelectionMode.range,
-              maxDate: widget.maxDate,
-              minDate: widget.minDate,
-              enablePastDates: false,
+              // maxDate: widget.maxDate,
+              // minDate: widget.minDate,
+              // enablePastDates: false,
               allowViewNavigation: false,
               endRangeSelectionColor: Colors.grey,
               startRangeSelectionColor: Colors.grey,
@@ -158,7 +165,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Check-In Date".toUpperCase(),
+                                    "Start Date".toUpperCase(),
                                     style: AppTextStyle.textStyleBold10
                                         .copyWith(color: Colors.grey.shade500),
                                   ),
@@ -182,7 +189,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Check-Out Date".toUpperCase(),
+                                    "End Date".toUpperCase(),
                                     style: AppTextStyle.textStyleBold10
                                         .copyWith(color: Colors.grey.shade500),
                                   ),
@@ -193,20 +200,20 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
                             )),
                           ],
                         ),
-                        Center(
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 4, vertical: 2),
-                            decoration: BoxDecoration(
-                                color: Colors.grey,
-                                borderRadius: BorderRadius.circular(16)),
-                            child: Text(
-                              "$_rangeCount DAYS",
-                              style: AppTextStyle.textStyleBold10
-                                  .copyWith(color: Colors.white),
-                            ),
-                          ),
-                        )
+                        // Center(
+                        //   child: Container(
+                        //     padding: const EdgeInsets.symmetric(
+                        //         horizontal: 4, vertical: 2),
+                        //     decoration: BoxDecoration(
+                        //         color: Colors.grey,
+                        //         borderRadius: BorderRadius.circular(16)),
+                        //     child: Text(
+                        //       "$_rangeCount DAYS",
+                        //       style: AppTextStyle.textStyleBold10
+                        //           .copyWith(color: Colors.white),
+                        //     ),
+                        //   ),
+                        // )
                       ],
                     )),
                 CustomButton(
@@ -215,7 +222,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
                     if (widget.refreshContent != null) {
                       widget.refreshContent!.refreshPage();
                     }
-                    Get.back();
+                    Get.back(result: true);
                   },
                   color: AppColor.buttonColor,
                   isLoading: false.obs,

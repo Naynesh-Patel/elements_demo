@@ -51,6 +51,7 @@ class _MangeMachineryState extends State<MangeMachinery> {
                       children: [
                         ListView.separated(
                           shrinkWrap: true,
+                          reverse: true,
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount: controller.addMachineryList.length,
                           itemBuilder: (context, index) {

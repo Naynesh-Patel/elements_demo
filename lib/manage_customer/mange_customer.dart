@@ -54,6 +54,7 @@ class _MangeCustomerState extends State<MangeCustomer> {
                           ListView.separated(
                             shrinkWrap: true,
                             scrollDirection: Axis.vertical,
+                            reverse: true,
                             physics: const NeverScrollableScrollPhysics(),
                             itemCount: controller.customerList.length,
                             itemBuilder: (context, index) {
