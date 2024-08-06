@@ -2,6 +2,7 @@ import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/controller/spareparts_controller.dart';
 import 'package:elements/mange_spareparts/add_spareparts.dart';
+import 'package:elements/mange_spareparts/view_spareparts_details.dart';
 import 'package:elements/widget/app%20bar/home_app_bar.dart';
 import 'package:elements/widget/button/small_button.dart';
 import 'package:elements/widget/custom_loader.dart';
@@ -53,97 +54,45 @@ class _SparepartsTabState extends State<SparepartsTab> {
                     ? const Center(
                         child: Text("Dara Not Found"),
                       )
-                    : ListView.builder(
+                    : ListView.separated(
                         shrinkWrap: true,
                         itemCount: controller.sparepartsList.length,
                         itemBuilder: (context, index) {
-                          return ListTile(
-                            contentPadding: const EdgeInsets.all(0),
-                            title: Row(
+                          return InkWell(
+                            onTap: () {
+                              controller.startDate = null;
+                              controller.endDate = null;
+                              controller.getHistory(sparepartId: controller.sparepartsList[ index]['id']);
+                              Get.to(  ViewSparepartsDetails(model: controller.sparepartsList[ index],));
+                            },
+                            child: Row(
                               children: [
-                                Text(controller.sparepartsList[index]['name'] ??
-                                    ''.capitalizeFirst),
-                                const SizedBox(
-                                  width: 2,
-                                ),
-                                Text('${index + 1}'),
-                              ],
-                            ),
-                            trailing: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Container(
-                                  width: 115,
-                                  height: 42,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(4),
-                                      border: Border.all(
-                                          color: const Color(0xffD1D1D1))),
-                                  child: TextField(
-                                    enabled: false,
-                                    keyboardType:
-                                        const TextInputType.numberWithOptions(),
-                                    maxLength: 3,
-                                    textAlignVertical: TextAlignVertical.center,
-                                    textAlign: TextAlign.center,
-                                    decoration: InputDecoration(
-                                        counterText: '',
-                                        border: InputBorder.none,
-                                        contentPadding:
-                                            const EdgeInsets.symmetric(
-                                                horizontal: 8.0, vertical: 13),
-                                        hintText: controller
-                                                .sparepartsList[index]['qty'] ??
-                                            '',
-                                        helperStyle: AppTextStyle
-                                            .textStyleLight16
-                                            .copyWith(
-                                                color:
-                                                    AppColor.dropDownHintColor),
-                                        hintStyle: AppTextStyle.textStyleLight14
-                                            .copyWith(
-                                                color: AppColor
-                                                    .dropDownHintColor)),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      _keyValue( "Name",controller.sparepartsList[index]['name'] ?? ''),
+                                      verticalSpacing(),
+                                      _keyValue( "Qty",controller.sparepartsList[index]['qty'] ?? ''),
+                                    ],
                                   ),
                                 ),
-                                const SizedBox(
-                                  width: 12,
-                                ),
-                                // InkWell(
-                                //   borderRadius: BorderRadius.circular(10),
-                                //   onTap: () {
-                                //     Get.to(AddSpareparts(
-                                //       model: controller.sparepartsList[index],
-                                //     ));
-                                //   },
-                                //   child: Container(
-                                //       decoration: BoxDecoration(
-                                //           // color: const Color(0xffFFFFFF),
-                                //           borderRadius:
-                                //               BorderRadius.circular(4),
-                                //           border: Border.all(
-                                //               color: const Color(0xffD1D1D1))),
-                                //       padding: const EdgeInsets.symmetric(
-                                //           vertical: 12, horizontal: 12),
-                                //       child: SvgPicture.asset(
-                                //         'assets/svg/ic_edit.svg',
-                                //         height: 16,
-                                //         width: 16,
-                                //       )),
-                                // ),
-                                SmallButton(
-                                  title: "  Edit  ",
-                                  onTap: () {
-                                    Get.to(AddSpareparts(
-                                      model: controller.sparepartsList[index],
-                                    ));
-                                  },
-                                ),
-
+                                      SmallButton(
+                                        title: "  Edit  ",
+                                        onTap: () {
+                                          Get.to(AddSpareparts(
+                                            model: controller.sparepartsList[index],
+                                          ));
+                                        },
+                                      ),
                               ],
                             ),
                           );
-                        },
+                        }, separatorBuilder: (BuildContext context, int index) {
+                          return  Divider(
+                            color: Colors.grey.withOpacity(0.2),
+                          );
+            },
                       ),
           )),
       // floatingActionButton: FloatingActionButton(
@@ -161,4 +110,29 @@ class _SparepartsTabState extends State<SparepartsTab> {
       //     )),
     );
   }
+
+  Widget _keyValue(key, value) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          "$key : ",
+          style: AppTextStyle.textStyleRegular16,
+        ),
+        Flexible(
+            child: Text(
+              "$value",
+              style: AppTextStyle.textStyleRegular14
+                  .copyWith(color: const Color(0xff555555)),
+            )),
+      ],
+    );
+  }
+
+  Widget verticalSpacing() {
+    return const SizedBox(
+      height: 6.0,
+    );
+  }
+
 }
