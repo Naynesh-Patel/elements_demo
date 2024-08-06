@@ -2,7 +2,6 @@ import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/constant/methods.dart';
 import 'package:elements/controller/expense_controller.dart';
-import 'package:elements/date_piker.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:elements/widget/custom_datepiker.dart';
 import 'package:flutter/material.dart';
@@ -10,8 +9,9 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class ViewExpenseDetails extends StatefulWidget {
-  final  String name;
-  const ViewExpenseDetails({super.key,required this.name});
+  final String name;
+
+  const ViewExpenseDetails({super.key, required this.name});
 
   @override
   State<ViewExpenseDetails> createState() => _ViewExpenseDetailsState();
@@ -66,15 +66,10 @@ class _ViewExpenseDetailsState extends State<ViewExpenseDetails> {
                           return Column(
                             children: [
                               _tableView(
-                                name:controller.expenseList[index]['name'] ?? '',
-                                date: getDateInDDMMYY(DateTime.parse(controller
-                                        .expenseList[index]['created_at'] ??
-                                    '')),
-                                type: controller.expenseList[index]
-                                        ['expense_type'] ??
-                                    '',
-                                price: controller.expenseList[index]['price'] ??
-                                    '',
+                                // name:controller.expenseList[index]['name'] ?? '',
+                                date: getDateInDDMMYY(DateTime.parse(controller.expenseList[index]['created_at'] ??    '')),
+                                type: controller.expenseList[index] ['expense_type']??'',
+                                price: controller.expenseList[index]['price']?? '',
                               ),
                             ],
                           );
@@ -143,7 +138,7 @@ class _ViewExpenseDetailsState extends State<ViewExpenseDetails> {
         ));
   }
 
-  Widget _tableView({required String type, price, name, date}) {
+  Widget _tableView({required String type, price, date}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

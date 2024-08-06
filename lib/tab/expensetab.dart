@@ -10,14 +10,10 @@ import 'package:elements/widget/custom_loader.dart';
 import 'package:elements/widget/dialogs/custom_dialogbox.dart';
 import 'package:elements/widget/empty_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/get_instance.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
-
-
-
 
 class ExpenseTab extends StatefulWidget {
   final bool isUpdate;
@@ -49,213 +45,266 @@ class _ExpenseTabState extends State<ExpenseTab> {
       body: Container(
         margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
         child: Obx(
-              () => expenseController.isGetExpenseLoading.value
+          () => expenseController.isGetExpenseLoading.value
               ? const CustomLoader()
               : expenseController.expenseList.isEmpty
-              ? const EmptyView()
-              : SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: Column(
-              children: [
-                ListView.separated(
-                  shrinkWrap: true,
-                  // scrollDirection: Axis.vertical,vertical
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: expenseController.expenseList.length,
-                  itemBuilder: (context, index) {
-                    return InkWell(
-                      onTap: () {
-                        // Get.to( ViewExpenseDetails());
-                        Get.to(  ViewExpenseDetails(name: expenseController.expenseList[ index]['name'] ?? '',));
-                      },
-                      child: Container(
-                        padding:  const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 10),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(4),
-                            border: Border.all(
-                                color: AppColor.borderColor,
-                                width: 1)),
-                        child: IntrinsicHeight(
-                          child: Row(
-                            crossAxisAlignment:
-                            CrossAxisAlignment.stretch,
-                            children: [
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment:
-                                  CrossAxisAlignment.start,
-                                  children: [
-                                    _keyValue(
-                                      "DD",
-                                      getDateInDDMMYY(DateTime.parse(
-                                          expenseController.expenseList[
-                                          index]
-                                          ['created_at']??'')),
-                                    ),
-                                    verticalSpacing(),
-                                    _keyValue(
-                                        "Name",
-                                        expenseController.expenseList[
-                                        index]['name'] ??
-                                            ''),
-                                    verticalSpacing(),
-                                    _keyValue(
-                                        "Expense Type",
-                                        expenseController.expenseList[
-                                        index]
-                                        ['expense_type'] ??
-                                            ''),
-                                    verticalSpacing(),
-                                    _keyValue(
-                                        "Price",
-                                        expenseController.expenseList[
-                                        index]['price'] ??
-                                            ''),
-                                    verticalSpacing(),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
+                  ? const EmptyView()
+                  : SingleChildScrollView(
+                      physics: const BouncingScrollPhysics(),
+                      child: Column(
+                        children: [
+                          ListView.separated(
+                            shrinkWrap: true,
+                            // scrollDirection: Axis.vertical,vertical
+                            physics:  const NeverScrollableScrollPhysics(),
+                            itemCount: expenseController.expenseList.length,
+                            itemBuilder: (context, index) {
+                              return InkWell(
+                                onTap: () {
+                                  // Get.to( ViewExpenseDetails());
+                                  Get.to(ViewExpenseDetails(
+                                    name: expenseController.expenseList[index] ['name'] ??'',
+                                  ));
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 10),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(4),
+                                      border: Border.all(
+                                          color: AppColor.borderColor,
+                                          width: 1)),
+                                  child: IntrinsicHeight(
+                                    child: Column(
+                                      crossAxisAlignment:CrossAxisAlignment.start,
                                       children: [
-                                        SmallButton(
-                                          title: "  View  ",
-                                          textColor: AppColor.selectColor,
-                                          onTap: () {
-                                            Get.to( ViewExpenseDetails(name: expenseController.expenseList[ index]['name'] ?? '',));
-                                          },
+                                        Expanded(
+                                          child: Row(
+                                            crossAxisAlignment:CrossAxisAlignment.start,
+                                            children: [
+                                              Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  _keyValue(
+                                                      "Name",
+                                                      expenseController
+                                                                  .expenseList[
+                                                              index]['name'] ??
+                                                          ''),
+                                                  verticalSpacing(),
+                                                  _keyValue(
+                                                      "Expense Type",
+                                                      expenseController.expenseList[index][
+                                                              'expense_type'] ??
+                                                          ''),
+                                                  verticalSpacing(),
+                                                  _keyValue(
+                                                      "Price",
+                                                      expenseController
+                                                                  .expenseList[
+                                                              index]['price'] ??
+                                                          ''),
+                                                ],
+                                              ),
+                                               const SizedBox(
+                                                width: 60,
+                                              ),
+                                              _keyValue(
+                                                "DD",
+                                                getDateInDDMMYY(DateTime.parse( expenseController.expenseList[index]['created_at'] ??'')),
+                                              ),
+                                              verticalSpacing(),
+                                              // Row(
+                                              //   mainAxisAlignment: MainAxisAlignment.end,
+                                              //   children: [
+                                              //     SmallButton(
+                                              //       title: "  View  ",
+                                              //       textColor: AppColor.selectColor,
+                                              //       onTap: () {
+                                              //         Get.to( ViewExpenseDetails(name: expenseController.expenseList[ index]['name'] ?? '',));
+                                              //       },
+                                              //     ),
+                                              //     const SizedBox(
+                                              //       width: 12.0,
+                                              //     ),
+                                              //     SmallButton(
+                                              //       title: "  Edit  ",
+                                              //       onTap: () {
+                                              //         Get.to(AddExpense(
+                                              //           model: expenseController.expenseList[index],
+                                              //         ));
+                                              //       },
+                                              //     ),
+                                              //     const SizedBox(
+                                              //       width: 12.0,
+                                              //     ),
+                                              //     SmallButton(
+                                              //       title: "Delete",
+                                              //       textColor: AppColor.cancelColor,
+                                              //       onTap: () {
+                                              //         CustomDialogBox.showDeleteDialog(
+                                              //           context: context,
+                                              //           bodyText:
+                                              //           "Do you really want to cancel these records? This process cannot be undone.",
+                                              //           onCancelTap: () {
+                                              //             Get.back();
+                                              //           },
+                                              //           onDeleteTap: () {
+                                              //             expenseController.deleteExpense(
+                                              //                 index: index);
+                                              //           },
+                                              //         );
+                                              //       },
+                                              //     ),
+                                              //   ],
+                                              // ),
+                                            ],
+                                          ),
                                         ),
-                                        const SizedBox(
-                                          width: 12.0,
+                                         const SizedBox(
+                                          height: 10.0,
                                         ),
-                                        SmallButton(
-                                          title: "  Edit  ",
-                                          onTap: () {
-                                            Get.to(AddExpense(
-                                              model: expenseController.expenseList[index],
-                                            ));
-                                          },
-                                        ),
-                                        const SizedBox(
-                                          width: 12.0,
-                                        ),
-                                        SmallButton(
-                                          title: "Delete",
-                                          textColor: AppColor.cancelColor,
-                                          onTap: () {
-                                            CustomDialogBox.showDeleteDialog(
-                                              context: context,
-                                              bodyText:
-                                              "Do you really want to cancel these records? This process cannot be undone.",
-                                              onCancelTap: () {
-                                                Get.back();
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.end,
+                                          children: [
+                                            SmallButton(
+                                              title: "  View  ",
+                                              textColor: AppColor.selectColor,
+                                              onTap: () {
+                                                Get.to(ViewExpenseDetails(
+                                                  name: expenseController .expenseList[ index]['name'] ??'',
+                                                ));
                                               },
-                                              onDeleteTap: () {
-                                                expenseController.deleteExpense(
-                                                    index: index);
+                                            ),
+                                            const SizedBox(
+                                              width: 12.0,
+                                            ),
+                                            SmallButton(
+                                              title: "  Edit  ",
+                                              onTap: () {
+                                                Get.to(AddExpense(
+                                                  model: expenseController.expenseList[index],
+                                                ));
                                               },
-                                            );
-                                          },
+                                            ),
+                                             const SizedBox(
+                                              width: 12.0,
+                                            ),
+                                            SmallButton(
+                                              title: "Delete",
+                                              textColor: AppColor.cancelColor,
+                                              onTap: () {
+                                                CustomDialogBox.showDeleteDialog(
+                                                  context: context,
+                                                  bodyText: "Do you really want to cancel these records? This process cannot be undone.",
+                                                  onCancelTap: () {
+                                                   Get.back();
+                                                  },
+                                                  onDeleteTap: () {
+                                                    expenseController.deleteExpense(index: index);
+                                                  },
+                                                );
+                                              },
+                                            ),
+                                          ],
                                         ),
+                                        // Column(
+                                        //   crossAxisAlignment: CrossAxisAlignment.end,
+                                        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        //   children: [
+                                        //     _keyValue(
+                                        //       "DD",
+                                        //       getDateInDDMMYY(DateTime.parse(
+                                        //           expenseController.expenseList[
+                                        //           index]
+                                        //           ['created_at']??'')),
+                                        //     ),
+                                        //     // Row(
+                                        //     //   children: [
+                                        //     //     InkWell(
+                                        //     //       borderRadius:
+                                        //     //       BorderRadius.circular(10),
+                                        //     //       onTap: () {
+                                        //     //         Get.to(AddExpense(
+                                        //     //           model: expenseController.expenseList[index],
+                                        //     //         ));
+                                        //     //       },
+                                        //     //       child: Container(
+                                        //     //           decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),
+                                        //     //               border: Border.all( color: const Color( 0xffD1D1D1))),
+                                        //     //           padding:  const EdgeInsets
+                                        //     //               .symmetric(
+                                        //     //               vertical: 10,
+                                        //     //               horizontal: 10),
+                                        //     //           child: SvgPicture.asset(
+                                        //     //             'assets/svg/ic_edit.svg',
+                                        //     //             height: 16,
+                                        //     //             width: 16,
+                                        //     //           )),
+                                        //     //     ),
+                                        //     //      const SizedBox(
+                                        //     //       width: 12,
+                                        //     //     ),
+                                        //     //     InkWell(
+                                        //     //       borderRadius:
+                                        //     //       BorderRadius.circular(10),
+                                        //     //       onTap: () {
+                                        //     //         CustomDialogBox
+                                        //     //             .showDeleteDialog(
+                                        //     //           context: context,
+                                        //     //           bodyText:
+                                        //     //           "Do you really want to cancel these records? This process cannot be undone.",
+                                        //     //           onCancelTap: () {
+                                        //     //             Get.back();
+                                        //     //           },
+                                        //     //           onDeleteTap: () {
+                                        //     //             expenseController
+                                        //     //                 .deleteExpense(
+                                        //     //                 index: index);
+                                        //     //           },
+                                        //     //         );
+                                        //     //       },
+                                        //     //       child: Container(
+                                        //     //         decoration: BoxDecoration(
+                                        //     //             borderRadius:
+                                        //     //             BorderRadius
+                                        //     //                 .circular(10),
+                                        //     //             border: Border.all(
+                                        //     //                 color: const Color(
+                                        //     //                     0xffD1D1D1))),
+                                        //     //         padding: const EdgeInsets
+                                        //     //             .symmetric(
+                                        //     //             vertical: 10,
+                                        //     //             horizontal: 10),
+                                        //     //         child: const Icon(
+                                        //     //           Icons.delete,
+                                        //     //           size: 16,
+                                        //     //           weight: 16,
+                                        //     //         ),
+                                        //     //       ),
+                                        //     //     ),
+                                        //     //   ],
+                                        //     // ),
+                                        //
+                                        //   ],
+                                        // ),
                                       ],
                                     ),
-                                  ],
+                                  ),
                                 ),
-                              ),
-                              // Column(
-                              //   crossAxisAlignment: CrossAxisAlignment.end,
-                              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              //   children: [
-                              //     _keyValue(
-                              //       "DD",
-                              //       getDateInDDMMYY(DateTime.parse(
-                              //           expenseController.expenseList[
-                              //           index]
-                              //           ['created_at']??'')),
-                              //     ),
-                              //     // Row(
-                              //     //   children: [
-                              //     //     InkWell(
-                              //     //       borderRadius:
-                              //     //       BorderRadius.circular(10),
-                              //     //       onTap: () {
-                              //     //         Get.to(AddExpense(
-                              //     //           model: expenseController.expenseList[index],
-                              //     //         ));
-                              //     //       },
-                              //     //       child: Container(
-                              //     //           decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),
-                              //     //               border: Border.all( color: const Color( 0xffD1D1D1))),
-                              //     //           padding:  const EdgeInsets
-                              //     //               .symmetric(
-                              //     //               vertical: 10,
-                              //     //               horizontal: 10),
-                              //     //           child: SvgPicture.asset(
-                              //     //             'assets/svg/ic_edit.svg',
-                              //     //             height: 16,
-                              //     //             width: 16,
-                              //     //           )),
-                              //     //     ),
-                              //     //      const SizedBox(
-                              //     //       width: 12,
-                              //     //     ),
-                              //     //     InkWell(
-                              //     //       borderRadius:
-                              //     //       BorderRadius.circular(10),
-                              //     //       onTap: () {
-                              //     //         CustomDialogBox
-                              //     //             .showDeleteDialog(
-                              //     //           context: context,
-                              //     //           bodyText:
-                              //     //           "Do you really want to cancel these records? This process cannot be undone.",
-                              //     //           onCancelTap: () {
-                              //     //             Get.back();
-                              //     //           },
-                              //     //           onDeleteTap: () {
-                              //     //             expenseController
-                              //     //                 .deleteExpense(
-                              //     //                 index: index);
-                              //     //           },
-                              //     //         );
-                              //     //       },
-                              //     //       child: Container(
-                              //     //         decoration: BoxDecoration(
-                              //     //             borderRadius:
-                              //     //             BorderRadius
-                              //     //                 .circular(10),
-                              //     //             border: Border.all(
-                              //     //                 color: const Color(
-                              //     //                     0xffD1D1D1))),
-                              //     //         padding: const EdgeInsets
-                              //     //             .symmetric(
-                              //     //             vertical: 10,
-                              //     //             horizontal: 10),
-                              //     //         child: const Icon(
-                              //     //           Icons.delete,
-                              //     //           size: 16,
-                              //     //           weight: 16,
-                              //     //         ),
-                              //     //       ),
-                              //     //     ),
-                              //     //   ],
-                              //     // ),
-                              //
-                              //   ],
-                              // ),
-                            ],
+                              );
+                            },
+                            separatorBuilder: (context, index) {
+                              return const SizedBox(
+                                height: 10,
+                              );
+                            },
                           ),
-                        ),
+                          // SizedBox(height: Get.height*0.120,),
+                        ],
                       ),
-                    );
-                  },
-                  separatorBuilder: (context, index) {
-                    return const SizedBox(
-                      height: 10,
-                    );
-                  },
-                ),
-                // SizedBox(height: Get.height*0.120,),
-              ],
-            ),
-          ),
+                    ),
         ),
       ),
       floatingActionButton: FloatingActionButton(

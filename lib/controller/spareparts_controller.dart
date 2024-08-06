@@ -10,6 +10,7 @@ import 'package:http/http.dart' as http;
 class SparepartsController extends GetxController {
   TextEditingController nameTextEditingController = TextEditingController();
   TextEditingController qtyTypeTextEditingController = TextEditingController();
+  TextEditingController DescriptionTextEditingController = TextEditingController();
   TextEditingController newqtyTypeTextEditingController =
       TextEditingController();
   TextEditingController sparepartsTextEditingController =
@@ -139,63 +140,63 @@ class SparepartsController extends GetxController {
     }
   }
 
-  // Future<void> deleteSpareparts(id) async {
-  //   try {
-  //     String url = "${baseURL}sparepart/delete";
-  //     log("API => $url");
-  //     isDeleteSparepartsLoading.value = false;
-  //     var response = await http.post(Uri.parse(url), body: {
-  //       "id": id,
-  //     });
-  //     if (response.statusCode == 200) {
-  //       var responseData = jsonDecode(response.body);
-  //       isDeleteSparepartsLoading.value = false;
-  //       if (responseData["status"]["success"] == 1) {
-  //         showToast(responseData["message"]);
-  //         isDeleteSparepartsLoading.value = false;
-  //       }
-  //     } else {
-  //       debugPrint("Fail");
-  //     }
-  //   } catch (e) {
-  //     debugPrint("Error:$e");
-  //     isDeleteSparepartsLoading.value = false;
-  //   }
-  // }
-
-
-
-
-
-
-  Future<void> deleteSpareparts({required int index}) async {
+  Future<void> deleteSpareparts(id) async {
     try {
       String url = "${baseURL}sparepart/delete";
       log("API => $url");
-      isDeleteSparepartsLoading.value = true;
-      var response = await http
-          .post(Uri.parse(url), body: {'id': sparepartsList[index]['id']});
+      isDeleteSparepartsLoading.value = false;
+      var response = await http.post(Uri.parse(url), body: {
+        "id": id,
+      });
       if (response.statusCode == 200) {
         var responseData = jsonDecode(response.body);
         isDeleteSparepartsLoading.value = false;
-        if (responseData["status"] == 1) {
-          showToast(responseData["message"]);
-          sparepartsList.removeAt(index);
-          Get.back();
-          isDeleteSparepartsLoading.value = false;
-        } else {
+        if (responseData["status"]["success"] == 1) {
           showToast(responseData["message"]);
           isDeleteSparepartsLoading.value = false;
         }
       } else {
-        debugPrint("statusCode===>${response.statusCode}");
-        isDeleteSparepartsLoading.value = false;
+        debugPrint("Fail");
       }
     } catch (e) {
-      debugPrint("Error:${e.toString()}");
+      debugPrint("Error:$e");
       isDeleteSparepartsLoading.value = false;
     }
   }
+
+
+
+
+
+
+  // Future<void> deleteSpareparts({required int index}) async {
+  //   try {
+  //     String url = "${baseURL}sparepart/delete";
+  //     log("API => $url");
+  //     isDeleteSparepartsLoading.value = true;
+  //     var response = await http
+  //         .post(Uri.parse(url), body: {'id': sparepartsList[index]['id']});
+  //     if (response.statusCode == 200) {
+  //       var responseData = jsonDecode(response.body);
+  //       isDeleteSparepartsLoading.value = false;
+  //       if (responseData["status"] == 1) {
+  //         showToast(responseData["message"]);
+  //         sparepartsList.removeAt(index);
+  //         Get.back();
+  //         isDeleteSparepartsLoading.value = false;
+  //       } else {
+  //         showToast(responseData["message"]);
+  //         isDeleteSparepartsLoading.value = false;
+  //       }
+  //     } else {
+  //       debugPrint("statusCode===>${response.statusCode}");
+  //       isDeleteSparepartsLoading.value = false;
+  //     }
+  //   } catch (e) {
+  //     debugPrint("Error:${e.toString()}");
+  //     isDeleteSparepartsLoading.value = false;
+  //   }
+  // }
 
 
 

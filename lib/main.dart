@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
       initialBinding: BindingController(),
       theme: ThemeData(
         fontFamily: "Kanit",
+
         // useMaterial3: true,
       ),
       home: const Splash(),
