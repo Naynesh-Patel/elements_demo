@@ -163,18 +163,25 @@ class SparepartsController extends GetxController {
   //   }
   // }
 
-  Future<void> deleteSpareparts(id) async {
+
+
+
+
+
+  Future<void> deleteSpareparts({required int index}) async {
     try {
       String url = "${baseURL}sparepart/delete";
       log("API => $url");
-
       isDeleteSparepartsLoading.value = true;
-      var response = await http.post(Uri.parse(url), body: {"id": id});
+      var response = await http
+          .post(Uri.parse(url), body: {'id': sparepartsList[index]['id']});
       if (response.statusCode == 200) {
         var responseData = jsonDecode(response.body);
         isDeleteSparepartsLoading.value = false;
         if (responseData["status"] == 1) {
           showToast(responseData["message"]);
+          sparepartsList.removeAt(index);
+          Get.back();
           isDeleteSparepartsLoading.value = false;
         } else {
           showToast(responseData["message"]);
@@ -189,6 +196,7 @@ class SparepartsController extends GetxController {
       isDeleteSparepartsLoading.value = false;
     }
   }
+
 
 
   containValueIsExitOrNot(){

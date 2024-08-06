@@ -198,26 +198,8 @@ class _MangeSparepartsState extends State<MangeSpareparts> {
                                                     Get.back();
                                                   },
                                                   onDeleteTap: () {
-                                                    CustomDialogBox
-                                                        .showDeleteDialog(
-                                                      context: context,
-                                                      bodyText:
-                                                      "Do you really want to cancel these records? This process cannot be undone.",
-                                                      onCancelTap: () {
-                                                        Get.back();
-                                                      },
-                                                      onDeleteTap: () {
-                                                        setState(() {
-                                                          controller.deleteSpareparts(
-                                                              controller
-                                                                  .sparepartsList[
-                                                              index]['id']);
-                                                          controller.sparepartsList
-                                                              .removeAt(index);
-                                                          Get.back();
-                                                        });
-                                                      },
-                                                    );
+                                                    controller.deleteSpareparts(
+                                                        index: index);
                                                   },
                                                 );
                                               },
