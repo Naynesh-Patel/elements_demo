@@ -102,6 +102,7 @@ class _MangeCustomerState extends State<MangeCustomer> {
                                                 )),
                                           ),
                                           SizedBox(width: 40,),
+
                                           Column(
                                             crossAxisAlignment:
                                             CrossAxisAlignment.start,
