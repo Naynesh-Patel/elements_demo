@@ -4,12 +4,9 @@ import 'package:elements/constant/methods.dart';
 import 'package:elements/controller/spareparts_controller.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:elements/widget/custom_datepiker.dart';
+import 'package:elements/widget/custom_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-
-
-
 
 
 class ViewSparepartsDetails extends StatefulWidget {
@@ -21,103 +18,128 @@ final  String name;
 }
 
 class _ViewSparepartsDetailsState extends State<ViewSparepartsDetails> {
-  SparepartsController controller = Get.find();
-  bool value = false;
-  int index = 0;
-  // List<dynamic> filterList = [
-  //   {
-  //     "name": "Arash",
-  //     "select": false,
-  //   },
-  //   {
-  //     "name": "Dipesh",
-  //     "select": false,
-  //   },
-  //   {
-  //     "name": "Suresh",
-  //     "select": false,
-  //   },
-  //   {
-  //     "name": "Nihal",
-  //     "select": false,
-  //   },
-  // ];
 
-  @override
-  void initState() {
-    controller.getSpareparts();
-    super.initState();
-  }
+  SparepartsController controller = Get.find();
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColor.whiteColor,
         appBar: CustomAppBar(
           onPressed: () {
-           Get.back();
+            Get.back();
           },
-          // action: [
-          //   IconButton(
-          //       onPressed: () {
-          //         filterDialog();
-          //       },
-          //       icon: Image.asset(
-          //         "assets/images/filtter.png",
-          //         height: 20,
-          //         width: 20,
-          //       )),
-          // ],
-          title:widget.name,
+          title: widget.name,
         ),
-        body: Container(
-          margin:  const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              _tableTopContent(),
-              SizedBox(
-                height: Get.height * 0.4,
-                child: Obx(
-                  () => ListView.builder(
+        body: Obx(()=> controller.isLoading.value ? const CustomLoader() : controller.historyList.isNotEmpty ? SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Container(
+              height: Get.height,
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  tableTopContent(),
+                  Obx(() => ListView.builder(
                     shrinkWrap: true,
-                    itemCount: controller.sparepartsList.length,
+                    itemCount: controller.historyList.length,
                     itemBuilder: (context, index) {
-                      return _tableView(
-                        // name: controller.sparepartsList[index]['name'] ?? '',
-                        // date:
-                        //     controller.sparepartsList[index]['create_at'] ?? '',
-                        date: getDateInDDMMYY(DateTime.parse(controller.sparepartsList[index]['create_at'])),
-                        qty: controller.sparepartsList[index]['qty'] ?? '',
+                      return Column(
+                        children: [
+                          _tableView(
+                            // name:controller.expenseList[index]['name'] ?? '',
+                            date: "${controller.historyList[index] ['comment']??'' }",
+                            type: getDateInDMYYYY(DateTime.parse(controller.historyList[index] ['create_at']??'')),
+                            price: controller.historyList[index]['qty']?? '',
+                          ),
+                        ],
                       );
                     },
-                  ),
-                ),
-              ),
-            ],
+                  )),
+                ],
+              )
+            // child: DataTable2(
+            //   dividerThickness: 0.2,
+            //   columnSpacing: 20,
+            //   horizontalMargin: 5,
+            //   minWidth: 400,
+            //   headingRowColor: MaterialStateProperty.all<Color>(
+            //       const Color(0xffF1F1F1).withOpacity(0.60)),
+            //   // dataRowColor: MaterialStateProperty.all<Color>(Colors.white),
+            //   dataTextStyle: const TextStyle(color: Color(0xff555555)),
+            //   columns: [
+            //     const DataColumn2(
+            //       label: Text(
+            //         'Name',
+            //         style: TextStyle(
+            //           color: AppColor.buttonColor,
+            //         ),
+            //       ),
+            //       size: ColumnSize.L,
+            //     ),
+            //     DataColumn(
+            //       label: Row(
+            //         children: [
+            //           const Text(
+            //             'Date',
+            //             style: TextStyle(
+            //               color: AppColor.buttonColor,
+            //             ),
+            //           ),
+            //           const SizedBox(
+            //             width: 5,
+            //           ),
+            //           InkWell(
+            //             onTap: () {
+            //               Get.to(const DatePiker());
+            //             },
+            //             child: Image.asset(
+            //               "assets/images/date.png",
+            //               height: 14,
+            //               width: 14,
+            //             ),
+            //           ),
+            //         ],
+            //       ),
+            //     ),
+            //     const DataColumn(
+            //       label: Text('Qty'),
+            //     ),
+            //   ],
+            //   rows: List<DataRow>.generate(
+            //     2,
+            //     (index) => const DataRow(cells: [
+            //       DataCell(Text('Steel Bolt')),
+            //       DataCell(Text('5/10/2023')),
+            //       DataCell(Text('20')),
+            //     ]),
+            //   ),
+            // ),
           ),
-        ));
+        ) : const Center(child: Text("No Data"))));
   }
 
-  Widget _tableView({required String qty, date}) {
+  Widget _tableView({required String type, price, date}) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(
             height: 12.0,
           ),
           Row(
-            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              // Expanded(
-              //     child: Text(name, style: AppTextStyle.textStyleRegular13)),
-              Text("$date",
-                  textAlign: TextAlign.center,
-                  style: AppTextStyle.textStyleRegular13),
+              // Expanded(child: Text(name, style: AppTextStyle.textStyleRegular13)),
               Expanded(
-                  child: Text(qty,
-                      textAlign: TextAlign.end,
-                      style: AppTextStyle.textStyleRegular13)),
+                flex: 2,
+                  child: Text("$date", style: AppTextStyle.textStyleRegular13)),
+              Expanded(
+                flex: 2,
+                child: Text(type,textAlign: TextAlign.center, style: AppTextStyle.textStyleRegular13),
+              ),
+              Expanded(child: Text(price,textAlign: TextAlign.end,style: AppTextStyle.textStyleRegular13)),
             ],
           ),
           const SizedBox(
@@ -129,7 +151,7 @@ class _ViewSparepartsDetailsState extends State<ViewSparepartsDetails> {
     );
   }
 
-  Widget _tableTopContent() {
+  Widget tableTopContent() {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
       decoration: const BoxDecoration(color: Color(0xffF1F1F1)),
@@ -142,225 +164,42 @@ class _ViewSparepartsDetailsState extends State<ViewSparepartsDetails> {
           //       .copyWith(color: AppColor.selectColor),
           // )),
           Expanded(
+            flex: 2,
+            child: Text("Description", style: AppTextStyle.textStyleRegular14),
+          ),
+          Expanded(
+            flex: 2,
             child: InkWell(
               onTap: () {
-                Get.to( const CustomDatePicker());
+                Get.to(const CustomDatePicker());
               },
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    "Date",
-                    style: AppTextStyle.textStyleRegular14
-                        .copyWith(color: AppColor.selectColor),
-                  ),
-                  const SizedBox(
-                    width: 2.0,
-                  ),
-                  Image.asset(
-                    "assets/images/date.png",
-                    height: 14,
-                    width: 14,
-                  ),
-                ],
+              child: Container(
+                // color: Colors.red,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Date",textAlign: TextAlign.center,
+                      style: AppTextStyle.textStyleRegular14
+                          .copyWith(color: AppColor.selectColor),
+                    ),
+                    const SizedBox(
+                      width: 2.0,
+                    ),
+                    Image.asset(
+                      "assets/images/date.png",
+                      height: 14,
+                      width: 14,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
-          Text("Qty",
-              style: AppTextStyle.textStyleRegular14
-                  .copyWith(color: AppColor.selectColor)),
+          Expanded(child: Text("Qty", textAlign: TextAlign.end,style: AppTextStyle.textStyleRegular14)),
         ],
       ),
     );
   }
 
-  // Future<void> filterDialog() async {
-  //   return showDialog<void>(
-  //     context: context,
-  //     barrierDismissible: false,
-  //     useSafeArea: true,
-  //     // user must tap button!
-  //     builder: (BuildContext context) {
-  //       return StatefulBuilder(
-  //         builder: (context, setState) {
-  //           return AlertDialog(
-  //             shape: RoundedRectangleBorder(
-  //               borderRadius: BorderRadius.circular(2),
-  //             ),
-  //             contentPadding: EdgeInsets.zero,
-  //             backgroundColor: Colors.white,
-  //             scrollable: true,
-  //             content: Column(
-  //                 crossAxisAlignment: CrossAxisAlignment.start,
-  //                 mainAxisSize: MainAxisSize.min,
-  //                 children: [
-  //                   Container(
-  //                     padding: const EdgeInsets.symmetric(vertical: 0.0),
-  //                     child: Row(
-  //                       crossAxisAlignment: CrossAxisAlignment.center,
-  //                       children: [
-  //                         Expanded(
-  //                           child: Center(
-  //                             child: Text("Filters",
-  //                                 style: AppTextStyle.textStyleBold16),
-  //                           ),
-  //                         ),
-  //                         IconButton(
-  //                             onPressed: () {
-  //                               Get.back();
-  //                             },
-  //                             icon: const Icon(Icons.clear)),
-  //                       ],
-  //                     ),
-  //                   ),
-  //                   const Divider(
-  //                     color: Colors.grey,
-  //                   ),
-  //                   Container(
-  //                     padding: const EdgeInsets.symmetric(
-  //                         horizontal: 8.0, vertical: 0.0),
-  //                     child: Text(
-  //                       "User Name List",
-  //                       style: AppTextStyle.textStyleBold13,
-  //                     ),
-  //                   ),
-  //                   const SizedBox(
-  //                     height: 16,
-  //                   ),
-  //                   SizedBox(
-  //                     height: 100,
-  //                     width: Get.width,
-  //                     child: ListView.separated(
-  //                       shrinkWrap: true,
-  //                       itemCount: filterList.length,
-  //                       padding: const EdgeInsets.symmetric(
-  //                           horizontal: 8.0, vertical: 0.0),
-  //                       itemBuilder: (context, index) {
-  //                         return Row(
-  //                           mainAxisAlignment: MainAxisAlignment.start,
-  //                           children: [
-  //                             InkWell(
-  //                               borderRadius: BorderRadius.circular(6.0),
-  //                               onTap: () {
-  //                                 if (filterList[index]['select'] == null) {
-  //                                   filterList[index]['select'] = true;
-  //                                 } else if (filterList[index]['select'] ==
-  //                                     true) {
-  //                                   filterList[index]['select'] = false;
-  //                                 } else {
-  //                                   filterList[index]['select'] = true;
-  //                                 }
-  //                                 setState(() {});
-  //                               },
-  //                               child: Container(
-  //                                 padding: const EdgeInsets.symmetric(
-  //                                     horizontal: 4.0, vertical: 4.0),
-  //                                 decoration: BoxDecoration(
-  //                                     border: Border.all(
-  //                                         color: AppColor.dropDownHintColor),
-  //                                     borderRadius: BorderRadius.circular(6.0)),
-  //                                 child: Icon(
-  //                                   Icons.check_rounded,
-  //                                   size: 14,
-  //                                   color: filterList[index]['select'] ?? false
-  //                                       ? AppColor.blackColor
-  //                                       : Colors.transparent,
-  //                                 ),
-  //                               ),
-  //                             ),
-  //                             const SizedBox(
-  //                               width: 4.0,
-  //                             ),
-  //                             Text(
-  //                               "${filterList[index]['name']}",
-  //                               style: AppTextStyle.textStyleRegular14,
-  //                             ),
-  //                           ],
-  //                         );
-  //                       },
-  //                       separatorBuilder: (BuildContext context, int index) {
-  //                         return const SizedBox(
-  //                           height: 8.0,
-  //                         );
-  //                       },
-  //                     ),
-  //                   ),
-  //                   Row(
-  //                     mainAxisAlignment: MainAxisAlignment.end,
-  //                     children: [
-  //                       SmallButton(
-  //                         title: "Clear",
-  //                         onTap: () {
-  //                           Get.back();
-  //                         },
-  //                       ),
-  //                       const SizedBox(
-  //                         width: 16.0,
-  //                       ),
-  //                       SmallButton(
-  //                         title: "Apply",
-  //                         onTap: () {
-  //                           Get.back();
-  //                         },
-  //                         textColor: AppColor.whiteColor,
-  //                         bodyColor: AppColor.selectColor,
-  //                       ),
-  //                       const SizedBox(
-  //                         width: 16.0,
-  //                       ),
-  //                     ],
-  //                   ),
-  //                   const SizedBox(
-  //                     height: 16.0,
-  //                   ),
-  //                 ]),
-  //             // actions: [
-  //             //   Row(
-  //             //     mainAxisAlignment: MainAxisAlignment.end,
-  //             //     children: [
-  //             //       InkWell(
-  //             //         onTap: () {
-  //             //           Get.back();
-  //             //         },
-  //             //         child: Container(
-  //             //             padding: const EdgeInsets.symmetric(
-  //             //                 vertical: 8, horizontal: 23),
-  //             //             decoration: BoxDecoration(
-  //             //                 borderRadius: BorderRadius.circular(4),
-  //             //                 // color: const Color(0xffC9C9C9),
-  //             //                 border: Border.all(color: const Color(0xffC9C9C9))),
-  //             //             child: const Text("Clear",
-  //             //                 style: TextStyle(
-  //             //                     color: Colors.black,
-  //             //                     fontSize: 18,
-  //             //                     fontWeight: FontWeight.w400))),
-  //             //       ),
-  //             //       const SizedBox(
-  //             //         width: 20,
-  //             //       ),
-  //             //       InkWell(
-  //             //         onTap: () {
-  //             //           Get.back();
-  //             //         },
-  //             //         child: Container(
-  //             //             padding: const EdgeInsets.symmetric(
-  //             //                 vertical: 8, horizontal: 23),
-  //             //             decoration: BoxDecoration(
-  //             //                 color: const Color(0xff01959F),
-  //             //                 borderRadius: BorderRadius.circular(4)),
-  //             //             child: const Text("Apply",
-  //             //                 style: TextStyle(
-  //             //                     color: Colors.white,
-  //             //                     fontSize: 18,
-  //             //                     fontWeight: FontWeight.w400))),
-  //             //       ),
-  //             //     ],
-  //             //   ),
-  //             // ],
-  //           );
-  //         },
-  //       );
-  //     },
-  //   );
-  // }
 }

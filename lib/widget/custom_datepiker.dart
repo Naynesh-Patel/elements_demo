@@ -201,7 +201,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
                                 color: Colors.grey,
                                 borderRadius: BorderRadius.circular(16)),
                             child: Text(
-                              "$_rangeCount NIGHTS",
+                              "$_rangeCount DAYS",
                               style: AppTextStyle.textStyleBold10
                                   .copyWith(color: Colors.white),
                             ),

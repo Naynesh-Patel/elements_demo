@@ -71,8 +71,13 @@ String getDate(String date) {
   return outputDate.toString();
 }
 
-String getDateInDDMMYY(date) {
+String  getDateInDDMMYY(date) {
   var d12 = DateFormat('dd MMMM yyyy').format(date);
+  return d12;
+}
+
+String  getDateInDMYYYY(date) {
+  var d12  = DateFormat('d/M/yyyy').format(date);
   return d12;
 }
 

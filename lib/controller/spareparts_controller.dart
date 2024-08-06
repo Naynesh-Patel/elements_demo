@@ -123,9 +123,14 @@ class SparepartsController extends GetxController {
       var response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
         var responseData = jsonDecode(response.body);
-        List h = responseData["data"];
-        sparepartsList.value = h;
-        isLoading.value = false;
+        if(responseData['status']=="success"){
+          List h = responseData["data"];
+          historyList.value = h;
+          isLoading.value = false;
+        }else{
+          isLoading.value = false;
+        }
+
       } else {
         debugPrint("statusCode${response.statusCode}");
         isLoading.value = false;
