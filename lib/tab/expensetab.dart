@@ -80,6 +80,7 @@ class _ExpenseTabState extends State<ExpenseTab> {
                                       children: [
                                         Expanded(
                                           child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             crossAxisAlignment:CrossAxisAlignment.start,
                                             children: [
                                               Column(
@@ -107,9 +108,7 @@ class _ExpenseTabState extends State<ExpenseTab> {
                                                           ''),
                                                 ],
                                               ),
-                                               const SizedBox(
-                                                width: 60,
-                                              ),
+
                                               _keyValue(
                                                 "DD",
                                                 getDateInDDMMYY(DateTime.parse( expenseController.expenseList[index]['created_at'] ??'')),

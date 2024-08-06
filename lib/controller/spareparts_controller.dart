@@ -11,12 +11,9 @@ import 'package:http/http.dart' as http;
 class SparepartsController extends GetxController {
   TextEditingController nameTextEditingController = TextEditingController();
   TextEditingController qtyTypeTextEditingController = TextEditingController();
-  TextEditingController DescriptionTextEditingController = TextEditingController();
-  TextEditingController newqtyTypeTextEditingController =
-      TextEditingController();
-  TextEditingController sparepartsTextEditingController =
-      TextEditingController();
-
+  TextEditingController descriptionTextEditingController = TextEditingController();
+  TextEditingController newqtyTypeTextEditingController = TextEditingController();
+  TextEditingController sparepartsTextEditingController = TextEditingController();
   TextEditingController totalQtyTextEditingController = TextEditingController();
 
   RxBool isSparepartsLoading = false.obs;
