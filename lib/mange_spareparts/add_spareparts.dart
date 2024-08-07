@@ -52,8 +52,8 @@ class _AddSparepartsState extends State<AddSpareparts> {
       sparepartsController.nameTextEditingController.clear();
       sparepartsController.qtyTypeTextEditingController.clear();
       sparepartsController.totalQtyTextEditingController.clear();
-      sparepartsController.newqtyTypeTextEditingController.clear();
     }
+    sparepartsController.newqtyTypeTextEditingController.clear();
     super.initState();
   }
 
@@ -125,6 +125,13 @@ class _AddSparepartsState extends State<AddSpareparts> {
                     hintText: "New Qty",
                     autofocus: true,
                     labelText: "Please Enter Add New Qty",
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Please Enter New Qty";
+                      } else {
+                        return null;
+                      }
+                    },
                     onChange: (p0) {
                       if (p0.isEmpty) {
                         total(int.parse("0"));
