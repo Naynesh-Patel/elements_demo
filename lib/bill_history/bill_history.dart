@@ -2,6 +2,7 @@
 import 'package:elements/bill_history/add_bill_history.dart';
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/controller/order_controller.dart';
+import 'package:elements/pdf.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:elements/widget/dialogs/custom_dialogbox.dart';
 import 'package:flutter/material.dart';
@@ -68,7 +69,8 @@ class _BillHistoryState extends State<BillHistory> {
                 //   pdfUrl:
                 //       'https://codinghouse.in/machinepro/pdf/OrderNo-40.pdf',
                 // ));
-                orderController.launchURL();
+                // orderController.launchURL();
+                Get.to(Pdf());
 
               },
               child: Container(

@@ -67,7 +67,7 @@ class CustomerController extends GetxController {
     }
   }
 
-  launchMap({String lat = "47.6", String long = "-122.3"}) async{
+  Future<void>launchMap({String lat = "47.6", String long = "-122.3"}) async{
     var mapSchema = 'geo:$lat,$long';
     if (await canLaunch(mapSchema)) {
       await launch(mapSchema);
