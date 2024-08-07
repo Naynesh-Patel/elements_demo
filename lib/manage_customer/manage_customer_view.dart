@@ -21,6 +21,7 @@ class _ManageCustomerViewState extends State<ManageCustomerView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: CustomAppBar(
         title:  widget.model
         ['company'] ??
