@@ -114,6 +114,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
               // minDate: widget.minDate,
               // enablePastDates: false,
               allowViewNavigation: false,
+
               endRangeSelectionColor: Colors.grey,
               startRangeSelectionColor: Colors.grey,
               selectionColor: Colors.grey,
@@ -136,6 +137,8 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
               initialSelectedRange: PickerDateRange(startDefaultDate, endDefaultDate),
               initialSelectedDate: DateTime.now(),
               initialDisplayDate: DateTime.now(),
+
+
             ),
           ),
           Material(
@@ -174,6 +177,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
                                 ],
                               ),
                             )),
+
                             Expanded(
                                 child: Container(
                               width: Get.width,

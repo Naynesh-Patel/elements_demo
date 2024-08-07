@@ -33,7 +33,9 @@ class _ViewSparepartsDetailsState extends State<ViewSparepartsDetails> {
           title: widget.model['name'],
         ),
         body: Obx(()=> controller.isLoading.value ? const CustomLoader() : SingleChildScrollView(
+
           scrollDirection: Axis.vertical,
+          physics: NeverScrollableScrollPhysics(),
           child: Container(
               height: Get.height,
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),

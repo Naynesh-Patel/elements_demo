@@ -427,7 +427,6 @@ class _AddCustomerState extends State<AddCustomer> {
                     ),
                     onTap: (){
                       controller.makePhoneCall("7359085239");
-
                     },
                   )),
               verticalSpacing(),
@@ -442,11 +441,10 @@ class _AddCustomerState extends State<AddCustomer> {
                     size: 20,
                   ),
                   onTap: (){
-                    controller.launchMap();
+                    controller.launchMap("");
                   },
                 )
               ),
-
               verticalSpacing(),
               CustomTextField(
                   textEditingController:

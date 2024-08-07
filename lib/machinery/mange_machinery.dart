@@ -87,7 +87,7 @@ class _MangeMachineryState extends State<MangeMachinery> {
                                             ''),
                                     verticalSpacing(),
                                     _keyValue(
-                                      "Manufacture Duration",
+                                      "Manufacture Days",
                                       controller.addMachineryList[index]
                                               ['manufacture_duration'] ??
                                           '',

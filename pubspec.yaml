@@ -45,7 +45,7 @@ dependencies:
   http: ^1.2.1
   share: ^2.0.4
   image_picker: ^1.1.2
-  url_launcher: ^6.0.1
+  url_launcher: ^6.1.5
   get_storage: ^2.1.1
   fluttertoast: ^8.2.1
   intl: ^0.18.1

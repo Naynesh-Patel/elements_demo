@@ -4,6 +4,7 @@ import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/controller/user_controller.dart';
 import 'package:elements/user/add_user.dart';
+import 'package:elements/user/user_view_detail.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:elements/widget/button/small_button.dart';
 import 'package:elements/widget/custom_loader.dart';
@@ -58,10 +59,11 @@ class _MangeUserState extends State<MangeUser> {
                           itemBuilder: (context, index) {
                             return InkWell(
                               onTap: () {
-                                Get.to(AddUser(
-                                  isView: true,
-                                  model:
-                                  controller.userList[index], name:controller.userList[index]["name"]??"",));
+                                Get.to(UserViewDetils(
+
+                                  model:controller.userList[index],));
+
+
                               },
                               child: Container(
                                 padding: const EdgeInsets.symmetric(
@@ -143,10 +145,13 @@ class _MangeUserState extends State<MangeUser> {
                                           title: "  View  ",
                                           textColor: AppColor.selectColor,
                                           onTap: () {
-                                            Get.to(AddUser(
-                                                isView: true,
-                                                model:
-                                                    controller.userList[index], name:controller.userList[index]["name"]??"",));
+                                            // Get.to(AddUser(
+                                            //     isView: true,
+                                            //     model:
+                                            //         controller.userList[index], name:controller.userList[index]["name"]??"",));
+                                            Get.to(UserViewDetils(
+
+                                              model:controller.userList[index],));
                                           },
                                         ),
                                         const SizedBox(
