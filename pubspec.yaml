@@ -37,9 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.6
   get: ^4.6.5
   flutter_svg: ^2.0.10+1
-#  data_table_2: ^2.5.12
   dropdown_button2: ^2.3.9
-  date_picker_plus: ^4.0.0
   calendar_date_picker2: ^1.0.600
   flutter_launcher_icons: ^0.13.1
   http: ^1.2.1
@@ -51,9 +49,7 @@ dependencies:
   intl: ^0.18.1
   flutter_spinkit: ^5.2.1
   local_auth: ^2.2.0
-  table_calendar: ^3.0.8
   syncfusion_flutter_datepicker: ^24.1.45
-  google_maps_flutter: ^2.1.1
 #  flutter_pdfview: ^1.3.2
 #  dio: ^4.0.43
 #  path_provider: ^2.0.11
