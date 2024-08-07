@@ -1,13 +1,11 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:elements/constant/vars.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
-
 import '../constant/methods.dart';
 import '../constant/urls.dart';
 import 'customer_controller.dart';

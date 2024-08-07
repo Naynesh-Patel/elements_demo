@@ -418,7 +418,7 @@ class _AddCustomerState extends State<AddCustomer> {
                   textEditingController:
                       controller.contactTextEditingController,
                   labelText: "Contact No",
-                  enable: false,
+                  // enable: false,
                   suffixFixIcon: InkWell(
                     child: const Icon(
                       Icons.phone,
@@ -434,7 +434,7 @@ class _AddCustomerState extends State<AddCustomer> {
               CustomTextField(
                 textEditingController: controller.addressTextEditingController,
                 labelText: "Address",
-                enable: false,
+                // enable: false,
                 suffixFixIcon: InkWell(
                   child: const Icon(
                     color: Colors.black,
@@ -443,7 +443,6 @@ class _AddCustomerState extends State<AddCustomer> {
                   ),
                   onTap: (){
                     controller.launchMap();
-                   // controller.openMap("", "");
                   },
                 )
               ),
@@ -453,7 +452,7 @@ class _AddCustomerState extends State<AddCustomer> {
                   textEditingController:
                       controller.websiteTextEditingController,
                   labelText: "Website",
-                  enable: false,
+                  // enable: false,
                   suffixFixIcon: InkWell(
                     onTap: (){
                     controller.webURL();
