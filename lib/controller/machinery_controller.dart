@@ -22,7 +22,7 @@ class MachineryController extends GetxController {
   TextEditingController sparepartsTextEditingController =
       TextEditingController();
 
-  RxList<dynamic> selectSparepartsList = <dynamic>[].obs;
+  RxList<dynamic> selectMachineList = <dynamic>[].obs;
 
   RxBool isMachineryLoading = false.obs;
   RxBool isGetMachineryLoading = false.obs;
@@ -77,7 +77,7 @@ class MachineryController extends GetxController {
     }
   }
 
-  Future<void> getMachinery() async {
+  Future<void> getMachinery({bool isMultiSelection = false}) async {
     try {
       String url = "${baseURL}machine/getAll";
       log("API => $url");
@@ -88,6 +88,9 @@ class MachineryController extends GetxController {
         var responseData = jsonDecode(response.body);
         List jobData = responseData["data"];
         addMachineryList.value = jobData;
+        if(isMultiSelection){
+          containValueIsExitOrNot();
+        }
       } else {
         debugPrint("statusCode${response.statusCode}");
         isGetMachineryLoading.value = false;
@@ -163,5 +166,15 @@ class MachineryController extends GetxController {
       debugPrint("Error:${e.toString()}");
       isDeleteMachineryLoading.value = false;
     }
+  }
+
+  containValueIsExitOrNot(){
+    for(int i =0; i< selectMachineList.length;i++){
+      int index = addMachineryList.indexWhere((item) => item["id"] == selectMachineList[i]['id']);
+      if(index != -1){
+        addMachineryList[index]['isSelect'] = true;
+      }
+    }
+
   }
 }

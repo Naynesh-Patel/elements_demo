@@ -74,10 +74,15 @@ class SparepartsController extends GetxController {
       isSparepartsLoading.value = true;
       var response = await http.post(Uri.parse(url), body: body);
       if (response.statusCode == 200) {
-        jsonDecode(response.body);
-        getSpareparts();
-        Get.back();
-        isSparepartsLoading.value = false;
+        var responseData = jsonDecode(response.body);
+        if(responseData['status']=="success") {
+          getSpareparts();
+          Get.back();
+          isSparepartsLoading.value = false;
+        }else{
+          showToast(responseData['message']);
+          isSparepartsLoading.value = false;
+        }
       } else {
         debugPrint("statusCode${response.statusCode}");
         isSparepartsLoading.value = false;
@@ -158,10 +163,15 @@ class SparepartsController extends GetxController {
       isSparepartsLoading.value = true;
       var response = await http.post(Uri.parse(url), body: body);
       if (response.statusCode == 200) {
-        jsonDecode(response.body);
-        Get.back();
-        getSpareparts();
-        isSparepartsLoading.value = false;
+       var responseData =  jsonDecode(response.body);
+       if(responseData['status']=="success") {
+         Get.back();
+         getSpareparts();
+         isSparepartsLoading.value = false;
+       }else{
+         showToast("${responseData['message']}");
+         isSparepartsLoading.value = false;
+       }
       } else {
         debugPrint("statusCode${response.statusCode}");
         isSparepartsLoading.value = false;

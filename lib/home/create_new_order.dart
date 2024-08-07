@@ -1,4 +1,5 @@
 import 'package:elements/constant/app_colors.dart';
+import 'package:elements/constant/assets_path.dart';
 import 'package:elements/constant/methods.dart';
 import 'package:elements/constant/vars.dart';
 import 'package:elements/controller/customer_controller.dart';
@@ -88,6 +89,7 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                       CustomTextField(
                           focusNode: FocusNode(),
                           readOnly: true,
+                          showCursor: false,
                           onTap: () {
                             Get.to( const SelectCustomerCompany());
                           },
@@ -112,6 +114,7 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                       CustomTextField(
                           focusNode: FocusNode(),
                           readOnly: true,
+                          showCursor: false,
                           onTap: () {
                             Get.to(const SelectMachine());
                           },
@@ -131,7 +134,57 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                             Icons.arrow_forward_ios_rounded,
                             size: 18,
                           )),
-                      verticalSpacing(),
+                      Obx(
+                            () => ListView.separated(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 14.0),
+                          itemCount: machineryController.selectMachineList.length,
+                          itemBuilder: (context, index) {
+                            return  Container(
+                              // color: Colors.yellow,
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Expanded(
+                                      flex: 2,
+                                      child:   Text(machineryController.selectMachineList[index]
+                                      ['machine_name'] ??
+                                          ''.capitalizeFirst.toString())
+                                  ),
+                                  // Text('${index + 1}'),
+                                  InkWell(
+                                    onTap: () {
+                                      machineryController.selectMachineList
+                                          .removeAt(index);
+                                    },
+                                    borderRadius: BorderRadius.circular(5),
+                                    child: Container(
+                                      height: 28.0,
+                                      width: 28.0,
+                                      padding: const EdgeInsets.symmetric(horizontal: 4.0,vertical: 4.0),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(4.0),
+                                        border: Border.all(color: AppColor.borderColor)
+                                      ),
+                                      child: Image.asset(
+                                        AssetPath.icDelete,
+                                      ),
+                                    ),
+                                  )
+                                ],
+
+                              ),
+                            );
+                          }, separatorBuilder: (BuildContext context, int index) {
+
+                          return const SizedBox(height: 15,);
+
+                        },
+                        ),
+                      ),
                       InkWell(
                         onTap: () async {
                           datePicker();

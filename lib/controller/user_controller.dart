@@ -275,8 +275,7 @@ class UserController extends GetxController {
         var responseData = jsonDecode(response.body);
         if (responseData['status'] == 1) {
           isUpdateUserLoading.value = false;
-
-          // Get.back();
+          Get.back();
         } else {
           debugPrint("Error Message ${responseData['message']}");
           isUpdateUserLoading.value = false;

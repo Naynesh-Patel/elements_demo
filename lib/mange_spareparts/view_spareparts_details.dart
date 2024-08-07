@@ -32,26 +32,26 @@ class _ViewSparepartsDetailsState extends State<ViewSparepartsDetails> {
           },
           title: widget.model['name'],
         ),
-        body: Obx(()=> controller.isLoading.value ? const CustomLoader() : SingleChildScrollView(
-
-          scrollDirection: Axis.vertical,
-          physics: NeverScrollableScrollPhysics(),
-          child: Container(
-              height: Get.height,
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  tableTopContent(),
-                  Obx(() => controller.historyList.isEmpty ?  Container(
-                      height: Get.height * 0.520,
-                      width: Get.width,
-                      // color: Colors.red,
-                      child: const Center(child: Text("No Data"))) : ListView.builder(
-                    shrinkWrap: true,
-                    reverse: true,
-                    itemCount: controller.historyList.length,
-                    itemBuilder: (context, index) {
+        body: Obx(()=> controller.isLoading.value ? const CustomLoader() : Container(
+            height: Get.height,
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+            child: Column(
+              // mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                tableTopContent(),
+                Obx(() => controller.historyList.isEmpty ?  Container(
+                    height: Get.height * 0.320,
+                    // color: Colors.red,
+                    child: const Center(child: Text("No Data Found"))) : Expanded(
+                      child: ListView.builder(
+                                        shrinkWrap: true,
+                                        padding: EdgeInsets.zero,
+                                        // reverse: true,
+                                        scrollDirection: Axis.vertical,
+                                        itemCount: controller.historyList.length,
+                                        itemBuilder: (context, index) {
                       return Column(
                         children: [
                           _tableView(
@@ -62,68 +62,68 @@ class _ViewSparepartsDetailsState extends State<ViewSparepartsDetails> {
                           ),
                         ],
                       );
-                    },
-                  )),
-                ],
-              )
-            // child: DataTable2(
-            //   dividerThickness: 0.2,
-            //   columnSpacing: 20,
-            //   horizontalMargin: 5,
-            //   minWidth: 400,
-            //   headingRowColor: MaterialStateProperty.all<Color>(
-            //       const Color(0xffF1F1F1).withOpacity(0.60)),
-            //   // dataRowColor: MaterialStateProperty.all<Color>(Colors.white),
-            //   dataTextStyle: const TextStyle(color: Color(0xff555555)),
-            //   columns: [
-            //     const DataColumn2(
-            //       label: Text(
-            //         'Name',
-            //         style: TextStyle(
-            //           color: AppColor.buttonColor,
-            //         ),
-            //       ),
-            //       size: ColumnSize.L,
-            //     ),
-            //     DataColumn(
-            //       label: Row(
-            //         children: [
-            //           const Text(
-            //             'Date',
-            //             style: TextStyle(
-            //               color: AppColor.buttonColor,
-            //             ),
-            //           ),
-            //           const SizedBox(
-            //             width: 5,
-            //           ),
-            //           InkWell(
-            //             onTap: () {
-            //               Get.to(const DatePiker());
-            //             },
-            //             child: Image.asset(
-            //               "assets/images/date.png",
-            //               height: 14,
-            //               width: 14,
-            //             ),
-            //           ),
-            //         ],
-            //       ),
-            //     ),
-            //     const DataColumn(
-            //       label: Text('Qty'),
-            //     ),
-            //   ],
-            //   rows: List<DataRow>.generate(
-            //     2,
-            //     (index) => const DataRow(cells: [
-            //       DataCell(Text('Steel Bolt')),
-            //       DataCell(Text('5/10/2023')),
-            //       DataCell(Text('20')),
-            //     ]),
-            //   ),
-            // ),
-          ),
+                                        },
+                                      ),
+                    )),
+              ],
+            )
+          // child: DataTable2(
+          //   dividerThickness: 0.2,
+          //   columnSpacing: 20,
+          //   horizontalMargin: 5,
+          //   minWidth: 400,
+          //   headingRowColor: MaterialStateProperty.all<Color>(
+          //       const Color(0xffF1F1F1).withOpacity(0.60)),
+          //   // dataRowColor: MaterialStateProperty.all<Color>(Colors.white),
+          //   dataTextStyle: const TextStyle(color: Color(0xff555555)),
+          //   columns: [
+          //     const DataColumn2(
+          //       label: Text(
+          //         'Name',
+          //         style: TextStyle(
+          //           color: AppColor.buttonColor,
+          //         ),
+          //       ),
+          //       size: ColumnSize.L,
+          //     ),
+          //     DataColumn(
+          //       label: Row(
+          //         children: [
+          //           const Text(
+          //             'Date',
+          //             style: TextStyle(
+          //               color: AppColor.buttonColor,
+          //             ),
+          //           ),
+          //           const SizedBox(
+          //             width: 5,
+          //           ),
+          //           InkWell(
+          //             onTap: () {
+          //               Get.to(const DatePiker());
+          //             },
+          //             child: Image.asset(
+          //               "assets/images/date.png",
+          //               height: 14,
+          //               width: 14,
+          //             ),
+          //           ),
+          //         ],
+          //       ),
+          //     ),
+          //     const DataColumn(
+          //       label: Text('Qty'),
+          //     ),
+          //   ],
+          //   rows: List<DataRow>.generate(
+          //     2,
+          //     (index) => const DataRow(cells: [
+          //       DataCell(Text('Steel Bolt')),
+          //       DataCell(Text('5/10/2023')),
+          //       DataCell(Text('20')),
+          //     ]),
+          //   ),
+          // ),
         ) ));
   }
 

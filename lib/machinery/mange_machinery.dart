@@ -2,6 +2,7 @@ import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/controller/machinery_controller.dart';
 import 'package:elements/machinery/add_machinery.dart';
+import 'package:elements/machinery/view_machinery.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:elements/widget/button/small_button.dart';
 import 'package:elements/widget/custom_loader.dart';
@@ -57,8 +58,7 @@ class _MangeMachineryState extends State<MangeMachinery> {
                           itemBuilder: (context, index) {
                             return InkWell(
                               onTap: () {
-                                Get.to(AddMachinery(
-                                    isView: true,
+                                Get.to(ViewMachinery(
                                     model: controller
                                         .addMachineryList[index]));
                               },
@@ -100,8 +100,7 @@ class _MangeMachineryState extends State<MangeMachinery> {
                                           title: " View ",
                                           textColor: AppColor.selectColor,
                                           onTap: () {
-                                            Get.to(AddMachinery(
-                                                isView: true,
+                                            Get.to(ViewMachinery(
                                                 model: controller
                                                     .addMachineryList[index]));
                                           },
