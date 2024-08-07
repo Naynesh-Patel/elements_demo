@@ -169,7 +169,7 @@ class _SettingTabState extends State<SettingTab> {
         _customTile(
           isSvg: false,
           title: "Manage Role",
-          imgPath: "assets/images/talk.png",
+          imgPath: "assets/images/mrole.png",
           index: 6,
           onTap: () {
             controller.selectMenu.value = 5;
@@ -192,7 +192,7 @@ class _SettingTabState extends State<SettingTab> {
           index: 6,
           onTap: () {
             controller.selectMenu.value = 6;
-            Get.to(const ChangePassword());
+            Get.to( const ChangePassword());
           },
         ),
         _customTile(

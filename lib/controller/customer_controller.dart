@@ -58,26 +58,25 @@ class CustomerController extends GetxController {
   }
 
 
-  webURL() async {
-    const url = 'https://flutter.dev';
-    if (await canLaunchUrl(Uri.parse(url))) {
-      await launchUrl(Uri.parse(url));
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
 
-  Future<void>launchMap({String lat = "47.6", String long = "-122.3"}) async{
-    var mapSchema = 'geo:$lat,$long';
-    if (await canLaunch(mapSchema)) {
-      await launch(mapSchema);
-    } else {
-      throw 'Could not launch $mapSchema';
+  Future<void> webURL() async {
+    final Uri uri =
+    Uri.parse('https://carbee.com.au/terms');
+    if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+      print('Cannot launch: $uri');
+      throw 'Could not launch $uri';
     }
   }
 
 
-
+  Future<void> launchMap(String query) async {
+    final Uri uri =
+    Uri.parse('https://www.google.com/maps/search/?api=1&query=$query');
+    if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+      print('Cannot launch: $uri');
+      throw 'Could not launch $uri';
+    }
+  }
 
 
 
@@ -85,6 +84,7 @@ class CustomerController extends GetxController {
     Uint8List bytes = await file.readAsBytes();
     base64Image = base64.encode(bytes);
   }
+
   Future<void> addCustomer() async {
     Map<String, dynamic> body = {
       'company': companyTextEditingController.text,

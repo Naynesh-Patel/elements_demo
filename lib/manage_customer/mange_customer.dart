@@ -4,6 +4,7 @@ import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/controller/customer_controller.dart';
 import 'package:elements/manage_customer/add_customer.dart';
+import 'package:elements/manage_customer/manage_customer_view.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:elements/widget/button/small_button.dart';
 import 'package:elements/widget/custom_loader.dart';
@@ -60,10 +61,11 @@ class _MangeCustomerState extends State<MangeCustomer> {
                             itemBuilder: (context, index) {
                               return InkWell(
                                 onTap: (){
-                                  Get.to(AddCustomer(
-                                    isView: true,
-                                    model: controller
-                                        .customerList[index], name: controller.customerList[index]["company"]??"",));
+                                  // Get.to(AddCustomer(
+                                  //   isView: true,
+                                  //   model: controller
+                                  //       .customerList[index], name: controller.customerList[index]["company"]??"",));
+                                  Get.to( ManageCustomerView(model:controller.customerList[index],));
                                 },
                                 child: Container(
                                   padding: const EdgeInsets.symmetric(
@@ -107,9 +109,15 @@ class _MangeCustomerState extends State<MangeCustomer> {
                                             CrossAxisAlignment.start,
                                             children: [
                                               _keyValue(
-                                                  "Name",
+                                                  "Company",
                                                   controller.customerList[index]
                                                   ['company'] ??
+                                                      ''),
+                                              verticalSpacing(),
+                                              _keyValue(
+                                                  "Owner",
+                                                  controller.customerList[index]
+                                                  ['reference'] ??
                                                       ''),
                                               verticalSpacing(),
                                               _keyValue(
@@ -118,12 +126,7 @@ class _MangeCustomerState extends State<MangeCustomer> {
                                                   ['contact'] ??
                                                       ''),
                                               verticalSpacing(),
-                                              _keyValue(
-                                                  "Reference By",
-                                                  controller.customerList[index]
-                                                  ['reference'] ??
-                                                      ''),
-                                              verticalSpacing(),
+
                                             ],
                                           ),
                                           const Spacer(),
@@ -137,10 +140,11 @@ class _MangeCustomerState extends State<MangeCustomer> {
                                             title: "  View  ",
                                             textColor: AppColor.selectColor,
                                             onTap: () {
-                                              Get.to(AddCustomer(
-                                                  isView: true,
-                                                  model: controller
-                                                      .customerList[index], name: controller.customerList[index]["company"]??"",));
+                                              // Get.to(AddCustomer(
+                                              //     isView: true,
+                                              //     model: controller
+                                              //         .customerList[index], name: controller.customerList[index]["company"]??"",));
+                                              Get.to( ManageCustomerView(model:controller.customerList[index],));
                                             },
                                           ),
                                           const SizedBox(
