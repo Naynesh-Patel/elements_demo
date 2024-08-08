@@ -65,6 +65,7 @@ class _ExpenseListState extends State<ExpenseList> {
                         const SizedBox(
                           height: 16.0,
                         ),
+
                         CustomTextField(
                           textEditingController: expenseController.expenseTypeTextEditingController,
                           textCapitalization: TextCapitalization.words,
