@@ -79,93 +79,39 @@ class _ExpenseTabState extends State<ExpenseTab> {
                                       crossAxisAlignment:CrossAxisAlignment.start,
                                       children: [
                                         Row(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Expanded(
-                                              child: _keyValue(
-                                                  "Name",
-                                                  expenseController
-                                                      .expenseList[
-                                                  index]['name'] ??
-                                                      ''),
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  // _keyValue(
+                                                  //     "Name",
+                                                  //     expenseController
+                                                  //         .expenseList[
+                                                  //     index]['name'] ??
+                                                  //         ''),
+                                                  _keyValue(
+                                                      "Expense Type",expenseController.expenseList[index][
+                                                      'expense_type'] ??
+                                                          ''),
+                                                  verticalSpacing(),
+                                                  _keyValue(
+                                                      "Price",
+                                                      expenseController
+                                                          .expenseList[
+                                                      index]['price'] ??
+                                                          ''),
+                                                ],
+                                              )
                                             ),
                                             _keyValue(
                                               "DD",
-                                              getDateInDDMMYY(DateTime.parse( expenseController.expenseList[index]['created_at'] ??'')),
+                                              getDateInDDMMYY(DateTime.parse(expenseController.expenseList[index]['created_at'] ??'')),
                                             ),
                                           ],
                                         ),
                                         verticalSpacing(),
-                                        _keyValue(
-                                            "Expense Type",
-                                            expenseController.expenseList[index][
-                                            'expense_type'] ??
-                                                ''),
-                                        verticalSpacing(),
-                                        _keyValue(
-                                            "Price",
-                                            expenseController
-                                                .expenseList[
-                                            index]['price'] ??
-                                                ''),
-                                        Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          crossAxisAlignment:CrossAxisAlignment.start,
-                                          children: [
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-
-                                              ],
-                                            ),
-
-                                            verticalSpacing(),
-                                            // Row(
-                                            //   mainAxisAlignment: MainAxisAlignment.end,
-                                            //   children: [
-                                            //     SmallButton(
-                                            //       title: "  View  ",
-                                            //       textColor: AppColor.selectColor,
-                                            //       onTap: () {
-                                            //         Get.to( ViewExpenseDetails(name: expenseController.expenseList[ index]['name'] ?? '',));
-                                            //       },
-                                            //     ),
-                                            //     const SizedBox(
-                                            //       width: 12.0,
-                                            //     ),
-                                            //     SmallButton(
-                                            //       title: "  Edit  ",
-                                            //       onTap: () {
-                                            //         Get.to(AddExpense(
-                                            //           model: expenseController.expenseList[index],
-                                            //         ));
-                                            //       },
-                                            //     ),
-                                            //     const SizedBox(
-                                            //       width: 12.0,
-                                            //     ),
-                                            //     SmallButton(
-                                            //       title: "Delete",
-                                            //       textColor: AppColor.cancelColor,
-                                            //       onTap: () {
-                                            //         CustomDialogBox.showDeleteDialog(
-                                            //           context: context,
-                                            //           bodyText:
-                                            //           "Do you really want to cancel these records? This process cannot be undone.",
-                                            //           onCancelTap: () {
-                                            //             Get.back();
-                                            //           },
-                                            //           onDeleteTap: () {
-                                            //             expenseController.deleteExpense(
-                                            //                 index: index);
-                                            //           },
-                                            //         );
-                                            //       },
-                                            //     ),
-                                            //   ],
-                                            // ),
-                                          ],
-                                        ),
                                          const SizedBox(
                                           height: 10.0,
                                         ),

@@ -2,6 +2,7 @@ import 'package:elements/constant/app_colors.dart';
 import 'package:elements/controller/customer_controller.dart';
 import 'package:elements/controller/expense_controller.dart';
 import 'package:elements/controller/home_controller.dart';
+import 'package:elements/expense/expense_list.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:elements/widget/button/custom_button.dart';
 import 'package:elements/widget/custom_text_field.dart';
@@ -58,33 +59,59 @@ class _AddExpenseState extends State<AddExpense> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // CustomTextField(
+                //   hintText: "Name",
+                //   labelText: "Name",
+                //   textEditingController:
+                //       expenseController.nameTextEditingController,
+                //   autoValidateMode: AutovalidateMode.onUserInteraction,
+                //   validator: (p0) {
+                //     if (p0!.isEmpty) {
+                //       return "Please enter the name";
+                //     }
+                //     return null;
+                //   },
+                // ),
+                // verticalSpacing(),
+                // CustomTextField(
+                //   textEditingController:
+                //       expenseController.expenseTypeTextEditingController,
+                //   hintText: "Tea",
+                //   labelText: "Expense Type",
+                //   autoValidateMode: AutovalidateMode.onUserInteraction,
+                //   validator: (p0) {
+                //     if (p0!.isEmpty) {
+                //       return "Please enter the type";
+                //     }
+                //     return null;
+                //   },
+                // ),
                 CustomTextField(
-                  hintText: "Name",
-                  labelText: "Name",
-                  textEditingController:
-                      expenseController.nameTextEditingController,
-                  autoValidateMode: AutovalidateMode.onUserInteraction,
-                  validator: (p0) {
-                    if (p0!.isEmpty) {
-                      return "Please enter the name";
-                    }
-                    return null;
-                  },
-                ),
-                verticalSpacing(),
-                CustomTextField(
-                  textEditingController:
-                      expenseController.expenseTypeTextEditingController,
-                  hintText: "Tea",
-                  labelText: "Expense Type",
-                  autoValidateMode: AutovalidateMode.onUserInteraction,
-                  validator: (p0) {
-                    if (p0!.isEmpty) {
-                      return "Please enter the type";
-                    }
-                    return null;
-                  },
-                ),
+                    onTap: () async {
+                      var result = await Get.to(const ExpenseList());
+                      if (result != null) {
+                        expenseController.expenseTypeTextEditingController
+                            .text = result['name'];
+                      }
+                    },
+                    hintText: "Tea",
+                    labelText: "Expense Type",
+                    // enable: false,
+                    textEditingController:
+                    expenseController.expenseTypeTextEditingController,
+                      validator: (p0) {
+                        if (p0!.isEmpty) {
+                          return "Please enter the type";
+                        }
+                        return null;
+                      },
+                    focusNode: FocusNode(),
+                    suffixFixIcon:  const Icon(
+                      Icons.arrow_forward_ios_rounded,
+                      size: 18,
+                      color: AppColor.blackColor,
+
+                    )),
                 verticalSpacing(),
                 CustomTextField(
                   textEditingController:

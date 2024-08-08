@@ -123,13 +123,13 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                           textEditingController: customerController
                               .machineNameTextEditingController,
                           autoValidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return "Please Enter Machine Type";
-                            } else {
-                              return null;
-                            }
-                          },
+                          // validator: (value) {
+                          //   if (value!.isEmpty) {
+                          //     return "Please Enter Machine Type";
+                          //   } else {
+                          //     return null;
+                          //   }
+                          // },
                           suffixFixIcon: const Icon(
                             Icons.arrow_forward_ios_rounded,
                             size: 18,
@@ -141,42 +141,39 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                           padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 14.0),
                           itemCount: machineryController.selectMachineList.length,
                           itemBuilder: (context, index) {
-                            return  Container(
-                              // color: Colors.yellow,
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Expanded(
-                                      flex: 2,
-                                      child:   Text(machineryController.selectMachineList[index]
-                                      ['machine_name'] ??
-                                          ''.capitalizeFirst.toString())
-                                  ),
-                                  // Text('${index + 1}'),
-                                  InkWell(
-                                    onTap: () {
-                                      machineryController.selectMachineList
-                                          .removeAt(index);
-                                    },
-                                    borderRadius: BorderRadius.circular(5),
-                                    child: Container(
-                                      height: 28.0,
-                                      width: 28.0,
-                                      padding: const EdgeInsets.symmetric(horizontal: 4.0,vertical: 4.0),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(4.0),
-                                        border: Border.all(color: AppColor.borderColor)
-                                      ),
-                                      child: Image.asset(
-                                        AssetPath.icDelete,
-                                      ),
+                            return  Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                    flex: 2,
+                                    child:   Text(machineryController.selectMachineList[index]
+                                    ['machine_name'] ??
+                                        ''.capitalizeFirst.toString())
+                                ),
+                                // Text('${index + 1}'),
+                                InkWell(
+                                  onTap: () {
+                                    machineryController.selectMachineList
+                                        .removeAt(index);
+                                  },
+                                  borderRadius: BorderRadius.circular(5),
+                                  child: Container(
+                                    height: 28.0,
+                                    width: 28.0,
+                                    padding: const EdgeInsets.symmetric(horizontal: 4.0,vertical: 4.0),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(4.0),
+                                      border: Border.all(color: AppColor.borderColor)
                                     ),
-                                  )
-                                ],
+                                    child: Image.asset(
+                                      AssetPath.icDelete,
+                                    ),
+                                  ),
+                                )
+                              ],
 
-                              ),
                             );
                           }, separatorBuilder: (BuildContext context, int index) {
 

@@ -19,11 +19,13 @@ class ExpenseController extends GetxController {
   RxBool isDeleteExpenseLoading = false.obs;
   RxBool isUpdateExpenseLoading = false.obs;
 
+  RxList<dynamic> selectExpenseList = <dynamic>[].obs;
+
   RxList<dynamic> expenseList = <dynamic>[].obs;
 
   Future<void> addExpense() async {
     Map<String, dynamic> body = {
-      "name": nameTextEditingController.text,
+      // "name": nameTextEditingController.text,
       "expense_type": expenseTypeTextEditingController.text,
       "price": priceTextEditingController.text,
       "user_id": modelUser.value.id,
@@ -73,7 +75,7 @@ class ExpenseController extends GetxController {
   Future<void> updateExpense(id) async {
     Map<String, dynamic> body = {
       'id': id,
-      "name": nameTextEditingController.text,
+      // "name": nameTextEditingController.text,
       "expense_type": expenseTypeTextEditingController.text,
       "price": priceTextEditingController.text,
       "user_id": modelUser.value.id,
@@ -127,5 +129,38 @@ class ExpenseController extends GetxController {
       debugPrint("Error:${e.toString()}");
       isDeleteExpenseLoading.value = false;
     }
+  }
+
+
+  selectExpense(){
+    List _sList = [];
+    _sList.addAll(selectExpenseList);
+    // selectSparepartsList.clear();
+    for (int i = 0; i < expenseList.length; i++) {
+      if (expenseList[i]['isSelect'] == true) {
+        int index = _sList.indexWhere((item) => item["id"] == expenseList[i]['id']);
+        Map<String, dynamic> d = {};
+        if(index == -1){
+          d = {
+            'id': expenseList[i]['id'],
+            'name': expenseList[i]['name'],
+            'controller': TextEditingController(),
+          };
+          selectExpenseList.add(d);
+        }/*else{
+            d = {
+            'id': sparepartsList[i]['id'],
+            'name': sparepartsList[i]['name'],
+            'controller': TextEditingController(),
+          };
+        }*/
+      }else{
+        int index = _sList.indexWhere((item) => item["id"] == expenseList[i]['id']);
+        if(index != -1){
+          selectExpenseList.removeAt(index);
+        }
+      }
+    }
+    Get.back();
   }
 }
