@@ -88,12 +88,13 @@ class _AddExpenseState extends State<AddExpense> {
                 // ),
                 CustomTextField(
                     onTap: () async {
-                      var result = await Get.to(const ExpenseList());
+                      var result = await Get.to(const ExpenseTypeList());
                       if (result != null) {
-                        expenseController.expenseTypeTextEditingController
-                            .text = result['name'];
+                        expenseController.expenseTypeTextEditingController.text = result['name'];
                       }
                     },
+                    showCursor: false,
+                    readOnly: true,
                     hintText: "Tea",
                     labelText: "Expense Type",
                     // enable: false,

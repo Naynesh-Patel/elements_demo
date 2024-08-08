@@ -11,16 +11,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 
-class ExpenseList extends StatefulWidget {
-  const ExpenseList({
+class ExpenseTypeList extends StatefulWidget {
+  const ExpenseTypeList({
     super.key,
   });
 
   @override
-  State<ExpenseList> createState() => _ExpenseListState();
+  State<ExpenseTypeList> createState() => _ExpenseTypeListState();
 }
 
-class _ExpenseListState extends State<ExpenseList> {
+class _ExpenseTypeListState extends State<ExpenseTypeList> {
   ExpenseController expenseController = Get.find();
 
   @override
@@ -145,11 +145,11 @@ class _ExpenseListState extends State<ExpenseList> {
         ],
       ),
 
-      body: Obx(() => expenseController.isGetExpenseLoading.value
+      body: Obx(() => expenseController.isExpenseTypeLoading.value
           ? const CustomLoader()
           : expenseController.expenseTypeList.isEmpty
               ? const EmptyView()
-              : ListView.separated(
+              : ListView.builder(
                   shrinkWrap: true,
                   itemCount: expenseController.expenseTypeList.length,
                   physics: const BouncingScrollPhysics(),
@@ -157,104 +157,123 @@ class _ExpenseListState extends State<ExpenseList> {
                   itemBuilder: (context, index) {
                     return InkWell(
                       onTap: () {
-                        if (expenseController.expenseTypeList[index]['isSelect'] ==
-                            null) {
-                          expenseController.expenseTypeList[index]['isSelect'] =
-                              true;
-                        } else if (expenseController.expenseTypeList[index]
-                                ['isSelect'] ==
-                            true) {
-                          expenseController.expenseTypeList[index]['isSelect'] =
-                              false;
-                        } else {
-                          expenseController.expenseTypeList[index]['isSelect'] =
-                              true;
-                        }
-                        setState(() {});
+                        Get.back(result:expenseController.expenseTypeList[index]);
+                        // if (expenseController.expenseTypeList[index]['isSelect'] ==
+                        //     null) {
+                        //   expenseController.expenseTypeList[index]['isSelect'] =
+                        //       true;
+                        // } else if (expenseController.expenseTypeList[index]
+                        //         ['isSelect'] ==
+                        //     true) {
+                        //   expenseController.expenseTypeList[index]['isSelect'] =
+                        //       false;
+                        // } else {
+                        //   expenseController.expenseTypeList[index]['isSelect'] =
+                        //       true;
+                        // }
+                        // setState(() {});
                       },
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16.0, vertical: 16.0),
-                        child: IntrinsicHeight(
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Expanded(
-                                child: Text(
-                                    expenseController.expenseTypeList[index]
-                                            ['name'] ??
-                                        ''.toString(),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 16.0,vertical: 16.0),
+                            child: Text(
+                                expenseController.expenseTypeList[index]
+                                ['name'] ??
+                                    ''.toString(),
 
 
-                                    style: AppTextStyle.textStyleRegular16
-                                        .copyWith(
-                                      color: const Color(0xff272727),
-                                    )),
-                              ),
-                              InkWell(
-                                borderRadius: BorderRadius.circular(6.0),
-                                onTap: () {
-                                  if (expenseController.expenseTypeList[index]
-                                          ['isSelect'] ==
-                                      null) {
-                                    expenseController.expenseTypeList[index]
-                                        ['isSelect'] = true;
-                                  } else if (expenseController
-                                          .expenseTypeList[index]['isSelect'] ==
-                                      true) {
-                                    expenseController.expenseTypeList[index]
-                                        ['isSelect'] = false;
-                                  } else {
-                                    expenseController.expenseTypeList[index]
-                                        ['isSelect'] = true;
-                                  }
-                                  setState(() {});
-                                },
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 4.0, vertical: 4.0),
-                                  decoration: BoxDecoration(
-                                      border: Border.all(
-                                          color: AppColor.dropDownHintColor),
-                                      borderRadius: BorderRadius.circular(6.0)),
-                                  child: Obx(() => Icon(
-                                        Icons.check_rounded,
-                                        size: 14,
-                                        color:
-                                            expenseController.expenseTypeList[index]
-                                                        ['isSelect'] ??
-                                                    false
-                                                ? AppColor.blackColor
-                                                : Colors.transparent,
-                                      )),
-                                ),
-                              ),
-                            ],
+                                style: AppTextStyle.textStyleRegular16
+                                    .copyWith(
+                                  color: const Color(0xff272727),
+                                )),
                           ),
-                        ),
+                          Divider(
+                            height: 1.0,
+                            color: Colors.grey.withOpacity(0.2),
+                          )
+                        ],
                       ),
                     );
                   },
-                  separatorBuilder: (BuildContext context, int index) {
-                    return const SizedBox(
-                      height: 0.0,
-                    );
-                  },
                 )),
-      bottomNavigationBar: Obx(() => expenseController.isExpenseLoading.value ||
-              expenseController.expenseTypeList.isEmpty
-          ? const SizedBox.shrink()
-          : Container(
-              margin:
-                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-              child: CustomButton(
-                  color: AppColor.buttonColor,
-                  buttonText: "Done",
-                  onTap: () {
-                    expenseController.selectExpense();
-                  },
-                  isLoading: false.obs),
-            )),
+      // bottomNavigationBar: Obx(() => expenseController.isExpenseLoading.value ||
+      //         expenseController.expenseTypeList.isEmpty
+      //     ? const SizedBox.shrink()
+      //     : Container(
+      //         margin:
+      //             const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+      //         child: CustomButton(
+      //             color: AppColor.buttonColor,
+      //             buttonText: "Done",
+      //             onTap: () {
+      //               expenseController.selectExpense();
+      //             },
+      //             isLoading: false.obs),
+      //       )),
     );
   }
+
+  // Container(
+  // padding: const EdgeInsets.symmetric(
+  // horizontal: 16.0, vertical: 16.0),
+  // child: IntrinsicHeight(
+  // child: Row(
+  // crossAxisAlignment: CrossAxisAlignment.start,
+  // children: [
+  // Expanded(
+  // child: Text(
+  // expenseController.expenseTypeList[index]
+  // ['name'] ??
+  // ''.toString(),
+  //
+  //
+  // style: AppTextStyle.textStyleRegular16
+  //     .copyWith(
+  // color: const Color(0xff272727),
+  // )),
+  // ),
+  // InkWell(
+  // borderRadius: BorderRadius.circular(6.0),
+  // onTap: () {
+  // if (expenseController.expenseTypeList[index]
+  // ['isSelect'] ==
+  // null) {
+  // expenseController.expenseTypeList[index]
+  // ['isSelect'] = true;
+  // } else if (expenseController
+  //     .expenseTypeList[index]['isSelect'] ==
+  // true) {
+  // expenseController.expenseTypeList[index]
+  // ['isSelect'] = false;
+  // } else {
+  // expenseController.expenseTypeList[index]
+  // ['isSelect'] = true;
+  // }
+  // setState(() {});
+  // },
+  // child: Container(
+  // padding: const EdgeInsets.symmetric(
+  // horizontal: 4.0, vertical: 4.0),
+  // decoration: BoxDecoration(
+  // border: Border.all(
+  // color: AppColor.dropDownHintColor),
+  // borderRadius: BorderRadius.circular(6.0)),
+  // child: Obx(() => Icon(
+  // Icons.check_rounded,
+  // size: 14,
+  // color:
+  // expenseController.expenseTypeList[index]
+  // ['isSelect'] ??
+  // false
+  // ? AppColor.blackColor
+  //     : Colors.transparent,
+  // )),
+  // ),
+  // ),
+  // ],
+  // ),
+  // ),
+  // )
 }

@@ -78,7 +78,7 @@ class ExpenseController extends GetxController {
 
   Future<void> addExpenseType() async {
     Map<String, dynamic> body = {
-      "expense_type": expenseTypeEditingController.text,
+      "name": expenseTypeTextEditingController.text,
     };
     try {
       String url = "${baseURL}expense/addExpenseType";
@@ -86,10 +86,17 @@ class ExpenseController extends GetxController {
       isExpenseLoading.value = true;
       var response = await http.post(Uri.parse(url), body: body);
       if (response.statusCode == 200) {
-        jsonDecode(response.body);
-        getExpenseTypeList();
-        Get.back();
-        isExpenseLoading.value = false;
+        var responseData = jsonDecode(response.body);
+        if(responseData['status']=="success"){
+          getExpenseTypeList();
+          expenseTypeTextEditingController.clear();
+          Get.back();
+          isExpenseLoading.value = false;
+        }else{
+          showToast("${responseData['message']}");
+          isExpenseLoading.value = false;
+        }
+
       } else {
         debugPrint("statusCode${response.statusCode}");
         isExpenseLoading.value = false;
