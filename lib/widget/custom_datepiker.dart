@@ -8,7 +8,6 @@ import 'package:elements/widget/app%20bar/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'button/custom_button.dart';
 
 class CustomDatePicker extends StatefulWidget {

@@ -51,7 +51,7 @@ class ExpenseController extends GetxController {
 
   Future getExpense() async {
     try {
-      String url = "${baseURL}expense/getAll";
+      String url = "${baseURL}expense/getAll?user_id=${modelUser.value.id}";
       log("API => $url");
       isGetExpenseLoading.value = true;
       var response = await http.get(Uri.parse(url));
