@@ -78,10 +78,7 @@ class ExpenseController extends GetxController {
 
   Future<void> addExpenseType() async {
     Map<String, dynamic> body = {
-
       "expense_type": expenseTypeEditingController.text,
-
-
     };
     try {
       String url = "${baseURL}expense/addExpenseType";

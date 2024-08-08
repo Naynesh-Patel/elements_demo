@@ -198,7 +198,7 @@ class _ExpenseListState extends State<ExpenseList> {
                                     expenseController.expenseTypeList[index]
                                         ['isSelect'] = true;
                                   } else if (expenseController
-                                          .expenseList[index]['isSelect'] ==
+                                          .expenseTypeList[index]['isSelect'] ==
                                       true) {
                                     expenseController.expenseTypeList[index]
                                         ['isSelect'] = false;
