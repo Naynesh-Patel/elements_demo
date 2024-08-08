@@ -110,7 +110,7 @@ class _ManageCustomerViewState extends State<ManageCustomerView> {
             trailing: InkWell(
               child: Image.asset("assets/images/world_wide_web.png",height: 20,),
               onTap: () {
-                controller.launchMap("");
+                controller.webURL();
               },
             ),
             onTap: () {},
