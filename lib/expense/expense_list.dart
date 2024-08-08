@@ -1,3 +1,4 @@
+
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/controller/expense_controller.dart';
@@ -7,6 +8,7 @@ import 'package:elements/widget/custom_loader.dart';
 import 'package:elements/widget/empty_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../widget/custom_text_field.dart';
 
 class ExpenseList extends StatefulWidget {
   const ExpenseList({
@@ -23,7 +25,7 @@ class _ExpenseListState extends State<ExpenseList> {
   @override
   void initState() {
     super.initState();
-    expenseController.getExpense();
+    expenseController.getExpenseTypeList();
   }
 
   @override
@@ -35,30 +37,135 @@ class _ExpenseListState extends State<ExpenseList> {
         onPressed: () {
           Get.back();
         },
+        action: [
+          IconButton(onPressed: () {
+            expenseController.expenseTypeTextEditingController.clear();
+            showDialog(
+              context: context,
+              barrierDismissible: false, // user must tap button!
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                  contentPadding: EdgeInsets.zero,
+                  backgroundColor: Colors.white,
+                  content: Container(
+                    padding:
+                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          "Add Expense Type",
+                          style: AppTextStyle.textStyleBold16,
+                        ),
+                        const SizedBox(
+                          height: 16.0,
+                        ),
+                        CustomTextField(
+                          textEditingController: expenseController.expenseTypeTextEditingController,
+                          textCapitalization: TextCapitalization.words,
+                          hintText: "Expense",
+                          labelText: "Expense Type",
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Please Enter Name";
+                            } else {
+                              return null;
+                            }
+                          },
+                        ),
+                        const SizedBox(
+                          height: 16.0,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: InkWell(
+                                onTap:(){
+                                  Get.back();
+                                },
+                                borderRadius: BorderRadius.circular(5),
+                                child: Container(
+                                    width: Get.width,
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                        BorderRadius.circular(5),
+                                        color:Colors.transparent,
+                                        border: Border.all(
+                                            color:
+                                            const Color(0xffC9C9C9))),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 16, vertical: 10),
+                                    child: Text(
+                                        "Cancel",textAlign: TextAlign.center,
+                                        style: AppTextStyle.textStyleRegular14.copyWith(color: AppColor.blackColor)
+                                    )),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 16.0,
+                            ),
+                            Expanded(
+                              child: InkWell(
+                                onTap:(){
+                                  expenseController.addExpenseType();
+                                },
+                                borderRadius: BorderRadius.circular(5),
+                                child: Container(
+                                    width: Get.width,
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                        BorderRadius.circular(5),
+                                        color:AppColor.selectColor,
+                                        border: Border.all(
+                                            color:AppColor.selectColor)),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 16, vertical: 10),
+                                    child: Text(
+                                        "Add",textAlign: TextAlign.center,
+                                        style: AppTextStyle.textStyleRegular14.copyWith(color : AppColor.whiteColor,)
+                                    )),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            );
+          }, icon: const Icon(Icons.add,color: AppColor.blackColor,))
+        ],
       ),
-      body: Obx(() => expenseController.isExpenseLoading.value
+
+      body: Obx(() => expenseController.isGetExpenseLoading.value
           ? const CustomLoader()
-          : expenseController.expenseList.isEmpty
+          : expenseController.expenseTypeList.isEmpty
               ? const EmptyView()
               : ListView.separated(
                   shrinkWrap: true,
-                  itemCount: expenseController.expenseList.length,
+                  itemCount: expenseController.expenseTypeList.length,
                   physics: const BouncingScrollPhysics(),
                   padding: const EdgeInsets.symmetric(vertical: 16.0),
                   itemBuilder: (context, index) {
                     return InkWell(
                       onTap: () {
-                        if (expenseController.expenseList[index]['isSelect'] ==
+                        if (expenseController.expenseTypeList[index]['isSelect'] ==
                             null) {
-                          expenseController.expenseList[index]['isSelect'] =
+                          expenseController.expenseTypeList[index]['isSelect'] =
                               true;
-                        } else if (expenseController.expenseList[index]
+                        } else if (expenseController.expenseTypeList[index]
                                 ['isSelect'] ==
                             true) {
-                          expenseController.expenseList[index]['isSelect'] =
+                          expenseController.expenseTypeList[index]['isSelect'] =
                               false;
                         } else {
-                          expenseController.expenseList[index]['isSelect'] =
+                          expenseController.expenseTypeList[index]['isSelect'] =
                               true;
                         }
                         setState(() {});
@@ -72,7 +179,7 @@ class _ExpenseListState extends State<ExpenseList> {
                             children: [
                               Expanded(
                                 child: Text(
-                                    expenseController.expenseList[index]
+                                    expenseController.expenseTypeList[index]
                                             ['name'] ??
                                         ''.toString(),
 
@@ -85,18 +192,18 @@ class _ExpenseListState extends State<ExpenseList> {
                               InkWell(
                                 borderRadius: BorderRadius.circular(6.0),
                                 onTap: () {
-                                  if (expenseController.expenseList[index]
+                                  if (expenseController.expenseTypeList[index]
                                           ['isSelect'] ==
                                       null) {
-                                    expenseController.expenseList[index]
+                                    expenseController.expenseTypeList[index]
                                         ['isSelect'] = true;
                                   } else if (expenseController
                                           .expenseList[index]['isSelect'] ==
                                       true) {
-                                    expenseController.expenseList[index]
+                                    expenseController.expenseTypeList[index]
                                         ['isSelect'] = false;
                                   } else {
-                                    expenseController.expenseList[index]
+                                    expenseController.expenseTypeList[index]
                                         ['isSelect'] = true;
                                   }
                                   setState(() {});
@@ -112,7 +219,7 @@ class _ExpenseListState extends State<ExpenseList> {
                                         Icons.check_rounded,
                                         size: 14,
                                         color:
-                                            expenseController.expenseList[index]
+                                            expenseController.expenseTypeList[index]
                                                         ['isSelect'] ??
                                                     false
                                                 ? AppColor.blackColor
@@ -133,7 +240,7 @@ class _ExpenseListState extends State<ExpenseList> {
                   },
                 )),
       bottomNavigationBar: Obx(() => expenseController.isExpenseLoading.value ||
-              expenseController.expenseList.isEmpty
+              expenseController.expenseTypeList.isEmpty
           ? const SizedBox.shrink()
           : Container(
               margin:
