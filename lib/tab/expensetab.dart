@@ -46,7 +46,6 @@ class _ExpenseTabState extends State<ExpenseTab> {
         title: "Expense",
       ),
       body: Container(
-        height: Get.height,
         margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 15),
         child: Obx(
           () => expenseController.isGetExpenseLoading.value
