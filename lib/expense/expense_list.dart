@@ -97,7 +97,7 @@ class _ExpenseTypeListState extends State<ExpenseTypeList> {
                                         color:Colors.transparent,
                                         border: Border.all(
                                             color:
-                                            const Color(0xffC9C9C9))),
+                                             const Color(0xffC9C9C9))),
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 16, vertical: 10),
                                     child: Text(

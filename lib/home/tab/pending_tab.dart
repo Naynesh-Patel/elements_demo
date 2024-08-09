@@ -4,6 +4,7 @@ import 'package:elements/constant/methods.dart';
 import 'package:elements/constant/vars.dart';
 import 'package:elements/controller/customer_controller.dart';
 import 'package:elements/controller/order_controller.dart';
+import 'package:elements/pdf.dart';
 import 'package:elements/widget/button/small_button.dart';
 import 'package:elements/widget/custom_loader.dart';
 import 'package:elements/widget/dialogs/custom_dialogbox.dart';
@@ -113,10 +114,8 @@ class _PendingTabState extends State<PendingTab> {
                 title: "Invoice",
                 textColor: AppColor.selectColor,
                 onTap: () async {
-                  // Get.to(const Invoice());
-                  // Get.to(const Invoice());
-
-                  orderController.launchURL();
+                  Get.to(Pdf());
+                  // orderController.launchURL();
                 },
               ),
               const SizedBox(

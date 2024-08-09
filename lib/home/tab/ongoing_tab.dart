@@ -3,6 +3,7 @@ import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/constant/methods.dart';
 import 'package:elements/constant/vars.dart';
 import 'package:elements/controller/order_controller.dart';
+import 'package:elements/pdf.dart';
 import 'package:elements/widget/button/small_button.dart';
 import 'package:elements/widget/custom_loader.dart';
 import 'package:elements/widget/dialogs/custom_dialogbox.dart';
@@ -42,7 +43,10 @@ class _OnGoingTabState extends State<OnGoingTab> {
                     onTap: () {
                       Get.to(CreateNewOrder(
                           isView: true,
-                          model: orderController.orderList[index]));
+                          model: orderController.orderList[index]
+                      )
+                      );
+
                     },
                     child: Obx(() => userType.value == "admin"
                         ? adminView(index: index)
@@ -110,8 +114,7 @@ class _OnGoingTabState extends State<OnGoingTab> {
                 title: "Invoice",
                 textColor: AppColor.selectColor,
                 onTap: () {
-                  // Get.to(const Invoice());
-                  orderController.launchURL();
+                  Get.to(const Pdf());
                 },
               ),
               const SizedBox(
@@ -133,8 +136,7 @@ class _OnGoingTabState extends State<OnGoingTab> {
                   onTap: () {
                     CustomDialogBox.showDeleteDialog(
                       context: context,
-                      bodyText:
-                          "Do you really want to cancel these records? This process cannot be undone.",
+                      bodyText:"Do you really want to cancel these records? This process cannot be undone.",
                       onCancelTap: () {
                         Get.back();
                       },

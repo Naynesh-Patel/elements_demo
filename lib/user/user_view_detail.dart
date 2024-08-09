@@ -94,13 +94,13 @@ class _UserViewDetilsState extends State<UserViewDetils> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        const SizedBox(height: 8.0,),
+        const SizedBox(height: 6.0,),
         Text(title,style: AppTextStyle.textStyleRegular12,),
         const SizedBox(height: 6.0,),
         Text(subTitle,style: AppTextStyle.textStyleRegular16,),
-        const SizedBox(height: 8.0,),
+        const SizedBox(height: 6.0,),
         const Divider(
-          color: Colors.grey,
+          color: AppColor.borderColor,
         ),
       ],
     );
