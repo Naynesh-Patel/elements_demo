@@ -50,23 +50,23 @@ class _UserViewDetilsState extends State<UserViewDetils> {
                         )),
                   ),
           ),
-          User(
+          user(
             "User Role",
             widget.model['user_type'] ?? '',
           ),
-          User(
+          user(
             "Company",
             "Coding House",
           ),
-          User(
+          user(
             "User Name",
             widget.model['name'] ?? '',
           ),
-          User(
+          user(
             "Contact No",
             widget.model['contact_no'] ?? '',
           ),
-          User(
+          user(
             "Address",
             widget.model['address'] ?? '',
           ),
@@ -75,7 +75,7 @@ class _UserViewDetilsState extends State<UserViewDetils> {
     );
   }
 
-  Widget User(key, value) {
+  Widget user(key, value) {
     return ListTile(
       title: Text(key),
       subtitle: Text(value),

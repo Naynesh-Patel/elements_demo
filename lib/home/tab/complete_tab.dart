@@ -2,6 +2,7 @@ import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/constant/methods.dart';
 import 'package:elements/constant/vars.dart';
+import 'package:elements/pdf.dart';
 import 'package:elements/widget/custom_loader.dart';
 import 'package:elements/widget/dialogs/custom_dialogbox.dart';
 import 'package:elements/widget/empty_view.dart';
@@ -110,8 +111,7 @@ class _CompleteTabState extends State<CompleteTab> {
                 title: "Invoice",
                 textColor: AppColor.selectColor,
                 onTap: () {
-                  // Get.to(const Invoice());
-                  orderController.launchURL();
+                  Get.to( const Pdf());
                 },
               ),
               const SizedBox(

@@ -36,6 +36,7 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
   UserController userController = Get.find();
 
   String managerId = "";
+
   @override
   void initState() {
     if (widget.model != null) {
@@ -91,7 +92,7 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                           readOnly: true,
                           showCursor: false,
                           onTap: () {
-                            Get.to( const SelectCustomerCompany());
+                            Get.to(const SelectCustomerCompany());
                           },
                           hintText: "Select Customer/Company",
                           labelText: "Customer/Company",
@@ -135,23 +136,25 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                             size: 18,
                           )),
                       Obx(
-                            () => ListView.separated(
+                        () => ListView.separated(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 14.0),
-                          itemCount: machineryController.selectMachineList.length,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8.0, vertical: 14.0),
+                          itemCount:
+                              machineryController.selectMachineList.length,
                           itemBuilder: (context, index) {
-                            return  Row(
+                            return Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisSize: MainAxisSize.min,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Expanded(
                                     flex: 2,
-                                    child:   Text(machineryController.selectMachineList[index]
-                                    ['machine_name'] ??
-                                        ''.capitalizeFirst.toString())
-                                ),
+                                    child: Text(machineryController
+                                                .selectMachineList[index]
+                                            ['machine_name'] ??
+                                        ''.capitalizeFirst.toString())),
                                 // Text('${index + 1}'),
                                 InkWell(
                                   onTap: () {
@@ -162,24 +165,26 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                                   child: Container(
                                     height: 28.0,
                                     width: 28.0,
-                                    padding: const EdgeInsets.symmetric(horizontal: 4.0,vertical: 4.0),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 4.0, vertical: 4.0),
                                     decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(4.0),
-                                      border: Border.all(color: AppColor.borderColor)
-                                    ),
+                                        borderRadius:
+                                            BorderRadius.circular(4.0),
+                                        border: Border.all(
+                                            color: AppColor.borderColor)),
                                     child: Image.asset(
                                       AssetPath.icDelete,
                                     ),
                                   ),
                                 )
                               ],
-
                             );
-                          }, separatorBuilder: (BuildContext context, int index) {
-
-                          return const SizedBox(height: 15,);
-
-                        },
+                          },
+                          separatorBuilder: (BuildContext context, int index) {
+                            return const SizedBox(
+                              height: 15,
+                            );
+                          },
                         ),
                       ),
                       InkWell(
@@ -201,7 +206,7 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                                 return null;
                               }
                             },
-                            suffixFixIcon: const Icon(
+                            suffixFixIcon:const Icon(
                               Icons.date_range,
                               size: 22,
                               color: Colors.black,
@@ -243,7 +248,7 @@ class _CreateNewOrderState extends State<CreateNewOrder> {
                       verticalSpacing(),
                       CustomTextField(
                           onTap: () async {
-                            var result = await Get.to(const SelectManager());
+                            var result = await Get.to(  SelectManager());
                             if (result != null) {
                               userController.usersRoleTextEditingController
                                   .text = result['name'];

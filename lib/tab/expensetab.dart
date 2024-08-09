@@ -103,7 +103,7 @@ class _ExpenseTabState extends State<ExpenseTab> {
             child: Text(
           "$value",
           style: AppTextStyle.textStyleRegular14
-              .copyWith(color: const Color(0xff555555)),
+              .copyWith(color:const Color(0xff555555)),
         )),
       ],
     );
@@ -128,38 +128,33 @@ class _ExpenseTabState extends State<ExpenseTab> {
                 .copyWith(color: AppColor.selectColor),
           )),
           Expanded(
-              child: Container(
-                  // color: Colors.yellow,
-                  child: Text("Expense Type",
-                      textAlign: TextAlign.center,
-                      style: AppTextStyle.textStyleRegular14))),
+              child: Text("Expense Type",
+                  textAlign: TextAlign.center,
+                  style: AppTextStyle.textStyleRegular14)),
           Expanded(
-            child: Container(
-              // color: Colors.grey,
-              child: InkWell(
-                onTap: () {
-                  Get.to(const CustomDatePicker());
-                },
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Date",
-                      textAlign: TextAlign.center,
-                      style: AppTextStyle.textStyleRegular14
-                          .copyWith(color: AppColor.selectColor),
-                    ),
-                    const SizedBox(
-                      width: 2.0,
-                    ),
-                    Image.asset(
-                      "assets/images/date.png",
-                      height: 14,
-                      width: 14,
-                    ),
-                  ],
-                ),
+            child: InkWell(
+              onTap: () {
+                Get.to(const CustomDatePicker());
+              },
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Date",
+                    textAlign: TextAlign.center,
+                    style: AppTextStyle.textStyleRegular14
+                        .copyWith(color: AppColor.selectColor),
+                  ),
+                  const SizedBox(
+                    width: 2.0,
+                  ),
+                  Image.asset(
+                    "assets/images/date.png",
+                    height: 14,
+                    width: 14,
+                  ),
+                ],
               ),
             ),
           ),
