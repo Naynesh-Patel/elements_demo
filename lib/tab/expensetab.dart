@@ -1,16 +1,11 @@
 import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/constant/methods.dart';
-import 'package:elements/constant/vars.dart';
 import 'package:elements/controller/expense_controller.dart';
-import 'package:elements/date_piker.dart';
 import 'package:elements/expense/add_expense.dart';
-import 'package:elements/expense/view_expense_details.dart';
 import 'package:elements/widget/app%20bar/home_app_bar.dart';
-import 'package:elements/widget/button/small_button.dart';
 import 'package:elements/widget/custom_datepiker.dart';
 import 'package:elements/widget/custom_loader.dart';
-import 'package:elements/widget/dialogs/custom_dialogbox.dart';
 import 'package:elements/widget/empty_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -46,7 +41,7 @@ class _ExpenseTabState extends State<ExpenseTab> {
         title: "Expense",
       ),
       body: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 15),
+        margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
         child: Obx(
           () => expenseController.isGetExpenseLoading.value
               ? const CustomLoader()
