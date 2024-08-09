@@ -178,11 +178,11 @@ class _ViewSparepartsDetailsState extends State<ViewSparepartsDetails> {
             flex: 2,
             child: InkWell(
               onTap: () async {
-                bool? result = await Get.to( CustomDatePicker(
+                var result = await Get.to( CustomDatePicker(
                   startDefaultDate: controller.startDate,
                   endDefaultDate: controller.endDate,
                 ));
-                if(result == true){
+                if(result != null){
                   controller.getHistory(sparepartId: widget.model['id']);
                 }
               },

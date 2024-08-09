@@ -203,7 +203,10 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
             if (widget.refreshContent != null) {
               widget.refreshContent!.refreshPage();
             }
-            Get.back(result: true);
+            Get.back(result: {
+              'startDate':sparepartsController.startDate,
+              'endDate':sparepartsController.endDate,
+            });
           },
           color: AppColor.buttonColor,
           isLoading: false.obs,
