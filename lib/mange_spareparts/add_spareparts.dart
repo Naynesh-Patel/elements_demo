@@ -128,15 +128,17 @@ class _AddSparepartsState extends State<AddSpareparts> {
                     validator: (value) {
                       if (value!.isEmpty) {
                         return "Please Enter New Qty";
-                      } else {
+                      }else if(double.parse(value) < 1){
+                        return "Qty must be 1 or greater";
+                      }else {
                         return null;
                       }
                     },
                     onChange: (p0) {
                       if (p0.isEmpty) {
-                        total(int.parse("0"));
+                        total(double.parse("0"));
                       } else {
-                        total(int.parse(p0));
+                        total(double.parse(p0));
                       }
                     },
                     focusNode: controller.sparepartsNewQtyFocusNode,
@@ -190,7 +192,9 @@ class _AddSparepartsState extends State<AddSpareparts> {
                     validator: (value) {
                       if (value!.isEmpty) {
                         return "Please Enter Qty";
-                      } else {
+                      } else if(double.parse(value) < 1){
+                       return "Qty must be 1 or greater";
+                      }else {
                         return null;
                       }
                     },
@@ -226,7 +230,7 @@ class _AddSparepartsState extends State<AddSpareparts> {
     );
   }
 
-  total(int value) {
+  total(double value) {
     sparepartsController.totalQtyTextEditingController.text =
         (int.parse(sparepartsController.qtyTypeTextEditingController.text) +
                 value)

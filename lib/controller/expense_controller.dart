@@ -15,6 +15,9 @@ class ExpenseController extends GetxController {
   TextEditingController companyIdEditingController = TextEditingController();
   TextEditingController expenseTypeEditingController = TextEditingController();
 
+  DateTime? startDate;
+  DateTime? endDate;
+
   RxBool isExpenseLoading = false.obs;
   RxBool isExpenseTypeLoading = false.obs;
   RxBool isGetExpenseLoading = false.obs;
@@ -56,7 +59,8 @@ class ExpenseController extends GetxController {
 
   Future getExpense() async {
     try {
-      String url = "${baseURL}expense/getAll?user_id=${modelUser.value.id}";
+      String url = "${baseURL}expense/getAll?user_id=${modelUser.value.id}&user_name=${nameTextEditingController.text}&expense_type=${expenseTypeEditingController.text}&start_date=$startDate&end_date=$endDate";
+
       log("API => $url");
       isGetExpenseLoading.value = true;
       var response = await http.get(Uri.parse(url));
