@@ -3,7 +3,6 @@ import 'package:elements/constant/app_colors.dart';
 import 'package:elements/constant/app_text_style.dart';
 import 'package:elements/controller/expense_controller.dart';
 import 'package:elements/widget/app%20bar/custom_appbar.dart';
-import 'package:elements/widget/button/custom_button.dart';
 import 'package:elements/widget/custom_loader.dart';
 import 'package:elements/widget/custom_text_field.dart';
 import 'package:elements/widget/empty_view.dart';
@@ -62,10 +61,9 @@ class _ExpenseTypeListState extends State<ExpenseTypeList> {
                           "Add Expense Type",
                           style: AppTextStyle.textStyleBold16,
                         ),
-                        const SizedBox(
+                         const SizedBox(
                           height: 16.0,
                         ),
-
                         CustomTextField(
                           textEditingController: expenseController.expenseTypeTextEditingController,
                           textCapitalization: TextCapitalization.words,
