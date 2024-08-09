@@ -34,45 +34,47 @@ class _HomeTabState extends State<HomeTab> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColor.whiteColor,
-      appBar: const HomeAppBar(
-        title: "MachinePro",
-      ),
-      body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _widgetTabBarView(),
-            const SizedBox(
-              height: 16,
-            ),
-            Obx(() => Expanded(
-                child: controller.selectTab.value == 1
-                    ? const PendingTab()
-                    : controller.selectTab.value == 2
-                        ? const OnGoingTab()
-                        : const CompleteTab())),
-          ],
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: AppColor.whiteColor,
+        appBar: const HomeAppBar(
+          title: "MachinePro",
         ),
-      ),
-      // drawer: drawer(),
-      floatingActionButton: Obx(() => userType.value == "admin"
-          ? FloatingActionButton(
-              elevation: 10.0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(36),
+        body: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _widgetTabBarView(),
+              const SizedBox(
+                height: 16,
               ),
-              backgroundColor: AppColor.buttonColor,
-              onPressed: () {
-                Get.to( const CreateNewOrder());
-              },
-              child: const Icon(
-                Icons.add,
-                color: Colors.white,
-              ))
-          : const SizedBox.shrink()),
+              Obx(() => Expanded(
+                  child: controller.selectTab.value == 1
+                      ? const PendingTab()
+                      : controller.selectTab.value == 2
+                          ? const OnGoingTab()
+                          : const CompleteTab())),
+            ],
+          ),
+        ),
+        // drawer: drawer(),
+        floatingActionButton: Obx(() => userType.value == "admin"
+            ? FloatingActionButton(
+                elevation: 10.0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(36),
+                ),
+                backgroundColor: AppColor.buttonColor,
+                onPressed: () {
+                  Get.to( const CreateNewOrder());
+                },
+                child: const Icon(
+                  Icons.add,
+                  color: Colors.white,
+                ))
+            : const SizedBox.shrink()),
+      ),
     );
   }
 

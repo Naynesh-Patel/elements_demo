@@ -44,6 +44,7 @@ class _DashBoardState extends State<DashBoard> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      extendBodyBehindAppBar: false,
       key: key,
       // drawer: drawer(),
       body: Center(

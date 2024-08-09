@@ -13,15 +13,17 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget{
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      automaticallyImplyLeading: false,
-      centerTitle: false,
-      backgroundColor: AppColor.bgAppBarColor,
-      title:  Text(
-          title,
-          style: AppTextStyle.textStyleRegular20.copyWith(color: AppColor.blackColor)
+    return SafeArea(
+      child: AppBar(
+        automaticallyImplyLeading: false,
+        centerTitle: false,
+        backgroundColor: AppColor.bgAppBarColor,
+        title:  Text(
+            title,
+            style: AppTextStyle.textStyleRegular20.copyWith(color: AppColor.blackColor)
+        ),
+        actions:action,
       ),
-      actions:action,
     );
   }
 
