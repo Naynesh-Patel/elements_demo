@@ -5,6 +5,7 @@ import 'package:elements/constant/urls.dart';
 import 'package:elements/constant/vars.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:get/get_rx/get_rx.dart';
 import 'package:http/http.dart' as http;
 
 class ExpenseController extends GetxController {
@@ -17,6 +18,8 @@ class ExpenseController extends GetxController {
 
   DateTime? startDate;
   DateTime? endDate;
+
+  RxBool applyFilter = false.obs;
 
   RxBool isExpenseLoading = false.obs;
   RxBool isExpenseTypeLoading = false.obs;

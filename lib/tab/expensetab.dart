@@ -36,6 +36,7 @@ class _ExpenseTabState extends State<ExpenseTab> {
       expenseController.endDate = null;
       expenseController.nameTextEditingController.clear();
       expenseController.expenseTypeEditingController.clear();
+      expenseController.applyFilter.value = false;
       expenseController.getExpense();
     });
     super.initState();
@@ -69,11 +70,15 @@ class _ExpenseTabState extends State<ExpenseTab> {
         child: Obx(
           () => expenseController.isGetExpenseLoading.value
               ? const CustomLoader()
-              : expenseController.expenseList.isEmpty
+              : expenseController.expenseList.isEmpty && !expenseController.applyFilter.value
                   ? const EmptyView()
                   :  Column(
             children: [
               _tableTopContent(),
+              expenseController.expenseList.isEmpty && expenseController.applyFilter.value ? SizedBox(
+                  height: Get.height * 0.320,
+                  // color: Colors.red,
+                  child: const Center(child: Text("No Data Found"))):
               Expanded(
                 child: ListView.builder(
                   shrinkWrap: true,
@@ -317,6 +322,7 @@ class _ExpenseTabState extends State<ExpenseTab> {
                     Expanded(
                       child: InkWell(
                         onTap: () {
+                          expenseController.applyFilter.value = true;
                           expenseController.getExpense();
                           Get.back();
                         },
@@ -337,6 +343,9 @@ class _ExpenseTabState extends State<ExpenseTab> {
                         onTap: () {
                           expenseController.nameTextEditingController.clear();
                           expenseController.expenseTypeEditingController.clear();
+                          expenseController.startDate = null;
+                          expenseController.endDate = null;
+                          expenseController.applyFilter.value = false;
                           expenseController.getExpense();
                           Get.back();
                         },
