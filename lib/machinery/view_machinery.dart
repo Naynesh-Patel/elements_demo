@@ -47,7 +47,7 @@ class _ViewMachineryState extends State<ViewMachinery> {
             children: [
               buildMenu(
                 title: "Machine Name",
-                subTitle: widget.model['Machine Name'] ?? '',
+                subTitle: widget.model['machine_name'] ?? '',
               ),
               buildMenu(
                 title: "Machine Type",
