@@ -58,6 +58,7 @@ class ExpenseController extends GetxController {
   }
 
   Future getExpense() async {
+    expenseList.clear();
     try {
       String url = "${baseURL}expense/getAll?user_id=${modelUser.value.id}&user_name=${nameTextEditingController.text}&expense_type=${expenseTypeEditingController.text}&start_date=$startDate&end_date=$endDate";
 
@@ -67,8 +68,13 @@ class ExpenseController extends GetxController {
       if (response.statusCode == 200) {
         isGetExpenseLoading.value = false;
         var responseData = jsonDecode(response.body);
-        List jobData = responseData["expenses"];
-        expenseList.value = jobData;
+        if(responseData['status']=="success"){
+          List jobData = responseData["expenses"];
+          expenseList.value = jobData;
+          isGetExpenseLoading.value = false;
+        }else{
+          isGetExpenseLoading.value = false;
+        }
       } else {
         debugPrint("statusCode${response.statusCode}");
         isGetExpenseLoading.value = false;

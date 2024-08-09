@@ -61,7 +61,7 @@ class _UserViewDetilsState extends State<UserViewDetils> {
           Text('${widget.model['user_type'] ?? ''}',textAlign: TextAlign.center,),
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 16.0,vertical: 16.0),
-            padding: EdgeInsets.symmetric(horizontal: 16.0,vertical: 16.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16.0,vertical: 16.0),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(4.0)
@@ -71,7 +71,7 @@ class _UserViewDetilsState extends State<UserViewDetils> {
               children: [
                 buildMenu(
                   title: "Company",
-                  subTitle: "Coding House"
+                  subTitle: "${widget.model['company_name'] ?? ''}"
                 ),
                 buildMenu(
                     title: "Contact No",
@@ -94,13 +94,13 @@ class _UserViewDetilsState extends State<UserViewDetils> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        const SizedBox(height: 12.0,),
+        const SizedBox(height: 8.0,),
         Text(title,style: AppTextStyle.textStyleRegular12,),
         const SizedBox(height: 6.0,),
         Text(subTitle,style: AppTextStyle.textStyleRegular16,),
-        const SizedBox(height: 12.0,),
+        const SizedBox(height: 8.0,),
         const Divider(
-          color: AppColor.buttonColor,
+          color: Colors.grey,
         ),
       ],
     );

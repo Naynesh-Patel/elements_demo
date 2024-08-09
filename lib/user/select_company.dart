@@ -43,11 +43,8 @@ class _SelectCompanyState extends State<SelectCompany> {
                   itemBuilder: (context, index) {
                     return InkWell(
                       onTap: () {
-                        companyController
-                                .selectCompanyTextEditingController.text =
-                            companyController.companyList[index]['name'] ?? '';
-
-                        Get.back();
+                        companyController.selectCompanyTextEditingController.text = companyController.companyList[index]['name'] ?? '';
+                        Get.back(result: companyController.companyList[index]);
                       },
                       child: Container(
                         padding: const EdgeInsets.symmetric(

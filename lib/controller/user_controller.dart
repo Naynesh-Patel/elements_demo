@@ -59,9 +59,12 @@ class UserController extends GetxController {
     base64Image = base64.encode(bytes);
   }
 
+  TextEditingController txtCompanyName = TextEditingController();
+  TextEditingController txtCompanyId = TextEditingController();
+
   Future<void> addUser() async {
     Map<String, dynamic> body = {
-      // "compny_id": modelUser.value.companyId,
+      "company_id": txtCompanyId.text,
       "name": userNameTextEditingController.text,
       "contact_no": contactNoTextEditingController.text,
       "address": addressTextEditingController.text,
@@ -118,7 +121,7 @@ class UserController extends GetxController {
   Future<void> updateUser(id) async {
     Map<String, dynamic> body = {
       "id": id,
-      // "compny_id": modelUser.value.companyId,
+      "company_id": txtCompanyId.text,
       "name": userNameTextEditingController.text,
       "contact_no": contactNoTextEditingController.text,
       "address": addressTextEditingController.text,

@@ -34,6 +34,8 @@ class _ExpenseTabState extends State<ExpenseTab> {
     setState(() {
       expenseController.startDate = null;
       expenseController.endDate = null;
+      expenseController.nameTextEditingController.clear();
+      expenseController.expenseTypeEditingController.clear();
       expenseController.getExpense();
     });
     super.initState();
@@ -129,29 +131,16 @@ class _ExpenseTabState extends State<ExpenseTab> {
                 onTap: () {
                   Get.to(const CustomDatePicker());
                 },
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Date",textAlign: TextAlign.center,
-                      style: AppTextStyle.textStyleRegular14
-                          .copyWith(color: AppColor.selectColor),
-                    ),
-                    const SizedBox(
-                      width: 2.0,
-                    ),
-                    Image.asset(
-                      "assets/images/date.png",
-                      height: 14,
-                      width: 14,
-                    ),
-                  ],
+                child:  Text(
+                  "Date",textAlign: TextAlign.end,
+                  style: AppTextStyle.textStyleRegular14
+                      .copyWith(color: AppColor.selectColor),
                 ),
               ),
             ),
           ),
-          Text("Amt", style: AppTextStyle.textStyleRegular14),
+                const SizedBox(
+                 width: 14.0,)
         ],
       ),
     );
@@ -176,17 +165,14 @@ class _ExpenseTabState extends State<ExpenseTab> {
                           .copyWith(color: AppColor.blackColor),
                     )),
                 Expanded(
-                    child: Text("${expenseController.expenseList[index]['expense_type']??''}",textAlign: TextAlign.center,
+                    child: Text("${expenseController.expenseList[index]['expense_type']??''} : ${expenseController.expenseList[index]['price']??''}",textAlign: TextAlign.center,
                         style: AppTextStyle.textStyleLight12
                             .copyWith(color: const Color(0xff555555)))),
                   Expanded(
                       child: Text(getDateInDMYYYY(DateTime.parse(expenseController.expenseList[index] ['created_at']??'')),
-                          textAlign: TextAlign.center,
+                          textAlign: TextAlign.end,
                           style: AppTextStyle.textStyleLight12
                               .copyWith(color: const Color(0xff555555)))),
-                  Text("${expenseController.expenseList[index]['price']??''}",
-                      style: AppTextStyle.textStyleLight12
-                          .copyWith(color: const Color(0xff555555))),
                 SizedBox(
                   width: 14.0,
                   height: Get.height*0.032,
@@ -223,7 +209,7 @@ class _ExpenseTabState extends State<ExpenseTab> {
                         child: Text('Delete'),
                       ),
                     ],
-                    icon: const Icon(Icons.more_vert),
+                    icon: const Icon(Icons.more_vert,size: 18,),
                   ),
                 ),
                 ]
@@ -241,7 +227,11 @@ class _ExpenseTabState extends State<ExpenseTab> {
   }
 
   showFilterSheet(){
-    return showModalBottomSheet(context: context, builder: (context) {
+    return showModalBottomSheet(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(4.0)
+      ),
+      context: context, builder: (context) {
       return StatefulBuilder(builder: (context, setState) {
         return Container(
           // color: Colors.red,

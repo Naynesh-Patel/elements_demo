@@ -17,8 +17,7 @@ class CompanyController extends GetxController {
   RxBool isGetCompanyDeleteLoading = false.obs;
   RxBool isGetCompanyUpdateLoading = false.obs;
 
-  TextEditingController selectCompanyTextEditingController =
-      TextEditingController();
+  TextEditingController selectCompanyTextEditingController = TextEditingController();
   TextEditingController machineNameTextEditingController =
       TextEditingController();
   TextEditingController ownerTextEditingController = TextEditingController();

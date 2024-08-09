@@ -29,7 +29,6 @@ class _AddUserState extends State<AddUser> {
   String? selectedValue;
 
   UserController controller = Get.find();
-  CompanyController companyController = Get.find();
 
   final _formKey = GlobalKey<FormState>();
 
@@ -47,15 +46,18 @@ class _AddUserState extends State<AddUser> {
       controller.fingerprintEditingController.text =
           widget.model['fingerprint'] ?? '';
       controller.base64Image = widget.model['photo'] ?? '';
-      companyController.selectCompanyTextEditingController.text =
-          widget.model['name'] ?? '';
+      controller.txtCompanyName.text =
+          widget.model['company_name'] ?? '';
+      controller.txtCompanyId.text =
+          widget.model['company_id'] ?? '';
     } else {
       controller.usersRoleTextEditingController.clear();
       controller.userNameTextEditingController.clear();
       controller.addressTextEditingController.clear();
       controller.contactNoTextEditingController.clear();
       controller.fingerprintEditingController.clear();
-      companyController.selectCompanyTextEditingController.clear();
+      controller.txtCompanyName.clear();
+      controller.txtCompanyId.clear();
       controller.base64Image = "";
       controller.imgFile = null;
     }
@@ -199,6 +201,13 @@ class _AddUserState extends State<AddUser> {
                          enable: widget.isView ? false : true,
                       onTap: () {
                         Get.to(const SelectCompany())?.then((val){
+                          if(val != null){
+                            controller.txtCompanyName.text= val['name'];
+                            controller.txtCompanyId.text= val['id'];
+                            setState(() {
+
+                            });
+                          }
                           _formKey.currentState!.validate();
                         });
                       },
@@ -206,8 +215,7 @@ class _AddUserState extends State<AddUser> {
                       showCursor: false,
                         hintText: "Select Company",
                         labelText: "Company",
-                        textEditingController: companyController
-                            .selectCompanyTextEditingController,
+                        textEditingController: controller.txtCompanyName,
                         // autoValidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
                           if (value!.isEmpty) {
